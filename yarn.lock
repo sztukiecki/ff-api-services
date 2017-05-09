@@ -1584,7 +1584,7 @@ fastparse@^1.1.1:
 
 "ff-aws-sdk@git+https://ffbbapi:2870973cbe@bb.flowfact.com/scm/npmmod/ff-aws-sdk.git#master":
   version "0.0.3"
-  resolved "git+https://ffbbapi:2870973cbe@bb.flowfact.com/scm/npmmod/ff-aws-sdk.git#c00db5387e3ed465e9f9c8437e65ecc26c1b368b"
+  resolved "git+https://ffbbapi:2870973cbe@bb.flowfact.com/scm/npmmod/ff-aws-sdk.git#99c05b619b7ea35edd7c017785a90bdd2095f6d9"
   dependencies:
     axios "^0.16.1"
     buffer "^5.0.6"

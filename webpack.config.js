@@ -85,6 +85,7 @@ module.exports = {
         path: PATH.resolve(__dirname, PUBLIC_PATH),
         filename: '[name].js',
         chunkFilename: '[name]-chunk.js',
+		library: 'ff-api-services',
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
