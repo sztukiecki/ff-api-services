@@ -16,30 +16,12 @@ const nodeEnvString = ((isProduction) ? 'production' : 'development');
 console.log(`running webpack in "${nodeEnvString }" mode`);
 
 
-let plugins = [
-    new CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks(module, count) {
-            let context = module.context;
-            return context && context.indexOf('node_modules') >= 0;
-        }
-    }),
-    //catch all - anything used in more than one place
-    new CommonsChunkPlugin({
-        async: 'commons',
-        minChunks(module, count) {
-            return count >= 2;
-        }
-    }),
-
+let plugins = [ 
     new webpack.DefinePlugin({
         'process.env': {
             'NODE_ENV': JSON.stringify(nodeEnvString)
         }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-        sourceMap: true
-    }),
+    })
 ];
 
 let entries = [];
@@ -49,15 +31,11 @@ if (!isBuild) {
     plugins.unshift(new webpack.NoEmitOnErrorsPlugin());
     plugins.unshift(new webpack.HotModuleReplacementPlugin());
     entries = [
-        './index.js'
+        './src/index.js'
     ];
 } else {
-    plugins.unshift(new webpack.LoaderOptionsPlugin({
-        minimize: true,
-        debug: false
-    }));
     entries = {
-        main: './index.js'
+        main: './src/index.js'
     };
 }
 

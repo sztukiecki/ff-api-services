@@ -251,10 +251,6 @@ paket-files/
 # ingore VSCode config File 
 .vscode/
 
-# cloudios 
-# ignoriere "dist" ordner ( ist flüchtig  ) 
-dist/
-
 # ignoriere electron appfolder ( wird kopiert aus dem dist order - flüchtig  )
 # ignoriere cordova www folder 
 

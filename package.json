@@ -1,9 +1,9 @@
 {
   "name": "ff-api-services",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "dist/main.js",
   "repository": "ssh://git@bb.flowfact.com:7999/npmmod/ff-api-services.git",
   "author": "Andreas Soroko <andreas.soroko@flowfact.de>",
   "license": "",
@@ -15,7 +15,7 @@
   "dependencies": {
     "axios": "^0.16.1",
     "axios-retry": "^1.2.0",
-    "ff-aws-sdk": "git+https://ffbbapi:2870973cbe@bb.flowfact.com/scm/npmmod/ff-aws-sdk.git#v0.0.1",
+    "ff-aws-sdk": "git+https://ffbbapi:2870973cbe@bb.flowfact.com/scm/npmmod/ff-aws-sdk.git#master",
     "webpack-bundle-analyzer": "^2.6.0",
     "wpapi": "^1.0.3"
   },
