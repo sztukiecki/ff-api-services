@@ -20,7 +20,6 @@ export default class APIClient {
     }
 
     getidToken = () => {
-        console.log('AWS', AWS);
         if (AWS.Config.credentials && AWS.Config.credentials.params && AWS.Config.credentials.params.Logins) {
             const loginKeys = Object.keys(AWS.Config.credentials.params.Logins);
             if (loginKeys.length > 0) {
