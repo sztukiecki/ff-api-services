@@ -1,8 +1,9 @@
 const PATH = require('path');
 
 const webpack = require('webpack');
+const CopyWebpackPlugins = require('copy-webpack-plugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
-//const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const isProduction = process.argv.indexOf('-p') !== -1;
 const isBuild = process.argv.indexOf('--env.build') !== -1;
@@ -16,11 +17,14 @@ const nodeEnvString = ((isProduction) ? 'production' : 'development');
 console.log(`running webpack in "${nodeEnvString }" mode`);
 
 
-let plugins = [ 
+let plugins = [
     new webpack.DefinePlugin({
         'process.env': {
             'NODE_ENV': JSON.stringify(nodeEnvString)
         }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+        sourceMap: true
     })
 ];
 
@@ -34,6 +38,10 @@ if (!isBuild) {
         './src/index.js'
     ];
 } else {
+    plugins.unshift(new webpack.LoaderOptionsPlugin({
+        minimize: true,
+        debug: false
+    }));    
     entries = {
         main: './src/index.js'
     };
@@ -83,8 +91,8 @@ module.exports = {
     },
     output: {
         path: PATH.resolve(__dirname, PUBLIC_PATH),
-        filename: '[name].js',
-        chunkFilename: '[name]-chunk.js',
+        filename: '[name]' + (isProduction ? '.min' : '') + '.js',
+        chunkFilename: '[name]-chunk' + (isProduction ? '.min' : '') + '.js',
 		library: 'ff-api-services',
         libraryTarget: 'umd',
         umdNamedDefine: true
