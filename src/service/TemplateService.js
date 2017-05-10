@@ -22,7 +22,7 @@ export default class TemplateService {
         const formData = new FormData();
         formData.append('file', file);
 
-        return this.client.makeRequetSimple({}, `/templates/${id}/content`, 'PUT', formData, {
+        return this.client.makeRequest({}, `/templates/${id}/content`, 'PUT', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
