@@ -8,7 +8,8 @@
   "author": "Andreas Soroko <andreas.soroko@flowfact.de>",
   "license": "",
   "scripts": {
-    "build": "cleandir dist/ && babel -d lib/ src/"
+    "build-package": "cleandir dist/ && babel -d lib/ src/",
+    "build": "node build.js"
   },
   "dependencies": {
     "axios": "^0.16.1",
