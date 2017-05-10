@@ -18,12 +18,15 @@ export default class TemplateService {
         return this.client.makeRequetSimple(body, '/templates', 'POST').then(s => s.data);
     }
 
-    createTemplateFormData(formData) {
-        return this.client.makeRequest({}, '/templates', 'POST', formData, {
+    uploadContent(id, file) {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        return this.client.makeRequetSimple({}, `/templates/${id}/content`, 'POST', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-        });
+        })
     }
 
     getTemplateById(id) {
