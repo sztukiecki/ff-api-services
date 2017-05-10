@@ -1,4 +1,4 @@
-import HttpClient, {APIMapping} from 'http';
+import HttpClient, {APIMapping} from '../http';
 
 
 export default class SearchService {
