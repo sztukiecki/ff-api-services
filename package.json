@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.2",
   "description": "",
-  "main": "dist/main.js",
+  "main": "lib/index.js",
   "repository": "ssh://git@bb.flowfact.com:7999/npmmod/ff-api-services.git",
   "author": "Andreas Soroko <andreas.soroko@flowfact.de>",
   "license": "",
