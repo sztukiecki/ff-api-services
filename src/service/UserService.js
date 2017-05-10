@@ -1,4 +1,4 @@
-import HttpClient, {APIMapping} from 'shared/services/http';
+import HttpClient, {APIMapping} from '../http';
 
 
 export default class UserService {
