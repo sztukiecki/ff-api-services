@@ -10,7 +10,6 @@
   ],
   "plugins": [
     "transform-object-rest-spread",
-    "transform-decorators-legacy",
-	"babel-plugin-add-module-exports"
+    "transform-decorators-legacy"
   ]
 }
