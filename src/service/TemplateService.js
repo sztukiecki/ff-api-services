@@ -20,7 +20,7 @@ export default class TemplateService {
 
     uploadContent(id, file) {
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append('file', file, file.name);
 
         return this.client.makeRequest({}, `/templates/${id}/content`, 'PUT', formData, {
             headers: {
