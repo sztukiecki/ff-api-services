@@ -1,4 +1,4 @@
-import HttpClient, {APIMapping} from 'http';
+import HttpClient, {APIMapping} from 'shared/services/http';
 
 export default class TemplateService {
 
@@ -8,6 +8,10 @@ export default class TemplateService {
 
     getAllTemplates() {
         return this.client.makeRequetSimple({}, '/templates', 'GET').then(s => s.data).then(s => s ? s : []);
+    }
+
+    getTemplatesByType(type) {
+        return this.client.makeRequetSimple({}, `/templates?templateType=${type}`, 'GET').then(s => s.data).then(s => s ? s : []);
     }
 
     createTemplate(body) {

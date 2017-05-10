@@ -1,4 +1,4 @@
-import HttpClient, {APIMapping} from '../http';
+import HttpClient, {APIMapping} from 'shared/services/http';
 
 
 export default class UserService {
@@ -18,6 +18,12 @@ export default class UserService {
 
     getCurrentUser() {
         return this.client.makeRequetSimple({}, '/users/currentUser', 'GET');
+    }
+
+    postImage(image) {
+        const formData = new FormData();
+        formData.append('contactPicture', image, 'contactPicture');
+        return this.client.makeRequest({}, '/users/picture', 'POST', formData, {headers: { 'Content-Type': 'multipart/form-data' }});
     }
 }
 

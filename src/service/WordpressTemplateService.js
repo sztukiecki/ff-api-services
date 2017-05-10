@@ -13,9 +13,7 @@ export default class WordpressTemplateService {
     }
 
     getSitesByPageId(pageId) {
-        return this.wordpressApi.pages().id(pageId).then(response => {
-
-        });
+        return this.wordpressApi.pages().id(pageId);
     }
 
     /**

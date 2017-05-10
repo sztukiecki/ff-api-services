@@ -51,9 +51,9 @@ export default class APIClient {
         const request = {
             method: method,
             url: url,
-            headers: {
+            headers: Object.assign({}, {
                 cognitoToken: this.idToken
-            },
+            }, additionsParams.headers || {}),
             data: body
         };
 
