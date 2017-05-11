@@ -34,7 +34,7 @@ export default class SearchService {
         } else {
             return {
                 query: {
-                    match: {
+                    match_phrase: {
                         _all: filter
                     }
                 }
