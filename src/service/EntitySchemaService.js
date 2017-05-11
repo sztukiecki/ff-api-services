@@ -51,6 +51,10 @@ export default class EntitySchemaService {
         return this.client.makeRequest({}, `/integrations/${integrationId}/formdata`, 'POST', data);
     }
 
+    deleteIntegration(integrationId) {
+        return this.client.makeRequest({}, `/integrations/${integrationId}`, 'DELETE');
+    }
+
     getResponseForIntegrationGetUrlByUrl(url) {
         return this.client.makeRequest({}, url, 'GET');
     }
