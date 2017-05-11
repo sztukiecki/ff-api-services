@@ -7,6 +7,9 @@ export default class FunnelService {
     }
 
 
+    getPossibleTags(funnelId){
+        return this.client.makeRequetSimple({}, `/funnels/${funnelId}/possibletags`, 'GET').then(s => s.data);
+    }
 
     getFunnelStatistics(funnelId){
         return this.client.makeRequetSimple({}, `/funnels/${funnelId}/statistics`, 'GET').then(s => s.data);
