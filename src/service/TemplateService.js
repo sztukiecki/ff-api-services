@@ -22,11 +22,7 @@ export default class TemplateService {
         const formData = new FormData();
         formData.append('file', file, file.name);
 
-        return this.client.makeRequest({}, `/templates/${id}/content`, 'PUT', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
+        return this.client.makeRequest({}, `/templates/${id}/content`, 'POST', formData)
     }
 
     getTemplateById(id) {
