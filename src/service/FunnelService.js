@@ -116,7 +116,12 @@ export default class FunnelService {
     getAllActions() {
         return this.client.makeRequetSimple({}, '/funnels/actions', 'GET').then(s => s.data.actionList);
     }
-
+    /*
+     * executeActionForEntity
+     */
+    executeActionForEntity(action,schemaId,entityId){
+        return this.client.makeRequetSimple(action,'/funnels/actions/execute/schemas/' + schemaId + '/entityId/' + entityId,'POST');
+    }
     /**
      * getDashboardInformation
      * @param { object } state state
