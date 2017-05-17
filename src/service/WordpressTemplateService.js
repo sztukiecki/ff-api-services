@@ -2,7 +2,14 @@ import WPAPI from 'wpapi';
 
 export default class WordpressTemplateService {
 
-    constructor() {
+    cognitoId = undefined;
+
+    constructor(cognitoId) {
+        if(!cognitoId) {
+            console.error('Do not init the WordpressTemplateService with an unknown cognitoId!');
+        }
+        this.cognitoId = cognitoId;
+
         this.wordpressApi = new WPAPI({
             endpoint: 'http://52.58.125.230/index.php/wp-json',
             username: 'ffAdmin',
@@ -12,8 +19,8 @@ export default class WordpressTemplateService {
         this.wordpressApi.headerFooter = this.wordpressApi.registerRoute('flowfact/v1', '/beaverbuilder/headerfooter');
     }
 
-    getSitesByPageId(pageId) {
-        return this.wordpressApi.pages().id(pageId);
+    getSiteByPageId(pageId) {
+        return this.wordpressApi.pages().param('userid', this.cognitoId).id(pageId);
     }
 
     /**
@@ -22,15 +29,15 @@ export default class WordpressTemplateService {
      * @param siteName
      */
     createSite(siteName) {
-        return this.wordpressApi.pages().create({
+        return this.wordpressApi.pages().param('userid', this.cognitoId).create({
             title: siteName,
             status: 'publish',
             type: 'page'
         });
     }
 
-    delete(id) {
-        return this.wordpressApi.pages().id(id).delete();
+    deleteSite(id) {
+        return this.wordpressApi.pages().id(id).param('userid', this.cognitoId).delete();
     }
 
     getHeaderFooterData() {
