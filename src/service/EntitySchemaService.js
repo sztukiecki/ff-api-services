@@ -1,20 +1,18 @@
 import HttpClient, {APIMapping} from '../http';
 
 export default class EntitySchemaService {
-    constructor() {
-        this.client = new HttpClient(APIMapping.entitySchemaService);
+    static client = new HttpClient(APIMapping.entitySchemaService);
+
+    static loadStats() {
+        return EntitySchemaService.client.makeRequest({}, '/stats', 'GET');
     }
 
-    loadStats() {
-        return this.client.makeRequest({}, '/stats', 'GET');
+    static getAllSchemas() {
+        return EntitySchemaService.client.makeRequest({}, '/schemas', 'GET');
     }
 
-    getAllSchemas() {
-        return this.client.makeRequest({}, '/schemas', 'GET');
-    }
-
-    getDataBySchemaId(schemaId, page = 1, size = null) {
-        return this.client.makeRequest({}, `/data/${schemaId}`, 'GET', undefined, {
+    static getDataBySchemaId(schemaId, page = 1, size = null) {
+        return EntitySchemaService.client.makeRequest({}, `/data/${schemaId}`, 'GET', undefined, {
             queryParams: {
                 page: page,
                 size: size
@@ -22,48 +20,53 @@ export default class EntitySchemaService {
         });
     }
 
-    selectSchemaById(schemaId) {
-        return this.client.makeRequest({}, `/schemas/${schemaId}`, 'GET');
+    static selectSchemaById(schemaId) {
+        return EntitySchemaService.client.makeRequest({}, `/schemas/${schemaId}`, 'GET');
     }
 
-    createNewSchema(schema) {
-        return this.client.makeRequest({}, '/schemas', 'POST', schema);
+    static createNewSchema(schema) {
+        return EntitySchemaService.client.makeRequest({}, '/schemas', 'POST', schema);
     }
 
-    deleteSchema(schemaId) {
-        return this.client.makeRequest({}, `/schemas/${schemaId}`, 'DELETE');
+    static deleteSchema(schemaId) {
+        return EntitySchemaService.client.makeRequest({}, `/schemas/${schemaId}`, 'DELETE');
     }
 
-    updateSchema(schema) {
-        return this.client.makeRequest({}, `/schemas/${schema.id}`, 'PUT', schema);
+    static updateSchema(schema) {
+        return EntitySchemaService.client.makeRequest({}, `/schemas/${schema.id}`, 'PUT', schema);
     }
 
-    integrationsForSchemaId(schemaId) {
-        return this.client.makeRequest({}, '/integrations', 'GET', undefined, {queryParams: {schemaId}});
+    static integrationsForSchemaId(schemaId) {
+        return EntitySchemaService.client.makeRequest({}, '/integrations', 'GET', undefined, {queryParams: {schemaId}});
     }
 
-    createNewIntegrationForSchema(schemaId, label) {
+    static createNewIntegrationForSchema(schemaId, label) {
         const integration = {schemaId, label};
-        return this.client.makeRequest({}, '/integrations', 'POST', integration);
+        return EntitySchemaService.client.makeRequest({}, '/integrations', 'POST', integration);
     }
 
-    updateIntegration(integrationId, data) {
-        return this.client.makeRequest({}, `/integrations/${integrationId}/formdata`, 'POST', data);
+    static updateIntegration(integrationId, data) {
+        return EntitySchemaService.client.makeRequest({}, `/integrations/${integrationId}/formdata`, 'POST', data);
     }
 
-    deleteIntegration(integrationId) {
-        return this.client.makeRequest({}, `/integrations/${integrationId}`, 'DELETE');
+    static deleteIntegration(integrationId) {
+        return EntitySchemaService.client.makeRequest({}, `/integrations/${integrationId}`, 'DELETE');
     }
 
-    getResponseForIntegrationGetUrlByUrl(url) {
-        return this.client.makeRequest({}, url, 'GET');
+    static getResponseForIntegrationGetUrlByUrl(url) {
+        return EntitySchemaService.client.makeRequest({}, url, 'GET');
     }
 
-    getResponseForIntegrationGetUrlById(integrationId) {
-        return this.client.makeRequest({}, `/integrations/${integrationId}/data`, 'GET');
+    static getResponseForIntegrationGetUrlById(integrationId) {
+        return EntitySchemaService.client.makeRequest({}, `/integrations/${integrationId}/data`, 'GET');
     }
 
-    deleteEntity(entityId, schemaId) {
-        return this.client.makeRequest({}, '/data', 'DELETE', undefined, {queryParams: {schemaId, entityId}});
+    static deleteEntity(entityId, schemaId) {
+        return EntitySchemaService.client.makeRequest({}, '/data', 'DELETE', undefined, {
+            queryParams: {
+                schemaId,
+                entityId
+            }
+        });
     }
 }

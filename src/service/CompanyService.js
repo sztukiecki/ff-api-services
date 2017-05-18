@@ -2,44 +2,37 @@ import HttpClient, {APIMapping} from '../http';
 
 export default class CompanyService {
 
-    constructor() {
-        this.client = new HttpClient(APIMapping.companyService);
-    }
+    static client = new HttpClient(APIMapping.companyService);
 
     //domain -> can also be an email
-    createCompany(companyName, companyUrl, domain) {
-        return this.client.makeRequetSimple({
+    static createCompany(companyName, companyUrl, domain) {
+        return CompanyService.client.makeRequetSimple({
             companyName,
             companyUrl,
             domain
         }, '/company', 'POST');
     }
 
-    usePreset(presets) {
-        return this.client.makeRequetSimple({
+    static usePreset(presets) {
+        return CompanyService.client.makeRequetSimple({
             presets
         }, '/company/usepreset', 'PUT');
     }
 
-    updateCompany(body) {
-        return this.client.makeRequetSimple(body, '/company', 'PUT');
+    static updateCompany(body) {
+        return CompanyService.client.makeRequetSimple(body, '/company', 'PUT');
     }
 
-    findCompany(companyId) {
-        return this.client.makeRequetSimple({}, `/company/${encodeURIComponent(companyId)}`, 'GET');
+    static findCompany(companyId) {
+        return CompanyService.client.makeRequetSimple({}, `/company/${encodeURIComponent(companyId)}`, 'GET');
     }
 
-    memberCountByEMailAddress(mailaddress) {
-        return this.client.makeRequetSimple({
+    static memberCountByEMailAddress(mailaddress) {
+        return CompanyService.client.makeRequetSimple({
             mailaddress: mailaddress
         }, '/company/numberOfUsers', 'PUT');
     }
-
-    test() {
-        return this.client.makeRequetSimple({}, '/company', 'GET');
-    }
 }
-
 
 const StatusMapping = {
     create: {

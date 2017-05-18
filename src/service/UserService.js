@@ -1,13 +1,10 @@
 import HttpClient, {APIMapping} from '../http';
 
-
 export default class UserService {
 
-    constructor() {
-        this.client = new HttpClient(APIMapping.userService);
-    }
+    static client = new HttpClient(APIMapping.userService);
 
-    createUser(companyID, mailAddress, firstName, lastName) {
+    static createUser(companyID, mailAddress, firstName, lastName) {
         return this.client.makeRequetSimple({
             firstname: firstName,
             lastname: lastName,
@@ -16,14 +13,14 @@ export default class UserService {
         }, '/users', 'POST');
     }
 
-    getCurrentUser() {
+    static getCurrentUser() {
         return this.client.makeRequetSimple({}, '/users/currentUser', 'GET');
     }
 
-    postImage(image) {
+    static postImage(image) {
         const formData = new FormData();
         formData.append('contactPicture', image, 'contactPicture');
-        return this.client.makeRequest({}, '/users/picture', 'POST', formData, {headers: { 'Content-Type': 'multipart/form-data' }});
+        return this.client.makeRequest({}, '/users/picture', 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
     }
 }
 

@@ -8,8 +8,11 @@ import ActivityService from './service/ActivityService';
 import SearchService from './service/SearchService';
 import TemplateService from './service/TemplateService';
 import WordpressTemplateService from './service/WordpressTemplateService';
-import EmailService from './service/EmailService';
 import FormService from './service/FormService';
+import HTTPProvider from './component/HTTPProvider';
+
+export default HTTPProvider;
+
 
 export {
     CompanyService,
@@ -22,6 +25,5 @@ export {
     ActivityService,
     SearchService,
     WordpressTemplateService,
-    EmailService,
     FormService
 };

@@ -2,7 +2,6 @@ import AWS from 'ff-aws-sdk';
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 
-
 axiosRetry(axios, {
     retries: 5, retryCondition: (error) => {
         return error && error.response && error.response.status >= 500
@@ -47,7 +46,6 @@ export default class APIClient {
             url += '?' + queryString;
         }
 
-
         const request = {
             method: method,
             url: url,
@@ -56,7 +54,6 @@ export default class APIClient {
             }, additionsParams.headers || {}),
             data: body
         };
-
 
         return axios(request);
     };

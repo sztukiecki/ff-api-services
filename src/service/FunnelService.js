@@ -1,49 +1,45 @@
 import HttpClient, {APIMapping} from '../http';
 
 export default class FunnelService {
+    static client = new HttpClient(APIMapping.funnelService);
 
-    constructor() {
-        this.client = new HttpClient(APIMapping.funnelService);
+    static getPossibleTags(funnelId) {
+        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}/possibletags`, 'GET').then(s => s.data);
     }
 
-
-    getPossibleTags(funnelId){
-        return this.client.makeRequetSimple({}, `/funnels/${funnelId}/possibletags`, 'GET').then(s => s.data);
-    }
-
-    getFunnelStatistics(funnelId){
-        return this.client.makeRequetSimple({}, `/funnels/${funnelId}/statistics`, 'GET').then(s => s.data);
+    static getFunnelStatistics(funnelId) {
+        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}/statistics`, 'GET').then(s => s.data);
     }
     /**
      * createFunnel
      * @param { object } funnelToCreate funnelToCreate
      */
-    createFunnel(funnelToCreate) {
-        return this.client.makeRequetSimple(funnelToCreate || {}, '/funnels', 'POST').then(s => s.data);
+    static createFunnel(funnelToCreate) {
+        return FunnelService.client.makeRequetSimple(funnelToCreate || {}, '/funnels', 'POST').then(s => s.data);
     }
 
     /**
      * findFunnelById
      * @param { string } funnelId funnelId
      */
-    findFunnelById(funnelId) {
-        return this.client.makeRequetSimple({}, `/funnels/${funnelId}`, 'GET').then(s => s.data);
+    static findFunnelById(funnelId) {
+        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}`, 'GET').then(s => s.data);
     }
 
     /**
      * deleteFunnelById
      * @param { string } funnelId funnelId
      */
-    deleteFunnelById(funnelId) {
-        return this.client.makeRequetSimple({}, `/funnels/${funnelId}`, 'DELETE').then(s => s.data);
+    static deleteFunnelById(funnelId) {
+        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}`, 'DELETE').then(s => s.data);
     }
 
     /**
      * getAllStagesOfAnFunnel
      * @param { string } funnelId funnelId
      */
-    getAllStagesOfAnFunnel(funnelId) {
-        return this.client.makeRequetSimple({}, `/funnels/${funnelId}/stages`, 'GET').then(s => s.data);
+    static getAllStagesOfAnFunnel(funnelId) {
+        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}/stages`, 'GET').then(s => s.data);
     }
 
     /**
@@ -51,8 +47,8 @@ export default class FunnelService {
      * @param { string } funnelId funnelId
      * @param { object } stage stage
      */
-    addStageAtTheEndOfTheFunnel(funnelId, stage) {
-        return this.client.makeRequetSimple(stage || {}, `/funnels/${funnelId}/stages`, 'POST').then(s => s.data);
+    static addStageAtTheEndOfTheFunnel(funnelId, stage) {
+        return FunnelService.client.makeRequetSimple(stage || {}, `/funnels/${funnelId}/stages`, 'POST').then(s => s.data);
     }
 
     /**
@@ -60,8 +56,8 @@ export default class FunnelService {
      * @param { string } funnelId funnelId
      * @param { string } stageId stageId
      */
-    findStageById(funnelId, stageId) {
-        return this.client.makeRequetSimple({}, `/funnels/${funnelId}/stages/${stageId}`, 'GET').then(s => s.data);
+    static findStageById(funnelId, stageId) {
+        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}/stages/${stageId}`, 'GET').then(s => s.data);
     }
 
     /**
@@ -70,8 +66,8 @@ export default class FunnelService {
      * @param { string } stageId stageId
      * @param { object } stage stage
      */
-    addStageAfterGivenStageOfGivenFunnel(funnelId, stageId, stage) {
-        return this.client.makeRequetSimple(stage, `/funnels/${funnelId}/stages/${stageId}`, 'POST').then(s => s.data);
+    static addStageAfterGivenStageOfGivenFunnel(funnelId, stageId, stage) {
+        return FunnelService.client.makeRequetSimple(stage, `/funnels/${funnelId}/stages/${stageId}`, 'POST').then(s => s.data);
     }
 
     /**
@@ -80,8 +76,8 @@ export default class FunnelService {
      * @param { string } stageId stageId
      * @param { object } stage stage
      */
-    changeAStagesOfAFunnel(funnelId, stageId, stage) {
-        return this.client.makeRequetSimple(stage, `/funnels/${funnelId}/stages/${stageId}`, 'PUT').then(s => s.data);
+    static changeAStagesOfAFunnel(funnelId, stageId, stage) {
+        return FunnelService.client.makeRequetSimple(stage, `/funnels/${funnelId}/stages/${stageId}`, 'PUT').then(s => s.data);
     }
 
     /**
@@ -89,16 +85,16 @@ export default class FunnelService {
      * @param { string } funnelId funnelId
      * @param { string } stageId stageId
      */
-    deleteStageFromFunnel(funnelId, stageId) {
-        return this.client.makeRequetSimple({}, `/funnels/${funnelId}/stages/${stageId}`, 'DELETE').then(s => s.data);
+    static deleteStageFromFunnel(funnelId, stageId) {
+        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}/stages/${stageId}`, 'DELETE').then(s => s.data);
     }
 
     /**
      * getStateOfTheFunnel
      * @param { string } funnelId funnelId
      */
-    getStateOfTheFunnel(funnelId) {
-        return this.client.makeRequetSimple({}, `/funnels/${funnelId}/state`, 'GET').then(s => s.data);
+    static getStateOfTheFunnel(funnelId) {
+        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}/state`, 'GET').then(s => s.data);
     }
 
     /**
@@ -106,47 +102,47 @@ export default class FunnelService {
      * @param { string } funnelId funnelId
      * @param { object } state state
      */
-    changeStateOfTheFunnel(funnelId, state) {
-        return this.client.makeRequetSimple(state || {}, `/funnels/${funnelId}/state`, 'POST').then(s => s.data);
+    static changeStateOfTheFunnel(funnelId, state) {
+        return FunnelService.client.makeRequetSimple(state || {}, `/funnels/${funnelId}/state`, 'POST').then(s => s.data);
     }
 
     /**
      * getAllActions
      */
-    getAllActions(type = 'automatic') {
-        return this.client.makeRequetSimple({}, '/funnels/actions/?type=' + type, 'GET').then(s => s.data);
+    static getAllActions(type = 'automatic') {
+        return FunnelService.client.makeRequetSimple({}, '/funnels/actions/?type=' + type, 'GET').then(s => s.data);
     }
     /*
      * executeActionForEntity
      */
-    executeActionForEntity(action,schemaId,entityId){
-        return this.client.makeRequetSimple(action,'/funnels/actions/execute/schemas/' + schemaId + '/entityId/' + entityId,'POST');
+    static executeActionForEntity(action, schemaId, entityId) {
+        return FunnelService.client.makeRequetSimple(action, '/funnels/actions/execute/schemas/' + schemaId + '/entityId/' + entityId, 'POST');
     }
     /**
      * getDashboardInformation
      * @param { object } state state
      */
-    getDashboardInformation(state) {
+    static getDashboardInformation(state) {
         if (state) {
-            return this.client.makeRequest({}, '/funnels/dashboard', 'GET', undefined, {queryParams: {state}}).then(s => s.data.dashboardFunnels);
+            return FunnelService.client.makeRequest({}, '/funnels/dashboard', 'GET', undefined, {queryParams: {state}}).then(s => s.data.dashboardFunnels);
         }
-        return this.client.makeRequetSimple({}, '/funnels/dashboard', 'GET').then(s => s.data.dashboardFunnels);
+        return FunnelService.client.makeRequetSimple({}, '/funnels/dashboard', 'GET').then(s => s.data.dashboardFunnels);
     }
 
     /**
      * getAvailableEntryConditionsForSchema
      * @param { object } state state
      */
-    getAvailableEntryConditionsForSchema(schemaId) {
-        return this.client.makeRequetSimple({}, `/availableEntryConditions/${schemaId}`, 'GET').then(s => s.data);
+    static getAvailableEntryConditionsForSchema(schemaId) {
+        return FunnelService.client.makeRequetSimple({}, `/availableEntryConditions/${schemaId}`, 'GET').then(s => s.data);
     }
 
     /**
      * getAvailableEntryConditionsForPrevStage
      * @param { object } state state
      */
-    getAvailableEntryConditionsForPrevStage(funnelId, stageId) {
-        return this.client.makeRequetSimple({}, `/funnels/${funnelId}/stages/${stageId}/availableEntryConditions`, 'GET').then(s => s.data);
+    static getAvailableEntryConditionsForPrevStage(funnelId, stageId) {
+        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}/stages/${stageId}/availableEntryConditions`, 'GET').then(s => s.data);
     }
 
     /**
@@ -156,15 +152,15 @@ export default class FunnelService {
      * @param data
      *      The model of the funnel as object
      */
-    updateFunnelById(funnelId, data) {
-        return this.client.makeRequest({}, `/funnels/${funnelId}`, 'PUT', data);
+    static updateFunnelById(funnelId, data) {
+        return FunnelService.client.makeRequest({}, `/funnels/${funnelId}`, 'PUT', data);
     }
 
-    setStageAsFirstStage(funnelId, stageId) {
-        return this.client.makeRequest({}, `/funnels/${funnelId}/stages/${stageId}/parent`, 'PUT');
+    static setStageAsFirstStage(funnelId, stageId) {
+        return FunnelService.client.makeRequest({}, `/funnels/${funnelId}/stages/${stageId}/parent`, 'PUT');
     }
 
-    setStageAfterStage(funnelId, stageId, parentId) {
-        return this.client.makeRequest({}, `/funnels/${funnelId}/stages/${stageId}/parent/${parentId}`, 'PUT');
+    static setStageAfterStage(funnelId, stageId, parentId) {
+        return FunnelService.client.makeRequest({}, `/funnels/${funnelId}/stages/${stageId}/parent/${parentId}`, 'PUT');
     }
 }

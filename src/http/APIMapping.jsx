@@ -1,39 +1,26 @@
-const APIMapping = {
-    userService: {
-        name: 'user-service'
-    },
-    companyService: {
-        name: 'company-service'
-    },
-    entitySchemaService: {
-        name: 'schema-service'
-    },
-    tagService: {
-        name: 'tag-service'
-    },
-    templateService: {
-        name: 'template-service'
-    },
-    funnelService: {
-        name: 'funnel-service'
-    },
-    presetService: {
-        name: 'preset-service'
-    },
-    activityService: {
-        name: 'activity-service'
-    },
-    entityExportService: {
-        name: 'entity-export-service'
-    },
-    searchService: {
-        name: 'search-service'
-    },
-    emailService: {
-        name: 'email-service'
-    },
-    formService: {
-        name: 'form-service'
+class APIMappingClass {
+
+    constructor(name) {
+        this.serviceName = name;
     }
+
+    get name() {
+        return this.serviceName;
+    }
+}
+
+const APIMapping = {
+    userService: new APIMappingClass('user-service'),
+    companyService: new APIMappingClass('company-service'),
+    entitySchemaService: new APIMappingClass('schema-service'),
+    tagService: new APIMappingClass('tag-service'),
+    templateService: new APIMappingClass('template-service'),
+    funnelService: new APIMappingClass('funnel-service'),
+    presetService: new APIMappingClass('preset-service'),
+    activityService: new APIMappingClass('activity-service'),
+    entityExportService: new APIMappingClass('entity-export-service'),
+    searchService: new APIMappingClass('search-service'),
+    formService: new APIMappingClass('form-service')
 };
 export default APIMapping;
+export {APIMappingClass};

@@ -1,26 +1,22 @@
 import HttpClient, {APIMapping} from '../http';
 
-
 export default class TagService {
 
-    constructor() {
-        this.client = new HttpClient(APIMapping.tagService);
-    }
+    static client = new HttpClient(APIMapping.tagService);
 
-
-    getAllTags() {
+    static getAllTags() {
         return this.client.makeRequetSimple({}, '/tags', 'GET').then(s => s.data);
     }
 
-    createTag(body) {
+    static createTag(body) {
         return this.client.makeRequetSimple(body, '/tags', 'POST').then(s => s.data);
     }
 
-    getTagById(id) {
+    static getTagById(id) {
         return this.client.makeRequetSimple({}, `/tags/${id}`, 'GET').then(s => s.data);
     }
 
-    updateTag(body, id) {
+    static updateTag(body, id) {
         return this.client.makeRequetSimple(body, `/tags/${id}`, 'PUT').then(s => s.data);
     }
 }
