@@ -113,8 +113,8 @@ export default class FunnelService {
     /**
      * getAllActions
      */
-    getAllActions() {
-        return this.client.makeRequetSimple({}, '/funnels/actions', 'GET').then(s => s.data.actionList);
+    getAllActions(type = 'automatic') {
+        return this.client.makeRequetSimple({}, '/funnels/actions/?type=' + type, 'GET').then(s => s.data);
     }
     /*
      * executeActionForEntity
