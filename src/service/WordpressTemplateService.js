@@ -13,6 +13,7 @@ export default class WordpressTemplateService {
     static init() {
         // register custom routes
         WordpressTemplateService.wordpressApi.headerFooter = WordpressTemplateService.wordpressApi.registerRoute('flowfact/v1', '/beaverbuilder/headerfooter');
+        WordpressTemplateService.wordpressApi.template = WordpressTemplateService.wordpressApi.registerRoute('flowfact/v1', '/template');
     }
 
     static getSiteByPageId(pageId) {
@@ -34,6 +35,15 @@ export default class WordpressTemplateService {
 
     static deleteSite(id) {
         return WordpressTemplateService.wordpressApi.pages().id(id).param('userid', AWS.Config.credentials._identityId).delete();
+    }
+
+    static linkTemplateToSite(pageId, templateId) {
+        return WordpressTemplateService.wordpressApi.template()
+            .param('userid', this.cognitoId)
+            .create({
+                templateId: templateId,
+                pageId: pageId
+            });
     }
 
     static getHeaderFooterData() {
