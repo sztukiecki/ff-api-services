@@ -7,6 +7,14 @@ export default class FunnelService {
         return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}/possibletags`, 'GET').then(s => s.data);
     }
 
+    static getKeysForTag(funnelId, tagName) {
+        return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}/tags/${tagName}/metadata/keys`, 'GET').then(s => s.data);
+    }
+
+    static getValuesForTagKey(funnelId, tagName, metadataKey) {
+        return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}/tags/${tagName}/metadata/keys/${metadataKey}/values`, 'GET').then(s => s.data);
+    }
+
     static getFunnelStatistics(funnelId) {
         return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}/statistics`, 'GET').then(s => s.data);
     }

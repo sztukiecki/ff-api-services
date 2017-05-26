@@ -27,7 +27,7 @@ const isDefaultStage = (stageToUse) => {
 
 class HttpClient {
 
-    apigClient = undefined;
+    apiClient = undefined;
     serviceName = undefined;
     stageToUse = undefined;
 
@@ -37,13 +37,13 @@ class HttpClient {
         }
 
         this.serviceName = apiMapping.name;
-        this.apigClient = new APIClient({});
+        this.apiClient = new APIClient({});
         this.getStage();
     }
 
     setAPIURL = () => {
-        if (this.apigClient) {
-            this.apigClient.config.url = `${document.location.protocol}//cloudios-1932238678.eu-central-1.elb.amazonaws.com/edge-service/${this.serviceName}/${this.stageToUse}`
+        if (this.apiClient) {
+            this.apiClient.config.url = `${document.location.protocol}//cloudios-1932238678.eu-central-1.elb.amazonaws.com/edge-service/${this.serviceName}/${this.stageToUse}`;
         }
     };
 
@@ -54,7 +54,7 @@ class HttpClient {
 
     makeRequest(params, path, method, body = undefined, additionalParams = undefined) {
         this.getStage();
-        return this.apigClient.invokeApi(params, path, method, additionalParams, body);
+        return this.apiClient.invokeApi(params, path, method, additionalParams, body);
     }
 
     /**
@@ -66,7 +66,7 @@ class HttpClient {
 
     makeRequestSimple(body, path, method) {
         this.getStage();
-        return this.apigClient.invokeApi(undefined, path, method, undefined, body);
+        return this.apiClient.invokeApi(undefined, path, method, undefined, body);
     }
 }
 
