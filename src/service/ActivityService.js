@@ -37,22 +37,22 @@ export default class ActivityService {
             searchQuery.page = page;
             searchQuery.size = size;
         }
-        return ActivityService.client.makeRequetSimple(searchQuery, '/activities/search', 'POST').then(s => s.data);
+        return ActivityService.client.makeRequestSimple(searchQuery, '/activities/search', 'POST').then(s => s.data);
     }
 
     static getActivityById(id) {
-        return ActivityService.client.makeRequetSimple({}, `/activities/${id}`, 'GET').then(s => s.data);
+        return ActivityService.client.makeRequestSimple({}, `/activities/${id}`, 'GET').then(s => s.data);
     }
 
     static createActivity(body) {
-        return ActivityService.client.makeRequetSimple(body, '/activities', 'POST').then(s => s.data);
+        return ActivityService.client.makeRequestSimple(body, '/activities', 'POST').then(s => s.data);
     }
 
     static updateActivity(body) {
-        return ActivityService.client.makeRequetSimple(body, `/activities/${body.id}`, 'PUT').then(s => s.data);
+        return ActivityService.client.makeRequestSimple(body, `/activities/${body.id}`, 'PUT').then(s => s.data);
     }
 
     static deleteActivity(id) {
-        return ActivityService.client.makeRequetSimple({}, `/activities/${id}`, 'DELETE').then(s => s.data);
+        return ActivityService.client.makeRequestSimple({}, `/activities/${id}`, 'DELETE').then(s => s.data);
     }
 }

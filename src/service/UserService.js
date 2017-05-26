@@ -5,7 +5,7 @@ export default class UserService {
     static client = new HttpClient(APIMapping.userService);
 
     static createUser(companyID, mailAddress, firstName, lastName) {
-        return this.client.makeRequetSimple({
+        return this.client.makeRequestSimple({
             firstname: firstName,
             lastname: lastName,
             businessMailAddress: mailAddress,
@@ -14,7 +14,7 @@ export default class UserService {
     }
 
     static getCurrentUser() {
-        return this.client.makeRequetSimple({}, '/users/currentUser', 'GET');
+        return this.client.makeRequestSimple({}, '/users/currentUser', 'GET');
     }
 
     static postImage(image) {

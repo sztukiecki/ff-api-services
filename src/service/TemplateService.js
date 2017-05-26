@@ -5,15 +5,15 @@ export default class TemplateService {
     static client = new HttpClient(APIMapping.templateService);
 
     static getAllTemplates() {
-        return this.client.makeRequetSimple({}, '/templates', 'GET').then(s => s.data).then(s => s ? s : []);
+        return this.client.makeRequestSimple({}, '/templates', 'GET').then(s => s.data).then(s => s ? s : []);
     }
 
     static getTemplatesByType(type) {
-        return this.client.makeRequetSimple({}, `/templates?templateType=${type}`, 'GET').then(s => s.data).then(s => s ? s : []);
+        return this.client.makeRequestSimple({}, `/templates?templateType=${type}`, 'GET').then(s => s.data).then(s => s ? s : []);
     }
 
     static createTemplate(body) {
-        return this.client.makeRequetSimple(body, '/templates', 'POST').then(s => s.data);
+        return this.client.makeRequestSimple(body, '/templates', 'POST').then(s => s.data);
     }
 
     static uploadContent(id, file) {
@@ -24,14 +24,14 @@ export default class TemplateService {
     }
 
     static getTemplateById(id) {
-        return this.client.makeRequetSimple({}, `/templates/${id}`, 'GET').then(s => s.data);
+        return this.client.makeRequestSimple({}, `/templates/${id}`, 'GET').then(s => s.data);
     }
 
     static delete(id) {
-        return this.client.makeRequetSimple({}, `/templates/${id}`, 'DELETE').then(s => s.data);
+        return this.client.makeRequestSimple({}, `/templates/${id}`, 'DELETE').then(s => s.data);
     }
 
     static updateTemplate(body, id) {
-        return this.client.makeRequetSimple(body, `/templates/${id}`, 'PUT').then(s => s.data);
+        return this.client.makeRequestSimple(body, `/templates/${id}`, 'PUT').then(s => s.data);
     }
 }

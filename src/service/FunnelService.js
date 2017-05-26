@@ -4,18 +4,18 @@ export default class FunnelService {
     static client = new HttpClient(APIMapping.funnelService);
 
     static getPossibleTags(funnelId) {
-        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}/possibletags`, 'GET').then(s => s.data);
+        return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}/possibletags`, 'GET').then(s => s.data);
     }
 
     static getFunnelStatistics(funnelId) {
-        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}/statistics`, 'GET').then(s => s.data);
+        return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}/statistics`, 'GET').then(s => s.data);
     }
     /**
      * createFunnel
      * @param { object } funnelToCreate funnelToCreate
      */
     static createFunnel(funnelToCreate) {
-        return FunnelService.client.makeRequetSimple(funnelToCreate || {}, '/funnels', 'POST').then(s => s.data);
+        return FunnelService.client.makeRequestSimple(funnelToCreate || {}, '/funnels', 'POST').then(s => s.data);
     }
 
     /**
@@ -23,7 +23,7 @@ export default class FunnelService {
      * @param { string } funnelId funnelId
      */
     static findFunnelById(funnelId) {
-        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}`, 'GET').then(s => s.data);
+        return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}`, 'GET').then(s => s.data);
     }
 
     /**
@@ -31,7 +31,7 @@ export default class FunnelService {
      * @param { string } funnelId funnelId
      */
     static deleteFunnelById(funnelId) {
-        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}`, 'DELETE').then(s => s.data);
+        return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}`, 'DELETE').then(s => s.data);
     }
 
     /**
@@ -39,7 +39,7 @@ export default class FunnelService {
      * @param { string } funnelId funnelId
      */
     static getAllStagesOfAnFunnel(funnelId) {
-        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}/stages`, 'GET').then(s => s.data);
+        return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}/stages`, 'GET').then(s => s.data);
     }
 
     /**
@@ -48,7 +48,7 @@ export default class FunnelService {
      * @param { object } stage stage
      */
     static addStageAtTheEndOfTheFunnel(funnelId, stage) {
-        return FunnelService.client.makeRequetSimple(stage || {}, `/funnels/${funnelId}/stages`, 'POST').then(s => s.data);
+        return FunnelService.client.makeRequestSimple(stage || {}, `/funnels/${funnelId}/stages`, 'POST').then(s => s.data);
     }
 
     /**
@@ -57,7 +57,7 @@ export default class FunnelService {
      * @param { string } stageId stageId
      */
     static findStageById(funnelId, stageId) {
-        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}/stages/${stageId}`, 'GET').then(s => s.data);
+        return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}/stages/${stageId}`, 'GET').then(s => s.data);
     }
 
     /**
@@ -67,7 +67,7 @@ export default class FunnelService {
      * @param { object } stage stage
      */
     static addStageAfterGivenStageOfGivenFunnel(funnelId, stageId, stage) {
-        return FunnelService.client.makeRequetSimple(stage, `/funnels/${funnelId}/stages/${stageId}`, 'POST').then(s => s.data);
+        return FunnelService.client.makeRequestSimple(stage, `/funnels/${funnelId}/stages/${stageId}`, 'POST').then(s => s.data);
     }
 
     /**
@@ -77,7 +77,7 @@ export default class FunnelService {
      * @param { object } stage stage
      */
     static changeAStagesOfAFunnel(funnelId, stageId, stage) {
-        return FunnelService.client.makeRequetSimple(stage, `/funnels/${funnelId}/stages/${stageId}`, 'PUT').then(s => s.data);
+        return FunnelService.client.makeRequestSimple(stage, `/funnels/${funnelId}/stages/${stageId}`, 'PUT').then(s => s.data);
     }
 
     /**
@@ -86,7 +86,7 @@ export default class FunnelService {
      * @param { string } stageId stageId
      */
     static deleteStageFromFunnel(funnelId, stageId) {
-        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}/stages/${stageId}`, 'DELETE').then(s => s.data);
+        return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}/stages/${stageId}`, 'DELETE').then(s => s.data);
     }
 
     /**
@@ -94,7 +94,7 @@ export default class FunnelService {
      * @param { string } funnelId funnelId
      */
     static getStateOfTheFunnel(funnelId) {
-        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}/state`, 'GET').then(s => s.data);
+        return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}/state`, 'GET').then(s => s.data);
     }
 
     /**
@@ -103,20 +103,20 @@ export default class FunnelService {
      * @param { object } state state
      */
     static changeStateOfTheFunnel(funnelId, state) {
-        return FunnelService.client.makeRequetSimple(state || {}, `/funnels/${funnelId}/state`, 'POST').then(s => s.data);
+        return FunnelService.client.makeRequestSimple(state || {}, `/funnels/${funnelId}/state`, 'POST').then(s => s.data);
     }
 
     /**
      * getAllActions
      */
     static getAllActions(type = 'automatic') {
-        return FunnelService.client.makeRequetSimple({}, '/funnels/actions/?type=' + type, 'GET').then(s => s.data);
+        return FunnelService.client.makeRequestSimple({}, '/funnels/actions/?type=' + type, 'GET').then(s => s.data);
     }
     /*
      * executeActionForEntity
      */
     static executeActionForEntity(action, schemaId, entityId) {
-        return FunnelService.client.makeRequetSimple(action, '/funnels/actions/execute/schemas/' + schemaId + '/entityId/' + entityId, 'POST');
+        return FunnelService.client.makeRequestSimple(action, '/funnels/actions/execute/schemas/' + schemaId + '/entityId/' + entityId, 'POST');
     }
     /**
      * getDashboardInformation
@@ -126,7 +126,7 @@ export default class FunnelService {
         if (state) {
             return FunnelService.client.makeRequest({}, '/funnels/dashboard', 'GET', undefined, {queryParams: {state}}).then(s => s.data.dashboardFunnels);
         }
-        return FunnelService.client.makeRequetSimple({}, '/funnels/dashboard', 'GET').then(s => s.data.dashboardFunnels);
+        return FunnelService.client.makeRequestSimple({}, '/funnels/dashboard', 'GET').then(s => s.data.dashboardFunnels);
     }
 
     /**
@@ -134,7 +134,7 @@ export default class FunnelService {
      * @param { object } state state
      */
     static getAvailableEntryConditionsForSchema(schemaId) {
-        return FunnelService.client.makeRequetSimple({}, `/availableEntryConditions/${schemaId}`, 'GET').then(s => s.data);
+        return FunnelService.client.makeRequestSimple({}, `/availableEntryConditions/${schemaId}`, 'GET').then(s => s.data);
     }
 
     /**
@@ -142,7 +142,7 @@ export default class FunnelService {
      * @param { object } state state
      */
     static getAvailableEntryConditionsForPrevStage(funnelId, stageId) {
-        return FunnelService.client.makeRequetSimple({}, `/funnels/${funnelId}/stages/${stageId}/availableEntryConditions`, 'GET').then(s => s.data);
+        return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}/stages/${stageId}/availableEntryConditions`, 'GET').then(s => s.data);
     }
 
     /**

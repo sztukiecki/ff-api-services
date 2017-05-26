@@ -6,7 +6,7 @@ export default class CompanyService {
 
     //domain -> can also be an email
     static createCompany(companyName, companyUrl, domain) {
-        return CompanyService.client.makeRequetSimple({
+        return CompanyService.client.makeRequestSimple({
             companyName,
             companyUrl,
             domain
@@ -14,21 +14,21 @@ export default class CompanyService {
     }
 
     static usePreset(presets) {
-        return CompanyService.client.makeRequetSimple({
+        return CompanyService.client.makeRequestSimple({
             presets
         }, '/company/usepreset', 'PUT');
     }
 
     static updateCompany(body) {
-        return CompanyService.client.makeRequetSimple(body, '/company', 'PUT');
+        return CompanyService.client.makeRequestSimple(body, '/company', 'PUT');
     }
 
     static findCompany(companyId) {
-        return CompanyService.client.makeRequetSimple({}, `/company/${encodeURIComponent(companyId)}`, 'GET');
+        return CompanyService.client.makeRequestSimple({}, `/company/${encodeURIComponent(companyId)}`, 'GET');
     }
 
     static memberCountByEMailAddress(mailaddress) {
-        return CompanyService.client.makeRequetSimple({
+        return CompanyService.client.makeRequestSimple({
             mailaddress: mailaddress
         }, '/company/numberOfUsers', 'PUT');
     }

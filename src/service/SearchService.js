@@ -8,7 +8,7 @@ export default class SearchService {
         if (typeof query === 'string') {
             query = JSON.parse(query);
         }
-        return this.client.makeRequetSimple(query, '/index/' + index, 'POST');
+        return this.client.makeRequestSimple(query, '/index/' + index, 'POST');
     }
 
     static filter(index, page = 1, size = null, filter) {
