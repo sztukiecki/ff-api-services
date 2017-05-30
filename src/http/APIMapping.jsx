@@ -20,7 +20,8 @@ const APIMapping = {
     activityService: new APIMappingClass('activity-service'),
     entityExportService: new APIMappingClass('entity-export-service'),
     searchService: new APIMappingClass('search-service'),
-    formService: new APIMappingClass('form-service')
+    formService: new APIMappingClass('form-service'),
+    componentService: new APIMappingClass('component-ui-service')
 };
 export default APIMapping;
 export {APIMappingClass};
