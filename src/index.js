@@ -9,6 +9,7 @@ import SearchService from './service/SearchService';
 import TemplateService from './service/TemplateService';
 import WordpressTemplateService from './service/WordpressTemplateService';
 import FormService from './service/FormService';
+import ComponentService from './service/ComponentService';
 import HTTPProvider from './component/HTTPProvider';
 
 export default HTTPProvider;
@@ -25,5 +26,6 @@ export {
     ActivityService,
     SearchService,
     WordpressTemplateService,
-    FormService
+    FormService,
+    ComponentService
 };
