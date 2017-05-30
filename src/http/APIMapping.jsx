@@ -21,7 +21,8 @@ const APIMapping = {
     entityExportService: new APIMappingClass('entity-export-service'),
     searchService: new APIMappingClass('search-service'),
     formService: new APIMappingClass('form-service'),
-    componentService: new APIMappingClass('component-ui-service')
+    componentService: new APIMappingClass('component-ui-service'),
+    geolocationService: new APIMappingClass('geolocation-service')
 };
 export default APIMapping;
 export {APIMappingClass};

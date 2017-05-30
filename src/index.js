@@ -3,6 +3,7 @@ import UserService from './service/UserService';
 import EntitySchemaService from './service/EntitySchemaService';
 import TagsService from './service/TagsService';
 import FunnelService from './service/FunnelService';
+import GeolocationService from './service/GeolocationService'
 import PresetService from './service/PresetService';
 import ActivityService from './service/ActivityService';
 import SearchService from './service/SearchService';
@@ -22,6 +23,7 @@ export {
     TagsService,
     EntitySchemaService,
     FunnelService,
+    GeolocationService,
     PresetService,
     ActivityService,
     SearchService,

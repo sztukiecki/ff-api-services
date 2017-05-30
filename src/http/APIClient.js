@@ -52,7 +52,8 @@ export default class APIClient {
             headers: Object.assign({}, {
                 cognitoToken: this.idToken
             }, additionsParams.headers || {}),
-            data: body
+            data: body,
+            cancelToken: additionsParams.cancelToken
         };
 
         return axios(request);
