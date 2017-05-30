@@ -4,8 +4,8 @@ export default class ComponentService {
 
     static client = new HttpClient(APIMapping.componentService);
 
-    static getComponents() {
-        return ComponentService.client.makeRequest({}, '/components', 'GET');
+    static getComponents(viewName) {
+        return ComponentService.client.makeRequest({}, `/components?viewName=${viewName}`, 'GET');
     }
 
     /**
