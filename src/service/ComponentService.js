@@ -25,4 +25,8 @@ export default class ComponentService {
     static createComponent(data) {
         return ComponentService.client.makeRequest({}, '/components', 'POST', data);
     }
+
+    static deleteComponent(id) {
+        return ComponentService.client.makeRequest({}, `/components/${id}`, 'DELETE')
+    }
 }
