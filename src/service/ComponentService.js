@@ -9,6 +9,7 @@ export default class ComponentService {
     }
 
     /**
+     *
      * The data format looks like this:
      * {
      *      "id": ...,

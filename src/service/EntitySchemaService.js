@@ -69,4 +69,8 @@ export default class EntitySchemaService {
             }
         });
     }
+
+    static updateEntity(schemaId, entityId, entity) {
+        return EntitySchemaService.client.makeRequest({}, `/data/${schemaId}/entity/${entityId}`, 'PUT', entity);
+    }
 }

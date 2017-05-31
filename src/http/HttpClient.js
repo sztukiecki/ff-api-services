@@ -26,7 +26,7 @@ const isDefaultStage = (stageToUse) => {
 };
 
 class HttpClient {
-
+e
     apiClient = undefined;
     serviceName = undefined;
     stageToUse = undefined;
