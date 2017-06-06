@@ -43,7 +43,7 @@ class HttpClient {
 
     setAPIURL = () => {
         if (this.apiClient) {
-            this.apiClient.config.url = `${document.location.protocol}//cloudios-1932238678.eu-central-1.elb.amazonaws.com/edge-service/${this.serviceName}/${this.stageToUse}`;
+            this.apiClient.config.url = `https://cloudios.development.flowfact.cloud/edge-service/${this.serviceName}/${this.stageToUse}`;
         }
     };
 
