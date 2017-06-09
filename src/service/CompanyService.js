@@ -32,6 +32,12 @@ export default class CompanyService {
             mailaddress: mailaddress
         }, '/company/numberOfUsers', 'PUT');
     }
+
+	static postImage(image, companyId) {
+		const formData = new FormData();
+		formData.append('logo', image);
+		return this.client.makeRequest({}, `/company/${encodeURIComponent(companyId)}/logo`, 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
+	}
 }
 
 const StatusMapping = {
