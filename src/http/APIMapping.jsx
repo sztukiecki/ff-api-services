@@ -22,7 +22,8 @@ const APIMapping = {
     searchService: new APIMappingClass('search-service'),
     formService: new APIMappingClass('form-service'),
     componentService: new APIMappingClass('component-ui-service'),
-    geolocationService: new APIMappingClass('geolocation-service')
+    geolocationService: new APIMappingClass('geolocation-service'),
+    emailService: new APIMappingClass('email-service')
 };
 export default APIMapping;
 export {APIMappingClass};

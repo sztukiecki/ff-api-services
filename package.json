@@ -1,14 +1,15 @@
 {
   "name": "ff-api-services",
   "private": true,
-  "version": "0.0.36",
+  "version": "0.0.37",
   "description": "",
   "main": "lib/index.js",
+  "types": "./lib/index.d.ts",
   "repository": "ssh://git@bb.flowfact.com:7999/npmmod/ff-api-services.git",
   "author": "Andreas Soroko <andreas.soroko@flowfact.de>",
   "license": "",
   "scripts": {
-    "build-package": "cleandir dist/ && babel -d lib/ src/",
+    "build-package": "cleandir dist/ && babel -d lib/ src/ && copyfiles src/index.d.ts lib/",
     "build": "node build.js"
   },
   "dependencies": {
@@ -38,6 +39,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "clean-dir": "^1.0.3",
     "copy-webpack-plugin": "^4.0.1",
+    "copyfiles": "^1.2.0",
     "css-loader": "^0.28.1",
     "file-loader": "^0.11.1",
     "less": "^2.7.2",

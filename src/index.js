@@ -10,11 +10,11 @@ import SearchService from './service/SearchService';
 import TemplateService from './service/TemplateService';
 import WordpressTemplateService from './service/WordpressTemplateService';
 import FormService from './service/FormService';
+import EmailService from './service/EmailService';
 import ComponentService from './service/ComponentService';
 import HTTPProvider from './component/HTTPProvider';
 
 export default HTTPProvider;
-
 
 export {
     CompanyService,
@@ -29,5 +29,6 @@ export {
     SearchService,
     WordpressTemplateService,
     FormService,
+    EmailService,
     ComponentService
 };
