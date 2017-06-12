@@ -33,10 +33,10 @@ export default class CompanyService {
         }, '/company/numberOfUsers', 'PUT');
     }
 
-	static postImage(image, companyId) {
+	static postImage(image) {
 		const formData = new FormData();
 		formData.append('logo', image);
-		return this.client.makeRequest({}, `/company/${encodeURIComponent(companyId)}/logo`, 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
+		return this.client.makeRequest({}, '/company/logo', 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
 	}
 }
 
