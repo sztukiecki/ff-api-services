@@ -1,7 +1,7 @@
 {
   "name": "ff-api-services",
   "private": true,
-  "version": "0.0.37",
+  "version": "0.0.38",
   "description": "",
   "main": "lib/index.js",
   "types": "./lib/index.d.ts",
@@ -9,7 +9,7 @@
   "author": "Andreas Soroko <andreas.soroko@flowfact.de>",
   "license": "",
   "scripts": {
-    "build-package": "cleandir dist/ && babel -d lib/ src/ && copyfiles src/index.d.ts lib/",
+    "build-package": "cleandir dist/ && babel -d lib/ src/ && copyup src/index.d.ts lib/",
     "build": "node build.js"
   },
   "dependencies": {
