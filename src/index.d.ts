@@ -3,4 +3,7 @@ declare module 'ff-api-services' {
         static createDomain(domain): Promise<any>;
         static verifyDomain(domain): Promise<any>;
     }
+    export class ViewDefinitionService {
+        static getDefinitionsForSchema(schemaId): Promise<any>
+    }
 }
