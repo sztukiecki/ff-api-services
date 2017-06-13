@@ -8,7 +8,7 @@ export default class EntitySchemaService {
     }
 
     static getAllSchemas() {
-        return EntitySchemaService.client.makeRequest({}, '/schemas', 'GET');
+        return EntitySchemaService.client.makeRequest({}, '/schemas?transform', 'GET');
     }
 
     static getDataBySchemaId(schemaId, page = 1, size = null) {
@@ -21,11 +21,11 @@ export default class EntitySchemaService {
     }
 
     static selectSchemaById(schemaId) {
-        return EntitySchemaService.client.makeRequest({}, `/schemas/${schemaId}`, 'GET');
+        return EntitySchemaService.client.makeRequest({}, `/schemas/${schemaId}?transform`, 'GET');
     }
 
     static createNewSchema(schema) {
-        return EntitySchemaService.client.makeRequest({}, '/schemas', 'POST', schema);
+        return EntitySchemaService.client.makeRequest({}, '/schemas?transform', 'POST', schema);
     }
 
     static deleteSchema(schemaId) {
@@ -33,7 +33,7 @@ export default class EntitySchemaService {
     }
 
     static updateSchema(schema) {
-        return EntitySchemaService.client.makeRequest({}, `/schemas/${schema.id}`, 'PUT', schema);
+        return EntitySchemaService.client.makeRequest({}, `/schemas/${schema.id}?transform`, 'PUT', schema);
     }
 
     static integrationsForSchemaId(schemaId) {
