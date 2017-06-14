@@ -41,7 +41,9 @@ export default class EntitySchemaService {
     }
 
     static createNewIntegrationForSchema(schemaId, label) {
-        const integration = {schemaId, label};
+        const integration = {
+            schemaId, label
+        };
         return EntitySchemaService.client.makeRequest({}, '/integrations?transform', 'POST', integration);
     }
 
