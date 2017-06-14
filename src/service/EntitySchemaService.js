@@ -37,16 +37,16 @@ export default class EntitySchemaService {
     }
 
     static integrationsForSchemaId(schemaId) {
-        return EntitySchemaService.client.makeRequest({}, '/integrations', 'GET', undefined, {queryParams: {schemaId}});
+        return EntitySchemaService.client.makeRequest({}, `/integrations?schemaId=${schemaId}&transform`, 'GET');
     }
 
     static createNewIntegrationForSchema(schemaId, label) {
         const integration = {schemaId, label};
-        return EntitySchemaService.client.makeRequest({}, '/integrations', 'POST', integration);
+        return EntitySchemaService.client.makeRequest({}, '/integrations?transform', 'POST', integration);
     }
 
     static updateIntegration(integrationId, data) {
-        return EntitySchemaService.client.makeRequest({}, `/integrations/${integrationId}/formdata`, 'POST', data);
+        return EntitySchemaService.client.makeRequest({}, `/integrations/${integrationId}/formdata?transform`, 'POST', data);
     }
 
     static deleteIntegration(integrationId) {
