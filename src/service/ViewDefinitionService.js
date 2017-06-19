@@ -27,4 +27,16 @@ export default class ViewDefinitionService {
     static deleteDefinition(viewDefinitionId) {
         return ViewDefinitionService.client.makeRequest({}, `/views/${viewDefinitionId}`, 'DELETE');
     }
+
+    static updateCategory(viewId, categoryName, categoryDefinition) {
+        return ViewDefinitionService.client.makeRequest({}, `/views/${viewId}/categories/${categoryName}`, 'PATCH', categoryDefinition);
+    }
+
+    static addCategory(viewId, categoryDefinition) {
+        return ViewDefinitionService.client.makeRequest({}, `/views/${viewId}/categories`, 'PATCH', categoryDefinition);
+    }
+
+    static deleteCategory(viewId, categoryName) {
+        return ViewDefinitionService.client.makeRequest({}, `/views/${viewId}/categories/${categoryName}`, 'DELETE');
+    }
 }
