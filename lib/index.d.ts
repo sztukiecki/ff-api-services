@@ -18,6 +18,8 @@ declare module 'ff-api-services' {
     }
 
     export class ViewDefinitionService {
-        static getDefinitionsForSchema(schemaId): Promise<any>
+        static getDefinitionsForSchema(schemaId): Promise<any>;
+        static getDefinition(viewDefinitionId): Promise<any>;
+        static updateCategory(viewId, categoryName, categoryDefinition): Promise<any>;
     }
 }
