@@ -57,7 +57,7 @@ export default class WordpressTemplateService {
     /**
      * Create a site by an specific name. The page published directly.
      *
-     * @param siteName 		The title of the new wordpress page
+     * @param siteName 		The title of the new WordPress page
      * @param templateId	The id of the template, which will be the title of the page aswell.
      *
      */
