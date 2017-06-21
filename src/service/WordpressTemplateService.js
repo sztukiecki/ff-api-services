@@ -17,6 +17,8 @@ export default class WordpressTemplateService {
 
     static wordpressUrl;
 
+    static cognitoToken;
+
     static init() {
         let stage = store.get(this.storeKeys.StageName),
             versionTag = store.get(this.storeKeys.VersionTagName);
@@ -32,6 +34,15 @@ export default class WordpressTemplateService {
         this.wordpressApi = new WPAPI({
             endpoint: this.wordpressUrl + 'index.php/wp-json'
         });
+
+		this.cognitoToken = null;
+
+		if (AWS.Config.credentials && AWS.Config.credentials.params && AWS.Config.credentials.params.Logins) {
+			const loginKeys = Object.keys(AWS.Config.credentials.params.Logins);
+			if (loginKeys.length > 0) {
+				this.cognitoToken = AWS.Config.credentials.params.Logins[loginKeys[0]];
+			}
+		}
 
         // register custom routes
         WordpressTemplateService.wordpressApi.headerFooter = WordpressTemplateService.wordpressApi.registerRoute('flowfact/v1', '/beaverbuilder/headerfooter');
@@ -51,16 +62,31 @@ export default class WordpressTemplateService {
      *
      */
     static createSite(siteName, templateId) {
-        return WordpressTemplateService.wordpressApi.pages().param('cognitoToken', AWS.Config.credentials.cognitoToken).create({
-            title: siteName,
-            slug: templateId,
-            status: 'publish',
-            type: 'page'
-        });
+        if (this.cognitoToken) {
+            return WordpressTemplateService.wordpressApi.pages().param('cognitoToken', this.cognitoToken).create({
+                title: siteName,
+                slug: templateId,
+                status: 'publish',
+                type: 'page'
+            });
+        }
+        console.log('no cognitoToken');
+        return false;
     }
 
-    static deleteSite(id) {
-        return WordpressTemplateService.wordpressApi.pages().id(id).param('cognitoToken', AWS.Config.credentials.cognitoToken).delete();
+    static deleteSite(templateId) {
+        if (this.cognitoToken) {
+			return WordpressTemplateService.wordpressApi.pages().slug(templateId).param('cognitoToken', this.cognitoToken).then(page => {
+				if (page !== []) {
+					console.log('page');
+					return WordpressTemplateService.wordpressApi.pages().id(page.id).param('cognitoToken', this.cognitoToken).delete();
+				}
+				console.log('no page');
+				return false;
+			});
+        }
+		console.log('no cognitoToken');
+		return false;
     }
 
     static getHeaderFooterData() {
