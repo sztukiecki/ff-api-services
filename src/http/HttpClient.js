@@ -95,5 +95,6 @@ export {
     isDefaultApi,
     setStageInStore,
     getStageFromStore,
-    setVersionTagFromStore
+    setVersionTagFromStore,
+    getVersionTagFromStore
 };
