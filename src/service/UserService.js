@@ -24,7 +24,7 @@ export default class UserService {
     }
 
     static updateUser(user) {
-        return this.client.makeRequest({}, '/users', 'PUT', data);
+        return this.client.makeRequest({}, '/users', 'PUT', user);
     }
 }
 
