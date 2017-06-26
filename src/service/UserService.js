@@ -22,6 +22,10 @@ export default class UserService {
         formData.append('contactPicture', image, 'contactPicture');
         return this.client.makeRequest({}, '/users/picture', 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
     }
+
+    static updateUser(user) {
+        return this.client.makeRequest({}, '/users', 'PUT', data);
+    }
 }
 
 const StatusMapping = {

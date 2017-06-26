@@ -79,4 +79,11 @@ declare module 'ff-api-services' {
         static getDefinition(viewDefinitionId): Promise<any>;
         static updateCategory(viewId, categoryName, categoryDefinition): Promise<any>;
     }
+
+    export class UserService {
+        static createUser(companyID, mailAddress, firstName, lastName): Promise<any>;
+        static getCurrentUser(): Promise<any>;
+        static postImage(image): Promise<any>;
+        static updateUser(user): Promise<any>;
+    }
 }
