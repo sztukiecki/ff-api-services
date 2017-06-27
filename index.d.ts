@@ -86,4 +86,11 @@ declare module 'ff-api-services' {
         static postImage(image): Promise<any>;
         static updateUser(user): Promise<any>;
     }
+
+    export class SearchService {
+        static getSearches(): Promise<any>;
+        static getSearch(searchId): Promise<any>;
+        static saveSearch(searchModel): Promise<any>;
+        static deleteSearch(searchId): Promise<any>;
+    }
 }
