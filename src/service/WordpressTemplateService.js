@@ -13,7 +13,7 @@ export default class WordpressTemplateService {
     static defaultVersionTag = 'stable';
 
 
-    static wordpressApi;
+    static wordpressApis = [];
 
     static wordpressUrl;
 
@@ -31,10 +31,6 @@ export default class WordpressTemplateService {
 
         this.wordpressUrl = 'https://templatingengine.' + stage + '.flowfact.cloud/';
 
-        this.wordpressApi = new WPAPI({
-            endpoint: this.wordpressUrl + 'index.php/wp-json'
-        });
-
 		this.cognitoToken = null;
 
 		if (AWS.Config.credentials && AWS.Config.credentials.params && AWS.Config.credentials.params.Logins) {
@@ -43,10 +39,6 @@ export default class WordpressTemplateService {
 				this.cognitoToken = AWS.Config.credentials.params.Logins[loginKeys[0]];
 			}
 		}
-
-        // register custom routes
-        WordpressTemplateService.wordpressApi.headerFooter = WordpressTemplateService.wordpressApi.registerRoute('flowfact/v1', '/beaverbuilder/headerfooter');
-        WordpressTemplateService.wordpressApi.template = WordpressTemplateService.wordpressApi.registerRoute('flowfact/v1', '/template');
     }
 
     static getPageUrl(templateId, companyId)
@@ -55,48 +47,62 @@ export default class WordpressTemplateService {
     }
 
     /**
-     * Create a site by an specific name. The page published directly.
+     * Create a site by a specific name. The page is published directly.
      *
-     * @param siteName 		The title of the new WordPress page
+     * @param companyId 	The company of the current user scope, which is also the blog name for the wordpress api
+     * @param pageTitle 	The title of the new WordPress page
      * @param templateId	The id of the template, which will be the title of the page aswell.
      *
      */
-    static createSite(siteName, templateId) {
+    static createPage(companyId, pageTitle, templateId) {
         if (this.cognitoToken) {
-            return WordpressTemplateService.wordpressApi.pages().param('cognitoToken', this.cognitoToken).create({
-                title: siteName,
+            const wordpressApi = this.getWordpressApi(companyId);
+            return wordpressApi.pages().param('cognitoToken', this.cognitoToken).create({
+                title: pageTitle,
                 slug: templateId,
                 status: 'publish',
                 type: 'page'
             });
         }
-        console.log('no cognitoToken');
         return false;
     }
 
-    static deleteSite(templateId) {
+    /**
+     * Delete a site with a specific name.
+     *
+     * @param companyId 	The company of the current user scope, which is also the blog name for the wordpress api
+     * @param templateId 	The slug of the WordPress page
+     *
+     */
+    static deletePage(companyId, templateId) {
         if (this.cognitoToken) {
-			return WordpressTemplateService.wordpressApi.pages().slug(templateId).param('cognitoToken', this.cognitoToken).then(page => {
-				if (page !== []) {
-					console.log('page');
-					return WordpressTemplateService.wordpressApi.pages().id(page.id).param('cognitoToken', this.cognitoToken).delete();
+            const wordpressApi = this.getWordpressApi(companyId);
+			return wordpressApi.pages().slug(templateId).param('cognitoToken', this.cognitoToken).then(page => {
+				if (page.length > 0) {
+				    page = page.shift();
+					return wordpressApi.pages().id(page.id).param('cognitoToken', this.cognitoToken).delete();
 				}
-				console.log('no page');
 				return false;
 			});
         }
-		console.log('no cognitoToken');
 		return false;
     }
 
-    static getHeaderFooterData() {
-        return WordpressTemplateService.wordpressApi.headerFooter().headerfooter();
-    }
+    /**
+     * Generates the blog specific WordPress API enpoints and returns them
+     *
+     * @param companyId The company of the current user scope, which is also the blog name for the wordpress api
+     * @returns {WPAPI}
+     */
+    static getWordpressApi(companyId) {
 
-    static updateHeaderFooter(headerId, footerId) {
-        WordpressTemplateService.wordpressApi.headerFooter().headerfooter().update({
-            headerPageId: headerId,
-            footerPageId: footerId
-        });
+        if (!(companyId in this.wordpressApis)) {
+
+            this.wordpressApis[companyId] = new WPAPI({
+                endpoint: `${this.wordpressUrl}${companyId}/index.php/wp-json`
+            });
+        }
+
+        return this.wordpressApis[companyId];
     }
 }
