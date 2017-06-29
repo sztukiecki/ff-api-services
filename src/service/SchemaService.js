@@ -20,11 +20,11 @@ export default class SchemaService {
         });
     }
 
-    static selectSchemaById(schemaId) {
+    static getSchema(schemaId) {
         return SchemaService.client.makeRequest({}, `/schemas/${schemaId}?transform`, 'GET');
     }
 
-    static createNewSchema(schema) {
+    static createSchema(schema) {
         return SchemaService.client.makeRequest({}, '/schemas?transform', 'POST', schema);
     }
 
@@ -36,11 +36,11 @@ export default class SchemaService {
         return SchemaService.client.makeRequest({}, `/schemas/${schema.id}?transform`, 'PUT', schema);
     }
 
-    static integrationsForSchemaId(schemaId) {
+    static getIntegrationsForSchema(schemaId) {
         return SchemaService.client.makeRequest({}, `/integrations?schemaId=${schemaId}&transform`, 'GET');
     }
 
-    static createNewIntegrationForSchema(schemaId, label) {
+    static createIntegrationForSchema(schemaId, label) {
         const integration = {
             schemaId, label
         };
@@ -61,18 +61,5 @@ export default class SchemaService {
 
     static getResponseForIntegrationGetUrlById(integrationId) {
         return SchemaService.client.makeRequest({}, `/integrations/${integrationId}/data`, 'GET');
-    }
-
-    static deleteEntity(entityId, schemaId) {
-        return SchemaService.client.makeRequest({}, '/data', 'DELETE', undefined, {
-            queryParams: {
-                schemaId,
-                entityId
-            }
-        });
-    }
-
-    static updateEntity(schemaId, entityId, entity) {
-        return SchemaService.client.makeRequest({}, `/data/${schemaId}/entity/${entityId}`, 'PUT', entity);
     }
 }
