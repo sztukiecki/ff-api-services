@@ -42,6 +42,22 @@ export default class SearchService {
         return this.client.makeRequestSimple(searchModel, `/search/${searchId}`, 'PUT');
     }
 
+    static search(query, index, page = 1, size = null) {
+        if (typeof query === 'string') {
+            query = JSON.parse(query);
+        }
+        return this.client.makeRequestSimple(query, '/index/' + index, 'POST');
+    }
+
+    static filter(index, page = 1, size = null, filter) {
+        return this.client.makeRequest({}, '/index/' + index, 'POST', this.getQuery(filter), {
+            queryParams: {
+                page: page,
+                size: size
+            }
+        });
+    }
+
     static getQuery(filter) {
         if (!filter) {
             return {
