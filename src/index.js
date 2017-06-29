@@ -1,6 +1,6 @@
 import CompanyService from './service/CompanyService';
 import UserService from './service/UserService';
-import EntitySchemaService from './service/EntitySchemaService';
+import SchemaService from './service/SchemaService';
 import TagsService from './service/TagsService';
 import FunnelService from './service/FunnelService';
 import GeolocationService from './service/GeolocationService'
@@ -14,6 +14,7 @@ import EmailService from './service/EmailService';
 import ComponentService from './service/ComponentService';
 import ViewDefinitionService from './service/ViewDefinitionService';
 import HTTPProvider from './component/HTTPProvider';
+import EntityService from './service/EntityService';
 
 export default HTTPProvider;
 
@@ -22,7 +23,7 @@ export {
     UserService,
     TemplateService,
     TagsService,
-    EntitySchemaService,
+    SchemaService,
     FunnelService,
     GeolocationService,
     PresetService,
@@ -32,5 +33,6 @@ export {
     FormService,
     EmailService,
     ComponentService,
-    ViewDefinitionService
+    ViewDefinitionService,
+    EntityService
 };

@@ -92,5 +92,6 @@ declare module 'ff-api-services' {
         static getSearch(searchId): Promise<any>;
         static saveSearch(searchModel): Promise<any>;
         static deleteSearch(searchId): Promise<any>;
+        static updateSearch(searchId, searchModel): Promise<any>;
     }
 }

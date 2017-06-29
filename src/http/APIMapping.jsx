@@ -12,7 +12,8 @@ class APIMappingClass {
 const APIMapping = {
     userService: new APIMappingClass('user-service'),
     companyService: new APIMappingClass('company-service'),
-    entitySchemaService: new APIMappingClass('schema-service'),
+    entityService: new APIMappingClass('entity-service'),
+    schemaService: new APIMappingClass('schema-service'),
     tagService: new APIMappingClass('tag-service'),
     templateService: new APIMappingClass('template-service'),
     funnelService: new APIMappingClass('funnel-service'),
