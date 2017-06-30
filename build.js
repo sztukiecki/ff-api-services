@@ -20,7 +20,7 @@ function updateVersion(){
     console.log('> updateVersion');
     execute('npm --no-git-tag-version version patch');
     execute('git add .');
-    execute('git commit --amend --no-edit')
+    execute('git commit --amend --no-edit');
 }
 function createCommit(){
     'use strict';
@@ -35,10 +35,8 @@ function addTag(){
     'use strict';
     let version = require('./package.json').version;
     console.log('> addTag', 'v' + version);
-    execute('git tag "v' + version  + '"');
+    execute('git tag "v' + version + '"');
 }
-
-
 
 buildPackage();
 createCommit();
