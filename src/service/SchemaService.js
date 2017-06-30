@@ -62,4 +62,11 @@ export default class SchemaService {
     static getResponseForIntegrationGetUrlById(integrationId) {
         return SchemaService.client.makeRequest({}, `/integrations/${integrationId}/data`, 'GET');
     }
+
+    /**
+     * Method to get all complex datatypes defined in the backend.
+     */
+    static getComplexDataTypes() {
+        return SchemaService.client.makeRequest({}, '/datatypes', 'GET');
+    }
 }
