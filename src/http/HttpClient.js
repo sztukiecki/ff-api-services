@@ -43,7 +43,6 @@ const isDefaultApi = () => {
 };
 
 class HttpClient {
-    
     apiClient = undefined;
     serviceName = undefined;
     stageToUse = undefined;
@@ -74,13 +73,6 @@ class HttpClient {
     makeRequest(params, path, method, body = undefined, additionalParams = undefined) {
         this.getStage();
         return this.apiClient.invokeApi(params, path, method, additionalParams, body);
-    }
-
-    /**
-     * @deprecated Use makeRequestSimple instead (damn typo)
-     */
-    makeRequetSimple(body, path, method) {
-        return this.makeRequestSimple(body, path, method);
     }
 
     makeRequestSimple(body, path, method) {

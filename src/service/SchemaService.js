@@ -7,8 +7,15 @@ export default class SchemaService {
         return SchemaService.client.makeRequest({}, '/stats', 'GET');
     }
 
-    static getAllSchemas() {
-        return SchemaService.client.makeRequest({}, '/schemas?transform', 'GET');
+    static getAllSchemas(withGroups = false) {
+        let queryParams = {
+            transform: true
+        };
+
+        if (withGroups) {
+            queryParams.groups = 'true';
+        }
+        return SchemaService.client.makeRequest({}, '/schemas', 'GET', undefined, {queryParams});
     }
 
     static getDataBySchemaId(schemaId, page = 1, size = null) {
