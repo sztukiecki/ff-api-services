@@ -56,7 +56,13 @@ export default class APIClient {
             cancelToken: additionsParams.cancelToken
         };
 
-        return axios(request);
+        return axios(request).then(response => {
+            return response;
+        }).catch(error => {
+            if(error.response) {
+                return error.response;
+            }
+        });
     };
 
     buildCanonicalQueryString = (queryParams) => {
