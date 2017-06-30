@@ -3,12 +3,20 @@ import HttpClient, {APIMapping} from '../http';
 export default class SchemaService {
     static client = new HttpClient(APIMapping.schemaService);
 
-    static loadStats() {
-        return SchemaService.client.makeRequest({}, '/stats', 'GET');
+    static loadStats(withGroups = false) {
+        const additionalParams = withGroups ? {queryParams: {groups: 'true'}} : undefined;
+        return SchemaService.client.makeRequest({}, '/stats', 'GET', undefined, additionalParams);
     }
 
-    static getAllSchemas() {
-        return SchemaService.client.makeRequest({}, '/schemas?transform', 'GET');
+    static getAllSchemas(withGroups = false) {
+        let queryParams = {
+            transform: true
+        };
+
+        if (withGroups) {
+            queryParams.groups = 'true';
+        }
+        return SchemaService.client.makeRequest({}, '/schemas', 'GET', undefined, {queryParams});
     }
 
     static getDataBySchemaId(schemaId, page = 1, size = null) {
@@ -61,12 +69,5 @@ export default class SchemaService {
 
     static getResponseForIntegrationGetUrlById(integrationId) {
         return SchemaService.client.makeRequest({}, `/integrations/${integrationId}/data`, 'GET');
-    }
-
-    /**
-     * Method to get all complex datatypes defined in the backend.
-     */
-    static getComplexDataTypes() {
-        return SchemaService.client.makeRequest({}, '/datatypes', 'GET');
     }
 }

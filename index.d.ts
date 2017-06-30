@@ -37,7 +37,7 @@ declare module 'ff-api-services' {
         ownerId: string;
         schemaId: string;
         stages: any; // TODO Check this, i only guessed this.
-        state: string; // TODO Check this, i only guessed this.<
+        state: string; // TODO Check this, i only guessed this.
         timestamp: number;
     }
 

@@ -4,7 +4,7 @@ import axiosRetry from 'axios-retry';
 
 axiosRetry(axios, {
     retries: 5, retryCondition: (error) => {
-        return error && error.response && error.response.status >= 500
+        return error && error.response && error.response.status >= 500;
 
     }
 });
@@ -26,7 +26,7 @@ export default class APIClient {
             }
         }
 
-        if (!this.idToken || ( this.idToken && this.idToken.trim().length === 0)) {
+        if (!this.idToken || (this.idToken && this.idToken.trim().length === 0)) {
             console.warn('no id token is set');
         }
     };
@@ -60,22 +60,16 @@ export default class APIClient {
     };
 
     buildCanonicalQueryString = (queryParams) => {
-        if (queryParams === undefined || Object.keys(queryParams).length < 1) {
+        if (!queryParams) {
             return '';
         }
 
-        let sortedQueryParams = [];
-        for (const property in queryParams) {
-            if (queryParams.hasOwnProperty(property)) {
-                sortedQueryParams.push(property);
-            }
-        }
-        sortedQueryParams.sort();
+        const sortedQueryParams = Object.getOwnPropertyNames(queryParams).sort();
 
-        let canonicalQueryString = '';
-        for (let i = 0; i < sortedQueryParams.length; i++) {
-            canonicalQueryString += sortedQueryParams[i] + '=' + encodeURIComponent(queryParams[sortedQueryParams[i]]) + '&';
-        }
-        return canonicalQueryString.substr(0, canonicalQueryString.length - 1);
+        return sortedQueryParams.map(
+            paramName => queryParams[paramName] === true
+                ? encodeURIComponent(paramName)
+                : `${encodeURIComponent(paramName)}=${encodeURIComponent(queryParams[paramName])}`
+        ).join('&');
     };
 }
