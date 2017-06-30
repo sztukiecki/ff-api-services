@@ -6,7 +6,7 @@ export default class CompanyService {
 
     //domain -> can also be an email
     static createCompany(companyName, companyUrl, domain) {
-        return CompanyService.client.makeRequestSimple({
+        return this.client.makeRequestSimple({
             companyName,
             companyUrl,
             domain
@@ -14,21 +14,21 @@ export default class CompanyService {
     }
 
     static usePreset(presets) {
-        return CompanyService.client.makeRequestSimple({
+        return this.client.makeRequestSimple({
             presets
         }, '/company/usepreset', 'PUT');
     }
 
     static updateCompany(body) {
-        return CompanyService.client.makeRequestSimple(body, '/company', 'PUT');
+        return this.client.makeRequestSimple(body, '/company', 'PUT');
     }
 
     static findCompany(companyId) {
-        return CompanyService.client.makeRequestSimple({}, `/company/${encodeURIComponent(companyId)}`, 'GET');
+        return this.client.makeRequestSimple({}, `/company/${encodeURIComponent(companyId)}`, 'GET');
     }
 
     static memberCountByEMailAddress(mailaddress) {
-        return CompanyService.client.makeRequestSimple({
+        return this.client.makeRequestSimple({
             mailaddress: mailaddress
         }, '/company/numberOfUsers', 'PUT');
     }

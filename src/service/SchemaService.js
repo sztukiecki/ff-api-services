@@ -4,7 +4,7 @@ export default class SchemaService {
     static client = new HttpClient(APIMapping.schemaService);
 
     static loadStats() {
-        return SchemaService.client.makeRequest({}, '/stats', 'GET');
+        return this.client.makeRequest({}, '/stats', 'GET');
     }
 
     static getAllSchemas(withGroups = false) {
@@ -15,11 +15,11 @@ export default class SchemaService {
         if (withGroups) {
             queryParams.groups = 'true';
         }
-        return SchemaService.client.makeRequest({}, '/schemas', 'GET', undefined, {queryParams});
+        return this.client.makeRequest({}, '/schemas', 'GET', undefined, {queryParams});
     }
 
     static getDataBySchemaId(schemaId, page = 1, size = null) {
-        return SchemaService.client.makeRequest({}, `/data/${schemaId}`, 'GET', undefined, {
+        return this.client.makeRequest({}, `/data/${schemaId}`, 'GET', undefined, {
             queryParams: {
                 page: page,
                 size: size
@@ -28,45 +28,45 @@ export default class SchemaService {
     }
 
     static getSchema(schemaId) {
-        return SchemaService.client.makeRequest({}, `/schemas/${schemaId}?transform`, 'GET');
+        return this.client.makeRequest({}, `/schemas/${schemaId}?transform`, 'GET');
     }
 
     static createSchema(schema) {
-        return SchemaService.client.makeRequest({}, '/schemas?transform', 'POST', schema);
+        return this.client.makeRequest({}, '/schemas?transform', 'POST', schema);
     }
 
     static deleteSchema(schemaId) {
-        return SchemaService.client.makeRequest({}, `/schemas/${schemaId}`, 'DELETE');
+        return this.client.makeRequest({}, `/schemas/${schemaId}`, 'DELETE');
     }
 
     static updateSchema(schema) {
-        return SchemaService.client.makeRequest({}, `/schemas/${schema.id}?transform`, 'PUT', schema);
+        return this.client.makeRequest({}, `/schemas/${schema.id}?transform`, 'PUT', schema);
     }
 
     static getIntegrationsForSchema(schemaId) {
-        return SchemaService.client.makeRequest({}, `/integrations?schemaId=${schemaId}&transform`, 'GET');
+        return this.client.makeRequest({}, `/integrations?schemaId=${schemaId}&transform`, 'GET');
     }
 
     static createIntegrationForSchema(schemaId, label) {
         const integration = {
             schemaId, label
         };
-        return SchemaService.client.makeRequest({}, '/integrations?transform', 'POST', integration);
+        return this.client.makeRequest({}, '/integrations?transform', 'POST', integration);
     }
 
     static updateIntegration(integrationId, data) {
-        return SchemaService.client.makeRequest({}, `/integrations/${integrationId}/formdata?transform`, 'POST', data);
+        return this.client.makeRequest({}, `/integrations/${integrationId}/formdata?transform`, 'POST', data);
     }
 
     static deleteIntegration(integrationId) {
-        return SchemaService.client.makeRequest({}, `/integrations/${integrationId}`, 'DELETE');
+        return this.client.makeRequest({}, `/integrations/${integrationId}`, 'DELETE');
     }
 
     static getResponseForIntegrationGetUrlByUrl(url) {
-        return SchemaService.client.makeRequest({}, url, 'GET');
+        return this.client.makeRequest({}, url, 'GET');
     }
 
     static getResponseForIntegrationGetUrlById(integrationId) {
-        return SchemaService.client.makeRequest({}, `/integrations/${integrationId}/data`, 'GET');
+        return this.client.makeRequest({}, `/integrations/${integrationId}/data`, 'GET');
     }
 }
