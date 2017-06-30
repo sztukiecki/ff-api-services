@@ -3,8 +3,9 @@ import HttpClient, {APIMapping} from '../http';
 export default class SchemaService {
     static client = new HttpClient(APIMapping.schemaService);
 
-    static loadStats() {
-        return this.client.makeRequest({}, '/stats', 'GET');
+    static loadStats(withGroups = false) {
+        const additionalParams = withGroups ? {queryParams: {groups: 'true'}} : undefined;
+        return this.client.makeRequest({}, '/stats', 'GET', undefined, additionalParams);
     }
 
     static getAllSchemas(withGroups = false) {
