@@ -5,6 +5,6 @@ export default class PresetService {
     static client = new HttpClient(APIMapping.presetService);
 
     static getPresets() {
-        return this.client.makeRequestSimple({}, '/preset', 'GET').then(s => s.data);
+        return PresetService.client.makeRequestSimple({}, '/preset', 'GET').then(s => s.data);
     }
 }

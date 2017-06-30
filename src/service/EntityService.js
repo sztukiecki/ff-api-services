@@ -10,7 +10,7 @@ export default class EntityService {
      * @param schemaId
      */
     static deleteEntity(entityId, schemaId) {
-        return this.client.makeRequest({}, `/schemas/${schemaId}/entities/${entityId}`, 'DELETE');
+        EntityService.client.makeRequest({}, `/schemas/${schemaId}/entities/${entityId}`, 'DELETE')
     }
 
     /**
@@ -21,10 +21,10 @@ export default class EntityService {
      * @returns {*}
      */
     static updateEntity(schemaId, entityId, entity) {
-        return this.client.makeRequest({}, `/schemas/${schemaId}/entities/${entityId}`, 'PUT', entity);
+        return EntityService.client.makeRequest({}, `/schemas/${schemaId}/entities/${entityId}`, 'PUT', entity);
     }
 
     static getEntityWithViewDefinition(viewId, schemaId, entityId) {
-        return this.client.makeRequest({}, `/views/${viewId}/schemas/${schemaId}/entities/${entityId}`, 'GET');
+        return EntityService.client.makeRequest({}, `/views/${viewId}/schemas/${schemaId}/entities/${entityId}`, 'GET');
     }
 }

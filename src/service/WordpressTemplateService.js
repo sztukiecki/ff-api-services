@@ -43,7 +43,7 @@ export default class WordpressTemplateService {
 
     static getPageUrl(templateId, companyId)
     {
-        return this.wordpressUrl + companyId + '/' + templateId;
+        return WordpressTemplateService.wordpressUrl + companyId + '/' + templateId;
     }
 
     /**
@@ -79,7 +79,7 @@ export default class WordpressTemplateService {
             const wordpressApi = this.getWordpressApi(companyId);
 			return wordpressApi.pages().slug(templateId).param('cognitoToken', this.cognitoToken).then(page => {
 				if (page.length > 0) {
-                    page = page.shift();
+				    page = page.shift();
 					return wordpressApi.pages().id(page.id).param('cognitoToken', this.cognitoToken).delete();
 				}
 				return false;

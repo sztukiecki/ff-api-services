@@ -5,7 +5,7 @@ export default class ViewDefinitionService {
     static client = new HttpClient(APIMapping.viewDefinitionService);
 
     static getDefinitionsForSchema(schemaId) {
-        return this.client.makeRequest({}, '/views', 'GET', undefined, {
+        return ViewDefinitionService.client.makeRequest({}, '/views', 'GET', undefined, {
             queryParams: {
                 schemaId
             }
@@ -13,30 +13,30 @@ export default class ViewDefinitionService {
     }
 
     static getDefinition(viewDefinitionId) {
-        return this.client.makeRequest({}, `/views/${viewDefinitionId}`, 'GET');
+        return ViewDefinitionService.client.makeRequest({}, `/views/${viewDefinitionId}`, 'GET');
     }
 
     static updateDefinition(viewDefinitionId, viewDefinition) {
-        return this.client.makeRequest({}, `/views/${viewDefinitionId}`, 'PUT', viewDefinition);
+        return ViewDefinitionService.client.makeRequest({}, `/views/${viewDefinitionId}`, 'PUT', viewDefinition);
     }
 
     static createDefinition(viewDefinition) {
-        return this.client.makeRequest({}, '/views', 'POST', viewDefinition);
+        return ViewDefinitionService.client.makeRequest({}, '/views', 'POST', viewDefinition);
     }
 
     static deleteDefinition(viewDefinitionId) {
-        return this.client.makeRequest({}, `/views/${viewDefinitionId}`, 'DELETE');
+        return ViewDefinitionService.client.makeRequest({}, `/views/${viewDefinitionId}`, 'DELETE');
     }
 
     static updateCategory(viewId, categoryName, categoryDefinition) {
-        return this.client.makeRequest({}, `/views/${viewId}/categories/${categoryName}`, 'PATCH', categoryDefinition);
+        return ViewDefinitionService.client.makeRequest({}, `/views/${viewId}/categories/${categoryName}`, 'PATCH', categoryDefinition);
     }
 
     static addCategory(viewId, categoryDefinition) {
-        return this.client.makeRequest({}, `/views/${viewId}/categories`, 'PATCH', categoryDefinition);
+        return ViewDefinitionService.client.makeRequest({}, `/views/${viewId}/categories`, 'PATCH', categoryDefinition);
     }
 
     static deleteCategory(viewId, categoryName) {
-        return this.client.makeRequest({}, `/views/${viewId}/categories/${categoryName}`, 'DELETE');
+        return ViewDefinitionService.client.makeRequest({}, `/views/${viewId}/categories/${categoryName}`, 'DELETE');
     }
 }
