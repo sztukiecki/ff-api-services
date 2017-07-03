@@ -1,4 +1,4 @@
-import store from 'store';
+import * as store from 'store';
 import APIClient from './APIClient';
 
 const StoreKeys = {

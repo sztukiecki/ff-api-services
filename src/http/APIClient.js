@@ -1,6 +1,6 @@
 import AWS from 'ff-aws-sdk';
 import axios from 'axios';
-import axiosRetry from 'axios-retry';
+import * as axiosRetry from 'axios-retry';
 import ErrorHandler from '../ErrorHandler';
 
 axiosRetry(axios, {
