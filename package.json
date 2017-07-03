@@ -9,7 +9,7 @@
   "author": "Andreas Soroko <andreas.soroko@flowfact.de>",
   "license": "",
   "scripts": {
-    "build-package": "cleandir dist/ && babel -d lib/ src/",
+    "build-package": "cleandir dist/ && tsc",
     "build": "node build.js"
   },
   "dependencies": {
@@ -44,6 +44,8 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
     "style-loader": "^0.17.0",
+    "tslint": "^5.4.3",
+    "typescript": "^2.4.1",
     "url-loader": "^0.5.8",
     "webpack": "^2.5.1"
   }
