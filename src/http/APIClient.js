@@ -51,7 +51,7 @@ export default class APIClient {
             method: method,
             url: url,
             headers: Object.assign({}, {
-                cognitoToken: this.idToken + 'meh'
+                cognitoToken: this.idToken
             }, additionsParams.headers || {}),
             data: body,
             cancelToken: additionsParams.cancelToken
