@@ -2,7 +2,7 @@ import EventEmitter from 'events';
 
 class ErrorHandler extends EventEmitter {
 
-    handleError(code, message) {
+    handleError(code, message)  {
         this.emit('error', code, message);
     }
 
