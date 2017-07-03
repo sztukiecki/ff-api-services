@@ -1,6 +1,7 @@
 import AWS from 'ff-aws-sdk';
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
+import ErrorHandler from '../ErrorHandler';
 
 axiosRetry(axios, {
     retries: 5, retryCondition: (error) => {
@@ -59,6 +60,9 @@ export default class APIClient {
         return axios(request).then(response => {
             return response;
         }).catch(error => {
+            const responseCode = error.response ? error.response.status : undefined;
+            ErrorHandler.handleError(responseCode, error.message);
+
             if(error.response) {
                 return error.response;
             }
