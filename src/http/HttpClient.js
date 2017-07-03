@@ -30,7 +30,7 @@ const setStageInStore = (stage) => {
 };
 
 
-const setVersionTagFromStore = (versionTag) => {
+const setVersionTagInStore = (versionTag) => {
     'use strict';
     if (versionTag) {
         store.set(StoreKeys.EdgeServiceVersionTag, versionTag);
@@ -87,6 +87,6 @@ export {
     isDefaultApi,
     setStageInStore,
     getStageFromStore,
-    setVersionTagFromStore,
+    setVersionTagInStore,
     getVersionTagFromStore
 };
