@@ -1,6 +1,7 @@
 import AWS from 'ff-aws-sdk';
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
+import ErrorHandler from '../ErrorHandler';
 
 axiosRetry(axios, {
     retries: 5, retryCondition: (error) => {
@@ -50,13 +51,17 @@ export default class APIClient {
             method: method,
             url: url,
             headers: Object.assign({}, {
-                cognitoToken: this.idToken
+                cognitoToken: this.idToken + 'meh'
             }, additionsParams.headers || {}),
             data: body,
             cancelToken: additionsParams.cancelToken
         };
 
-        return axios(request);
+        return axios(request)
+            .catch(error => {
+                const responseCode = error.response ? error.response.status : undefined;
+                ErrorHandler.handleError(responseCode, error.message);
+            });
     };
 
     buildCanonicalQueryString = (queryParams) => {
