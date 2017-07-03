@@ -10,7 +10,7 @@ export default class EntityService {
      * @param schemaId
      */
     static deleteEntity(entityId, schemaId) {
-        EntityService.client.makeRequest({}, `/schemas/${schemaId}/entities/${entityId}`, 'DELETE')
+        return EntityService.client.makeRequest({}, `/schemas/${schemaId}/entities/${entityId}`, 'DELETE')
     }
 
     /**
