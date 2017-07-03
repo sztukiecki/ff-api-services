@@ -75,25 +75,25 @@ declare module 'ff-api-services' {
     }
 
     export class ViewDefinitionService {
-        static getDefinitionsForSchema(schemaId): Promise<any>;
-        static getDefinition(viewDefinitionId): Promise<any>;
-        static updateCategory(viewId, categoryName, categoryDefinition): Promise<any>;
+        static getDefinitionsForSchema(schemaId: string): Promise<any>;
+        static getDefinition(viewDefinitionId: string): Promise<any>;
+        static updateCategory(viewId: string, categoryName: string, categoryDefinition: any): Promise<any>;
     }
 
     export class UserService {
-        static createUser(companyID, mailAddress, firstName, lastName): Promise<any>;
+        static createUser(companyID: string, mailAddress: string, firstName: string, lastName: string): Promise<any>;
         static getCurrentUser(): Promise<any>;
-        static postImage(image): Promise<any>;
-        static updateUser(user): Promise<any>;
+        static postImage(image: any): Promise<any>;
+        static updateUser(user: any): Promise<any>;
     }
 
     export class SearchService {
         static getSearches(): Promise<any>;
-        static getSearch(searchId): Promise<any>;
-        static saveSearch(searchModel): Promise<any>;
-        static deleteSearch(searchId): Promise<any>;
-        static updateSearch(searchId, searchModel): Promise<any>;
-        static search(query, index, page, size): Promise<any>;
-        static filter(index, page, size, filter): Promise<any>;
+        static getSearch(searchId: string): Promise<any>;
+        static saveSearch(searchModel: any): Promise<any>;
+        static deleteSearch(searchId: string): Promise<any>;
+        static updateSearch(searchId: string, searchModel: string): Promise<any>;
+        static search(query: any, index: string, page: number, size: number): Promise<any>;
+        static filter(index: string, page: number, size: number, filter: any): Promise<any>;
     }
 }
