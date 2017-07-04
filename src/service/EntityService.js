@@ -20,8 +20,8 @@ export default class EntityService {
      * @param entity
      * @returns {*}
      */
-    static updateEntity(schemaId, entityId, entity) {
-        return EntityService.client.makeRequest({}, `/schemas/${schemaId}/entities/${entityId}`, 'PUT', entity);
+    static updateEntityField(schemaId, entityId, field) {
+        return EntityService.client.makeRequest({}, `/schemas/${schemaId}/entities/${entityId}`, 'PATCH', field);
     }
 
     static getEntityWithViewDefinition(viewId, schemaId, entityId) {
