@@ -4,6 +4,10 @@ export default class EntityService {
 
     static client = new HttpClient(APIMapping.entityService);
 
+    static createEntity(schemaId) {
+        return EntityService.client.makeRequest({}, `/schemas/${schemaId}`, 'POST');
+    }
+
     /**
      * Delete a entity in the Backend
      * @param entityId
