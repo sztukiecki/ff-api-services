@@ -1,5 +1,4 @@
 class APIMappingClass {
-
     constructor(name) {
         this.serviceName = name;
     }

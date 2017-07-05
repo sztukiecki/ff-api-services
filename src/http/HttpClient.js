@@ -15,7 +15,6 @@ const getStageFromStore = () => {
     return fromStore ? fromStore : defaultStage;
 };
 
-
 const getVersionTagFromStore = () => {
     'use strict';
     const fromStore = store.get(StoreKeys.EdgeServiceVersionTag);
@@ -28,7 +27,6 @@ const setStageInStore = (stage) => {
         store.set(StoreKeys.EdgeServiceStage, stage);
     }
 };
-
 
 const setVersionTagInStore = (versionTag) => {
     'use strict';
@@ -60,7 +58,10 @@ class HttpClient {
 
     setAPIURL = () => {
         if (this.apiClient) {
-            this.apiClient.config.url = `https://cloudios.${this.stageToUse}.flowfact.cloud/edge-service/${this.serviceName}/${this.apiVersionTag}`;
+            const baseUrl = this.stageToUse === 'local'
+                ? 'http://localhost:8080'
+                : `https://cloudios.${this.stageToUse}.flowfact.cloud/edge-service`;
+            this.apiClient.config.url = `${baseUrl}/${this.serviceName}/${this.apiVersionTag}`;
         }
     };
 
