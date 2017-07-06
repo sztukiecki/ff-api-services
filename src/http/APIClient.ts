@@ -1,22 +1,31 @@
 import AWS from 'ff-aws-sdk';
-import axios from 'axios';
+import axios, {AxiosError, AxiosRequestConfig, CancelToken} from 'axios';
 import * as axiosRetry from 'axios-retry';
 import ErrorHandler from '../ErrorHandler';
 
 axiosRetry(axios, {
-    retries: 5, retryCondition: (error) => {
-        return error && error.response && error.response.status >= 500;
-
+    retries: 5, retryCondition: (error: AxiosError): boolean => {
+        return !!error && !!error.response && error.response.status >= 500;
     }
 });
+
+type ParamMap = { [key: string]: string|true };
+
+export interface APIClientConfig {
+    url?: string;
+}
+
+export interface APIClientAdditionalParams {
+    headers?: string | ParamMap;
+    queryParams?: ParamMap;
+    cancelToken?: CancelToken;
+}
 
 export default class APIClient {
 
     idToken = '';
 
-    constructor(config) {
-        this.config = config;
-
+    constructor(public config: APIClientConfig) {
     }
 
     getidToken = () => {
@@ -32,7 +41,7 @@ export default class APIClient {
         }
     };
 
-    invokeApi = (params, path, method, additionsParams, body) => {
+    invokeApi = (path: string, method: string, additionsParams: APIClientAdditionalParams = {}, body: string|{} = '') => {
         if (!path.startsWith('/')) {
             throw new Error('missing slash at the beginning');
         }
@@ -42,12 +51,14 @@ export default class APIClient {
 
         this.getidToken();
         let url = this.config.url + path;
-        const queryString = this.buildCanonicalQueryString(additionsParams.queryParams);
-        if (queryString !== '') {
-            url += '?' + queryString;
+        if (additionsParams.queryParams) {
+            const queryString = this.buildCanonicalQueryString(additionsParams.queryParams);
+            if (queryString !== '') {
+                url += '?' + queryString;
+            }
         }
 
-        const request = {
+        const request: AxiosRequestConfig = {
             method: method,
             url: url,
             headers: Object.assign({}, {
@@ -69,17 +80,21 @@ export default class APIClient {
         });
     };
 
-    buildCanonicalQueryString = (queryParams) => {
+    buildCanonicalQueryString = (queryParams: ParamMap) => {
         if (!queryParams) {
             return '';
         }
 
         const sortedQueryParams = Object.getOwnPropertyNames(queryParams).sort();
 
-        return sortedQueryParams.map(
-            paramName => queryParams[paramName] === true
-                ? encodeURIComponent(paramName)
-                : `${encodeURIComponent(paramName)}=${encodeURIComponent(queryParams[paramName])}`
-        ).join('&');
+        return sortedQueryParams.map(paramName => {
+            const paramValue = queryParams[paramName];
+
+            if (paramValue === true) {
+                return encodeURIComponent(paramName)
+            }
+
+            return `${encodeURIComponent(paramName)}=${encodeURIComponent(paramValue)}`
+        }).join('&');
     };
 }

@@ -12,7 +12,7 @@ export default class ActivityService {
                 size: size
             };
         }
-        return ActivityService.client.makeRequest(searchQuery, '/activities', 'GET').then(s => s.data);
+        return ActivityService.client.makeRequest('/activities', 'GET').then(s => s.data);
     }
 
     static getActiveActivities(page = undefined, size = undefined) {
@@ -23,7 +23,7 @@ export default class ActivityService {
                 size: size
             };
         }
-        return ActivityService.client.makeRequest(searchQuery, '/activities/active', 'GET').then(s => s.data);
+        return ActivityService.client.makeRequest('/activities/active', 'GET').then(s => s.data);
     }
 
     static searchActivities(search, searchQuery = {}, page = undefined, size = undefined) {

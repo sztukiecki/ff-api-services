@@ -132,7 +132,7 @@ export default class FunnelService {
      */
     static getDashboardInformation(state) {
         if (state) {
-            return FunnelService.client.makeRequest({}, '/funnels/dashboard', 'GET', undefined, {queryParams: {state}}).then(s => s.data.dashboardFunnels);
+            return FunnelService.client.makeRequest('/funnels/dashboard', 'GET', undefined, {queryParams: {state}}).then(s => s.data.dashboardFunnels);
         }
         return FunnelService.client.makeRequestSimple({}, '/funnels/dashboard', 'GET').then(s => s.data.dashboardFunnels);
     }
@@ -161,14 +161,14 @@ export default class FunnelService {
      *      The model of the funnel as object
      */
     static updateFunnelById(funnelId, data) {
-        return FunnelService.client.makeRequest({}, `/funnels/${funnelId}`, 'PUT', data);
+        return FunnelService.client.makeRequest(`/funnels/${funnelId}`, 'PUT', data);
     }
 
     static setStageAsFirstStage(funnelId, stageId) {
-        return FunnelService.client.makeRequest({}, `/funnels/${funnelId}/stages/${stageId}/parent`, 'PUT');
+        return FunnelService.client.makeRequest(`/funnels/${funnelId}/stages/${stageId}/parent`, 'PUT');
     }
 
     static setStageAfterStage(funnelId, stageId, parentId) {
-        return FunnelService.client.makeRequest({}, `/funnels/${funnelId}/stages/${stageId}/parent/${parentId}`, 'PUT');
+        return FunnelService.client.makeRequest(`/funnels/${funnelId}/stages/${stageId}/parent/${parentId}`, 'PUT');
     }
 }

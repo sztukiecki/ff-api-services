@@ -1,6 +1,7 @@
 class APIMappingClass {
+    serviceName: string;
 
-    constructor(name) {
+    constructor(name: string) {
         this.serviceName = name;
     }
 
@@ -27,5 +28,6 @@ const APIMapping = {
     emailService: new APIMappingClass('email-service'),
     viewDefinitionService: new APIMappingClass('view-definition-service')
 };
+
 export default APIMapping;
 export {APIMappingClass};

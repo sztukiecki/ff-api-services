@@ -97,3 +97,16 @@ declare module 'ff-api-services' {
         static filter(index: string, page: number, size: number, filter: any): Promise<any>;
     }
 }
+
+declare module 'axios-retry' {
+    import {AxiosError, AxiosStatic} from 'axios';
+
+    interface AxiosRetryParams {
+        retries?: number;
+        retryCondition?: (error: AxiosError) => boolean;
+    }
+
+    namespace axiosRetry {}
+    function axiosRetry(axios: AxiosStatic, params: AxiosRetryParams): void;
+    export = axiosRetry;
+}

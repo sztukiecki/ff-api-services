@@ -1,5 +1,6 @@
 import * as store from 'store';
-import APIClient from './APIClient';
+import APIClient, {APIClientAdditionalParams} from './APIClient';
+import {APIMappingClass} from './APIMapping';
 
 const StoreKeys = {
     EdgeServiceStage: 'HTTPCLIENT.APICLIENT.STAGE',
@@ -22,7 +23,7 @@ const getVersionTagFromStore = () => {
     return fromStore ? fromStore : defaultVersionTag;
 };
 
-const setStageInStore = (stage) => {
+const setStageInStore = (stage: string) => {
     'use strict';
     if (stage) {
         store.set(StoreKeys.EdgeServiceStage, stage);
@@ -30,7 +31,7 @@ const setStageInStore = (stage) => {
 };
 
 
-const setVersionTagInStore = (versionTag) => {
+const setVersionTagInStore = (versionTag: string) => {
     'use strict';
     if (versionTag) {
         store.set(StoreKeys.EdgeServiceVersionTag, versionTag);
@@ -43,18 +44,17 @@ const isDefaultApi = () => {
 };
 
 class HttpClient {
-    apiClient = undefined;
-    serviceName = undefined;
-    stageToUse = undefined;
-    apiVersionTag = undefined;
+    apiClient: APIClient = new APIClient({});
+    serviceName?: string;
+    stageToUse: string;
+    apiVersionTag: string;
 
-    constructor(apiMapping) {
+    constructor(apiMapping: APIMappingClass) {
         if (apiMapping === undefined || apiMapping.name.trim().length === 0) {
             console.warn('http client has some invalid initial configs');
         }
 
         this.serviceName = apiMapping.name;
-        this.apiClient = new APIClient({});
         this.getStage();
     }
 
@@ -70,14 +70,14 @@ class HttpClient {
         this.setAPIURL();
     };
 
-    makeRequest(params, path, method, body = undefined, additionalParams = undefined) {
+    makeRequest(path: string, method: string, body?: string|{}, additionalParams?: APIClientAdditionalParams) {
         this.getStage();
-        return this.apiClient.invokeApi(params, path, method, additionalParams, body);
+        return this.apiClient.invokeApi(path, method, additionalParams, body);
     }
 
-    makeRequestSimple(body, path, method) {
+    makeRequestSimple(body: string|{}, path: string, method: string) {
         this.getStage();
-        return this.apiClient.invokeApi(undefined, path, method, undefined, body);
+        return this.apiClient.invokeApi(path, method, undefined, body);
     }
 }
 

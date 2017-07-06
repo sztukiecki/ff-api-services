@@ -20,11 +20,11 @@ export default class UserService {
     static postImage(image) {
         const formData = new FormData();
         formData.append('contactPicture', image, 'contactPicture');
-        return this.client.makeRequest({}, '/users/picture', 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
+        return this.client.makeRequest('/users/picture', 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
     }
 
     static updateUser(user) {
-        return this.client.makeRequest({}, '/users', 'PUT', user);
+        return this.client.makeRequest('/users', 'PUT', user);
     }
 }
 

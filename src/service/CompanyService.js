@@ -36,7 +36,7 @@ export default class CompanyService {
 	static postImage(image) {
 		const formData = new FormData();
 		formData.append('logo', image);
-		return this.client.makeRequest({}, '/company/logo', 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
+		return this.client.makeRequest('/company/logo', 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
 	}
 }
 

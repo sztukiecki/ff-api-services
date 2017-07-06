@@ -9,7 +9,7 @@ export default class SearchService {
      * will be returned in a array.
      */
     static getSearches() {
-        return this.client.makeRequest({}, '/search', 'GET');
+        return this.client.makeRequest('/search', 'GET');
     }
 
     /**
@@ -17,7 +17,7 @@ export default class SearchService {
      * @param searchId
      */
     static getSearch(searchId) {
-        return this.client.makeRequest({}, `/search/${searchId}`, 'GET');
+        return this.client.makeRequest(`/search/${searchId}`, 'GET');
     }
 
     /**
@@ -35,7 +35,7 @@ export default class SearchService {
      * @returns {*}
      */
     static deleteSearch(searchId) {
-        return this.client.makeRequest({}, `/search/${searchId}`, 'DELETE');
+        return this.client.makeRequest(`/search/${searchId}`, 'DELETE');
     }
 
     static updateSearch(searchId, searchModel) {
@@ -50,12 +50,12 @@ export default class SearchService {
     }
 
     static filter(index, page = 1, size = null, filter) {
-        return this.client.makeRequest({}, '/index/' + index, 'POST', this.getQuery(filter), {
-            queryParams: {
-                page: page,
-                size: size
-            }
-        });
+        return this.client.makeRequest('/index/' + index, 'POST', this.getQuery(filter), {
+    queryParams: {
+        page: page,
+        size: size
+    }
+});
     }
 
     static getQuery(filter) {
@@ -65,14 +65,14 @@ export default class SearchService {
                     'match_all': {}
                 }
             };
-        } else {
-            return {
-                query: {
-                    'match_phrase': {
-                        _all: filter
-                    }
-                }
-            };
         }
+
+        return {
+            query: {
+                'match_phrase': {
+                    _all: filter
+                }
+            }
+        };
     }
 }

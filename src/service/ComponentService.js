@@ -5,7 +5,7 @@ export default class ComponentService {
     static client = new HttpClient(APIMapping.componentService);
 
     static getComponents(viewName) {
-        return ComponentService.client.makeRequest({}, `/components?viewName=${viewName}`, 'GET');
+        return ComponentService.client.makeRequest(`/components?viewName=${viewName}`, 'GET');
     }
 
     /**
@@ -24,10 +24,10 @@ export default class ComponentService {
      * @param data
      */
     static createComponent(data) {
-        return ComponentService.client.makeRequest({}, '/components', 'POST', data);
+        return ComponentService.client.makeRequest('/components', 'POST', data);
     }
 
     static deleteComponent(id) {
-        return ComponentService.client.makeRequest({}, `/components/${id}`, 'DELETE')
+        return ComponentService.client.makeRequest(`/components/${id}`, 'DELETE');
     }
 }

@@ -16,11 +16,13 @@ interface EmailServiceVerifyResponse {
 export default class EmailService {
     static client = new HttpClient(APIMapping.emailService);
 
-    static createDomain(domain: string): Promise<EmailServiceVerifyResponse> {
-        return EmailService.client.makeRequestSimple({domain}, '/configuration/whitelabel', 'POST').then(({data}: {data: EmailServiceVerifyResponse}) => data);
+    static async createDomain(domain: string): Promise<EmailServiceVerifyResponse> {
+        const result = await EmailService.client.makeRequestSimple({domain}, '/configuration/whitelabel', 'POST');
+        return result.data;
     }
 
-    static verifyDomain(domain: string): Promise<EmailServiceVerifyResponse> {
-        return EmailService.client.makeRequestSimple({domain}, '/configuration/whitelabel/verify', 'POST').then(({data}: {data: EmailServiceVerifyResponse}) => data);
+    static async verifyDomain(domain: string): Promise<EmailServiceVerifyResponse> {
+        const result = await EmailService.client.makeRequestSimple({domain}, '/configuration/whitelabel/verify', 'POST');
+        return result.data;
     }
 }
