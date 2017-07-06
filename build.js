@@ -11,8 +11,8 @@ function execute(command, callback){
 
 function buildPackage() {
     'use strict';
-    console.log('> buildPackage');
-    execute('npm run build-package');
+    console.log('> rebuildPackage');
+    execute('npm run rebuild-package');
 }
 
 function updateVersion(){
