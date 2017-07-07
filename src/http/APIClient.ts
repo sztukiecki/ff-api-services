@@ -5,11 +5,11 @@ import ErrorHandler from '../ErrorHandler';
 
 axiosRetry(axios, {
     retries: 5, retryCondition: (error: AxiosError): boolean => {
-        return !!error && !!error.response && error.response.status >= 500;
+        return error.response ? error.response.status >= 500 : false;
     }
 });
 
-type ParamMap = { [key: string]: string|true };
+export type ParamMap = { [key: string]: string|true };
 
 export interface APIClientConfig {
     url?: string;
