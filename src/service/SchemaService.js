@@ -28,8 +28,9 @@ export default class SchemaService {
         });
     }
 
-    static getSchema(schemaId) {
-        return SchemaService.client.makeRequest({}, `/schemas/${schemaId}?transform`, 'GET');
+    static getSchema(schemaId, queryParams = {}) {
+        queryParams.transform = true;
+        return SchemaService.client.makeRequest({}, `/schemas/${schemaId}`, 'GET', undefined, {queryParams});
     }
 
     static createSchema(schema) {
