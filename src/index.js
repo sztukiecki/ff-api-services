@@ -14,6 +14,7 @@ import EmailService from './service/EmailService';
 import ViewDefinitionService from './service/ViewDefinitionService';
 import HTTPProvider from './component/HTTPProvider';
 import EntityService from './service/EntityService';
+import RelogService from './service/RelogService';
 import ErrorHandler from './ErrorHandler';
 
 export default HTTPProvider;
@@ -34,5 +35,6 @@ export {
     EmailService,
     ViewDefinitionService,
     EntityService,
+    RelogService,
     ErrorHandler
 };
