@@ -101,12 +101,12 @@ export interface MandatoryElkData {
     Severity: 'TRACE' | 'DEBUG' | 'INFO' | 'WARN' | 'ERROR';
     SenderName: string;
     SenderVersion: string;
+    product: string;
 }
 
 export interface FFAdditionalElkData {
     SenderFramework?: string;
     stage?: string;
-    product?: string;
     facility?: string;
     timestamp?: number;
     requestURI?: string;
