@@ -8,6 +8,6 @@ export default class RelogService {
     }
 
     static logBatch(logEntries) {
-        return this.client.makeRequestSimple({_batch: logEntries}, '/relog/elk-gelf/batch', 'POST');
+        return this.client.makeRequestSimple({batch: logEntries}, '/relog/elk-gelf/batch', 'POST');
     }
 }
