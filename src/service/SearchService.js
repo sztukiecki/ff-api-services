@@ -65,14 +65,13 @@ export default class SearchService {
                     'match_all': {}
                 }
             };
-        } else {
-            return {
-                query: {
-                    'match_phrase': {
-                        _all: filter
-                    }
-                }
-            };
         }
+        return {
+            query: {
+                'match_phrase': {
+                    _all: filter
+                }
+            }
+        };
     }
 }

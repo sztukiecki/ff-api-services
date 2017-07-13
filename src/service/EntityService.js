@@ -31,4 +31,8 @@ export default class EntityService {
     static getEntityWithViewDefinition(viewId, schemaId, entityId) {
         return EntityService.client.makeRequest({}, `/views/${viewId}/schemas/${schemaId}/entities/${entityId}`, 'GET');
     }
+
+    static getEntity(schemaId, entityId) {
+        return EntityService.client.makeRequest({}, `/schemas/${schemaId}/entities/${entityId}`, 'GET');
+    }
 }
