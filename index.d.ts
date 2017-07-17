@@ -96,6 +96,10 @@ export class SearchService {
     static filter(index: string, page: number, size: number, filter: any): Promise<any>;
 }
 
+export class MyFLOWFACTService {
+    static doOrder(order: object): Promise<any>;
+}
+
 export interface MandatoryElkData {
     message: string;
     Severity: 'TRACE' | 'DEBUG' | 'INFO' | 'WARN' | 'ERROR';

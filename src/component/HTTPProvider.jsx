@@ -1,5 +1,5 @@
 import React from 'react';
-import {action, computed, observable} from 'mobx';
+import {action, observable} from 'mobx';
 import {observer} from 'mobx-react';
 import PropTypes from 'prop-types';
 import LoadingIndicator from 'react-loading-indicator';
