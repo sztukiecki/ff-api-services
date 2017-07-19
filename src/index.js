@@ -16,7 +16,6 @@ import HTTPProvider from './component/HTTPProvider';
 import EntityService from './service/EntityService';
 import RelogService from './service/RelogService';
 import MyFLOWFACTService from './service/MyFLOWFACTService';
-import ErrorHandler from './ErrorHandler';
 
 export default HTTPProvider;
 
@@ -37,6 +36,5 @@ export {
     ViewDefinitionService,
     EntityService,
     RelogService,
-    MyFLOWFACTService,
-    ErrorHandler
+    MyFLOWFACTService
 };
