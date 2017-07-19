@@ -3,7 +3,7 @@ import axios from 'axios';
 import axiosRetry from 'axios-retry';
 
 axiosRetry(axios, {
-    retries: 5, retryCondition: (error) => {
+    retries: 0, retryCondition: (error) => {
         return error && error.response && error.response.status >= 500;
 
     }
