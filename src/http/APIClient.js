@@ -2,21 +2,12 @@ import AWS from 'ff-aws-sdk';
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 
-axiosRetry(axios, {
-    // was set to 5 before
-    retries: 0, retryCondition: (error) => {
-        return error && error.response && error.response.status >= 500;
-
-    }
-});
-
 export default class APIClient {
 
     idToken = '';
 
     constructor(config) {
         this.config = config;
-
     }
 
     getidToken = () => {
@@ -41,13 +32,16 @@ export default class APIClient {
         }
 
         this.getidToken();
+
+        // add parameters to the url
         let url = this.config.url + path;
         const queryString = this.buildCanonicalQueryString(additionsParams.queryParams);
         if (queryString !== '') {
             url += '?' + queryString;
         }
 
-        const request = {
+        // setup the requst
+        let request = {
             method: method,
             url: url,
             headers: Object.assign({}, {
@@ -57,7 +51,22 @@ export default class APIClient {
             cancelToken: additionsParams.cancelToken
         };
 
-        return axios(request);
+        const client = axios.create();
+
+        const axiosConfiguration = this.config.axios;
+        if (axiosConfiguration) {
+            if (axiosConfiguration['axios-retry']) {
+                axiosRetry(client, {
+                    retries: axiosConfiguration['axios-retry'].retries,
+                    retryCondition: () => {
+                        return true;
+                    }
+                });
+            }
+        }
+
+        // fire the request
+        return client.request(request);
     };
 
     buildCanonicalQueryString = (queryParams) => {

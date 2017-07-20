@@ -41,43 +41,34 @@ const isDefaultApi = () => {
 };
 
 class HttpClient {
+
     apiClient = undefined;
-    serviceName = undefined;
+    apiService = undefined;
     stageToUse = undefined;
     apiVersionTag = undefined;
 
-    constructor(apiMapping) {
-        if (apiMapping === undefined || apiMapping.name.trim().length === 0) {
-            console.warn('http client has some invalid initial configs');
-        }
-
-        this.serviceName = apiMapping.name;
-        this.apiClient = new APIClient({});
-        this.getStage();
-    }
-
-    setAPIURL = () => {
-        if (this.apiClient) {
-            const baseUrl = this.stageToUse === 'local'
-                ? 'http://localhost:8080'
-                : `https://cloudios.${this.stageToUse}.flowfact.cloud/edge-service`;
-            this.apiClient.config.url = `${baseUrl}/${this.serviceName}/${this.apiVersionTag}`;
-        }
-    };
-
-    getStage = () => {
+    constructor(apiService) {
+        this.apiService = apiService;
         this.stageToUse = getStageFromStore();
         this.apiVersionTag = getVersionTagFromStore();
-        this.setAPIURL();
+        this.apiClient = new APIClient({
+            'axios': apiService.axiosConfiguration,
+            'url': this.buildAPIUrl()
+        });
+    }
+
+    buildAPIUrl = () => {
+        const baseUrl = this.stageToUse === 'local'
+            ? 'http://localhost:8080'
+            : `https://cloudios.${this.stageToUse}.flowfact.cloud/edge-service`;
+        return `${baseUrl}/${this.apiService.name}/${this.apiVersionTag}`;
     };
 
     makeRequest(params, path, method, body = undefined, additionalParams = undefined) {
-        this.getStage();
         return this.apiClient.invokeApi(params, path, method, additionalParams, body);
     }
 
     makeRequestSimple(body, path, method) {
-        this.getStage();
         return this.apiClient.invokeApi(undefined, path, method, undefined, body);
     }
 }
