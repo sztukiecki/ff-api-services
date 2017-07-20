@@ -58,15 +58,17 @@ export default class APIClient {
             if (axiosConfiguration['axios-retry']) {
                 axiosRetry(client, {
                     retries: axiosConfiguration['axios-retry'].retries,
-                    retryCondition: () => {
-                        return true;
+                    retryCondition: (error) => {
+                        return error && error.response && error.response.status >= 500;
                     }
                 });
             }
         }
 
         // fire the request
-        return client.request(request);
+        return client.request(request).catch(response => {
+            console.log(response);
+        });
     };
 
     buildCanonicalQueryString = (queryParams) => {
