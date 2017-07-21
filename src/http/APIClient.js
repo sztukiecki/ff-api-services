@@ -66,9 +66,7 @@ export default class APIClient {
         }
 
         // fire the request
-        return client.request(request).catch(response => {
-            console.log(response);
-        });
+        return client.request(request);
     };
 
     buildCanonicalQueryString = (queryParams) => {
