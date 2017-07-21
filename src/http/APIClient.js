@@ -66,6 +66,8 @@ export default class APIClient {
         }
 
         // fire the request
+        // NEVER put a catch here because it prevents all other error handling
+        // i.e. you can't handle a service returning an error (which is possibly expected)
         return client.request(request);
     };
 
