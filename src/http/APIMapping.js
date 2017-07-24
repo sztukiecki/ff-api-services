@@ -102,6 +102,11 @@ const APIMapping = {
         'axios-retry': {
             retries: 4
         }
+    }),
+    multimediaService: new APIService('multimedia-service', {
+        'axios-retry': {
+            retries: 4
+        }
     })
 };
 

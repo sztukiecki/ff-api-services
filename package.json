@@ -1,12 +1,12 @@
 {
   "name": "ff-api-services",
   "private": true,
-  "version": "0.0.87",
+  "version": "0.0.88",
   "description": "",
   "main": "lib/index.js",
   "types": "./index.d.ts",
   "repository": "ssh://git@bb.flowfact.com:7999/npmmod/ff-api-services.git",
-  "author": "Andreas Soroko <andreas.soroko@flowfact.de>",
+  "author": "FLOWFACT GmbH",
   "license": "",
   "scripts": {
     "build-package": "babel -d lib/ src/",
