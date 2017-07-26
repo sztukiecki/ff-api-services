@@ -19,7 +19,7 @@ export default class MyFLOWFACTService {
      * @returns {*}
      */
     static getProductPrice(productName) {
-        return MyFLOWFACTService.client.makeRequestSimple(order, `/product/price/${productName}`, 'GET');
+        return MyFLOWFACTService.client.makeRequestSimple({}, `/product/price/${productName}`, 'GET');
     }
 
 }

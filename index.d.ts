@@ -98,6 +98,7 @@ export class SearchService {
 
 export class MyFLOWFACTService {
     static doOrder(order: object): Promise<any>;
+    static getProductPrice(productName: string): Promise<any>;
 }
 
 export interface MandatoryElkData {
