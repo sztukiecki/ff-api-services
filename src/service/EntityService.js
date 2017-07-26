@@ -35,4 +35,16 @@ export default class EntityService {
     static getEntity(schemaId, entityId) {
         return EntityService.client.makeRequest({}, `/schemas/${schemaId}/entities/${entityId}`, 'GET');
     }
+
+    /**
+     * Get the history of a entity in a well formatted form.
+     * @param schemaId
+     * @param entityId
+     * @param page
+     *  the current page
+     * @returns {*}
+     */
+    static getHistory(schemaId, entityId, page) {
+        return EntityService.client.makeRequest({}, `/schemas/${schemaId}/entities/${entityId}/history?page=${page}&size=15&order=DESC`, 'GET');
+    }
 }
