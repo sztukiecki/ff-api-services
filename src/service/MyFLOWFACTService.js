@@ -12,4 +12,14 @@ export default class MyFLOWFACTService {
     static doOrder(order) {
         return MyFLOWFACTService.client.makeRequestSimple(order, '/order/doOrder', 'POST');
     }
+
+    /**
+     * Get the price for a product.
+     * @param productName
+     * @returns {*}
+     */
+    static getProductPrice(productName) {
+        return MyFLOWFACTService.client.makeRequestSimple(order, `/product/price/${productName}`, 'GET');
+    }
+
 }
