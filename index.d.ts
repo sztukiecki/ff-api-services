@@ -50,8 +50,9 @@ export class FunnelService {
     static getKeysForTag(funnelId: string, tagName: string): Promise<string[]>;
     static getValuesForTagKey(funnelId: string, tagName: string, metadataKey: string): Promise<string[]>;
     static getFunnelStatistics(funnelId: string): Promise<FunnelServiceStatisticsResponse>;
-    static createFunnel(funnelToCreate: FunnelServiceCreateRequest): Promise<FunnelServiceCreateResponse>;
+    static getFunnelStageEntities(funnelId: string, stageId: string, page: number = 1, size: number = 10): Promise<any>;
 
+    static createFunnel(funnelToCreate: FunnelServiceCreateRequest): Promise<FunnelServiceCreateResponse>;
     // TODO These must still be defined
     static findFunnelById(funnelId: string): Promise<any>;
     static deleteFunnelById(funnelId: string): Promise<any>;
