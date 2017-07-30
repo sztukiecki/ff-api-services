@@ -56,11 +56,12 @@ class HttpClient {
             'url': this.buildAPIUrl()
         });
     }
-
+// https://services.production.cloudios.flowfact-prod.cloud/edge-service/management/health
     buildAPIUrl = () => {
+        const account = this.stageToUse === 'development' ? 'flowfact-dev' : 'flowfact-prod';
         const baseUrl = this.stageToUse === 'local'
             ? 'http://localhost:8080/edge-service'
-            : `https://cloudios.${this.stageToUse}.flowfact.cloud/edge-service`;
+            : `https://services.${this.stageToUse}.cloudios.${account}.cloud/edge-service`;
         return `${baseUrl}/${this.apiService.name}/${this.apiVersionTag}`;
     };
 
