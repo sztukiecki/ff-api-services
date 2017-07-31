@@ -29,7 +29,18 @@ export default class WordpressTemplateService {
         // Technically both versions are already implemented
         versionTag = versionTag ? versionTag : this.defaultVersionTag;
 
-        this.wordpressUrl = 'https://templatingengine.' + stage + '.flowfact.cloud/';
+        let domainName = 'flowfact-prod';
+        switch (stage) {
+            case 'development':
+                domainName = 'flowfact-dev';
+                break;
+            case 'staging':
+            case 'production':
+                domainName = 'flowfact-prod';
+                break;
+        }
+
+        this.wordpressUrl = 'https://templateengine.' + stage + '.cloudios.' + domainName + '.cloud/';
 
 		this.cognitoToken = null;
 
