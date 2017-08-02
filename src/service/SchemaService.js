@@ -34,7 +34,7 @@ export default class SchemaService {
     }
 
     static createSchema(schema) {
-        return SchemaService.client.makeRequest({}, '/schemas?transform', 'POST', schema);
+        return SchemaService.client.makeRequest({}, '/schemas?transform=true', 'POST', schema);
     }
 
     static deleteSchema(schemaId) {
@@ -42,22 +42,22 @@ export default class SchemaService {
     }
 
     static updateSchema(schema) {
-        return SchemaService.client.makeRequest({}, `/schemas/${schema.id}?transform`, 'PUT', schema);
+        return SchemaService.client.makeRequest({}, `/schemas/${schema.id}?transform=true`, 'PUT', schema);
     }
 
     static getIntegrationsForSchema(schemaId) {
-        return SchemaService.client.makeRequest({}, `/integrations?schemaId=${schemaId}&transform`, 'GET');
+        return SchemaService.client.makeRequest({}, `/integrations?schemaId=${schemaId}&transform=true`, 'GET');
     }
 
     static createIntegrationForSchema(schemaId, label) {
         const integration = {
             schemaId, label
         };
-        return SchemaService.client.makeRequest({}, '/integrations?transform', 'POST', integration);
+        return SchemaService.client.makeRequest({}, '/integrations?transform=true', 'POST', integration);
     }
 
     static updateIntegration(integrationId, data) {
-        return SchemaService.client.makeRequest({}, `/integrations/${integrationId}/formdata?transform`, 'POST', data);
+        return SchemaService.client.makeRequest({}, `/integrations/${integrationId}/formdata?transform=true`, 'POST', data);
     }
 
     static deleteIntegration(integrationId) {
