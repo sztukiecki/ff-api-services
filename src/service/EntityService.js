@@ -4,8 +4,8 @@ export default class EntityService {
 
     static client = new HttpClient(APIMapping.entityService);
 
-    static createEntity(schemaId) {
-        return EntityService.client.makeRequest({}, `/schemas/${schemaId}`, 'POST', {});
+    static createEntity(schemaId, entity) {
+        return EntityService.client.makeRequest({}, `/schemas/${schemaId}`, 'POST', entity || {});
     }
 
     /**

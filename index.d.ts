@@ -102,6 +102,20 @@ export class MyFLOWFACTService {
     static getProductPrice(productName: string): Promise<any>;
 }
 
+export class EntityService {
+
+    static createEntity(schemaId: string, entity: object = undefined): Promise<any>;
+
+    static deleteEntity(entityId: string, schemaId: string): Promise<any>;
+
+    static updateEntityField(schemaId: string, entityId: string, field: object): Promise<any>;
+
+    static getEntityWithViewDefinition(viewId: string, schemaId: string, entityId: string): Promise<any>;
+    static getEntity(schemaId: string, entityId: string): Promise<any>;
+    static getHistory(schemaId: string, entityId: string, page: number): Promise<any>;
+
+}
+
 export interface MandatoryElkData {
     message: string;
     Severity: 'TRACE' | 'DEBUG' | 'INFO' | 'WARN' | 'ERROR';
