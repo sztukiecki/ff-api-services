@@ -25,6 +25,7 @@ const setStageInStore = (stage) => {
     'use strict';
     if (stage) {
         store.set(StoreKeys.EdgeServiceStage, stage);
+        console.log('Set stage to: ' + stage);
     }
 };
 
@@ -32,6 +33,7 @@ const setVersionTagInStore = (versionTag) => {
     'use strict';
     if (versionTag) {
         store.set(StoreKeys.EdgeServiceVersionTag, versionTag);
+        console.log('Set versionTag to: ' + versionTag);
     }
 };
 
