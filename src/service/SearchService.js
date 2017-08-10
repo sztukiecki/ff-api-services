@@ -49,8 +49,8 @@ export default class SearchService {
         return this.client.makeRequestSimple(query, '/index/' + index, 'POST');
     }
 
-    static filter(index, page = 1, size = null, filter) {
-        return this.client.makeRequest({}, '/index/' + index, 'POST', this.getQuery(filter), {
+    static filter(index, page = 1, size = null, filter, sorting) {
+        return this.client.makeRequest({}, '/index/' + index, 'POST', this.buildQuery(filter, sorting), {
             queryParams: {
                 page: page,
                 size: size
@@ -58,20 +58,37 @@ export default class SearchService {
         });
     }
 
-    static getQuery(filter) {
+    static buildQuery(filter, sorting) {
+        let query = '';
         if (!filter) {
-            return {
-                query: {
+            query = {
+                'query': {
                     'match_all': {}
                 }
             };
-        }
-        return {
-            query: {
-                'match_phrase': {
-                    _all: filter
+        } else {
+            query = {
+                'query': {
+                    'match_phrase': {
+                        '_all': filter
+                    }
                 }
             }
-        };
+        }
+
+        if(sorting) {
+            query['sort'] = {
+                _script : {
+                    type: 'string',
+                    order: sorting.order,
+                    script: {
+                        lang: 'painless',
+                        inline: `def field = doc['${sorting.key}.values.raw']; if(field.value != null) { return field.value.toString().toUpperCase(); } return '';`
+                    }
+                }
+            }
+        }
+
+        return query;
     }
 }
