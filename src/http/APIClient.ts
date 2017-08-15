@@ -4,9 +4,17 @@ import * as axiosRetry from 'axios-retry';
 
 export type ParamMap = { [key: string]: string|true };
 
+export interface AxiosConfig {
+    'axios-retry': AxiosRetryConfig
+}
+
+export interface AxiosRetryConfig {
+    retries?: number;
+}
+
 export interface APIClientConfig {
     url?: string;
-    axios?: AxiosInstance;
+    axios?: AxiosConfig;
 }
 
 export interface APIClientAdditionalParams {
@@ -73,7 +81,7 @@ export default class APIClient {
                 axiosRetry(client, {
                     retries: axiosConfiguration['axios-retry'].retries,
                     retryCondition: (error: AxiosError) => {
-                        return error && error.response && error.response.status >= 500;
+                        return Boolean(error && error.response && error.response.status >= 500);
                     }
                 });
             }

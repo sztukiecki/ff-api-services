@@ -1,6 +1,6 @@
 import * as store from 'store';
 import APIClient, {APIClientAdditionalParams} from './APIClient';
-import {APIMappingClass} from './APIMapping';
+import {APIService} from './APIMapping';
 
 const StoreKeys = {
     EdgeServiceStage: 'HTTPCLIENT.APICLIENT.STAGE',
@@ -46,11 +46,11 @@ const isDefaultApi = () => {
 class HttpClient {
 
     apiClient: APIClient;
-    apiService = undefined;
+    apiService: APIService;
     stageToUse = undefined;
     apiVersionTag = undefined;
 
-    constructor(apiService) {
+    constructor(apiService: APIService) {
         this.apiService = apiService;
         this.stageToUse = getStageFromStore();
         this.apiVersionTag = getVersionTagFromStore();

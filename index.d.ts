@@ -104,7 +104,7 @@ declare module 'ff-api-services' {
 
     export class EntityService {
 
-        static createEntity(schemaId: string, entity: object = undefined): Promise<any>;
+        static createEntity(schemaId: string, entity: object): Promise<any>;
 
         static deleteEntity(entityId: string, schemaId: string): Promise<any>;
 
@@ -144,17 +144,4 @@ declare module 'ff-api-services' {
         static log(logEntry: FFElkData): Promise<any>;
         static logBatch(logEntries: FFElkData[]): Promise<any>;
     }
-}
-
-declare module 'axios-retry' {
-    import {AxiosError, AxiosStatic} from 'axios';
-
-    interface AxiosRetryParams {
-        retries?: number;
-        retryCondition?: (error: AxiosError) => boolean;
-    }
-
-    namespace axiosRetry {}
-    function axiosRetry(axios: AxiosStatic, params: AxiosRetryParams): void;
-    export = axiosRetry;
 }

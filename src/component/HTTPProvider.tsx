@@ -2,7 +2,7 @@ import * as React from 'react';
 import {action, observable} from 'mobx';
 import {observer} from 'mobx-react';
 import LoadingIndicator from 'react-loading-indicator';
-import {ReactElement} from "react";
+import {ReactElement} from 'react';
 
 export type HTTPProviderProps = {
     method: (...params: any[]) => any;

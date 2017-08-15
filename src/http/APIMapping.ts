@@ -1,5 +1,7 @@
+import {AxiosConfig} from './APIClient';
+
 class APIService {
-    constructor(serviceName, configuration) {
+    constructor(private serviceName: string, private configuration?: AxiosConfig) {
         this.serviceName = serviceName;
         this.configuration = configuration;
     }
