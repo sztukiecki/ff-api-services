@@ -1,18 +1,12 @@
 import AWS from 'ff-aws-sdk';
 import axios, {AxiosError, AxiosRequestConfig, CancelToken} from 'axios';
 import * as axiosRetry from 'axios-retry';
-import ErrorHandler from '../ErrorHandler';
-
-axiosRetry(axios, {
-    retries: 5, retryCondition: (error: AxiosError): boolean => {
-        return error.response ? error.response.status >= 500 : false;
-    }
-});
 
 export type ParamMap = { [key: string]: string|true };
 
 export interface APIClientConfig {
     url?: string;
+    axios?: AxiosInstance;
 }
 
 export interface APIClientAdditionalParams {
@@ -50,6 +44,8 @@ export default class APIClient {
         }
 
         this.getidToken();
+
+        // add parameters to the url
         let url = this.config.url + path;
         if (additionsParams.queryParams) {
             const queryString = this.buildCanonicalQueryString(additionsParams.queryParams);
@@ -58,7 +54,8 @@ export default class APIClient {
             }
         }
 
-        const request: AxiosRequestConfig = {
+        // setup the requst
+        let request: AxiosRequestConfig = {
             method: method,
             url: url,
             headers: Object.assign({}, {
@@ -68,16 +65,24 @@ export default class APIClient {
             cancelToken: additionsParams.cancelToken
         };
 
-        return axios(request).then(response => {
-            return response;
-        }).catch(error => {
-            const responseCode = error.response ? error.response.status : undefined;
-            ErrorHandler.handleError(responseCode, error.message);
+        const client = axios.create();
 
-            if(error.response) {
-                return error.response;
+        const axiosConfiguration = this.config.axios;
+        if (axiosConfiguration) {
+            if (axiosConfiguration['axios-retry']) {
+                axiosRetry(client, {
+                    retries: axiosConfiguration['axios-retry'].retries,
+                    retryCondition: (error: AxiosError) => {
+                        return error && error.response && error.response.status >= 500;
+                    }
+                });
             }
-        });
+        }
+
+        // fire the request
+        // NEVER put a catch here because it prevents all other error handling
+        // i.e. you can't handle a service returning an error (which is possibly expected)
+        return client.request(request);
     };
 
     buildCanonicalQueryString = (queryParams: ParamMap) => {

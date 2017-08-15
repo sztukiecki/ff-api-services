@@ -3,21 +3,52 @@ import HttpClient, {APIMapping} from '../http';
 export default class FunnelService {
     static client = new HttpClient(APIMapping.funnelService);
 
+    /**
+     * getPossibleTags
+     * @param { string } funnelId funnelId
+     */
     static getPossibleTags(funnelId) {
         return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}/possibletags`, 'GET').then(s => s.data);
     }
 
+    /**
+     * getKeysForTag
+     * @param { string } funnelId funnelId
+     * @param { string } tagName tagName
+     */
     static getKeysForTag(funnelId, tagName) {
         return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}/tags/${tagName}/metadata/keys`, 'GET').then(s => s.data);
     }
 
+    /**
+     * getValuesForTagKey
+     * @param { string } funnelId funnelId
+     * @param { string } tagName tagName
+     * @param { string } metadataKey metadataKey
+     */
     static getValuesForTagKey(funnelId, tagName, metadataKey) {
         return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}/tags/${tagName}/metadata/keys/${metadataKey}/values`, 'GET').then(s => s.data);
     }
 
+    /**
+     * getFunnelStatistics
+     * @param { string } funnelId funnelId
+     */
     static getFunnelStatistics(funnelId) {
         return FunnelService.client.makeRequestSimple({}, `/funnels/${funnelId}/statistics`, 'GET').then(s => s.data);
     }
+
+    /**
+     * getFunnelStageEntities
+     * @param { string } funnelId funnelId
+     * @param { string } stageId stageId
+     * @param { number } page page
+     * @param { number} size size
+     */
+    static async getFunnelStageEntities(funnelId, stageId, page = 1, size = 10) {
+        return (await FunnelService.client.makeRequestSimple({page, size}, `/funnels/${funnelId}/stage/${stageId}/entities`, 'GET')).data;
+    }
+
     /**
      * createFunnel
      * @param { object } funnelToCreate funnelToCreate

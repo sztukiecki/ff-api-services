@@ -1,36 +1,22 @@
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var APIService = function () {
-    function APIService(serviceName, configuration) {
-        _classCallCheck(this, APIService);
-
+class APIService {
+    constructor(serviceName, configuration) {
         this.serviceName = serviceName;
         this.configuration = configuration;
     }
 
-    _createClass(APIService, [{
-        key: 'name',
-        get: function get() {
-            return this.serviceName;
-        }
+    get name() {
+        return this.serviceName;
+    }
 
-        /*
-         * The Axios Configuration Object.
-         */
+    /*
+     * The Axios Configuration Object.
+     */
+    get axiosConfiguration() {
+        return this.configuration;
+    }
+}
 
-    }, {
-        key: 'axiosConfiguration',
-        get: function get() {
-            return this.configuration;
-        }
-    }]);
-
-    return APIService;
-}();
-
-var APIMapping = {
+const APIMapping = {
     userService: new APIService('user-service', {
         'axios-retry': {
             retries: 4
@@ -125,4 +111,4 @@ var APIMapping = {
 };
 
 export default APIMapping;
-export { APIService };
+export {APIService};

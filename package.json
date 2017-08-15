@@ -1,15 +1,16 @@
 {
   "name": "ff-api-services",
   "private": true,
-  "version": "0.0.67",
+  "version": "0.0.100",
   "description": "",
   "main": "lib/index.js",
   "types": "./index.d.ts",
   "repository": "ssh://git@bb.flowfact.com:7999/npmmod/ff-api-services.git",
-  "author": "Andreas Soroko <andreas.soroko@flowfact.de>",
+  "author": "FLOWFACT GmbH",
   "license": "",
   "scripts": {
-    "build-package": "cleandir lib/ && tsc",
+    "build-package": "tsc",
+    "rebuild-package": "cleandir dist/ && npm run build-package",
     "build": "node build.js"
   },
   "dependencies": {

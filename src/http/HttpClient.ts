@@ -16,7 +16,6 @@ const getStageFromStore = () => {
     return fromStore ? fromStore : defaultStage;
 };
 
-
 const getVersionTagFromStore = () => {
     'use strict';
     const fromStore = store.get(StoreKeys.EdgeServiceVersionTag);
@@ -27,14 +26,15 @@ const setStageInStore = (stage: string) => {
     'use strict';
     if (stage) {
         store.set(StoreKeys.EdgeServiceStage, stage);
+        console.log('Set stage to: ' + stage);
     }
 };
-
 
 const setVersionTagInStore = (versionTag: string) => {
     'use strict';
     if (versionTag) {
         store.set(StoreKeys.EdgeServiceVersionTag, versionTag);
+        console.log('Set versionTag to: ' + versionTag);
     }
 };
 
@@ -44,39 +44,35 @@ const isDefaultApi = () => {
 };
 
 class HttpClient {
-    apiClient: APIClient = new APIClient({});
-    serviceName?: string;
-    stageToUse: string;
-    apiVersionTag: string;
 
-    constructor(apiMapping: APIMappingClass) {
-        if (apiMapping === undefined || apiMapping.name.trim().length === 0) {
-            console.warn('http client has some invalid initial configs');
-        }
+    apiClient: APIClient;
+    apiService = undefined;
+    stageToUse = undefined;
+    apiVersionTag = undefined;
 
-        this.serviceName = apiMapping.name;
-        this.getStage();
-    }
-
-    setAPIURL = () => {
-        if (this.apiClient) {
-            this.apiClient.config.url = `https://cloudios.${this.stageToUse}.flowfact.cloud/edge-service/${this.serviceName}/${this.apiVersionTag}`;
-        }
-    };
-
-    getStage = () => {
+    constructor(apiService) {
+        this.apiService = apiService;
         this.stageToUse = getStageFromStore();
         this.apiVersionTag = getVersionTagFromStore();
-        this.setAPIURL();
+        this.apiClient = new APIClient({
+            'axios': apiService.axiosConfiguration,
+            'url': this.buildAPIUrl()
+        });
+    }
+// https://services.production.cloudios.flowfact-prod.cloud/edge-service/management/health
+    buildAPIUrl = () => {
+        const account = this.stageToUse === 'development' ? 'flowfact-dev' : 'flowfact-prod';
+        const baseUrl = this.stageToUse === 'local'
+            ? 'http://localhost:8080/edge-service'
+            : `https://services.${this.stageToUse}.cloudios.${account}.cloud/edge-service`;
+        return `${baseUrl}/${this.apiService.name}/${this.apiVersionTag}`;
     };
 
     makeRequest(path: string, method: string, body?: string|{}, additionalParams?: APIClientAdditionalParams) {
-        this.getStage();
         return this.apiClient.invokeApi(path, method, additionalParams, body);
     }
 
     makeRequestSimple(body: string|{}, path: string, method: string) {
-        this.getStage();
         return this.apiClient.invokeApi(path, method, undefined, body);
     }
 }

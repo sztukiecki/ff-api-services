@@ -96,6 +96,54 @@ declare module 'ff-api-services' {
         static search(query: any, index: string, page: number, size: number): Promise<any>;
         static filter(index: string, page: number, size: number, filter: any): Promise<any>;
     }
+
+    export class MyFLOWFACTService {
+        static doOrder(order: object): Promise<any>;
+        static getProductPrice(productName: string): Promise<any>;
+    }
+
+    export class EntityService {
+
+        static createEntity(schemaId: string, entity: object = undefined): Promise<any>;
+
+        static deleteEntity(entityId: string, schemaId: string): Promise<any>;
+
+        static updateEntityField(schemaId: string, entityId: string, field: object): Promise<any>;
+
+        static getEntityWithViewDefinition(viewId: string, schemaId: string, entityId: string): Promise<any>;
+        static getEntity(schemaId: string, entityId: string): Promise<any>;
+        static getHistory(schemaId: string, entityId: string, page: number): Promise<any>;
+
+    }
+
+    export interface MandatoryElkData {
+        message: string;
+        Severity: 'TRACE' | 'DEBUG' | 'INFO' | 'WARN' | 'ERROR';
+        SenderName: string;
+        SenderVersion: string;
+        product: string;
+    }
+
+    export interface FFAdditionalElkData {
+        SenderFramework?: string;
+        stage?: string;
+        facility?: string;
+        timestamp?: number;
+        requestURI?: string;
+        receivedStatusCode?: number;
+        sentStatusCode?: number;
+        location?: string;
+        userId?: string;
+        companyId?: string;
+        requestId?: string;
+    }
+
+    export type FFElkData = MandatoryElkData & FFAdditionalElkData;
+
+    export class RelogService {
+        static log(logEntry: FFElkData): Promise<any>;
+        static logBatch(logEntries: FFElkData[]): Promise<any>;
+    }
 }
 
 declare module 'axios-retry' {

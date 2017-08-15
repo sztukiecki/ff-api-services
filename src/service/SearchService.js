@@ -9,7 +9,7 @@ export default class SearchService {
      * will be returned in a array.
      */
     static getSearches() {
-        return this.client.makeRequest('/search', 'GET');
+        return this.client.makeRequest({}, '/search', 'GET');
     }
 
     /**
@@ -17,7 +17,7 @@ export default class SearchService {
      * @param searchId
      */
     static getSearch(searchId) {
-        return this.client.makeRequest(`/search/${searchId}`, 'GET');
+        return this.client.makeRequest({}, `/search/${searchId}`, 'GET');
     }
 
     /**
@@ -35,7 +35,7 @@ export default class SearchService {
      * @returns {*}
      */
     static deleteSearch(searchId) {
-        return this.client.makeRequest(`/search/${searchId}`, 'DELETE');
+        return this.client.makeRequest({}, `/search/${searchId}`, 'DELETE');
     }
 
     static updateSearch(searchId, searchModel) {
@@ -49,30 +49,46 @@ export default class SearchService {
         return this.client.makeRequestSimple(query, '/index/' + index, 'POST');
     }
 
-    static filter(index, page = 1, size = null, filter) {
-        return this.client.makeRequest('/index/' + index, 'POST', this.getQuery(filter), {
-    queryParams: {
-        page: page,
-        size: size
-    }
-});
+    static filter(index, page = 1, size = null, filter, sorting) {
+        return this.client.makeRequest({}, '/index/' + index, 'POST', this.buildQuery(filter, sorting), {
+            queryParams: {
+                page: page,
+                size: size
+            }
+        });
     }
 
-    static getQuery(filter) {
+    static buildQuery(filter, sorting) {
+        let query = '';
         if (!filter) {
-            return {
-                query: {
+            query = {
+                'query': {
                     'match_all': {}
                 }
             };
-        }
-
-        return {
-            query: {
-                'match_phrase': {
-                    _all: filter
+        } else {
+            query = {
+                'query': {
+                    'match_phrase': {
+                        '_all': filter
+                    }
                 }
             }
-        };
+        }
+
+        if(sorting) {
+            query['sort'] = {
+                _script : {
+                    type: 'string',
+                    order: sorting.order,
+                    script: {
+                        lang: 'painless',
+                        inline: `def field = doc['${sorting.key}.values.raw']; if(field.value != null) { return field.value.toString().toUpperCase(); } return '';`
+                    }
+                }
+            }
+        }
+
+        return query;
     }
 }
