@@ -47,8 +47,8 @@ class HttpClient {
 
     apiClient: APIClient;
     apiService: APIService;
-    stageToUse = undefined;
-    apiVersionTag = undefined;
+    stageToUse: string;
+    apiVersionTag: string;
 
     constructor(apiService: APIService) {
         this.apiService = apiService;
