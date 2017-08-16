@@ -50,7 +50,7 @@ export class FunnelService {
     static getKeysForTag(funnelId: string, tagName: string): Promise<string[]>;
     static getValuesForTagKey(funnelId: string, tagName: string, metadataKey: string): Promise<string[]>;
     static getFunnelStatistics(funnelId: string): Promise<FunnelServiceStatisticsResponse>;
-    static getFunnelStageEntities(funnelId: string, stageId: string, page: number = 1, size: number = 10): Promise<any>;
+    static getFunnelStageEntities(funnelId: string, stageId: string, page?: number, size?: number): Promise<any>;
 
     static createFunnel(funnelToCreate: FunnelServiceCreateRequest): Promise<FunnelServiceCreateResponse>;
     // TODO These must still be defined
@@ -104,7 +104,7 @@ export class MyFLOWFACTService {
 
 export class EntityService {
 
-    static createEntity(schemaId: string, entity: object = undefined): Promise<any>;
+    static createEntity(schemaId: string, entity?: object): Promise<any>;
 
     static deleteEntity(entityId: string, schemaId: string): Promise<any>;
 
