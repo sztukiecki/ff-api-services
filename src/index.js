@@ -17,6 +17,7 @@ import EntityService from './service/EntityService';
 import RelogService from './service/RelogService';
 import MyFLOWFACTService from './service/MyFLOWFACTService';
 import MultimediaService from './service/MultimediaService';
+import CognitoService from './service/CognitoService';
 
 export default HTTPProvider;
 
@@ -38,5 +39,6 @@ export {
     EntityService,
     RelogService,
     MyFLOWFACTService,
-    MultimediaService
+    MultimediaService,
+    CognitoService
 };

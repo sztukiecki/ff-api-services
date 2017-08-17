@@ -1,7 +1,7 @@
 {
   "name": "ff-api-services",
   "private": true,
-  "version": "0.0.100",
+  "version": "0.0.101",
   "description": "",
   "main": "lib/index.js",
   "types": "./index.d.ts",
@@ -16,7 +16,7 @@
   "dependencies": {
     "axios": "^0.16.1",
     "axios-retry": "^1.2.0",
-    "ff-aws-sdk": "git+https://ffbbapi:2870973cbe@bb.flowfact.com/scm/npmmod/ff-aws-sdk.git#master",
+    "ff-aws-sdk": "git+https://ffbbnpm:b7ce02a4a4733566be8a8bf670a46096@bb.flowfact.com/scm/npmmod/ff-aws-sdk.git#v0.0.9",
     "mobx": "^3.1.9",
     "mobx-react": "^4.1.8",
     "prop-types": "^15.5.10",
