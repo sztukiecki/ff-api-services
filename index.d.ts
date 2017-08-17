@@ -112,7 +112,7 @@ export class EntityService {
 
 }
 
-export class CognitoService {
+export class CognitoServiceClass {
     getValidSession(): Promise<any>;
     setNewLoginData(idToken: string): void;
     login(username: string, password: string): Promise<any>;
@@ -120,7 +120,7 @@ export class CognitoService {
     signOut(): void;
 }
 
-export const cognitoService: CognitoService;
+export const CognitoService: CognitoServiceClass;
 
 export interface MandatoryElkData {
     message: string;
