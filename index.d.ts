@@ -120,6 +120,8 @@ export class CognitoService {
     signOut(): void;
 }
 
+export const cognitoService: CognitoService;
+
 export interface MandatoryElkData {
     message: string;
     Severity: 'TRACE' | 'DEBUG' | 'INFO' | 'WARN' | 'ERROR';
