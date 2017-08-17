@@ -64,7 +64,7 @@ class CognitoService {
                 username: username,
                 password: password
             }).then(result => {
-                CognitoService.setNewLoginData(result.idToken.jwtToken);
+                this.setNewLoginData(result.idToken.jwtToken);
 
                 AWS.Config.credentials.get(true).then(res => {
                     resolve(res);
@@ -91,7 +91,7 @@ class CognitoService {
     }
 
     signOut() {
-        if (!CognitoService.tryGetUser()) {
+        if (!this.tryGetUser()) {
             return;
         }
 
