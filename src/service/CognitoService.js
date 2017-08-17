@@ -44,7 +44,7 @@ class CognitoService {
         return AWS.Config.credentials.get();
     }
 
-    setNewLoginData = (idToken) => {
+    setNewLoginData(idToken) {
         let region = AWS.Config.getConfig().region;
         let userPoolId = AWS.Config.getConfig().userPoolID;
         const loginData = {
@@ -52,7 +52,7 @@ class CognitoService {
             token: idToken
         };
         AWS.Config.credentials.setNewLoginData(loginData);
-    };
+    }
 
     login(username, password) {
         this.user = new AWS.CognitoUser({
@@ -64,7 +64,7 @@ class CognitoService {
                 username: username,
                 password: password
             }).then(result => {
-                this.setNewLoginData(result.idToken.jwtToken);
+                CognitoService.setNewLoginData(result.idToken.jwtToken);
 
                 AWS.Config.credentials.get(true).then(res => {
                     resolve(res);
@@ -91,7 +91,7 @@ class CognitoService {
     }
 
     signOut() {
-        if (!this.tryGetUser()) {
+        if (!CognitoService.tryGetUser()) {
             return;
         }
 
