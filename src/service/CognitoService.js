@@ -1,7 +1,9 @@
 import AWS from 'ff-aws-sdk';
+import {getStageFromStore} from 'ff-api-services/lib/http/HttpClient';
 
-const region = 'eu-central-1';
-const settings = {
+
+const REGION = 'eu-central-1';
+const SETTINGS = {
     development: {
         identityPoolId: 'eu-central-1:079515e9-300a-42c6-b608-930f84fed704',
         userPoolId: 'eu-central-1_8kCTHzIgR',
@@ -24,11 +26,11 @@ class CognitoService {
     constructor() {
         this.user = undefined;
 
-        // TODO: Make the stage changeable
-        AWS.Config.setConfig(region,
-            settings['development'].identityPoolId,
-            settings['development'].userPoolId,
-            settings['development'].clientId);
+        let stage = getStageFromStore();
+        AWS.Config.setConfig(REGION,
+            SETTINGS[stage].identityPoolId,
+            SETTINGS[stage].userPoolId,
+            SETTINGS[stage].clientId);
     }
 
     getValidSession() {
