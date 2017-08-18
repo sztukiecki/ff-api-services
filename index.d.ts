@@ -58,7 +58,7 @@ export class FunnelService {
     static getKeysForTag(funnelId: string, tagName: string): Promise<string[]>;
     static getValuesForTagKey(funnelId: string, tagName: string, metadataKey: string): Promise<string[]>;
     static getFunnelStatistics(funnelId: string): Promise<FunnelServiceStatisticsResponse>;
-    static getFunnelStageEntities(funnelId: string, stageId: string, page: number = 1, size: number = 10): Promise<any>;
+    static getFunnelStageEntities(funnelId: string, stageId: string, page?: number, size?: number): Promise<any>;
 
     static createFunnel(funnelToCreate: FunnelServiceCreateRequest): Promise<FunnelServiceCreateResponse>;
     // TODO These must still be defined
@@ -115,18 +115,24 @@ export class MyFLOWFACTService {
 }
 
 export class EntityService {
-
-    static createEntity(schemaId: string, entity: object = undefined): Promise<any>;
-
+    static createEntity(schemaId: string, entity?: object): Promise<any>;
     static deleteEntity(entityId: string, schemaId: string): Promise<any>;
-
     static updateEntityField(schemaId: string, entityId: string, field: object): Promise<any>;
-
     static getEntityWithViewDefinition(viewId: string, schemaId: string, entityId: string): Promise<any>;
     static getEntity(schemaId: string, entityId: string): Promise<any>;
     static getHistory(schemaId: string, entityId: string, page: number): Promise<any>;
 
 }
+
+export class CognitoServiceClass {
+    getValidSession(): Promise<any>;
+    setNewLoginData(idToken: string): void;
+    login(username: string, password: string): Promise<any>;
+    tryGetUser(): Boolean;
+    signOut(): void;
+}
+
+export const CognitoService: CognitoServiceClass;
 
 export interface MandatoryElkData {
     message: string;
