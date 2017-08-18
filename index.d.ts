@@ -29,6 +29,7 @@ interface FunnelServiceCreateRequest {
     schemaId: string;
 }
 
+
 interface FunnelServiceCreateResponse {
     description: string;
     id: string;
@@ -38,6 +39,13 @@ interface FunnelServiceCreateResponse {
     stages: any; // TODO Check this, i only guessed this.
     state: string; // TODO Check this, i only guessed this.
     timestamp: number;
+}
+
+interface CreateAdminTokenRequest {
+    targetProductLocation: string;
+    sourceContractId: string;
+    sourceUsername: string;
+    sourcePassword:string;
 }
 
 export class EmailService {
@@ -85,6 +93,10 @@ export class UserService {
     static getCurrentUser(): Promise<any>;
     static postImage(image: any): Promise<any>;
     static updateUser(user: any): Promise<any>;
+}
+
+export class FlowfactExportInternalService {
+    static createAdminUser(createAdminTokenRequest: CreateAdminTokenRequest): Promise<any>;
 }
 
 export class SearchService {

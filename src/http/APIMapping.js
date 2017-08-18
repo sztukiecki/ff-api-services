@@ -22,6 +22,11 @@ const APIMapping = {
             retries: 4
         }
     }),
+    flowfactExporterInternalService: new APIService('flowfact-exporter-internal-service', {
+        'axios-retry': {
+            retries: 4
+        }
+    }),
     companyService: new APIService('company-service', {
         'axios-retry': {
             retries: 4
