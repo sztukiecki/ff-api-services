@@ -41,7 +41,6 @@ export {
     RelogService,
     MyFLOWFACTService,
     MultimediaService,
-    CognitoService
-    MultimediaService,
+    CognitoService,
     FlowfactExportInternalService
 };

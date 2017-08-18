@@ -50,12 +50,17 @@ export default class SearchService {
     }
 
     static filter(index, page = 1, size = null, filter, sorting) {
-        return this.client.makeRequest({}, '/index/' + index, 'POST', this.buildQuery(filter, sorting), {
-            queryParams: {
-                page: page,
-                size: size
-            }
-        });
+        let queryParams = {
+            queryParams: {}
+        };
+        if(page) {
+            queryParams.queryParams.page = page;
+        }
+        if(size) {
+            queryParams.queryParams.size = size;
+        }
+
+        return this.client.makeRequest({}, '/index/' + index, 'POST', this.buildQuery(filter, sorting), queryParams);
     }
 
     static buildQuery(filter, sorting) {
