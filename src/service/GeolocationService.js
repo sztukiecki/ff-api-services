@@ -11,7 +11,7 @@ export default class GeolocationService {
             },
             cancelToken
         };
-        return GeolocationService.client.makeRequest({}, '/search', 'GET', undefined, additionalParams).then(s => s.data);
+        return GeolocationService.client.makeRequest('/search', 'GET', undefined, additionalParams).then(s => s.data);
     }
 
     static getBestMatchCoordinates(query) {
@@ -20,6 +20,6 @@ export default class GeolocationService {
                 q: query
             }
         };
-        return GeolocationService.client.makeRequest({}, '/getBestMatchCoordinates', 'GET', undefined, additionalParams).then(s => s.data);
+        return GeolocationService.client.makeRequest('/getBestMatchCoordinates', 'GET', undefined, additionalParams).then(s => s.data);
     }
 }

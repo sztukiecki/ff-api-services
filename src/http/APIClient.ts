@@ -1,13 +1,33 @@
 import AWS from 'ff-aws-sdk';
-import axios from 'axios';
-import axiosRetry from 'axios-retry';
+import axios, {AxiosError, AxiosRequestConfig, CancelToken} from 'axios';
+import * as axiosRetry from 'axios-retry';
+
+export type ParamMap = { [key: string]: string|true };
+
+export interface AxiosConfig {
+    'axios-retry': AxiosRetryConfig
+}
+
+export interface AxiosRetryConfig {
+    retries?: number;
+}
+
+export interface APIClientConfig {
+    url?: string;
+    axios?: AxiosConfig;
+}
+
+export interface APIClientAdditionalParams {
+    headers?: string | ParamMap;
+    queryParams?: ParamMap;
+    cancelToken?: CancelToken;
+}
 
 export default class APIClient {
 
     idToken = '';
 
-    constructor(config) {
-        this.config = config;
+    constructor(public config: APIClientConfig) {
     }
 
     getidToken = () => {
@@ -23,7 +43,7 @@ export default class APIClient {
         }
     };
 
-    invokeApi = (params, path, method, additionsParams, body) => {
+    invokeApi = (path: string, method: string, additionsParams: APIClientAdditionalParams = {}, body: string|{} = '') => {
         if (!path.startsWith('/')) {
             throw new Error('missing slash at the beginning');
         }
@@ -35,13 +55,15 @@ export default class APIClient {
 
         // add parameters to the url
         let url = this.config.url + path;
-        const queryString = this.buildCanonicalQueryString(additionsParams.queryParams);
-        if (queryString !== '') {
-            url += '?' + queryString;
+        if (additionsParams.queryParams) {
+            const queryString = this.buildCanonicalQueryString(additionsParams.queryParams);
+            if (queryString !== '') {
+                url += '?' + queryString;
+            }
         }
 
         // setup the requst
-        let request = {
+        let request: AxiosRequestConfig = {
             method: method,
             url: url,
             headers: Object.assign({}, {
@@ -58,8 +80,8 @@ export default class APIClient {
             if (axiosConfiguration['axios-retry']) {
                 axiosRetry(client, {
                     retries: axiosConfiguration['axios-retry'].retries,
-                    retryCondition: (error) => {
-                        return error && error.response && error.response.status >= 500;
+                    retryCondition: (error: AxiosError) => {
+                        return Boolean(error && error.response && error.response.status >= 500);
                     }
                 });
             }
@@ -71,17 +93,21 @@ export default class APIClient {
         return client.request(request);
     };
 
-    buildCanonicalQueryString = (queryParams) => {
+    buildCanonicalQueryString = (queryParams: ParamMap) => {
         if (!queryParams) {
             return '';
         }
 
         const sortedQueryParams = Object.getOwnPropertyNames(queryParams).sort();
 
-        return sortedQueryParams.map(
-            paramName => queryParams[paramName] === true
-                ? encodeURIComponent(paramName)
-                : `${encodeURIComponent(paramName)}=${encodeURIComponent(queryParams[paramName])}`
-        ).join('&');
+        return sortedQueryParams.map(paramName => {
+            const paramValue = queryParams[paramName];
+
+            if (paramValue === true) {
+                return encodeURIComponent(paramName)
+            }
+
+            return `${encodeURIComponent(paramName)}=${encodeURIComponent(paramValue)}`
+        }).join('&');
     };
 }

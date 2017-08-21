@@ -1,5 +1,6 @@
-import store from 'store';
-import APIClient from './APIClient';
+import * as store from 'store';
+import APIClient, {APIClientAdditionalParams} from './APIClient';
+import {APIService} from './APIMapping';
 
 const StoreKeys = {
     EdgeServiceStage: 'HTTPCLIENT.APICLIENT.STAGE',
@@ -21,7 +22,7 @@ const getVersionTagFromStore = () => {
     return fromStore ? fromStore : defaultVersionTag;
 };
 
-const setStageInStore = (stage) => {
+const setStageInStore = (stage: string) => {
     'use strict';
     if (stage) {
         store.set(StoreKeys.EdgeServiceStage, stage);
@@ -29,7 +30,7 @@ const setStageInStore = (stage) => {
     }
 };
 
-const setVersionTagInStore = (versionTag) => {
+const setVersionTagInStore = (versionTag: string) => {
     'use strict';
     if (versionTag) {
         store.set(StoreKeys.EdgeServiceVersionTag, versionTag);
@@ -44,12 +45,12 @@ const isDefaultApi = () => {
 
 class HttpClient {
 
-    apiClient = undefined;
-    apiService = undefined;
-    stageToUse = undefined;
-    apiVersionTag = undefined;
+    apiClient: APIClient;
+    apiService: APIService;
+    stageToUse: string;
+    apiVersionTag: string;
 
-    constructor(apiService) {
+    constructor(apiService: APIService) {
         this.apiService = apiService;
         this.stageToUse = getStageFromStore();
         this.apiVersionTag = getVersionTagFromStore();
@@ -67,12 +68,12 @@ class HttpClient {
         return `${baseUrl}/${this.apiService.name}/${this.apiVersionTag}`;
     };
 
-    makeRequest(params, path, method, body = undefined, additionalParams = undefined) {
-        return this.apiClient.invokeApi(params, path, method, additionalParams, body);
+    makeRequest(path: string, method: string, body?: string|{}, additionalParams?: APIClientAdditionalParams) {
+        return this.apiClient.invokeApi(path, method, additionalParams, body);
     }
 
-    makeRequestSimple(body, path, method) {
-        return this.apiClient.invokeApi(undefined, path, method, undefined, body);
+    makeRequestSimple(body: string|{}, path: string, method: string) {
+        return this.apiClient.invokeApi(path, method, undefined, body);
     }
 }
 
