@@ -17,7 +17,7 @@ export default class MultimediaService {
         const formData = new FormData();
         formData.append('file', file);
 
-        return this.client.makeRequest({}, `/${companyId}/${entityId}`, 'POST', formData, {
+        return this.client.makeRequest(`/${companyId}/${entityId}`, 'POST', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

@@ -7,7 +7,7 @@ export default class FlowfactExportInternalService {
     static createAdminUser(createAdminTokenRequest){
         console.log('Test');
         console.log(createAdminTokenRequest);
-        return FlowfactExportInternalService.client.makeRequest({}, '/adminUser', 'POST', createAdminTokenRequest);
+        return FlowfactExportInternalService.client.makeRequest('/adminUser', 'POST', createAdminTokenRequest);
     }
 
 }
