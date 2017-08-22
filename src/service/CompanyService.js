@@ -43,7 +43,7 @@ export default class CompanyService {
     static postTerms(terms) {
         const formData = new FormData();
         formData.append('terms-file', terms);
-        return this.client.makeRequest('/upload/terms', 'POST', formData,
+        return this.client.makeRequest('/company/upload/terms', 'POST', formData,
             {headers: {'Content-Type': 'multipart/form-data'}});
     }
 }
