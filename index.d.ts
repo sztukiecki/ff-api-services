@@ -107,7 +107,7 @@ declare module 'ff-api-services' {
         static deleteSearch(searchId: string): Promise<any>;
         static updateSearch(searchId: string, searchModel: string): Promise<any>;
         static search(query: any, index: string, page: number, size: number): Promise<any>;
-        static filter(index: string, page: number, size: number, filter: any): Promise<any>;
+        static filter(index: string, page?: number, size?: number, filter?: any): Promise<any>;
     }
 
     export class MyFLOWFACTService {
