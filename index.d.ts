@@ -90,12 +90,13 @@ declare module 'ff-api-services' {
     }
 
     interface EntityFieldValue {
-        value: {[key: string]: string};
+        value: any;
     }
 
     interface EntityFieldSettings {
         captions: {[key: string]: string};
         type: string;
+        unit?: string;
     }
 
     interface EntityField {
