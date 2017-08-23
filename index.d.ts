@@ -83,10 +83,41 @@ declare module 'ff-api-services' {
         static setStageAfterStage(funnelId: string, stageId: object, parentId: string): Promise<any>;
     }
 
+    export interface ShortViewDefinition {
+        id: string;
+        name: string;
+        schemaId: string;
+    }
+
+    interface EntityFieldValue {
+        value: any;
+    }
+
+    interface EntityFieldSettings {
+        captions: {[key: string]: string};
+        type: string;
+        unit?: string;
+    }
+
+    interface EntityField {
+        values: EntityFieldValue[];
+        settings: EntityFieldSettings;
+    }
+
+    export interface ViewDefinitionCategory {
+        name: string;
+        fields: EntityField[];
+    }
+
+    export interface ViewDefinition extends ShortViewDefinition {
+        componentId: string;
+        categories: ViewDefinitionCategory[];
+    }
+
     export class ViewDefinitionService {
-        static getDefinitionsForSchema(schemaId: string): Promise<any>;
-        static getDefinition(viewDefinitionId: string): Promise<any>;
-        static updateCategory(viewId: string, categoryName: string, categoryDefinition: any): Promise<any>;
+        static getDefinitionsForSchema(schemaId: string): Promise<ShortViewDefinition[]>;
+        static getDefinition(viewDefinitionId: string): Promise<ViewDefinition>;
+        static updateCategory(viewId: string, categoryName: string, categoryDefinition: ViewDefinitionCategory): Promise<any>;
     }
 
     export class UserService {
@@ -107,7 +138,7 @@ declare module 'ff-api-services' {
         static deleteSearch(searchId: string): Promise<any>;
         static updateSearch(searchId: string, searchModel: string): Promise<any>;
         static search(query: any, index: string, page: number, size: number): Promise<any>;
-        static filter(index: string, page: number, size: number, filter: any): Promise<any>;
+        static filter(index: string, page?: number, size?: number, filter?: any): Promise<any>;
     }
 
     export class MyFLOWFACTService {
