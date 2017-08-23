@@ -46,7 +46,6 @@ export default class CompanyService {
         return this.client.makeRequest('/company/terms/upload', 'POST', formData,
             {headers: {'Content-Type': 'multipart/form-data'}});
     }
-
     static removeTerms() {
         return this.client.makeRequest('/company/terms/remove', 'POST', null, {});
     }
