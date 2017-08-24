@@ -1,5 +1,5 @@
 import AWS from 'ff-aws-sdk';
-import store from 'store';
+import * as store from 'store';
 import WPAPI from 'wpapi';
 
 export default class WordpressTemplateService {
