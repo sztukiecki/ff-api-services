@@ -3,7 +3,6 @@ import * as store from 'store';
 import WPAPI from 'wpapi';
 
 export default class WordpressTemplateService {
-
     static storeKeys = {
         StageName: 'HTTPCLIENT.APICLIENT.STAGE',
         VersionTagName: 'HTTPCLIENT.APICLIENT.VERSIONTAG'
