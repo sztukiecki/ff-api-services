@@ -1,3 +1,5 @@
+import {AxiosResponse} from "axios";
+
 declare module 'ff-api-services' {
     interface EmailServiceVerifyDnsEntry {
         valid: boolean;
@@ -115,7 +117,7 @@ declare module 'ff-api-services' {
     }
 
     export class ViewDefinitionService {
-        static getDefinitionsForSchema(schemaId: string): Promise<ShortViewDefinition[]>;
+        static getDefinitionsForSchema(schemaId: string): Promise<AxiosResponse>;
         static getDefinition(viewDefinitionId: string): Promise<ViewDefinition>;
         static updateCategory(viewId: string, categoryName: string, categoryDefinition: ViewDefinitionCategory): Promise<any>;
     }
