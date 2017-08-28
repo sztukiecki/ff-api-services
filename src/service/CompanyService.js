@@ -47,8 +47,10 @@ export default class CompanyService {
             {headers: {'Content-Type': 'multipart/form-data'}});
     }
 
-    static removeTerms() {
-        return this.client.makeRequest('/company/terms/remove', 'POST', null, {});
+    static removeTerms(fileName) {
+        const formData = new FormData();
+        formData.append('file-name', fileName);
+        return this.client.makeRequest('/company/terms/remove', 'POST', formData);
     }
 
     static renameTerms(currentName, newName) {
