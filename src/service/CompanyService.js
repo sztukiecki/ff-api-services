@@ -20,9 +20,6 @@ export default class CompanyService {
     }
 
     static updateCompany(body) {
-        console.log('##################');
-        console.log(body);
-        console.log('##################');
         return CompanyService.client.makeRequestSimple(body, '/company', 'PUT');
     }
 
