@@ -20,6 +20,9 @@ export default class CompanyService {
     }
 
     static updateCompany(body) {
+        console.log('##################');
+        console.log(body);
+        console.log('##################');
         return CompanyService.client.makeRequestSimple(body, '/company', 'PUT');
     }
 
@@ -48,6 +51,14 @@ export default class CompanyService {
     }
     static removeTerms() {
         return this.client.makeRequest('/company/terms/remove', 'POST', null, {});
+    }
+
+    static renameTerms(currentName, newName) {
+        const formData = new FormData();
+        formData.append('current-name', currentName);
+        formData.append('new-name', newName);
+        return this.client.makeRequest('company/terms/rename', 'POST', formData,
+            {headers: {'Content-Type': 'multipart/form-data'}});
     }
 }
 
