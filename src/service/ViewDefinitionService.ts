@@ -1,4 +1,5 @@
 import HttpClient, {APIMapping} from '../http';
+import {AxiosResponse} from "axios";
 
 export interface ShortViewDefinition {
     id: string;
@@ -20,16 +21,16 @@ export default class ViewDefinitionService {
 
     static client = new HttpClient(APIMapping.viewDefinitionService);
 
-    static getDefinitionsForSchema(schemaId: string): Promise<ShortViewDefinition[]> {
+    static getDefinitionsForSchema(schemaId: string): Promise<AxiosResponse> {
         return ViewDefinitionService.client.makeRequest('/views', 'GET', undefined, {
             queryParams: {
                 schemaId
             }
-        }).then(({data}) => data || []);
+        });
     }
 
-    static getDefinition(viewDefinitionId: string): Promise<ViewDefinition> {
-        return ViewDefinitionService.client.makeRequest(`/views/${viewDefinitionId}`, 'GET').then(({data}) => data);
+    static getDefinition(viewDefinitionId: string): Promise<AxiosResponse> {
+        return ViewDefinitionService.client.makeRequest(`/views/${viewDefinitionId}`, 'GET');
     }
 
     static updateDefinition(viewDefinitionId: string, viewDefinition: ViewDefinition) {
