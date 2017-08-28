@@ -56,8 +56,7 @@ export default class CompanyService {
         formData.append('current-name', currentName);
         formData.append('new-name', newName);
 
-        return this.client.makeRequest('company/terms/rename', 'POST', formData,
-            {headers: {'Content-Type': 'multipart/form-data'}});
+        return this.client.makeRequest('/company/terms/rename', 'POST', formData);
     }
 }
 
