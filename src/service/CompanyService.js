@@ -49,6 +49,7 @@ export default class CompanyService {
         return this.client.makeRequest('/company/terms/upload', 'POST', formData,
             {headers: {'Content-Type': 'multipart/form-data'}});
     }
+
     static removeTerms() {
         return this.client.makeRequest('/company/terms/remove', 'POST', null, {});
     }
@@ -57,6 +58,7 @@ export default class CompanyService {
         const formData = new FormData();
         formData.append('current-name', currentName);
         formData.append('new-name', newName);
+
         return this.client.makeRequest('company/terms/rename', 'POST', formData,
             {headers: {'Content-Type': 'multipart/form-data'}});
     }
