@@ -1,6 +1,6 @@
 import AWS from 'ff-aws-sdk';
 import * as store from 'store';
-import WPAPI from 'wpapi';
+import * as WPAPI from 'wpapi';
 
 export default class WordpressTemplateService {
     static storeKeys = {
@@ -10,7 +10,6 @@ export default class WordpressTemplateService {
 
     static defaultStage = 'staging';
     static defaultVersionTag = 'stable';
-
 
     static wordpressApis = [];
 
