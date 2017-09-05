@@ -7,23 +7,20 @@ const StoreKeys = {
     EdgeServiceVersionTag: 'HTTPCLIENT.APICLIENT.VERSIONTAG'
 };
 
-const defaultStage = 'staging';
+const defaultStage = 'production';
 const defaultVersionTag = 'stable';
 
 const getStageFromStore = () => {
-    'use strict';
     const fromStore = store.get(StoreKeys.EdgeServiceStage);
     return fromStore ? fromStore : defaultStage;
 };
 
 const getVersionTagFromStore = () => {
-    'use strict';
     const fromStore = store.get(StoreKeys.EdgeServiceVersionTag);
     return fromStore ? fromStore : defaultVersionTag;
 };
 
 const setStageInStore = (stage: string) => {
-    'use strict';
     if (stage) {
         store.set(StoreKeys.EdgeServiceStage, stage);
         console.log('Set stage to: ' + stage);
@@ -31,7 +28,6 @@ const setStageInStore = (stage: string) => {
 };
 
 const setVersionTagInStore = (versionTag: string) => {
-    'use strict';
     if (versionTag) {
         store.set(StoreKeys.EdgeServiceVersionTag, versionTag);
         console.log('Set versionTag to: ' + versionTag);
@@ -39,7 +35,6 @@ const setVersionTagInStore = (versionTag: string) => {
 };
 
 const isDefaultApi = () => {
-    'use strict';
     return (getStageFromStore() === defaultStage) && (getVersionTagFromStore() === defaultVersionTag);
 };
 
