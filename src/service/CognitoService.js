@@ -27,6 +27,9 @@ class CognitoService {
         this.user = undefined;
 
         let stage = getStageFromStore();
+        if (stage === 'local') {
+            stage = 'development';
+        }
         AWS.Config.setConfig(REGION,
             SETTINGS[stage].identityPoolId,
             SETTINGS[stage].userPoolId,
