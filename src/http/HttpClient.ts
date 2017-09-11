@@ -58,7 +58,7 @@ class HttpClient {
     buildAPIUrl = () => {
         const account = this.stageToUse === 'development' ? 'flowfact-dev' : 'flowfact-prod';
         const baseUrl = this.stageToUse === 'local'
-            ? 'http://localhost:8080/edge-service'
+            ? 'http://localhost:8080'
             : `https://services.${this.stageToUse}.cloudios.${account}.cloud/edge-service`;
         return `${baseUrl}/${this.apiService.name}/${this.apiVersionTag}`;
     };
