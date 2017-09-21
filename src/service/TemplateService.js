@@ -23,6 +23,17 @@ export default class TemplateService {
         return this.client.makeRequest(`/templates/${id}/content`, 'POST', formData);
     }
 
+    static uploadAttachment(templateId, file) {
+        const formData = new FormData();
+        formData.append('file', file, file.name);
+
+        return this.client.makeRequest(`/templates/${templateId}/attachments`, 'POST', formData);
+    }
+
+    static removeAttachment(templateId, attachmentId) {
+        return this.client.makeRequestSimple(attachmentId, `/templates/${templateId}/attachments/delete`, 'POST');
+    }
+
     static getTemplateById(id) {
         return this.client.makeRequestSimple({}, `/templates/${id}`, 'GET').then(s => s.data);
     }
