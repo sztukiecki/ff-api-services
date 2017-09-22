@@ -8,7 +8,7 @@ export default class WordpressTemplateService {
         VersionTagName: 'HTTPCLIENT.APICLIENT.VERSIONTAG'
     };
 
-    static defaultStage = 'production';
+    static defaultStage = 'staging';
     static defaultVersionTag = 'stable';
 
     static wordpressApis = [];
@@ -27,17 +27,18 @@ export default class WordpressTemplateService {
         // Technically both versions are already implemented
         versionTag = versionTag ? versionTag : this.defaultVersionTag;
 
+        let domainName = 'flowfact-prod';
         switch (stage) {
             case 'development':
-                this.wordpressUrl = 'https://templateengine.development.cloudios.flowfact-dev.cloud/';
+                domainName = 'flowfact-dev';
                 break;
             case 'staging':
-                this.wordpressUrl = 'https://templateengine.staging.cloudios.flowfact-prod.cloud/';
-                break;
             case 'production':
-                this.wordpressUrl = 'https://sites.production.te.flowfact-prod.cloud/';
+                domainName = 'flowfact-prod';
                 break;
         }
+
+        this.wordpressUrl = 'https://sites.' + stage + '.te.' + domainName + '.cloud/';
 
         this.cognitoToken = null;
 
