@@ -8,16 +8,15 @@ export default class MultimediaService {
      * Upload a file for a entity
      *
      * @param file
-     * @param companyId
      * @param entityId
      * @returns
      *      the url to request this file
      */
-    static upload(file, companyId, entityId) {
+    static upload(file, entityId) {
         const formData = new FormData();
         formData.append('file', file);
 
-        return this.client.makeRequest(`/${companyId}/${entityId}`, 'POST', formData, {
+        return this.client.makeRequest(`/upload/${entityId}`, 'POST', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
