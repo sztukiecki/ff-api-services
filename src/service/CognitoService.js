@@ -1,5 +1,5 @@
 import AWS from 'ff-aws-sdk';
-import {getStageFromStore} from 'ff-api-services/lib/http/HttpClient';
+import {getStageFromStore} from '../http/HttpClient';
 
 
 const REGION = 'eu-central-1';

@@ -1,16 +1,9 @@
 import AWS from 'ff-aws-sdk';
-import * as store from 'store';
 import * as WPAPI from 'wpapi';
 
+import {getStageFromStore, getVersionTagFromStore} from '../http/HttpClient';
+
 export default class WordpressTemplateService {
-    static storeKeys = {
-        StageName: 'HTTPCLIENT.APICLIENT.STAGE',
-        VersionTagName: 'HTTPCLIENT.APICLIENT.VERSIONTAG'
-    };
-
-    static defaultStage = 'staging';
-    static defaultVersionTag = 'stable';
-
     static wordpressApis = [];
 
     static wordpressUrl;
@@ -18,14 +11,11 @@ export default class WordpressTemplateService {
     static cognitoToken;
 
     static init() {
-        let stage = store.get(this.storeKeys.StageName),
-            versionTag = store.get(this.storeKeys.VersionTagName);
-
-        stage = stage ? stage : this.defaultStage;
+        let stage = getStageFromStore(),
+            versionTag = getVersionTagFromStore();
 
         // There is no concept on how to implement the version into the beaverbuilder right now.
         // Technically both versions are already implemented
-        versionTag = versionTag ? versionTag : this.defaultVersionTag;
 
         let domainName = 'flowfact-prod';
         switch (stage) {
