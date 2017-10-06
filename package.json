@@ -1,5 +1,5 @@
 {
-  "name": "ff-api-services",
+  "name": "@flowfact/api-services",
   "version": "0.0.0-SNAPSHOT",
   "description": "",
   "main": "lib/index.js",
@@ -12,7 +12,8 @@
   },
   "scripts": {
     "build-package": "tsc",
-    "rebuild-package": "cleandir dist/ && npm run build-package"
+    "rebuild-package": "cleandir dist/ && npm run build-package",
+    "prepare": "npm run rebuild-package"
   },
   "dependencies": {
     "@flowfact/aws-sdk": "^0.20171006.10",

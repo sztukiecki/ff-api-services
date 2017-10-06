@@ -1,1 +1,5 @@
 /.idea
+/pipeline
+/setVersionNpm_*
+/tests
+/Jenkinsfile
