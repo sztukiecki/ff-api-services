@@ -1,4 +1,4 @@
-import AWS from 'ff-aws-sdk';
+import AWS from '@flowfact/aws-sdk';
 import axios, {AxiosError, AxiosRequestConfig, CancelToken} from 'axios';
 import * as axiosRetry from 'axios-retry';
 

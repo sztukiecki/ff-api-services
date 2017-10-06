@@ -15,9 +15,9 @@
     "rebuild-package": "cleandir dist/ && npm run build-package"
   },
   "dependencies": {
+    "@flowfact/aws-sdk": "^0.20171006.10",
     "axios": "^0.16.2",
     "axios-retry": "^1.3.1",
-    "ff-aws-sdk": "^0.20171004.5",
     "mobx": "^3.3.0",
     "mobx-react": "^4.3.3",
     "react-loading-indicator": "^1.0.2",

@@ -1,4 +1,4 @@
-import AWS from 'ff-aws-sdk';
+import AWS from '@flowfact/aws-sdk';
 import * as WPAPI from 'wpapi';
 
 import {getStageFromStore, getVersionTagFromStore} from '../http/HttpClient';
