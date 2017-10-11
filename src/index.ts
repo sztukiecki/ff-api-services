@@ -19,6 +19,7 @@ import MyFLOWFACTService from './service/MyFLOWFACTService';
 import MultimediaService from './service/MultimediaService';
 import FlowfactExportInternalService from './service/FlowfactExportInternalService';
 import CognitoService from './service/CognitoService';
+import InteractiveExposeService from './service/InteractiveExposeService';
 
 export default HTTPProvider;
 
@@ -42,5 +43,6 @@ export {
     MyFLOWFACTService,
     MultimediaService,
     CognitoService,
-    FlowfactExportInternalService
+    FlowfactExportInternalService,
+    InteractiveExposeService
 };

@@ -17,12 +17,10 @@ export default class EmailService {
     static client = new HttpClient(APIMapping.emailService);
 
     static async createDomain(domain: string): Promise<EmailServiceVerifyResponse> {
-        const result = await EmailService.client.makeRequestSimple({domain}, '/configuration/whitelabel', 'POST');
-        return result.data;
+        return (await EmailService.client.makeRequestSimple({domain}, '/configuration/whitelabel', 'POST')).data;
     }
 
     static async verifyDomain(domain: string): Promise<EmailServiceVerifyResponse> {
-        const result = await EmailService.client.makeRequestSimple({domain}, '/configuration/whitelabel/verify', 'POST');
-        return result.data;
+        return (await EmailService.client.makeRequestSimple({domain}, '/configuration/whitelabel/verify', 'POST')).data;
     }
 }

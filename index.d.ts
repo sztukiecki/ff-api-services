@@ -195,3 +195,28 @@ export class RelogService {
     static log(logEntry: FFElkData): Promise<any>;
     static logBatch(logEntries: FFElkData[]): Promise<any>;
 }
+
+export interface InteractiveExposeColors {
+    accent: string;
+    accentContrast: string;
+}
+
+export interface InteractiveExposeSettings {
+    colors: InteractiveExposeColors;
+    theme: string;
+    urlIdentifier: string;
+}
+
+export interface InteractiveExposeLogos {
+    dark: string;
+    light: string;
+}
+
+export interface InteractiveExposeSettingsWithLogos extends InteractiveExposeSettings {
+    logos: InteractiveExposeLogos;
+}
+
+export default class InteractiveExposeService {
+    static getSettings(): Promise<InteractiveExposeSettingsWithLogos>;
+    static changeSettings(settings: InteractiveExposeSettings): Promise<InteractiveExposeSettingsWithLogos>;
+}
