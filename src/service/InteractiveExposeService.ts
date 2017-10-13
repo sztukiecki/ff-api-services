@@ -31,11 +31,9 @@ export default class InteractiveExposeService {
         return (await InteractiveExposeService.client.makeRequestSimple(settings, '/settings', 'POST')).data;
     }
 
-
     static async getPreviewUrl(entityId: string): Promise<string> {
         return (await InteractiveExposeService.client.makeRequestSimple({entityId: entityId}, '/preview', 'POST')).data;
     }
-
 
     static async sendInteractiveExpose(recipientId: string, objectId: string, recipientEmailAddress: string): Promise<string> {
         return (await InteractiveExposeService.client.makeRequestSimple({
@@ -45,4 +43,9 @@ export default class InteractiveExposeService {
         }, '/interactiveExposes', 'POST')).data;
     }
 
+    static async changeLogo(type: 'light' | 'dark', image: File): Promise<void> {
+        const formData = new FormData();
+        formData.append('logo', image);
+        await this.client.makeRequest(`/settings/logos/${type}`, 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
+    }
 }

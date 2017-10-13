@@ -269,4 +269,6 @@ export class InteractiveExposeService {
     static getPreviewUrl(entityId: string): Promise<string>;
 
     static sendInteractiveExpose(recipientId: string, objectId: string, recipientEmailAddress: string): Promise<string>;
+
+    static changeLogo(type: 'light' | 'dark', image: File): Promise<void>;
 }
