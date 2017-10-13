@@ -30,4 +30,10 @@ export default class InteractiveExposeService {
     static async changeSettings(settings: InteractiveExposeSettings): Promise<InteractiveExposeSettingsWithLogos> {
         return (await InteractiveExposeService.client.makeRequestSimple(settings, '/settings', 'POST')).data;
     }
+
+
+    static async getPreviewURL(entityId: any): Promise<InteractiveExposeSettingsWithLogos> {
+        return (await InteractiveExposeService.client.makeRequestSimple({entityId: entityId}, '/preview', 'POST')).data;
+    }
+
 }
