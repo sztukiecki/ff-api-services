@@ -270,5 +270,5 @@ export class InteractiveExposeService {
 
     static sendInteractiveExpose(recipientId: string, objectId: string, recipientEmailAddress: string): Promise<string>;
 
-    static changeLogo(type: 'light' | 'dark', image: File): Promise<void>;
+    static changeLogo(type: 'light' | 'dark', image: File): Promise<string>;
 }

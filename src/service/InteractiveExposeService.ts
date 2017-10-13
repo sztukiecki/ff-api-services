@@ -43,9 +43,9 @@ export default class InteractiveExposeService {
         }, '/interactiveExposes', 'POST')).data;
     }
 
-    static async changeLogo(type: 'light' | 'dark', image: File): Promise<void> {
+    static async changeLogo(type: 'light' | 'dark', image: File): Promise<string> {
         const formData = new FormData();
         formData.append('logo', image);
-        await this.client.makeRequest(`/settings/logos/${type}`, 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
+        return (await this.client.makeRequest(`/settings/logos/${type}`, 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}})).data;
     }
 }
