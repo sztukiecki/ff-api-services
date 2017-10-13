@@ -32,8 +32,17 @@ export default class InteractiveExposeService {
     }
 
 
-    static async getPreviewURL(entityId: any): Promise<InteractiveExposeSettingsWithLogos> {
+    static async getPreviewUrl(entityId: string): Promise<string> {
         return (await InteractiveExposeService.client.makeRequestSimple({entityId: entityId}, '/preview', 'POST')).data;
+    }
+
+
+    static async sendInteractiveExpose(recipientId: string, objectId: string, recipientEmailAddress: string): Promise<string> {
+        return (await InteractiveExposeService.client.makeRequestSimple({
+            recipientId: recipientId,
+            objectId: objectId,
+            recipientEmailAddress: recipientEmailAddress
+        }, '/preview', 'POST')).data;
     }
 
 }
