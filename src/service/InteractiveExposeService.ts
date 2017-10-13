@@ -42,7 +42,7 @@ export default class InteractiveExposeService {
             recipientId: recipientId,
             objectId: objectId,
             recipientEmailAddress: recipientEmailAddress
-        }, '/preview', 'POST')).data;
+        }, '/interactiveExposes', 'POST')).data;
     }
 
 }
