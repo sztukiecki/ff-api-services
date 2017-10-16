@@ -1,4 +1,5 @@
 import HttpClient, {APIMapping} from '../http';
+import FileModel from "../util/FileModel";
 
 export interface InteractiveExposeColors {
     accent: string;
@@ -43,7 +44,7 @@ export default class InteractiveExposeService {
         }, '/interactiveExposes', 'POST')).data;
     }
 
-    static async changeLogo(type: 'light' | 'dark', image: File): Promise<string> {
+    static async changeLogo(type: 'light' | 'dark', image: File): Promise<FileModel> {
         const formData = new FormData();
         formData.append('logo', image);
         return (await this.client.makeRequest(`/settings/logos/${type}`, 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}})).data;
