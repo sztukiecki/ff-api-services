@@ -1,5 +1,14 @@
 import {AxiosResponse} from "axios";
 
+export default interface FileModel {
+    bucketName: string;
+    identifier: string;
+    name: string | null;
+    prefix: string;
+    url: string;
+}
+
+
 interface EmailServiceVerifyDnsEntry {
     valid: boolean;
     type: "a" | "cname";
@@ -270,5 +279,5 @@ export class InteractiveExposeService {
 
     static sendInteractiveExpose(recipientId: string, objectId: string, recipientEmailAddress: string): Promise<string>;
 
-    static changeLogo(type: 'light' | 'dark', image: File): Promise<string>;
+    static changeLogo(type: 'light' | 'dark', image: File): Promise<FileModel>;
 }
