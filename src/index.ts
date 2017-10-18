@@ -12,7 +12,6 @@ import WordpressTemplateService from './service/WordpressTemplateService';
 import FormService from './service/FormService';
 import EmailService from './service/EmailService';
 import ViewDefinitionService from './service/ViewDefinitionService';
-import HTTPProvider from './component/HTTPProvider';
 import EntityService from './service/EntityService';
 import RelogService from './service/RelogService';
 import MyFLOWFACTService from './service/MyFLOWFACTService';
@@ -20,8 +19,6 @@ import MultimediaService from './service/MultimediaService';
 import FlowfactExportInternalService from './service/FlowfactExportInternalService';
 import CognitoService from './service/CognitoService';
 import InteractiveExposeService from './service/InteractiveExposeService';
-
-export default HTTPProvider;
 
 export {
     CompanyService,
