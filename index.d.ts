@@ -270,6 +270,18 @@ export interface InteractiveExposeSettingsWithLogos extends InteractiveExposeSet
     logos: InteractiveExposeLogos;
 }
 
+export interface InteractiveExposeTemplate {
+    id: string,
+    name: string,
+    description: string,
+    body: string,
+    type: string,
+    role: string,
+    assignedSchemas: string[],
+    creatorId: string,
+    updaterId: string
+}
+
 export class InteractiveExposeService {
     static getSettings(): Promise<InteractiveExposeSettingsWithLogos>;
 
@@ -280,4 +292,10 @@ export class InteractiveExposeService {
     static sendInteractiveExpose(recipientId: string, objectId: string, recipientEmailAddress: string): Promise<string>;
 
     static changeLogo(type: 'light' | 'dark', image: File): Promise<FileModel>;
+
+    static getTemplates(role: 'OFFER' | 'REPORT' | undefined): Promise<AxiosResponse>;
+
+    static updateTemplate(templateId: string, template: InteractiveExposeTemplate): Promise<AxiosResponse>;
+
+    static deleteTemplate(templateId: string): Promise<AxiosResponse>;
 }
