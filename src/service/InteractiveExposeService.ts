@@ -1,5 +1,6 @@
 import HttpClient, {APIMapping} from '../http';
 import FileModel from "../util/FileModel";
+import {AxiosResponse} from "axios";
 
 export interface InteractiveExposeColors {
     accent: string;
@@ -19,6 +20,18 @@ export interface InteractiveExposeLogos {
 
 export interface InteractiveExposeSettingsWithLogos extends InteractiveExposeSettings {
     logos: InteractiveExposeLogos;
+}
+
+export interface InteractiveExposeTemplate {
+    id: string,
+    name: string,
+    description: string,
+    body: string,
+    type: string,
+    role: string,
+    assignedSchemas: string[],
+    creatorId: string,
+    updaterId: string
 }
 
 export default class InteractiveExposeService {
@@ -48,5 +61,43 @@ export default class InteractiveExposeService {
         const formData = new FormData();
         formData.append('logo', image);
         return (await this.client.makeRequest(`/settings/logos/${type}`, 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}})).data;
+    }
+
+    /**
+     * Get all interactive expose templates.
+     * Add a role parameter to filter the templates by the roles.
+     *
+     * @param {"OFFER" | "REPORT"} role
+     * @returns {Promise<AxiosResponse>}
+     */
+    static async getTemplates(role: 'OFFER' | 'REPORT' | undefined): Promise<AxiosResponse> {
+        if(role) {
+            return await InteractiveExposeService.client.makeRequest('/templates', 'GET', {}, {
+                queryParams: {
+                    role: role
+                }
+            });
+        }
+
+        return await InteractiveExposeService.client.makeRequestSimple({}, '/templates', 'GET');
+    }
+
+    /**
+     * Update a interactive expose template by his id.
+     * @param {string} templateId
+     * @param {InteractiveExposeTemplate} template
+     * @returns {Promise<AxiosResponse>}
+     */
+    static async updateTemplate(templateId: string, template: InteractiveExposeTemplate): Promise<AxiosResponse> {
+        return await InteractiveExposeService.client.makeRequestSimple(template, `/templates/${templateId}`, 'POST');
+    }
+
+    /**
+     * Delete a interactive expose template on the server.
+     * @param {string} templateId
+     * @returns {Promise<AxiosResponse>}
+     */
+    static async deleteTemplate(templateId: string): Promise<AxiosResponse> {
+        return await InteractiveExposeService.client.makeRequestSimple({}, `/templates/${templateId}`, 'DELETE');
     }
 }
