@@ -107,7 +107,7 @@ export default class APIClient {
                 return encodeURIComponent(paramName)
             }
 
-            return `${encodeURIComponent(paramName)}=${encodeURIComponent(paramValue)}`
+            return `${encodeURIComponent(paramName)}=${encodeURIComponent(paramValue.toString())}`
         }).join('&');
     };
 }
