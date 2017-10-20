@@ -92,7 +92,7 @@ export default class InteractiveExposeService {
     static async createTemplate(template: InteractiveExposeTemplate, fillDefaultContent: boolean = false): Promise<AxiosResponse> {
         const queryParams = {
             queryParams: {
-                fillDefaultContent: fillDefaultContent
+                fillDefaultContent: String(fillDefaultContent)
             }
         };
 
