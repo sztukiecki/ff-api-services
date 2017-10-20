@@ -83,6 +83,15 @@ export default class InteractiveExposeService {
     }
 
     /**
+     * Get a template by his id.
+     * @param {string} templateId
+     * @returns {Promise<AxiosResponse>}
+     */
+    static async getTemplateById(templateId: string): Promise<AxiosResponse> {
+        return await InteractiveExposeService.client.makeRequestSimple({}, `templates/${templateId}`, 'GET');
+    }
+
+    /**
      * Create a new interactive expose template.
      * @param {InteractiveExposeTemplate} template
      * @param {boolean} fillDefaultContent

@@ -295,6 +295,8 @@ export class InteractiveExposeService {
 
     static getTemplates(role: 'OFFER' | 'REPORT' | undefined): Promise<AxiosResponse>;
 
+    static getTemplateById(templateId: string): Promise<AxiosResponse>;
+
     static createTemplate(template: InteractiveExposeTemplate, fillDefaultContent: boolean): Promise<AxiosResponse>;
 
     static updateTemplate(templateId: string, template: InteractiveExposeTemplate): Promise<AxiosResponse>;
