@@ -88,7 +88,7 @@ export default class InteractiveExposeService {
      * @returns {Promise<AxiosResponse>}
      */
     static async getTemplateById(templateId: string): Promise<AxiosResponse> {
-        return await InteractiveExposeService.client.makeRequestSimple({}, `templates/${templateId}`, 'GET');
+        return await InteractiveExposeService.client.makeRequestSimple({}, `/templates/${templateId}`, 'GET');
     }
 
     /**
