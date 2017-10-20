@@ -83,6 +83,23 @@ export default class InteractiveExposeService {
     }
 
     /**
+     * Create a new interactive expose template.
+     * @param {InteractiveExposeTemplate} template
+     * @param {boolean} fillDefaultContent
+     *      true if the content of the template have to be filled with default content
+     * @returns {Promise<AxiosResponse>}
+     */
+    static async createTemplate(template: InteractiveExposeTemplate, fillDefaultContent: boolean = false): Promise<AxiosResponse> {
+        const queryParams = {
+            queryParams: {
+                fillDefaultContent: fillDefaultContent
+            }
+        };
+
+        return await InteractiveExposeService.client.makeRequest('/templates', 'POST', template, queryParams);
+    }
+
+    /**
      * Update a interactive expose template by his id.
      * @param {string} templateId
      * @param {InteractiveExposeTemplate} template

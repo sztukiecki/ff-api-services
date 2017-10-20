@@ -2,7 +2,7 @@ import AWS from '@flowfact/aws-sdk';
 import axios, {AxiosError, AxiosRequestConfig, CancelToken} from 'axios';
 import * as axiosRetry from 'axios-retry';
 
-export type ParamMap = { [key: string]: string|true };
+export type ParamMap = { [key: string]: string|boolean };
 
 export interface AxiosConfig {
     'axios-retry': AxiosRetryConfig
