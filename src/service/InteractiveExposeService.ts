@@ -115,7 +115,7 @@ export default class InteractiveExposeService {
      * @returns {Promise<AxiosResponse>}
      */
     static async updateTemplate(templateId: string, template: InteractiveExposeTemplate): Promise<AxiosResponse> {
-        return await InteractiveExposeService.client.makeRequestSimple(template, `/templates/${templateId}`, 'POST');
+        return await InteractiveExposeService.client.makeRequestSimple(template, `/templates/${templateId}`, 'PUT');
     }
 
     /**
