@@ -49,11 +49,12 @@ export default class InteractiveExposeService {
         return (await InteractiveExposeService.client.makeRequestSimple({entityId: entityId}, '/preview', 'POST')).data;
     }
 
-    static async sendInteractiveExpose(recipientId: string, objectId: string, recipientEmailAddress: string): Promise<string> {
+    static async sendInteractiveExpose(recipientId: string, objectId: string, recipientEmailAddress: string, hideRecommendations: boolean = false): Promise<string> {
         return (await InteractiveExposeService.client.makeRequestSimple({
             recipientId: recipientId,
             objectId: objectId,
-            recipientEmailAddress: recipientEmailAddress
+            recipientEmailAddress: recipientEmailAddress,
+            hideRecommendations: hideRecommendations
         }, '/interactiveExposes', 'POST')).data;
     }
 
