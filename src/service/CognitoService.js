@@ -1,5 +1,5 @@
 import AWS from '@flowfact/aws-sdk';
-import {getStageFromStore} from '../http/HttpClient';
+import {getStageFromStore} from '../http/APIClient';
 
 
 const REGION = 'eu-central-1';

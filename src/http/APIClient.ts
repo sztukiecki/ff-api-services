@@ -2,6 +2,44 @@ import AWS from '@flowfact/aws-sdk';
 import axios, {AxiosError, AxiosRequestConfig, CancelToken} from 'axios';
 import * as axiosRetry from 'axios-retry';
 
+import * as store from 'store';
+
+const StoreKeys = {
+    EdgeServiceStage: 'HTTPCLIENT.APICLIENT.STAGE',
+    EdgeServiceVersionTag: 'HTTPCLIENT.APICLIENT.VERSIONTAG'
+};
+
+const defaultStage = 'production';
+const defaultVersionTag = 'stable';
+
+const getStageFromStore = () => {
+    const fromStore = store.get(StoreKeys.EdgeServiceStage);
+    return fromStore ? fromStore : defaultStage;
+};
+
+const getVersionTagFromStore = () => {
+    const fromStore = store.get(StoreKeys.EdgeServiceVersionTag);
+    return fromStore ? fromStore : defaultVersionTag;
+};
+
+const setStageInStore = (stage: string) => {
+    if (stage) {
+        store.set(StoreKeys.EdgeServiceStage, stage);
+        console.log('Set stage to: ' + stage);
+    }
+};
+
+const setVersionTagInStore = (versionTag: string) => {
+    if (versionTag) {
+        store.set(StoreKeys.EdgeServiceVersionTag, versionTag);
+        console.log('Set versionTag to: ' + versionTag);
+    }
+};
+
+const isDefaultApi = () => {
+    return (getStageFromStore() === defaultStage) && (getVersionTagFromStore() === defaultVersionTag);
+};
+
 export type ParamMap = { [key: string]: string|boolean };
 
 export interface AxiosConfig {
@@ -13,7 +51,7 @@ export interface AxiosRetryConfig {
 }
 
 export interface APIClientConfig {
-    url?: string;
+    serviceName?: string;
     axios?: AxiosConfig;
 }
 
@@ -27,10 +65,15 @@ export default class APIClient {
 
     idToken = '';
 
+    stageToUse: string;
+    apiVersionTag: string;
+
     constructor(public config: APIClientConfig) {
+        this.stageToUse = getStageFromStore();
+        this.apiVersionTag = getVersionTagFromStore();
     }
 
-    getidToken = () => {
+    getidToken() {
         if (AWS.Config.credentials && AWS.Config.credentials.params && AWS.Config.credentials.params.Logins) {
             const loginKeys = Object.keys(AWS.Config.credentials.params.Logins);
             if (loginKeys.length > 0) {
@@ -41,9 +84,17 @@ export default class APIClient {
         if (!this.idToken || (this.idToken && this.idToken.trim().length === 0)) {
             console.warn('no id token is set');
         }
+    }
+
+    private async buildAPIUrl() {
+        const account = this.stageToUse === 'development' ? 'flowfact-dev' : 'flowfact-prod';
+        const baseUrl = this.stageToUse === 'local'
+            ? 'http://localhost:8080'
+            : `https://api.${this.stageToUse}.cloudios.${account}.cloud`;
+        return `${baseUrl}/${this.config.serviceName}/${this.apiVersionTag}`;
     };
 
-    invokeApi = (path: string, method: string, additionsParams: APIClientAdditionalParams = {}, body: string|{} = '') => {
+    public async invokeApi (path: string, method: string, additionsParams: APIClientAdditionalParams = {}, body: string|{} = '') {
         if (!path.startsWith('/')) {
             throw new Error('missing slash at the beginning');
         }
@@ -54,7 +105,7 @@ export default class APIClient {
         this.getidToken();
 
         // add parameters to the url
-        let url = this.config.url + path;
+        let url = (await this.buildAPIUrl()) + path;
         if (additionsParams.queryParams) {
             const queryString = this.buildCanonicalQueryString(additionsParams.queryParams);
             if (queryString !== '') {
@@ -91,9 +142,9 @@ export default class APIClient {
         // NEVER put a catch here because it prevents all other error handling
         // i.e. you can't handle a service returning an error (which is possibly expected)
         return client.request(request);
-    };
+    }
 
-    buildCanonicalQueryString = (queryParams: ParamMap) => {
+    buildCanonicalQueryString(queryParams: ParamMap) {
         if (!queryParams) {
             return '';
         }
@@ -109,5 +160,14 @@ export default class APIClient {
 
             return `${encodeURIComponent(paramName)}=${encodeURIComponent(paramValue.toString())}`
         }).join('&');
-    };
+    }
 }
+
+export {
+    StoreKeys,
+    isDefaultApi,
+    setStageInStore,
+    getStageFromStore,
+    setVersionTagInStore,
+    getVersionTagFromStore
+};

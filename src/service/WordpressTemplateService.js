@@ -1,7 +1,7 @@
 import AWS from '@flowfact/aws-sdk';
 import * as WPAPI from 'wpapi';
 
-import {getStageFromStore, getVersionTagFromStore} from '../http/HttpClient';
+import {getStageFromStore, getVersionTagFromStore} from '../http/APIClient';
 
 export default class WordpressTemplateService {
     static wordpressApis = [];
