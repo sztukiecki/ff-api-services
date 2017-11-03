@@ -1,6 +1,6 @@
-import HttpClient, {APIMapping} from '../http';
+import { APIClient, APIMapping } from '../http';
 import FileModel from "../util/FileModel";
-import {AxiosResponse} from "axios";
+import { AxiosResponse } from "axios";
 
 export interface InteractiveExposeColors {
     accent: string;
@@ -34,34 +34,37 @@ export interface InteractiveExposeTemplate {
     updaterId: string
 }
 
-export default class InteractiveExposeService {
-    static client = new HttpClient(APIMapping.interactiveExposeService);
+export class InteractiveExposeService extends APIClient {
 
-    static async getSettings(): Promise<InteractiveExposeSettingsWithLogos> {
-        return (await InteractiveExposeService.client.makeRequestSimple({}, '/settings', 'GET')).data;
+    constructor() {
+        super(APIMapping.interactiveExposeService);
     }
 
-    static async changeSettings(settings: InteractiveExposeSettings): Promise<InteractiveExposeSettingsWithLogos> {
-        return (await InteractiveExposeService.client.makeRequestSimple(settings, '/settings', 'POST')).data;
+    async getSettings(): Promise<InteractiveExposeSettingsWithLogos> {
+        return (await this.invokeApi('/settings', 'GET')).data;
     }
 
-    static async getPreviewUrl(entityId: string): Promise<string> {
-        return (await InteractiveExposeService.client.makeRequestSimple({entityId: entityId}, '/preview', 'POST')).data;
+    async changeSettings(settings: InteractiveExposeSettings): Promise<InteractiveExposeSettingsWithLogos> {
+        return (await this.invokeApi('/settings', 'POST', settings)).data;
     }
 
-    static async sendInteractiveExpose(recipientId: string, objectId: string, recipientEmailAddress: string, hideRecommendations: boolean = false): Promise<string> {
-        return (await InteractiveExposeService.client.makeRequestSimple({
+    async getPreviewUrl(entityId: string): Promise<string> {
+        return (await this.invokeApi('/preview', 'POST', {entityId: entityId})).data;
+    }
+
+    async sendInteractiveExpose(recipientId: string, objectId: string, recipientEmailAddress: string, hideRecommendations: boolean = false): Promise<string> {
+        return (await this.invokeApi('/interactiveExposes', 'POST', {
             recipientId: recipientId,
             objectId: objectId,
             recipientEmailAddress: recipientEmailAddress,
             hideRecommendations: hideRecommendations
-        }, '/interactiveExposes', 'POST')).data;
+        })).data;
     }
 
-    static async changeLogo(type: 'light' | 'dark', image: File): Promise<FileModel> {
+    async changeLogo(type: 'light' | 'dark', image: File): Promise<FileModel> {
         const formData = new FormData();
         formData.append('logo', image);
-        return (await this.client.makeRequest(`/settings/logos/${type}`, 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}})).data;
+        return (await this.invokeApi(`/settings/logos/${type}`, 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}})).data;
     }
 
     /**
@@ -71,16 +74,16 @@ export default class InteractiveExposeService {
      * @param {"OFFER" | "REPORT"} role
      * @returns {Promise<AxiosResponse>}
      */
-    static async getTemplates(role: 'OFFER' | 'REPORT' | undefined): Promise<AxiosResponse> {
-        if(role) {
-            return await InteractiveExposeService.client.makeRequest('/templates', 'GET', {}, {
+    async getTemplates(role: 'OFFER' | 'REPORT' | undefined): Promise<AxiosResponse> {
+        if (role) {
+            return await this.invokeApi('/templates', 'GET', {}, {
                 queryParams: {
                     role: role
                 }
             });
         }
 
-        return await InteractiveExposeService.client.makeRequestSimple({}, '/templates', 'GET');
+        return await this.invokeApi('/templates', 'GET');
     }
 
     /**
@@ -88,8 +91,8 @@ export default class InteractiveExposeService {
      * @param {string} templateId
      * @returns {Promise<AxiosResponse>}
      */
-    static async getTemplateById(templateId: string): Promise<AxiosResponse> {
-        return await InteractiveExposeService.client.makeRequestSimple({}, `/templates/${templateId}`, 'GET');
+    async getTemplateById(templateId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/templates/${templateId}`, 'GET');
     }
 
     /**
@@ -99,14 +102,14 @@ export default class InteractiveExposeService {
      *      true if the content of the template have to be filled with default content
      * @returns {Promise<AxiosResponse>}
      */
-    static async createTemplate(template: InteractiveExposeTemplate, fillDefaultContent: boolean = false): Promise<AxiosResponse> {
+    async createTemplate(template: InteractiveExposeTemplate, fillDefaultContent: boolean = false): Promise<AxiosResponse> {
         const queryParams = {
             queryParams: {
                 fillDefaultContent: String(fillDefaultContent)
             }
         };
 
-        return await InteractiveExposeService.client.makeRequest('/templates', 'POST', template, queryParams);
+        return await this.invokeApi('/templates', 'POST', template, queryParams);
     }
 
     /**
@@ -115,8 +118,8 @@ export default class InteractiveExposeService {
      * @param {InteractiveExposeTemplate} template
      * @returns {Promise<AxiosResponse>}
      */
-    static async updateTemplate(templateId: string, template: InteractiveExposeTemplate): Promise<AxiosResponse> {
-        return await InteractiveExposeService.client.makeRequestSimple(template, `/templates/${templateId}`, 'PUT');
+    async updateTemplate(templateId: string, template: InteractiveExposeTemplate): Promise<AxiosResponse> {
+        return await this.invokeApi(`/templates/${templateId}`, 'PUT', template);
     }
 
     /**
@@ -124,7 +127,9 @@ export default class InteractiveExposeService {
      * @param {string} templateId
      * @returns {Promise<AxiosResponse>}
      */
-    static async deleteTemplate(templateId: string): Promise<AxiosResponse> {
-        return await InteractiveExposeService.client.makeRequestSimple({}, `/templates/${templateId}`, 'DELETE');
+    async deleteTemplate(templateId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/templates/${templateId}`, 'DELETE');
     }
 }
+
+export default new InteractiveExposeService();

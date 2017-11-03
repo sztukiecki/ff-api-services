@@ -1,4 +1,4 @@
-import HttpClient, {APIMapping} from '../http';
+import {APIClient, APIMapping} from '../http';
 import {AxiosResponse} from "axios";
 
 export interface ShortViewDefinition {
@@ -17,43 +17,47 @@ export interface ViewDefinition extends ShortViewDefinition {
     categories: ViewDefinitionCategory[];
 }
 
-export default class ViewDefinitionService {
+export class ViewDefinitionService extends APIClient {
 
-    static client = new HttpClient(APIMapping.viewDefinitionService);
+    constructor() {
+        super(APIMapping.viewDefinitionService);
+    }
 
-    static getDefinitionsForSchema(schemaId: string): Promise<AxiosResponse> {
-        return ViewDefinitionService.client.makeRequest('/views', 'GET', undefined, {
+    getDefinitionsForSchema(schemaId: string): Promise<AxiosResponse> {
+        return this.invokeApi('/views', 'GET', undefined, {
             queryParams: {
                 schemaId
             }
         });
     }
 
-    static getDefinition(viewDefinitionId: string): Promise<AxiosResponse> {
-        return ViewDefinitionService.client.makeRequest(`/views/${viewDefinitionId}`, 'GET');
+    getDefinition(viewDefinitionId: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/views/${viewDefinitionId}`, 'GET');
     }
 
-    static updateDefinition(viewDefinitionId: string, viewDefinition: ViewDefinition) {
-        return ViewDefinitionService.client.makeRequest(`/views/${viewDefinitionId}`, 'PUT', viewDefinition);
+    updateDefinition(viewDefinitionId: string, viewDefinition: ViewDefinition) {
+        return this.invokeApi(`/views/${viewDefinitionId}`, 'PUT', viewDefinition);
     }
 
-    static createDefinition(viewDefinition: ViewDefinition) {
-        return ViewDefinitionService.client.makeRequest('/views', 'POST', viewDefinition);
+    createDefinition(viewDefinition: ViewDefinition) {
+        return this.invokeApi('/views', 'POST', viewDefinition);
     }
 
-    static deleteDefinition(viewDefinitionId: string) {
-        return ViewDefinitionService.client.makeRequest(`/views/${viewDefinitionId}`, 'DELETE');
+    deleteDefinition(viewDefinitionId: string) {
+        return this.invokeApi(`/views/${viewDefinitionId}`, 'DELETE');
     }
 
-    static updateCategory(viewId: string, categoryName: string, categoryDefinition: ViewDefinitionCategory) {
-        return ViewDefinitionService.client.makeRequest(`/views/${viewId}/categories/${categoryName}`, 'PATCH', categoryDefinition);
+    updateCategory(viewId: string, categoryName: string, categoryDefinition: ViewDefinitionCategory) {
+        return this.invokeApi(`/views/${viewId}/categories/${categoryName}`, 'PATCH', categoryDefinition);
     }
 
-    static addCategory(viewId: string, categoryDefinition: ViewDefinitionCategory) {
-        return ViewDefinitionService.client.makeRequest(`/views/${viewId}/categories`, 'PATCH', categoryDefinition);
+    addCategory(viewId: string, categoryDefinition: ViewDefinitionCategory) {
+        return this.invokeApi(`/views/${viewId}/categories`, 'PATCH', categoryDefinition);
     }
 
-    static deleteCategory(viewId: string, categoryName: string) {
-        return ViewDefinitionService.client.makeRequest(`/views/${viewId}/categories/${categoryName}`, 'DELETE');
+    deleteCategory(viewId: string, categoryName: string) {
+        return this.invokeApi(`/views/${viewId}/categories/${categoryName}`, 'DELETE');
     }
 }
+
+export default new ViewDefinitionService();

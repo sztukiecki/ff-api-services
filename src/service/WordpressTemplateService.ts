@@ -1,18 +1,18 @@
 import AWS from '@flowfact/aws-sdk';
 import * as WPAPI from 'wpapi';
 
-import {getStageFromStore, getVersionTagFromStore} from '../http/APIClient';
+import {getStageFromStore} from '../http/APIClient';
 
-export default class WordpressTemplateService {
-    static wordpressApis = [];
+export class WordpressTemplateService {
+    wordpressApis: any[] = [];
 
-    static wordpressUrl;
+    wordpressUrl: string;
 
-    static cognitoToken;
+    cognitoToken?: string;
 
-    static init() {
-        let stage = getStageFromStore(),
-            versionTag = getVersionTagFromStore();
+    init() {
+        let stage = getStageFromStore();
+        // let versionTag = getVersionTagFromStore();
 
         // There is no concept on how to implement the version into the beaverbuilder right now.
         // Technically both versions are already implemented
@@ -30,7 +30,7 @@ export default class WordpressTemplateService {
 
         this.wordpressUrl = 'https://sites.' + stage + '.te.' + domainName + '.cloud/';
 
-        this.cognitoToken = null;
+        this.cognitoToken = undefined;
 
         if (AWS.Config.credentials && AWS.Config.credentials.params && AWS.Config.credentials.params.Logins) {
             const loginKeys = Object.keys(AWS.Config.credentials.params.Logins);
@@ -40,9 +40,8 @@ export default class WordpressTemplateService {
         }
     }
 
-    static getPageUrl(templateId, companyId)
-    {
-        return WordpressTemplateService.wordpressUrl + companyId + '/' + templateId;
+    getPageUrl(templateId: string, companyId: string) {
+        return this.wordpressUrl + companyId + '/' + templateId;
     }
 
     /**
@@ -54,11 +53,11 @@ export default class WordpressTemplateService {
      * @param wpTemplate	The name of the WordPress template that is used for rendering.
      *
      */
-    static createPage(companyId, pageTitle, templateId, wpTemplate) {
+    createPage(companyId: string, pageTitle: string, templateId: string, wpTemplate: string) {
         if (this.cognitoToken) {
             const wordpressApi = this.getWordpressApi(companyId);
 
-            let pageObject = {
+            let pageObject: any = {
                 title: pageTitle,
                 slug: templateId,
                 status: 'publish',
@@ -86,7 +85,7 @@ export default class WordpressTemplateService {
      * @param newTemplateId     The id of the newly created template.
      * @returns {*}
      */
-    static duplicatePage(companyId, oldTemplateId, newTemplateId) {
+    duplicatePage(companyId: string, oldTemplateId: string, newTemplateId: string) {
         if (this.cognitoToken) {
             const wordpressApi = this.getWordpressApi(companyId);
             return wordpressApi
@@ -105,10 +104,10 @@ export default class WordpressTemplateService {
      * @param templateId 	The slug of the WordPress page
      *
      */
-    static deletePage(companyId, templateId) {
+    deletePage(companyId: string, templateId: string) {
         if (this.cognitoToken) {
             const wordpressApi = this.getWordpressApi(companyId);
-            return wordpressApi.pages().slug(templateId).param('cognitoToken', this.cognitoToken).then(pages => {
+            return wordpressApi.pages().slug(templateId).param('cognitoToken', this.cognitoToken).then((pages: any[]) => {
                 if (pages.length > 0) {
                     const page = pages.shift();
                     return wordpressApi.pages().id(page.id).param('cognitoToken', this.cognitoToken).delete();
@@ -125,7 +124,7 @@ export default class WordpressTemplateService {
      * @param companyId The company of the current user scope, which is also the blog name for the wordpress api
      * @returns {WPAPI}
      */
-    static getWordpressApi(companyId) {
+    getWordpressApi(companyId: string) {
 
         if (!(companyId in this.wordpressApis)) {
 
@@ -138,3 +137,5 @@ export default class WordpressTemplateService {
         return this.wordpressApis[companyId];
     }
 }
+
+export default new WordpressTemplateService();

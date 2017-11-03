@@ -1,5 +1,6 @@
 import AWS from '@flowfact/aws-sdk';
 import {getStageFromStore} from '../http/APIClient';
+import CognitoUser from "@flowfact/aws-sdk/lib/models/CognitoUser";
 
 
 const REGION = 'eu-central-1';
@@ -21,10 +22,12 @@ const SETTINGS = {
     }
 };
 
-class CognitoService {
+export class CognitoService {
+
+    user: CognitoUser | null;
 
     constructor() {
-        this.user = undefined;
+        this.user = null;
 
         let stage = getStageFromStore();
         if (stage === 'local') {
@@ -41,7 +44,7 @@ class CognitoService {
         AWS.Config.credentials.loadCachedId();
         if (currentUser) {
             return currentUser.getSession().then((s) => {
-                    this.setNewLoginData(s.idToken.getJwtToken());
+                    this.setNewLoginData((s as any).idToken.getJwtToken());
                     return AWS.Config.credentials.get();
                 }
             );
@@ -49,7 +52,7 @@ class CognitoService {
         return AWS.Config.credentials.get();
     }
 
-    setNewLoginData(idToken) {
+    setNewLoginData(idToken: string) {
         let region = AWS.Config.getConfig().region;
         let userPoolId = AWS.Config.getConfig().userPoolID;
         const loginData = {
@@ -59,29 +62,31 @@ class CognitoService {
         AWS.Config.credentials.setNewLoginData(loginData);
     }
 
-    login(username, password) {
+    login(username: string, password: string) {
         this.user = new AWS.CognitoUser({
             username: username,
             pool: AWS.Config.getUserPool()
         });
         return new Promise((resolve, reject) => {
-            this.user.authenticateUser({
-                username: username,
-                password: password
-            }).then(result => {
-                this.setNewLoginData(result.idToken.jwtToken);
+            if (this.user) {
+                this.user.authenticateUser({
+                    username: username,
+                    password: password
+                }, () => {})!.then((result: any) => {
+                    this.setNewLoginData(result.idToken.jwtToken);
 
-                AWS.Config.credentials.get(true).then(res => {
-                    resolve(res);
-                }).catch(err => {
-                    reject(err);
+                    AWS.Config.credentials.get().then(res => {
+                        resolve(res);
+                    }).catch(err => {
+                        reject(err);
+                    });
+                }).catch(error => {
+                    if (error.response) {
+                        error.errorType = error.response.data.__type;
+                    }
+                    reject(error);
                 });
-            }).catch(error => {
-                if (error.response) {
-                    error.errorType = error.response.data.__type;
-                }
-                reject(error);
-            });
+            }
         });
     }
 
@@ -100,10 +105,10 @@ class CognitoService {
             return;
         }
 
-        this.user.globalSignOut().then(() => {
-            this.user.signOut();
+        this.user!.globalSignOut().then(() => {
+            this.user!.signOut();
             AWS.Config.credentials.clear();
-            this.user = undefined;
+            this.user = null;
         });
     }
 }

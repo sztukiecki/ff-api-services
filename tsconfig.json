@@ -9,7 +9,8 @@
 			"dom"
 		],
 		"sourceMap": true,
-		"allowJs": true,
+		"allowJs": false,
+		"declaration": true,
 		"jsx": "react",
 		"moduleResolution": "node",
 		"rootDir": "src",

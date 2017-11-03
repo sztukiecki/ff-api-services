@@ -1,9 +1,10 @@
 import AWS from '@flowfact/aws-sdk';
-import axios, {AxiosError, AxiosRequestConfig, CancelToken} from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
 import * as axiosRetry from 'axios-retry';
 import * as isNode from 'detect-node';
 import * as store from 'store';
 import ConsulClient from "@flowfact/consul-client";
+import { APIService } from "./APIMapping";
 
 const StoreKeys = {
     EdgeServiceStage: 'HTTPCLIENT.APICLIENT.STAGE',
@@ -63,17 +64,24 @@ export interface APIClientAdditionalParams {
 }
 
 export default class APIClient {
-
-    idToken = '';
-
+    idToken: string = '';
+    userId: string;
     stageToUse: string;
     apiVersionTag: string;
 
     private _consulClient?: ConsulClient;
+    private _axiosConfig?: AxiosConfig;
+    private _serviceName: string;
 
-    constructor(public config: APIClientConfig) {
+    constructor(service: APIService) {
+        this._axiosConfig = service.axiosConfiguration;
+        this._serviceName = service.name;
         this.stageToUse = getStageFromStore();
         this.apiVersionTag = getVersionTagFromStore();
+    }
+
+    withUserId(userId: string): this {
+        return Object.assign(Object.create(Object.getPrototypeOf(this)), this, {userId})
     }
 
     updateUserCredentials() {
@@ -105,7 +113,7 @@ export default class APIClient {
     private async buildAPIUrl() {
         let baseUrl;
         if (isNode) {
-            const selected = await this._getConsulClient().service.select(this.config.serviceName);
+            const selected = await this._getConsulClient().service.select(this._serviceName);
             return `http://${selected.address}:${selected.port}`;
         } else {
             const account = this.stageToUse === 'development' ? 'flowfact-dev' : 'flowfact-prod';
@@ -113,27 +121,20 @@ export default class APIClient {
                 ? 'http://localhost:8080'
                 : `https://api.${this.stageToUse}.cloudios.${account}.cloud`;
         }
-        return `${baseUrl}/${this.config.serviceName}/${this.apiVersionTag}`;
+        return `${baseUrl}/${this._serviceName}/${this.apiVersionTag}`;
     };
 
-    private getCurrentUserId(): string {
-        return 'bc3d72c7-f8b0-4e20-abb9-b6a450626a0d'; // TODO FIXME this is statically Marina
-    }
-
-    public async invokeApi (path: string, method: string, additionsParams: APIClientAdditionalParams = {}, body: string|{} = '') {
+    public async invokeApi(path: string, method: string, body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse> {
         if (!path.startsWith('/')) {
             throw new Error('missing slash at the beginning');
-        }
-        if (additionsParams === undefined) {
-            additionsParams = {};
         }
 
         this.updateUserCredentials();
 
         // add parameters to the url
         let url = (await this.buildAPIUrl()) + path;
-        if (additionsParams.queryParams) {
-            const queryString = this.buildCanonicalQueryString(additionsParams.queryParams);
+        if (additionalParams.queryParams) {
+            const queryString = this.buildCanonicalQueryString(additionalParams.queryParams);
             if (queryString !== '') {
                 url += '?' + queryString;
             }
@@ -141,7 +142,7 @@ export default class APIClient {
 
         // setup the requst
         const userIdentification = isNode ? {
-            userId: this.getCurrentUserId()
+            userId: this.userId
         } : {
             cognitoToken: this.idToken
         };
@@ -149,14 +150,14 @@ export default class APIClient {
         let request: AxiosRequestConfig = {
             method: method,
             url: url,
-            headers: Object.assign({}, userIdentification, additionsParams.headers || {}),
+            headers: Object.assign({}, userIdentification, additionalParams.headers || {}),
             data: body,
-            cancelToken: additionsParams.cancelToken
+            cancelToken: additionalParams.cancelToken
         };
 
         const client = axios.create();
 
-        const axiosConfiguration = this.config.axios;
+        const axiosConfiguration = this._axiosConfig;
         if (axiosConfiguration) {
             if (axiosConfiguration['axios-retry']) {
                 axiosRetry(client, {
@@ -170,7 +171,7 @@ export default class APIClient {
 
         // fire the request
         // NEVER put a catch here because it prevents all other error handling
-        // i.e. you can't handle a service returning an error (which is possibly expected)
+        // i.e. you can't handle a service returning an http code >= 400 (which is possibly expected)
         return client.request(request);
     }
 

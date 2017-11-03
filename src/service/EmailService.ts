@@ -1,26 +1,30 @@
-import HttpClient, {APIMapping} from '../http';
+import {APIClient, APIMapping} from '../http';
 
-interface EmailServiceVerifyDnsEntry {
+export interface EmailServiceVerifyDnsEntry {
     valid: boolean;
-    type: "a" | "cname";
+    type: 'a' | 'cname';
     host: string;
     data: string;
 }
 
-interface EmailServiceVerifyResponse {
+export interface EmailServiceVerifyResponse {
     domain: string;
     valid: boolean;
     dnsEntries: EmailServiceVerifyDnsEntry[];
 }
 
-export default class EmailService {
-    static client = new HttpClient(APIMapping.emailService);
-
-    static async createDomain(domain: string): Promise<EmailServiceVerifyResponse> {
-        return (await EmailService.client.makeRequestSimple({domain}, '/configuration/whitelabel', 'POST')).data;
+export class EmailService extends APIClient {
+    constructor() {
+        super(APIMapping.emailService);
     }
 
-    static async verifyDomain(domain: string): Promise<EmailServiceVerifyResponse> {
-        return (await EmailService.client.makeRequestSimple({domain}, '/configuration/whitelabel/verify', 'POST')).data;
+    async createDomain(domain: string): Promise<EmailServiceVerifyResponse> {
+        return (await this.invokeApi('/configuration/whitelabel', 'POST', {domain})).data;
+    }
+
+    async verifyDomain(domain: string): Promise<EmailServiceVerifyResponse> {
+        return (await this.invokeApi('/configuration/whitelabel/verify', 'POST', {domain})).data;
     }
 }
+
+export default new EmailService();

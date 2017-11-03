@@ -1,8 +1,8 @@
-import HttpClient from './HttpClient';
+import APIClient from './APIClient';
 import APIMapping, {APIService} from './APIMapping';
 
-export default HttpClient;
 export {
     APIMapping,
-    APIService
+    APIService,
+    APIClient
 };

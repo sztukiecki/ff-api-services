@@ -1,6 +1,6 @@
 import {AxiosConfig} from './APIClient';
 
-class APIService {
+export class APIService {
     constructor(private serviceName: string, private configuration?: AxiosConfig) {
         this.serviceName = serviceName;
         this.configuration = configuration;
@@ -123,4 +123,3 @@ const APIMapping = {
 };
 
 export default APIMapping;
-export {APIService};

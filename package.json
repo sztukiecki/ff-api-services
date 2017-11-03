@@ -3,7 +3,7 @@
   "version": "1.0.0-SNAPSHOT",
   "description": "",
   "main": "lib/index.js",
-  "types": "./index.d.ts",
+  "types": "lib/index.d.ts",
   "repository": "ssh://git@bb.flowfact.com:7999/npmmod/ff-api-services.git",
   "author": "FLOWFACT GmbH",
   "license": "",
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build-package": "tsc",
-    "rebuild-package": "rimraf dist/ && npm run build-package",
+    "rebuild-package": "rimraf lib/ && npm run build-package",
     "prepare": "npm run rebuild-package"
   },
   "dependencies": {
