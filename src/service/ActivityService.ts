@@ -7,24 +7,24 @@ export class ActivityService extends APIClient {
     }
 
     getAllActivities(page?: number, size?: number) {
-        let searchQuery = {};
-        if (typeof page === 'number' && typeof size === 'number') {
-            searchQuery = {
-                page: page,
-                size: size
-            };
-        }
+        // let searchQuery = {};
+        // if (typeof page === 'number' && typeof size === 'number') {
+        //     searchQuery = {
+        //         page: page,
+        //         size: size
+        //     };
+        // }
         return this.invokeApi('/activities', 'GET').then(s => s.data);
     }
 
     getActiveActivities(page?: number, size?: number) {
-        let searchQuery = {};
-        if (typeof page === 'number' && typeof size === 'number') {
-            searchQuery = {
-                page: page,
-                size: size
-            };
-        }
+        // let searchQuery = {};
+        // if (typeof page === 'number' && typeof size === 'number') {
+        //     searchQuery = {
+        //         page: page,
+        //         size: size
+        //     };
+        // }
         return this.invokeApi('/activities/active', 'GET').then(s => s.data);
     }
 
