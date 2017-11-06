@@ -13,7 +13,7 @@ import FormService from './service/FormService';
 import EmailService from './service/EmailService';
 import ViewDefinitionService from './service/ViewDefinitionService';
 import EntityService from './service/EntityService';
-import RelogService from './service/RelogService';
+import RelogService, {FFElkData, FFAdditionalElkData} from './service/RelogService';
 import MyFLOWFACTService from './service/MyFLOWFACTService';
 import MultimediaService from './service/MultimediaService';
 import FlowfactExportInternalService from './service/FlowfactExportInternalService';
@@ -45,3 +45,9 @@ export {
     InteractiveExposeService,
     ModuleService
 };
+
+// types only
+export {
+    FFElkData,
+    FFAdditionalElkData
+}
