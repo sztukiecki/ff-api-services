@@ -19,6 +19,7 @@ import MultimediaService from './service/MultimediaService';
 import FlowfactExportInternalService from './service/FlowfactExportInternalService';
 import CognitoService from './service/CognitoService';
 import InteractiveExposeService from './service/InteractiveExposeService';
+import ModuleService from './service/ModuleService';
 
 export {
     CompanyService,
@@ -41,5 +42,6 @@ export {
     MultimediaService,
     CognitoService,
     FlowfactExportInternalService,
-    InteractiveExposeService
+    InteractiveExposeService,
+    ModuleService
 };

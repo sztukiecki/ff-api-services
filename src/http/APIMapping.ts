@@ -119,6 +119,11 @@ const APIMapping = {
         'axios-retry': {
             retries: 4
         }
+    }),
+    moduleService: new APIService('module-service', {
+        'axios-retry': {
+            retries: 4
+        }
     })
 };
 
