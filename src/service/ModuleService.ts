@@ -14,7 +14,7 @@ export class ModuleService extends APIClient {
     getActiveModules(): Promise<AxiosResponse> {
         return this.invokeApi('/modules', 'GET', undefined, {
             queryParams: {
-                active: true
+                active: 'true'
             }
         });
     }
