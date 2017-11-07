@@ -72,6 +72,7 @@ export class FunnelService {
     static getFunnelStatistics(funnelId: string): Promise<FunnelServiceStatisticsResponse>;
     static getFunnelStageEntities(funnelId: string, stageId: string, page?: number, size?: number): Promise<any>;
     static createFunnel(funnelToCreate: FunnelServiceCreateRequest): Promise<FunnelServiceCreateResponse>;
+    static duplicateFunnel(funnelId: string): Promise<FunnelServiceStatisticsResponse>;
     // TODO These must still be defined
     static findFunnelById(funnelId: string): Promise<any>;
     static deleteFunnelById(funnelId: string): Promise<any>;

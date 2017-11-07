@@ -30,6 +30,10 @@ export class FunnelService extends APIClient {
         return this.invokeApi('/funnels', 'POST', funnelToCreate || {}).then(s => s.data);
     }
 
+    duplicateFunnel(funnelId: string) {
+        return this.invokeApi('/funnels/' + funnelId + '/duplicate','POST')
+    }
+
     findFunnelById(funnelId: string) {
         return this.invokeApi(`/funnels/${funnelId}`, 'GET').then(s => s.data);
     }
