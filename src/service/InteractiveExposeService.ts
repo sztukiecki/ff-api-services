@@ -52,12 +52,15 @@ export class InteractiveExposeService extends APIClient {
         return (await this.invokeApi('/preview', 'POST', {entityId: entityId})).data;
     }
 
-    async sendInteractiveExpose(recipientId: string, objectId: string, recipientEmailAddress: string, hideRecommendations: boolean = false): Promise<string> {
+    async sendInteractiveExpose(recipientId: string, objectId: string, recipientEmailAddress: string, hideRecommendations: boolean = false, emailTemplateId: string = ''): Promise<string> {
         return (await this.invokeApi('/interactiveExposes', 'POST', {
             recipientId: recipientId,
             objectId: objectId,
             recipientEmailAddress: recipientEmailAddress,
-            hideRecommendations: hideRecommendations
+            hideRecommendations: hideRecommendations,
+            emailTemplate: {
+                templateId: emailTemplateId
+            }
         })).data;
     }
 
