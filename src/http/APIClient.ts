@@ -14,15 +14,11 @@ const StoreKeys = {
 const defaultStage = isNode ? 'development' : 'production';
 const defaultVersionTag = isNode ? 'latest' : 'stable';
 
-const getStageFromStore = () => {
-    const fromStore = store.get(StoreKeys.EdgeServiceStage);
-    return fromStore ? fromStore : defaultStage;
-};
+const getStageFromStore = () =>
+    store.get(StoreKeys.EdgeServiceStage) || defaultStage;
 
-const getVersionTagFromStore = () => {
-    const fromStore = store.get(StoreKeys.EdgeServiceVersionTag);
-    return fromStore ? fromStore : defaultVersionTag;
-};
+const getVersionTagFromStore = () =>
+    store.get(StoreKeys.EdgeServiceVersionTag) || defaultVersionTag;
 
 const setStageInStore = (stage: string) => {
     if (stage) {
@@ -66,8 +62,8 @@ export interface APIClientAdditionalParams {
 export default class APIClient {
     idToken: string = '';
     userId: string;
-    stageToUse: string;
-    apiVersionTag: string;
+    static stageToUse: string;
+    static apiVersionTag: string;
 
     private _consulClient?: ConsulClient;
     private _axiosConfig?: AxiosConfig;
@@ -76,8 +72,6 @@ export default class APIClient {
     constructor(service: APIService) {
         this._axiosConfig = service.axiosConfiguration;
         this._serviceName = service.name;
-        this.stageToUse = getStageFromStore();
-        this.apiVersionTag = getVersionTagFromStore();
     }
 
     withUserId(userId: string): this {
@@ -103,8 +97,10 @@ export default class APIClient {
             // might contain the protocol. The nodejs consul client does not accept it for whatever reason.
             const consulUrl = (process.env.CONSUL_CLIENT_HOST || 'consulclients.development.flowfact-dev.cloud').replace(/https?:\/\//, '');
             const consulPort = process.env.CONSUL_CLIENT_PORT || '8500';
+
+            const cls = this.constructor as typeof APIClient;
             // TODO figure out a way to get the name of the executing service here
-            this._consulClient = new ConsulClient(consulUrl, consulPort, 'api-services', this.stageToUse, this.apiVersionTag);
+            this._consulClient = new ConsulClient(consulUrl, consulPort, 'api-services', cls.stageToUse, cls.apiVersionTag);
         }
 
         return this._consulClient!;
@@ -112,16 +108,17 @@ export default class APIClient {
 
     private async buildAPIUrl() {
         let baseUrl;
+        const cls = this.constructor as typeof APIClient;
         if (isNode) {
             const selected = await this._getConsulClient().service.select(this._serviceName);
             return `http://${selected.address}:${selected.port}`;
         } else {
-            const account = this.stageToUse === 'development' ? 'flowfact-dev' : 'flowfact-prod';
-            baseUrl = this.stageToUse === 'local'
+            const account = cls.stageToUse === 'development' ? 'flowfact-dev' : 'flowfact-prod';
+            baseUrl = cls.stageToUse === 'local'
                 ? 'http://localhost:8080'
-                : `https://api.${this.stageToUse}.cloudios.${account}.cloud`;
+                : `https://api.${cls.stageToUse}.cloudios.${account}.cloud`;
         }
-        return `${baseUrl}/${this._serviceName}/${this.apiVersionTag}`;
+        return `${baseUrl}/${this._serviceName}/${cls.apiVersionTag}`;
     };
 
     public async invokeApi(path: string, method: string, body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse> {
