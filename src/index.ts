@@ -20,6 +20,7 @@ import FlowfactExportInternalService from './service/FlowfactExportInternalServi
 import CognitoService from './service/CognitoService';
 import InteractiveExposeService from './service/InteractiveExposeService';
 import ModuleService from './service/ModuleService';
+import APIClient from './http/APIClient';
 
 export {
     CompanyService,
@@ -50,4 +51,8 @@ export {
 export {
     FFElkData,
     FFAdditionalElkData
+}
+
+export {
+    APIClient
 }
