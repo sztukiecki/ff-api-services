@@ -74,6 +74,12 @@ export default class APIClient {
         this._serviceName = service.name;
     }
 
+    private _getStage = () =>
+        isNode ? (this.constructor as typeof APIClient).stageToUse : getStageFromStore();
+
+    private _getVersionTag = () =>
+        isNode ? (this.constructor as typeof APIClient).apiVersionTag : getVersionTagFromStore();
+
     withUserId(userId: string): this {
         return Object.assign(Object.create(Object.getPrototypeOf(this)), this, {userId})
     }
@@ -98,9 +104,8 @@ export default class APIClient {
             const consulUrl = (process.env.CONSUL_CLIENT_HOST || 'consulclients.development.flowfact-dev.cloud').replace(/https?:\/\//, '');
             const consulPort = process.env.CONSUL_CLIENT_PORT || '8500';
 
-            const cls = this.constructor as typeof APIClient;
             // TODO figure out a way to get the name of the executing service here
-            this._consulClient = new ConsulClient(consulUrl, consulPort, 'api-services', cls.stageToUse, cls.apiVersionTag);
+            this._consulClient = new ConsulClient(consulUrl, consulPort, 'api-services', this._getStage(), this._getVersionTag());
         }
 
         return this._consulClient!;
@@ -108,17 +113,17 @@ export default class APIClient {
 
     private async buildAPIUrl() {
         let baseUrl;
-        const cls = this.constructor as typeof APIClient;
         if (isNode) {
             const selected = await this._getConsulClient().service.select(this._serviceName);
             return `http://${selected.address}:${selected.port}`;
         } else {
-            const account = cls.stageToUse === 'development' ? 'flowfact-dev' : 'flowfact-prod';
-            baseUrl = cls.stageToUse === 'local'
+            const stage = this._getStage();
+            const account = stage === 'development' ? 'flowfact-dev' : 'flowfact-prod';
+            baseUrl = stage === 'local'
                 ? 'http://localhost:8080'
-                : `https://api.${cls.stageToUse}.cloudios.${account}.cloud`;
+                : `https://api.${stage}.cloudios.${account}.cloud`;
         }
-        return `${baseUrl}/${this._serviceName}/${cls.apiVersionTag}`;
+        return `${baseUrl}/${this._serviceName}/${this._getVersionTag()}`;
     };
 
     public async invokeApi(path: string, method: string, body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse> {
