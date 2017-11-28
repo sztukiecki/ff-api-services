@@ -1,5 +1,5 @@
 import AWS from '@flowfact/aws-sdk';
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
+import axios, {AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
 import * as axiosRetry from 'axios-retry';
 import * as isNode from 'detect-node';
 import * as store from 'store';
@@ -165,7 +165,7 @@ export default class APIClient {
                 axiosRetry(client, {
                     retries: axiosConfiguration['axios-retry'].retries,
                     retryCondition: (error: AxiosError) => {
-                        return Boolean(error && error.response && error.response.status >= 500);
+                        return Boolean(error && error.response && error.response.status >= 500 && method != 'POST');
                     }
                 });
             }
