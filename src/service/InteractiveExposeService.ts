@@ -90,6 +90,14 @@ export class InteractiveExposeService extends APIClient {
     }
 
     /**
+     * Check requirements of the interactive exposé and if necessary solve them
+     */
+
+    async checkRequirements(): Promise<AxiosResponse> {
+        return await this.invokeApi(`/interactiveExposes/checkRequirements`, 'GET');
+    }
+
+    /**
      * Get a template by his id.
      * @param {string} templateId
      * @returns {Promise<AxiosResponse>}
