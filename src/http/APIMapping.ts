@@ -124,6 +124,11 @@ const APIMapping = {
         'axios-retry': {
             retries: 4
         }
+    }),
+    sampleDataService: new APIService('sampledata-service', {
+        'axios-retry': {
+            retries: 1
+        }
     })
 };
 

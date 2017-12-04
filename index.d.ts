@@ -258,3 +258,7 @@ export class ModuleService {
     static activateModule(moduleName: string): Promise<AxiosResponse>;
     static deactivateModule(moduleName: string): Promise<AxiosResponse>;
 }
+
+export class SampleDataService {
+    static importSampleData(bundleName: string): Promise<AxiosResponse>;
+}
