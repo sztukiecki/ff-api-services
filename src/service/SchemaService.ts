@@ -11,7 +11,7 @@ export class SchemaService extends APIClient {
         return this.invokeApi('/stats', 'GET', undefined, additionalParams);
     }
 
-    getAllSchemas(withGroups: boolean = false) {
+    getAllSchemas(withGroups: boolean = false): Promise<AxiosResponse> {
         let queryParams: any = {
             transform: true
         };
@@ -22,7 +22,7 @@ export class SchemaService extends APIClient {
         return this.invokeApi('/schemas', 'GET', undefined, {queryParams});
     }
 
-    getDataBySchemaId(schemaId: string, page: number = 1, size?: number) {
+    getDataBySchemaId(schemaId: string, page: number = 1, size?: number): Promise<AxiosResponse> {
         let queryParams: any = {
             page: page.toString(),
         };
@@ -32,47 +32,47 @@ export class SchemaService extends APIClient {
         return this.invokeApi(`/data/${schemaId}`, 'GET', undefined, {queryParams});
     }
 
-    getSchema(schemaId: string, queryParams: any = {}) {
+    getSchema(schemaId: string, queryParams: any = {}): Promise<AxiosResponse> {
         queryParams.transform = true;
         return this.invokeApi(`/schemas/${schemaId}`, 'GET', undefined, {queryParams});
     }
 
-    createSchema(schema: any) {
+    createSchema(schema: any): Promise<AxiosResponse> {
         return this.invokeApi('/schemas?transform=true', 'POST', schema);
     }
 
-    deleteSchema(schemaId: string) {
+    deleteSchema(schemaId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/schemas/${schemaId}`, 'DELETE');
     }
 
-    updateSchema(schema: any) {
+    updateSchema(schema: any): Promise<AxiosResponse> {
         return this.invokeApi(`/schemas/${schema.id}?transform=true`, 'PUT', schema);
     }
 
-    getIntegrationsForSchema(schemaId: string) {
+    getIntegrationsForSchema(schemaId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/integrations?schemaId=${schemaId}&transform=true`, 'GET');
     }
 
-    createIntegrationForSchema(schemaId: string, label: string) {
+    createIntegrationForSchema(schemaId: string, label: string): Promise<AxiosResponse> {
         const integration = {
             schemaId, label
         };
         return this.invokeApi('/integrations?transform=true', 'POST', integration);
     }
 
-    updateIntegration(integrationId: string, data: any) {
+    updateIntegration(integrationId: string, data: any): Promise<AxiosResponse> {
         return this.invokeApi(`/integrations/${integrationId}/formdata?transform=true`, 'POST', data);
     }
 
-    deleteIntegration(integrationId: string) {
+    deleteIntegration(integrationId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/integrations/${integrationId}`, 'DELETE');
     }
 
-    getResponseForIntegrationGetUrlByUrl(url: string) {
+    getResponseForIntegrationGetUrlByUrl(url: string): Promise<AxiosResponse> {
         return this.invokeApi(url, 'GET');
     }
 
-    getResponseForIntegrationGetUrlById(integrationId: string) {
+    getResponseForIntegrationGetUrlById(integrationId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/integrations/${integrationId}/data`, 'GET');
     }
 }

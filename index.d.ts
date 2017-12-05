@@ -152,6 +152,22 @@ export class SearchService {
     static filter(index: string, page?: number, size?: number, filter?: any): Promise<any>;
 }
 
+export class SchemaService {
+    loadStats(withGroups: boolean): Promise<AxiosResponse>;
+    getAllSchemas(withGroups: boolean): Promise<AxiosResponse>;
+    getDataBySchemaId(schemaId: string, page: number, size?: number): Promise<AxiosResponse>;
+    getSchema(schemaId: string, queryParams: any): Promise<AxiosResponse>;
+    createSchema(schema: any): Promise<AxiosResponse>;
+    deleteSchema(schemaId: string): Promise<AxiosResponse>;
+    updateSchema(schema: any): Promise<AxiosResponse>;
+    getIntegrationsForSchema(schemaId: string): Promise<AxiosResponse>;
+    createIntegrationForSchema(schemaId: string, label: string): Promise<AxiosResponse>;
+    updateIntegration(integrationId: string, data: any): Promise<AxiosResponse>;
+    deleteIntegration(integrationId: string): Promise<AxiosResponse>;
+    getResponseForIntegrationGetUrlByUrl(url: string): Promise<AxiosResponse>;
+    getResponseForIntegrationGetUrlById(integrationId: string): Promise<AxiosResponse>;
+}
+
 export class MyFLOWFACTService {
     static doOrder(order: object): Promise<any>;
     static getProductPrice(productName: string): Promise<any>;
