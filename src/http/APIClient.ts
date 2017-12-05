@@ -14,11 +14,13 @@ const StoreKeys = {
 const defaultStage = isNode ? 'development' : 'production';
 const defaultVersionTag = isNode ? 'latest' : 'stable';
 
-const getStageFromStore = () =>
-    store.get(StoreKeys.EdgeServiceStage) || defaultStage;
+const getStageFromStore = () => {
+    return store.get(StoreKeys.EdgeServiceStage) || defaultStage;
+};
 
-const getVersionTagFromStore = () =>
-    store.get(StoreKeys.EdgeServiceVersionTag) || defaultVersionTag;
+const getVersionTagFromStore = () => {
+    return store.get(StoreKeys.EdgeServiceVersionTag) || defaultVersionTag;
+};
 
 const setStageInStore = (stage: string) => {
     if (stage) {
@@ -35,7 +37,9 @@ const setVersionTagInStore = (versionTag: string) => {
 };
 
 const isDefaultApi = () => {
-    return (getStageFromStore() === defaultStage) && (getVersionTagFromStore() === defaultVersionTag);
+    const stage = getStageFromStore();
+    const versionTag = getVersionTagFromStore();
+    return (stage === defaultStage) && (versionTag === defaultVersionTag);
 };
 
 export type ParamMap = { [key: string]: string|boolean };
