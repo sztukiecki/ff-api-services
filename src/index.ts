@@ -21,6 +21,7 @@ import CognitoService from './service/CognitoService';
 import InteractiveExposeService from './service/InteractiveExposeService';
 import ModuleService from './service/ModuleService';
 import SampleDataService from './service/SampleDataService';
+import AdminTokenService from './service/AdminTokenService';
 import APIClient from './http/APIClient';
 
 export {
@@ -46,7 +47,8 @@ export {
     FlowfactExportInternalService,
     InteractiveExposeService,
     ModuleService,
-    SampleDataService
+    SampleDataService,
+    AdminTokenService
 };
 
 // types only
