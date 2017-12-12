@@ -7,7 +7,11 @@ export class AdminTokenService extends APIClient {
     }
 
     getAuthenticationToken(userPlatformToken: string): Promise<AxiosResponse>  {
-        return this.invokeApi('/public/adminUser/authenticate', 'GET', {headers: {token: userPlatformToken}});
+        return this.invokeApi('/public/adminUser/authenticate', 'GET', undefined,{
+            headers: {
+                token: userPlatformToken
+            }
+        });
     }
 }
 
