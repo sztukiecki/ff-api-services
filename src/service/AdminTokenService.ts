@@ -6,8 +6,8 @@ export class AdminTokenService extends APIClient {
         super(APIMapping.adminTokenService);
     }
 
-    getAuthenticationToken(user_platform_token: string): Promise<AxiosResponse>  {
-        return this.invokeApi('/public/adminUser/authenticate', 'GET', {headers: {header: user_platform_token}});
+    getAuthenticationToken(userPlatformToken: string): Promise<AxiosResponse>  {
+        return this.invokeApi('/public/adminUser/authenticate', 'GET', {headers: {token: userPlatformToken}});
     }
 }
 
