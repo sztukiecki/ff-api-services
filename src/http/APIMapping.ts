@@ -95,6 +95,7 @@ const APIMapping = {
         }
     }),
     emailService: new APIService('email-service'),
+    adminTokenService: new APIService('admin-token-service'),
     viewDefinitionService: new APIService('view-definition-service', {
         'axios-retry': {
             retries: 4
