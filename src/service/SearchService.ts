@@ -1,5 +1,5 @@
 import {APIClient, APIMapping} from '../http';
-import { AxiosResponse } from 'axios';
+import {AxiosResponse} from 'axios';
 
 export class SearchService extends APIClient {
 
@@ -35,18 +35,25 @@ export class SearchService extends APIClient {
     }
 
     search(query: any, index: string, page: number = 1, size?: number) {
+        let queryParams: any = {};
+        if (page) {
+            queryParams.page = page;
+        }
+        if (size) {
+            queryParams.size = size;
+        }
         if (typeof query === 'string') {
             query = JSON.parse(query);
         }
-        return this.invokeApi('/index/' + index, 'POST', query);
+        return this.invokeApi('/index/' + index, 'POST', query, {queryParams});
     }
 
     filter(index: string, page: number = 1, size: number = 30, filter: string, sorting: any) {
         let queryParams: any = {};
-        if(page) {
+        if (page) {
             queryParams.page = page;
         }
-        if(size) {
+        if (size) {
             queryParams.size = size;
         }
 
@@ -71,9 +78,9 @@ export class SearchService extends APIClient {
             }
         }
 
-        if(sorting) {
+        if (sorting) {
             query['sort'] = {
-                _script : {
+                _script: {
                     type: 'string',
                     order: sorting.order,
                     script: {
