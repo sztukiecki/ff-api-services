@@ -135,7 +135,10 @@ export default class APIClient {
             throw new Error('missing slash at the beginning');
         }
 
-        this.updateUserCredentials();
+        // public resources don't need any cognito token, so skipping this
+        if (!path.startsWith('/public')) {
+            this.updateUserCredentials();
+        }
 
         // add parameters to the url
         let url = (await this.buildAPIUrl()) + path;
@@ -146,7 +149,7 @@ export default class APIClient {
             }
         }
 
-        // setup the requst
+        // setup the request
         const userIdentification = isNode ? {
             userId: this.userId
         } : {
