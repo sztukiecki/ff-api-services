@@ -77,7 +77,7 @@ export class InteractiveExposeService extends APIClient {
      * @param {"OFFER" | "REPORT"} role
      * @returns {Promise<AxiosResponse>}
      */
-    async getTemplates(role: 'OFFER' | 'REPORT' | undefined): Promise<AxiosResponse> {
+    async getTemplates(role?: 'OFFER' | 'REPORT'): Promise<AxiosResponse> {
         if (role) {
             return await this.invokeApi('/templates', 'GET', {}, {
                 queryParams: {
