@@ -1,7 +1,7 @@
-import AWS from '@flowfact/aws-sdk';
 import * as WPAPI from 'wpapi';
-
 import {getStageFromStore} from '../http/APIClient';
+
+const AWS = require('aws-sdk');
 
 export class WordpressTemplateService {
     wordpressApis: any[] = [];

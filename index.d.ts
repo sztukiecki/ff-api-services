@@ -184,7 +184,8 @@ export class EntityService {
 }
 
 export class AdminTokenService {
-    getAuthenticationToken(userPlatformToken: string): Promise<AxiosResponse>;
+    authenticate(platformToken: string): Promise<AxiosResponse>;
+    authenticate2(platformToken: string): Promise<AxiosResponse>;
 }
 
 export class CognitoServiceClass {
@@ -192,6 +193,7 @@ export class CognitoServiceClass {
     setNewLoginData(idToken: string): void;
     login(username: string, password: string): Promise<any>;
     tryGetUser(): Boolean;
+    refreshLogin(): void;
     signOut(): void;
 }
 

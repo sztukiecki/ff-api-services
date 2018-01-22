@@ -1,10 +1,10 @@
-import AWS from '@flowfact/aws-sdk';
-import axios, {AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
+import axios, {AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken} from 'axios';
 import * as axiosRetry from 'axios-retry';
 import * as isNode from 'detect-node';
 import * as store from 'store';
 import ConsulClient from "@flowfact/consul-client";
-import { APIService } from "./APIMapping";
+import {APIService} from "./APIMapping";
+import {CognitoService} from '..';
 
 const StoreKeys = {
     EdgeServiceStage: 'HTTPCLIENT.APICLIENT.STAGE',
@@ -42,7 +42,7 @@ const isDefaultApi = () => {
     return (stage === defaultStage) && (versionTag === defaultVersionTag);
 };
 
-export type ParamMap = { [key: string]: string|boolean };
+export type ParamMap = { [key: string]: string | boolean };
 
 export interface AxiosConfig {
     'axios-retry': AxiosRetryConfig
@@ -63,9 +63,9 @@ export interface APIClientAdditionalParams {
     cancelToken?: CancelToken;
 }
 
-export default class APIClient {
-    idToken: string = '';
+export default abstract class APIClient {
     userId: string;
+
     static stageToUse: string;
     static apiVersionTag: string;
 
@@ -86,19 +86,6 @@ export default class APIClient {
 
     withUserId(userId: string): this {
         return Object.assign(Object.create(Object.getPrototypeOf(this)), this, {userId})
-    }
-
-    updateUserCredentials() {
-        if (AWS.Config.credentials && AWS.Config.credentials.params && AWS.Config.credentials.params.Logins) {
-            const loginKeys = Object.keys(AWS.Config.credentials.params.Logins);
-            if (loginKeys.length > 0) {
-                this.idToken = AWS.Config.credentials.params.Logins[loginKeys[0]];
-            }
-        }
-
-        if (!isNode && (!this.idToken || this.idToken.trim().length === 0)) {
-            console.warn('no id token is set');
-        }
     }
 
     private _getConsulClient(): ConsulClient {
@@ -135,11 +122,6 @@ export default class APIClient {
             throw new Error('missing slash at the beginning');
         }
 
-        // public resources don't need any cognito token, so skipping this
-        if (!path.startsWith('/public')) {
-            this.updateUserCredentials();
-        }
-
         // add parameters to the url
         let url = (await this.buildAPIUrl()) + path;
         if (additionalParams.queryParams) {
@@ -149,12 +131,11 @@ export default class APIClient {
             }
         }
 
-        // setup the request
-        const userIdentification = isNode ? {
-            userId: this.userId
-        } : {
-            cognitoToken: this.idToken
-        };
+        let userIdentification = {};
+        if (!path.startsWith('/public')) {
+            // setup the request
+            userIdentification = isNode ? {userId: this.userId} : {cognitoToken: await CognitoService.getCognitoToken()};
+        }
 
         let request: AxiosRequestConfig = {
             method: method,
@@ -165,7 +146,6 @@ export default class APIClient {
         };
 
         const client = axios.create();
-
         const axiosConfiguration = this._axiosConfig;
         if (axiosConfiguration) {
             if (axiosConfiguration['axios-retry']) {
