@@ -1,10 +1,46 @@
 import axios, {AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken} from 'axios';
 import * as axiosRetry from 'axios-retry';
 import * as isNode from 'detect-node';
+import * as store from 'store';
 import ConsulClient from "@flowfact/consul-client";
 import {APIService} from "./APIMapping";
-import {getStageFromStore, getVersionTagFromStore} from '../index';
-import CognitoService from '../service/CognitoService';
+import {CognitoService} from '..';
+
+const StoreKeys = {
+    EdgeServiceStage: 'HTTPCLIENT.APICLIENT.STAGE',
+    EdgeServiceVersionTag: 'HTTPCLIENT.APICLIENT.VERSIONTAG'
+};
+
+const defaultStage = isNode ? 'development' : 'production';
+const defaultVersionTag = isNode ? 'latest' : 'stable';
+
+const getStageFromStore = () => {
+    return store.get(StoreKeys.EdgeServiceStage) || defaultStage;
+};
+
+const getVersionTagFromStore = () => {
+    return store.get(StoreKeys.EdgeServiceVersionTag) || defaultVersionTag;
+};
+
+const setStageInStore = (stage: string) => {
+    if (stage) {
+        store.set(StoreKeys.EdgeServiceStage, stage);
+        console.log('Set stage to: ' + stage);
+    }
+};
+
+const setVersionTagInStore = (versionTag: string) => {
+    if (versionTag) {
+        store.set(StoreKeys.EdgeServiceVersionTag, versionTag);
+        console.log('Set versionTag to: ' + versionTag);
+    }
+};
+
+const isDefaultApi = () => {
+    const stage = getStageFromStore();
+    const versionTag = getVersionTagFromStore();
+    return (stage === defaultStage) && (versionTag === defaultVersionTag);
+};
 
 export type ParamMap = { [key: string]: string | boolean };
 
@@ -146,3 +182,12 @@ export default class APIClient {
         }).join('&');
     }
 }
+
+export {
+    StoreKeys,
+    isDefaultApi,
+    setStageInStore,
+    getStageFromStore,
+    setVersionTagInStore,
+    getVersionTagFromStore
+};

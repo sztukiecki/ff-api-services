@@ -1,5 +1,5 @@
 import * as WPAPI from 'wpapi';
-import {getStageFromStore} from '../index';
+import {getStageFromStore} from '../http/APIClient';
 
 const AWS = require('aws-sdk');
 
