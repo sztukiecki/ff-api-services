@@ -1,4 +1,5 @@
-import {APIClient, APIMapping} from '../http';
+import {APIMapping} from '../http';
+import APIClient from '../http/APIClient';
 import {AxiosResponse} from 'axios';
 
 export class CompanyService extends APIClient {

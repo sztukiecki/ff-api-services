@@ -1,4 +1,4 @@
-import {getStageFromStore} from '../http/APIClient';
+import {getStageFromStore} from '../index';
 import {
     CognitoUserPool, CognitoUser, AuthenticationDetails, CognitoUserSession
 } from 'amazon-cognito-identity-js';
