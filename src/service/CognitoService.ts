@@ -84,6 +84,25 @@ export class CognitoService {
         });
     }
 
+    async loginFromCache() {
+        const currentUser = this.userPool.getCurrentUser();
+        if(!currentUser) {
+            throw new Error('Could not get the current user.');
+        }
+
+        AWS.config.credentials.loadCacheId();
+        currentUser.getSession(async (error: AWS.AWSError, session: CognitoUserSession) => {
+            this.loginWithTokens({
+                username: currentUser.getUsername(),
+                idToken: session.getIdToken().getJwtToken(),
+                refreshToken: session.getRefreshToken().getToken(),
+                accessToken: session.getAccessToken().getJwtToken()
+            });
+
+            await AWS.config.credentials.getPromise();
+        });
+    }
+
     loginWithTokens(tokens: TokenModel) {
         const stage = getStageFromStore();
 
