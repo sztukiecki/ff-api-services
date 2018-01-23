@@ -63,7 +63,7 @@ export interface APIClientAdditionalParams {
     cancelToken?: CancelToken;
 }
 
-export default class APIClient {
+export default abstract class APIClient {
     userId: string;
 
     static stageToUse: string;
