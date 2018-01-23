@@ -2,9 +2,9 @@ import axios, {AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken} from 
 import * as axiosRetry from 'axios-retry';
 import * as isNode from 'detect-node';
 import * as store from 'store';
-import ConsulClient from "@flowfact/consul-client";
+import ConsulClient from '@flowfact/consul-client';
 import {APIService} from "./APIMapping";
-import {CognitoService} from '..';
+const AWS = require('aws-sdk');
 
 const StoreKeys = {
     EdgeServiceStage: 'HTTPCLIENT.APICLIENT.STAGE',
@@ -117,6 +117,15 @@ export default abstract class APIClient {
         return `${baseUrl}/${this._serviceName}/${this._getVersionTag()}`;
     };
 
+    private getCognitoToken() {
+        if (AWS.config.credentials && AWS.config.credentials.params && AWS.config.credentials.params.Logins) {
+            const loginKeys = Object.keys(AWS.config.credentials.params.Logins);
+            if (loginKeys.length > 0) {
+                return AWS.config.credentials.params.Logins[loginKeys[0]];
+            }
+        }
+    }
+
     public async invokeApi(path: string, method: string, body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse> {
         if (!path.startsWith('/')) {
             throw new Error('missing slash at the beginning');
@@ -134,7 +143,7 @@ export default abstract class APIClient {
         let userIdentification = {};
         if (!path.startsWith('/public')) {
             // setup the request
-            userIdentification = isNode ? {userId: this.userId} : {cognitoToken: await CognitoService.getCognitoToken()};
+            userIdentification = isNode ? {userId: this.userId} : {cognitoToken: this.getCognitoToken()};
         }
 
         let request: AxiosRequestConfig = {

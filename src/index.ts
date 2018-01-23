@@ -17,7 +17,6 @@ import RelogService, {FFElkData, FFAdditionalElkData} from './service/RelogServi
 import MyFLOWFACTService from './service/MyFLOWFACTService';
 import MultimediaService from './service/MultimediaService';
 import FlowfactExportInternalService from './service/FlowfactExportInternalService';
-import CognitoService from './service/CognitoService';
 import InteractiveExposeService from './service/InteractiveExposeService';
 import ModuleService from './service/ModuleService';
 import SampleDataService from './service/SampleDataService';
@@ -43,7 +42,6 @@ export {
     RelogService,
     MyFLOWFACTService,
     MultimediaService,
-    CognitoService,
     FlowfactExportInternalService,
     InteractiveExposeService,
     ModuleService,

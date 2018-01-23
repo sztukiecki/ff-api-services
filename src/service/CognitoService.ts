@@ -30,12 +30,17 @@ export interface TokenModel {
     username: string
 }
 
+let instance: any = null;
 export class CognitoService {
 
     userPool: CognitoUserPool;
     cognitoUser: CognitoUser | null;
 
     constructor() {
+        if(!instance) {
+            instance = this;
+        }
+
         let stage = getStageFromStore();
         if (stage === 'local') {
             stage = 'development';
@@ -52,6 +57,8 @@ export class CognitoService {
             UserPoolId: SETTINGS[stage].UserPoolId,
             ClientId: SETTINGS[stage].ClientId
         });
+
+        return instance;
     }
 
     /**
@@ -75,6 +82,15 @@ export class CognitoService {
                 Password: password
             }), {
                 onSuccess: (result) => {
+                    const stage = getStageFromStore();
+                    // define the new Logins
+                    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+                        IdentityPoolId: SETTINGS[stage].IdentityPoolId,
+                        Logins: {
+                            [`cognito-idp.${REGION}.amazonaws.com/${SETTINGS[stage].UserPoolId}`]: result.getIdToken().getJwtToken()
+                        }
+                    });
+
                     resolve(result);
                 },
                 onFailure: (error) => {
