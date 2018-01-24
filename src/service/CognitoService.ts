@@ -1,7 +1,7 @@
-import {getStageFromStore} from '../http/APIClient';
 import {
     CognitoUserPool, CognitoUser, AuthenticationDetails, CognitoUserSession
 } from 'amazon-cognito-identity-js';
+import StageConfiguration from '../util/StageConfiguration';
 const AWS = require('aws-sdk');
 
 const REGION = 'eu-central-1';
@@ -41,7 +41,7 @@ export class CognitoService {
             instance = this;
         }
 
-        let stage = getStageFromStore();
+        let stage = StageConfiguration.getStageFromStore();
         if (stage === 'local') {
             stage = 'development';
         }
@@ -82,7 +82,7 @@ export class CognitoService {
                 Password: password
             }), {
                 onSuccess: (result) => {
-                    const stage = getStageFromStore();
+                    const stage = StageConfiguration.getStageFromStore();
                     // define the new Logins
                     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
                         IdentityPoolId: SETTINGS[stage].IdentityPoolId,
@@ -120,7 +120,7 @@ export class CognitoService {
     }
 
     loginWithTokens(tokens: TokenModel) {
-        const stage = getStageFromStore();
+        const stage = StageConfiguration.getStageFromStore();
 
         // set the new tokens in the store
         const key = `CognitoIdentityServiceProvider.${SETTINGS[stage].ClientId}`;
@@ -199,7 +199,7 @@ export class CognitoService {
                 if (error) {
                     reject(error);
                 } else {
-                    const stage: string = getStageFromStore();
+                    const stage: string = StageConfiguration.getStageFromStore();
 
                     AWS.config.credentials = new AWS.CognitoIdentityCredentials({
                         IdentityPoolId: SETTINGS[stage].IdentityPoolId,

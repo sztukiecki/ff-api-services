@@ -4,7 +4,7 @@ import * as isNode from 'detect-node';
 import * as store from 'store';
 import ConsulClient from '@flowfact/consul-client';
 import {APIService} from "./APIMapping";
-const AWS = require('aws-sdk');
+import CognitoService from '../service/CognitoService';
 
 const StoreKeys = {
     EdgeServiceStage: 'HTTPCLIENT.APICLIENT.STAGE',
@@ -117,13 +117,13 @@ export default abstract class APIClient {
         return `${baseUrl}/${this._serviceName}/${this._getVersionTag()}`;
     };
 
-    private getCognitoToken() {
-        if (AWS.config.credentials && AWS.config.credentials.params && AWS.config.credentials.params.Logins) {
-            const loginKeys = Object.keys(AWS.config.credentials.params.Logins);
-            if (loginKeys.length > 0) {
-                return AWS.config.credentials.params.Logins[loginKeys[0]];
-            }
+    private async getCognitoToken() {
+        const cognitoToken = await CognitoService.getCognitoToken();
+        if(!cognitoToken) {
+            throw new Error('Could not get the cognito token. Are you not logged in?');
         }
+
+        return cognitoToken;
     }
 
     public async invokeApi(path: string, method: string, body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse> {
@@ -143,7 +143,7 @@ export default abstract class APIClient {
         let userIdentification = {};
         if (!path.startsWith('/public')) {
             // setup the request
-            userIdentification = isNode ? {userId: this.userId} : {cognitoToken: this.getCognitoToken()};
+            userIdentification = isNode ? {userId: this.userId} : {cognitoToken: await this.getCognitoToken()};
         }
 
         let request: AxiosRequestConfig = {
