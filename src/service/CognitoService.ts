@@ -83,14 +83,8 @@ export class CognitoService {
                 Password: password
             }), {
                 onSuccess: (result) => {
-                    const stage = StageConfiguration.getStageFromStore();
                     // define the new Logins
-                    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-                        IdentityPoolId: SETTINGS[stage].IdentityPoolId,
-                        Logins: {
-                            [`cognito-idp.${REGION}.amazonaws.com/${SETTINGS[stage].UserPoolId}`]: result.getIdToken().getJwtToken()
-                        }
-                    });
+                    AWS.config.credentials = this.getCognitoIdentityCredentials(result.getIdToken().getJwtToken());
 
                     resolve(result);
                 },
@@ -244,7 +238,7 @@ export class CognitoService {
         return new AWS.CognitoIdentityCredentials({
             IdentityPoolId: SETTINGS[stage].IdentityPoolId,
             Logins: {
-                [`cognito-idp-${REGION}.amazonaws.com/${SETTINGS[stage].UserPoolId}`]: idToken
+                [`cognito-idp.${REGION}.amazonaws.com/${SETTINGS[stage].UserPoolId}`]: idToken
             }
         });
     }
