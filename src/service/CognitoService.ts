@@ -2,6 +2,7 @@ import {
     CognitoUserPool, CognitoUser, AuthenticationDetails, CognitoUserSession
 } from 'amazon-cognito-identity-js';
 import StageConfiguration from '../util/StageConfiguration';
+import {AWSError} from "aws-sdk";
 const AWS = require('aws-sdk');
 
 const REGION = 'eu-central-1';
@@ -130,12 +131,7 @@ export class CognitoService {
         localStorage.setItem(`${key}.${tokens.username}.accessToken`, tokens.accessToken);
 
         // define the new Logins
-        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-            IdentityPoolId: SETTINGS[stage].IdentityPoolId,
-            Logins: {
-                [`cognito-idp.${REGION}.amazonaws.com/${SETTINGS[stage].UserPoolId}`]: tokens.idToken
-            }
-        });
+        AWS.config.credentials = this.getCognitoIdentityCredentials(tokens.idToken);
 
         return new Promise(async (resolve, reject) => {
             try {
@@ -181,6 +177,7 @@ export class CognitoService {
 
     /**
      * Get the current user from the local storage.
+     * This method refreshs the session if the cognitoToken is expired!
      * @returns {Promise<any>}
      */
     getCurrentUser(): Promise<CognitoUser | null> {
@@ -198,18 +195,24 @@ export class CognitoService {
             this.cognitoUser.getSession((error: Error, session: CognitoUserSession) => {
                 if (error) {
                     reject(error);
-                } else {
-                    const stage: string = StageConfiguration.getStageFromStore();
-
-                    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-                        IdentityPoolId: SETTINGS[stage].IdentityPoolId,
-                        Logins: {
-                            [`cognito-idp-${REGION}.amazonaws.com/${SETTINGS[stage].UserPoolId}`]: session.getIdToken().getJwtToken()
-                        }
-                    });
-
-                    resolve(this.cognitoUser);
+                    return;
                 }
+
+                // Check if the session need a refresh. isValid checks if the access and id tokens have not expired.
+                if(!session.isValid()) {
+                    this.cognitoUser!.refreshSession(session.getRefreshToken(), (refreshError: AWSError, refreshedSession: CognitoUserSession) => {
+                        if(error) {
+                            reject(refreshError);
+                            return;
+                        }
+                        AWS.config.credentials = this.getCognitoIdentityCredentials(refreshedSession.getIdToken().getJwtToken());
+                    });
+                    resolve(this.cognitoUser);
+                    return;
+                }
+
+                AWS.config.credentials = this.getCognitoIdentityCredentials(session.getIdToken().getJwtToken());
+                resolve(this.cognitoUser);
             });
         })
     }
@@ -233,6 +236,16 @@ export class CognitoService {
                     resolve(session!.getIdToken()!.getJwtToken());
                 }
             });
+        });
+    }
+
+    getCognitoIdentityCredentials(idToken: string): AWS.CognitoIdentityCredentials {
+        const stage: string = StageConfiguration.getStageFromStore();
+        return new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: SETTINGS[stage].IdentityPoolId,
+            Logins: {
+                [`cognito-idp-${REGION}.amazonaws.com/${SETTINGS[stage].UserPoolId}`]: idToken
+            }
         });
     }
 }
