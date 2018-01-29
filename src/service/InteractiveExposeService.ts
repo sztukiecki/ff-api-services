@@ -142,7 +142,7 @@ export class InteractiveExposeService extends APIClient {
      * Perform the setup steps for the domain.
      */
     async setupDomain(): Promise<AxiosResponse> {
-        return this.invokeApi('/domain/setup', 'POST', '');
+        return this.invokeApi('/domain/setup', 'POST');
     }
 }
 
