@@ -73,9 +73,6 @@ export class InteractiveExposeService extends APIClient {
     /**
      * Get all interactive expose templates.
      * Add a role parameter to filter the templates by the roles.
-     *
-     * @param {"OFFER" | "REPORT"} role
-     * @returns {Promise<AxiosResponse>}
      */
     async getTemplates(role?: 'OFFER' | 'REPORT'): Promise<AxiosResponse> {
         if (role) {
@@ -98,9 +95,7 @@ export class InteractiveExposeService extends APIClient {
     }
 
     /**
-     * Get a template by his id.
-     * @param {string} templateId
-     * @returns {Promise<AxiosResponse>}
+     * Get a template by its id.
      */
     async getTemplateById(templateId: string): Promise<AxiosResponse> {
         return await this.invokeApi(`/templates/${templateId}`, 'GET');
@@ -108,10 +103,9 @@ export class InteractiveExposeService extends APIClient {
 
     /**
      * Create a new interactive expose template.
-     * @param {InteractiveExposeTemplate} template
-     * @param {boolean} fillDefaultContent
+     * @param template
+     * @param fillDefaultContent
      *      true if the content of the template have to be filled with default content
-     * @returns {Promise<AxiosResponse>}
      */
     async createTemplate(template: InteractiveExposeTemplate, fillDefaultContent: boolean = false): Promise<AxiosResponse> {
         const queryParams = {
@@ -125,9 +119,6 @@ export class InteractiveExposeService extends APIClient {
 
     /**
      * Update a interactive expose template by his id.
-     * @param {string} templateId
-     * @param {InteractiveExposeTemplate} template
-     * @returns {Promise<AxiosResponse>}
      */
     async updateTemplate(templateId: string, template: InteractiveExposeTemplate): Promise<AxiosResponse> {
         return await this.invokeApi(`/templates/${templateId}`, 'PUT', template);
@@ -135,8 +126,6 @@ export class InteractiveExposeService extends APIClient {
 
     /**
      * Delete a interactive expose template on the server.
-     * @param {string} templateId
-     * @returns {Promise<AxiosResponse>}
      */
     async deleteTemplate(templateId: string): Promise<AxiosResponse> {
         return await this.invokeApi(`/templates/${templateId}`, 'DELETE');
