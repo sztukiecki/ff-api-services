@@ -76,14 +76,14 @@ export class InteractiveExposeService extends APIClient {
      */
     async getTemplates(role?: 'OFFER' | 'REPORT'): Promise<AxiosResponse> {
         if (role) {
-            return await this.invokeApi('/templates', 'GET', {}, {
+            return this.invokeApi('/templates', 'GET', {}, {
                 queryParams: {
                     role: role
                 }
             });
         }
 
-        return await this.invokeApi('/templates', 'GET');
+        return this.invokeApi('/templates', 'GET');
     }
 
     /**
@@ -91,14 +91,14 @@ export class InteractiveExposeService extends APIClient {
      */
 
     async checkRequirements(): Promise<AxiosResponse> {
-        return await this.invokeApi(`/interactiveExposes/checkRequirements`, 'GET');
+        return this.invokeApi(`/interactiveExposes/checkRequirements`, 'GET');
     }
 
     /**
      * Get a template by its id.
      */
     async getTemplateById(templateId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/templates/${templateId}`, 'GET');
+        return this.invokeApi(`/templates/${templateId}`, 'GET');
     }
 
     /**
@@ -114,21 +114,21 @@ export class InteractiveExposeService extends APIClient {
             }
         };
 
-        return await this.invokeApi('/templates', 'POST', template, queryParams);
+        return this.invokeApi('/templates', 'POST', template, queryParams);
     }
 
     /**
      * Update a interactive expose template by his id.
      */
     async updateTemplate(templateId: string, template: InteractiveExposeTemplate): Promise<AxiosResponse> {
-        return await this.invokeApi(`/templates/${templateId}`, 'PUT', template);
+        return this.invokeApi(`/templates/${templateId}`, 'PUT', template);
     }
 
     /**
      * Delete a interactive expose template on the server.
      */
     async deleteTemplate(templateId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/templates/${templateId}`, 'DELETE');
+        return this.invokeApi(`/templates/${templateId}`, 'DELETE');
     }
 }
 
