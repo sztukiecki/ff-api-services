@@ -130,6 +130,13 @@ export class InteractiveExposeService extends APIClient {
     async deleteTemplate(templateId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/templates/${templateId}`, 'DELETE');
     }
+
+    /**
+     * Add a domain to the company.
+     */
+    async addDomain(domain: string): Promise<AxiosResponse> {
+        return this.invokeApi('/domain', 'POST', '', {queryParams: {domain}});
+    }
 }
 
 export default new InteractiveExposeService();
