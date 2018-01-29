@@ -137,6 +137,13 @@ export class InteractiveExposeService extends APIClient {
     async addDomain(domain: string): Promise<AxiosResponse> {
         return this.invokeApi('/domain', 'POST', '', {queryParams: {domain}});
     }
+
+    /**
+     * Perform the setup steps for the domain.
+     */
+    async setupDomain(): Promise<AxiosResponse> {
+        return this.invokeApi('/domain/setup', 'POST', '');
+    }
 }
 
 export default new InteractiveExposeService();
