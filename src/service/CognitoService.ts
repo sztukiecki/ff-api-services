@@ -91,7 +91,11 @@ export class CognitoService {
     }
 
     loginWithTokens(tokens: TokenModel) {
-        const stage = StageConfiguration.getStageFromStore();
+        let stage = StageConfiguration.getStageFromStore();
+        if (stage === 'local') {
+            stage = 'development';
+        }
+
         // set the new tokens in the store
         const key = `CognitoIdentityServiceProvider.${SETTINGS[stage].ClientId}`;
         localStorage.setItem(`${key}.LastAuthUser`, tokens.username);
@@ -215,7 +219,10 @@ export class CognitoService {
     }
 
     getCognitoIdentityCredentials(idToken: string): AWS.CognitoIdentityCredentials {
-        const stage: string = StageConfiguration.getStageFromStore();
+        let stage: string = StageConfiguration.getStageFromStore();
+        if (stage === 'local') {
+            stage = 'development';
+        }
         return new AWS.CognitoIdentityCredentials({
             IdentityPoolId: SETTINGS[stage].IdentityPoolId,
             Logins: {
