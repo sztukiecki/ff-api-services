@@ -185,7 +185,14 @@ export class EntityService {
 
 export class AdminTokenService {
     authenticate(platformToken: string): Promise<AxiosResponse>;
-    authenticate2(platformToken: string): Promise<AxiosResponse>;
+    authenticateAndReturnUsernameWithToken(platformToken: string): Promise<AxiosResponse>;
+}
+
+export interface TokenModel {
+    idToken: string,
+    accessToken: string,
+    refreshToken: string,
+    username: string
 }
 
 export class CognitoServiceClass {

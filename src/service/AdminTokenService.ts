@@ -1,5 +1,5 @@
 import {APIClient, APIMapping} from '../http';
-import { AxiosResponse } from "axios";
+import {AxiosResponse} from "axios";
 
 export class AdminTokenService extends APIClient {
     constructor() {
@@ -11,8 +11,8 @@ export class AdminTokenService extends APIClient {
      * @param {string} platformToken
      * @returns {Promise<AxiosResponse>}
      */
-    authenticate(platformToken: string): Promise<AxiosResponse>  {
-        return this.invokeApi('/public/adminUser/authenticate', 'GET', undefined,{
+    authenticate(platformToken: string): Promise<AxiosResponse> {
+        return this.invokeApi('/public/adminUser/authenticate', 'GET', undefined, {
             headers: {
                 token: platformToken
             }
@@ -24,8 +24,8 @@ export class AdminTokenService extends APIClient {
      * @param {string} platformToken
      * @returns {Promise<AxiosResponse>}
      */
-    authenticateAndReturnUsernameWithToken(platformToken: string): Promise<AxiosResponse>  {
-        return this.invokeApi('/public/adminUser/authenticateAndReturnUsernameWithToken', 'GET', undefined,{
+    authenticateAndReturnUsernameWithToken(platformToken: string): Promise<AxiosResponse> {
+        return this.invokeApi('/public/adminUser/authenticateAndReturnUsernameWithToken', 'GET', undefined, {
             headers: {
                 token: platformToken
             }

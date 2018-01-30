@@ -3,6 +3,8 @@ import {
 } from 'amazon-cognito-identity-js';
 import StageConfiguration from '../util/StageConfiguration';
 import {AWSError} from "aws-sdk";
+import {TokenModel} from "../../index";
+
 const AWS = require('aws-sdk');
 
 const REGION = 'eu-central-1';
@@ -24,21 +26,15 @@ const SETTINGS = {
     }
 };
 
-export interface TokenModel {
-    idToken: string,
-    accessToken: string,
-    refreshToken: string,
-    username: string
-}
-
 let instance: any = null;
+
 export class CognitoService {
 
     userPool: CognitoUserPool;
     cognitoUser: CognitoUser | null;
 
     constructor() {
-        if(!instance) {
+        if (!instance) {
             instance = this;
         }
 
@@ -85,7 +81,6 @@ export class CognitoService {
                 onSuccess: (result) => {
                     // define the new Logins
                     AWS.config.credentials = this.getCognitoIdentityCredentials(result.getIdToken().getJwtToken());
-
                     resolve(result);
                 },
                 onFailure: (error) => {
@@ -95,28 +90,8 @@ export class CognitoService {
         });
     }
 
-    async loginFromCache() {
-        const currentUser = this.userPool.getCurrentUser();
-        if(!currentUser) {
-            throw new Error('Could not get the current user.');
-        }
-
-        AWS.config.credentials.loadCacheId();
-        currentUser.getSession(async (error: AWS.AWSError, session: CognitoUserSession) => {
-            this.loginWithTokens({
-                username: currentUser.getUsername(),
-                idToken: session.getIdToken().getJwtToken(),
-                refreshToken: session.getRefreshToken().getToken(),
-                accessToken: session.getAccessToken().getJwtToken()
-            });
-
-            await AWS.config.credentials.getPromise();
-        });
-    }
-
     loginWithTokens(tokens: TokenModel) {
         const stage = StageConfiguration.getStageFromStore();
-
         // set the new tokens in the store
         const key = `CognitoIdentityServiceProvider.${SETTINGS[stage].ClientId}`;
         localStorage.setItem(`${key}.LastAuthUser`, tokens.username);
@@ -135,15 +110,33 @@ export class CognitoService {
 
                 // get the session. If this is valid, than the login was successful.
                 this.userPool!.getCurrentUser()!.getSession((error: Error, session: CognitoUserSession) => {
-                    if(error) {
+                    if (error) {
                         reject(error);
                     } else {
                         resolve();
                     }
                 });
-            } catch(error) {
+            } catch (error) {
                 reject(error);
             }
+        });
+    }
+
+    refreshSession(session: CognitoUserSession): Promise<any> {
+        return new Promise((resolve, reject) => {
+            if (session.isValid()) {
+                resolve('SESSION_IS_VALID');
+                return;
+            }
+
+            // Check if the session need a refresh. isValid checks if the access and id tokens have not expired.
+            this.cognitoUser!.refreshSession(session.getRefreshToken(), (refreshError: AWSError, refreshedSession: CognitoUserSession) => {
+                if (refreshError) {
+                    reject(refreshError);
+                    return;
+                }
+                AWS.config.credentials = this.getCognitoIdentityCredentials(refreshedSession.getIdToken().getJwtToken());
+            });
         });
     }
 
@@ -186,25 +179,13 @@ export class CognitoService {
                 return;
             }
 
-            this.cognitoUser.getSession((error: Error, session: CognitoUserSession) => {
+            this.cognitoUser.getSession(async (error: Error, session: CognitoUserSession) => {
                 if (error) {
                     reject(error);
                     return;
                 }
 
-                // Check if the session need a refresh. isValid checks if the access and id tokens have not expired.
-                if(!session.isValid()) {
-                    this.cognitoUser!.refreshSession(session.getRefreshToken(), (refreshError: AWSError, refreshedSession: CognitoUserSession) => {
-                        if(error) {
-                            reject(refreshError);
-                            return;
-                        }
-                        AWS.config.credentials = this.getCognitoIdentityCredentials(refreshedSession.getIdToken().getJwtToken());
-                    });
-                    resolve(this.cognitoUser);
-                    return;
-                }
-
+                await this.refreshSession(session);
                 AWS.config.credentials = this.getCognitoIdentityCredentials(session.getIdToken().getJwtToken());
                 resolve(this.cognitoUser);
             });
