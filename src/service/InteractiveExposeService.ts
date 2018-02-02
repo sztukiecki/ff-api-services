@@ -34,6 +34,17 @@ export interface InteractiveExposeTemplate {
     updaterId: string
 }
 
+export interface SendInteractiveExposeModel {
+    objectId: string,
+    recipientId: string,
+    recipientMailAddress?: string;
+    callbackUrl?: string,
+    hideRecommendations: boolean,
+    emailTemplate?: {
+        templateId: string
+    }
+}
+
 export class InteractiveExposeService extends APIClient {
 
     constructor() {
@@ -52,16 +63,8 @@ export class InteractiveExposeService extends APIClient {
         return (await this.invokeApi('/preview', 'POST', {entityId: entityId})).data;
     }
 
-    async sendInteractiveExpose(recipientId: string, objectId: string, recipientEmailAddress: string, hideRecommendations: boolean = false, emailTemplateId: string = ''): Promise<string> {
-        return (await this.invokeApi('/interactiveExposes', 'POST', {
-            recipientId: recipientId,
-            objectId: objectId,
-            recipientEmailAddress: recipientEmailAddress,
-            hideRecommendations: hideRecommendations,
-            emailTemplate: {
-                templateId: emailTemplateId
-            }
-        })).data;
+    async sendInteractiveExpose(model: SendInteractiveExposeModel): Promise<AxiosResponse> {
+        return await this.invokeApi('/interactiveExposes', 'POST', model);
     }
 
     async changeLogo(type: 'light' | 'dark', image: File): Promise<FileModel> {
