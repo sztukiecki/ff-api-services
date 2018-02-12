@@ -32,7 +32,7 @@ export class MultimediaService extends APIClient {
      * @returns well.. 200 OK?
      */
     deleteFile(bucketType: 'Image' | 'Document', entityId: string, filename: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/deleteFile`, 'POST', {
+        return this.invokeApi(`/deleteFile`, 'DELETE', {
             bucketType,
             entityId,
             filename
