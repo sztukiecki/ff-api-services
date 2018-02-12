@@ -73,6 +73,10 @@ export class InteractiveExposeService extends APIClient {
         return (await this.invokeApi(`/settings/logos/${type}`, 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}})).data;
     }
 
+    async deleteLogo(type: 'light' | 'dark'): Promise<AxiosResponse> {
+        return await this.invokeApi(`/settings/logos/${type}`, 'DELETE');
+    }
+
     /**
      * Get all interactive expose templates.
      * Add a role parameter to filter the templates by the roles.
