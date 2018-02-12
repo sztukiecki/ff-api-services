@@ -25,6 +25,19 @@ export class MultimediaService extends APIClient {
             }
         });
     }
+
+    /**
+     * Deletes a file from S3
+     *
+     * @returns well.. 200 OK?
+     */
+    deleteFile(bucketType: 'Image' | 'Document', entityId: string, filename: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/deleteFile`, 'POST', {
+            bucketType,
+            entityId,
+            filename
+        });
+    }
 }
 
 export default new MultimediaService();
