@@ -96,6 +96,8 @@ export class CognitoService {
             stage = 'development';
         }
 
+        AWS.config.credentials.clearCachedId();
+
         // set the new tokens in the store
         const key = `CognitoIdentityServiceProvider.${SETTINGS[stage].ClientId}`;
         localStorage.setItem(`${key}.LastAuthUser`, tokens.username);
