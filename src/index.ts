@@ -18,6 +18,7 @@ import MyFLOWFACTService from './service/MyFLOWFACTService';
 import MultimediaService from './service/MultimediaService';
 import FlowfactExportInternalService from './service/FlowfactExportInternalService';
 import InteractiveExposeService from './service/InteractiveExposeService';
+import InteractiveExposeStatisticsService from './service/InteractiveExposeStatisticsService';
 import ModuleService from './service/ModuleService';
 import SampleDataService from './service/SampleDataService';
 import AdminTokenService from './service/AdminTokenService';
@@ -44,6 +45,7 @@ export {
     MultimediaService,
     FlowfactExportInternalService,
     InteractiveExposeService,
+    InteractiveExposeStatisticsService,
     ModuleService,
     SampleDataService,
     AdminTokenService
