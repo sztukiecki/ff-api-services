@@ -3,7 +3,7 @@ import UserService from './service/UserService';
 import SchemaService from './service/SchemaService';
 import TagsService from './service/TagService';
 import FunnelService from './service/FunnelService';
-import GeolocationService from './service/GeolocationService'
+import GeolocationService from './service/GeolocationService';
 import PresetService from './service/PresetService';
 import ActivityService from './service/ActivityService';
 import SearchService from './service/SearchService';
@@ -22,6 +22,7 @@ import InteractiveExposeStatisticsService from './service/InteractiveExposeStati
 import ModuleService from './service/ModuleService';
 import SampleDataService from './service/SampleDataService';
 import AdminTokenService from './service/AdminTokenService';
+import SlackIntegrationService from './service/SlackIntegrationService';
 import APIClient from './http/APIClient';
 
 export {
@@ -48,15 +49,16 @@ export {
     InteractiveExposeStatisticsService,
     ModuleService,
     SampleDataService,
-    AdminTokenService
+    AdminTokenService,
+    SlackIntegrationService
 };
 
 // types only
 export {
     FFElkData,
     FFAdditionalElkData
-}
+};
 
 export {
     APIClient
-}
+};

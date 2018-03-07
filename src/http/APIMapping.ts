@@ -135,6 +135,11 @@ const APIMapping = {
         'axios-retry': {
             retries: 1
         }
+    }),
+    slackIntegrationService: new APIService('slack-integration-service', {
+        'axios-retry': {
+            retries: 1
+        }
     })
 };
 
