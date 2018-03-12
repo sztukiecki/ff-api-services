@@ -34,6 +34,13 @@ export class RelogService extends APIClient {
         return this.invokeApi('/relog/elk-gelf', 'POST', logEntry);
     }
 
+    /**
+     * Here you don't have to pass the userId
+     */
+    logInternal(logEntry: FFElkData): Promise<AxiosResponse> {
+        return this.invokeApi('/internal/relog/elk-gelf', 'POST', logEntry);
+    }
+
     logBatch(logEntries: FFElkData[]) {
         return this.invokeApi('/relog/elk-gelf/batch', 'POST', {batch: logEntries});
     }
