@@ -143,7 +143,11 @@ export default abstract class APIClient {
         let userIdentification = {};
         if (!path.startsWith('/public')) {
             // setup the request
-            userIdentification = isNode ? {userId: this.userId} : {cognitoToken: await this.getCognitoToken()};
+            if (isNode && this.userId) {
+                userIdentification = {userId: this.userId};
+            } else if (!isNode) {
+                userIdentification = {cognitoToken: await this.getCognitoToken()};
+            }
         }
 
         let request: AxiosRequestConfig = {
