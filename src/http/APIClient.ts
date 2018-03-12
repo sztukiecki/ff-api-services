@@ -5,6 +5,7 @@ import * as store from 'store';
 import ConsulClient from '@flowfact/consul-client';
 import {APIService} from "./APIMapping";
 import CognitoService from '../service/CognitoService';
+import Interceptor from '../util/Interceptor';
 
 const StoreKeys = {
     EdgeServiceStage: 'HTTPCLIENT.APICLIENT.STAGE',
@@ -168,6 +169,14 @@ export default abstract class APIClient {
                         return Boolean(error && error.response && error.response.status >= 500 && method != 'POST');
                     }
                 });
+            }
+        }
+
+        for (const interceptor of Interceptor.interceptors) {
+            if (interceptor.type === 'request') {
+                axios.interceptors.request.use(interceptor.method);
+            } else if (interceptor.type === 'response') {
+                axios.interceptors.response.use(interceptor.method);
             }
         }
 
