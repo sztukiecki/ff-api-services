@@ -16,7 +16,7 @@
     "prepare": "npm run rebuild-package"
   },
   "dependencies": {
-    "@flowfact/consul-client": "^0.20171103.8",
+    "@flowfact/consul-client": "^0.20180313.3",
     "amazon-cognito-identity-js": "1.28.0",
     "aws-sdk": "2.177.0",
     "axios": "^0.16.2",
