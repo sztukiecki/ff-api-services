@@ -28,10 +28,13 @@ export interface PostMessageRequest {
 
 export interface SlackConfiguration {
     oauthToken: string;
-    verificationToken: string;
-    clientId: string;
-    clientSecret: string;
+    teamId: string;
     relatedChannels: Array<string>;
+}
+
+export interface OAuthAccessRequest {
+    companyId: string;
+    code: string;
 }
 
 export type TypedAxiosResponse<T> = AxiosResponse & {data: T};
@@ -41,6 +44,7 @@ export interface SlackApi {
     postMessage(postMessageRequest: PostMessageRequest): Promise<AxiosResponse>;
     createChannel(createChannelRequest: CreateChannelRequest): Promise<AxiosResponse>;
     deleteChannel(deleteChannelRequest: DeleteChannelRequest): Promise<AxiosResponse>;
+    oAuthAccess(oAuthAccessRequest: OAuthAccessRequest): Promise<AxiosResponse>;
 
 }
 
@@ -62,7 +66,8 @@ export class SlackIntegrationService extends APIClient {
         this._slackApi = {
             postMessage: postMessageRequest => this.invokeApi('/slack/postMessage', 'post', postMessageRequest),
             createChannel: createChannelRequest => this.invokeApi('/slack/createChannel', 'post', createChannelRequest),
-            deleteChannel: deleteChannelRequest => this.invokeApi('/slack/deleteChannel', 'post', deleteChannelRequest)
+            deleteChannel: deleteChannelRequest => this.invokeApi('/slack/deleteChannel', 'post', deleteChannelRequest),
+            oAuthAccess: oAuthAccessRequest => this.invokeApi('/slack/oauthAccess', 'post', oAuthAccessRequest)
         };
         this._settingsApi = {
             getSettings: () => this.invokeApi('/companyIntegrationSettings', 'get'),
