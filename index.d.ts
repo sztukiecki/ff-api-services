@@ -1,4 +1,5 @@
 import {AxiosResponse} from "axios";
+import {SendInteractiveExposeModel} from "./src/service/InteractiveExposeService";
 
 export default interface FileModel {
     bucketName: string;
@@ -271,13 +272,17 @@ export class InteractiveExposeService {
     static getSettings(): Promise<InteractiveExposeSettingsWithLogos>;
     static changeSettings(settings: InteractiveExposeSettings): Promise<InteractiveExposeSettingsWithLogos>;
     static getPreviewUrl(entityId: string): Promise<string>;
-    static sendInteractiveExpose(recipientId: string, objectId: string, recipientEmailAddress: string, hideRecommendations: boolean): Promise<string>;
+    static sendInteractiveExpose(model: SendInteractiveExposeModel): Promise<string>;
     static changeLogo(type: 'light' | 'dark', image: File): Promise<FileModel>;
     static getTemplates(role: 'OFFER' | 'REPORT' | undefined): Promise<AxiosResponse>;
     static getTemplateById(templateId: string): Promise<AxiosResponse>;
     static createTemplate(template: InteractiveExposeTemplate, fillDefaultContent: boolean): Promise<AxiosResponse>;
     static updateTemplate(templateId: string, template: InteractiveExposeTemplate): Promise<AxiosResponse>;
     static deleteTemplate(templateId: string): Promise<AxiosResponse>;
+}
+
+export class InteractiveExposeDeliveryService {
+    static sendInteractiveExposes(model: SendInteractiveExposeModel[]): Promise<string>;
 }
 
 export class ModuleService {

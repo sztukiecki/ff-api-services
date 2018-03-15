@@ -22,6 +22,7 @@ import InteractiveExposeStatisticsService from './service/InteractiveExposeStati
 import ModuleService from './service/ModuleService';
 import SampleDataService from './service/SampleDataService';
 import AdminTokenService from './service/AdminTokenService';
+import InteractiveExposeDeliveryService from './service/InteractiveExposeDeliveryService';
 import SlackIntegrationService from './service/SlackIntegrationService';
 import APIClient from './http/APIClient';
 
@@ -49,6 +50,7 @@ export {
     InteractiveExposeStatisticsService,
     ModuleService,
     SampleDataService,
+    InteractiveExposeDeliveryService,
     AdminTokenService,
     SlackIntegrationService
 };

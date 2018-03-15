@@ -121,6 +121,7 @@ const APIMapping = {
             retries: 4
         }
     }),
+    interactiveExposeDeliveryService: new APIService('interactive-expose-delivery-service'),
     interactiveExposeStatisticsService: new APIService('interactive-expose-statistics-service', {
         'axios-retry': {
             retries: 4
