@@ -282,7 +282,8 @@ export class InteractiveExposeService {
 }
 
 export class InteractiveExposeDeliveryService {
-    static sendInteractiveExposes(model: SendInteractiveExposeModel[]): Promise<string>;
+    static sendInteractiveExposes(model: SendInteractiveExposeModel[]): Promise<AxiosResponse>;
+    static fetchSendingStatus(requestId: string): Promise<AxiosResponse>
 }
 
 export class ModuleService {
