@@ -11,7 +11,7 @@ export class SampleDataService extends APIClient {
             bundleName: bundleName
         };
 
-        return this.invokeApi('/import', 'GET', undefined, {queryParams});
+        return this.invokeApi('/import', 'POST', undefined, {queryParams});
     }
 }
 
