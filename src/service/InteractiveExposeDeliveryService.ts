@@ -3,6 +3,15 @@ import APIMapping from "../http/APIMapping";
 import {AxiosResponse} from "axios";
 import {SendInteractiveExposeModel} from "./InteractiveExposeService";
 
+export interface InteractiveExposeDeliveryPreferenceModel {
+    emailText: string;
+}
+
+export interface InteractiveExposeDeliveryModel {
+    exposes: SendInteractiveExposeModel[];
+    preferences: InteractiveExposeDeliveryPreferenceModel;
+}
+
 export class InteractiveExposeDeliveryService extends APIClient {
 
     constructor() {
@@ -10,11 +19,15 @@ export class InteractiveExposeDeliveryService extends APIClient {
     }
 
     async sendInteractiveExposes(model: SendInteractiveExposeModel[]): Promise<AxiosResponse> {
-        return await this.invokeApi('/interactiveExposes', 'POST', model);
+        return this.invokeApi('/interactiveExposes', 'POST', model);
+    }
+
+    async sendInteractiveExposesV2(model: InteractiveExposeDeliveryModel) {
+        return this.invokeApi('/interactiveExposes/send', 'POST', model);
     }
 
     async fetchSendingStatus(requestId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/interactiveExposes/status/${requestId}`, 'GET');
+        return this.invokeApi(`/interactiveExposes/status/${requestId}`, 'GET');
     }
 }
 
