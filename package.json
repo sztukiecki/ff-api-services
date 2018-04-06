@@ -3,7 +3,6 @@
   "version": "2.0.0-SNAPSHOT",
   "description": "",
   "main": "lib/index.js",
-  "module": "es/index.js",
   "types": "lib/index.d.ts",
   "repository": "ssh://git@bb.flowfact.com:7999/npmmod/ff-api-services.git",
   "author": "FLOWFACT GmbH",
@@ -13,11 +12,9 @@
     "registry": "https://arm.flowfact-ops.cloud/content/repositories/ffnpm/"
   },
   "scripts": {
-    "build-package-cjs": "tsc",
-    "build-package-esm": "tsc --project tsconfig.esm.json",
-    "rebuild-package-cjs": "rimraf lib/ && npm run build-package-cjs",
-    "rebuild-package-esm": "rimraf es/ && npm run build-package-esm",
-    "prepare": "npm run rebuild-package-cjs && npm run rebuild-package-esm"
+    "build-package": "tsc",
+    "rebuild-package": "rimraf lib/ && npm run build-package",
+    "prepare": "npm run rebuild-package"
   },
   "dependencies": {
     "@flowfact/consul-client": "^0.20180313.3",

@@ -24,7 +24,6 @@ import SampleDataService from './service/SampleDataService';
 import AdminTokenService from './service/AdminTokenService';
 import InteractiveExposeDeliveryService from './service/InteractiveExposeDeliveryService';
 import SlackIntegrationService from './service/SlackIntegrationService';
-import CognitoService from './service/CognitoService';
 import APIClient from './http/APIClient';
 
 export {
@@ -53,8 +52,7 @@ export {
     SampleDataService,
     InteractiveExposeDeliveryService,
     AdminTokenService,
-    SlackIntegrationService,
-    CognitoService
+    SlackIntegrationService
 };
 
 // types only
