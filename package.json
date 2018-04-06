@@ -7,6 +7,7 @@
   "repository": "ssh://git@bb.flowfact.com:7999/npmmod/ff-api-services.git",
   "author": "FLOWFACT GmbH",
   "license": "",
+  "sideEffects": false,
   "publishConfig": {
     "registry": "https://arm.flowfact-ops.cloud/content/repositories/ffnpm/"
   },
