@@ -1,4 +1,5 @@
 /.idea
+/es
 /lib
 /node_modules
 .project
