@@ -20,6 +20,10 @@ export class UserService extends APIClient {
         return this.invokeApi('/users/currentUser', 'GET');
     }
 
+    getAllUsersOfTheCompany() {
+        return this.invokeApi('/users', 'GET');
+    }
+
     postImage(image: any) {
         const formData = new FormData();
         formData.append('contactPicture', image, 'contactPicture');
