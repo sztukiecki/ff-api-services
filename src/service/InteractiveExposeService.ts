@@ -11,6 +11,7 @@ export interface InteractiveExposeSettings {
     colors: InteractiveExposeColors;
     theme: string;
     urlIdentifier: string;
+    allowSendFromOtherContext?: boolean;
 }
 
 export interface InteractiveExposeLogos {
