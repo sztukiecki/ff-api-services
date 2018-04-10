@@ -25,7 +25,8 @@ import AdminTokenService from './service/AdminTokenService';
 import InteractiveExposeDeliveryService from './service/InteractiveExposeDeliveryService';
 import SlackIntegrationService from './service/SlackIntegrationService';
 import CognitoService from './service/CognitoService';
-import APIClient from './http/APIClient';
+import APIClient, { StoreKeys, isDefaultApi, setStageInStore, getStageFromStore, setVersionTagInStore,
+    getVersionTagFromStore } from './http/APIClient';
 
 export {
     CompanyService,
@@ -64,5 +65,11 @@ export {
 };
 
 export {
-    APIClient
+    APIClient,
+    StoreKeys,
+    isDefaultApi,
+    setStageInStore,
+    getStageFromStore,
+    setVersionTagInStore,
+    getVersionTagFromStore
 };
