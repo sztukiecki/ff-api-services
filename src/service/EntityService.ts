@@ -66,7 +66,7 @@ export class EntityService extends APIClient {
      * @param {HasRightsModel[]} listOfEntitesAsJsonString - Something like: [{"schemaId":"3ecf...","entityId":"3c30...","hasAccess":true},{"schemaId":"3ecf...","entityId":"3c30...","hasAccess":true}]
      */
     getHasAccessForMultipleEntities(userId: string, accessType: string, listOfEntitesAsJsonString: HasRightsModel[]): Promise<AxiosResponse> {
-        return this.invokeApi(`/users/${userId}/hasright/${accessType}`, 'POST', listOfEntitesAsJsonString);
+        return this.invokeApi(`/users/${userId}/hasaccess/${accessType}`, 'POST', listOfEntitesAsJsonString);
     }
 
 }
