@@ -58,6 +58,10 @@ export class ViewDefinitionService extends APIClient {
     deleteCategory(viewId: string, categoryName: string) {
         return this.invokeApi(`/views/${viewId}/categories/${categoryName}`, 'DELETE');
     }
+
+    listFieldsOfViews(viewName: string) {
+        return this.invokeApi(`/views/fields/${viewName}`, 'GET');
+    }
 }
 
 export default new ViewDefinitionService();
