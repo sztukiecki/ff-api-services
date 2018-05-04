@@ -1,47 +1,11 @@
 import axios, {AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken} from 'axios';
 import * as axiosRetry from 'axios-retry';
 import * as isNode from 'detect-node';
-import * as store from 'store';
 import ConsulClient from '@flowfact/consul-client';
 import {APIService} from "./APIMapping";
 import CognitoService from '../service/CognitoService';
 import Interceptor from '../util/Interceptor';
-
-const StoreKeys = {
-    EdgeServiceStage: 'HTTPCLIENT.APICLIENT.STAGE',
-    EdgeServiceVersionTag: 'HTTPCLIENT.APICLIENT.VERSIONTAG'
-};
-
-const defaultStage = isNode ? 'development' : 'production';
-const defaultVersionTag = isNode ? 'latest' : 'stable';
-
-const getStageFromStore = () => {
-    return store.get(StoreKeys.EdgeServiceStage) || defaultStage;
-};
-
-const getVersionTagFromStore = () => {
-    return store.get(StoreKeys.EdgeServiceVersionTag) || defaultVersionTag;
-};
-
-const setStageInStore = (stage: string) => {
-    if (stage) {
-        store.set(StoreKeys.EdgeServiceStage, stage);
-        console.log('Set stage to: ' + stage);
-    }
-};
-
-const setVersionTagInStore = (versionTag: string) => {
-    if (versionTag) {
-        store.set(StoreKeys.EdgeServiceVersionTag, versionTag);
-        console.log('Set versionTag to: ' + versionTag);
-    }
-};
-
-const isDefaultApi = () => {
-    const stage = getStageFromStore();
-    const versionTag = getVersionTagFromStore();
-    return (stage === defaultStage) && (versionTag === defaultVersionTag);
-};
+import StageConfiguration from '../util/StageConfiguration';
 
 export type ParamMap = { [key: string]: string | boolean };
 
@@ -80,10 +44,10 @@ export default abstract class APIClient {
     }
 
     private _getStage = () =>
-        isNode ? (this.constructor as typeof APIClient).stageToUse : getStageFromStore();
+        isNode ? (this.constructor as typeof APIClient).stageToUse : StageConfiguration.getStageFromStore();
 
     private _getVersionTag = () =>
-        isNode ? (this.constructor as typeof APIClient).apiVersionTag : getVersionTagFromStore();
+        isNode ? (this.constructor as typeof APIClient).apiVersionTag : StageConfiguration.getVersionTagFromStore();
 
     withUserId(userId: string): this {
         return Object.assign(Object.create(Object.getPrototypeOf(this)), this, {userId})
@@ -204,12 +168,3 @@ export default abstract class APIClient {
         }).join('&');
     }
 }
-
-export {
-    StoreKeys,
-    isDefaultApi,
-    setStageInStore,
-    getStageFromStore,
-    setVersionTagInStore,
-    getVersionTagFromStore
-};

@@ -25,8 +25,8 @@ import AdminTokenService from './service/AdminTokenService';
 import InteractiveExposeDeliveryService from './service/InteractiveExposeDeliveryService';
 import SlackIntegrationService from './service/SlackIntegrationService';
 import CognitoService from './service/CognitoService';
-import APIClient, { StoreKeys, isDefaultApi, setStageInStore, getStageFromStore, setVersionTagInStore,
-    getVersionTagFromStore } from './http/APIClient';
+import APIClient from './http/APIClient';
+import StageConfiguration, {STORE_KEYS} from './util/StageConfiguration';
 
 export {
     CompanyService,
@@ -62,6 +62,28 @@ export {
 export {
     FFElkData,
     FFAdditionalElkData
+};
+
+const StoreKeys = STORE_KEYS;
+
+const getStageFromStore = () => {
+    return StageConfiguration.getStageFromStore();
+};
+
+const getVersionTagFromStore = () => {
+    return StageConfiguration.getVersionTagFromStore();
+};
+
+const setStageInStore = (stage: string) => {
+    StageConfiguration.setStageInStore(stage);
+};
+
+const setVersionTagInStore = (versionTag: string) => {
+    StageConfiguration.setVersionTagInStore(versionTag);
+};
+
+const isDefaultApi = () => {
+    return StageConfiguration.isDefaultApi()
 };
 
 export {

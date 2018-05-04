@@ -11,14 +11,14 @@ const DEFAULT_VERSION_TAG = isNode ? 'latest' : 'stable';
 
 let instance: StageConfiguration | null = null;
 export class StageConfiguration {
-    
+
     constructor() {
         if(!instance) {
             instance = this;
         }
         return this;
     }
-    
+
     getStageFromStore() {
         return store.get(STORE_KEYS.edgeServiceStage) || DEFAULT_STAGE;
     }
@@ -49,3 +49,6 @@ export class StageConfiguration {
 }
 
 export default new StageConfiguration();
+export {
+    STORE_KEYS
+}

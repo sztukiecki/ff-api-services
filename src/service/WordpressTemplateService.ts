@@ -1,5 +1,5 @@
 import * as WPAPI from 'wpapi';
-import {getStageFromStore} from '../http/APIClient';
+import StageConfiguration from '../util/StageConfiguration';
 
 const AWS = require('aws-sdk');
 
@@ -11,7 +11,7 @@ export class WordpressTemplateService {
     cognitoToken?: string;
 
     init() {
-        let stage = getStageFromStore();
+        let stage = StageConfiguration.getStageFromStore();
         // let versionTag = getVersionTagFromStore();
 
         // There is no concept on how to implement the version into the beaverbuilder right now.
