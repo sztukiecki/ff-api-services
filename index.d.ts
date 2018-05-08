@@ -167,6 +167,7 @@ export class SchemaService {
     deleteIntegration(integrationId: string): Promise<AxiosResponse>;
     getResponseForIntegrationGetUrlByUrl(url: string): Promise<AxiosResponse>;
     getResponseForIntegrationGetUrlById(integrationId: string): Promise<AxiosResponse>;
+    getAllMembersOfGroup(groupId: string): Promise<AxiosResponse>;
 }
 
 export class MyFLOWFACTService {

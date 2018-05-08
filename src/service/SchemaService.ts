@@ -75,6 +75,10 @@ export class SchemaService extends APIClient {
     getResponseForIntegrationGetUrlById(integrationId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/integrations/${integrationId}/data`, 'GET');
     }
+
+    getAllMembersOfGroup(groupId: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/groups/${groupId}/members`, 'GET');
+    }
 }
 
 export default new SchemaService();
