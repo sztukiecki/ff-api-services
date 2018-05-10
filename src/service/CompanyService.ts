@@ -92,7 +92,7 @@ export class CompanyService extends APIClient {
      * @returns {Promise<AxiosResponse>}
      */
     createOrUpdateLegislationText(legislationText: LegislationText): Promise<AxiosResponse> {
-        return this.invokeApi('/legislationTexts', 'PUT', JSON.stringify(legislationText));
+        return this.invokeApi('/legislationTexts', 'PUT', legislationText);
     }
 
     /**
