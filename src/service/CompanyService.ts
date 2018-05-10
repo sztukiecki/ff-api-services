@@ -88,12 +88,11 @@ export class CompanyService extends APIClient {
 
     /**
      * Updates one legislation text and if it does not exists, then it will create it
-     * @param {string} id
      * @param {LegislationText} legislationText
      * @returns {Promise<AxiosResponse>}
      */
-    createOrUpdateLegislationText(id: string, legislationText: LegislationText): Promise<AxiosResponse> {
-        return this.invokeApi(`/legislationText`, 'PUT', JSON.stringify(legislationText));
+    createOrUpdateLegislationText(legislationText: LegislationText): Promise<AxiosResponse> {
+        return this.invokeApi('/legislationTexts', 'PUT', JSON.stringify(legislationText));
     }
 
     /**
