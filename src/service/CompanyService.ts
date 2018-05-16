@@ -1,6 +1,20 @@
 import {APIClient, APIMapping} from '../http';
 import { AxiosResponse } from 'axios';
 
+export interface LegislationCheckbox {
+    value: string,
+    label: string,
+    required: boolean,
+    defaultChecked: boolean
+}
+
+export interface LegislationText {
+    id: string,
+    legislationTextName: string,
+    legislationTextContent: string,
+    legislationCheckboxes: LegislationCheckbox[]
+}
+
 export class CompanyService extends APIClient {
 
     constructor() {
@@ -62,6 +76,32 @@ export class CompanyService extends APIClient {
         formData.append('new-name', newName);
 
         return this.invokeApi('/company/terms/rename', 'POST', formData);
+    }
+
+    /**
+     * Get all legislations texts from the company as JSON
+     * @returns {Promise<AxiosResponse>}
+     */
+    getLegislationTexts(): Promise<AxiosResponse> {
+        return this.invokeApi('/legislationTexts', 'GET');
+    }
+
+    /**
+     * Updates one legislation text and if it does not exists, then it will create it
+     * @param {LegislationText} legislationText
+     * @returns {Promise<AxiosResponse>}
+     */
+    createOrUpdateLegislationText(legislationText: LegislationText): Promise<AxiosResponse> {
+        return this.invokeApi('/legislationTexts', 'PUT', legislationText);
+    }
+
+    /**
+     * Deletes one legislation text of the company
+     * @param {string} id
+     * @returns {Promise<AxiosResponse>}
+     */
+    deleteLegislationText(id: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/legislationTexts/${id}`, 'DELETE');
     }
 }
 
