@@ -1,13 +1,13 @@
 {
   "name": "@flowfact/api-services",
   "version": "3.0.0-SNAPSHOT",
-  "description": "",
+  "description": "middleware of flowfact to interact between frontend and backend",
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
   "repository": "ssh://git@bb.flowfact.com:7999/npmmod/ff-api-services.git",
   "author": "FLOWFACT GmbH",
-  "license": "",
+  "license": "SEE LICENSE IN LICENSE",
   "sideEffects": false,
   "publishConfig": {
     "registry": "https://arm.flowfact-ops.cloud/content/repositories/ffnpm/"
