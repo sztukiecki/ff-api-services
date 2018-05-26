@@ -36,7 +36,7 @@ const APIMapping = {
     }),
     entityService: new APIService('entity-service', {
         'axios-retry': {
-            retries: 4
+            retries: 1
         }
     }),
     schemaService: new APIService('schema-service', {
