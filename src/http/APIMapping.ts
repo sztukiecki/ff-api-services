@@ -69,6 +69,11 @@ const APIMapping = {
             retries: 4
         }
     }),
+    agentRecommendationService: new APIService('agent-recommendation-service', {
+        'axios-retry': {
+            retries: 1
+        }
+    }),
     entityExportService: new APIService('entity-export-service', {
         'axios-retry': {
             retries: 4
