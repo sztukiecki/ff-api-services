@@ -1,5 +1,13 @@
 import {APIClient, APIMapping} from '../http';
 import {AxiosResponse} from 'axios';
+import {DslBuilder} from "@flowfact/node-flowdsl";
+import {Flowdsl} from "@flowfact/node-flowdsl/lib/Flowdsl";
+
+export interface FilterConfiguration {
+    value: string,
+    fields: string[],
+    limitResponse: boolean // if true, than just the fields in the fields array will be returned
+}
 
 export class SearchService extends APIClient {
 
@@ -34,64 +42,67 @@ export class SearchService extends APIClient {
         return this.invokeApi(`/search/${searchId}`, 'PUT', searchModel);
     }
 
-    search(query: any, index: string, page: number = 1, size?: number) {
+    search(query: Flowdsl, index: string, page: number = 1, size?: number) {
         let queryParams: any = {};
         if (page) {
-            queryParams.page = page;
-        }
-        if (size) {
-            queryParams.size = size;
-        }
-        if (typeof query === 'string') {
-            query = JSON.parse(query);
-        }
-        return this.invokeApi('/index/' + index, 'POST', query, {queryParams});
-    }
-
-    filter(index: string, page: number = 1, size: number = 30, filter: string, sorting: any) {
-        let queryParams: any = {};
-        if (page) {
-            queryParams.page = page;
+            // page -1 because the the pages start at 0 on the backend
+            queryParams.page = (page - 1);
         }
         if (size) {
             queryParams.size = size;
         }
 
-        return this.invokeApi('/index/' + index, 'POST', this.buildQuery(filter, sorting), {queryParams});
+        return this.invokeApi('/schemas/' + index, 'POST', query, {
+            queryParams: queryParams,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
     }
 
-    buildQuery(filter: string, sorting: any) {
-        let query = {};
-        if (!filter) {
-            query = {
-                'query': {
-                    'match_all': {}
-                }
-            };
-        } else {
-            query = {
-                'query': {
-                    'match_phrase': {
-                        '_all': filter
-                    }
-                }
+    filter(index: string, page: number = 1, size: number = 30, filter: FilterConfiguration, sorting: any) {
+        let queryParams: any = {};
+        if (page) {
+            // page -1 because the the pages start at 0 on the backend
+            queryParams.page = (page - 1);
+        }
+        if (size) {
+            queryParams.size = size;
+        }
+
+        return this.invokeApi('/schemas/' + index, 'POST', this.buildQuery(filter, sorting), {
+            queryParams: queryParams,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+
+    buildQuery(filterConfiguration: FilterConfiguration, sorting: any): Flowdsl {
+        const builder = new DslBuilder();
+        builder.target('ENTITY');
+        builder.distinct(false);
+
+        if (filterConfiguration) {
+            if (filterConfiguration.value && filterConfiguration.value !== '')
+                filterConfiguration.fields.forEach(field => {
+                    builder.withCondition({
+                        type: 'HASFIELDWITHVALUE',
+                        field: field,
+                        value: filterConfiguration.value
+                    });
+                });
+
+            if (filterConfiguration.limitResponse) {
+                builder.fetch(filterConfiguration.fields);
             }
         }
 
         if (sorting) {
-            query['sort'] = {
-                _script: {
-                    type: 'string',
-                    order: sorting.order,
-                    script: {
-                        lang: 'painless',
-                        inline: `def field = doc['${sorting.key}.values.raw']; if(field.value != null) { return field.value.toString().toUpperCase(); } return '';`
-                    }
-                }
-            }
+            // don't do anything right now, because the flowdsl doesn't support sorting.
         }
 
-        return query;
+        return builder.build();
     }
 }
 

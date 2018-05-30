@@ -2,7 +2,7 @@ import {
     CognitoUserPool, CognitoUser, AuthenticationDetails, CognitoUserSession
 } from 'amazon-cognito-identity-js';
 import StageConfiguration from '../util/StageConfiguration';
-import {AWSError} from "aws-sdk";
+import {AWSError} from 'aws-sdk';
 import {TokenModel} from "../../index";
 
 const AWS = require('aws-sdk');
