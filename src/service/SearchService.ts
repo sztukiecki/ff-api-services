@@ -6,7 +6,7 @@ import {Flowdsl} from "@flowfact/node-flowdsl/lib/Flowdsl";
 export interface FilterConfiguration {
     value: string,
     fields: string[],
-    limitResponse: boolean // if true, than just the fields in the fields array will be returned
+    limitResponse?: boolean // if true, than just the fields in the fields array will be returned
 }
 
 export class SearchService extends APIClient {
@@ -46,7 +46,7 @@ export class SearchService extends APIClient {
         let queryParams: any = {};
         if (page) {
             // page -1 because the the pages start at 0 on the backend
-            queryParams.page = (page - 1);
+            queryParams.page = page;
         }
         if (size) {
             queryParams.size = size;
@@ -64,7 +64,7 @@ export class SearchService extends APIClient {
         let queryParams: any = {};
         if (page) {
             // page -1 because the the pages start at 0 on the backend
-            queryParams.page = (page - 1);
+            queryParams.page = page;
         }
         if (size) {
             queryParams.size = size;
