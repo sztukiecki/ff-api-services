@@ -14,10 +14,13 @@ export class AgentRecommendationService extends APIClient {
         return this.invokeApi(`/public/authenticated/getViewForProspect?accessToken=${token}`, 'GET').then(s => s.data);
     }
 
+    getCompanyAndUser(token: string) {
+        return this.invokeApi(`/public/authenticated/companyAndUser?accessToken=${token}`, 'GET').then(s => s.data);
+    }
+
     updateFieldWithSpecificValue(field: string, value: any, token: string) {
         return this.invokeApi(`/public/authenticated/updateFieldWithSpecificValue/${field}?accessToken=${token}`, 'PATCH', value).then(s => s.data);
     }
-
 }
 
 export default new AgentRecommendationService();
