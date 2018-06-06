@@ -1,7 +1,8 @@
 import {APIClient, APIMapping} from '../http';
 import {AxiosResponse} from 'axios';
 import {DslBuilder} from "@flowfact/node-flowdsl";
-import {Flowdsl} from "@flowfact/node-flowdsl/lib/Flowdsl";
+import {Flowdsl, FlowdslConditionUnion} from "@flowfact/node-flowdsl/lib/Flowdsl";
+import {EntityIdCondition, HasFieldWithValueCondition} from "@flowfact/node-flowdsl/src/Flowdsl";
 
 export interface FilterConfiguration {
     value: string,
@@ -84,14 +85,27 @@ export class SearchService extends APIClient {
         builder.distinct(false);
 
         if (filterConfiguration) {
-            if (filterConfiguration.value && filterConfiguration.value !== '')
-                filterConfiguration.fields.forEach(field => {
-                    builder.withCondition({
+            if (filterConfiguration.value && filterConfiguration.value !== '') {
+                const conditions: FlowdslConditionUnion[] = filterConfiguration.fields.map(field => {
+                    if (field === 'id') {
+                        return <EntityIdCondition>{
+                            type: 'ENTITYID',
+                            values: [filterConfiguration.value]
+                        };
+                    }
+                    return <HasFieldWithValueCondition>{
                         type: 'HASFIELDWITHVALUE',
                         field: field,
-                        value: filterConfiguration.value
-                    });
+                        value: filterConfiguration.value,
+                        operator: 'LIKE'
+                    };
                 });
+
+                builder.withCondition({
+                    type: 'OR',
+                    conditions: conditions
+                });
+            }
 
             if (filterConfiguration.limitResponse) {
                 builder.fetch(filterConfiguration.fields);
