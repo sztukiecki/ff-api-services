@@ -10,6 +10,27 @@ export class AgentRecommendationService extends APIClient {
         return this.invokeApi(`/agent/schema/${schemaId}/entity/${entityId}`, 'GET').then(s => s.data);
     }
 
+    uploadAgentVideo(schemaId: string, entityId: string, file: any) {
+        let formData = new FormData();
+        formData.append('file', file);
+        return this.invokeApi(`/agent/upload/schema/${schemaId}/entity/${entityId}`, 'POST', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(s => s.data);
+    }
+
+    uploadRaterVideo(schemaId: string, entityId: string, file: any, token: string) {
+        let formData = new FormData();
+        formData.append('file', file);
+        return this.invokeApi(`/public/authenticated/upload/schema/${schemaId}/entity/${entityId}?accessToken=${token}`, 'POST', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then(s => s.data);
+    }
+
+
     getViewForRater(token: string) {
         return this.invokeApi(`/public/authenticated/getViewForProspect?accessToken=${token}`, 'GET').then(s => s.data);
     }
