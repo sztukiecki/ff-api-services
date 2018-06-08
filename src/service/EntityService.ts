@@ -1,5 +1,6 @@
 import {APIClient, APIMapping} from '../http';
 import {AxiosResponse} from 'axios';
+import {Flowdsl} from "@flowfact/node-flowdsl/lib/Flowdsl";
 
 export interface HasRightsModel {
     schemaId: string,
@@ -17,32 +18,43 @@ export class EntityService extends APIClient {
         return this.invokeApi(`/schemas/${schemaId}`, 'POST', entity || {});
     }
 
+    searchEntity(index: string, viewName: string, searchTerm: string, flowdsl?: Flowdsl, page: number = 1, size: number = 10): Promise<AxiosResponse> {
+        const queryParams: any = {};
+        queryParams.page = page;
+        queryParams.size = size;
+        queryParams.viewName = viewName;
+
+        return this.invokeApi(`/search/schemas/${index}`, 'POST', flowdsl, {
+            queryParams: queryParams
+        });
+    }
+
     /**
      * Delete a entity in the Backend
      */
-    deleteEntity(entityId: string, schemaId: string) {
+    deleteEntity(entityId: string, schemaId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/schemas/${schemaId}/entities/${entityId}`, 'DELETE');
     }
 
     /**
      * Update a entity in the backend
      */
-    updateEntityField(schemaId: string, entityId: string, field: any) {
+    updateEntityField(schemaId: string, entityId: string, field: any): Promise<AxiosResponse> {
         return this.invokeApi(`/schemas/${schemaId}/entities/${entityId}`, 'PATCH', field);
     }
 
-    getEntityWithViewDefinition(viewId: string, schemaId: string, entityId: string) {
+    getEntityWithViewDefinition(viewId: string, schemaId: string, entityId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/views/${viewId}/schemas/${schemaId}/entities/${entityId}`, 'GET');
     }
 
-    getEntity(schemaId: string, entityId: string) {
+    getEntity(schemaId: string, entityId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/schemas/${schemaId}/entities/${entityId}`, 'GET');
     }
 
     /**
      * Get the history of a entity in a well formatted form.
      */
-    getHistory(schemaId: string, entityId: string, page: number) {
+    getHistory(schemaId: string, entityId: string, page: number): Promise<AxiosResponse> {
         return this.invokeApi(`/schemas/${schemaId}/entities/${entityId}/history?page=${page}&size=15&order=DESC`, 'GET');
     }
 
