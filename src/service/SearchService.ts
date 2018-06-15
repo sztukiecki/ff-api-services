@@ -46,7 +46,6 @@ export class SearchService extends APIClient {
     search(query: Flowdsl, index: string, page: number = 1, size?: number) {
         let queryParams: any = {};
         if (page) {
-            // page -1 because the the pages start at 0 on the backend
             queryParams.page = page;
         }
         if (size) {

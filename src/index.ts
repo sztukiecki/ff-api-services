@@ -28,6 +28,7 @@ import SlackIntegrationService from './service/SlackIntegrationService';
 import CognitoService from './service/CognitoService';
 import APIClient from './http/APIClient';
 import StageConfiguration, {STORE_KEYS} from './util/StageConfiguration';
+import FullTextSearchService from './service/FullTextSearchService';
 
 export {
     CompanyService,
@@ -57,7 +58,8 @@ export {
     AdminTokenService,
     SlackIntegrationService,
     CognitoService,
-    AgentRecommendationService
+    AgentRecommendationService,
+    FullTextSearchService
 };
 
 // types only
