@@ -84,6 +84,11 @@ const APIMapping = {
             retries: 4
         }
     }),
+	fullTextSearchService: new APIService('full-text-search-service', {
+		'axios-retry': {
+			retries: 1
+		}
+	}),
     formService: new APIService('form-service', {
         'axios-retry': {
             retries: 4
