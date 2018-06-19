@@ -42,6 +42,10 @@ export class AgentRecommendationService extends APIClient {
     updateFieldWithSpecificValue(field: string, value: any, token: string) {
         return this.invokeApi(`/public/authenticated/updateFieldWithSpecificValue/${field}?accessToken=${token}`, 'PATCH', value).then(s => s.data);
     }
+
+    finishRating(token: string, value: any) {
+        return this.invokeApi(`/public/authenticated/finishRating?accessToken=${token}`, 'POST', value).then(s => s.data);
+    }
 }
 
 export default new AgentRecommendationService();
