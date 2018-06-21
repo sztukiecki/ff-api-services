@@ -11,7 +11,7 @@ export class SchemaService extends APIClient {
         return this.invokeApi('/stats', 'GET', undefined, additionalParams);
     }
 
-    getAllSchemas(withGroups: boolean = false): Promise<AxiosResponse> {
+    getAllSchemas(withGroups: boolean = false, short: boolean = false): Promise<AxiosResponse> {
         let queryParams: any = {
             transform: true
         };
@@ -19,6 +19,11 @@ export class SchemaService extends APIClient {
         if (withGroups) {
             queryParams.groups = 'true';
         }
+
+        if(short) {
+            queryParams.short = 'true';
+        }
+
         return this.invokeApi('/schemas', 'GET', undefined, {queryParams});
     }
 

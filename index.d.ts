@@ -1,5 +1,6 @@
 import {AxiosResponse} from "axios";
 import {SendInteractiveExposeModel} from "./src/service/InteractiveExposeService";
+import {EntityQuery, HasRightsModel} from "./src/service/EntityService";
 
 export default interface FileModel {
     bucketName: string;
@@ -155,7 +156,7 @@ export class SearchService {
 
 export class SchemaService {
     loadStats(withGroups: boolean): Promise<AxiosResponse>;
-    getAllSchemas(withGroups: boolean): Promise<AxiosResponse>;
+    getAllSchemas(withGroups: boolean, short: boolean): Promise<AxiosResponse>;
     getDataBySchemaId(schemaId: string, page: number, size?: number): Promise<AxiosResponse>;
     getSchema(schemaId: string, queryParams: any): Promise<AxiosResponse>;
     createSchema(schema: any): Promise<AxiosResponse>;
@@ -182,7 +183,9 @@ export class EntityService {
     static getEntityWithViewDefinition(viewId: string, schemaId: string, entityId: string): Promise<any>;
     static getEntity(schemaId: string, entityId: string): Promise<any>;
     static getHistory(schemaId: string, entityId: string, page: number): Promise<any>;
-
+    static getHasAccessForSingleEntity(schemaId: string, entityId: string, userId: string, accessType: string): Promise<any>;
+    static getHasAccessForMultipleEntities(userId: string, entities: HasRightsModel[]): Promise<any>;
+    static transformEntitiesWithView(schemaId: string, entityQueries: EntityQuery[]): Promise<any>;
 }
 
 export class AdminTokenService {

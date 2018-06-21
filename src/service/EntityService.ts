@@ -8,6 +8,11 @@ export interface HasRightsModel {
     hasAccess: boolean
 }
 
+export interface EntityQuery {
+    entityId: string,
+    schemaId: string
+}
+
 export class EntityService extends APIClient {
 
     constructor() {
@@ -75,12 +80,22 @@ export class EntityService extends APIClient {
      * @returns object - Returns a JSON object, that looks like the one you posted, but with an addtional field for each item with the name "hasAccess" and a boolean.
      * @param {string} userId
      * @param {string} accessType - READ, UPDATE, SEARCH, DELETE
-     * @param {HasRightsModel[]} listOfEntitesAsJsonString - Something like: [{"schemaId":"3ecf...","entityId":"3c30...","hasAccess":true},{"schemaId":"3ecf...","entityId":"3c30...","hasAccess":true}]
+     * @param {HasRightsModel[]} entities - Something like: [{"schemaId":"3ecf...","entityId":"3c30...","hasAccess":true},{"schemaId":"3ecf...","entityId":"3c30...","hasAccess":true}]
      */
-    getHasAccessForMultipleEntities(userId: string, accessType: string, listOfEntitesAsJsonString: HasRightsModel[]): Promise<AxiosResponse> {
-        return this.invokeApi(`/users/${userId}/hasaccess/${accessType}`, 'POST', listOfEntitesAsJsonString);
+    getHasAccessForMultipleEntities(userId: string, accessType: string, entities: HasRightsModel[]): Promise<AxiosResponse> {
+        return this.invokeApi(`/users/${userId}/hasaccess/${accessType}`, 'POST', entities);
     }
 
+    /**
+     * This method sends entityIds and schemaIds to the entity-service and the entity-service transform this data
+     * into views with the entity. So an array will be returned, with the viewEntity.
+     * @param {string} viewName
+     * @param {EntityQuery[]} entityQueries
+     * @returns {Promise<AxiosResponse>}
+     */
+    transformEntitiesWithView(viewName: string, entityQueries: EntityQuery[]): Promise<AxiosResponse> {
+        return this.invokeApi(`/views/${viewName}/entities`, 'POST', entityQueries);
+    }
 }
 
 export default new EntityService();
