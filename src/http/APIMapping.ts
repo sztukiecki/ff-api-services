@@ -39,6 +39,11 @@ const APIMapping = {
             retries: 1
         }
     }),
+    cognitoClientService: new APIService('cognito-client-service', {
+        'axios-retry': {
+            retries: 4
+        }
+    }),
     schemaService: new APIService('schema-service', {
         'axios-retry': {
             retries: 4
