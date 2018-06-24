@@ -1,5 +1,5 @@
 import {APIClient, APIMapping} from '../http';
-import { AxiosResponse } from 'axios';
+import {AxiosResponse} from 'axios';
 
 export class UserService extends APIClient {
 
@@ -32,6 +32,10 @@ export class UserService extends APIClient {
 
     updateUser(user: any) {
         return this.invokeApi('/users', 'PUT', user);
+    }
+
+    isUserAlreadyKnown(aliasMailAddress: string) {
+        return this.invokeApi('public/users/exists', 'GET', undefined, {queryParams: {aliasMailAddress: aliasMailAddress}}).then(response => response.data)
     }
 }
 
