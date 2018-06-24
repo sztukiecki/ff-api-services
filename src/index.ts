@@ -29,10 +29,12 @@ import CognitoService from './service/CognitoService';
 import APIClient from './http/APIClient';
 import StageConfiguration, {STORE_KEYS} from './util/StageConfiguration';
 import FullTextSearchService from './service/FullTextSearchService';
+import CognitoClientService from './service/CognitoClientService';
 
 export {
     CompanyService,
     UserService,
+    CognitoClientService,
     TemplateService,
     TagsService,
     SchemaService,
