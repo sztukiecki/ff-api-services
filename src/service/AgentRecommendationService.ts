@@ -46,6 +46,11 @@ export class AgentRecommendationService extends APIClient {
     finishRating(token: string, value: any) {
         return this.invokeApi(`/public/authenticated/finishRating?accessToken=${token}`, 'POST', value).then(s => s.data);
     }
+
+
+    createPreconditions() {
+        return this.invokeApi(`/agent/preconditions`, 'POST').then(s => s.data);
+    }
 }
 
 export default new AgentRecommendationService();
