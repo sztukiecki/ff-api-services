@@ -35,7 +35,7 @@ export class UserService extends APIClient {
     }
 
     isUserAlreadyKnown(aliasMailAddress: string) {
-        return this.invokeApi('public/users/exists', 'GET', undefined, {queryParams: {aliasMailAddress: aliasMailAddress}}).then(response => response.data)
+        return this.invokeApi('public/users/exists', 'GET', undefined, {queryParams: {aliasMailAddress: aliasMailAddress}});
     }
 }
 
