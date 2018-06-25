@@ -1,6 +1,6 @@
-import { APIClient, APIMapping } from '../http';
-import FileModel from "../util/FileModel";
-import { AxiosResponse } from "axios";
+import {APIClient, APIMapping} from '../http';
+import FileModel from '../util/FileModel';
+import {AxiosResponse} from 'axios';
 
 export interface InteractiveExposeColors {
     accent: string;
@@ -151,6 +151,23 @@ export class InteractiveExposeService extends APIClient {
      */
     async setupDomain(): Promise<AxiosResponse> {
         return this.invokeApi('/domain/setup', 'POST');
+    }
+
+    /**
+     * Sets the last activity time of the user session
+     */
+    keepAlive(token: string, userSessionId: string): Promise<AxiosResponse> {
+        return this.invokeApi(
+            '/public/interactiveExposes/keepAlive',
+            'GET',
+            {},
+            {
+                queryParams: {
+                    token,
+                    userSessionId
+                }
+            }
+        );
     }
 }
 
