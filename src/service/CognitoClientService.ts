@@ -8,8 +8,14 @@ export class CognitoClientService extends APIClient {
     }
 
     getLoginNameByAliasMailAddress(aliasMailAddress: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/public/users/loginname/`, 'GET', undefined, {queryParams: {aliasMailAddress: aliasMailAddress}}).then(response => response.data);
+        return this.invokeApi(`/public/users/loginname/`, 'GET', undefined, {queryParams: {aliasMailAddress: aliasMailAddress}});
     }
+
+
+    linkSAAndCognitoAccount(aliasMailAddress: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/public/users/link`, 'POST', undefined, {queryParams: {aliasMailAddress: aliasMailAddress}});
+    }
+
 
 }
 
