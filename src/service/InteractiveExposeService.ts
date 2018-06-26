@@ -46,6 +46,18 @@ export interface SendInteractiveExposeModel {
     }
 }
 
+export interface InteractiveExposeMapping {
+    schemaId: string,
+    maxStageCount: number,
+    settings: any,
+    ratingSettings: any,
+    initialAgreement: any,
+    stageConfigurations: any,
+    additionalData: any,
+    sections: any,
+    advancedStageConfigurationMappings: any
+}
+
 export class InteractiveExposeService extends APIClient {
 
     constructor() {
@@ -97,7 +109,6 @@ export class InteractiveExposeService extends APIClient {
     /**
      * Check requirements of the interactive exposé and if necessary solve them
      */
-
     async checkRequirements(): Promise<AxiosResponse> {
         return this.invokeApi(`/interactiveExposes/checkRequirements`, 'GET');
     }
@@ -151,6 +162,27 @@ export class InteractiveExposeService extends APIClient {
      */
     async setupDomain(): Promise<AxiosResponse> {
         return this.invokeApi('/domain/setup', 'POST');
+    }
+
+    /**
+     * Get interactive expose mapping. Default mapping is just named so, cause of convienience
+     */
+    async getMappingOrDefault(schemaId: string = 'defaultMapping'): Promise<AxiosResponse> {
+        return this.invokeApi(`/mapping/${schemaId}`, 'GET');
+    }
+
+    /**
+     * Get interactive expose mapping. Default mapping is just named so, cause of convienience
+     */
+    async getAllMappings(): Promise<AxiosResponse> {
+        return this.invokeApi('/mapping/all', 'GET');
+    }
+
+    /**
+     * Update interactive expose mapping
+     */
+    async updateMapping(mapping: InteractiveExposeMapping): Promise<AxiosResponse> {
+        return this.invokeApi('/mapping', 'PUT', mapping);
     }
 
     /**
