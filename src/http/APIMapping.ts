@@ -29,11 +29,7 @@ const APIMapping = {
             retries: 4
         }
     }),
-    companyService: new APIService('company-service', {
-        'axios-retry': {
-            retries: 4
-        }
-    }),
+    companyService: new APIService('company-service'),
     entityService: new APIService('entity-service', {
         'axios-retry': {
             retries: 1

@@ -32,7 +32,11 @@ export class AgentRecommendationService extends APIClient {
 
 
     getViewForRater(token: string) {
-        return this.invokeApi(`/public/authenticated/getViewForProspect?accessToken=${token}`, 'GET').then(s => s.data);
+        return this.invokeApi(`/public/authenticated/getViewForProspect?accessToken=${token}`, 'GET', undefined, {
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(s => s.data);
     }
 
     getCompanyAndUser(token: string) {
