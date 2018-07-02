@@ -1,4 +1,5 @@
 import {APIClient, APIMapping} from '../http';
+import {AxiosResponse} from "axios";
 
 export class AgentRecommendationService extends APIClient {
 
@@ -43,8 +44,8 @@ export class AgentRecommendationService extends APIClient {
         return this.invokeApi(`/public/authenticated/companyAndUser?accessToken=${token}`, 'GET').then(s => s.data);
     }
 
-    updateFieldWithSpecificValue(field: string, value: any, token: string) {
-        return this.invokeApi(`/public/authenticated/updateFieldWithSpecificValue/${field}?accessToken=${token}`, 'PATCH', value).then(s => s.data);
+    updateEntity(fieldValueMapping: object, token: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/public/authenticated/updateEntity?accessToken=${token}`, 'PATCH', fieldValueMapping);
     }
 
     finishRating(token: string, value: any) {
