@@ -30,6 +30,7 @@ import APIClient from './http/APIClient';
 import StageConfiguration, {STORE_KEYS} from './util/StageConfiguration';
 import FullTextSearchService from './service/FullTextSearchService';
 import CognitoClientService from './service/CognitoClientService';
+import SprengnetterService from './service/SprengnetterService';
 
 export {
     CompanyService,
@@ -61,7 +62,8 @@ export {
     SlackIntegrationService,
     CognitoService,
     AgentRecommendationService,
-    FullTextSearchService
+    FullTextSearchService,
+    SprengnetterService
 };
 
 // types only

@@ -152,7 +152,8 @@ const APIMapping = {
         'axios-retry': {
             retries: 1
         }
-    })
+    }),
+    spregnetterService: new APIService('sprengnetter-service')
 };
 
 export default APIMapping;

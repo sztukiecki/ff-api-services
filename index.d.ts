@@ -171,6 +171,12 @@ export class SchemaService {
     getAllMembersOfGroup(groupId: string): Promise<AxiosResponse>;
 }
 
+export class SprengnetterService {
+    fetchRentHeatmap(body: any): Promise<AxiosResponse>;
+    fetchValuationHeatmap(body: any): Promise<AxiosResponse>;
+    fetchValuation(body: any): Promise<AxiosResponse>;
+}
+
 export class MyFLOWFACTService {
     static doOrder(order: object): Promise<any>;
     static getProductPrice(productName: string): Promise<any>;
