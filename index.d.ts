@@ -175,6 +175,7 @@ export class SprengnetterService {
     fetchRentHeatmap(body: any): Promise<AxiosResponse>;
     fetchValuationHeatmap(body: any): Promise<AxiosResponse>;
     fetchValuation(body: any): Promise<AxiosResponse>;
+    fetchRentValuation(body: any): Promise<AxiosResponse>;
 }
 
 export class MyFLOWFACTService {

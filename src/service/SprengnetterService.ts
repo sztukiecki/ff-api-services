@@ -18,6 +18,10 @@ export class SprengnetterService extends APIClient {
     fetchValuation(body: any): Promise<AxiosResponse> {
         return this.invokeApi('/api/valuation', 'POST', body);
     }
+
+    fetchRentValuation(body: any): Promise<AxiosResponse> {
+        return this.invokeApi('/api/rent', 'POST', body);
+    }
 }
 
 export default new SprengnetterService();
