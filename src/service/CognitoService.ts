@@ -3,7 +3,13 @@ import {
 } from 'amazon-cognito-identity-js';
 import StageConfiguration from '../util/StageConfiguration';
 import {AWSError} from 'aws-sdk';
-import {TokenModel} from "../../index";
+
+export interface TokenModel {
+    idToken: string,
+    accessToken: string,
+    refreshToken: string,
+    username: string
+}
 
 const AWS = require('aws-sdk');
 
