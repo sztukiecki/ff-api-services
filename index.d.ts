@@ -178,6 +178,12 @@ export class SprengnetterService {
     fetchRentValuation(body: any): Promise<AxiosResponse>;
 }
 
+export class PropertyMarketingPhaseService {
+    fetchPhases(schemaId: string): Promise<AxiosResponse>;
+    fetchCurrentPhase(schemaId: string, entityId: string): Promise<AxiosResponse>;
+    updateCurrentPhase(schemaId: string, entityId: string, name: string): Promise<AxiosResponse>;
+}
+
 export class MyFLOWFACTService {
     static doOrder(order: object): Promise<any>;
     static getProductPrice(productName: string): Promise<any>;

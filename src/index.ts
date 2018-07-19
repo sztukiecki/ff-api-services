@@ -31,6 +31,7 @@ import StageConfiguration, {STORE_KEYS} from './util/StageConfiguration';
 import FullTextSearchService from './service/FullTextSearchService';
 import CognitoClientService from './service/CognitoClientService';
 import SprengnetterService from './service/SprengnetterService';
+import PropertyMarketingPhaseService from './service/PropertyMarketingPhaseService';
 
 export {
     CompanyService,
@@ -63,7 +64,8 @@ export {
     CognitoService,
     AgentRecommendationService,
     FullTextSearchService,
-    SprengnetterService
+    SprengnetterService,
+    PropertyMarketingPhaseService
 };
 
 // types only
