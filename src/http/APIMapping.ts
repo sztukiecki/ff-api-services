@@ -50,7 +50,8 @@ const APIMapping = {
     sampleDataService: new APIService('sampledata-service'),
     slackIntegrationService: new APIService('slack-integration-service'),
     spregnetterService: new APIService('sprengnetter-service'),
-    propertyMarketingPhaseService: new APIService('property-marketing-phase-service')
+    propertyMarketingPhaseService: new APIService('property-marketing-phase-service'),
+    portalManagementService: new APIService('portal-management-service')
 };
 
 export default APIMapping;

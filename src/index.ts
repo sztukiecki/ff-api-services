@@ -32,6 +32,7 @@ import FullTextSearchService from './service/FullTextSearchService';
 import CognitoClientService from './service/CognitoClientService';
 import SprengnetterService from './service/SprengnetterService';
 import PropertyMarketingPhaseService from './service/PropertyMarketingPhaseService';
+import PortalManagementService from './service/PortalManagementService';
 
 export {
     CompanyService,
@@ -65,7 +66,8 @@ export {
     AgentRecommendationService,
     FullTextSearchService,
     SprengnetterService,
-    PropertyMarketingPhaseService
+    PropertyMarketingPhaseService,
+    PortalManagementService
 };
 
 // types only
