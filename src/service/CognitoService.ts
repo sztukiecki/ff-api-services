@@ -120,6 +120,11 @@ export class CognitoService {
                 await AWS.config.credentials.getPromise();
                 await AWS.config.credentials.refreshPromise();
 
+                this.userPool = new CognitoUserPool({
+					UserPoolId: SETTINGS[stage].UserPoolId,
+					ClientId: SETTINGS[stage].ClientId
+				});
+
                 // get the session. If this is valid, than the login was successful.
                 this.userPool!.getCurrentUser()!.getSession((error: Error, session: CognitoUserSession) => {
                     if (error) {

@@ -51,7 +51,8 @@ const APIMapping = {
     slackIntegrationService: new APIService('slack-integration-service'),
     spregnetterService: new APIService('sprengnetter-service'),
     propertyMarketingPhaseService: new APIService('property-marketing-phase-service'),
-    portalManagementService: new APIService('portal-management-service')
+    portalManagementService: new APIService('portal-management-service'),
+    office365AuthenticationService: new APIService('office365-sync-contacts-service')
 };
 
 export default APIMapping;

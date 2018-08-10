@@ -33,6 +33,7 @@ import CognitoClientService from './service/CognitoClientService';
 import SprengnetterService from './service/SprengnetterService';
 import PropertyMarketingPhaseService from './service/PropertyMarketingPhaseService';
 import PortalManagementService from './service/PortalManagementService';
+import Office365AuthenticationService from './service/Office365AuthenticationService';
 
 export {
     CompanyService,
@@ -67,7 +68,8 @@ export {
     FullTextSearchService,
     SprengnetterService,
     PropertyMarketingPhaseService,
-    PortalManagementService
+    PortalManagementService,
+    Office365AuthenticationService
 };
 
 // types only
