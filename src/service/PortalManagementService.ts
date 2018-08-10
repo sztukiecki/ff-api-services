@@ -1,6 +1,10 @@
 import {APIClient, APIMapping} from '../http';
 import {AxiosResponse} from "axios";
 
+export interface PortalAuthenticationModel {
+    callbackUrl: string
+}
+
 export class PortalManagementService extends APIClient {
 
     constructor() {
@@ -19,10 +23,22 @@ export class PortalManagementService extends APIClient {
         return this.invokeApi('/portalTypes', 'GET');
     }
 
-    registerPortal(portalType: 'IS24' | 'OPEN_IMMO'): Promise<AxiosResponse> {
-        return this.invokeApi('/portals/register', 'POST', {
-            portalType: portalType
-        });
+    createPortal(portalType: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/portals/create/${portalType}`, 'POST');
+    }
+
+    authenticatePortal(portalId: string, portalAuthenticationModel: PortalAuthenticationModel) {
+        return this.invokeApi(`/portals/${portalId}/authenticate`, 'POST', portalAuthenticationModel)
+    }
+
+    is24AuthenticationCallback(portalId: string, verifier: string, token: string, state: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/portals/is24/authenticate/${portalId}/callback`, 'GET', undefined, {
+            queryParams: {
+                oauth_verifier: verifier,
+                oauth_token: token,
+                state: state
+            }
+        })
     }
 }
 

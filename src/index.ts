@@ -5,7 +5,6 @@ import TagsService from './service/TagService';
 import FunnelService from './service/FunnelService';
 import GeolocationService from './service/GeolocationService';
 import PresetService from './service/PresetService';
-import ActivityService from './service/ActivityService';
 import AgentRecommendationService from './service/AgentRecommendationService';
 import SearchService from './service/SearchService';
 import TemplateService from './service/TemplateService';
@@ -15,7 +14,6 @@ import EmailService from './service/EmailService';
 import ViewDefinitionService from './service/ViewDefinitionService';
 import EntityService from './service/EntityService';
 import RelogService, {FFAdditionalElkData, FFElkData} from './service/RelogService';
-import MyFLOWFACTService from './service/MyFLOWFACTService';
 import MultimediaService from './service/MultimediaService';
 import FlowfactExportInternalService from './service/FlowfactExportInternalService';
 import InteractiveExposeService from './service/InteractiveExposeService';
@@ -45,7 +43,6 @@ export {
     FunnelService,
     GeolocationService,
     PresetService,
-    ActivityService,
     SearchService,
     WordpressTemplateService,
     FormService,
@@ -53,7 +50,6 @@ export {
     ViewDefinitionService,
     EntityService,
     RelogService,
-    MyFLOWFACTService,
     MultimediaService,
     FlowfactExportInternalService,
     InteractiveExposeService,
