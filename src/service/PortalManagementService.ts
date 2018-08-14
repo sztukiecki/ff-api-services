@@ -50,7 +50,7 @@ export class PortalManagementService extends APIClient {
         return this.invokeApi(`/portals/${portalId}/authenticate`, 'POST', portalAuthenticationModel)
     }
 
-    publishEstate(publishRequest: PublishRequest): Promise<AxiosResponse> {
+    publishEstates(publishRequest: PublishRequest): Promise<AxiosResponse> {
         return this.invokeApi('/publish', 'POST', publishRequest);
     }
 
