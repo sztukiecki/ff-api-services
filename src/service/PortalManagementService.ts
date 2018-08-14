@@ -5,6 +5,17 @@ export interface PortalAuthenticationModel {
     callbackUrl: string
 }
 
+export interface PublishRequest {
+    portalId: string,
+    entries: PublishRequestEntry[]
+}
+
+export interface PublishRequestEntry {
+    entityId: string,
+    externalId?: string,
+    targetStatus: 'OFFLINE' | 'ONLINE'
+}
+
 export class PortalManagementService extends APIClient {
 
     constructor() {
@@ -37,6 +48,10 @@ export class PortalManagementService extends APIClient {
 
     authenticatePortal(portalId: string, portalAuthenticationModel: PortalAuthenticationModel) {
         return this.invokeApi(`/portals/${portalId}/authenticate`, 'POST', portalAuthenticationModel)
+    }
+
+    publishEstate(publishRequest: PublishRequest): Promise<AxiosResponse> {
+        return this.invokeApi('/publish', 'POST', publishRequest);
     }
 
     is24AuthenticationCallback(portalId: string, verifier: string, token: string, state: string): Promise<AxiosResponse> {
