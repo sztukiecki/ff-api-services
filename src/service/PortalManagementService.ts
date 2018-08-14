@@ -23,6 +23,10 @@ export class PortalManagementService extends APIClient {
         return this.invokeApi('/portalTypes', 'GET');
     }
 
+    fetchPublishedOn(entityId: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/estates/${entityId}/portals`, 'GET');
+    }
+
     createPortal(portalType: string): Promise<AxiosResponse> {
         return this.invokeApi(`/portals/create/${portalType}`, 'POST');
     }
