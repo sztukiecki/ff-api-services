@@ -27,6 +27,10 @@ export class PortalManagementService extends APIClient {
         return this.invokeApi(`/portals/create/${portalType}`, 'POST');
     }
 
+    updatePortal(portalId: string, portal: object): Promise<AxiosResponse> {
+        return this.invokeApi(`/portals/${portalId}`, 'PATCH', portal);
+    }
+
     authenticatePortal(portalId: string, portalAuthenticationModel: PortalAuthenticationModel) {
         return this.invokeApi(`/portals/${portalId}/authenticate`, 'POST', portalAuthenticationModel)
     }
@@ -40,6 +44,7 @@ export class PortalManagementService extends APIClient {
             }
         })
     }
+
 }
 
 export default new PortalManagementService();
