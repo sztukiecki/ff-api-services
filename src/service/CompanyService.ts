@@ -103,6 +103,14 @@ export class CompanyService extends APIClient {
     deleteLegislationText(id: string): Promise<AxiosResponse> {
         return this.invokeApi(`/legislationTexts/${id}`, 'DELETE');
     }
+
+    /**
+     * Restore default legislation texts of the company.
+     * Other texts then the ones from FLOWFACT will not be modified.
+     */
+    restoreDefaults(): Promise<AxiosResponse> {
+        return this.invokeApi('/legislationTexts/restoreDefaults', 'PATCH');
+    }
 }
 
 export default new CompanyService();
