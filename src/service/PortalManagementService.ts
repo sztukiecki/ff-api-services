@@ -46,6 +46,10 @@ export class PortalManagementService extends APIClient {
         return this.invokeApi(`/portals/${portalId}`, 'PATCH', portal);
     }
 
+    deletePortal(portalId: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/portals/${portalId}`, 'DELETE');
+    }
+
     authenticatePortal(portalId: string, portalAuthenticationModel: PortalAuthenticationModel) {
         return this.invokeApi(`/portals/${portalId}/authenticate`, 'POST', portalAuthenticationModel)
     }
