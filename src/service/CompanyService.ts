@@ -105,6 +105,14 @@ export class CompanyService extends APIClient {
     }
 
     /**
+     * Gets the currently valid consent text that the user must accept before we put our example legislation texts into his or her system.
+     * Thats because we do not want to hold the text in the client, but in the service so the customer has no chance to modify it.
+     */
+    fetchCurrentlyValidConsentText(): Promise<AxiosResponse> {
+        return this.invokeApi('/consentText', 'GET');
+    }
+
+    /**
      * Restore default legislation texts of the company.
      * Other texts then the ones from FLOWFACT will not be modified.
      */
