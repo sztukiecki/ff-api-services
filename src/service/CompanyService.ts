@@ -109,7 +109,7 @@ export class CompanyService extends APIClient {
      * Thats because we do not want to hold the text in the client, but in the service so the customer has no chance to modify it.
      */
     fetchCurrentlyValidConsentText(): Promise<AxiosResponse> {
-        return this.invokeApi('/consentText', 'GET');
+        return this.invokeApi('/legislationTexts/consentText', 'GET');
     }
 
     /**
