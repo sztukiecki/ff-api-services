@@ -58,6 +58,14 @@ export class PortalManagementService extends APIClient {
         return this.invokeApi('/publish', 'POST', publishRequest);
     }
 
+    /**
+     * Fetches the information on which portal a estate is published on.
+     * @param estateId
+     */
+    fetchPublishInformation(estateId: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/estates/${estateId}/portals`, 'GET');
+    }
+
     is24AuthenticationCallback(portalId: string, verifier: string, token: string, state: string): Promise<AxiosResponse> {
         return this.invokeApi(`/portals/is24/authenticate/${portalId}/callback`, 'GET', undefined, {
             queryParams: {
