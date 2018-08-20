@@ -117,7 +117,7 @@ export class CompanyService extends APIClient {
      * Other texts then the ones from FLOWFACT will not be modified.
      */
     restoreDefaults(): Promise<AxiosResponse> {
-        return this.invokeApi('/legislationTexts/restoreDefaults', 'PATCH');
+        return this.invokeApi('/legislationTexts/restoreDefaults', 'PUT');
     }
 }
 
