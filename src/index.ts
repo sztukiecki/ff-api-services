@@ -1,4 +1,5 @@
 import CompanyService from './service/CompanyService';
+import ContactService from './service/ContactService';
 import UserService from './service/UserService';
 import SchemaService from './service/SchemaService';
 import TagsService from './service/TagService';
@@ -36,6 +37,7 @@ import Office365AuthenticationService from './service/Office365AuthenticationSer
 export {
     CompanyService,
     UserService,
+    ContactService,
     CognitoClientService,
     TemplateService,
     TagsService,
