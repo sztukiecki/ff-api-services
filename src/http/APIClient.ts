@@ -84,7 +84,7 @@ export default abstract class APIClient {
 
     private async getCognitoToken() {
         const cognitoToken = await CognitoService.getCognitoToken();
-        if(!cognitoToken) {
+        if (!cognitoToken) {
             throw new Error('Could not get the cognito token. Are you not logged in?');
         }
 
@@ -159,12 +159,14 @@ export default abstract class APIClient {
 
         return sortedQueryParams.map(paramName => {
             const paramValue = queryParams[paramName];
-
+            if (!paramValue) {
+                return undefined;
+            }
             if (paramValue === true) {
-                return encodeURIComponent(paramName)
+                return encodeURIComponent(paramName);
             }
 
             return `${encodeURIComponent(paramName)}=${encodeURIComponent(paramValue.toString())}`
-        }).join('&');
+        }).filter(param => param !== undefined).join('&');
     }
 }
