@@ -8,8 +8,8 @@ export class ContactService extends APIClient {
     }
 
 
-    getContactByEmail(email: string, firstName: string, lastName: string): Promise<AxiosResponse> {
-        return this.invokeApi('/contact', 'GET', undefined, {queryParams: {email, firstName, lastName}});
+    getContactByEmail(email: string): Promise<AxiosResponse> {
+        return this.invokeApi('/contact', 'GET', undefined, {queryParams: {email}});
     }
 }
 
