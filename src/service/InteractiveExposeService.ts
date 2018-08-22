@@ -186,6 +186,15 @@ export class InteractiveExposeService extends APIClient {
     }
 
     /**
+     * Put restored example legislation texts into the company scoped default mapping
+     */
+    async restoreDefaults(): Promise<AxiosResponse> {
+        return this.invokeApi('/mapping/restoreDefaults', 'PUT', undefined, {
+            headers: {'Content-Type': 'application/json'}
+        })
+    }
+
+    /**
      * Sets the last activity time of the user session
      */
     keepAlive(token: string, userSessionId: string): Promise<AxiosResponse> {
