@@ -8,7 +8,7 @@ export class Office365AuthenticationService extends APIClient {
 	}
 
 	authenticate(temporaryToken: string): Promise<AxiosResponse> {
-		return this.invokeApi('/public/prototype/authenticate', 'GET', undefined, {
+		return this.invokeApi('/public/authentication/cognito', 'GET', undefined, {
 			queryParams: {
 				temporaryToken: temporaryToken
 			}
