@@ -50,7 +50,7 @@ const APIMapping = {
     spregnetterService: new APIService('sprengnetter-service'),
     propertyMarketingPhaseService: new APIService('property-marketing-phase-service'),
     portalManagementService: new APIService('portal-management-service'),
-    office365AuthenticationService: new APIService('office365-sync-contacts-service')
+    office365AuthenticationService: new APIService('office365-authentication-service')
 };
 
 export default APIMapping;
