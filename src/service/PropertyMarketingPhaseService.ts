@@ -23,9 +23,10 @@ export class PropertyMarketingPhaseService extends APIClient {
         return this.invokeApi(`/${schemaId}/${entityId}/currentPhase`, 'GET');
     }
 
-    updateCurrentPhase(schemaId: string, entityId: string, name: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/${schemaId}/${entityId}/currentPhase`, 'POST', {
-            name: name
+    updateStep(schemaId: string, entityId: string, stepId: string, completed: boolean): Promise<AxiosResponse> {
+        return this.invokeApi(`/${schemaId}/${entityId}/updateStep`, 'POST', {
+            stepId: stepId,
+            completed: completed
         });
     }
 }
