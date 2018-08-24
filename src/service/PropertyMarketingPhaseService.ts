@@ -15,8 +15,8 @@ export class PropertyMarketingPhaseService extends APIClient {
         return this.invokeApi(`/${schemaId}/phases/${phaseName}`, 'GET');
     }
 
-    fetchEntitiesInPhase(schemaId: string, phaseName: string): Promise<AxiosResponse<string[]>> {
-        return this.invokeApi(`/${schemaId}/phases/${phaseName}/entities`, 'GET');
+    fetchEntitiesInPhase(phaseName: string): Promise<AxiosResponse<string[]>> {
+        return this.invokeApi(`/phases/${phaseName}/entities`, 'GET');
     }
 
     fetchCurrentPhase(schemaId: string, entityId: string): Promise<AxiosResponse> {
@@ -28,6 +28,10 @@ export class PropertyMarketingPhaseService extends APIClient {
             stepId: stepId,
             completed: completed
         });
+    }
+
+    fetchEntityCountForPhase(phaseName: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/phases/${phaseName}/entitiesCount`, 'GET');
     }
 }
 
