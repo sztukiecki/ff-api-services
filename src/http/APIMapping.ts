@@ -33,6 +33,7 @@ const APIMapping = {
     agentRecommendationService: new APIService('agent-recommendation-service'),
     entityExportService: new APIService('entity-export-service'),
     searchService: new APIService('search-service'),
+    searchProfileService: new APIService('search-profile-service'),
 	fullTextSearchService: new APIService('full-text-search-service'),
     formService: new APIService('form-service'),
     componentService: new APIService('component-ui-service'),
