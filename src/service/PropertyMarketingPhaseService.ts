@@ -35,8 +35,8 @@ export class PropertyMarketingPhaseService extends APIClient {
         });
     }
 
-    fetchEntityCountForPhase(phaseName: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/phases/${phaseName}/entitiesCount`, 'GET', undefined, {
+    fetchPhaseStatistics(): Promise<AxiosResponse> {
+        return this.invokeApi(`/phases/stats`, 'GET', undefined, {
             queryParams: {
                 archived: true,
                 inactive: true
