@@ -3,6 +3,7 @@ import AdminTokenService from './service/AdminTokenService';
 import AgentRecommendationService from './service/AgentRecommendationService';
 import CognitoClientService from './service/CognitoClientService';
 import CognitoService from './service/CognitoService';
+import CommissionCalculationService from './service/CommissionCalculationService';
 import CompanyService from './service/CompanyService';
 import ContactService from './service/ContactService';
 import EmailService from './service/EmailService';
@@ -40,6 +41,7 @@ export {
 	UserService,
 	ContactService,
 	CognitoClientService,
+	CommissionCalculationService,
 	TemplateService,
 	TagsService,
 	SchemaService,

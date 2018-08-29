@@ -22,6 +22,7 @@ const APIMapping = {
     userService: new APIService('user-service'),
     flowfactExporterInternalService: new APIService('flowfact-exporter-internal-service'),
     contactService: new APIService('contact-service'),
+    commissionCalculationService: new APIService('commission-calculation-service'),
     companyService: new APIService('company-service'),
     entityService: new APIService('entity-service'),
     cognitoClientService: new APIService('cognito-client-service'),
