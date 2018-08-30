@@ -35,6 +35,10 @@ export class PropertyMarketingPhaseService extends APIClient {
         });
     }
 
+    changeCurrentStep(schemaId: string, entityId: string, stepId: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/${schemaId}/${entityId}/switchToStep`, 'POST', { stepId });
+    }
+
     fetchPhaseStatistics(): Promise<AxiosResponse> {
         return this.invokeApi(`/phases/stats`, 'GET', undefined, {
             queryParams: {
