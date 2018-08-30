@@ -39,7 +39,11 @@ export class PortalManagementService extends APIClient {
     }
 
     createPortal(portalType: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/portals/create/${portalType}`, 'POST');
+        return this.invokeApi(`/portals/create/${portalType}`, 'POST', undefined, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
     }
 
     updatePortal(portalId: string, portal: object): Promise<AxiosResponse> {
