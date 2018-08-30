@@ -47,6 +47,10 @@ export class PropertyMarketingPhaseService extends APIClient {
             }
         });
     }
+
+    fetchTotalCommissionForAllPhases(): Promise<AxiosResponse> {
+        return this.invokeApi(`/calculateTotalCommissionForAllPhases`, 'GET');
+    }
 }
 
 export default new PropertyMarketingPhaseService();
