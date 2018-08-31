@@ -1,4 +1,4 @@
-import * as store from "store";
+import * as store from 'store';
 import * as isNode from 'detect-node';
 
 const STORE_KEYS = {
@@ -19,11 +19,11 @@ export class StageConfiguration {
         return this;
     }
 
-    getStageFromStore() {
+    getStageFromStore(): string {
         return store.get(STORE_KEYS.edgeServiceStage) || DEFAULT_STAGE;
     }
 
-    getVersionTagFromStore() {
+    getVersionTagFromStore(): string {
         return store.get(STORE_KEYS.edgeServiceVersionTag) || DEFAULT_VERSION_TAG;
     }
 
