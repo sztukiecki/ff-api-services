@@ -79,7 +79,6 @@ export class PortalManagementService extends APIClient {
             }
         })
     }
-
 }
 
 export default new PortalManagementService();

@@ -51,6 +51,10 @@ export class PropertyMarketingPhaseService extends APIClient {
     fetchTotalCommissionForAllPhases(): Promise<AxiosResponse> {
         return this.invokeApi(`/calculateTotalCommissionForAllPhases`, 'GET');
     }
+
+    validateStep(stepId: string, schemaId: string, entityId: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/validateStep/stepId/${stepId}/schemaId/${schemaId}/entityId/${entityId}`, 'GET');
+    }
 }
 
 export default new PropertyMarketingPhaseService();
