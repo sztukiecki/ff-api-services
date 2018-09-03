@@ -53,7 +53,7 @@ export class PropertyMarketingPhaseService extends APIClient {
     }
 
     validateStep(stepId: string, schemaId: string, entityId: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/validateStep/stepId/${stepId}/schemaId/${schemaId}/entityId/${entityId}`, 'GET');
+        return this.invokeApi(`/validateStep/stepId/${stepId}/schemaId/${schemaId}/entityId/${entityId}`, 'POST');
     }
 }
 
