@@ -7,7 +7,7 @@ import CognitoService from '../service/CognitoService';
 import Interceptor from '../util/Interceptor';
 import StageConfiguration from '../util/StageConfiguration';
 
-export type ParamMap = { [key: string]: string | boolean };
+export type ParamMap = { [key: string]: string | boolean | number | undefined };
 
 export interface AxiosConfig {
     'axios-retry': AxiosRetryConfig
@@ -91,7 +91,7 @@ export default abstract class APIClient {
         return cognitoToken;
     }
 
-    public async invokeApi(path: string, method: string, body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse> {
+    public async invokeApi(path: string, method: string, body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<any>> {
         if (!path.startsWith('/')) {
             throw new Error('missing slash at the beginning');
         }
