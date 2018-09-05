@@ -71,7 +71,7 @@ export default abstract class APIClient {
         let baseUrl;
         if (isNode) {
             const selected = await this._getConsulClient().service.select(this._serviceName);
-            return `http://${selected.address}:${selected.port}`;
+            return `http://${selected.Service.Address}:${selected.Service.Port}`;
         } else {
             const stage = this._getStage();
             const account = stage === 'development' ? 'flowfact-dev' : 'flowfact-prod';
