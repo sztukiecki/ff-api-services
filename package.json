@@ -20,7 +20,7 @@
     "prepare": "npm run rebuild-package-cjs && npm run rebuild-package-esm"
   },
   "dependencies": {
-    "@flowfact/consul-client": "^0.20180313.3",
+    "@flowfact/consul-client": "^0.20180828.14",
     "@flowfact/node-flowdsl": "0.20180602.3",
     "amazon-cognito-identity-js": "1.28.0",
     "aws-sdk": "2.177.0",
