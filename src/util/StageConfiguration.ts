@@ -1,13 +1,12 @@
 import * as store from 'store';
-import * as isNode from 'detect-node';
 
 const STORE_KEYS = {
     edgeServiceStage: 'HTTPCLIENT.APICLIENT.STAGE',
     edgeServiceVersionTag: 'HTTPCLIENT.APICLIENT.VERSIONTAG'
 };
 
-const DEFAULT_STAGE = isNode ? 'development' : 'production';
-const DEFAULT_VERSION_TAG = isNode ? 'latest' : 'stable';
+const DEFAULT_STAGE = 'development';
+const DEFAULT_VERSION_TAG = 'latest';
 
 let instance: StageConfiguration | null = null;
 export class StageConfiguration {
