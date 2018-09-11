@@ -1,7 +1,7 @@
 import {APIClient, APIMapping} from '../http';
 import {AxiosResponse} from 'axios';
-import {User} from "../../types/user-service/user";
-import {CreateUserModel} from "../../types/user-service/createUserModel";
+import {User} from "../util/user-service/user";
+import {CreateUserModel} from "../util/user-service/createUserModel";
 
 export class UserService extends APIClient {
 
