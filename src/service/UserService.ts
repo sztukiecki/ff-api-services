@@ -1,5 +1,7 @@
 import {APIClient, APIMapping} from '../http';
 import {AxiosResponse} from 'axios';
+import {User} from "../../types/user-service/user";
+import {CreateUserModel} from "../../types/user-service/createUserModel";
 
 export class UserService extends APIClient {
 
@@ -7,7 +9,7 @@ export class UserService extends APIClient {
         super(APIMapping.userService);
     }
 
-    createUser(companyID: string, mailAddress: string, firstName: string, lastName: string): Promise<AxiosResponse> {
+    createUser(companyID: string, mailAddress: string, firstName: string, lastName: string): Promise<AxiosResponse<CreateUserModel>> {
         return this.invokeApi('/users', 'POST', {
             firstname: firstName,
             lastname: lastName,
@@ -16,25 +18,25 @@ export class UserService extends APIClient {
         });
     }
 
-    getCurrentUser() {
+    getCurrentUser(): Promise<AxiosResponse<User>> {
         return this.invokeApi('/users/currentUser', 'GET');
     }
 
-    getAllUsersOfTheCompany() {
+    getAllUsersOfTheCompany(): Promise<AxiosResponse<User[]>> {
         return this.invokeApi('/users', 'GET');
     }
 
-    postImage(image: any) {
+    postImage(image: Blob): Promise<AxiosResponse<any>> {
         const formData = new FormData();
         formData.append('contactPicture', image, 'contactPicture');
         return this.invokeApi('/users/picture', 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
     }
 
-    updateUser(user: any) {
+    updateUser(user: User): Promise<AxiosResponse<any>> {
         return this.invokeApi('/users', 'PUT', user);
     }
 
-    isUserAlreadyKnown(aliasMailAddress: string) {
+    isUserAlreadyKnown(aliasMailAddress: string): Promise<AxiosResponse<any>> {
         return this.invokeApi('/public/users/exists', 'GET', undefined, {queryParams: {aliasMailAddress: aliasMailAddress}});
     }
 }
