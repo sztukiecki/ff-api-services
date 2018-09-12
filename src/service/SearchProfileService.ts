@@ -15,6 +15,10 @@ export class SearchProfileService extends APIClient {
         return this.invokeApi(`/matchAll/${schemaName}`, 'GET');
     }
 
+    getCountOfMatchmakingResultsForSchemaWithName(schemaName: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/matchCount/${schemaName}`, 'GET');
+    }
+
 }
 
 export default new SearchProfileService();
