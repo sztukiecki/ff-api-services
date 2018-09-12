@@ -60,6 +60,14 @@ export class SearchService extends APIClient {
         });
     }
 
+    count(query: Flowdsl, index: string) {
+        return this.invokeApi('/schemas/' + index + '/count', 'POST', query, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+
     filter(index: string, page: number = 1, size: number = 30, filter: FilterConfiguration, sorting: any) {
         let queryParams: any = {};
         if (page) {
