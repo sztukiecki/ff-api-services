@@ -20,7 +20,8 @@ export class Office365AuthenticationService extends APIClient {
 			queryParams: {
 				code,
 				redirectUrl,
-				clientId
+				clientId,
+				origin: 'client'
 			}
 		});
 	}
