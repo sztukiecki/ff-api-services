@@ -14,6 +14,16 @@ export class Office365AuthenticationService extends APIClient {
 			}
 		});
 	}
+
+	registerContract(code: string, redirectUrl: string, clientId: string): Promise<AxiosResponse> {
+		return this.invokeApi('/public/authentication/salesautomat', 'GET', undefined, {
+			queryParams: {
+				code,
+				redirectUrl,
+				clientId
+			}
+		});
+	}
 }
 
 export default new Office365AuthenticationService();
