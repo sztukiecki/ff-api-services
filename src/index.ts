@@ -35,6 +35,7 @@ import UserService from './service/UserService';
 import ViewDefinitionService from './service/ViewDefinitionService';
 import WordpressTemplateService from './service/WordpressTemplateService';
 import StageConfiguration, { STORE_KEYS } from './util/StageConfiguration';
+import CustomerLegitimationArchiveService from './service/CustomerLegitimationArchiveService';
 
 export {
 	CompanyService,
@@ -71,7 +72,8 @@ export {
 	PropertyMarketingPhaseService,
 	PortalManagementService,
 	Office365AuthenticationService,
-	SearchProfileService
+	SearchProfileService,
+	CustomerLegitimationArchiveService
 };
 
 // types only
