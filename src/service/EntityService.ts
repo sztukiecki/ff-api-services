@@ -2,17 +2,12 @@ import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 import { Flowdsl } from "@flowfact/node-flowdsl/lib/Flowdsl";
 import { Entity, EntityACLType, EntityValues, EntityView } from '@flowfact/types';
-import { ParamList, SearchResult, UniformObject } from '../util/InternalTypes';
+import { EntityQuery, ParamList, SearchResult, UniformObject } from '../util/InternalTypes';
 
 export interface HasRightsModel {
     schemaId: string;
     entityId: string;
     hasAccess: boolean;
-}
-
-export interface EntityQuery {
-    entityId: string;
-    schemaId: string;
 }
 
 export class EntityService extends APIClient {

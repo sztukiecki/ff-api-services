@@ -7,3 +7,10 @@ export interface SearchResult<T> {
     page: number;
     pageSize: number;
 }
+
+export interface EntityQuery {
+    entityId: string;
+    schemaId: string;
+}
+
+export type PhaseName = 'acquisition' | 'preparation' | 'marketing' | 'closing' | 'after_sales';

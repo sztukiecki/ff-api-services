@@ -1,8 +1,7 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 import { DslBuilder } from "@flowfact/node-flowdsl";
-import { Flowdsl, FlowdslConditionUnion } from "@flowfact/node-flowdsl/lib/Flowdsl";
-import { EntityIdCondition, HasFieldWithValueCondition } from "@flowfact/node-flowdsl/src/Flowdsl";
+import { Flowdsl, FlowdslConditionUnion, EntityIdCondition, HasFieldWithValueCondition } from "@flowfact/node-flowdsl/lib/Flowdsl";
 import { SearchResult } from '../util/InternalTypes';
 import { Entity } from '@flowfact/types';
 

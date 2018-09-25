@@ -1,5 +1,12 @@
 import {APIClient, APIMapping} from '../http';
 import {AxiosResponse} from "axios";
+import { EntityQuery, PhaseName } from '../util/InternalTypes';
+
+export interface EntityPhaseInformation {
+    entityId: string;
+    schemaId: string;
+    phaseName: PhaseName;
+}
 
 export class PropertyMarketingPhaseService extends APIClient {
 
@@ -28,7 +35,7 @@ export class PropertyMarketingPhaseService extends APIClient {
         return this.invokeApi(`/${schemaId}/${entityId}/currentPhase`, 'GET');
     }
 
-    fetchCurrentPhaseOfSomeEntities(entities: object): Promise<AxiosResponse<object[]>> {
+    fetchCurrentPhaseOfSomeEntities(entities: EntityQuery[]): Promise<AxiosResponse<EntityPhaseInformation[]>> {
         return this.invokeApi(`/phases`, 'POST', entities);
     }
 
