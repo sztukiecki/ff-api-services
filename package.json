@@ -22,6 +22,7 @@
   "dependencies": {
     "@flowfact/consul-client": "^0.20180913.16",
     "@flowfact/node-flowdsl": "0.20180602.3",
+    "@flowfact/types": "^0.20180925.6",
     "amazon-cognito-identity-js": "1.28.0",
     "aws-sdk": "2.177.0",
     "axios": "^0.18.0",

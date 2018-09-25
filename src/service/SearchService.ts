@@ -1,8 +1,10 @@
-import {APIClient, APIMapping} from '../http';
-import {AxiosResponse} from 'axios';
-import {DslBuilder} from "@flowfact/node-flowdsl";
-import {Flowdsl, FlowdslConditionUnion} from "@flowfact/node-flowdsl/lib/Flowdsl";
-import {EntityIdCondition, HasFieldWithValueCondition} from "@flowfact/node-flowdsl/src/Flowdsl";
+import { APIClient, APIMapping } from '../http';
+import { AxiosResponse } from 'axios';
+import { DslBuilder } from "@flowfact/node-flowdsl";
+import { Flowdsl, FlowdslConditionUnion } from "@flowfact/node-flowdsl/lib/Flowdsl";
+import { EntityIdCondition, HasFieldWithValueCondition } from "@flowfact/node-flowdsl/src/Flowdsl";
+import { SearchResult } from '../util/InternalTypes';
+import { Entity } from '@flowfact/types';
 
 export interface FilterConfiguration {
     value: string,
@@ -52,7 +54,7 @@ export class SearchService extends APIClient {
             queryParams.size = size;
         }
 
-        return this.invokeApi('/schemas/' + index, 'POST', query, {
+        return this.invokeApi<SearchResult<Entity>>('/schemas/' + index, 'POST', query, {
             queryParams: queryParams,
             headers: {
                 'Content-Type': 'application/json'
@@ -78,7 +80,7 @@ export class SearchService extends APIClient {
             queryParams.size = size;
         }
 
-        return this.invokeApi('/schemas/' + index, 'POST', this.buildQuery(filter, sorting), {
+        return this.invokeApi<SearchResult<Entity>>('/schemas/' + index, 'POST', this.buildQuery(filter, sorting), {
             queryParams: queryParams,
             headers: {
                 'Content-Type': 'application/json'

@@ -1,16 +1,18 @@
-import {APIClient, APIMapping} from '../http';
-import {AxiosResponse} from 'axios';
-import {Flowdsl} from "@flowfact/node-flowdsl/lib/Flowdsl";
+import { APIClient, APIMapping } from '../http';
+import { AxiosResponse } from 'axios';
+import { Flowdsl } from "@flowfact/node-flowdsl/lib/Flowdsl";
+import { Entity, EntityACLType, EntityValues, EntityView } from '@flowfact/types';
+import { ParamList, SearchResult, UniformObject } from '../util/InternalTypes';
 
 export interface HasRightsModel {
-    schemaId: string,
-    entityId: string,
-    hasAccess: boolean
+    schemaId: string;
+    entityId: string;
+    hasAccess: boolean;
 }
 
 export interface EntityQuery {
-    entityId: string,
-    schemaId: string
+    entityId: string;
+    schemaId: string;
 }
 
 export class EntityService extends APIClient {
@@ -23,13 +25,14 @@ export class EntityService extends APIClient {
         return this.invokeApi(`/schemas/${schemaId}`, 'POST', entity || {});
     }
 
-    searchEntity(index: string, viewName: string, searchTerm: string, flowdsl?: Flowdsl, page: number = 1, size: number = 10): Promise<AxiosResponse> {
-        const queryParams: any = {};
-        queryParams.page = page;
-        queryParams.size = size;
-        queryParams.viewName = viewName;
+    searchEntity(index: string, viewName: string, searchTerm: string, flowdsl?: Flowdsl, page: number = 1, size: number = 10) {
+        const queryParams: ParamList = {
+            page,
+            size,
+            viewName
+        };
 
-        return this.invokeApi(`/search/schemas/${index}`, 'POST', flowdsl, {
+        return this.invokeApi<SearchResult<EntityView>>(`/search/schemas/${index}`, 'POST', flowdsl, {
             queryParams: queryParams
         });
     }
@@ -37,23 +40,23 @@ export class EntityService extends APIClient {
     /**
      * Delete a entity in the Backend
      */
-    deleteEntity(entityId: string, schemaId: string): Promise<AxiosResponse> {
+    deleteEntity(entityId: string, schemaId: string) {
         return this.invokeApi(`/schemas/${schemaId}/entities/${entityId}`, 'DELETE');
     }
 
     /**
      * Update a entity in the backend
      */
-    updateEntityField(schemaId: string, entityId: string, field: any): Promise<AxiosResponse> {
-        return this.invokeApi(`/schemas/${schemaId}/entities/${entityId}`, 'PATCH', field);
+    updateEntityField(schemaId: string, entityId: string, field: UniformObject<EntityValues<Entity>>) {
+        return this.invokeApi<Entity>(`/schemas/${schemaId}/entities/${entityId}`, 'PATCH', field);
     }
 
-    getEntityWithViewDefinition(viewId: string, schemaId: string, entityId: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/views/${viewId}/schemas/${schemaId}/entities/${entityId}`, 'GET');
+    getEntityWithViewDefinition(viewId: string, schemaId: string, entityId: string) {
+        return this.invokeApi<EntityView>(`/views/${viewId}/schemas/${schemaId}/entities/${entityId}`, 'GET');
     }
 
-    getEntity(schemaId: string, entityId: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/schemas/${schemaId}/entities/${entityId}`, 'GET');
+    getEntity(schemaId: string, entityId: string) {
+        return this.invokeApi<Entity>(`/schemas/${schemaId}/entities/${entityId}`, 'GET');
     }
 
     /**
@@ -64,37 +67,25 @@ export class EntityService extends APIClient {
     }
 
     /**
-     * Check the right of a user to access a single entity, where "access" means one of: read, write, delete or search.
-     * @param {string} schemaId
-     * @param {string} entityId
-     * @param {string} userId
-     * @param {string} accessType - READ, UPDATE, SEARCH, DELETE
-     * @returns {boolean}
+     * Check the right of a user to access a single entity.
      */
-    getHasAccessForSingleEntity(schemaId: string, entityId: string, userId: string, accessType: string): Promise<AxiosResponse> {
+    getHasAccessForSingleEntity(schemaId: string, entityId: string, userId: string, accessType: EntityACLType): Promise<AxiosResponse> {
         return this.invokeApi(`/schemas/${schemaId}/entities/${entityId}/users/${userId}/hasaccess/${accessType}`, 'GET');
     }
 
     /**
-     * Check the rights of a user to access several entities, where "access" means one of: read, write, delete or search.
-     * @returns object - Returns a JSON object, that looks like the one you posted, but with an addtional field for each item with the name "hasAccess" and a boolean.
-     * @param {string} userId
-     * @param {string} accessType - READ, UPDATE, SEARCH, DELETE
-     * @param {HasRightsModel[]} entities - Something like: [{"schemaId":"3ecf...","entityId":"3c30...","hasAccess":true},{"schemaId":"3ecf...","entityId":"3c30...","hasAccess":true}]
+     * Check the rights of a user to access several entities.
      */
-    getHasAccessForMultipleEntities(userId: string, accessType: string, entities: HasRightsModel[]): Promise<AxiosResponse> {
-        return this.invokeApi(`/users/${userId}/hasaccess/${accessType}`, 'POST', entities);
+    getHasAccessForMultipleEntities(userId: string, accessType: EntityACLType, entities: EntityQuery[]) {
+        return this.invokeApi<HasRightsModel[]>(`/users/${userId}/hasaccess/${accessType}`, 'POST', entities);
     }
 
     /**
      * This method sends entityIds and schemaIds to the entity-service and the entity-service transform this data
      * into views with the entity. So an array will be returned, with the viewEntity.
-     * @param {string} viewName
-     * @param {EntityQuery[]} entityQueries
-     * @returns {Promise<AxiosResponse>}
      */
-    transformEntitiesWithView(viewName: string, entityQueries: EntityQuery[]): Promise<AxiosResponse> {
-        return this.invokeApi(`/views/${viewName}/entities`, 'POST', entityQueries);
+    transformEntitiesWithView(viewName: string, entityQueries: EntityQuery[]) {
+        return this.invokeApi<EntityView[]>(`/views/${viewName}/entities`, 'POST', entityQueries);
     }
 }
 

@@ -91,7 +91,7 @@ export default abstract class APIClient {
         return cognitoToken;
     }
 
-    public async invokeApi(path: string, method: string, body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<any>> {
+    public async invokeApi<T = any>(path: string, method: string, body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<T>> {
         if (!path.startsWith('/')) {
             throw new Error('missing slash at the beginning');
         }
@@ -147,7 +147,7 @@ export default abstract class APIClient {
         // fire the request
         // NEVER put a catch here because it prevents all other error handling
         // i.e. you can't handle a service returning an http code >= 400 (which is possibly expected)
-        return client.request(request);
+        return client.request<T>(request);
     }
 
     buildCanonicalQueryString(queryParams: ParamMap) {
