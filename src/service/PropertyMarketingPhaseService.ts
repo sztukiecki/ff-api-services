@@ -1,5 +1,12 @@
 import {APIClient, APIMapping} from '../http';
 import {AxiosResponse} from "axios";
+import { EntityQuery, PhaseName } from '../util/InternalTypes';
+
+export interface EntityPhaseInformation {
+    entityId: string;
+    schemaId: string;
+    phaseName: PhaseName;
+}
 
 export class PropertyMarketingPhaseService extends APIClient {
 
@@ -50,6 +57,14 @@ export class PropertyMarketingPhaseService extends APIClient {
 
     fetchTotalCommissionForAllPhases(): Promise<AxiosResponse> {
         return this.invokeApi(`/calculateTotalCommissionForAllPhases`, 'GET');
+    }
+
+    fetchCurrentPhaseOfSomeEntities(entities: EntityQuery[]): Promise<AxiosResponse<EntityPhaseInformation[]>> {
+        return this.invokeApi(`/phases`, 'POST', entities);
+    }
+
+    fetchAllPhasesForEstate(schemaId: string, entityId: string) {
+        return this.invokeApi(`/${schemaId}/${entityId}/phases`, 'GET');
     }
 
     validateStep(stepId: string, schemaId: string, entityId: string): Promise<AxiosResponse> {
