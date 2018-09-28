@@ -1,12 +1,5 @@
 import {APIClient, APIMapping} from '../http';
 import {AxiosResponse} from "axios";
-import { EntityQuery, PhaseName } from '../util/InternalTypes';
-
-export interface EntityPhaseInformation {
-    entityId: string;
-    schemaId: string;
-    phaseName: PhaseName;
-}
 
 export class PropertyMarketingPhaseService extends APIClient {
 
@@ -25,22 +18,14 @@ export class PropertyMarketingPhaseService extends APIClient {
     fetchEntitiesInPhase(phaseName: string): Promise<AxiosResponse<string[]>> {
         return this.invokeApi(`/phases/${phaseName}/entities`, 'GET', undefined, {
             queryParams: {
-                archived: true,
-                inactive: true
+                archived: 'true',
+                inactive: 'true'
             }
         });
     }
 
     fetchCurrentPhase(schemaId: string, entityId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/${schemaId}/${entityId}/currentPhase`, 'GET');
-    }
-
-    fetchCurrentPhaseOfSomeEntities(entities: EntityQuery[]): Promise<AxiosResponse<EntityPhaseInformation[]>> {
-        return this.invokeApi(`/phases`, 'POST', entities);
-    }
-
-    fetchAllPhasesForEstate(schemaId: string, entityId: string) {
-		return this.invokeApi(`/${schemaId}/${entityId}/phases`, 'GET');
     }
 
     updateStep(schemaId: string, entityId: string, stepId: string, completed: boolean): Promise<AxiosResponse> {
@@ -57,8 +42,8 @@ export class PropertyMarketingPhaseService extends APIClient {
     fetchPhaseStatistics(): Promise<AxiosResponse> {
         return this.invokeApi(`/phases/stats`, 'GET', undefined, {
             queryParams: {
-                archived: true,
-                inactive: true
+                archived: 'true',
+                inactive: 'true'
             }
         });
     }
