@@ -1,6 +1,6 @@
 import { APIClient, APIMapping } from '../http';
 import { ParamList, SearchResult } from '../util/InternalTypes';
-import { Entity } from '../../node_modules/@flowfact/types';
+import { Entity } from '@flowfact/types';
 
 export class FullTextSearchService extends APIClient {
 
