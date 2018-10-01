@@ -1,7 +1,6 @@
 import * as WPAPI from 'wpapi';
+import { CognitoService } from '..';
 import StageConfiguration from '../util/StageConfiguration';
-
-const AWS = require('aws-sdk');
 
 export class WordpressTemplateService {
     wordpressApis: any[] = [];
@@ -31,11 +30,10 @@ export class WordpressTemplateService {
         this.wordpressUrl = 'https://sites.' + stage + '.te.' + domainName + '.cloud/';
 
         this.cognitoToken = undefined;
-
-        if (AWS.Config.credentials && AWS.Config.credentials.params && AWS.Config.credentials.params.Logins) {
-            const loginKeys = Object.keys(AWS.Config.credentials.params.Logins);
+        if (CognitoService.token) {
+            const loginKeys = Object.keys(CognitoService.token);
             if (loginKeys.length > 0) {
-                this.cognitoToken = AWS.Config.credentials.params.Logins[loginKeys[0]];
+                this.cognitoToken = CognitoService.token[loginKeys[0]];
             }
         }
     }

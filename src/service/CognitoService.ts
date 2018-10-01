@@ -1,8 +1,5 @@
-import {
-    CognitoUserPool, CognitoUser, AuthenticationDetails, CognitoUserSession
-} from 'amazon-cognito-identity-js';
+import { AuthenticationDetails, CognitoUser, CognitoUserPool, CognitoUserSession } from 'amazon-cognito-identity-js';
 import StageConfiguration from '../util/StageConfiguration';
-import {AWSError} from 'aws-sdk';
 
 export interface TokenModel {
     idToken: string,
@@ -10,8 +7,6 @@ export interface TokenModel {
     refreshToken: string,
     username: string
 }
-
-const AWS = require('aws-sdk');
 
 const REGION = 'eu-central-1';
 const SETTINGS = {
@@ -38,6 +33,7 @@ export class CognitoService {
 
     userPool: CognitoUserPool;
     cognitoUser: CognitoUser | null;
+    public token: { [key: string]: string };
 
     constructor() {
         if (!instance) {
@@ -49,12 +45,6 @@ export class CognitoService {
             stage = 'development';
         }
 
-        AWS.config.update({
-            region: REGION,
-            credentials: new AWS.CognitoIdentityCredentials({
-                IdentityPoolId: SETTINGS[stage].IdentityPoolId
-            })
-        });
 
         this.userPool = new CognitoUserPool({
             UserPoolId: SETTINGS[stage].UserPoolId,
@@ -84,15 +74,15 @@ export class CognitoService {
                 Username: username,
                 Password: password
             }), {
-                onSuccess: (result) => {
-                    // define the new Logins
-                    AWS.config.credentials = this.getCognitoIdentityCredentials(result.getIdToken().getJwtToken());
-                    resolve(result);
-                },
-                onFailure: (error) => {
-                    reject(error);
-                }
-            });
+                    onSuccess: (result) => {
+                        // define the new Logins
+                        this.token = this.buildLoginToken(result.getIdToken().getJwtToken());
+                        resolve(result);
+                    },
+                    onFailure: (error) => {
+                        reject(error);
+                    }
+                });
         });
     }
 
@@ -102,7 +92,6 @@ export class CognitoService {
             stage = 'development';
         }
 
-        AWS.config.credentials.clearCachedId();
 
         // set the new tokens in the store
         const key = `CognitoIdentityServiceProvider.${SETTINGS[stage].ClientId}`;
@@ -111,19 +100,16 @@ export class CognitoService {
         localStorage.setItem(`${key}.${tokens.username}.refreshToken`, tokens.refreshToken);
         localStorage.setItem(`${key}.${tokens.username}.accessToken`, tokens.accessToken);
 
-        // define the new Logins
-        AWS.config.credentials = this.getCognitoIdentityCredentials(tokens.idToken);
+        this.token = this.buildLoginToken(tokens.idToken);
 
         return new Promise(async (resolve, reject) => {
             try {
                 // refresh the information
-                await AWS.config.credentials.getPromise();
-                await AWS.config.credentials.refreshPromise();
 
                 this.userPool = new CognitoUserPool({
-					UserPoolId: SETTINGS[stage].UserPoolId,
-					ClientId: SETTINGS[stage].ClientId
-				});
+                    UserPoolId: SETTINGS[stage].UserPoolId,
+                    ClientId: SETTINGS[stage].ClientId
+                });
 
                 // get the session. If this is valid, than the login was successful.
                 this.userPool!.getCurrentUser()!.getSession((error: Error, session: CognitoUserSession) => {
@@ -142,17 +128,18 @@ export class CognitoService {
     refreshSession(session: CognitoUserSession): Promise<any> {
         return new Promise((resolve, reject) => {
             if (session.isValid()) {
+                this.token = this.buildLoginToken(session.getIdToken().getJwtToken());
                 resolve('SESSION_IS_VALID');
                 return;
             }
 
             // Check if the session need a refresh. isValid checks if the access and id tokens have not expired.
-            this.cognitoUser!.refreshSession(session.getRefreshToken(), (refreshError: AWSError, refreshedSession: CognitoUserSession) => {
+            this.cognitoUser!.refreshSession(session.getRefreshToken(), (refreshError: any, refreshedSession: CognitoUserSession) => {
                 if (refreshError) {
                     reject(refreshError);
                     return;
                 }
-                AWS.config.credentials = this.getCognitoIdentityCredentials(refreshedSession.getIdToken().getJwtToken());
+                this.token = this.buildLoginToken(refreshedSession.getIdToken().getJwtToken());
             });
         });
     }
@@ -170,6 +157,7 @@ export class CognitoService {
         return new Promise((resolve, reject) => {
             cognitoUser.globalSignOut({
                 onSuccess: (msg) => {
+                    this.token = {};
                     resolve(msg);
                 },
                 onFailure: (error) => {
@@ -203,7 +191,6 @@ export class CognitoService {
                 }
 
                 await this.refreshSession(session);
-                AWS.config.credentials = this.getCognitoIdentityCredentials(session.getIdToken().getJwtToken());
                 resolve(this.cognitoUser);
             });
         })
@@ -231,18 +218,16 @@ export class CognitoService {
         });
     }
 
-    getCognitoIdentityCredentials(idToken: string): AWS.CognitoIdentityCredentials {
+    buildLoginToken(idToken: string): { [key: string]: string } {
         let stage: string = StageConfiguration.getStageFromStore();
         if (stage === 'local') {
             stage = 'development';
         }
-        return new AWS.CognitoIdentityCredentials({
-            IdentityPoolId: SETTINGS[stage].IdentityPoolId,
-            Logins: {
-                [`cognito-idp.${REGION}.amazonaws.com/${SETTINGS[stage].UserPoolId}`]: idToken
-            }
-        });
+        return {
+            [`cognito-idp.${REGION}.amazonaws.com/${SETTINGS[stage].UserPoolId}`]: idToken
+        }
     }
+
 }
 
 export default new CognitoService();
