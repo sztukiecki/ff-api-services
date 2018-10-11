@@ -19,19 +19,28 @@ export class InteractiveExposeStatisticsService extends APIClient {
         });
     }
 
-	/**
+    /**
      * Counts all iex which were sent for en estate.
-	 * @param estateId
-	 * @param singleCount represent the boolean if only contacts to whom iex was sent should be counted,
-	 *          or all sent iex including same contacts.
-	 */
-	getSentInteractiveExposeCount(estateId: string, singleCount?: boolean) : Promise<AxiosResponse> {
-		return this.invokeApi(`/${estateId}/sent/count`, 'GET', undefined, singleCount != null ? {
-			queryParams: {
-				singleCount
-			}
+     * @param estateId
+     * @param singleCount represent the boolean if only contacts to whom iex was sent should be counted,
+     *          or all sent iex including same contacts.
+     */
+    fetchSentInteractiveExposeCount(estateId: string, singleCount?: boolean) : Promise<AxiosResponse> {
+        return this.invokeApi(`/estateStatistics/${estateId}/sent/count`, 'GET', undefined, singleCount != null ? {
+            queryParams: {
+                singleCount
+            }
         } : {});
-	}
+    }
+
+    /**
+     * Aggregates different statistics data for given estate by given statistics types.
+     * @param estateId
+     * @param requestedTypes represents a list with statistic types
+     */
+    fetchDynamicEstateStatistics(estateId: string, requestedTypes: object) : Promise<AxiosResponse> {
+        return this.invokeApi(`/dynamic/${estateId}`, 'POST', requestedTypes);
+    }
 
 }
 

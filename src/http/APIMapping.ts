@@ -28,6 +28,7 @@ const APIMapping = {
     cognitoClientService: new APIService('cognito-client-service'),
     schemaService: new APIService('schema-service'),
     tagService: new APIService('tag-service'),
+    taggingService: new APIService('tagging-service'),
     templateService: new APIService('template-service'),
     funnelService: new APIService('funnel-service'),
     presetService: new APIService('preset-service'),
@@ -54,7 +55,8 @@ const APIMapping = {
     propertyMarketingPhaseService: new APIService('property-marketing-phase-service'),
     portalManagementService: new APIService('portal-management-service'),
     office365AuthenticationService: new APIService('office365-authentication-service'),
-    customerLegitimationArchiveService: new APIService("customer-legitimation-archive-service")
+    customerLegitimationArchiveService: new APIService("customer-legitimation-archive-service"),
+    gdprService: new APIService("gdpr-service")
 };
 
 export default APIMapping;
