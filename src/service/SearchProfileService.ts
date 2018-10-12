@@ -7,6 +7,10 @@ export class SearchProfileService extends APIClient {
         super(APIMapping.searchProfileService);
     }
 
+    setup(): Promise<AxiosResponse> {
+        return this.invokeApi(`/searchProfile/createSchema`, 'POST');
+    }
+
     getMatchmakingRelevantFieldsBySchema(schemaId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/schemas/${schemaId}/fields`, 'GET');
     }
