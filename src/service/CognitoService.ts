@@ -1,4 +1,10 @@
-import { AuthenticationDetails, CognitoUser, CognitoUserPool, CognitoUserSession } from 'amazon-cognito-identity-js';
+import {
+    AuthenticationDetails,
+    CognitoUser,
+    CognitoUserAttribute,
+    CognitoUserPool,
+    CognitoUserSession
+} from 'amazon-cognito-identity-js';
 import StageConfiguration from '../util/StageConfiguration';
 
 export interface TokenModel {
@@ -74,15 +80,15 @@ export class CognitoService {
                 Username: username,
                 Password: password
             }), {
-                    onSuccess: (result) => {
-                        // define the new Logins
-                        this.token = this.buildLoginToken(result.getIdToken().getJwtToken());
-                        resolve(result);
-                    },
-                    onFailure: (error) => {
-                        reject(error);
-                    }
-                });
+                onSuccess: (result) => {
+                    // define the new Logins
+                    this.token = this.buildLoginToken(result.getIdToken().getJwtToken());
+                    resolve(result);
+                },
+                onFailure: (error) => {
+                    reject(error);
+                }
+            });
         });
     }
 
@@ -125,6 +131,79 @@ export class CognitoService {
         });
     }
 
+    checkUsername(username: string) {
+        const cognitoUser = new CognitoUser({
+            Username: username,
+            Pool: this.userPool
+        });
+
+        return new Promise((resolve, reject) => {
+            cognitoUser.authenticateUser(new AuthenticationDetails({
+                Username: username,
+                Password: ''
+            }), {
+                onSuccess: () => {
+                    resolve();
+                },
+                onFailure: (error) => {
+                    if (error.response) {
+                        error.errorType = error.response.data.__type;
+                    }
+                    reject(error);
+                }
+            });
+        });
+    }
+
+    signUp(username: string, password: string, email: string) {
+        return new Promise((resolve, reject) => {
+            const emailAttribute = {
+                Name: 'email',
+                Value: email
+            };
+
+            return this.userPool.signUp(username, password, [new CognitoUserAttribute(emailAttribute)], [], (error, result) => {
+                if (error) {
+                    return reject(error);
+                }
+
+                if (result) {
+                    this.cognitoUser = result.user;
+                    return resolve(result);
+                }
+            });
+        });
+    }
+
+    forgotPassword(username?: string) {
+        return new Promise(async (resolve, reject) => {
+            if (username) {
+                this.cognitoUser = new CognitoUser({
+                    Username: username,
+                    Pool: this.userPool
+                });
+            } else {
+                const cognitoUser: CognitoUser | null = await this.getCurrentUser();
+                if (!cognitoUser) {
+                    reject('Could not get the current user');
+                }
+            }
+            if (!this.cognitoUser) {
+                return reject('Cognito user is not present');
+            }
+
+            this.cognitoUser.forgotPassword({
+                onSuccess: (data) => {
+                    resolve(data);
+                },
+                onFailure: (error: Error) => {
+                    console.error(error);
+                    reject(error);
+                }
+            });
+        });
+    }
+
     refreshSession(session: CognitoUserSession): Promise<any> {
         return new Promise((resolve, reject) => {
             if (session.isValid()) {
@@ -164,6 +243,29 @@ export class CognitoService {
                     reject(error);
                 }
             });
+        });
+    }
+
+    async changePassword(oldPassword: string, newPassword: string) {
+        let cognitoUser: CognitoUser | null = this.cognitoUser;
+        if (!cognitoUser) {
+            cognitoUser = await this.getCurrentUser();
+        }
+
+        if (!cognitoUser) {
+            return;
+        }
+
+        return cognitoUser.getSession((error: Error) => {
+            if (!error && cognitoUser) {
+                return cognitoUser.changePassword(oldPassword, newPassword, (_error) => {
+                    if (_error) {
+                        return _error;
+                    }
+                    return true;
+                });
+            }
+            return false;
         });
     }
 
@@ -228,6 +330,99 @@ export class CognitoService {
         }
     }
 
+    resendConfirmationCode() {
+        return new Promise((resolve, reject) => {
+            if (this.cognitoUser) {
+                this.cognitoUser.resendConfirmationCode((error, result) => {
+                    if (error) {
+                        return reject(error);
+                    }
+                    resolve(result);
+                });
+            } else {
+                reject();
+            }
+        });
+    }
+
+    confirmRegistration(code: string, username?: string) {
+        return new Promise(async (resolve, reject) => {
+            if (username) {
+                this.cognitoUser = new CognitoUser({
+                    Username: username,
+                    Pool: this.userPool
+                });
+            } else if (!this.cognitoUser) {
+                this.cognitoUser = await this.getCurrentUser();
+            }
+
+            if (this.cognitoUser) {
+                this.cognitoUser.confirmRegistration(code, true, (error, result) => {
+                    if (error) {
+                        return reject(error);
+                    }
+                    resolve(result);
+                });
+            } else {
+                reject();
+            }
+        });
+    }
+
+    confirmPassword(code: string, password: string) {
+        return new Promise(async (resolve, reject) => {
+            if (!this.cognitoUser) {
+                this.cognitoUser = await this.getCurrentUser();
+            }
+
+            if(!this.cognitoUser) {
+                reject();
+                return;
+            }
+
+            this.cognitoUser.confirmPassword(code, password, {
+                onSuccess: () => {
+                    resolve();
+                },
+                onFailure: (error: Error) => {
+                    reject(error);
+                }
+            });
+        });
+    }
+
+    confirmEmail(code: string, username: string) {
+        return new Promise(async (resolve, reject) => {
+            if (username) {
+                this.cognitoUser = new CognitoUser({
+                    Username: username,
+                    Pool: this.userPool
+                });
+            } else if (!this.cognitoUser) {
+                this.cognitoUser = await this.getCurrentUser();
+            }
+
+            if (this.cognitoUser) {
+                this.cognitoUser.verifyAttribute('email', code, {
+                    onSuccess: (success) => {
+                        resolve(success);
+                    },
+                    onFailure: (error) => {
+                        reject(error);
+                    }
+                });
+            } else {
+                reject();
+            }
+        });
+    }
+
+    setCognitoUser(username: string) {
+        this.cognitoUser = new CognitoUser({
+            Username: username,
+            Pool: this.userPool
+        });
+    }
 }
 
 export default new CognitoService();

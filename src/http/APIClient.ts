@@ -57,7 +57,9 @@ export default abstract class APIClient {
         if (!this._consulClient) {
             // Dirty hack: Remove the protocol from the environment value. The Java Consul Client needs it, so the value
             // might contain the protocol. The nodejs consul client does not accept it for whatever reason.
+            // @ts-ignore
             const consulUrl = (process.env.CONSUL_CLIENT_HOST || 'consulclients.development.flowfact-dev.cloud').replace(/https?:\/\//, '');
+            // @ts-ignore
             const consulPort = process.env.CONSUL_CLIENT_PORT || '8500';
 
             // TODO figure out a way to get the name of the executing service here
@@ -82,7 +84,7 @@ export default abstract class APIClient {
         return `${baseUrl}/${this._serviceName}/${this._getVersionTag()}`;
     };
 
-    private async getCognitoToken() {
+    private async _getCognitoToken() {
         const cognitoToken = await CognitoService.getCognitoToken();
         if (!cognitoToken) {
             throw new Error('Could not get the cognito token. Are you not logged in?');
@@ -111,7 +113,7 @@ export default abstract class APIClient {
             if (isNode && this.userId) {
                 userIdentification = {userId: this.userId};
             } else if (!isNode) {
-                userIdentification = {cognitoToken: await this.getCognitoToken()};
+                userIdentification = {cognitoToken: await this._getCognitoToken()};
             }
         }
 

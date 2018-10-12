@@ -7,16 +7,21 @@ export class CognitoClientService extends APIClient {
         super(APIMapping.cognitoClientService);
     }
 
-    getLoginNameByAliasMailAddress(aliasMailAddress: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/public/users/loginname/`, 'GET', undefined, {queryParams: {aliasMailAddress: aliasMailAddress}});
+    fetchLoginNameByAliasMailAddress(aliasMailAddress: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/public/users/loginname/`, 'GET', undefined, {
+            queryParams: {
+                aliasMailAddress: aliasMailAddress
+            }
+        });
     }
 
-
-    linkSAAndCognitoAccount(aliasMailAddress: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/public/users/link`, 'POST', undefined, {queryParams: {aliasMailAddress: aliasMailAddress}});
+    linkAccount(aliasMailAddress: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/public/users/link`, 'POST', undefined, {
+            queryParams: {
+                aliasMailAddress: aliasMailAddress
+            }
+        });
     }
-
-
 }
 
 export default new CognitoClientService();
