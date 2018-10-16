@@ -16,6 +16,15 @@ export class GDPRService extends APIClient {
             }
         });
     }
+
+    async fetchCompanyTerms(userId: string, companyId: string) {
+        return await this.invokeApi('/public/company', 'GET', undefined, {
+            queryParams: {
+                userId: userId,
+                companyId: companyId
+            }
+        });
+    }
 }
 
 export default new GDPRService();
