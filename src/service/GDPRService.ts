@@ -1,5 +1,6 @@
 import APIClient from "../http/APIClient";
 import APIMapping from "../http/APIMapping";
+import {AxiosResponse} from "axios";
 
 export class GDPRService extends APIClient {
 
@@ -7,7 +8,7 @@ export class GDPRService extends APIClient {
         super(APIMapping.gdprService);
     }
 
-    async fetchContact(contactId: string, userId: string, companyId: string) {
+    async fetchContact(contactId: string, userId: string, companyId: string): Promise<AxiosResponse> {
         return await this.invokeApi('/public/contact', 'GET', undefined, {
             queryParams: {
                 contactId: contactId,
@@ -17,9 +18,19 @@ export class GDPRService extends APIClient {
         });
     }
 
-    async fetchCompanyTerms(userId: string, companyId: string) {
+    async fetchCompanyTerms(userId: string, companyId: string): Promise<AxiosResponse> {
         return await this.invokeApi('/public/company', 'GET', undefined, {
             queryParams: {
+                userId: userId,
+                companyId: companyId
+            }
+        });
+    }
+
+    async fetchConsents(contactId: string, userId: string, companyId: string): Promise<AxiosResponse> {
+        return await this.invokeApi('/public/consents', 'GET', undefined, {
+            queryParams: {
+                contactId: contactId,
                 userId: userId,
                 companyId: companyId
             }
