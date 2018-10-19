@@ -10,6 +10,11 @@ export interface ExportRequestBody {
     recipientEmail: string;
 }
 
+export interface EntityQuery {
+    entityId: string;
+    schemaId: string;
+}
+
 export class GDPRService extends APIClient {
 
     constructor() {
@@ -47,6 +52,15 @@ export class GDPRService extends APIClient {
 
     async exportPersonalData(userId: string, companyId: string, body: ExportRequestBody): Promise<AxiosResponse> {
         return await this.invokeApi('/public/export', 'POST', body, {
+            queryParams: {
+                userId: userId,
+                companyId: companyId
+            }
+        });
+    }
+
+    async resolveEntities(companyId: string, userId: string, body: EntityQuery[]): Promise<AxiosResponse> {
+        return await this.invokeApi('/public/resolveEntities', 'POST', body, {
             queryParams: {
                 userId: userId,
                 companyId: companyId
