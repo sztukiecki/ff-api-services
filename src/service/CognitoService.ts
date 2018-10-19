@@ -256,16 +256,19 @@ export class CognitoService {
             return;
         }
 
-        return cognitoUser.getSession((error: Error) => {
-            if (!error && cognitoUser) {
-                return cognitoUser.changePassword(oldPassword, newPassword, (_error) => {
-                    if (_error) {
-                        return _error;
-                    }
-                    return true;
-                });
-            }
-            return false;
+        return new Promise((resolve, reject) => {
+            cognitoUser!.getSession((error?: Error) => {
+                if (!error && cognitoUser) {
+                    return cognitoUser.changePassword(oldPassword, newPassword, (_error) => {
+                        if (_error) {
+                            reject(_error);
+                            return;
+                        }
+                        resolve(true);
+                    });
+                }
+                resolve(false);
+            });
         });
     }
 
