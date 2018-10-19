@@ -1,6 +1,7 @@
 import APIClient from "../http/APIClient";
 import APIMapping from "../http/APIMapping";
 import {AxiosResponse} from "axios";
+import { EntityQuery } from '../util/InternalTypes';
 
 export type ExportType = 'JSON' | 'CSV' | 'XML';
 
@@ -8,11 +9,6 @@ export interface ExportRequestBody {
     contactId: string;
     exportType: ExportType;
     recipientEmail: string;
-}
-
-export interface EntityQuery {
-    entityId: string;
-    schemaId: string;
 }
 
 export class GDPRService extends APIClient {
