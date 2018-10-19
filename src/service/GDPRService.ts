@@ -2,6 +2,14 @@ import APIClient from "../http/APIClient";
 import APIMapping from "../http/APIMapping";
 import {AxiosResponse} from "axios";
 
+export type ExportType = 'JSON' | 'CSV' | 'XML';
+
+export interface ExportRequestBody {
+    contactId: string;
+    exportType: ExportType;
+    recipientEmail: string;
+}
+
 export class GDPRService extends APIClient {
 
     constructor() {
@@ -31,6 +39,15 @@ export class GDPRService extends APIClient {
         return await this.invokeApi('/public/consents', 'GET', undefined, {
             queryParams: {
                 contactId: contactId,
+                userId: userId,
+                companyId: companyId
+            }
+        });
+    }
+
+    async exportPersonalData(userId: string, companyId: string, body: ExportRequestBody): Promise<AxiosResponse> {
+        return await this.invokeApi('/public/export', 'POST', body, {
+            queryParams: {
                 userId: userId,
                 companyId: companyId
             }
