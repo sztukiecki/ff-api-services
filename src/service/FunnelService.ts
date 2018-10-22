@@ -39,7 +39,7 @@ export class FunnelService extends APIClient {
 			queryParams: {
 				includeEntityIds: `${includeEntityIds}`
 			}
-		} : undefined).then(s => s.data);
+		} : undefined);
     }
 
     deleteFunnelById(funnelId: string) {
