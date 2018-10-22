@@ -34,7 +34,7 @@ export class FunnelService extends APIClient {
         return this.invokeApi('/funnels/' + funnelId + '/duplicate','POST')
     }
 
-    findFunnelById(funnelId: string, includeEntityIds?: string) {
+    findFunnelById(funnelId: string, includeEntityIds?: boolean) {
         return this.invokeApi(`/funnels/${funnelId}`, 'GET', undefined, includeEntityIds ? {
 			queryParams: {
 				includeEntityIds: `${includeEntityIds}`
