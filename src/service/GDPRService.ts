@@ -11,6 +11,8 @@ export interface ExportRequestBody {
     recipientEmail: string;
 }
 
+export type DataChangeRequestType = 'DELETE' | 'CHANGE' | 'PROCESS_LIMITATION';
+
 export class GDPRService extends APIClient {
 
     constructor() {
@@ -58,6 +60,29 @@ export class GDPRService extends APIClient {
     async resolveEntities(companyId: string, userId: string, body: EntityQuery[]): Promise<AxiosResponse> {
         return await this.invokeApi('/public/resolveEntities', 'POST', body, {
             queryParams: {
+                userId: userId,
+                companyId: companyId
+            }
+        });
+    }
+
+    async changeData(contactId: string, userId: string, companyId: string, type: DataChangeRequestType = 'CHANGE', changes: object = {}): Promise<AxiosResponse> {
+        return await this.invokeApi('/public/changeRequests', 'POST', {
+            contactId: contactId,
+            type: type,
+            changes: changes
+        }, {
+            queryParams: {
+                userId: userId,
+                companyId: companyId
+            }
+        });
+    }
+
+    async fetchChangeRequestStatus(contactId: string, userId: string, companyId: string): Promise<AxiosResponse> {
+        return await this.invokeApi('/public/changeRequests/status', 'GET', undefined, {
+            queryParams: {
+                contactId: contactId,
                 userId: userId,
                 companyId: companyId
             }
