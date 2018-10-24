@@ -90,7 +90,16 @@ export class GDPRService extends APIClient {
     }
 
     async revokeConsent(consentId: string, consentSchemaId: string, userId: string, companyId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/public/consent/schemaId/${consentSchemaId}/entityId/${consentId}/revoke`, 'POST', undefined, {
+        return await this.invokeApi(`/public/consents/schemaId/${consentSchemaId}/entityId/${consentId}/revoke`, 'POST', undefined, {
+            queryParams: {
+                userId: userId,
+                companyId: companyId
+            }
+        });
+    }
+
+    async createConsent(consentEntity: object, userId: string, companyId: string): Promise<AxiosResponse> {
+        return await this.invokeApi('/public/consents', 'POST', consentEntity, {
             queryParams: {
                 userId: userId,
                 companyId: companyId
