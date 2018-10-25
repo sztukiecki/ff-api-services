@@ -56,7 +56,8 @@ const APIMapping = {
     portalManagementService: new APIService('portal-management-service'),
     office365AuthenticationService: new APIService('office365-authentication-service'),
     customerLegitimationArchiveService: new APIService("customer-legitimation-archive-service"),
-    gdprService: new APIService("gdpr-service")
+    gdprService: new APIService("gdpr-service"),
+    appointmentBookingService: new APIService("appointment-booking-service")
 };
 
 export default APIMapping;
