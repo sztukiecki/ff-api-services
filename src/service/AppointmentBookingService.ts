@@ -22,7 +22,7 @@ export class AppointmentBookingService extends APIClient {
 	}
 
 	getAppointmentRequestData(token: any): Promise<AxiosResponse> {
-		return this.invokeApi('/public/request/?token=' + token, 'GET');
+		return this.invokeApi('/public/request/' + token, 'GET');
 	}
 }
 
