@@ -20,6 +20,10 @@ export class AppointmentBookingService extends APIClient {
 	deleteEvent(eventId: any): Promise<AxiosResponse> {
 		return this.invokeApi('/eventconfig/delete/event', 'POST', {eventSlotId: eventId});
 	}
+
+	getAppointmentRequestData(token: any): Promise<AxiosResponse> {
+		return this.invokeApi('/request/?token=' + token, 'GET');
+	}
 }
 
 export default new AppointmentBookingService();
