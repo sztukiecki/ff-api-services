@@ -11,6 +11,11 @@ export interface ExportRequestBody {
     recipientEmail: string;
 }
 
+export interface Settings {
+    companyId: string;
+    contactApproachAlwaysAllowed: boolean;
+}
+
 export type DataChangeRequestType = 'DELETE' | 'CHANGE' | 'PROCESS_LIMITATION';
 
 export class GDPRService extends APIClient {
@@ -105,6 +110,14 @@ export class GDPRService extends APIClient {
                 companyId: companyId
             }
         });
+    }
+
+    async fetchSettings(): Promise<AxiosResponse<Settings>> {
+        return await this.invokeApi('/settings', 'GET');
+    }
+
+    async updateSettings(settings: Settings): Promise<AxiosResponse> {
+        return await this.invokeApi('/settings', 'PUT', settings);
     }
 }
 
