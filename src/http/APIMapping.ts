@@ -57,7 +57,8 @@ const APIMapping = {
     office365AuthenticationService: new APIService('office365-authentication-service'),
     customerLegitimationArchiveService: new APIService("customer-legitimation-archive-service"),
     gdprService: new APIService("gdpr-service"),
-    appointmentBookingService: new APIService("appointment-booking-service")
+    appointmentBookingService: new APIService("appointment-booking-service"),
+    matchmakingService: new APIService("matchmaking-service")
 };
 
 export default APIMapping;
