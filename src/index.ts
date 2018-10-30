@@ -39,6 +39,7 @@ import StageConfiguration, {STORE_KEYS} from './util/StageConfiguration';
 import CustomerLegitimationArchiveService from './service/CustomerLegitimationArchiveService';
 import GDPRService from './service/GDPRService';
 import AppointmentBookingService from './service/AppointmentBookingService';
+import TrialLicenseService from './service/TrialLicenseService';
 import MatchmakingService from './service/MatchmakingService';
 
 export {
@@ -81,7 +82,8 @@ export {
 	CustomerLegitimationArchiveService,
 	GDPRService,
 	AppointmentBookingService,
-	MatchmakingService
+    TrialLicenseService,
+    MatchmakingService
 };
 
 // types only

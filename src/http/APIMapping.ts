@@ -49,6 +49,7 @@ const APIMapping = {
     interactiveExposeDeliveryService: new APIService('interactive-expose-delivery-service'),
     interactiveExposeStatisticsService: new APIService('interactive-expose-statistics-service'),
     moduleService: new APIService('module-service'),
+    trialLicenseServive: new APIService('trial-license-service'),
     sampleDataService: new APIService('sampledata-service'),
     slackIntegrationService: new APIService('slack-integration-service'),
     spregnetterService: new APIService('sprengnetter-service'),
