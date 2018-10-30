@@ -1,6 +1,6 @@
 import {APIClient, APIMapping} from '../http';
 
-export class AgentRecommendationService extends APIClient {
+export class TrialLicenseService extends APIClient {
 
     constructor() {
         super(APIMapping.trialLicenseServive);
@@ -16,4 +16,4 @@ export class AgentRecommendationService extends APIClient {
     }
 }
 
-export default new AgentRecommendationService();
+export default new TrialLicenseService();
