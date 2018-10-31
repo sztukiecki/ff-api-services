@@ -24,6 +24,10 @@ export class AppointmentBookingService extends APIClient {
 	getAppointmentRequestData(token: any): Promise<AxiosResponse> {
 		return this.invokeApi('/public/request/' + token, 'GET');
 	}
+
+	bookAppointment(token: any, appointment: any): Promise<AxiosResponse> {
+		return this.invokeApi('/public/request/' + token, 'POST', appointment);
+	}
 }
 
 export default new AppointmentBookingService();
