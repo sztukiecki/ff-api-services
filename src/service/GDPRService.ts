@@ -119,6 +119,10 @@ export class GDPRService extends APIClient {
     async updateSettings(settings: Settings): Promise<AxiosResponse> {
         return await this.invokeApi('/settings', 'PUT', settings);
     }
+
+    async fetchAllChangeRequests(): Promise<AxiosResponse> {
+        return await this.invokeApi('/changeRequests/all', 'GET');
+    }
 }
 
 export default new GDPRService();
