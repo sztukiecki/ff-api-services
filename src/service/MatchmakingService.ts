@@ -1,6 +1,6 @@
-import {APIClient, APIMapping} from '../http';
-import {AxiosResponse} from 'axios';
-import {MatchCount, MatchScore} from '../util/MatchmakingModels';
+import { AxiosResponse } from 'axios';
+import { APIClient, APIMapping } from '../http';
+import { MatchCount, MatchScore } from '../util/MatchmakingModels';
 
 export class MatchmakingService extends APIClient {
 
@@ -16,6 +16,10 @@ export class MatchmakingService extends APIClient {
     getMatchesByContact(contactId:number): Promise<AxiosResponse<Array<MatchScore>>> {
         return this.invokeApi('/matches/contact/' + contactId, 'GET');
     }
+
+	initialImport(): Promise<AxiosResponse> {
+		return this.invokeApi('/trigger/initial', 'POST');
+	}
 }
 
 export default new MatchmakingService();
