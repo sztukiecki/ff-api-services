@@ -51,8 +51,16 @@ export class PropertyMarketingPhaseService extends APIClient {
         });
     }
 
-    changeCurrentStep(schemaId: string, entityId: string, stepId: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/${schemaId}/${entityId}/switchToStep`, 'POST', { stepId });
+	/**
+	 * Switches to next step using the step switch validator.
+	 * @param schemaId
+	 * @param entityId
+	 * @param stepId
+	 * @param source as string / enum, represents either KANBAN or LIFECYCLE
+	 * @returns {Promise<any>} Status OK or REJECTED and a list of widgets if rejected.
+	 */
+    changeCurrentStep(schemaId: string, entityId: string, stepId: string, source?: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/${schemaId}/${entityId}/switchToStep`, 'POST', { stepId, source });
     }
 
     fetchPhaseStatistics(): Promise<AxiosResponse> {
