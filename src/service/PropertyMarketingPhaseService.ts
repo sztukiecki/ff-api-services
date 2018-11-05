@@ -59,7 +59,7 @@ export class PropertyMarketingPhaseService extends APIClient {
 	 * @param source as string / enum, represents either KANBAN or LIFECYCLE
 	 * @returns {Promise<any>} Status OK or REJECTED and a list of widgets if rejected.
 	 */
-    changeCurrentStep(schemaId: string, entityId: string, stepId: string, source?: string): Promise<AxiosResponse> {
+    changeCurrentStep(schemaId: string, entityId: string, stepId: string, source?: 'KANBAN' | 'LIFECYCLE'): Promise<AxiosResponse> {
         return this.invokeApi(`/${schemaId}/${entityId}/switchToStep`, 'POST', { stepId, source });
     }
 
