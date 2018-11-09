@@ -18,6 +18,10 @@ export class MatchmakingService extends APIClient {
         return this.invokeApi('/matches/contact/' + contactId, 'GET');
     }
 
+    getMatchesByEstate(estateId: string): Promise<AxiosResponse<Array<MatchScore>>> {
+        return this.invokeApi('/matches/estate/' + estateId, 'GET');
+    }
+
     getMatchCountByEstate(estateId: string): Promise<AxiosResponse<MatchCountForEstate>> {
         return this.invokeApi(`/matches/estate/${estateId}/count`, 'GET');
     }
