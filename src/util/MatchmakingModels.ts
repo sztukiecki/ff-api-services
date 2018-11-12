@@ -23,3 +23,10 @@ export interface Inquiry {
 	status: null;
 	id: string;
 }
+
+export interface MatchmakingPagingResponse<T> {
+	total: number;
+	page: number;
+	size: number;
+	data: T
+}
