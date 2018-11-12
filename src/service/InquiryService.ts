@@ -1,7 +1,6 @@
 import { AxiosResponse } from 'axios';
+import { APIClient, APIMapping } from '../http';
 import { Inquiry } from '../util/MatchmakingModels';
-import APIClient from '../http/APIClient';
-import APIMapping from '../http/APIMapping';
 
 export class InquiryService extends APIClient {
 
@@ -9,7 +8,7 @@ export class InquiryService extends APIClient {
 		super(APIMapping.inquiryService);
 	}
 
-	getAll(page: number = 1, size: number = 100): Promise<AxiosResponse<Inquiry>> {
+	getAll(page: number = 1, size: number = 100): Promise<AxiosResponse<Array<Inquiry>>> {
 		return this.invokeApi(`/inquiry?page=${page}&size=${size}`, 'GET');
 	}
 }
