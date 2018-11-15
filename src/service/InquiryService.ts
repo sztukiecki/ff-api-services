@@ -12,9 +12,6 @@ export class InquiryService extends APIClient {
 		return this.invokeApi(`/inquiry?page=${page}&size=${size}`, 'GET');
 	}
 
-	updateInquiries(inquiries: Array<Inquiry>): Promise<AxiosResponse> {
-		return this.invokeApi(`/inquiry`, 'PATCH', inquiries);
-	}
 }
 
 export default new InquiryService();
