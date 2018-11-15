@@ -158,6 +158,13 @@ export class InteractiveExposeService extends APIClient {
     }
 
     /**
+     * Uninitialize the company domain.
+     */
+    async startDomainTeardown(): Promise<AxiosResponse> {
+        return this.invokeApi('/domain/startTeardown', 'POST');
+    }
+
+    /**
      * Perform the setup steps for the domain.
      */
     async setupDomain(): Promise<AxiosResponse> {
