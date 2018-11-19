@@ -8,8 +8,8 @@ export class SearchProfileService extends APIClient {
         super(APIMapping.searchProfileService);
     }
 
-    setup(): Promise<AxiosResponse> {
-        return this.invokeApi(`/searchProfile/createSchema`, 'POST');
+    getSchema(): Promise<AxiosResponse> {
+        return this.invokeApi(`/searchprofile/schema`, 'GET');
     }
 
     createSearchprofileFromInquiry(message: InquiryCreatedMessage): Promise<AxiosResponse> {
