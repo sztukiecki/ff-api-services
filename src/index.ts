@@ -42,6 +42,7 @@ import UserService from './service/UserService';
 import ViewDefinitionService from './service/ViewDefinitionService';
 import WordpressTemplateService from './service/WordpressTemplateService';
 import StageConfiguration, { STORE_KEYS } from './util/StageConfiguration';
+import { InquiryCreatedMessage } from './util/searchprofile-service/InquiryCreatedMessage';
 
 export {
 	CompanyService,
@@ -85,7 +86,8 @@ export {
 	AppointmentBookingService,
 	TrialLicenseService,
 	MatchmakingService,
-	InquiryService
+	InquiryService,
+	InquiryCreatedMessage
 };
 
 // types only
