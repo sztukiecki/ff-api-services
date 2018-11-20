@@ -1,11 +1,11 @@
-import axios, {AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken} from 'axios';
+import ConsulClient from '@flowfact/consul-client';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
 import * as axiosRetry from 'axios-retry';
 import * as isNode from 'detect-node';
-import ConsulClient from '@flowfact/consul-client';
-import {APIService} from "./APIMapping";
 import CognitoService from '../service/CognitoService';
 import Interceptor from '../util/Interceptor';
 import StageConfiguration from '../util/StageConfiguration';
+import { APIService } from "./APIMapping";
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
 
@@ -171,4 +171,10 @@ export default abstract class APIClient {
             return `${encodeURIComponent(paramName)}=${encodeURIComponent(paramValue.toString())}`
         }).filter(param => param !== undefined).join('&');
     }
+}
+
+
+if (isNode) {
+    APIClient.stageToUse = process.env.STAGE_NAME || 'development';
+    APIClient.apiVersionTag = APIClient.stageToUse === 'development' ? 'latest' : 'stable';
 }
