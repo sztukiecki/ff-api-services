@@ -5,7 +5,8 @@ import * as isNode from 'detect-node';
 import CognitoService from '../service/CognitoService';
 import Interceptor from '../util/Interceptor';
 import StageConfiguration from '../util/StageConfiguration';
-import { APIService } from "./APIMapping";
+import { APIService } from './APIMapping';
+import {stringify} from 'qs';
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
 
@@ -102,8 +103,8 @@ export default abstract class APIClient {
         let url = (await this.buildAPIUrl()) + path;
         if (additionalParams.queryParams) {
             const queryString = this.buildCanonicalQueryString(additionalParams.queryParams);
-            if (queryString !== '') {
-                url += '?' + queryString;
+            if (queryString && queryString !== '') {
+                url += queryString;
             }
         }
 
@@ -157,19 +158,7 @@ export default abstract class APIClient {
             return '';
         }
 
-        const sortedQueryParams = Object.getOwnPropertyNames(queryParams).sort();
-
-        return sortedQueryParams.map(paramName => {
-            const paramValue = queryParams[paramName];
-            if (!paramValue) {
-                return undefined;
-            }
-            if (paramValue === true) {
-                return encodeURIComponent(paramName);
-            }
-
-            return `${encodeURIComponent(paramName)}=${encodeURIComponent(paramValue.toString())}`
-        }).filter(param => param !== undefined).join('&');
+        return stringify(queryParams, { addQueryPrefix: true });
     }
 }
 

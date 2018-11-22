@@ -1,7 +1,7 @@
 import APIClient from "../http/APIClient";
 import APIMapping from "../http/APIMapping";
 import {AxiosResponse} from "axios";
-import { EntityQuery } from '../util/InternalTypes';
+import {EntityQuery} from '../util/InternalTypes';
 
 export type ExportType = 'JSON' | 'CSV' | 'XML';
 
@@ -126,6 +126,26 @@ export class GDPRService extends APIClient {
 
     async fetchAllChangeRequests(): Promise<AxiosResponse> {
         return await this.invokeApi('/changeRequests/all', 'GET');
+    }
+
+    async isContactBlocked(contactId: string): Promise<AxiosResponse> {
+        return await this.invokeApi('/contact/blocked', 'GET', undefined, {
+            queryParams: {
+                contactId: contactId
+            }
+        });
+    }
+
+    async blockContact(contactId: string, block: boolean): Promise<AxiosResponse> {
+        return await this.invokeApi('/contact/block', 'POST', undefined, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            queryParams: {
+                block: block,
+                contactId: contactId
+            }
+        });
     }
 }
 
