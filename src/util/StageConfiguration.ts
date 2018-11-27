@@ -30,14 +30,12 @@ export class StageConfiguration {
     setStageInStore (stage: string) {
         if (stage) {
             store.set(STORE_KEYS.edgeServiceStage, stage);
-            console.log('Set stage to: ' + stage);
         }
     }
 
     setVersionTagInStore = (versionTag: string) => {
         if (versionTag) {
             store.set(STORE_KEYS.edgeServiceVersionTag, versionTag);
-            console.log('Set versionTag to: ' + versionTag);
         }
     };
 
