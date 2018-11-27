@@ -19,8 +19,8 @@ export class TrialLicenseService extends APIClient {
         return this.invokeApi('/public/buy', 'POST', payload).then(s => s.data);
     }
 
-    upgradeAccount() {
-        return this.invokeApi('/upgradeAccount', 'POST').then(s => s.data);
+    upgradeAccount(hostedPageId: string) {
+        return this.invokeApi('/upgradeAccount/' + hostedPageId, 'POST').then(s => s.data);
     }
 }
 
