@@ -1,5 +1,5 @@
 import {APIClient, APIMapping} from '../http';
-import { AxiosResponse } from 'axios';
+import {AxiosResponse} from 'axios';
 
 export interface LegislationCheckbox {
     value: string,
@@ -34,6 +34,14 @@ export class CompanyService extends APIClient {
         return this.invokeApi('/company/usepreset', 'PUT', {
             presets
         });
+    }
+
+    startTrial(companyId: string) {
+        return this.invokeApi(`/internal/company/${companyId}/startTrial`, 'PUT');
+    }
+
+    endTrial(companyId: string) {
+        return this.invokeApi(`/internal/company/${companyId}/endTrial`, 'PUT');
     }
 
     updateCompany(body: any) {
