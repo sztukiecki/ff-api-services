@@ -8,7 +8,7 @@ export class AgentRecommendationService extends APIClient {
     }
 
     getViewForAgent(schemaId: string, entityId: string) {
-        return this.invokeApi(`/agent/schema/${schemaId}/entity/${entityId}`, 'GET').then(s => s.data);
+        return this.invokeApi(`/agent/schema/${schemaId}/entity/${entityId}`, 'GET')
     }
 
     uploadAgentVideo(schemaId: string, entityId: string, file: any) {
@@ -18,7 +18,7 @@ export class AgentRecommendationService extends APIClient {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-        }).then(s => s.data);
+        });
     }
 
     uploadRaterVideo(schemaId: string, entityId: string, file: any, token: string) {
@@ -28,7 +28,7 @@ export class AgentRecommendationService extends APIClient {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-        }).then(s => s.data);
+        });
     }
 
 
@@ -37,11 +37,11 @@ export class AgentRecommendationService extends APIClient {
             headers: {
                 'Accept': 'application/json'
             }
-        }).then(s => s.data);
+        });
     }
 
     getCompanyAndUser(token: string) {
-        return this.invokeApi(`/public/authenticated/companyAndUser?accessToken=${token}`, 'GET').then(s => s.data);
+        return this.invokeApi(`/public/authenticated/companyAndUser?accessToken=${token}`, 'GET');
     }
 
     updateEntity(fieldValueMapping: object, token: string): Promise<AxiosResponse> {
@@ -49,12 +49,12 @@ export class AgentRecommendationService extends APIClient {
     }
 
     finishRating(token: string, value: any) {
-        return this.invokeApi(`/public/authenticated/finishRating?accessToken=${token}`, 'POST', value).then(s => s.data);
+        return this.invokeApi(`/public/authenticated/finishRating?accessToken=${token}`, 'POST', value);
     }
 
 
     createPreconditions() {
-        return this.invokeApi(`/agent/preconditions`, 'POST').then(s => s.data);
+        return this.invokeApi(`/agent/preconditions`, 'POST');
     }
 }
 
