@@ -124,9 +124,9 @@ export class InteractiveExposeService extends APIClient {
     }
 
     /**
-     * Gets all existing IEX Templates of a company
+     * Gets all existing design Templates of a company
      */
-    async getIexTemplates(): Promise<AxiosResponse> {
+    async fetchDesignTemplates(): Promise<AxiosResponse> {
         return this.invokeApi('/interactiveExposes/templates/assignments', 'GET');
     }
 
