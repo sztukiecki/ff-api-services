@@ -72,8 +72,11 @@ export class InteractiveExposeService extends APIClient {
         return (await this.invokeApi('/settings', 'POST', settings)).data;
     }
 
-    async getPreviewUrl(entityId: string): Promise<string> {
-        return (await this.invokeApi('/preview', 'POST', {entityId: entityId})).data;
+    async getPreviewUrl(entityId: string, templateName: string = 'standard'): Promise<string> {
+        return (await this.invokeApi('/preview', 'POST', {
+            entityId: entityId,
+            templateName: templateName
+        })).data;
     }
 
     async sendInteractiveExpose(model: SendInteractiveExposeModel): Promise<AxiosResponse> {
