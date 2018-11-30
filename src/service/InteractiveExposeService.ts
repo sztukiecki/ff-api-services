@@ -58,6 +58,12 @@ export interface InteractiveExposeMapping {
     advancedStageConfigurationMappings: any
 }
 
+export interface DesignTemplate {
+    templateName: string,
+    templateNiceName: string,
+    default: boolean
+}
+
 export class InteractiveExposeService extends APIClient {
 
     constructor() {
@@ -128,6 +134,10 @@ export class InteractiveExposeService extends APIClient {
      */
     async fetchDesignTemplates(): Promise<AxiosResponse> {
         return this.invokeApi('/interactiveExposes/templates/assignments', 'GET');
+    }
+
+    async updateDesignTemplates(designTemplates: DesignTemplate[]): Promise<AxiosResponse> {
+        return this.invokeApi('/interactiveExposes/templates/assignments', 'POST', designTemplates);
     }
 
     /**
