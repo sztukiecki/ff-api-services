@@ -64,6 +64,12 @@ export interface DesignTemplate {
     default: boolean
 }
 
+export interface DesignTemplateAssignment {
+    companyId: string,
+    templateName: string,
+    isDefault: boolean
+}
+
 export class InteractiveExposeService extends APIClient {
 
     constructor() {
@@ -132,11 +138,11 @@ export class InteractiveExposeService extends APIClient {
     /**
      * Gets all existing design Templates of a company
      */
-    async fetchDesignTemplates(): Promise<AxiosResponse> {
+    async fetchDesignTemplates(): Promise<AxiosResponse<DesignTemplate[]>> {
         return this.invokeApi('/interactiveExposes/templates/assignments', 'GET');
     }
 
-    async updateDesignTemplates(designTemplates: DesignTemplate[]): Promise<AxiosResponse> {
+    async updateDesignTemplates(designTemplates: DesignTemplateAssignment[]): Promise<AxiosResponse> {
         return this.invokeApi('/interactiveExposes/templates/assignments', 'POST', designTemplates);
     }
 
