@@ -95,7 +95,7 @@ export class SearchService extends APIClient {
         if (filterConfiguration) {
             if (filterConfiguration.value && filterConfiguration.value !== '') {
                 const conditions: FlowdslConditionUnion[] = filterConfiguration.fields.map(field => {
-                    if (field === 'id') {
+                    if (field === 'id' || field === 'identifier') {
                         return <EntityIdCondition>{
                             type: 'ENTITYID',
                             values: [filterConfiguration.value]
