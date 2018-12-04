@@ -94,6 +94,14 @@ export class CompanyService extends APIClient {
         return this.invokeApi('/legislationTexts', 'GET');
     }
 
+    fetchLegislationTextsByCompanyId(companyId: string): Promise<AxiosResponse> {
+        return this.invokeApi('/public/legislationTexts', 'GET', undefined, {
+            queryParams: {
+                companyId: companyId
+            }
+        });
+    }
+
     /**
      * Updates one legislation text and if it does not exists, then it will create it
      * @param {LegislationText} legislationText
