@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 import { Contact } from '../util/ContactModels';
-import { MatchCountForEstate, MatchmakingPagingResponse, MatchScore } from '../util/MatchmakingModels';
+import { MatchCountForEstate, MatchmakingPagingResponse, MatchScoreContact, MatchScoreEstate } from '../util/MatchmakingModels';
 
 export class MatchmakingService extends APIClient {
 
@@ -26,13 +26,13 @@ export class MatchmakingService extends APIClient {
 		});
 	}
 
-	getMatchesByContact(contactId: string, page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<MatchScore>>>> {
+	getMatchesByContact(contactId: string, page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<MatchScoreContact>>>> {
 		return this.invokeApi(`/matches/contacts/${contactId}`, 'GET', undefined, {
 			queryParams: { page }
 		});
 	}
 
-	getMatchesByEstate(estateId: string, page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<MatchScore>>>> {
+	getMatchesByEstate(estateId: string, page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<MatchScoreEstate>>>> {
 		return this.invokeApi(`/matches/estates/${estateId}`, 'GET', undefined, {
 			queryParams: { page }
 		});

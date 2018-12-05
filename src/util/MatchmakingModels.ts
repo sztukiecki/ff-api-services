@@ -3,8 +3,16 @@ export interface MatchCount {
 	matchCount: number;
 }
 
-export interface MatchScore {
+export interface MatchScoreContact {
+	searchprofileId: string;
 	estateId: string;
+	schemaId: string;
+	score: number;
+}
+
+export interface MatchScoreEstate {
+	searchprofileId: string;
+	contactId: string;
 	schemaId: string;
 	score: number;
 }
