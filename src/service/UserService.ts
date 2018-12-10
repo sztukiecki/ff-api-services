@@ -43,6 +43,14 @@ export class UserService extends APIClient {
             }
         });
     }
+
+    getUserByAliasMailAddressInternal(aliasMailAddress: string): Promise<AxiosResponse<any>> {
+        return this.invokeApi('/internal/users', 'GET', undefined, {
+            queryParams: {
+                aliasMailAddress: aliasMailAddress
+            }
+        });
+    }
 }
 
 export default new UserService();
