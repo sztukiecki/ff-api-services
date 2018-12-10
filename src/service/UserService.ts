@@ -51,6 +51,14 @@ export class UserService extends APIClient {
             }
         });
     }
+
+    getUserByLoginInternal(loginMailAddress: string): Promise<AxiosResponse<any>> {
+        return this.invokeApi('/internal/users', 'GET', undefined, {
+            queryParams: {
+                login: loginMailAddress
+            }
+        });
+    }
 }
 
 export default new UserService();
