@@ -94,8 +94,15 @@ export class GDPRService extends APIClient {
         });
     }
 
-    async updateChangeRequestStatus(changeRequestId: string, status: 'APPROVED' | 'DENIED'): Promise<AxiosResponse> {
-        return await this.invokeApi(`/changeRequests/${changeRequestId}/status/${status}`, 'POST', undefined);
+    async updateChangeRequestStatus(changeRequestId: string, status: 'APPROVED' | 'DENIED', reason: string): Promise<AxiosResponse> {
+        const formData = new FormData();
+        formData.append('reason', reason);
+
+        return await this.invokeApi(`/changeRequests/${changeRequestId}/status/${status}`, 'POST', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
     }
 
     async revokeConsent(consentId: string, consentSchemaId: string, userId: string, companyId: string): Promise<AxiosResponse> {
