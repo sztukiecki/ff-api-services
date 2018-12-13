@@ -154,6 +154,10 @@ export class GDPRService extends APIClient {
             }
         });
     }
+
+    async sendConsentMail(contactId: string) {
+        return await this.invokeApi(`/consents/mail/${contactId}`, 'POST');
+    }
 }
 
 export default new GDPRService();
