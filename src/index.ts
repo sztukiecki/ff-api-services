@@ -36,13 +36,14 @@ import SlackIntegrationService from './service/SlackIntegrationService';
 import SprengnetterService from './service/SprengnetterService';
 import TaggingService from './service/TaggingService';
 import TagsService from './service/TagService';
+import TaskService from './service/TaskService';
 import TemplateService from './service/TemplateService';
 import TrialLicenseService from './service/TrialLicenseService';
 import UserService from './service/UserService';
 import ViewDefinitionService from './service/ViewDefinitionService';
 import WordpressTemplateService from './service/WordpressTemplateService';
-import StageConfiguration, { STORE_KEYS } from './util/StageConfiguration';
 import { InquiryCreatedMessage } from './util/searchprofile-service/InquiryCreatedMessage';
+import StageConfiguration, { STORE_KEYS } from './util/StageConfiguration';
 
 export {
 	CompanyService,
@@ -53,6 +54,7 @@ export {
 	TemplateService,
 	TagsService,
 	TaggingService,
+	TaskService,
 	SchemaService,
 	FunnelService,
 	GeolocationService,
