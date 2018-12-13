@@ -23,7 +23,7 @@ export class TaskService extends APIClient {
 	}
 
 	updateTask(id: string, task: object) {
-		return this.invokeApi(`/task/`, 'PUT', task).then(s => s.data);
+		return this.invokeApi(`/task/${id}`, 'PUT', task).then(s => s.data);
 	}
 
 }
