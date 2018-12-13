@@ -20,7 +20,7 @@ export class EntityService extends APIClient {
         return this.invokeApi(`/schemas/${schemaId}`, 'POST', entity || {});
     }
 
-    searchEntity(index: string, viewName: string, searchTerm: string, flowdsl?: Flowdsl, page: number = 1, size: number = 10) {
+    searchEntity(index: string, viewName: string, flowdsl?: Flowdsl, page: number = 1, size: number = 10) {
         const queryParams: ParamList = {
             page,
             size,
