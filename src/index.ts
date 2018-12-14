@@ -42,6 +42,7 @@ import TrialLicenseService from './service/TrialLicenseService';
 import UserService from './service/UserService';
 import ViewDefinitionService from './service/ViewDefinitionService';
 import WordpressTemplateService from './service/WordpressTemplateService';
+import HistoryModuleService from './service/HistoryModuleService';
 import { InquiryCreatedMessage } from './util/searchprofile-service/InquiryCreatedMessage';
 import StageConfiguration, { STORE_KEYS } from './util/StageConfiguration';
 
@@ -89,6 +90,7 @@ export {
 	TrialLicenseService,
 	MatchmakingService,
 	InquiryService,
+    HistoryModuleService,
 	InquiryCreatedMessage
 };
 
