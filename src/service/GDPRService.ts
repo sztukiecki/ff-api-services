@@ -135,6 +135,16 @@ export class GDPRService extends APIClient {
         return await this.invokeApi('/changeRequests/all', 'GET');
     }
 
+    async fetchContactsWithPendingConsent(page: number = 1, size: number = 50): Promise<AxiosResponse> {
+        return await this.invokeApi('/contacts', 'GET', undefined, {
+            queryParams: {
+                status: 'CONSENT_PENDING',
+                page: page,
+                size: size
+            }
+        });
+    }
+
     async isContactBlocked(contactId: string): Promise<AxiosResponse> {
         return await this.invokeApi('/contact/blocked', 'GET', undefined, {
             queryParams: {
