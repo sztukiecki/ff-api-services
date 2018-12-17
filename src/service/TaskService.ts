@@ -7,23 +7,23 @@ export class TaskService extends APIClient {
 	}
 
 	getById(id: string) {
-		return this.invokeApi(`/task/${id}`, 'GET').then(s => s.data);
+		return this.invokeApi(`/task/${id}`, 'GET');
 	}
 
 	getTaskForEntityById(entityId: string) {
-		return this.invokeApi(`/task/forEntity/${entityId}`, 'GET').then(s => s.data);
+		return this.invokeApi(`/task/forEntity/${entityId}`, 'GET');
 	}
 
 	deleteTask(id: string) {
-		return this.invokeApi(`/task/${id}`, 'DELETE').then(s => s.data);
+		return this.invokeApi(`/task/${id}`, 'DELETE');
 	}
 
 	createTask(task: object) {
-		return this.invokeApi(`/task`, 'POST', task).then(s => s.data);
+		return this.invokeApi(`/task`, 'POST', task);
 	}
 
 	updateTask(id: string, task: object) {
-		return this.invokeApi(`/task/${id}`, 'PUT', task).then(s => s.data);
+		return this.invokeApi(`/task/${id}`, 'PUT', task);
 	}
 
 }
