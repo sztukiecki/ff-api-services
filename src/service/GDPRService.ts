@@ -123,6 +123,10 @@ export class GDPRService extends APIClient {
         });
     }
 
+    async addConsent(consentEntity: object): Promise<AxiosResponse> {
+        return await this.invokeApi('/consents', 'POST', consentEntity);
+    }
+
     async fetchSettings(): Promise<AxiosResponse<Settings>> {
         return await this.invokeApi('/settings', 'GET');
     }
