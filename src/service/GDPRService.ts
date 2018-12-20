@@ -165,6 +165,14 @@ export class GDPRService extends APIClient {
         });
     }
 
+    async consentStatus(contactId: string): Promise<AxiosResponse> {
+        return await this.invokeApi('/consents/status', 'GET', undefined, {
+            queryParams: {
+                contactId: contactId
+            }
+        });
+    }
+
     async blockContact(contactId: string, block: boolean): Promise<AxiosResponse> {
         return await this.invokeApi('/contact/block', 'POST', undefined, {
             headers: {
