@@ -34,6 +34,14 @@ export class GDPRService extends APIClient {
         });
     }
 
+    async fetchConsentData(token: string): Promise<AxiosResponse>{
+        return await this.invokeApi('public/consents/consentdata', 'GET', undefined, {
+            queryParams: {
+                token: token
+            }
+        });
+    }
+
     async fetchCompanyTerms(userId: string, companyId: string): Promise<AxiosResponse> {
         return await this.invokeApi('/public/company', 'GET', undefined, {
             queryParams: {
