@@ -24,16 +24,6 @@ export class GDPRService extends APIClient {
         super(APIMapping.gdprService);
     }
 
-    async fetchContact(contactId: string, userId: string, companyId: string): Promise<AxiosResponse> {
-        return await this.invokeApi('/public/contact', 'GET', undefined, {
-            queryParams: {
-                contactId: contactId,
-                userId: userId,
-                companyId: companyId
-            }
-        });
-    }
-
     async fetchConsentData(token: string): Promise<AxiosResponse>{
         return await this.invokeApi('/public/consents/consentdata', 'GET', undefined, {
             queryParams: {
