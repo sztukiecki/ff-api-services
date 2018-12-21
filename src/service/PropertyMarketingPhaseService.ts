@@ -1,12 +1,7 @@
 import {APIClient, APIMapping} from '../http';
 import {AxiosResponse} from "axios";
-import { EntityQuery, PhaseName } from '../util/InternalTypes';
-
-export interface EntityPhaseInformation {
-    entityId: string;
-    schemaId: string;
-    phaseName: PhaseName;
-}
+import { v4 as uuid } from 'uuid/interfaces';
+import { EntityQuery, EntityPhaseInformation, PhaseConfigurationInformation } from '../util/InternalTypes';
 
 export class PropertyMarketingPhaseService extends APIClient {
 
@@ -87,9 +82,19 @@ export class PropertyMarketingPhaseService extends APIClient {
     validateStep(stepId: string, schemaId: string, entityId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/validateStep/stepId/${stepId}/schemaId/${schemaId}/entityId/${entityId}`, 'POST');
     }
+
+    // --- phase configurations ---
+    fetchConfigurations() {
+        return this.invokeApi('/phaseconfigurations', 'GET');
+    }
+
+    saveOrUpdateConfiguration(phaseConfigurationInformation: PhaseConfigurationInformation): Promise<AxiosResponse> {
+        return this.invokeApi('/phaseconfigurations', 'POST', phaseConfigurationInformation);
+    }
+
+    deleteCustomConfiguration(id: uuid): Promise<AxiosResponse> {
+        return this.invokeApi(`/phaseconfigurations/${id}`, 'DELETE');
+    }
 }
 
 export default new PropertyMarketingPhaseService();
-
-
-// property-marketing-phase-service
