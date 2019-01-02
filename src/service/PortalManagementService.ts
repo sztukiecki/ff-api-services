@@ -1,84 +1,88 @@
-import {APIClient, APIMapping} from '../http';
-import {AxiosResponse} from "axios";
+import { AxiosResponse } from 'axios';
+import { APIClient, APIMapping } from '../http';
 
 export interface PortalAuthenticationModel {
-    callbackUrl: string
+	callbackUrl: string;
 }
 
 export interface PublishRequest {
-    portalId: string,
-    entries: PublishRequestEntry[]
+	portalId: string;
+	entries: PublishRequestEntry[];
 }
 
 export interface PublishRequestEntry {
-    entityId: string,
-    externalId?: string,
-    targetStatus: 'OFFLINE' | 'ONLINE'
+	entityId: string;
+	externalId?: string;
+	targetStatus: 'OFFLINE' | 'ONLINE';
 }
 
 export class PortalManagementService extends APIClient {
 
-    constructor() {
-        super(APIMapping.portalManagementService);
-    }
+	constructor() {
+		super(APIMapping.portalManagementService);
+	}
 
-    fetchPortals(): Promise<AxiosResponse> {
-        return this.invokeApi('/portals', 'GET');
-    }
+	fetchPortals(): Promise<AxiosResponse> {
+		return this.invokeApi('/portals', 'GET');
+	}
 
-    fetchPortal(portalId: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/portals/${portalId}`, 'GET');
-    }
+	fetchPortal(portalId: string): Promise<AxiosResponse> {
+		return this.invokeApi(`/portals/${portalId}`, 'GET');
+	}
 
-    fetchPortalTypes(): Promise<AxiosResponse> {
-        return this.invokeApi('/portalTypes', 'GET');
-    }
+	fetchPredefinedPortals(): Promise<AxiosResponse> {
+		return this.invokeApi('/predefinedPortals', 'GET');
+	}
 
-    fetchPublishedOn(entityId: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/estates/${entityId}/portals`, 'GET');
-    }
+	fetchPortalTypes(): Promise<AxiosResponse> {
+		return this.invokeApi('/portalTypes', 'GET');
+	}
 
-    createPortal(portalType: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/portals/create/${portalType}`, 'POST', undefined, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-    }
+	fetchPublishedOn(entityId: string): Promise<AxiosResponse> {
+		return this.invokeApi(`/estates/${entityId}/portals`, 'GET');
+	}
 
-    updatePortal(portalId: string, portal: object): Promise<AxiosResponse> {
-        return this.invokeApi(`/portals/${portalId}`, 'PATCH', portal);
-    }
+	createPortal(portalType: string): Promise<AxiosResponse> {
+		return this.invokeApi(`/portals/create/${portalType}`, 'POST', undefined, {
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+	}
 
-    deletePortal(portalId: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/portals/${portalId}`, 'DELETE');
-    }
+	updatePortal(portalId: string, portal: object): Promise<AxiosResponse> {
+		return this.invokeApi(`/portals/${portalId}`, 'PATCH', portal);
+	}
 
-    authenticatePortal(portalId: string, portalAuthenticationModel: PortalAuthenticationModel) {
-        return this.invokeApi(`/portals/${portalId}/authenticate`, 'POST', portalAuthenticationModel)
-    }
+	deletePortal(portalId: string): Promise<AxiosResponse> {
+		return this.invokeApi(`/portals/${portalId}`, 'DELETE');
+	}
 
-    publishEstates(publishRequest: PublishRequest): Promise<AxiosResponse> {
-        return this.invokeApi('/publish', 'POST', publishRequest);
-    }
+	authenticatePortal(portalId: string, portalAuthenticationModel: PortalAuthenticationModel) {
+		return this.invokeApi(`/portals/${portalId}/authenticate`, 'POST', portalAuthenticationModel);
+	}
 
-    /**
-     * Fetches the information on which portal a estate is published on.
-     * @param estateId
-     */
-    fetchPublishInformation(estateId: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/estates/${estateId}/portals`, 'GET');
-    }
+	publishEstates(publishRequest: PublishRequest): Promise<AxiosResponse> {
+		return this.invokeApi('/publish', 'POST', publishRequest);
+	}
 
-    is24AuthenticationCallback(portalId: string, verifier: string, token: string, state: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/portals/is24/authenticate/${portalId}/callback`, 'GET', undefined, {
-            queryParams: {
-                oauth_verifier: verifier,
-                oauth_token: token,
-                state: state
-            }
-        })
-    }
+	/**
+	 * Fetches the information on which portal a estate is published on.
+	 * @param estateId
+	 */
+	fetchPublishInformation(estateId: string): Promise<AxiosResponse> {
+		return this.invokeApi(`/estates/${estateId}/portals`, 'GET');
+	}
+
+	is24AuthenticationCallback(portalId: string, verifier: string, token: string, state: string): Promise<AxiosResponse> {
+		return this.invokeApi(`/portals/is24/authenticate/${portalId}/callback`, 'GET', undefined, {
+			queryParams: {
+				oauth_verifier: verifier,
+				oauth_token: token,
+				state: state
+			}
+		});
+	}
 }
 
 export default new PortalManagementService();
