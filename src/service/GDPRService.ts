@@ -175,8 +175,12 @@ export class GDPRService extends APIClient {
         });
     }
 
-    async sendConsentMail(contactId: string) {
+    async sendConsentMail(contactId: string): Promise<AxiosResponse> {
         return await this.invokeApi(`/consents/mail/${contactId}`, 'POST');
+    }
+
+    async sendCheckContactDetailsMail(contactId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/contacts/mail/${contactId}`, 'POST');
     }
 }
 
