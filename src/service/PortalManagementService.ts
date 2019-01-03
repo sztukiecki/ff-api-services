@@ -16,6 +16,23 @@ export interface PublishRequestEntry {
 	targetStatus: 'OFFLINE' | 'ONLINE';
 }
 
+export interface Portal {
+	companyId?: string;
+	description?: string;
+	ftpConnectionType?: 'FTP';
+	ftpPort?: number;
+	ftpServer?: string;
+	id?: string;
+	loginName?: string;
+	logo?: string;
+	name?: string;
+	password?: string;
+	portalKey?: string;
+	portalType?: PortalType;
+}
+
+export type PortalType = 'IS24' | 'OPENIMMO' | 'WORDPRESS';
+
 export class PortalManagementService extends APIClient {
 
 	constructor() {
@@ -42,15 +59,15 @@ export class PortalManagementService extends APIClient {
 		return this.invokeApi(`/estates/${entityId}/portals`, 'GET');
 	}
 
-	createPortal(portalType: string): Promise<AxiosResponse> {
-		return this.invokeApi(`/portals/create/${portalType}`, 'POST', undefined, {
+	createPortal(portalType: PortalType, portal: Portal): Promise<AxiosResponse> {
+		return this.invokeApi(`/portals/create/${portalType}`, 'POST', portal, {
 			headers: {
 				'Content-Type': 'application/json'
 			}
 		});
 	}
 
-	updatePortal(portalId: string, portal: object): Promise<AxiosResponse> {
+	updatePortal(portalId: string, portal: Portal): Promise<AxiosResponse> {
 		return this.invokeApi(`/portals/${portalId}`, 'PATCH', portal);
 	}
 
