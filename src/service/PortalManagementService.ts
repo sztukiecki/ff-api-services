@@ -83,6 +83,14 @@ export class PortalManagementService extends APIClient {
 		return this.invokeApi('/publish', 'POST', publishRequest);
 	}
 
+	changeShowAddress(portalId: string, estateId: string, showAddress: boolean): Promise<AxiosResponse> {
+		return this.invokeApi(`/portals/${portalId}/estates/${estateId}`, 'PUT', undefined, {
+			queryParams: {
+				showAddress: showAddress
+			}
+		});
+	}
+
 	/**
 	 * Fetches the information on which portal a estate is published on.
 	 * @param estateId
