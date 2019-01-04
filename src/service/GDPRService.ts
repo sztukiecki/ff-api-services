@@ -1,187 +1,198 @@
-import APIClient from "../http/APIClient";
-import APIMapping from "../http/APIMapping";
-import {AxiosResponse} from "axios";
+import APIClient from '../http/APIClient';
+import APIMapping from '../http/APIMapping';
+import {AxiosResponse} from 'axios';
 import {EntityQuery} from '../util/InternalTypes';
 
 export type ExportType = 'JSON' | 'CSV' | 'XML';
 
 export interface ExportRequestBody {
-    contactId: string;
-    exportType: ExportType;
-    recipientEmail: string;
+	contactId: string;
+	exportType: ExportType;
+	recipientEmail: string;
 }
 
 export interface Settings {
-    companyId: string;
-    contactApproachAlwaysAllowed: boolean;
+	companyId: string;
+	contactApproachAlwaysAllowed: boolean;
 }
 
 export type DataChangeRequestType = 'DELETE' | 'CHANGE' | 'PROCESS_LIMITATION';
 
 export class GDPRService extends APIClient {
 
-    constructor() {
-        super(APIMapping.gdprService);
-    }
+	constructor() {
+		super(APIMapping.gdprService);
+	}
 
-    async fetchConsentData(token: string): Promise<AxiosResponse>{
-        return await this.invokeApi('/public/consents/consentdata', 'GET', undefined, {
-            queryParams: {
-                token: token
-            }
-        });
-    }
+	async fetchConsentData(token: string): Promise<AxiosResponse> {
+		return await this.invokeApi('/public/consents/consentdata', 'GET', undefined, {
+			queryParams: {
+				token: token
+			}
+		});
+	}
 
-    async fetchCompanyTerms(userId: string, companyId: string): Promise<AxiosResponse> {
-        return await this.invokeApi('/public/company', 'GET', undefined, {
-            queryParams: {
-                userId: userId,
-                companyId: companyId
-            }
-        });
-    }
+	async fetchCompanyTerms(userId: string, companyId: string): Promise<AxiosResponse> {
+		return await this.invokeApi('/public/company', 'GET', undefined, {
+			queryParams: {
+				userId: userId,
+				companyId: companyId
+			}
+		});
+	}
 
-    async fetchConsents(contactId: string, userId: string, companyId: string): Promise<AxiosResponse> {
-        return await this.invokeApi('/public/consents', 'GET', undefined, {
-            queryParams: {
-                contactId: contactId,
-                userId: userId,
-                companyId: companyId
-            }
-        });
-    }
+	async fetchConsents(contactId: string, userId: string, companyId: string): Promise<AxiosResponse> {
+		return await this.invokeApi('/public/consents', 'GET', undefined, {
+			queryParams: {
+				contactId: contactId,
+				userId: userId,
+				companyId: companyId
+			}
+		});
+	}
 
-    async exportPersonalData(userId: string, companyId: string, body: ExportRequestBody): Promise<AxiosResponse> {
-        return await this.invokeApi('/public/export', 'POST', body, {
-            queryParams: {
-                userId: userId,
-                companyId: companyId
-            }
-        });
-    }
+	async exportPersonalData(userId: string, companyId: string, body: ExportRequestBody): Promise<AxiosResponse> {
+		return await this.invokeApi('/public/export', 'POST', body, {
+			queryParams: {
+				userId: userId,
+				companyId: companyId
+			}
+		});
+	}
 
-    async resolveEntities(companyId: string, userId: string, body: EntityQuery[]): Promise<AxiosResponse> {
-        return await this.invokeApi('/public/resolveEntities', 'POST', body, {
-            queryParams: {
-                userId: userId,
-                companyId: companyId
-            }
-        });
-    }
+	async resolveEntities(companyId: string, userId: string, body: EntityQuery[]): Promise<AxiosResponse> {
+		return await this.invokeApi('/public/resolveEntities', 'POST', body, {
+			queryParams: {
+				userId: userId,
+				companyId: companyId
+			}
+		});
+	}
 
-    async changeData(contactId: string, userId: string, companyId: string, type: DataChangeRequestType = 'CHANGE', changes: object = {}): Promise<AxiosResponse> {
-        return await this.invokeApi('/public/changeRequests', 'POST', {
-            contactId: contactId,
-            type: type,
-            changes: changes
-        }, {
-            queryParams: {
-                userId: userId,
-                companyId: companyId
-            }
-        });
-    }
+	async changeData(contactId: string, userId: string, companyId: string, type: DataChangeRequestType = 'CHANGE', changes: object = {}): Promise<AxiosResponse> {
+		return await this.invokeApi('/public/changeRequests', 'POST', {
+			contactId: contactId,
+			type: type,
+			changes: changes
+		}, {
+			queryParams: {
+				userId: userId,
+				companyId: companyId
+			}
+		});
+	}
 
-    async fetchChangeRequestStatus(contactId: string, userId: string, companyId: string): Promise<AxiosResponse> {
-        return await this.invokeApi('/public/changeRequests/status', 'GET', undefined, {
-            queryParams: {
-                contactId: contactId,
-                userId: userId,
-                companyId: companyId
-            }
-        });
-    }
+	async fetchChangeRequestStatus(contactId: string, userId: string, companyId: string): Promise<AxiosResponse> {
+		return await this.invokeApi('/public/changeRequests/status', 'GET', undefined, {
+			queryParams: {
+				contactId: contactId,
+				userId: userId,
+				companyId: companyId
+			}
+		});
+	}
 
-    async updateChangeRequestStatus(changeRequestId: string, status: 'APPROVED' | 'DENIED', reason: string): Promise<AxiosResponse> {
-        const formData = new FormData();
-        formData.append('reason', reason);
+	async updateChangeRequestStatus(changeRequestId: string, status: 'APPROVED' | 'DENIED', reason: string): Promise<AxiosResponse> {
+		const formData = new FormData();
+		formData.append('reason', reason);
 
-        return await this.invokeApi(`/changeRequests/${changeRequestId}/status/${status}`, 'POST', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
-    }
+		return await this.invokeApi(`/changeRequests/${changeRequestId}/status/${status}`, 'POST', formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}
+		});
+	}
 
-    async revokeConsent(consentId: string, consentSchemaId: string, userId: string, companyId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/public/consents/schemaId/${consentSchemaId}/entityId/${consentId}/revoke`, 'POST', undefined, {
-            queryParams: {
-                userId: userId,
-                companyId: companyId
-            }
-        });
-    }
+	async revokeConsent(consentId: string, consentSchemaId: string, userId: string, companyId: string): Promise<AxiosResponse> {
+		return await this.invokeApi(`/public/consents/schemaId/${consentSchemaId}/entityId/${consentId}/revoke`, 'POST', undefined, {
+			queryParams: {
+				userId: userId,
+				companyId: companyId
+			}
+		});
+	}
 
-    async createConsent(consentEntity: object, userId: string, companyId: string): Promise<AxiosResponse> {
-        return await this.invokeApi('/public/consents', 'POST', consentEntity, {
-            queryParams: {
-                userId: userId,
-                companyId: companyId
-            }
-        });
-    }
+	async createConsent(consentEntity: object, userId: string, companyId: string): Promise<AxiosResponse> {
+		return await this.invokeApi('/public/consents', 'POST', consentEntity, {
+			queryParams: {
+				userId: userId,
+				companyId: companyId
+			}
+		});
+	}
 
-    async addConsent(consentEntity: object): Promise<AxiosResponse> {
-        return await this.invokeApi('/consents', 'POST', consentEntity);
-    }
+	async addConsent(consentEntity: object): Promise<AxiosResponse> {
+		return await this.invokeApi('/consents', 'POST', consentEntity);
+	}
 
-    async fetchSettings(): Promise<AxiosResponse<Settings>> {
-        return await this.invokeApi('/settings', 'GET');
-    }
+	async fetchSettings(): Promise<AxiosResponse<Settings>> {
+		return await this.invokeApi('/settings', 'GET');
+	}
 
-    async updateSettings(settings: Settings): Promise<AxiosResponse> {
-        return await this.invokeApi('/settings', 'PUT', settings);
-    }
+	async updateSettings(settings: Settings): Promise<AxiosResponse> {
+		return await this.invokeApi('/settings', 'PUT', settings);
+	}
 
-    async fetchAllChangeRequests(): Promise<AxiosResponse> {
-        return await this.invokeApi('/changeRequests/all', 'GET');
-    }
+	async fetchAllChangeRequests(): Promise<AxiosResponse> {
+		return await this.invokeApi('/changeRequests/all', 'GET');
+	}
 
-    async fetchContactsWithPendingConsent(page: number = 1, size: number = 50): Promise<AxiosResponse> {
-        return await this.invokeApi('/contacts', 'GET', undefined, {
-            queryParams: {
-                status: 'CONSENT_PENDING',
-                page: page,
-                size: size
-            }
-        });
-    }
+	async fetchContactsWithPendingConsent(page: number = 1, size: number = 50): Promise<AxiosResponse> {
+		return await this.invokeApi('/contacts', 'GET', undefined, {
+			queryParams: {
+				status: 'CONSENT_PENDING',
+				page: page,
+				size: size
+			}
+		});
+	}
 
-    async isContactBlocked(contactId: string): Promise<AxiosResponse> {
-        return await this.invokeApi('/contact/blocked', 'GET', undefined, {
-            queryParams: {
-                contactId: contactId
-            }
-        });
-    }
+	async isContactBlocked(contactId: string): Promise<AxiosResponse> {
+		return await this.invokeApi('/contact/blocked', 'GET', undefined, {
+			queryParams: {
+				contactId: contactId
+			}
+		});
+	}
 
-    async consentStatus(contactId: string): Promise<AxiosResponse> {
-        return await this.invokeApi('/consents/status', 'GET', undefined, {
-            queryParams: {
-                contactId: contactId
-            }
-        });
-    }
+	async consentStatus(contactId: string): Promise<AxiosResponse> {
+		return await this.invokeApi('/consents/status', 'GET', undefined, {
+			queryParams: {
+				contactId: contactId
+			}
+		});
+	}
 
-    async blockContact(contactId: string, block: boolean): Promise<AxiosResponse> {
-        return await this.invokeApi('/contact/block', 'POST', undefined, {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            queryParams: {
-                block: block,
-                contactId: contactId
-            }
-        });
-    }
+	async blockContact(contactId: string, block: boolean): Promise<AxiosResponse> {
+		return await this.invokeApi('/contact/block', 'POST', undefined, {
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			queryParams: {
+				block: block,
+				contactId: contactId
+			}
+		});
+	}
 
-    async sendConsentMail(contactId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/consents/mail/${contactId}`, 'POST');
-    }
+	async sendConsentMail(contactId: string): Promise<AxiosResponse> {
+		return await this.invokeApi(`/consents/mail/${contactId}`, 'POST');
+	}
 
-    async sendCheckContactDetailsMail(contactId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/contacts/mail/${contactId}`, 'POST');
-    }
+	async sendCheckContactDetailsMail(contactId: string): Promise<AxiosResponse> {
+		return await this.invokeApi(`/contacts/mail/${contactId}`, 'POST');
+	}
+
+	async sendNewConsentMail(contactId: string, companyId: string, userId: string): Promise<AxiosResponse> {
+		return await this.invokeApi('/public/consents/mail', 'POST', undefined, {
+			queryParams: {
+				companyId: companyId,
+				contactId: contactId,
+				userId: userId
+			}
+		}
+	)
+	}
 }
 
 export default new GDPRService();
