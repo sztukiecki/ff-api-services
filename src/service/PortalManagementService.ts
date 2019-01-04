@@ -96,6 +96,10 @@ export class PortalManagementService extends APIClient {
 		return this.invokeApi(`/portals/${portalId}/estates/${estateId}`, 'POST', portalEstateSettings);
 	}
 
+	fetchPortalEstateSettings(estateId: string): Promise<AxiosResponse<PortalEstateSettings[]>> {
+		return this.invokeApi(`/portals/estates/${estateId}`, 'GET');
+	}
+
 	/**
 	 * Fetches the information on which portal a estate is published on.
 	 * @param estateId
