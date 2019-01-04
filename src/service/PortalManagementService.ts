@@ -31,6 +31,15 @@ export interface Portal {
 	portalType?: PortalType;
 }
 
+export interface PortalEstateSettings {
+	id: string;
+	portalId: string;
+	schemaId: string;
+	entityId: string;
+	externalId: string;
+	showAddress: boolean;
+}
+
 export type PortalType = 'IS24' | 'OPENIMMO' | 'WORDPRESS';
 
 export class PortalManagementService extends APIClient {
@@ -83,12 +92,8 @@ export class PortalManagementService extends APIClient {
 		return this.invokeApi('/publish', 'POST', publishRequest);
 	}
 
-	changeShowAddress(portalId: string, estateId: string, showAddress: boolean): Promise<AxiosResponse> {
-		return this.invokeApi(`/portals/${portalId}/estates/${estateId}`, 'PUT', undefined, {
-			queryParams: {
-				showAddress: showAddress
-			}
-		});
+	updatePortalEstateSettings(portalId: string, estateId: string, portalEstateSettings: PortalEstateSettings): Promise<AxiosResponse> {
+		return this.invokeApi(`/portals/${portalId}/estates/${estateId}`, 'POST', portalEstateSettings);
 	}
 
 	/**
