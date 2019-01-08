@@ -83,6 +83,10 @@ export class PropertyMarketingPhaseService extends APIClient {
         return this.invokeApi(`/validateStep/stepId/${stepId}/schemaId/${schemaId}/entityId/${entityId}`, 'POST');
     }
 
+    deleteEntityInformation(schemaId: uuid, entityId: uuid): Promise<AxiosResponse> {
+        return this.invokeApi(`/steps/${schemaId}/${entityId}`, 'DELETE');
+    }
+
     // --- phase configurations ---
     fetchConfigurations() {
         return this.invokeApi('/phaseconfigurations', 'GET');
