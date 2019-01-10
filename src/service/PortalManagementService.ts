@@ -121,6 +121,10 @@ export class PortalManagementService extends APIClient {
 			}
 		});
 	}
+
+	checkAuthentication(portalId: string): Promise<AxiosResponse> {
+		return this.invokeApi(`/portals/${portalId}/checkAuthentication`, 'GET');
+	}
 }
 
 export default new PortalManagementService();
