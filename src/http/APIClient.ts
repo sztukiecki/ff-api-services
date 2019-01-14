@@ -2,11 +2,11 @@ import ConsulClient from '@flowfact/consul-client';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
 import * as axiosRetry from 'axios-retry';
 import * as isNode from 'detect-node';
+import { stringify } from 'qs';
 import CognitoService from '../service/CognitoService';
 import Interceptor from '../util/Interceptor';
 import StageConfiguration from '../util/StageConfiguration';
 import { APIService } from './APIMapping';
-import {stringify} from 'qs';
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
 
@@ -73,8 +73,8 @@ export default abstract class APIClient {
     private async buildAPIUrl() {
         let baseUrl;
         if (isNode) {
-            const selected = await this._getConsulClient().service.select(this._serviceName);
-            return `http://${selected.Service.Address}:${selected.Service.Port}`;
+            const currentConfig = await this._getConsulClient().config.getCurrent();
+            return `http://${currentConfig["com.flowfact.internallb"]}/${this._serviceName}/${this._getVersionTag()}`;
         } else {
             const stage = this._getStage();
             const account = stage === 'development' ? 'flowfact-dev' : 'flowfact-prod';
