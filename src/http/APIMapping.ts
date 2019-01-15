@@ -62,7 +62,8 @@ const APIMapping = {
 	trialLicenseServive: new APIService('trial-license-service'),
 	userService: new APIService('user-service'),
 	viewDefinitionService: new APIService('view-definition-service'),
-	historyModuleService: new APIService('history-module-service')
+    historyModuleService: new APIService('history-module-service'),
+    onboardingService: new APIService('onboarding-service')
 };
 
 export default APIMapping;
