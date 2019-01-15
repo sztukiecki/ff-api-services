@@ -3,6 +3,7 @@ import { AxiosResponse } from 'axios';
 import { Flowdsl } from "@flowfact/node-flowdsl/lib/Flowdsl";
 import { Entity, EntityACLType, EntityValues, EntityView } from '@flowfact/types';
 import { EntityQuery, ParamList, SearchResult, UniformObject } from '../util/InternalTypes';
+import { v4 as uuid } from 'uuid/interfaces';
 
 export interface HasRightsModel {
     schemaId: string;
@@ -81,6 +82,16 @@ export class EntityService extends APIClient {
      */
     transformEntitiesWithView(viewName: string, entityQueries: EntityQuery[]) {
         return this.invokeApi<EntityView[]>(`/views/${viewName}/entities`, 'POST', entityQueries);
+    }
+
+    /**
+     * Duplicates an entity and its multimedia files like images and documents.
+     * @param schemaId
+     * @param entityId
+     * @returns a new UUID of created entity.
+     */
+    duplicateEntity(schemaId: uuid, entityId: uuid): Promise<AxiosResponse<uuid>> {
+        return this.invokeApi(`/schemas/${schemaId}/entities/${entityId}/duplicate`, 'POST');
     }
 }
 
