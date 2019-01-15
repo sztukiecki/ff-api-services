@@ -1,9 +1,9 @@
 import {APIClient, APIMapping} from '../http';
 import {AxiosResponse} from "axios";
 
-export class AdminTokenService extends APIClient {
+export class OnboardingService extends APIClient {
     constructor() {
-        super(APIMapping.adminTokenService);
+        super(APIMapping.onboardingService);
     }
 
     /**
@@ -15,4 +15,4 @@ export class AdminTokenService extends APIClient {
     }
 }
 
-export default new AdminTokenService();
+export default new OnboardingService();
