@@ -69,7 +69,7 @@ export class ContactService extends APIClient {
 	}
 
 	parsePastedAddress(pastedAddress: string): Promise<AxiosResponse<Schema>> {
-		return this.invokeApi('/parse', 'POST', pastedAddress);
+		return this.invokeApi('/parse', 'POST', pastedAddress, { headers: { 'Content-Type': 'text/plain' } });
 	}
 }
 
