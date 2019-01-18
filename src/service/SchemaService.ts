@@ -1,5 +1,5 @@
-import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
+import { APIClient, APIMapping } from '../http';
 
 export class SchemaService extends APIClient {
     constructor() {
@@ -48,6 +48,16 @@ export class SchemaService extends APIClient {
 
     deleteSchema(schemaId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/schemas/${schemaId}`, 'DELETE');
+    }
+
+    /**
+     * deletes all groups and schemas 
+     * @constructor
+     * @param {string} key - if you are sure you want delete all schemas then set key = DELETE 
+     */
+    deleteAllSchema(key: string): Promise<AxiosResponse> {
+        if(!key || key != 'DELETE') return Promise.reject("you need to set key = DELETE if you are sure you want delete all schemas")
+        return this.invokeApi(`/schemas/deleteAll?key=${key}`, 'DELETE');
     }
 
     updateSchema(schema: any): Promise<AxiosResponse> {
