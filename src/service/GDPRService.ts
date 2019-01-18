@@ -194,8 +194,11 @@ export class GDPRService extends APIClient {
 				contactId: contactId,
 				userId: userId
 			}
-		}
-	)
+		});
+	}
+
+	async fetchConsentAuthor(consentId: string): Promise<AxiosResponse> {
+		return await this.invokeApi(`/consents/${consentId}/author`, 'GET');
 	}
 }
 
