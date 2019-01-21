@@ -49,7 +49,12 @@ export class PortalManagementService extends APIClient {
 	}
 
 	fetchPortals(ignoreInactivePortals: boolean = false): Promise<AxiosResponse> {
-	    return this.invokeApi(`/portals?ignoreInactivePortals=${ignoreInactivePortals}`, 'GET')
+	    return this.invokeApi('/portals', 'GET',undefined,{
+                queryParams: {
+                    ignoreInactivePortals: ignoreInactivePortals
+                }
+            }
+        )
 	}
 
 	fetchPortal(portalId: string): Promise<AxiosResponse> {
