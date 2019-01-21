@@ -21,6 +21,7 @@ export interface FFAdditionalElkData {
     userId?: string;
     companyId?: string;
     requestId?: string;
+    docker_host?: string;
 }
 
 export type FFElkData = MandatoryElkData & FFAdditionalElkData;
