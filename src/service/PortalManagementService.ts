@@ -48,8 +48,13 @@ export class PortalManagementService extends APIClient {
 		super(APIMapping.portalManagementService);
 	}
 
-	fetchPortals(): Promise<AxiosResponse> {
-		return this.invokeApi('/portals', 'GET');
+	fetchPortals(ignoreInactivePortals: boolean = false): Promise<AxiosResponse> {
+	    return this.invokeApi('/portals', 'GET',undefined,{
+                queryParams: {
+                    ignoreInactivePortals
+                }
+            }
+        )
 	}
 
 	fetchPortal(portalId: string): Promise<AxiosResponse> {
