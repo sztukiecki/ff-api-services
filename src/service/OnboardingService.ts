@@ -13,6 +13,15 @@ export class OnboardingService extends APIClient {
     onboardCurrentUser(): Promise<AxiosResponse> {
         return this.invokeApi('/customer', 'POST');
     }
+
+    setupAccount(bundleName: string): Promise<AxiosResponse> {
+        const queryParams: any = {
+            bundleName: bundleName
+        };
+
+        return this.invokeApi('/customer/setup', 'POST', undefined, {queryParams});
+    }
+
 }
 
 export default new OnboardingService();
