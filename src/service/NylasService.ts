@@ -8,7 +8,7 @@ export class NylasService extends APIClient {
 		super(APIMapping.nylasService);
 	}
 
-	async fetchCompanyTerms(code: string, companyId: string): Promise<AxiosResponse> {
+	async authorizeUser(code: string): Promise<AxiosResponse> {
 		return await this.invokeApi('/authorize', 'POST', undefined, {
 			queryParams: {
 				code: code
