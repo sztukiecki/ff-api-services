@@ -43,6 +43,7 @@ const APIMapping = {
 	interactiveExposeStatisticsService: new APIService('interactive-expose-statistics-service'),
 	matchmakingService: new APIService('matchmaking-service'),
 	moduleService: new APIService('module-service'),
+	nylasService: new APIService('nylas-service'),
 	multimediaService: new APIService('multimedia-service'),
 	office365AuthenticationService: new APIService('office365-authentication-service'),
 	portalManagementService: new APIService('portal-management-service'),

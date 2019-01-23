@@ -23,6 +23,7 @@ import InteractiveExposeStatisticsService from './service/InteractiveExposeStati
 import MatchmakingService from './service/MatchmakingService';
 import ModuleService from './service/ModuleService';
 import MultimediaService from './service/MultimediaService';
+import NylasService from './service/NylasService';
 import Office365AuthenticationService from './service/Office365AuthenticationService';
 import PortalManagementService from './service/PortalManagementService';
 import PresetService from './service/PresetService';
@@ -91,6 +92,7 @@ export {
     AppointmentBookingService,
     TrialLicenseService,
     MatchmakingService,
+    NylasService,
     InquiryService,
     HistoryModuleService,
     InquiryCreatedMessage
