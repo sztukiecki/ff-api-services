@@ -22,6 +22,13 @@ export class OnboardingService extends APIClient {
         return this.invokeApi('/customer/setup', 'POST', undefined, {queryParams});
     }
 
+    createNewSubscription(numberOfUsers: string) {
+        const queryParams: any = {
+            numberOfUsers: numberOfUsers
+        };
+        return this.invokeApi('/buypage/generateUrl', 'POST', undefined, {queryParams});
+    }
+
 }
 
 export default new OnboardingService();
