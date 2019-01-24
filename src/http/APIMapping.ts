@@ -65,7 +65,7 @@ const APIMapping = {
 	viewDefinitionService: new APIService('view-definition-service'),
 	historyModuleService: new APIService('history-module-service'),
 	onboardingService: new APIService('onboarding-service'),
-	csvImportService: new APIService('csv-import-service')
+	csvImportService: new APIService('csv-importer-service')
 };
 
 export default APIMapping;
