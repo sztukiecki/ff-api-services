@@ -28,6 +28,7 @@ const APIMapping = {
 	componentService: new APIService('component-ui-service'),
 	contactService: new APIService('contact-service'),
 	customerLegitimationArchiveService: new APIService('customer-legitimation-archive-service'),
+	dynamicLayoutService: new APIService('dynamic-layout-service'),
 	emailService: new APIService('email-service'),
 	entityExportService: new APIService('entity-export-service'),
 	entityService: new APIService('entity-service'),

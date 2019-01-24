@@ -9,6 +9,7 @@ import CompanyService from './service/CompanyService';
 import ContactService from './service/ContactService';
 import CsvImportService from './service/CsvImportService';
 import CustomerLegitimationArchiveService from './service/CustomerLegitimationArchiveService';
+import DynamicLayoutService from './service/DynamicLayoutService';
 import EmailService from './service/EmailService';
 import EntityService from './service/EntityService';
 import FlowfactExportInternalService from './service/FlowfactExportInternalService';
@@ -60,6 +61,7 @@ export {
 	ContactService,
 	CsvImportService,
 	CustomerLegitimationArchiveService,
+	DynamicLayoutService,
 	EmailService,
 	EntityService,
 	FlowfactExportInternalService,
