@@ -13,7 +13,7 @@ let instance: StageConfiguration | null = null;
 export class StageConfiguration {
 
     constructor() {
-        if(!instance) {
+        if (!instance) {
             instance = this;
         }
         return this;
@@ -43,10 +43,10 @@ export class StageConfiguration {
         const stage = this.getStageFromStore();
         const versionTag = this.getVersionTagFromStore();
         return (stage === DEFAULT_STAGE) && (versionTag === DEFAULT_VERSION_TAG);
-    };
+    }
 }
 
 export default new StageConfiguration();
 export {
     STORE_KEYS
-}
+};

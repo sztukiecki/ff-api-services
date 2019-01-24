@@ -1,4 +1,4 @@
-import {APIClient, APIMapping} from '../http';
+import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
 export class FlowfactExportInternalService extends APIClient {
@@ -8,8 +8,6 @@ export class FlowfactExportInternalService extends APIClient {
     }
 
     createAdminUser(createAdminTokenRequest: any): Promise<AxiosResponse> {
-        console.log('Test');
-        console.log(createAdminTokenRequest);
         return this.invokeApi('/adminUser', 'POST', createAdminTokenRequest);
     }
 }

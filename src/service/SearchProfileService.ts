@@ -1,6 +1,6 @@
-import { InquiryCreatedMessage } from './../util/searchprofile-service/InquiryCreatedMessage';
-import {AxiosResponse} from 'axios';
-import {APIClient, APIMapping} from '../http';
+import InquiryCreatedMessage from '../util/searchprofile-service/InquiryCreatedMessage';
+import { AxiosResponse } from 'axios';
+import { APIClient, APIMapping } from '../http';
 
 export class SearchProfileService extends APIClient {
 

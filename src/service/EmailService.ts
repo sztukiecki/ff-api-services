@@ -1,4 +1,4 @@
-import {APIClient, APIMapping} from '../http';
+import { APIClient, APIMapping } from '../http';
 
 export interface EmailServiceVerifyDnsEntry {
     valid: boolean;

@@ -21,7 +21,7 @@ export interface PhaseConfigurationInformation {
     id: uuid;
     schemaName: string;
     timestamp: number;
-    phaseConfiguration: any
+    phaseConfiguration: any;
 }
 
 export interface EntityPhaseInformation {

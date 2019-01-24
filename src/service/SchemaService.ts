@@ -20,7 +20,7 @@ export class SchemaService extends APIClient {
             queryParams.groups = 'true';
         }
 
-        if(short) {
+        if (short) {
             queryParams.short = 'true';
         }
 
@@ -51,12 +51,14 @@ export class SchemaService extends APIClient {
     }
 
     /**
-     * deletes all groups and schemas 
+     * deletes all groups and schemas
      * @constructor
-     * @param {string} key - if you are sure you want delete all schemas then set key = DELETE 
+     * @param {string} key - if you are sure you want delete all schemas then set key = DELETE
      */
     deleteAllSchema(key: string): Promise<AxiosResponse> {
-        if(!key || key != 'DELETE') return Promise.reject("you need to set key = DELETE if you are sure you want delete all schemas")
+        if (!key || key !== 'DELETE') {
+            return Promise.reject('you need to set key = DELETE if you are sure you want delete all schemas');
+        }
         return this.invokeApi(`/schemas/deleteAll?key=${key}`, 'DELETE');
     }
 

@@ -1,6 +1,6 @@
-import {APIClient, APIMapping} from '../http';
+import { APIClient, APIMapping } from '../http';
 import FileModel from '../util/FileModel';
-import {AxiosResponse} from 'axios';
+import { AxiosResponse } from 'axios';
 
 export interface InteractiveExposeColors {
     accent: string;
@@ -24,50 +24,50 @@ export interface InteractiveExposeSettingsWithLogos extends InteractiveExposeSet
 }
 
 export interface InteractiveExposeTemplate {
-    id: string,
-    name: string,
-    description: string,
-    body: string,
-    type: string,
-    role: string,
-    assignedSchemas: string[],
-    creatorId: string,
-    updaterId: string
+    id: string;
+    name: string;
+    description: string;
+    body: string;
+    type: string;
+    role: string;
+    assignedSchemas: string[];
+    creatorId: string;
+    updaterId: string;
 }
 
 export interface SendInteractiveExposeModel {
-    objectId: string,
-    recipientId: string,
+    objectId: string;
+    recipientId: string;
     recipientMailAddress?: string;
-    callbackUrl?: string,
-    hideRecommendations: boolean,
+    callbackUrl?: string;
+    hideRecommendations: boolean;
     emailTemplate?: {
         templateId: string
-    }
+    };
 }
 
 export interface InteractiveExposeMapping {
-    schemaId: string,
-    maxStageCount: number,
-    settings: any,
-    ratingSettings: any,
-    initialAgreement: any,
-    stageConfigurations: any,
-    additionalData: any,
-    sections: any,
-    advancedStageConfigurationMappings: any
+    schemaId: string;
+    maxStageCount: number;
+    settings: any;
+    ratingSettings: any;
+    initialAgreement: any;
+    stageConfigurations: any;
+    additionalData: any;
+    sections: any;
+    advancedStageConfigurationMappings: any;
 }
 
 export interface DesignTemplate {
-    templateName: string,
-    templateNiceName: string,
-    default: boolean
+    templateName: string;
+    templateNiceName: string;
+    default: boolean;
 }
 
 export interface DesignTemplateAssignment {
-    companyId: string,
-    templateName: string,
-    isDefault: boolean
+    companyId: string;
+    templateName: string;
+    isDefault: boolean;
 }
 
 export class InteractiveExposeService extends APIClient {
@@ -224,7 +224,7 @@ export class InteractiveExposeService extends APIClient {
     async restoreDefaults(): Promise<AxiosResponse> {
         return this.invokeApi('/mapping/restoreDefaults', 'PUT', undefined, {
             headers: {'Content-Type': 'application/json'}
-        })
+        });
     }
 
     /**

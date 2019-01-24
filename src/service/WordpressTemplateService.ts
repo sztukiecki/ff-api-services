@@ -23,6 +23,7 @@ export class WordpressTemplateService {
                 break;
             case 'staging':
             case 'production':
+            default:
                 domainName = 'flowfact-prod';
                 break;
         }

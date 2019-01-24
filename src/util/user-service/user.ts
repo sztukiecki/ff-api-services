@@ -12,7 +12,6 @@
 import { Image } from './image';
 import { Timestamp } from './timestamp';
 
-
 export interface User {
     aliasMailAddress?: string;
     businessMailAddress?: string;

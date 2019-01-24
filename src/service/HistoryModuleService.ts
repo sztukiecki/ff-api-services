@@ -1,6 +1,6 @@
-import APIClient from "../http/APIClient";
-import APIMapping from "../http/APIMapping";
-import {AxiosResponse} from "axios";
+import APIClient from '../http/APIClient';
+import APIMapping from '../http/APIMapping';
+import { AxiosResponse } from 'axios';
 
 export class HistoryModuleService extends APIClient {
 
@@ -16,10 +16,10 @@ export class HistoryModuleService extends APIClient {
             offset: offset
         };
 
-        if(filterType) {
+        if (filterType) {
             body.filter = {
                 type: filterType
-            }
+            };
         }
 
         return await this.invokeApi('/history', 'POST', [body]);

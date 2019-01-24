@@ -1,5 +1,5 @@
-import {APIClient, APIMapping} from '../http';
-import {AxiosResponse} from "axios";
+import { APIClient, APIMapping } from '../http';
+import { AxiosResponse } from 'axios';
 
 export class AgentRecommendationService extends APIClient {
 
@@ -8,7 +8,7 @@ export class AgentRecommendationService extends APIClient {
     }
 
     getViewForAgent(schemaId: string, entityId: string) {
-        return this.invokeApi(`/agent/schema/${schemaId}/entity/${entityId}`, 'GET')
+        return this.invokeApi(`/agent/schema/${schemaId}/entity/${entityId}`, 'GET');
     }
 
     uploadAgentVideo(schemaId: string, entityId: string, file: any) {
@@ -31,7 +31,6 @@ export class AgentRecommendationService extends APIClient {
         });
     }
 
-
     getViewForRater(token: string) {
         return this.invokeApi(`/public/authenticated/getViewForProspect?accessToken=${token}`, 'GET', undefined, {
             headers: {
@@ -51,7 +50,6 @@ export class AgentRecommendationService extends APIClient {
     finishRating(token: string, value: any) {
         return this.invokeApi(`/public/authenticated/finishRating?accessToken=${token}`, 'POST', value);
     }
-
 
     createPreconditions() {
         return this.invokeApi(`/agent/preconditions`, 'POST');

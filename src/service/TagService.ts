@@ -1,4 +1,4 @@
-import {APIClient, APIMapping} from '../http';
+import { APIClient, APIMapping } from '../http';
 
 export class TagService extends APIClient {
 
@@ -23,4 +23,4 @@ export class TagService extends APIClient {
     }
 }
 
-export default new TagService()
+export default new TagService();

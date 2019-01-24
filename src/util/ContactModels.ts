@@ -23,7 +23,6 @@ export interface Contact {
     [key: string]: any;
 }
 
-
 export interface IdModel {
     id?: string | undefined;
 }

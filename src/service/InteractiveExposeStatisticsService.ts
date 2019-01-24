@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from '../http';
-import { AxiosResponse } from "axios";
+import { AxiosResponse } from 'axios';
 
 export class InteractiveExposeStatisticsService extends APIClient {
     constructor() {
@@ -11,7 +11,7 @@ export class InteractiveExposeStatisticsService extends APIClient {
      * @param {string} estateId
      * @returns {Promise<AxiosResponse>}
      */
-    getEstateStatistics(estateId: string) : Promise<AxiosResponse> {
+    getEstateStatistics(estateId: string): Promise<AxiosResponse> {
         return this.invokeApi('/estateStatistics', 'GET', undefined, {
             queryParams: {
                 estateId
@@ -25,7 +25,7 @@ export class InteractiveExposeStatisticsService extends APIClient {
      * @param singleCount represent the boolean if only contacts to whom iex was sent should be counted,
      *          or all sent iex including same contacts.
      */
-    fetchSentInteractiveExposeCount(estateId: string, singleCount?: boolean) : Promise<AxiosResponse> {
+    fetchSentInteractiveExposeCount(estateId: string, singleCount?: boolean): Promise<AxiosResponse> {
         return this.invokeApi(`/estateStatistics/${estateId}/sent/count`, 'GET', undefined, singleCount != null ? {
             queryParams: {
                 singleCount
@@ -38,7 +38,7 @@ export class InteractiveExposeStatisticsService extends APIClient {
      * @param estateId
      * @param requestedTypes represents a list with statistic types
      */
-    fetchDynamicEstateStatistics(estateId: string, requestedTypes: object) : Promise<AxiosResponse> {
+    fetchDynamicEstateStatistics(estateId: string, requestedTypes: object): Promise<AxiosResponse> {
         return this.invokeApi(`/dynamic/${estateId}`, 'POST', requestedTypes);
     }
 

@@ -4,13 +4,13 @@ import { Inquiry } from '../util/MatchmakingModels';
 
 export class InquiryService extends APIClient {
 
-	constructor() {
-		super(APIMapping.inquiryService);
-	}
+    constructor() {
+        super(APIMapping.inquiryService);
+    }
 
-	getAll(page: number = 1, size: number = 100): Promise<AxiosResponse<Array<Inquiry>>> {
-		return this.invokeApi(`/inquiry?page=${page}&size=${size}`, 'GET');
-	}
+    getAll(page: number = 1, size: number = 100): Promise<AxiosResponse<Array<Inquiry>>> {
+        return this.invokeApi(`/inquiry?page=${page}&size=${size}`, 'GET');
+    }
 
 }
 

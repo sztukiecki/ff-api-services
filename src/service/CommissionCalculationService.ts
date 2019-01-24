@@ -1,19 +1,19 @@
-import {APIClient, APIMapping} from '../http';
+import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
 export interface TotalCommission {
-	totalCommission: number;
+    totalCommission: number;
 }
 
 export interface CommissionEntry {
-	entityId: string;
-	commission: number;
+    entityId: string;
+    commission: number;
 }
 
 export class CommissionCalculationService extends APIClient {
-	constructor() {
-		super(APIMapping.commissionCalculationService);
-	}
+    constructor() {
+        super(APIMapping.commissionCalculationService);
+    }
 
     calculateTotalCommission(entityIds: string[]): Promise<AxiosResponse<TotalCommission>> {
         return this.invokeApi(`/calculateTotalCommission`, 'POST', entityIds);

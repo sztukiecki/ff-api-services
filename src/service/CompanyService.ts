@@ -1,18 +1,18 @@
-import {APIClient, APIMapping} from '../http';
-import {AxiosResponse} from 'axios';
+import { APIClient, APIMapping } from '../http';
+import { AxiosResponse } from 'axios';
 
 export interface LegislationCheckbox {
-    value: string,
-    label: string,
-    required: boolean,
-    defaultChecked: boolean
+    value: string;
+    label: string;
+    required: boolean;
+    defaultChecked: boolean;
 }
 
 export interface LegislationText {
-    id: string,
-    legislationTextName: string,
-    legislationTextContent: string,
-    legislationCheckboxes: LegislationCheckbox[]
+    id: string;
+    legislationTextName: string;
+    legislationTextContent: string;
+    legislationCheckboxes: LegislationCheckbox[];
 }
 
 export class CompanyService extends APIClient {
@@ -21,7 +21,7 @@ export class CompanyService extends APIClient {
         super(APIMapping.companyService);
     }
 
-    //domain -> can also be an email
+    // domain -> can also be an email
     createCompany(companyName: string, companyUrl: string, domain: string): Promise<AxiosResponse> {
         return this.invokeApi('/company', 'POST', {
             companyName,
@@ -62,14 +62,14 @@ export class CompanyService extends APIClient {
         const formData = new FormData();
         formData.append('logo', image);
         return this.invokeApi('/company/logo', 'POST', formData,
-            {headers: {'Content-Type': 'multipart/form-data'}});
+                              {headers: {'Content-Type': 'multipart/form-data'}});
     }
 
     postTerms(terms: any) {
         const formData = new FormData();
         formData.append('terms-file', terms);
         return this.invokeApi('/company/terms/upload', 'POST', formData,
-            {headers: {'Content-Type': 'multipart/form-data'}});
+                              {headers: {'Content-Type': 'multipart/form-data'}});
     }
 
     removeTerms(fileName: string) {

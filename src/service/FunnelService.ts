@@ -1,4 +1,4 @@
-import {APIClient, APIMapping} from '../http';
+import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
 export class FunnelService extends APIClient {
@@ -31,15 +31,15 @@ export class FunnelService extends APIClient {
     }
 
     duplicateFunnel(funnelId: string) {
-        return this.invokeApi('/funnels/' + funnelId + '/duplicate','POST')
+        return this.invokeApi('/funnels/' + funnelId + '/duplicate', 'POST');
     }
 
     findFunnelById(funnelId: string, includeEntityIds?: boolean) {
         return this.invokeApi(`/funnels/${funnelId}`, 'GET', undefined, includeEntityIds ? {
-			queryParams: {
-				includeEntityIds: `${includeEntityIds}`
-			}
-		} : undefined);
+            queryParams: {
+                includeEntityIds: `${includeEntityIds}`
+            }
+        } : undefined);
     }
 
     deleteFunnelById(funnelId: string) {

@@ -1,7 +1,7 @@
-import {APIClient} from "../http";
-import APIMapping from "../http/APIMapping";
-import {AxiosResponse} from "axios";
-import {SendInteractiveExposeModel} from "./InteractiveExposeService";
+import { APIClient } from '../http';
+import APIMapping from '../http/APIMapping';
+import { AxiosResponse } from 'axios';
+import { SendInteractiveExposeModel } from './InteractiveExposeService';
 
 export interface InteractiveExposeDeliveryPreferenceModel {
     emailText: string;

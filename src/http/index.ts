@@ -1,5 +1,5 @@
 import APIClient from './APIClient';
-import APIMapping, {APIService} from './APIMapping';
+import APIMapping, { APIService } from './APIMapping';
 
 export {
     APIMapping,

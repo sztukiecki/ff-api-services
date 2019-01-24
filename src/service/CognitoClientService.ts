@@ -1,5 +1,5 @@
-import {APIClient, APIMapping} from '../http';
-import {AxiosResponse} from 'axios';
+import { APIClient, APIMapping } from '../http';
+import { AxiosResponse } from 'axios';
 
 export class CognitoClientService extends APIClient {
 

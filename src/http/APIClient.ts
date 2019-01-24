@@ -11,7 +11,7 @@ import { APIService } from './APIMapping';
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
 
 export interface AxiosConfig {
-    'axios-retry': AxiosRetryConfig
+    'axios-retry': AxiosRetryConfig;
 }
 
 export interface AxiosRetryConfig {
@@ -51,7 +51,7 @@ export default abstract class APIClient {
         isNode ? (this.constructor as typeof APIClient).apiVersionTag : StageConfiguration.getVersionTagFromStore();
 
     withUserId(userId: string): this {
-        return Object.assign(Object.create(Object.getPrototypeOf(this)), this, {userId})
+        return Object.assign(Object.create(Object.getPrototypeOf(this)), this, {userId});
     }
 
     private _getConsulClient(): ConsulClient {
@@ -74,7 +74,7 @@ export default abstract class APIClient {
         let baseUrl;
         if (isNode) {
             const currentConfig = await this._getConsulClient().config.getCurrent();
-            return `http://${currentConfig["com.flowfact.internallb"]}/${this._serviceName}/${this._getVersionTag()}`;
+            return `http://${currentConfig['com.flowfact.internallb']}/${this._serviceName}/${this._getVersionTag()}`;
         } else {
             const stage = this._getStage();
             const account = stage === 'development' ? 'flowfact-dev' : 'flowfact-prod';
@@ -83,7 +83,7 @@ export default abstract class APIClient {
                 : `https://api.${stage}.cloudios.${account}.cloud`;
         }
         return `${baseUrl}/${this._serviceName}/${this._getVersionTag()}`;
-    };
+    }
 
     private async _getCognitoToken() {
         const cognitoToken = await CognitoService.getCognitoToken();
@@ -133,7 +133,7 @@ export default abstract class APIClient {
                 axiosRetry(client, {
                     retries: axiosConfiguration['axios-retry'].retries,
                     retryCondition: (error: AxiosError) => {
-                        return Boolean(error && error.response && error.response.status >= 500 && method != 'POST');
+                        return Boolean(error && error.response && error.response.status >= 500 && method !== 'POST');
                     }
                 });
             }
@@ -161,7 +161,6 @@ export default abstract class APIClient {
         return stringify(queryParams, { addQueryPrefix: true });
     }
 }
-
 
 if (isNode) {
     APIClient.stageToUse = process.env.STAGE_NAME || 'development';

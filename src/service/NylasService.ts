@@ -4,17 +4,17 @@ import { AxiosResponse } from 'axios';
 
 export class NylasService extends APIClient {
 
-	constructor() {
-		super(APIMapping.nylasService);
-	}
+    constructor() {
+        super(APIMapping.nylasService);
+    }
 
-	async authorizeUser(code: string): Promise<AxiosResponse> {
-		return await this.invokeApi('/authorize', 'POST', undefined, {
-			queryParams: {
-				code: code
-			}
-		});
-	}
+    async authorizeUser(code: string): Promise<AxiosResponse> {
+        return await this.invokeApi('/authorize', 'POST', undefined, {
+            queryParams: {
+                code: code
+            }
+        });
+    }
 
 }
 

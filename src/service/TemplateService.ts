@@ -1,4 +1,4 @@
-import {APIClient, APIMapping} from '../http';
+import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
 export class TemplateService extends APIClient {

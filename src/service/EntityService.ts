@@ -1,6 +1,6 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
-import { Flowdsl } from "@flowfact/node-flowdsl/lib/Flowdsl";
+import { Flowdsl } from '@flowfact/node-flowdsl/lib/Flowdsl';
 import { Entity, EntityACLType, EntityValues, EntityView } from '@flowfact/types';
 import { EntityQuery, ParamList, SearchResult, UniformObject } from '../util/InternalTypes';
 import { v4 as uuid } from 'uuid/interfaces';

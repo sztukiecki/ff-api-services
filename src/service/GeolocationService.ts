@@ -1,5 +1,5 @@
-import {APIClient, APIMapping} from '../http';
-import { CancelToken } from "axios";
+import { APIClient, APIMapping } from '../http';
+import { CancelToken } from 'axios';
 
 export class GeolocationService extends APIClient {
 

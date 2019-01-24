@@ -1,14 +1,14 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
-import { DslBuilder } from "@flowfact/node-flowdsl";
-import { Flowdsl, FlowdslConditionUnion, EntityIdCondition, HasFieldWithValueCondition } from "@flowfact/node-flowdsl/lib/Flowdsl";
+import { DslBuilder } from '@flowfact/node-flowdsl';
+import { Flowdsl, FlowdslConditionUnion, EntityIdCondition, HasFieldWithValueCondition } from '@flowfact/node-flowdsl/lib/Flowdsl';
 import { SearchResult } from '../util/InternalTypes';
 import { Entity } from '@flowfact/types';
 
 export interface FilterConfiguration {
-    value: string,
-    fields: string[],
-    limitResponse?: boolean // if true, than just the fields in the fields array will be returned
+    value: string;
+    fields: string[];
+    limitResponse?: boolean; // if true, than just the fields in the fields array will be returned
 }
 
 export class SearchService extends APIClient {
@@ -96,12 +96,12 @@ export class SearchService extends APIClient {
             if (filterConfiguration.value && filterConfiguration.value !== '') {
                 const conditions: FlowdslConditionUnion[] = filterConfiguration.fields.map(field => {
                     if (field === 'id') {
-                        return <EntityIdCondition>{
+                        return <EntityIdCondition> {
                             type: 'ENTITYID',
                             values: [filterConfiguration.value]
                         };
                     }
-                    return <HasFieldWithValueCondition>{
+                    return <HasFieldWithValueCondition> {
                         type: 'HASFIELDWITHVALUE',
                         field: field,
                         value: filterConfiguration.value,

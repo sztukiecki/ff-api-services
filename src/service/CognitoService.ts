@@ -8,10 +8,10 @@ import {
 import StageConfiguration from '../util/StageConfiguration';
 
 export interface TokenModel {
-    idToken: string,
-    accessToken: string,
-    refreshToken: string,
-    username: string
+    idToken: string;
+    accessToken: string;
+    refreshToken: string;
+    username: string;
 }
 
 const REGION = 'eu-central-1';
@@ -51,7 +51,6 @@ export class CognitoService {
             stage = 'development';
         }
 
-
         this.userPool = new CognitoUserPool({
             UserPoolId: SETTINGS[stage].UserPoolId,
             ClientId: SETTINGS[stage].ClientId
@@ -79,7 +78,7 @@ export class CognitoService {
             this.cognitoUser!.authenticateUser(new AuthenticationDetails({
                 Username: username,
                 Password: password
-            }), {
+            }),                                {
                 onSuccess: (result) => {
                     // define the new Logins
                     this.token = this.buildLoginToken(result.getIdToken().getJwtToken());
@@ -97,7 +96,6 @@ export class CognitoService {
         if (stage === 'local') {
             stage = 'development';
         }
-
 
         // set the new tokens in the store
         const key = `CognitoIdentityServiceProvider.${SETTINGS[stage].ClientId}`;
@@ -141,7 +139,7 @@ export class CognitoService {
             cognitoUser.authenticateUser(new AuthenticationDetails({
                 Username: username,
                 Password: ''
-            }), {
+            }),                          {
                 onSuccess: () => {
                     resolve();
                 },
@@ -197,6 +195,7 @@ export class CognitoService {
                     resolve(data);
                 },
                 onFailure: (error: Error) => {
+                    // tslint:disable-next-line:no-console
                     console.error(error);
                     reject(error);
                 }
@@ -298,7 +297,7 @@ export class CognitoService {
                 await this.refreshSession(session);
                 resolve(this.cognitoUser);
             });
-        })
+        });
     }
 
     /**
@@ -330,7 +329,7 @@ export class CognitoService {
         }
         return {
             [`cognito-idp.${REGION}.amazonaws.com/${SETTINGS[stage].UserPoolId}`]: idToken
-        }
+        };
     }
 
     resendConfirmationCode() {
@@ -378,7 +377,7 @@ export class CognitoService {
                 this.cognitoUser = await this.getCurrentUser();
             }
 
-            if(!this.cognitoUser) {
+            if (!this.cognitoUser) {
                 reject();
                 return;
             }

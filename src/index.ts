@@ -51,91 +51,91 @@ import { InquiryCreatedMessage } from './util/searchprofile-service/InquiryCreat
 import StageConfiguration, { STORE_KEYS } from './util/StageConfiguration';
 
 export {
-	AdminTokenService,
-	AgentRecommendationService,
-	AppointmentBookingService,
-	CognitoClientService,
-	CognitoService,
-	CommissionCalculationService,
-	CompanyService,
-	ContactService,
-	CsvImportService,
-	CustomerLegitimationArchiveService,
-	DynamicLayoutService,
-	EmailService,
-	EntityService,
-	FlowfactExportInternalService,
-	FormService,
-	FullTextSearchService,
-	FunnelService,
-	GDPRService,
-	GeolocationService,
-	HistoryModuleService,
-	InquiryCreatedMessage,
-	InquiryService,
-	InteractiveExposeDeliveryService,
-	InteractiveExposeService,
-	InteractiveExposeStatisticsService,
-	MatchmakingService,
-	ModuleService,
-	MultimediaService,
-	NylasService,
-	Office365AuthenticationService,
-	OnboardingService,
-	PortalManagementService,
-	PresetService,
-	PropertyMarketingPhaseService,
-	RelogService,
-	SampleDataService,
-	SchemaService,
-	SearchProfileService,
-	SearchService,
-	SlackIntegrationService,
-	SprengnetterService,
-	TaggingService,
-	TagsService,
-	TaskService,
-	TemplateService,
-	TrialLicenseService,
-	UserService,
-	ViewDefinitionService,
-	WordpressTemplateService
+    AdminTokenService,
+    AgentRecommendationService,
+    AppointmentBookingService,
+    CognitoClientService,
+    CognitoService,
+    CommissionCalculationService,
+    CompanyService,
+    ContactService,
+    CsvImportService,
+    CustomerLegitimationArchiveService,
+    DynamicLayoutService,
+    EmailService,
+    EntityService,
+    FlowfactExportInternalService,
+    FormService,
+    FullTextSearchService,
+    FunnelService,
+    GDPRService,
+    GeolocationService,
+    HistoryModuleService,
+    InquiryCreatedMessage,
+    InquiryService,
+    InteractiveExposeDeliveryService,
+    InteractiveExposeService,
+    InteractiveExposeStatisticsService,
+    MatchmakingService,
+    ModuleService,
+    MultimediaService,
+    NylasService,
+    Office365AuthenticationService,
+    OnboardingService,
+    PortalManagementService,
+    PresetService,
+    PropertyMarketingPhaseService,
+    RelogService,
+    SampleDataService,
+    SchemaService,
+    SearchProfileService,
+    SearchService,
+    SlackIntegrationService,
+    SprengnetterService,
+    TaggingService,
+    TagsService,
+    TaskService,
+    TemplateService,
+    TrialLicenseService,
+    UserService,
+    ViewDefinitionService,
+    WordpressTemplateService
 };
 
 // types only
 export {
-	FFElkData,
-	FFAdditionalElkData
+    FFElkData,
+    FFAdditionalElkData
 };
 
 const StoreKeys = STORE_KEYS;
 
 const getStageFromStore = () => {
-	return StageConfiguration.getStageFromStore();
+    return StageConfiguration.getStageFromStore();
 };
 
 const getVersionTagFromStore = () => {
-	return StageConfiguration.getVersionTagFromStore();
+    return StageConfiguration.getVersionTagFromStore();
 };
 
 const setStageInStore = (stage: string) => {
-	StageConfiguration.setStageInStore(stage);
+    StageConfiguration.setStageInStore(stage);
 };
 
 const setVersionTagInStore = (versionTag: string) => {
-	StageConfiguration.setVersionTagInStore(versionTag);
+    StageConfiguration.setVersionTagInStore(versionTag);
 };
 
 const isDefaultApi = () => {
-	return StageConfiguration.isDefaultApi();
+    return StageConfiguration.isDefaultApi();
 };
 
 export {
-	APIClient,
-	StoreKeys,
-	isDefaultApi,
-	setStageInStore,
-	getStageFromStore,
-	setVersionTagInStore,
-	getVersionTagFromStore
+    APIClient,
+    StoreKeys,
+    isDefaultApi,
+    setStageInStore,
+    getStageFromStore,
+    setVersionTagInStore,
+    getVersionTagFromStore
 };

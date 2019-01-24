@@ -2,29 +2,29 @@ import { APIClient, APIMapping } from '../http';
 
 export class TaskService extends APIClient {
 
-	constructor() {
-		super(APIMapping.taskService);
-	}
+    constructor() {
+        super(APIMapping.taskService);
+    }
 
-	getById(id: string) {
-		return this.invokeApi(`/task/${id}`, 'GET');
-	}
+    getById(id: string) {
+        return this.invokeApi(`/task/${id}`, 'GET');
+    }
 
-	getTaskForEntityById(entityId: string) {
-		return this.invokeApi(`/task/forEntity/${entityId}`, 'GET');
-	}
+    getTaskForEntityById(entityId: string) {
+        return this.invokeApi(`/task/forEntity/${entityId}`, 'GET');
+    }
 
-	deleteTask(id: string) {
-		return this.invokeApi(`/task/${id}`, 'DELETE');
-	}
+    deleteTask(id: string) {
+        return this.invokeApi(`/task/${id}`, 'DELETE');
+    }
 
-	createTask(task: object) {
-		return this.invokeApi(`/task`, 'POST', task);
-	}
+    createTask(task: object) {
+        return this.invokeApi(`/task`, 'POST', task);
+    }
 
-	updateTask(id: string, task: object) {
-		return this.invokeApi(`/task/${id}`, 'PUT', task);
-	}
+    updateTask(id: string, task: object) {
+        return this.invokeApi(`/task/${id}`, 'PUT', task);
+    }
 
 }
 
