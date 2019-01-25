@@ -1,5 +1,5 @@
-import { APIClient, APIMapping } from '../http';
-import { AxiosResponse } from 'axios';
+import {APIClient, APIMapping} from '../http';
+import {AxiosResponse} from 'axios';
 
 export class OnboardingService extends APIClient {
     constructor() {
@@ -27,6 +27,14 @@ export class OnboardingService extends APIClient {
             numberOfUsers: numberOfUsers
         };
         return this.invokeApi('/buypage/generateUrl', 'POST', undefined, {queryParams});
+    }
+
+    getQualificationQuestions() {
+        return this.invokeApi('/qualifications', 'GET');
+    }
+
+    answerQuestion(questionId: number, answer: any) {
+        return this.invokeApi('/qualifications/answer/' + questionId, 'POST', {answer});
     }
 
 }
