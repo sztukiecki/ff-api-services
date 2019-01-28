@@ -53,7 +53,7 @@ export class NylasService extends APIClient {
     }
 
     async getConfig(): Promise<AxiosResponse<NylasConfig>> {
-        return await this.invokeApi('config', 'GET');
+        return await this.invokeApi('/config', 'GET');
     }
 }
 
