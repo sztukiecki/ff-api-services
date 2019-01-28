@@ -4,14 +4,19 @@ import { AxiosResponse } from 'axios';
 
 interface SendEmailRequest {
 	subject: string;
-	to: string[];
-	cc: string[];
-	bcc: string[];
-	from: string;
-	reply_to: string[];
+	to: EmailAddress[];
+	cc: EmailAddress[];
+	bcc: EmailAddress[];
+	from: EmailAddress[];
+	reply_to: EmailAddress[];
 	body: string;
 	file_ids: string[];
 	tracking: Tracking;
+}
+
+interface EmailAddress {
+	email: string;
+	name: string;
 }
 
 interface Tracking {
