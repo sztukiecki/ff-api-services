@@ -7,7 +7,7 @@ import CognitoService from './service/CognitoService';
 import CommissionCalculationService from './service/CommissionCalculationService';
 import CompanyService from './service/CompanyService';
 import ContactService from './service/ContactService';
-import CsvImportService from './service/CsvImportService';
+import CsvToEntityImporterService from './service/CsvToEntityImporterService';
 import CustomerLegitimationArchiveService from './service/CustomerLegitimationArchiveService';
 import DynamicLayoutService from './service/DynamicLayoutService';
 import EmailService from './service/EmailService';
@@ -59,7 +59,7 @@ export {
     CommissionCalculationService,
     CompanyService,
     ContactService,
-    CsvImportService,
+    CsvToEntityImporterService,
     CustomerLegitimationArchiveService,
     DynamicLayoutService,
     EmailService,

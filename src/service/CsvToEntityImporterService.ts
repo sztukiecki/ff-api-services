@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 
-export class CsvImportService extends APIClient {
+export class CsvToEntityImporterService extends APIClient {
     constructor() {
-        super(APIMapping.csvImportService);
+        super(APIMapping.csvToEntityImporterService);
     }
 
     async uploadCsvFile(file: FormData, targetSchema: string, delimiter: string = ','): Promise<AxiosResponse> {
@@ -11,4 +11,4 @@ export class CsvImportService extends APIClient {
     }
 }
 
-export default new CsvImportService();
+export default new CsvToEntityImporterService();
