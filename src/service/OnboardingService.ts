@@ -1,5 +1,5 @@
-import {APIClient, APIMapping} from '../http';
-import {AxiosResponse} from 'axios';
+import { APIClient, APIMapping } from '../http';
+import { AxiosResponse } from 'axios';
 
 export class OnboardingService extends APIClient {
     constructor() {
@@ -35,6 +35,10 @@ export class OnboardingService extends APIClient {
 
     answerQuestion(questionId: number, answer: any) {
         return this.invokeApi('/qualifications/answer/' + questionId, 'POST', {answer});
+    }
+
+    trackBuyNowClicked() {
+        return this.invokeApi('/track/buynowclicked', 'POST');
     }
 
 }
