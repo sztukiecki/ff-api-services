@@ -1,6 +1,6 @@
+import { AxiosResponse } from 'axios';
 import APIClient from '../http/APIClient';
 import APIMapping from '../http/APIMapping';
-import { AxiosResponse } from 'axios';
 
 interface SendEmailRequest {
     subject: string;
@@ -24,6 +24,10 @@ interface Tracking {
     opens: boolean;
     thread_replies: boolean;
     payload: string;
+}
+
+interface RegistrationUrl {
+    registrationUrl: string;
 }
 
 interface NylasConfig {
@@ -54,6 +58,14 @@ export class NylasService extends APIClient {
 
     async getConfig(): Promise<AxiosResponse<NylasConfig>> {
         return await this.invokeApi('/config', 'GET');
+    }
+
+    async getRegistrationUrl(email: string): Promise<AxiosResponse<RegistrationUrl>> {
+        return await this.invokeApi('/registration-url', 'GET', undefined, {
+            queryParams: {
+                email: email
+            }
+        });
     }
 }
 
