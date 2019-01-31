@@ -67,6 +67,21 @@ export class NylasService extends APIClient {
             }
         });
     }
+
+    async overwriteSettings(email: string, settings: object): Promise<AxiosResponse> {
+        return await this.invokeApi('/config', 'POST', {
+                email: email,
+                configValues: settings
+            }
+        );
+    }
+    async updateSettings(email: string, settings: object): Promise<AxiosResponse> {
+        return await this.invokeApi('/config', 'PATCH', {
+                email: email,
+                configValues: settings
+            }
+        );
+    }
 }
 
 export default new NylasService();
