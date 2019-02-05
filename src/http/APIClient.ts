@@ -94,7 +94,7 @@ export default abstract class APIClient {
         return cognitoToken;
     }
 
-    public async invokeApi<T = any>(path: string, method: string, body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<T>> {
+    public async invokeApi<T = any>(path: string, method: string = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<T>> {
         if (!path.startsWith('/')) {
             throw new Error('missing slash at the beginning');
         }

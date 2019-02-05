@@ -1,5 +1,6 @@
 import { APIClient, APIMapping } from '../http';
-import { AxiosResponse } from 'axios';
+import Phase from '../models/Phase';
+import Flywheel from '../models/Flywheel';
 
 export class FlywheelService extends APIClient {
 
@@ -10,16 +11,24 @@ export class FlywheelService extends APIClient {
     /**
      * Returns all flywheels with no param given or no-content
      */
-    async fetchAllFlywheels(): Promise<AxiosResponse> {
-        return this.invokeApi('/flywheel', 'GET');
+    async fetchAllFlywheels() {
+        return this.invokeApi<Flywheel[]>('/flywheel', 'GET');
     }
 
     /**
      * Return a specific flywheel by name or not-found
      * @param flywheelName
      */
-    async fetchFlywheel(flywheelName: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/flywheel/${flywheelName}`, 'GET');
+    async fetchFlywheel(flywheelName: string) {
+        return this.invokeApi<Flywheel>(`/flywheel/${flywheelName}`);
+    }
+
+    /**
+     * Return a specific phase with all subphases
+     * @param phaseName
+     */
+    async fetchPhase(phaseName: string) {
+        return this.invokeApi<Phase>(`/phase/${phaseName}`);
     }
 }
 
