@@ -8,20 +8,17 @@ export class FlywheelService extends APIClient {
     }
 
     /**
-     * Syntactic sugar for fetching all flywheels
+     * Returns all flywheels with no param given or no-content
      */
     async fetchAllFlywheels(): Promise<AxiosResponse> {
-        return this.fetchFlywheel();
+        return this.invokeApi('/flywheel', 'GET');
     }
 
     /**
-     * Returns all flywheels with no param given or no-content
      * Return a specific flywheel by name or not-found
-     * Use 'mock' as flywheelName to get one mock.
-     * Use 'moclAll' as flywheelName to get many mocks.
      * @param flywheelName
      */
-    async fetchFlywheel(flywheelName?: string): Promise<AxiosResponse> {
+    async fetchFlywheel(flywheelName: string): Promise<AxiosResponse> {
         return this.invokeApi(`/flywheel/${flywheelName}`, 'GET');
     }
 }
