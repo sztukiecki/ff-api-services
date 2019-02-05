@@ -13,6 +13,7 @@ import DynamicLayoutService from './service/DynamicLayoutService';
 import EmailService from './service/EmailService';
 import EntityService from './service/EntityService';
 import FlowfactExportInternalService from './service/FlowfactExportInternalService';
+import FlywheelService from './service/FlywheelService';
 import FormService from './service/FormService';
 import FullTextSearchService from './service/FullTextSearchService';
 import FunnelService from './service/FunnelService';
@@ -65,6 +66,7 @@ export {
     EmailService,
     EntityService,
     FlowfactExportInternalService,
+    FlywheelService,
     FormService,
     FullTextSearchService,
     FunnelService,

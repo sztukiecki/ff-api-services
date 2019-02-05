@@ -33,6 +33,7 @@ const APIMapping = {
     entityExportService: new APIService('entity-export-service'),
     entityService: new APIService('entity-service'),
     flowfactExporterInternalService: new APIService('flowfact-exporter-internal-service'),
+    flywheelService: new APIService('flywheel-service'),
     formService: new APIService('form-service'),
     fullTextSearchService: new APIService('full-text-search-service'),
     funnelService: new APIService('funnel-service'),
