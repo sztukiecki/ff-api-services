@@ -34,6 +34,13 @@ export class FlywheelService extends APIClient {
     }
 
     /**
+     * only for dev
+     */
+    async fetchAllMocks() {
+        return this.invokeApi<Flywheel[]>('/flywheels/mockAll', 'GET');
+    }
+
+    /**
      * Return a specific flywheel by name or not-found
      * @param flywheelName
      */
