@@ -19,6 +19,14 @@ export class FlywheelService extends APIClient {
     }
 
     /**
+     * Deletes a flywheel based on the name (id)
+     * @param flywheelName
+     */
+    async deleteFlywheel(flywheelName: string) {
+        return this.invokeApi(`/flywheels/${flywheelName}`, 'DELETE');
+    }
+
+    /**
      * Returns all flywheels with no param given or no-content
      */
     async fetchAllFlywheels() {
