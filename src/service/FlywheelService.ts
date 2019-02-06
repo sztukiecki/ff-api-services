@@ -41,6 +41,10 @@ export class FlywheelService extends APIClient {
         return this.invokeApi<Flywheel>(`/flywheels/${flywheelName}`);
     }
 
+    async fetchAllPhases() {
+        return this.invokeApi<Phase[]>('/phases', 'GET');
+    }
+
     /**
      * Return a specific phase with all subphases
      * @param phaseName
