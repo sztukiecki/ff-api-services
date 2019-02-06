@@ -46,7 +46,7 @@ export class FlywheelService extends APIClient {
      * @param phaseName
      */
     async fetchPhase(phaseName: string) {
-        return this.invokeApi<Phase>(`/phase/${phaseName}`);
+        return this.invokeApi<Phase>(`/phases/${phaseName}`);
     }
 }
 
