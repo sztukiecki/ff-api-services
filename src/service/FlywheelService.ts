@@ -9,10 +9,20 @@ export class FlywheelService extends APIClient {
     }
 
     /**
+     * Creates a new flywheel based on the title
+     * @param title
+     */
+    async createFlywheel(title: string) {
+        return this.invokeApi<Flywheel>('/flywheels', 'POST', {
+            title: title
+        });
+    }
+
+    /**
      * Returns all flywheels with no param given or no-content
      */
     async fetchAllFlywheels() {
-        return this.invokeApi<Flywheel[]>('/flywheel', 'GET');
+        return this.invokeApi<Flywheel[]>('/flywheels', 'GET');
     }
 
     /**
@@ -20,7 +30,7 @@ export class FlywheelService extends APIClient {
      * @param flywheelName
      */
     async fetchFlywheel(flywheelName: string) {
-        return this.invokeApi<Flywheel>(`/flywheel/${flywheelName}`);
+        return this.invokeApi<Flywheel>(`/flywheels/${flywheelName}`);
     }
 
     /**
