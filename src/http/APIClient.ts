@@ -74,7 +74,7 @@ export default abstract class APIClient {
         let baseUrl;
         if (isNode) {
             const currentConfig = await this._getConsulClient().config.getCurrent();
-            return `http://${currentConfig['com.flowfact.internallb']}/${this._serviceName}/${this._getVersionTag()}`;
+            return `http://${currentConfig['com.flowfact.router.host']}/${this._serviceName}`;
         } else {
             const stage = this._getStage();
             const account = stage === 'development' ? 'flowfact-dev' : 'flowfact-prod';
