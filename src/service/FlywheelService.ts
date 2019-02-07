@@ -90,6 +90,12 @@ export class FlywheelService extends APIClient {
     async deletePhase(phaseName: string): Promise<AxiosResponse> {
         return this.invokeApi(`/phases/${phaseName}`, 'DELETE');
     }
+
+    async updatePhases(flywheelName: string, phaseNames: string[]) {
+        return this.invokeApi<Flywheel>(`/flywheels/${flywheelName}/phases`, 'PATCH', {
+            phaseNames: phaseNames
+        });
+    }
 }
 
 export default new FlywheelService();
