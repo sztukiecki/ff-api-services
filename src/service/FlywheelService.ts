@@ -66,6 +66,14 @@ export class FlywheelService extends APIClient {
     }
 
     /**
+     * Return all transactions for a specific phase
+     * @param phaseName
+     */
+    async fetchTransactionsForPhase(phaseName: string) {
+        return this.invokeApi(`/transactions/phase/${phaseName}`);
+    }
+
+    /**
      * Moves a transaction to another phase
      */
     async moveTransaction(transactionId: string, fromPhaseName: string, toPhaseName: string) {
