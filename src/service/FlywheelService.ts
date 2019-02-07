@@ -70,7 +70,7 @@ export class FlywheelService extends APIClient {
      * @param phaseName
      */
     async fetchTransactionsForPhase(phaseName: string) {
-        return this.invokeApi(`/transactions/phase/${phaseName}`);
+        return this.invokeApi(`/transactions/phases/${phaseName}`);
     }
 
     /**
@@ -80,7 +80,7 @@ export class FlywheelService extends APIClient {
         return this.invokeApi(`/transactions/transaction/${transactionId}`, 'PUT', {fromPhaseName, toPhaseName});
     }
 
-    /*
+    /**
      * Creates or updates a phase.
      */
     async savePhase(phase: object): Promise<AxiosResponse> {
