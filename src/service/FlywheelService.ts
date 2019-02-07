@@ -93,7 +93,7 @@ export class FlywheelService extends APIClient {
 
     async updatePhases(flywheelName: string, phaseNames: string[]) {
         return this.invokeApi<Flywheel>(`/flywheels/${flywheelName}`, 'PATCH', {
-            opt: 'set-phases',
+            op: 'set-phases',
             phaseNames: phaseNames
         });
     }
