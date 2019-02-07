@@ -1,6 +1,7 @@
 import { APIClient, APIMapping } from '../http';
 import Phase from '../models/Phase';
 import Flywheel from '../models/Flywheel';
+import { AxiosResponse } from 'axios';
 
 export class FlywheelService extends APIClient {
 
@@ -69,6 +70,17 @@ export class FlywheelService extends APIClient {
      */
     async moveTransaction(transactionId: string, fromPhaseName: string, toPhaseName: string) {
         return this.invokeApi(`/transactions/transaction/${transactionId}`, 'PUT', {fromPhaseName, toPhaseName});
+    }
+
+    /*
+     * Creates or updates a phase.
+     */
+    async savePhase(phase: object): Promise<AxiosResponse> {
+        return this.invokeApi('/phases', 'POST', phase);
+    }
+
+    async deletePhase(phaseName: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/phases/${phaseName}`, 'DELETE');
     }
 }
 
