@@ -48,8 +48,8 @@ export class FlywheelService extends APIClient {
         return this.invokeApi<Flywheel>(`/flywheels/${flywheelName}`);
     }
 
-    async fetchAllPhases(shortVersion = false) {
-        return this.invokeApi<Phase[]>(`/phases`, 'GET', undefined, {
+    async fetchAllPhases(shortVersion: boolean = false) {
+        return this.invokeApi<Phase[]>('/phases', 'GET', undefined, {
             queryParams: {
                 shortVersion: shortVersion
             }
@@ -62,6 +62,13 @@ export class FlywheelService extends APIClient {
      */
     async fetchPhase(phaseName: string) {
         return this.invokeApi<Phase>(`/phases/${phaseName}`);
+    }
+
+    /**
+     * Moves a transaction to another phase
+     */
+    async moveTransaction(transactionId: string, fromPhaseName: string, toPhaseName: string) {
+        return this.invokeApi(`/transactions/transaction/${transactionId}`, 'PUT', {fromPhaseName, toPhaseName});
     }
 }
 
