@@ -49,10 +49,10 @@ export class FlywheelService extends APIClient {
         return this.invokeApi<Flywheel>(`/flywheels/${flywheelName}`);
     }
 
-    async fetchAllPhases(shortVersion: boolean = false) {
+    async fetchAllPhases(filter?: string) {
         return this.invokeApi<Phase[]>('/phases', 'GET', undefined, {
             queryParams: {
-                shortVersion: shortVersion
+                filter: filter
             }
         });
     }
