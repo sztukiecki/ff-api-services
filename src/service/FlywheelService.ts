@@ -53,19 +53,17 @@ export class FlywheelService extends APIClient {
      * Returns all phases which have childrens
      */
     async fetchAllKanbans() {
-        return this.invokeApi<Phase[]>('/kanbans', 'GET', undefined);
-    }
-
-    /**
-     * This one makes some problems with our firewall #TODO
-     * @param filter
-     */
-    async fetchAllPhases(filter?: string) {
         return this.invokeApi<Phase[]>('/phases', 'GET', undefined, {
             queryParams: {
-                filter: filter
+                filters: JSON.stringify({
+                    type: 'EXCLUDE_PHASE_STEPS'
+                })
             }
         });
+    }
+
+    async fetchAllPhases() {
+        return this.invokeApi<Phase[]>('/phases', 'GET', );
     }
 
     /**
