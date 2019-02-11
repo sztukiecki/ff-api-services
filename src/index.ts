@@ -49,7 +49,7 @@ import UserService from './service/UserService';
 import ViewDefinitionService from './service/ViewDefinitionService';
 import WordpressTemplateService from './service/WordpressTemplateService';
 import InquiryCreatedMessage from './util/searchprofile-service/InquiryCreatedMessage';
-import StageConfiguration, { STORE_KEYS } from './util/StageConfiguration';
+import EnvironmentManagement, { StoreKeys, VersionTagTypes, StageTypes } from './util/EnvironmentManagement';
 
 export {
     AdminTokenService,
@@ -110,34 +110,10 @@ export {
     FFAdditionalElkData
 };
 
-const StoreKeys = STORE_KEYS;
-
-const getStageFromStore = () => {
-    return StageConfiguration.getStageFromStore();
-};
-
-const getVersionTagFromStore = () => {
-    return StageConfiguration.getVersionTagFromStore();
-};
-
-const setStageInStore = (stage: string) => {
-    StageConfiguration.setStageInStore(stage);
-};
-
-const setVersionTagInStore = (versionTag: string) => {
-    StageConfiguration.setVersionTagInStore(versionTag);
-};
-
-const isDefaultApi = () => {
-    return StageConfiguration.isDefaultApi();
-};
-
 export {
     APIClient,
     StoreKeys,
-    isDefaultApi,
-    setStageInStore,
-    getStageFromStore,
-    setVersionTagInStore,
-    getVersionTagFromStore
+    VersionTagTypes,
+    StageTypes,
+    EnvironmentManagement
 };

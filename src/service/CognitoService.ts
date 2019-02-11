@@ -5,7 +5,7 @@ import {
     CognitoUserPool,
     CognitoUserSession
 } from 'amazon-cognito-identity-js';
-import StageConfiguration from '../util/StageConfiguration';
+import EnvironmentManagement, {StageTypes} from '../util/EnvironmentManagement';
 
 export interface TokenModel {
     idToken: string;
@@ -46,9 +46,9 @@ export class CognitoService {
             instance = this;
         }
 
-        let stage = StageConfiguration.getStageFromStore();
-        if (stage === 'local') {
-            stage = 'development';
+        let stage = EnvironmentManagement.getStage();
+        if (stage === StageTypes.LOCAL) {
+            stage = StageTypes.DEVELOPMENT;
         }
 
         this.userPool = new CognitoUserPool({
@@ -92,9 +92,9 @@ export class CognitoService {
     }
 
     loginWithTokens(tokens: TokenModel) {
-        let stage = StageConfiguration.getStageFromStore();
-        if (stage === 'local') {
-            stage = 'development';
+        let stage = EnvironmentManagement.getStage();
+        if (stage === StageTypes.LOCAL) {
+            stage = StageTypes.DEVELOPMENT;
         }
 
         // set the new tokens in the store
@@ -323,9 +323,9 @@ export class CognitoService {
     }
 
     buildLoginToken(idToken: string): { [key: string]: string } {
-        let stage: string = StageConfiguration.getStageFromStore();
-        if (stage === 'local') {
-            stage = 'development';
+        let stage: string = EnvironmentManagement.getStage();
+        if (stage === StageTypes.LOCAL) {
+            stage = StageTypes.DEVELOPMENT;
         }
         return {
             [`cognito-idp.${REGION}.amazonaws.com/${SETTINGS[stage].UserPoolId}`]: idToken

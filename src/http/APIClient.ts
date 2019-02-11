@@ -5,7 +5,7 @@ import * as isNode from 'detect-node';
 import { stringify } from 'qs';
 import CognitoService from '../service/CognitoService';
 import Interceptor from '../util/Interceptor';
-import StageConfiguration from '../util/StageConfiguration';
+import EnvironmentManagement from '../util/EnvironmentManagement';
 import { APIService } from './APIMapping';
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
@@ -44,54 +44,8 @@ export default abstract class APIClient {
         this._serviceName = service.name;
     }
 
-    private _getStage = () =>
-        isNode ? (this.constructor as typeof APIClient).stageToUse : StageConfiguration.getStageFromStore();
-
-    private _getVersionTag = () =>
-        isNode ? (this.constructor as typeof APIClient).apiVersionTag : StageConfiguration.getVersionTagFromStore();
-
-    withUserId(userId: string): this {
+    public withUserId(userId: string): this {
         return Object.assign(Object.create(Object.getPrototypeOf(this)), this, {userId});
-    }
-
-    private _getConsulClient(): ConsulClient {
-        if (!this._consulClient) {
-            // Dirty hack: Remove the protocol from the environment value. The Java Consul Client needs it, so the value
-            // might contain the protocol. The nodejs consul client does not accept it for whatever reason.
-            // @ts-ignore
-            const consulUrl = (process.env.CONSUL_CLIENT_HOST || 'consulclients.development.flowfact-dev.cloud').replace(/https?:\/\//, '');
-            // @ts-ignore
-            const consulPort = process.env.CONSUL_CLIENT_PORT || '8500';
-
-            // TODO figure out a way to get the name of the executing service here
-            this._consulClient = new ConsulClient(consulUrl, consulPort, 'api-services', this._getStage(), this._getVersionTag());
-        }
-
-        return this._consulClient!;
-    }
-
-    private async buildAPIUrl() {
-        let baseUrl;
-        if (isNode) {
-            const currentConfig = await this._getConsulClient().config.getCurrent();
-            return `http://${currentConfig['com.flowfact.router.host']}/${this._serviceName}`;
-        } else {
-            const stage = this._getStage();
-            const account = stage === 'development' ? 'flowfact-dev' : 'flowfact-prod';
-            baseUrl = stage === 'local'
-                ? 'http://localhost:8080'
-                : `https://api.${stage}.cloudios.${account}.cloud`;
-        }
-        return `${baseUrl}/${this._serviceName}/${this._getVersionTag()}`;
-    }
-
-    private async _getCognitoToken() {
-        const cognitoToken = await CognitoService.getCognitoToken();
-        if (!cognitoToken) {
-            throw new Error('Could not get the cognito token. Are you not logged in?');
-        }
-
-        return cognitoToken;
     }
 
     public async invokeApi<T = any>(path: string, method: string = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<T>> {
@@ -102,7 +56,7 @@ export default abstract class APIClient {
         // add parameters to the url
         let url = (await this.buildAPIUrl()) + path;
         if (additionalParams.queryParams) {
-            const queryString = this.buildCanonicalQueryString(additionalParams.queryParams);
+            const queryString = this._buildCanonicalQueryString(additionalParams.queryParams);
             if (queryString && queryString !== '') {
                 url += queryString;
             }
@@ -153,7 +107,55 @@ export default abstract class APIClient {
         return client.request<T>(request);
     }
 
-    buildCanonicalQueryString(queryParams: ParamMap) {
+    public async buildAPIUrl() {
+        let baseUrl;
+        if (isNode) {
+            const currentConfig = await this._getConsulClient().config.getCurrent();
+            return `http://${currentConfig['com.flowfact.router.host']}/${this._serviceName}`;
+        } else {
+            const stage = this._getStage();
+            const account = stage === 'development' ? 'flowfact-dev' : 'flowfact-prod';
+            baseUrl = stage === 'local'
+                ? 'http://localhost:8080'
+                : `https://api.${stage}.cloudios.${account}.cloud`;
+        }
+        return `${baseUrl}/${this._serviceName}/${this._getVersionTag()}`;
+    }
+
+    private _getStage() {
+        return isNode ? (this.constructor as typeof APIClient).stageToUse : EnvironmentManagement.getStage();
+    }
+
+    private _getVersionTag() {
+        return isNode ? (this.constructor as typeof APIClient).apiVersionTag : EnvironmentManagement.getVersionTag();
+    }
+
+    private _getConsulClient(): ConsulClient {
+        if (!this._consulClient) {
+            // Dirty hack: Remove the protocol from the environment value. The Java Consul Client needs it, so the value
+            // might contain the protocol. The nodejs consul client does not accept it for whatever reason.
+            // @ts-ignore
+            const consulUrl = (process.env.CONSUL_CLIENT_HOST || 'consulclients.development.flowfact-dev.cloud').replace(/https?:\/\//, '');
+            // @ts-ignore
+            const consulPort = process.env.CONSUL_CLIENT_PORT || '8500';
+
+            // TODO figure out a way to get the name of the executing service here
+            this._consulClient = new ConsulClient(consulUrl, consulPort, 'api-services', this._getStage(), this._getVersionTag());
+        }
+
+        return this._consulClient!;
+    }
+
+    private async _getCognitoToken() {
+        const cognitoToken = await CognitoService.getCognitoToken();
+        if (!cognitoToken) {
+            throw new Error('Could not get the cognito token. Are you not logged in?');
+        }
+
+        return cognitoToken;
+    }
+
+    private _buildCanonicalQueryString(queryParams: ParamMap) {
         if (!queryParams) {
             return '';
         }

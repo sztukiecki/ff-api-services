@@ -1,16 +1,15 @@
 import * as WPAPI from 'wpapi';
 import { CognitoService } from '..';
-import StageConfiguration from '../util/StageConfiguration';
+import EnvironmentManagement, {StageTypes} from '../util/EnvironmentManagement';
 
 export class WordpressTemplateService {
+
     wordpressApis: any[] = [];
-
     wordpressUrl: string;
-
     cognitoToken?: string;
 
     init() {
-        let stage = StageConfiguration.getStageFromStore();
+        let stage = EnvironmentManagement.getStage();
         // let versionTag = getVersionTagFromStore();
 
         // There is no concept on how to implement the version into the beaverbuilder right now.
@@ -18,11 +17,11 @@ export class WordpressTemplateService {
 
         let domainName = 'flowfact-prod';
         switch (stage) {
-            case 'development':
+            case StageTypes.DEVELOPMENT:
                 domainName = 'flowfact-dev';
                 break;
-            case 'staging':
-            case 'production':
+            case StageTypes.STAGING:
+            case StageTypes.PRODUCTION:
             default:
                 domainName = 'flowfact-prod';
                 break;
