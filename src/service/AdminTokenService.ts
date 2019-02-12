@@ -6,6 +6,10 @@ export class AdminTokenService extends APIClient {
         super(APIMapping.adminTokenService);
     }
 
+    createOrReturnAdminToken(): Promise<AxiosResponse> {
+        return this.invokeApi('/createOrReturnAdminToken', 'GET');
+    }
+
     /**
      * Authenticate the user with the platformToken and returns the cognitoToken
      * @param {string} platformToken
