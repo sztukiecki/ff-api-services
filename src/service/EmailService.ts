@@ -1,4 +1,5 @@
 import { APIClient, APIMapping } from '../http';
+import {AxiosResponse} from "axios";
 
 export interface EmailServiceVerifyDnsEntry {
     valid: boolean;
@@ -24,6 +25,14 @@ export class EmailService extends APIClient {
 
     async verifyDomain(domain: string): Promise<EmailServiceVerifyResponse> {
         return (await this.invokeApi('/configuration/whitelabel/verify', 'POST', {domain})).data;
+    }
+
+    async fetchMailBody(s3Key: string): Promise<AxiosResponse<String>> {
+        return this.invokeApi('/body/html', 'GET', undefined, {
+            queryParams: {
+                s3Key: s3Key
+            }
+        });
     }
 }
 
