@@ -7,7 +7,7 @@ export class AdminTokenService extends APIClient {
     }
 
     createOrReturnAdminToken(): Promise<AxiosResponse> {
-        return this.invokeApi('/createOrReturnAdminToken', 'GET');
+        return this.invokeApi('/createOrReturnAdminToken', 'POST');
     }
 
     /**
