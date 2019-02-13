@@ -17,20 +17,24 @@ export class PropertyMarketingPhaseService extends APIClient {
         return this.invokeApi(`/${schemaId}/phases/${phaseName}`, 'GET');
     }
 
-    fetchEntitiesInPhase(phaseName: string): Promise<AxiosResponse<string[]>> {
-        return this.invokeApi(`/phases/${phaseName}/entities`, 'GET', undefined, {
+    fetchEntitiesInPhase(phaseName: string, page: number = 1, size: number = 50) {
+        return this.invokeApi<string[]>(`/phases/${phaseName}/entities`, 'GET', undefined, {
             queryParams: {
                 archived: 'true',
-                inactive: 'true'
+                inactive: 'true',
+                page,
+                size
             }
         });
     }
 
-    fetchEntitiesInPhaseAndSchema(phaseName: string, schemaId: string): Promise<AxiosResponse<string[]>> {
-        return this.invokeApi(`/phases/${phaseName}/entities/${schemaId}`, 'GET', undefined, {
+    fetchEntitiesInPhaseAndSchema(phaseName: string, schemaId: string, page: number = 1, size: number = 50) {
+        return this.invokeApi<string[]>(`/phases/${phaseName}/entities/${schemaId}`, 'GET', undefined, {
             queryParams: {
                 archived: 'true',
-                inactive: 'true'
+                inactive: 'true',
+                page,
+                size
             }
         });
     }
