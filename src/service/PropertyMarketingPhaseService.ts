@@ -62,11 +62,12 @@ export class PropertyMarketingPhaseService extends APIClient {
         return this.invokeApi(`/${schemaId}/${entityId}/switchToStep`, 'POST', {stepId, source});
     }
 
-    fetchPhaseStatistics(): Promise<AxiosResponse> {
+    fetchPhaseStatistics(maxCount: number = 50): Promise<AxiosResponse> {
         return this.invokeApi(`/phases/stats`, 'GET', undefined, {
             queryParams: {
                 archived: 'true',
-                inactive: 'true'
+                inactive: 'true',
+                size: maxCount
             }
         });
     }
