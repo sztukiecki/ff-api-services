@@ -30,7 +30,7 @@ export class EmailService extends APIClient {
     async fetchMailBody(s3Key: string): Promise<AxiosResponse<String>> {
         return this.invokeApi('/body/html', 'GET', undefined, {
             queryParams: {
-                s3Key: s3Key
+                s3key: s3Key
             }
         });
     }
