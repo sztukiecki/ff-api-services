@@ -92,8 +92,16 @@ export class FlywheelService extends APIClient {
     /**
      * Creates or updates a phase.
      */
-    async savePhase(phase: object): Promise<AxiosResponse> {
+    async createPhase(phase: object): Promise<AxiosResponse> {
         return this.invokeApi('/phases', 'POST', phase);
+    }
+
+    async updatePhase(phase: object): Promise<AxiosResponse> {
+        return this.invokeApi('/phases', 'PUT', phase, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
     }
 
     async deletePhase(phaseName: string): Promise<AxiosResponse> {
