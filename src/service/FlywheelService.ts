@@ -63,7 +63,7 @@ export class FlywheelService extends APIClient {
     }
 
     async fetchAllPhases() {
-        return this.invokeApi<Phase[]>('/phases', 'GET', );
+        return this.invokeApi<Phase[]>('/phases', 'GET');
     }
 
     /**
@@ -109,10 +109,18 @@ export class FlywheelService extends APIClient {
     }
 
     async updatePhases(flywheelName: string, phaseNames: string[]) {
-        return this.invokeApi<Flywheel>(`/flywheels/${flywheelName}`, 'PATCH', {
-            op: 'set-phases',
-            phaseNames: phaseNames
-        });
+        return this.invokeApi<Flywheel>(
+            `/flywheels/${flywheelName}`, 'PATCH',
+            [{
+                op: 'set-phases',
+                phaseNames: phaseNames
+            }],
+            {
+                headers: {
+                    'Content-Type': 'application/json-patch+json'
+                }
+            }
+        );
     }
 }
 
