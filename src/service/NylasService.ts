@@ -82,6 +82,15 @@ export class NylasService extends APIClient {
             }
         );
     }
+
+    /* UNDER DEVELOPMENT; DOES NOT WORK YET */
+    async deleteAccount(email: string): Promise<AxiosResponse> {
+        return await this.invokeApi('/account', 'DELETE', undefined, {
+            queryParams: {
+                email: email
+            }
+        });
+    }
 }
 
 export default new NylasService();
