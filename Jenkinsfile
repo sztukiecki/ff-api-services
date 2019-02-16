@@ -22,14 +22,14 @@ lock(resource: "${env.JOB_NAME}_${env.BRANCH_NAME}", inversePrecedence: false) {
             env.serviceName = "${env.JOB_NAME}".split('/')[1]
 
             stage('Checkout') {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '34cd7bb4-0b2a-4dd6-8ef0-8e03b619cf1c', name: 'origin', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://bb.flowfact.com/scm/' + projectName + '/' + serviceName + '.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github_admin_ffoperations', name: 'origin', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://github.com/FLOWFACTCorp/' + serviceName + '.git']]])
                 sh "mkdir pipeline"
                 dir('pipeline') {
-                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '34cd7bb4-0b2a-4dd6-8ef0-8e03b619cf1c', name: 'origin', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://bb.flowfact.com/scm/IN/jenkins-pipeline-steps.git']]])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github_admin_ffoperations', name: 'origin', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://github.com/FLOWFACTCorp/jenkins-pipeline-steps.git']]])
                 }
                 sh "mkdir tests"
                 dir('tests') {
-                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '34cd7bb4-0b2a-4dd6-8ef0-8e03b619cf1c', name: 'origin', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://bb.flowfact.com/scm/TT/jenkins-test-automation.git']]])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github_admin_ffoperations', name: 'origin', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://bb.flowfact.com/scm/TT/jenkins-test-automation.git']]])
                 }
             }
 
