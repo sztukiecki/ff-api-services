@@ -29,7 +29,7 @@ lock(resource: "${env.JOB_NAME}_${env.BRANCH_NAME}", inversePrecedence: false) {
                 }
                 sh "mkdir tests"
                 dir('tests') {
-                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github_admin_ffoperations', name: 'origin', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://bb.flowfact.com/scm/TT/jenkins-test-automation.git']]])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github_admin_ffoperations', name: 'origin', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://github.com/FLOWFACTCorp/jenkins-test-automation.git']]])
                 }
             }
 
