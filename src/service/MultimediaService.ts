@@ -27,6 +27,21 @@ export class MultimediaService extends APIClient {
     }
 
     /**
+     * Downloads a file
+     *
+     * @param fileUrl
+     * @returns
+     *      the url to request this file
+     */
+    download(fileUrl: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/download`, 'GET', undefined, {
+            queryParams: {
+                uri: fileUrl
+            }
+        });
+    }
+
+    /**
      * Deletes a file from S3
      *
      * @returns well.. 200 OK?
