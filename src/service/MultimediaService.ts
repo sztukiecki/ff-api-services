@@ -27,13 +27,13 @@ export class MultimediaService extends APIClient {
     }
 
     /**
-     * Downloads a file
+     * Fetches the file
      *
      * @param fileUrl
      * @returns
      *      the url to request this file
      */
-    download(fileUrl: string): Promise<AxiosResponse> {
+    fetchFile(fileUrl: string): Promise<AxiosResponse> {
         return this.invokeApi(`/download`, 'GET', undefined, {
             queryParams: {
                 uri: fileUrl
