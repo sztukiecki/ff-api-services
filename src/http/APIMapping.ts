@@ -1,20 +1,10 @@
-import { AxiosConfig } from './APIClient';
-
 export class APIService {
-    constructor(private readonly serviceName: string, private readonly configuration?: AxiosConfig) {
+    constructor(private readonly serviceName: string) {
         this.serviceName = serviceName;
-        this.configuration = configuration;
     }
 
     get name() {
         return this.serviceName;
-    }
-
-    /*
-	 * The Axios Configuration Object.
-	 */
-    get axiosConfiguration() {
-        return this.configuration;
     }
 }
 
