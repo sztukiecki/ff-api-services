@@ -122,6 +122,20 @@ export class FlywheelService extends APIClient {
             }
         );
     }
+
+    async exitPhase(transactionId: string) {
+        return this.invokeApi(
+            `/transactions/${transactionId}`, 'PATCH',
+            [{
+                op: 'exitPhase'
+            }],
+            {
+                headers: {
+                    'Content-Type': 'application/json-patch+json'
+                }
+            }
+        );
+    }
 }
 
 export default new FlywheelService();
