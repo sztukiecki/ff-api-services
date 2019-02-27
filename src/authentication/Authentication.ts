@@ -167,7 +167,7 @@ class Authentication {
 
     public async changePassword(oldPassword: string, newPassword: string): Promise<any> {
         const currentUser = await this.getCurrentUser();
-        if(currentUser) {
+        if (currentUser) {
             return Auth.changePassword(currentUser, oldPassword, newPassword);
         }
     }
@@ -193,7 +193,7 @@ class Authentication {
 
     public async getIdToken() {
         const currentSession = await this.getCurrentSession();
-        if(!currentSession) {
+        if (!currentSession) {
             throw new Error('Could not get the current session. Are you logged in?');
         }
 
@@ -207,7 +207,7 @@ class Authentication {
 
     public async getAccessToken() {
         const currentSession = await this.getCurrentSession();
-        if(!currentSession) {
+        if (!currentSession) {
             throw new Error('Could not get the current session. Are you logged in?');
         }
 
