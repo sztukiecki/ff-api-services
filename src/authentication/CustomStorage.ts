@@ -1,4 +1,4 @@
-import store from 'store';
+import * as store from 'store';
 
 /**
  * This storage can be used from node and other javascript products.

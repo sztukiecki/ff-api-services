@@ -14,7 +14,7 @@
   },
   "scripts": {
     "build-package-cjs": "tsc",
-    "build-package-esm": "tsc --project tsconfig.json",
+    "build-package-esm": "tsc --project tsconfig.esm.json",
     "rebuild-package-cjs": "rimraf lib/ && npm run build-package-cjs",
     "rebuild-package-esm": "rimraf es/ && npm run build-package-esm",
     "prepare": "npm run rebuild-package-cjs && npm run rebuild-package-esm",
