@@ -3,7 +3,6 @@ import AdminTokenService from './service/AdminTokenService';
 import AgentRecommendationService from './service/AgentRecommendationService';
 import AppointmentBookingService from './service/AppointmentBookingService';
 import CognitoClientService from './service/CognitoClientService';
-import CognitoService from './service/CognitoService';
 import CommissionCalculationService from './service/CommissionCalculationService';
 import CompanyService from './service/CompanyService';
 import ContactService from './service/ContactService';
@@ -47,16 +46,19 @@ import TemplateService from './service/TemplateService';
 import TrialLicenseService from './service/TrialLicenseService';
 import UserService from './service/UserService';
 import ViewDefinitionService from './service/ViewDefinitionService';
-import WordpressTemplateService from './service/WordpressTemplateService';
 import InquiryCreatedMessage from './util/searchprofile-service/InquiryCreatedMessage';
 import EnvironmentManagement, { StoreKeys, VersionTagTypes, StageTypes } from './util/EnvironmentManagement';
+import Authentication from './authentication/Authentication';
+
+export {
+    Authentication
+};
 
 export {
     AdminTokenService,
     AgentRecommendationService,
     AppointmentBookingService,
     CognitoClientService,
-    CognitoService,
     CommissionCalculationService,
     CompanyService,
     ContactService,
@@ -100,8 +102,7 @@ export {
     TemplateService,
     TrialLicenseService,
     UserService,
-    ViewDefinitionService,
-    WordpressTemplateService
+    ViewDefinitionService
 };
 
 // types only

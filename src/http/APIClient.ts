@@ -1,27 +1,13 @@
 import ConsulClient from '@flowfact/consul-client';
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
-import * as axiosRetry from 'axios-retry';
+import axios, { AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
 import * as isNode from 'detect-node';
 import { stringify } from 'qs';
-import CognitoService from '../service/CognitoService';
+import Authentication from '../authentication/Authentication';
+import EnvironmentManagement, { StageTypes } from '../util/EnvironmentManagement';
 import Interceptor from '../util/Interceptor';
-import EnvironmentManagement from '../util/EnvironmentManagement';
 import { APIService } from './APIMapping';
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
-
-export interface AxiosConfig {
-    'axios-retry': AxiosRetryConfig;
-}
-
-export interface AxiosRetryConfig {
-    retries?: number;
-}
-
-export interface APIClientConfig {
-    serviceName: string;
-    axios?: AxiosConfig;
-}
 
 export interface APIClientAdditionalParams {
     headers?: string | ParamMap;
@@ -32,20 +18,11 @@ export interface APIClientAdditionalParams {
 export default abstract class APIClient {
     userId: string;
 
-    static stageToUse: string;
-    static apiVersionTag: string;
-
     private _consulClient?: ConsulClient;
-    private _axiosConfig?: AxiosConfig;
     private _serviceName: string;
 
     constructor(service: APIService) {
-        this._axiosConfig = service.axiosConfiguration;
         this._serviceName = service.name;
-    }
-
-    public withUserId(userId: string): this {
-        return Object.assign(Object.create(Object.getPrototypeOf(this)), this, {userId});
     }
 
     public async invokeApi<T = any>(path: string, method: string = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<T>> {
@@ -66,9 +43,14 @@ export default abstract class APIClient {
         if (!path.startsWith('/public')) {
             // setup the request
             if (isNode && this.userId) {
-                userIdentification = {userId: this.userId};
+                userIdentification = {
+                    userId: this.userId
+                };
             } else if (!isNode) {
-                userIdentification = {cognitoToken: await this._getCognitoToken()};
+                userIdentification = {
+                    cognitoToken: (await Authentication.getCurrentSession())!.getIdToken()!.getJwtToken(),
+                    'x-cognito-access-token': (await Authentication.getCurrentSession())!.getAccessToken()!.getJwtToken()
+                };
             }
         }
 
@@ -81,18 +63,6 @@ export default abstract class APIClient {
         };
 
         const client = axios.create();
-        const axiosConfiguration = this._axiosConfig;
-        if (axiosConfiguration) {
-            if (axiosConfiguration['axios-retry']) {
-                axiosRetry(client, {
-                    retries: axiosConfiguration['axios-retry'].retries,
-                    retryCondition: (error: AxiosError) => {
-                        return Boolean(error && error.response && error.response.status >= 500 && method !== 'POST');
-                    }
-                });
-            }
-        }
-
         for (const interceptor of Interceptor.interceptors) {
             if (interceptor.type === 'request') {
                 axios.interceptors.request.use(interceptor.method);
@@ -108,26 +78,17 @@ export default abstract class APIClient {
     }
 
     public async buildAPIUrl() {
-        let baseUrl;
         if (isNode) {
             const currentConfig = await this._getConsulClient().config.getCurrent();
             return `http://${currentConfig['com.flowfact.router.host']}/${this._serviceName}`;
-        } else {
-            const stage = this._getStage();
-            const account = stage === 'development' ? 'flowfact-dev' : 'flowfact-prod';
-            baseUrl = stage === 'local'
-                ? 'http://localhost:8080'
-                : `https://api.${stage}.cloudios.${account}.cloud`;
         }
-        return `${baseUrl}/${this._serviceName}/${this._getVersionTag()}`;
-    }
 
-    private _getStage() {
-        return isNode ? (this.constructor as typeof APIClient).stageToUse : EnvironmentManagement.getStage();
-    }
-
-    private _getVersionTag() {
-        return isNode ? (this.constructor as typeof APIClient).apiVersionTag : EnvironmentManagement.getVersionTag();
+        const stage = EnvironmentManagement.getStage();
+        const account = stage === StageTypes.DEVELOPMENT ? 'flowfact-dev' : 'flowfact-prod';
+        const baseUrl = stage === StageTypes.LOCAL
+            ? 'http://localhost:8080'
+            : `https://api.${stage}.cloudios.${account}.cloud`;
+        return `${baseUrl}/${this._serviceName}/${EnvironmentManagement.getVersionTag()}`;
     }
 
     private _getConsulClient(): ConsulClient {
@@ -140,19 +101,10 @@ export default abstract class APIClient {
             const consulPort = process.env.CONSUL_CLIENT_PORT || '8500';
 
             // TODO figure out a way to get the name of the executing service here
-            this._consulClient = new ConsulClient(consulUrl, consulPort, 'api-services', this._getStage(), this._getVersionTag());
+            this._consulClient = new ConsulClient(consulUrl, consulPort, 'api-services', EnvironmentManagement.getStage(), EnvironmentManagement.getVersionTag());
         }
 
         return this._consulClient!;
-    }
-
-    private async _getCognitoToken() {
-        const cognitoToken = await CognitoService.getCognitoToken();
-        if (!cognitoToken) {
-            throw new Error('Could not get the cognito token. Are you not logged in?');
-        }
-
-        return cognitoToken;
     }
 
     private _buildCanonicalQueryString(queryParams: ParamMap) {
@@ -160,11 +112,6 @@ export default abstract class APIClient {
             return '';
         }
 
-        return stringify(queryParams, { addQueryPrefix: true });
+        return stringify(queryParams, {addQueryPrefix: true});
     }
-}
-
-if (isNode) {
-    APIClient.stageToUse = process.env.STAGE_NAME || 'development';
-    APIClient.apiVersionTag = APIClient.stageToUse === 'development' ? 'latest' : 'stable';
 }
