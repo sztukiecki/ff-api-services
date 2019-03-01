@@ -47,10 +47,18 @@ export default abstract class APIClient {
                     userId: this.userId
                 };
             } else if (!isNode) {
-                userIdentification = {
-                    cognitoToken: (await Authentication.getCurrentSession())!.getIdToken()!.getJwtToken(),
-                    'x-cognito-access-token': (await Authentication.getCurrentSession())!.getAccessToken()!.getJwtToken()
-                };
+                const supportToken = localStorage.getItem('support_token') || '';
+
+                if (supportToken.length === 0) {
+                    userIdentification = {
+                        cognitoToken: (await Authentication.getCurrentSession())!.getIdToken()!.getJwtToken(),
+                        'x-cognito-access-token': (await Authentication.getCurrentSession())!.getAccessToken()!.getJwtToken()
+                    };
+                } else {
+                    userIdentification = {
+                        'x-ff-support-token': supportToken
+                    };
+                }
             }
         }
 
