@@ -1,120 +1,54 @@
-import APIClient from './http/APIClient';
-import AdminTokenService from './service/AdminTokenService';
-import AgentRecommendationService from './service/AgentRecommendationService';
-import AppointmentBookingService from './service/AppointmentBookingService';
-import CognitoClientService from './service/CognitoClientService';
-import CommissionCalculationService from './service/CommissionCalculationService';
-import CompanyService from './service/CompanyService';
-import ContactService from './service/ContactService';
-import CsvToEntityImporterService from './service/CsvToEntityImporterService';
-import CustomerLegitimationArchiveService from './service/CustomerLegitimationArchiveService';
-import DynamicLayoutService from './service/DynamicLayoutService';
-import EmailService from './service/EmailService';
-import EntityService from './service/EntityService';
-import FlowfactExportInternalService from './service/FlowfactExportInternalService';
-import FlywheelService from './service/FlywheelService';
-import FormService from './service/FormService';
-import FullTextSearchService from './service/FullTextSearchService';
-import FunnelService from './service/FunnelService';
-import GDPRService from './service/GDPRService';
-import GeolocationService from './service/GeolocationService';
-import HistoryModuleService from './service/HistoryModuleService';
-import InquiryService from './service/InquiryService';
-import InteractiveExposeDeliveryService from './service/InteractiveExposeDeliveryService';
-import InteractiveExposeService from './service/InteractiveExposeService';
-import InteractiveExposeStatisticsService from './service/InteractiveExposeStatisticsService';
-import MatchmakingService from './service/MatchmakingService';
-import ModuleService from './service/ModuleService';
-import MultimediaService from './service/MultimediaService';
-import NylasService from './service/NylasService';
-import Office365AuthenticationService from './service/Office365AuthenticationService';
-import OnboardingService from './service/OnboardingService';
-import PortalManagementService from './service/PortalManagementService';
-import PresetService from './service/PresetService';
-import PropertyMarketingPhaseService from './service/PropertyMarketingPhaseService';
-import RelogService, { FFAdditionalElkData, FFElkData } from './service/RelogService';
-import SampleDataService from './service/SampleDataService';
-import SchemaService from './service/SchemaService';
-import SearchProfileService from './service/SearchProfileService';
-import SearchService from './service/SearchService';
-import SlackIntegrationService from './service/SlackIntegrationService';
-import SprengnetterService from './service/SprengnetterService';
-import TaggingService from './service/TaggingService';
-import TagsService from './service/TagService';
-import TaskService from './service/TaskService';
-import TemplateService from './service/TemplateService';
-import TrialLicenseService from './service/TrialLicenseService';
-import UserService from './service/UserService';
-import ViewDefinitionService from './service/ViewDefinitionService';
-import InquiryCreatedMessage from './util/searchprofile-service/InquiryCreatedMessage';
-import EnvironmentManagement, { StoreKeys, VersionTagTypes, StageTypes } from './util/EnvironmentManagement';
-import Authentication from './authentication/Authentication';
+export { default as APIClient } from './http/APIClient';
+export { default as AdminTokenService } from './service/AdminTokenService';
+export { default as AgentRecommendationService } from './service/AgentRecommendationService';
+export { default as AppointmentBookingService } from './service/AppointmentBookingService';
+export { default as CognitoClientService } from './service/CognitoClientService';
+export { default as CommissionCalculationService } from './service/CommissionCalculationService';
+export { default as CompanyService } from './service/CompanyService';
+export { default as ContactService } from './service/ContactService';
+export { default as CsvToEntityImporterService } from './service/CsvToEntityImporterService';
+export { default as CustomerLegitimationArchiveService } from './service/CustomerLegitimationArchiveService';
+export { default as DynamicLayoutService } from './service/DynamicLayoutService';
+export { default as EmailService } from './service/EmailService';
+export { default as EntityService } from './service/EntityService';
+export { default as FlowfactExportInternalService } from './service/FlowfactExportInternalService';
+export { default as FlywheelService } from './service/FlywheelService';
+export { default as FormService } from './service/FormService';
+export { default as FullTextSearchService } from './service/FullTextSearchService';
+export { default as FunnelService } from './service/FunnelService';
+export { default as GDPRService } from './service/GDPRService';
+export { default as GeolocationService } from './service/GeolocationService';
+export { default as HistoryModuleService } from './service/HistoryModuleService';
+export { default as InquiryService } from './service/InquiryService';
+export { default as InteractiveExposeDeliveryService } from './service/InteractiveExposeDeliveryService';
+export { default as InteractiveExposeService } from './service/InteractiveExposeService';
+export { default as InteractiveExposeStatisticsService } from './service/InteractiveExposeStatisticsService';
+export { default as MatchmakingService } from './service/MatchmakingService';
+export { default as ModuleService } from './service/ModuleService';
+export { default as MultimediaService } from './service/MultimediaService';
+export { default as NylasService } from './service/NylasService';
+export { default as Office365AuthenticationService } from './service/Office365AuthenticationService';
+export { default as OnboardingService } from './service/OnboardingService';
+export { default as PortalManagementService } from './service/PortalManagementService';
+export { default as PresetService } from './service/PresetService';
+export { default as PropertyMarketingPhaseService } from './service/PropertyMarketingPhaseService';
+export { default as RelogService } from './service/RelogService';
+export { default as SampleDataService } from './service/SampleDataService';
+export { default as SchemaService } from './service/SchemaService';
+export { default as SearchProfileService } from './service/SearchProfileService';
+export { default as SearchService } from './service/SearchService';
+export { default as SlackIntegrationService } from './service/SlackIntegrationService';
+export { default as SprengnetterService } from './service/SprengnetterService';
+export { default as TaggingService } from './service/TaggingService';
+export { default as TagsService } from './service/TagService';
+export { default as TaskService } from './service/TaskService';
+export { default as TemplateService } from './service/TemplateService';
+export { default as TrialLicenseService } from './service/TrialLicenseService';
+export { default as UserService } from './service/UserService';
+export { default as ViewDefinitionService } from './service/ViewDefinitionService';
+export { default as InquiryCreatedMessage } from './util/searchprofile-service/InquiryCreatedMessage';
+export { default as EnvironmentManagement } from './util/EnvironmentManagement';
+export { default as Authentication } from './authentication/Authentication';
 
-export {
-    Authentication
-};
-
-export {
-    AdminTokenService,
-    AgentRecommendationService,
-    AppointmentBookingService,
-    CognitoClientService,
-    CommissionCalculationService,
-    CompanyService,
-    ContactService,
-    CsvToEntityImporterService,
-    CustomerLegitimationArchiveService,
-    DynamicLayoutService,
-    EmailService,
-    EntityService,
-    FlowfactExportInternalService,
-    FlywheelService,
-    FormService,
-    FullTextSearchService,
-    FunnelService,
-    GDPRService,
-    GeolocationService,
-    HistoryModuleService,
-    InquiryCreatedMessage,
-    InquiryService,
-    InteractiveExposeDeliveryService,
-    InteractiveExposeService,
-    InteractiveExposeStatisticsService,
-    MatchmakingService,
-    ModuleService,
-    MultimediaService,
-    NylasService,
-    Office365AuthenticationService,
-    OnboardingService,
-    PortalManagementService,
-    PresetService,
-    PropertyMarketingPhaseService,
-    RelogService,
-    SampleDataService,
-    SchemaService,
-    SearchProfileService,
-    SearchService,
-    SlackIntegrationService,
-    SprengnetterService,
-    TaggingService,
-    TagsService,
-    TaskService,
-    TemplateService,
-    TrialLicenseService,
-    UserService,
-    ViewDefinitionService
-};
-
-// types only
-export {
-    FFElkData,
-    FFAdditionalElkData
-};
-
-export {
-    APIClient,
-    StoreKeys,
-    VersionTagTypes,
-    StageTypes,
-    EnvironmentManagement
-};
+export * from './util/EnvironmentManagement';
+export * from './service/RelogService';
