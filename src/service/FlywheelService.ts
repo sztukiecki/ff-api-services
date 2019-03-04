@@ -159,11 +159,27 @@ export class FlywheelService extends APIClient {
         );
     }
 
-    async exitPhase(transactionId: string) {
+    async exitPhase(transactionId: number) {
         return this.invokeApi(
             `/transactions/${transactionId}`, 'PATCH',
             [{
                 op: 'exitPhase'
+            }],
+            {
+                headers: {
+                    'Content-Type': 'application/json-patch+json'
+                }
+            }
+        );
+    }
+
+    async linkTransaction(transactionId: number, entityId: string, targetPhase: number) {
+        return this.invokeApi(
+            `/transactions/${transactionId}`, 'PATCH',
+            [{
+                op: 'linkTransaction',
+                entityId,
+                targetPhase
             }],
             {
                 headers: {
