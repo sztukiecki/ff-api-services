@@ -3,6 +3,36 @@ import Phase from '../models/Phase';
 import Flywheel from '../models/Flywheel';
 import { AxiosResponse } from 'axios';
 
+type Filter = ExcludeStepsFilter |
+    ExcludeKanbansFilter |
+    SchemaIdFilter |
+    ExcludeCustomerFilter |
+    ExcludeMasterFilter;
+
+interface ExcludeStepsFilter {
+    type: 'EXCLUDE_PHASE_STEPS';
+}
+
+interface ExcludeKanbansFilter {
+    type: 'EXCLUDE_PHASE_NON_STEPS';
+}
+
+interface SchemaIdFilter {
+    type: 'MATCH_SCHEMA_ID';
+    data: {
+        schemaId: string;
+    };
+}
+
+interface ExcludeCustomerFilter {
+    type: 'EXCLUDE_CUSTOMER';
+}
+
+interface ExcludeMasterFilter {
+    type: 'EXCLUDE_MASTER';
+}
+
+
 export class FlywheelService extends APIClient {
 
     constructor() {
@@ -62,8 +92,14 @@ export class FlywheelService extends APIClient {
         });
     }
 
-    async fetchAllPhases() {
-        return this.invokeApi<Phase[]>('/phases', 'GET');
+    async fetchAllPhases(filters?: Filter[]) {
+        const params: any = {};
+        if (filters) {
+            params.queryParams = {
+                filters: JSON.stringify(filters)
+            };
+        }
+        return this.invokeApi<Phase[]>('/phases', 'GET', undefined, params);
     }
 
     /**
