@@ -6,7 +6,7 @@ export class SampleDataService extends APIClient {
         super(APIMapping.sampleDataService);
     }
 
-    importSampleData(bundleName: string = 'Basic'): Promise<AxiosResponse> {
+    importSampleData(bundleName: string = 'All'): Promise<AxiosResponse> {
         const queryParams: any = {
             bundleName: bundleName
         };

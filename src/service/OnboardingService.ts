@@ -14,9 +14,10 @@ export class OnboardingService extends APIClient {
         return this.invokeApi('/customer', 'POST');
     }
 
-    setupAccount(bundleName: string): Promise<AxiosResponse> {
+    setupAccount(bundleName: string, withEntities: boolean = true): Promise<AxiosResponse> {
         const queryParams: any = {
-            bundleName: bundleName
+            bundleName: bundleName,
+            withEntities: withEntities.toString()
         };
 
         return this.invokeApi('/customer/setup', 'POST', undefined, {queryParams});
