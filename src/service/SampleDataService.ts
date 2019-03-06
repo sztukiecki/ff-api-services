@@ -21,7 +21,9 @@ export class SampleDataService extends APIClient {
     }
 
     importSampleDataBatch(bundles: ImportBundle[]): Promise<AxiosResponse> {
-        return this.invokeApi('/batchimport', 'POST', bundles);
+        return this.invokeApi('/batchimport', 'POST', {
+            bundles: bundles
+        });
     }
 
     fetchBundles(scope: 'FLOWFACT' | 'CUSTOM' = 'FLOWFACT'): Promise<AxiosResponse> {
