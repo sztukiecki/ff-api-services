@@ -21,9 +21,21 @@ export class EntityService extends APIClient {
         return this.invokeApi(`/schemas/${schemaId}`, 'POST', entity || {});
     }
 
-    searchEntity(index: string, viewName: string, flowdsl?: Flowdsl, page: number = 1, size: number = 10) {
+    searchEntity(index: string, viewName: string, flowdsl?: Flowdsl, page: number = 1, size: number = 20) {
         const queryParams: ParamList = {
             page,
+            size,
+            viewName
+        };
+
+        return this.invokeApi<SearchResult<EntityView>>(`/search/schemas/${index}`, 'POST', flowdsl, {
+            queryParams: queryParams
+        });
+    }
+
+    fetchEntitiesVirtualized(index: string, viewName: string, flowdsl?: Flowdsl, offset: number = 0, size: number = 20) {
+        const queryParams: ParamList = {
+            offset,
             size,
             viewName
         };
