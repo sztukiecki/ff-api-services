@@ -13,6 +13,14 @@ export class SampleDataService extends APIClient {
 
         return this.invokeApi('/import', 'POST', undefined, {queryParams});
     }
+
+    fetchBundles(scope: 'FLOWFACT' | 'CUSTOM' = 'FLOWFACT') {
+        return this.invokeApi('/bundles', 'GET', undefined, {
+            queryParams: {
+                scope: scope
+            }
+        });
+    }
 }
 
 export default new SampleDataService();
