@@ -1,6 +1,12 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
+interface ImportBundle {
+    bundleName: string;
+    scope: string;
+    withEntities: boolean;
+}
+
 export class SampleDataService extends APIClient {
     constructor() {
         super(APIMapping.sampleDataService);
@@ -14,7 +20,11 @@ export class SampleDataService extends APIClient {
         return this.invokeApi('/import', 'POST', undefined, {queryParams});
     }
 
-    fetchBundles(scope: 'FLOWFACT' | 'CUSTOM' = 'FLOWFACT') {
+    importSampleDataBatch(bundles: ImportBundle[]): Promise<AxiosResponse> {
+        return this.invokeApi('/batchimport', 'POST', bundles);
+    }
+
+    fetchBundles(scope: 'FLOWFACT' | 'CUSTOM' = 'FLOWFACT'): Promise<AxiosResponse> {
         return this.invokeApi('/bundles', 'GET', undefined, {
             queryParams: {
                 scope: scope
