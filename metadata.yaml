@@ -1,0 +1,4 @@
+teams:
+  - developer
+type: library
+build: npm
