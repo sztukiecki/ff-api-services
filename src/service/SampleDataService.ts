@@ -20,6 +20,14 @@ export class SampleDataService extends APIClient {
         return this.invokeApi('/import', 'POST', undefined, {queryParams});
     }
 
+    removeSampleData(bundleName: string = 'All'): Promise<AxiosResponse> {
+        const queryParams: any = {
+            bundleName: bundleName
+        };
+
+        return this.invokeApi('/remove', 'DELETE', undefined, {queryParams});
+    }
+
     importSampleDataBatch(bundles: ImportBundle[]): Promise<AxiosResponse> {
         return this.invokeApi('/batchimport', 'POST', {
             bundles: bundles
