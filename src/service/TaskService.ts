@@ -11,7 +11,7 @@ export class TaskService extends APIClient {
     }
 
     getTaskForEntityById(entityId: string) {
-        return this.invokeApi(`/task/forEntity/${entityId}`, 'GET');
+        return this.invokeApi(`/task/for-entity/${entityId}`, 'GET');
     }
 
     deleteTask(id: string) {
