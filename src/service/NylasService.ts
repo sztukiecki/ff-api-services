@@ -60,10 +60,11 @@ export class NylasService extends APIClient {
         return await this.invokeApi('/config', 'GET');
     }
 
-    async getRegistrationUrl(email: string): Promise<AxiosResponse<RegistrationUrl>> {
+    async getRegistrationUrl(email: string, callbackUrl?: string): Promise<AxiosResponse<RegistrationUrl>> {
         return await this.invokeApi('/registration-url', 'GET', undefined, {
             queryParams: {
-                email: email
+                email: email,
+                callbackUrl: callbackUrl
             }
         });
     }
