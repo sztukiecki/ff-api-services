@@ -13,6 +13,7 @@ export interface APIClientAdditionalParams {
     headers?: string | ParamMap;
     queryParams?: ParamMap;
     cancelToken?: CancelToken;
+    [key: string]: any;
 }
 
 export default abstract class APIClient {
@@ -30,10 +31,12 @@ export default abstract class APIClient {
             throw new Error('missing slash at the beginning');
         }
 
+        const {queryParams, headers, cancelToken, ...others}: any = additionalParams || {};
+
         // add parameters to the url
         let url = (await this.buildAPIUrl()) + path;
-        if (additionalParams.queryParams) {
-            const queryString = this._buildCanonicalQueryString(additionalParams.queryParams);
+        if (queryParams) {
+            const queryString = this._buildCanonicalQueryString(queryParams);
             if (queryString && queryString !== '') {
                 url += queryString;
             }
@@ -65,9 +68,10 @@ export default abstract class APIClient {
         let request: AxiosRequestConfig = {
             method: method,
             url: url,
-            headers: Object.assign({}, userIdentification, additionalParams.headers || {}),
+            headers: Object.assign({}, userIdentification, headers || {}),
             data: body,
-            cancelToken: additionalParams.cancelToken
+            cancelToken: cancelToken,
+            ...others
         };
 
         const client = axios.create();

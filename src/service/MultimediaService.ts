@@ -37,7 +37,11 @@ export class MultimediaService extends APIClient {
         return this.invokeApi(`/download`, 'GET', undefined, {
             queryParams: {
                 uri: fileUrl
-            }
+            },
+            headers: {
+                Accept: 'application/octet-stream'
+            },
+            responseType: 'arraybuffer'
         });
     }
 
