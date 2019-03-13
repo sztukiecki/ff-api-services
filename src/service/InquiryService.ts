@@ -12,6 +12,10 @@ export class InquiryService extends APIClient {
         return this.invokeApi(`/inquiry?page=${page}&size=${size}`, 'GET');
     }
 
+    linkEstateAndStartAutomation(inquiryId: string, estateId: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/${inquiryId}/setEstate/${estateId}`, 'POST');
+    }
+
 }
 
 export default new InquiryService();
