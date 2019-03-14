@@ -21,6 +21,10 @@ export class EntityService extends APIClient {
         return this.invokeApi(`/schemas/${schemaId}`, 'POST', entity || {});
     }
 
+    stringifyEntity(schemaId: string, entityId: string, viewId: string = 'EntityRelationView'): Promise<AxiosResponse> {
+        return this.invokeApi(`/views/${viewId}/schemas/${schemaId}/entities/${entityId}/stringify`);
+    }
+
     searchEntity(index: string, viewName: string, flowdsl?: Flowdsl, page: number = 1, size: number = 20) {
         const queryParams: ParamList = {
             page,
