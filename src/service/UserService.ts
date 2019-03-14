@@ -69,6 +69,36 @@ export class UserService extends APIClient {
             }
         });
     }
+
+    activateUser(userId: string) {
+        return this.invokeApi(
+            `/users/${userId}`,
+            'PATCH',
+            [{
+                op: 'activate'
+            }],
+            {
+                headers: {
+                    'Content-Type': 'application/json-patch+json'
+                }
+            }
+        );
+    }
+
+    deactivateUser(userId: string) {
+        return this.invokeApi(
+            `/users/${userId}`,
+            'PATCH',
+            [{
+                op: 'deactivate'
+            }],
+            {
+                headers: {
+                    'Content-Type': 'application/json-patch+json'
+                }
+            }
+        );
+    }
 }
 
 export default new UserService();
