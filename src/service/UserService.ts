@@ -32,8 +32,18 @@ export class UserService extends APIClient {
         return this.invokeApi('/users/picture', 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
     }
 
+    postImageForUser(userId: string, image: Blob): Promise<AxiosResponse<any>> {
+        const formData = new FormData();
+        formData.append('contactPicture', image, 'contactPicture');
+        return this.invokeApi(`/users/${userId}/picture`, 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
+    }
+
     updateUser(user: User): Promise<AxiosResponse<any>> {
         return this.invokeApi('/users', 'PUT', user);
+    }
+
+    updateUserById(userId: string, user: User): Promise<AxiosResponse<any>> {
+        return this.invokeApi(`/users/${userId}`, 'PUT', user);
     }
 
     isUserAlreadyKnown(aliasMailAddress: string): Promise<AxiosResponse<any>> {
