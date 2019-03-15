@@ -25,6 +25,11 @@ export default abstract class APIClient {
         this._serviceName = service.name;
     }
 
+    public withUserId(userId: string): this {
+        this.userId = userId;
+        return this;
+    }
+
     public async invokeApi<T = any>(path: string, method: string = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<T>> {
         if (!path.startsWith('/')) {
             throw new Error('missing slash at the beginning');
@@ -91,7 +96,7 @@ export default abstract class APIClient {
     public async buildAPIUrl() {
         if (isNode) {
             const currentConfig = await this._getConsulClient().config.getCurrent();
-            return `http://${currentConfig['com.flowfact.router.host']}/${this._serviceName}`;
+            return `https://${currentConfig['com.flowfact.router.host']}/${this._serviceName}`;
         }
 
         const stage = EnvironmentManagement.getStage();
