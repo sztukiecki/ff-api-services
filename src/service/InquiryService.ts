@@ -13,7 +13,7 @@ export class InquiryService extends APIClient {
     }
 
     linkEstateAndStartAutomation(inquiryId: string, estateId: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/${inquiryId}/setEstate/${estateId}`, 'POST');
+        return this.invokeApi(`/inquiry/${inquiryId}/setEstate/${estateId}`, 'POST');
     }
 
 }
