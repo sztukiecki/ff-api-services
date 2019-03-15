@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from '../http';
-import { AxiosResponse } from 'axios';
+import { AxiosPromise, AxiosResponse } from 'axios';
 
 interface ImportBundle {
     bundleName: string;
@@ -20,7 +20,7 @@ export class SampleDataService extends APIClient {
         return this.invokeApi('/import', 'POST', undefined, {queryParams});
     }
 
-    removeSampleData(bundleName: string = 'All'): Promise<AxiosResponse> {
+    removeSampleData(bundleName: string = 'All'): AxiosPromise {
         const queryParams: any = {
             bundleName: bundleName
         };
