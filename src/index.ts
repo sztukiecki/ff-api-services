@@ -49,6 +49,7 @@ export { default as ViewDefinitionService } from './service/ViewDefinitionServic
 export { default as InquiryCreatedMessage } from './util/searchprofile-service/InquiryCreatedMessage';
 export { default as EnvironmentManagement } from './util/EnvironmentManagement';
 export { default as Authentication } from './authentication/Authentication';
+export { default as OmniChannelService } from './service/OmniChannelService';
 
 export * from './util/EnvironmentManagement';
 export * from './service/RelogService';
