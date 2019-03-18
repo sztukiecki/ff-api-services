@@ -22,6 +22,10 @@ export class CognitoClientService extends APIClient {
             }
         });
     }
+
+    resetPassword(aliasMailAddress: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/users/password`, 'DELETE', {username: aliasMailAddress});
+    }
 }
 
 export default new CognitoClientService();
