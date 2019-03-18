@@ -54,7 +54,7 @@ export default abstract class APIClient {
                     userId: this.userId
                 };
             } else if (!isNode) {
-                const supportToken = localStorage.getItem('support_token') || '';
+                const supportToken = localStorage.getItem('flowfact.support.token') || '';
 
                 if (supportToken.length === 0) {
                     userIdentification = {
