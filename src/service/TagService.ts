@@ -6,20 +6,36 @@ export class TagService extends APIClient {
         super(APIMapping.tagService);
     }
 
-    getAllTags() {
-        return this.invokeApi('/tags', 'GET').then(s => s.data);
+    /**
+     * TODO: Please comment this method
+     */
+    async fetchAllTags() {
+        return await this.invokeApi('/tags', 'GET').then(s => s.data);
     }
 
-    createTag(body: any) {
-        return this.invokeApi('/tags', 'POST', body).then(s => s.data);
+    /**
+     * TODO: Please comment this method
+     * @param body
+     */
+    async createTag(body: any) {
+        return await this.invokeApi('/tags', 'POST', body).then(s => s.data);
     }
 
-    getTagById(id: string) {
-        return this.invokeApi(`/tags/${id}`, 'GET').then(s => s.data);
+    /**
+     * TODO: Please comment this method
+     * @param id
+     */
+    async fetchTagById(id: string) {
+        return await this.invokeApi(`/tags/${id}`, 'GET').then(s => s.data);
     }
 
-    updateTag(body: any, id: string) {
-        return this.invokeApi(`/tags/${id}`, 'PUT', body).then(s => s.data);
+    /**
+     * TODO: Please comment this method
+     * @param body
+     * @param id
+     */
+    async updateTag(body: any, id: string) {
+        return await this.invokeApi(`/tags/${id}`, 'PUT', body).then(s => s.data);
     }
 }
 

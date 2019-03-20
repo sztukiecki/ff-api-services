@@ -7,7 +7,12 @@ export class GeolocationService extends APIClient {
         super(APIMapping.geolocationService);
     }
 
-    getAutocompletionResults(query: string, cancelToken: CancelToken) {
+    /**
+     * TODO: Please comment this method
+     * @param query
+     * @param cancelToken
+     */
+    fetchAutocompletionResults(query: string, cancelToken: CancelToken) {
         const additionalParams = {
             queryParams: {
                 q: query
@@ -17,7 +22,11 @@ export class GeolocationService extends APIClient {
         return this.invokeApi('/search', 'GET', undefined, additionalParams).then(s => s.data);
     }
 
-    getBestMatchCoordinates(query: string) {
+    /**
+     * TODO: Please comment this method
+     * @param query
+     */
+    fetchBestMatchCoordinates(query: string) {
         const additionalParams = {
             queryParams: {
                 q: query

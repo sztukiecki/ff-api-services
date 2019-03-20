@@ -7,7 +7,11 @@ export class FlowfactExportInternalService extends APIClient {
         super(APIMapping.flowfactExporterInternalService);
     }
 
-    createAdminUser(createAdminTokenRequest: any): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param createAdminTokenRequest
+     */
+    async createAdminUser(createAdminTokenRequest: any): Promise<AxiosResponse> {
         return this.invokeApi('/adminUser', 'POST', createAdminTokenRequest);
     }
 }

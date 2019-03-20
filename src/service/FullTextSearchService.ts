@@ -10,8 +10,13 @@ export class FullTextSearchService extends APIClient {
 
     /**
      * Get the full search information by id.
+     * @param schemaName
+     * @param searchTerm
+     * @param page
+     * @param size
+     * @param params
      */
-    search(schemaName: string, searchTerm: string, page: number = 1, size?: number, params: ParamList = {}) {
+    async search(schemaName: string, searchTerm: string, page: number = 1, size?: number, params: ParamList = {}) {
         return this.invokeApi<SearchResult<Entity>>('/search/' + schemaName, 'GET', '', {
             queryParams: {
                 page,

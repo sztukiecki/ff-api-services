@@ -7,7 +7,12 @@ export class DynamicLayoutService extends APIClient {
         super(APIMapping.dynamicLayoutService);
     }
 
-    async getOverviewForSchema(schemaId: string): Promise<AxiosResponse> {
+    /**
+     * This method fetches a layout for a specific schema. If the provided schema has no overview, then
+     * it returns the overview of the group (just if the schema is part of a group)
+     * @param schemaId
+     */
+    async fetchOverviewForSchema(schemaId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/overviews/schemaId/${schemaId}`, 'GET');
     }
 }

@@ -7,16 +7,26 @@ export class Office365AuthenticationService extends APIClient {
         super(APIMapping.office365AuthenticationService);
     }
 
-    authenticate(temporaryToken: string): Promise<AxiosResponse> {
-        return this.invokeApi('/public/authentication/cognito', 'GET', undefined, {
+    /**
+     * TODO: Please comment this method
+     * @param temporaryToken
+     */
+    async authenticate(temporaryToken: string): Promise<AxiosResponse> {
+        return await this.invokeApi('/public/authentication/cognito', 'GET', undefined, {
             queryParams: {
                 temporaryToken: temporaryToken
             }
         });
     }
 
-    registerContract(code: string, redirectUrl: string, clientId: string): Promise<AxiosResponse> {
-        return this.invokeApi('/public/authentication/salesautomat', 'GET', undefined, {
+    /**
+     * TODO: Please comment this method
+     * @param code
+     * @param redirectUrl
+     * @param clientId
+     */
+    async registerContract(code: string, redirectUrl: string, clientId: string): Promise<AxiosResponse> {
+        return await this.invokeApi('/public/authentication/salesautomat', 'GET', undefined, {
             queryParams: {
                 code,
                 redirectUrl,

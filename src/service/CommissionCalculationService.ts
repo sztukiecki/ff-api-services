@@ -15,11 +15,19 @@ export class CommissionCalculationService extends APIClient {
         super(APIMapping.commissionCalculationService);
     }
 
-    calculateTotalCommission(entityIds: string[]): Promise<AxiosResponse<TotalCommission>> {
+    /**
+     * TODO: Please comment this method
+     * @param entityIds
+     */
+    async calculateTotalCommission(entityIds: string[]): Promise<AxiosResponse<TotalCommission>> {
         return this.invokeApi(`/calculateTotalCommission`, 'POST', entityIds);
     }
 
-    calculateSeparateCommission(entityIds: string[]): Promise<AxiosResponse<CommissionEntry[]>> {
+    /**
+     * TODO: Please comment this method
+     * @param entityIds
+     */
+    async calculateSeparateCommission(entityIds: string[]): Promise<AxiosResponse<CommissionEntry[]>> {
         return this.invokeApi(`/calculateSeparateCommission`, 'POST', entityIds);
     }
 }

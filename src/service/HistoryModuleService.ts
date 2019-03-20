@@ -13,6 +13,14 @@ export class HistoryModuleService extends APIClient {
         super(APIMapping.historyModuleService);
     }
 
+    /**
+     * Fetches a history of an entity
+     * @param schemaId
+     * @param entityId
+     * @param size
+     * @param offset
+     * @param filter
+     */
     async fetchHistory(schemaId: string, entityId: string, size: number = 20, offset: number = 0, filter?: Filter): Promise<AxiosResponse> {
         let body: any = {
             schemaId: schemaId,

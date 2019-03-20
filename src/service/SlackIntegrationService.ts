@@ -64,15 +64,15 @@ export class SlackIntegrationService extends APIClient {
     constructor() {
         super(APIMapping.slackIntegrationService);
         this._slackApi = {
-            postMessage: postMessageRequest => this.invokeApi('/slack/postMessage', 'post', postMessageRequest),
-            createChannel: createChannelRequest => this.invokeApi('/slack/createChannel', 'post', createChannelRequest),
-            deleteChannel: deleteChannelRequest => this.invokeApi('/slack/deleteChannel', 'post', deleteChannelRequest),
-            oAuthAccess: oAuthAccessRequest => this.invokeApi('/slack/oauthAccess', 'post', oAuthAccessRequest)
+            postMessage: postMessageRequest => this.invokeApi('/slack/postMessage', 'POST', postMessageRequest),
+            createChannel: createChannelRequest => this.invokeApi('/slack/createChannel', 'POST', createChannelRequest),
+            deleteChannel: deleteChannelRequest => this.invokeApi('/slack/deleteChannel', 'POST', deleteChannelRequest),
+            oAuthAccess: oAuthAccessRequest => this.invokeApi('/slack/oauthAccess', 'POST', oAuthAccessRequest)
         };
         this._settingsApi = {
-            getSettings: () => this.invokeApi('/companyIntegrationSettings', 'get'),
-            postSettings: slackConfiguration => this.invokeApi('/companyIntegrationSettings', 'post', slackConfiguration),
-            deleteSettings: () => this.invokeApi('/companyIntegrationSettings', 'delete')
+            getSettings: () => this.invokeApi('/companyIntegrationSettings', 'GET'),
+            postSettings: slackConfiguration => this.invokeApi('/companyIntegrationSettings', 'POST', slackConfiguration),
+            deleteSettings: () => this.invokeApi('/companyIntegrationSettings', 'DELETE')
         };
     }
 

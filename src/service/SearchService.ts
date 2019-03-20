@@ -21,30 +21,50 @@ export class SearchService extends APIClient {
      * Get all searches as short searches. Just the ID and the Name of the search
      * will be returned in a array.
      */
-    getSearches(): Promise<AxiosResponse> {
-        return this.invokeApi('/search', 'GET');
+    async fetchSearches(): Promise<AxiosResponse> {
+        return await this.invokeApi('/search', 'GET');
     }
 
     /**
      * Get the full search information by id.
      */
-    getSearch(searchId: string) {
-        return this.invokeApi(`/search/${searchId}`, 'GET');
+    async fetchSearch(searchId: string) {
+        return await this.invokeApi(`/search/${searchId}`, 'GET');
     }
 
-    saveSearch(searchModel: any) {
-        return this.invokeApi('/search', 'POST', searchModel);
+    /**
+     * TODO: Please comment this method
+     * @param searchModel
+     */
+    async saveSearch(searchModel: any) {
+        return await this.invokeApi('/search', 'POST', searchModel);
     }
 
-    deleteSearch(searchId: string) {
-        return this.invokeApi(`/search/${searchId}`, 'DELETE');
+    /**
+     * TODO: Please comment this method
+     * @param searchId
+     */
+    async deleteSearch(searchId: string) {
+        return await this.invokeApi(`/search/${searchId}`, 'DELETE');
     }
 
-    updateSearch(searchId: string, searchModel: any) {
-        return this.invokeApi(`/search/${searchId}`, 'PUT', searchModel);
+    /**
+     * TODO: Please comment this method
+     * @param searchId
+     * @param searchModel
+     */
+    async updateSearch(searchId: string, searchModel: any) {
+        return await this.invokeApi(`/search/${searchId}`, 'PUT', searchModel);
     }
 
-    search(query: Flowdsl, index: string, page: number = 1, size?: number) {
+    /**
+     * TODO: Please comment this method
+     * @param query
+     * @param index
+     * @param page
+     * @param size
+     */
+    async search(query: Flowdsl, index: string, page: number = 1, size?: number) {
         let queryParams: any = {};
         if (page) {
             queryParams.page = page;
@@ -53,7 +73,7 @@ export class SearchService extends APIClient {
             queryParams.size = size;
         }
 
-        return this.invokeApi<SearchResult<Entity>>('/schemas/' + index, 'POST', query, {
+        return await this.invokeApi<SearchResult<Entity>>('/schemas/' + index, 'POST', query, {
             queryParams: queryParams,
             headers: {
                 'Content-Type': 'application/json'
@@ -61,15 +81,28 @@ export class SearchService extends APIClient {
         });
     }
 
-    count(query: Flowdsl, index: string) {
-        return this.invokeApi('/schemas/' + index + '/count', 'POST', query, {
+    /**
+     * TODO: Please comment this method
+     * @param query
+     * @param index
+     */
+    async count(query: Flowdsl, index: string) {
+        return await this.invokeApi('/schemas/' + index + '/count', 'POST', query, {
             headers: {
                 'Content-Type': 'application/json'
             }
         });
     }
 
-    filter(index: string, page: number = 1, size: number = 30, filter: FilterConfiguration, sorting: any) {
+    /**
+     * TODO: Please comment this method
+     * @param index
+     * @param page
+     * @param size
+     * @param filter
+     * @param sorting
+     */
+    async filter(index: string, page: number = 1, size: number = 30, filter: FilterConfiguration, sorting: any) {
         let queryParams: any = {};
         if (page) {
             // page -1 because the the pages start at 0 on the backend
@@ -79,7 +112,7 @@ export class SearchService extends APIClient {
             queryParams.size = size;
         }
 
-        return this.invokeApi<SearchResult<Entity>>('/schemas/' + index, 'POST', this.buildQuery(filter, sorting), {
+        return await this.invokeApi<SearchResult<Entity>>('/schemas/' + index, 'POST', this.buildQuery(filter, sorting), {
             queryParams: queryParams,
             headers: {
                 'Content-Type': 'application/json'

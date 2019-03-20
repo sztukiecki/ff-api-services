@@ -11,8 +11,8 @@ export class TaggingService extends APIClient {
      * Adds a tag into the database and creates a consumable kafka topic.
      * @param body as a tagRequest containing schemaId, entityId, tagName and metadata object.
      */
-    addTag(body: any): Promise<AxiosResponse> {
-        return this.invokeApi('/tag', 'POST', body);
+    async addTag(body: any): Promise<AxiosResponse> {
+        return await this.invokeApi('/tag', 'POST', body);
     }
 }
 

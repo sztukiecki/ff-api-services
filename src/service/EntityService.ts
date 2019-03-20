@@ -17,15 +17,34 @@ export class EntityService extends APIClient {
         super(APIMapping.entityService);
     }
 
-    createEntity(schemaId: string, entity: any): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param schemaId
+     * @param entity
+     */
+    async createEntity(schemaId: string, entity: any): Promise<AxiosResponse> {
         return this.invokeApi(`/schemas/${schemaId}`, 'POST', entity || {});
     }
 
-    stringifyEntity(schemaId: string, entityId: string, viewId: string = 'EntityRelationView'): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param schemaId
+     * @param entityId
+     * @param viewId
+     */
+    async stringifyEntity(schemaId: string, entityId: string, viewId: string = 'EntityRelationView'): Promise<AxiosResponse> {
         return this.invokeApi(`/views/${viewId}/schemas/${schemaId}/entities/${entityId}/stringify`);
     }
 
-    searchEntity(index: string, viewName: string, flowdsl?: Flowdsl, page: number = 1, size: number = 20) {
+    /**
+     * TODO: Please comment this method
+     * @param index
+     * @param viewName
+     * @param flowdsl
+     * @param page
+     * @param size
+     */
+    async searchEntity(index: string, viewName: string, flowdsl?: Flowdsl, page: number = 1, size: number = 20) {
         const queryParams: ParamList = {
             page,
             size,
@@ -37,7 +56,15 @@ export class EntityService extends APIClient {
         });
     }
 
-    fetchEntitiesVirtualized(index: string, viewName: string, flowdsl?: Flowdsl, offset: number = 0, size: number = 20) {
+    /**
+     * TODO: Please comment this method
+     * @param index
+     * @param viewName
+     * @param flowdsl
+     * @param offset
+     * @param size
+     */
+    async fetchEntitiesVirtualized(index: string, viewName: string, flowdsl?: Flowdsl, offset: number = 0, size: number = 20) {
         const queryParams: ParamList = {
             offset,
             size,
@@ -51,52 +78,81 @@ export class EntityService extends APIClient {
 
     /**
      * Delete a entity in the Backend
+     * @param entityId
+     * @param schemaId
      */
-    deleteEntity(entityId: string, schemaId: string) {
+    async deleteEntity(entityId: string, schemaId: string) {
         return this.invokeApi(`/schemas/${schemaId}/entities/${entityId}`, 'DELETE');
     }
 
     /**
      * Update a entity in the backend
+     * @param schemaId
+     * @param entityId
+     * @param field
      */
-    updateEntityField(schemaId: string, entityId: string, field: UniformObject<EntityValues<Entity>>) {
+    async updateEntityField(schemaId: string, entityId: string, field: UniformObject<EntityValues<Entity>>) {
         return this.invokeApi<Entity>(`/schemas/${schemaId}/entities/${entityId}`, 'PATCH', field);
     }
 
-    getEntityWithViewDefinition(viewId: string, schemaId: string, entityId: string) {
+    /**
+     * TODO: Please comment this method
+     * @param viewId
+     * @param schemaId
+     * @param entityId
+     */
+    async fetchEntityWithViewDefinition(viewId: string, schemaId: string, entityId: string) {
         return this.invokeApi<EntityView>(`/views/${viewId}/schemas/${schemaId}/entities/${entityId}`, 'GET');
     }
 
-    getEntity(schemaId: string, entityId: string) {
+    /**
+     * TODO: Please comment this method
+     * @param schemaId
+     * @param entityId
+     */
+    async fetchEntity(schemaId: string, entityId: string) {
         return this.invokeApi<Entity>(`/schemas/${schemaId}/entities/${entityId}`, 'GET');
     }
 
     /**
      * Get the history of a entity in a well formatted form.
+     * @param schemaId
+     * @param entityId
+     * @param page
+     * @deprecated Please use the history-service instead.
      */
-    getHistory(schemaId: string, entityId: string, page: number): Promise<AxiosResponse> {
+    async fetchHistory(schemaId: string, entityId: string, page: number): Promise<AxiosResponse> {
         return this.invokeApi(`/schemas/${schemaId}/entities/${entityId}/history?page=${page}&size=15&order=DESC`, 'GET');
     }
 
     /**
      * Check the right of a user to access a single entity.
+     * @param schemaId
+     * @param entityId
+     * @param userId
+     * @param accessType
      */
-    getHasAccessForSingleEntity(schemaId: string, entityId: string, userId: string, accessType: EntityACLType): Promise<AxiosResponse> {
+    async hasAccessForSingleEntity(schemaId: string, entityId: string, userId: string, accessType: EntityACLType): Promise<AxiosResponse> {
         return this.invokeApi(`/schemas/${schemaId}/entities/${entityId}/users/${userId}/hasaccess/${accessType}`, 'GET');
     }
 
     /**
      * Check the rights of a user to access several entities.
+     * @param userId
+     * @param accessType
+     * @param entities
      */
-    getHasAccessForMultipleEntities(userId: string, accessType: EntityACLType, entities: EntityQuery[]) {
+    async hasAccessForMultipleEntities(userId: string, accessType: EntityACLType, entities: EntityQuery[]) {
         return this.invokeApi<HasRightsModel[]>(`/users/${userId}/hasaccess/${accessType}`, 'POST', entities);
     }
 
     /**
      * This method sends entityIds and schemaIds to the entity-service and the entity-service transform this data
      * into views with the entity. So an array will be returned, with the viewEntity.
+     * @param viewName
+     * @param entityQueries
      */
-    transformEntitiesWithView(viewName: string, entityQueries: EntityQuery[]) {
+    async transformEntitiesWithView(viewName: string, entityQueries: EntityQuery[]) {
         return this.invokeApi<EntityView[]>(`/views/${viewName}/entities`, 'POST', entityQueries);
     }
 
@@ -106,7 +162,7 @@ export class EntityService extends APIClient {
      * @param entityId
      * @returns a new UUID of created entity.
      */
-    duplicateEntity(schemaId: uuid, entityId: uuid): Promise<AxiosResponse<uuid>> {
+    async duplicateEntity(schemaId: uuid, entityId: uuid): Promise<AxiosResponse<uuid>> {
         return this.invokeApi(`/schemas/${schemaId}/entities/${entityId}/duplicate`, 'POST');
     }
 }

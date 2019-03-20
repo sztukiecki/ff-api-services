@@ -31,19 +31,28 @@ export class RelogService extends APIClient {
         super(APIMapping.relogService);
     }
 
-    log(logEntry: FFElkData): Promise<AxiosResponse> {
-        return this.invokeApi('/relog/elk-gelf', 'POST', logEntry);
+    /**
+     * TODO: Please comment this method
+     * @param logEntry
+     */
+    async log(logEntry: FFElkData): Promise<AxiosResponse> {
+        return await this.invokeApi('/relog/elk-gelf', 'POST', logEntry);
     }
 
     /**
      * Here you don't have to pass the userId
+     * @param logEntry
      */
-    logInternal(logEntry: FFElkData): Promise<AxiosResponse> {
-        return this.invokeApi('/internal/relog/elk-gelf', 'POST', logEntry);
+    async logInternal(logEntry: FFElkData): Promise<AxiosResponse> {
+        return await this.invokeApi('/internal/relog/elk-gelf', 'POST', logEntry);
     }
 
-    logBatch(logEntries: FFElkData[]) {
-        return this.invokeApi('/relog/elk-gelf/batch', 'POST', {batch: logEntries});
+    /**
+     * TODO: Please comment this method
+     * @param logEntries
+     */
+    async logBatch(logEntries: FFElkData[]) {
+        return await this.invokeApi('/relog/elk-gelf/batch', 'POST', {batch: logEntries});
     }
 }
 

@@ -1,4 +1,3 @@
-export { default as APIClient } from './http/APIClient';
 export { default as AdminTokenService } from './service/AdminTokenService';
 export { default as AgentRecommendationService } from './service/AgentRecommendationService';
 export { default as AppointmentBookingService } from './service/AppointmentBookingService';
@@ -46,7 +45,6 @@ export { default as TemplateService } from './service/TemplateService';
 export { default as TrialLicenseService } from './service/TrialLicenseService';
 export { default as UserService } from './service/UserService';
 export { default as ViewDefinitionService } from './service/ViewDefinitionService';
-export { default as InquiryCreatedMessage } from './util/searchprofile-service/InquiryCreatedMessage';
 export { default as EnvironmentManagement } from './util/EnvironmentManagement';
 export { default as Authentication } from './authentication/Authentication';
 export { default as OmniChannelService } from './service/OmniChannelService';

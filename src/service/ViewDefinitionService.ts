@@ -23,48 +23,94 @@ export class ViewDefinitionService extends APIClient {
         super(APIMapping.viewDefinitionService);
     }
 
-    getDefinitionsForSchema(schemaId: string): Promise<AxiosResponse> {
-        return this.invokeApi('/views', 'GET', undefined, {
+    /**
+     * TODO: Please comment this method
+     * @param schemaId
+     */
+    async fetchDefinitionsForSchema(schemaId: string): Promise<AxiosResponse> {
+        return await this.invokeApi('/views', 'GET', undefined, {
             queryParams: {
                 schemaId
             }
         });
     }
 
-    getDefinition(viewDefinitionId: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/views/${viewDefinitionId}`, 'GET');
+    /**
+     * TODO: Please comment this method
+     * @param viewDefinitionId
+     */
+    async fetchDefinition(viewDefinitionId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/views/${viewDefinitionId}`, 'GET');
     }
 
-    updateDefinition(viewDefinitionId: string, viewDefinition: ViewDefinition) {
-        return this.invokeApi(`/views/${viewDefinitionId}`, 'PUT', viewDefinition);
+    /**
+     * TODO: Please comment this method
+     * @param viewDefinitionId
+     * @param viewDefinition
+     */
+    async updateDefinition(viewDefinitionId: string, viewDefinition: ViewDefinition) {
+        return await this.invokeApi(`/views/${viewDefinitionId}`, 'PUT', viewDefinition);
     }
 
-    createDefinition(viewDefinition: ViewDefinition) {
-        return this.invokeApi('/views', 'POST', viewDefinition);
+    /**
+     * TODO: Please comment this method
+     * @param viewDefinition
+     */
+    async createDefinition(viewDefinition: ViewDefinition) {
+        return await this.invokeApi('/views', 'POST', viewDefinition);
     }
 
-    deleteDefinition(viewDefinitionId: string) {
-        return this.invokeApi(`/views/${viewDefinitionId}`, 'DELETE');
+    /**
+     * TODO: Please comment this method
+     * @param viewDefinitionId
+     */
+    async deleteDefinition(viewDefinitionId: string) {
+        return await this.invokeApi(`/views/${viewDefinitionId}`, 'DELETE');
     }
 
-    updateCategory(viewId: string, categoryName: string, categoryDefinition: ViewDefinitionCategory) {
-        return this.invokeApi(`/views/${viewId}/categories/${categoryName}`, 'PATCH', categoryDefinition);
+    /**
+     * TODO: Please comment this method
+     * @param viewId
+     * @param categoryName
+     * @param categoryDefinition
+     */
+    async updateCategory(viewId: string, categoryName: string, categoryDefinition: ViewDefinitionCategory) {
+        return await this.invokeApi(`/views/${viewId}/categories/${categoryName}`, 'PATCH', categoryDefinition);
     }
 
-    addCategory(viewId: string, categoryDefinition: ViewDefinitionCategory) {
-        return this.invokeApi(`/views/${viewId}/categories`, 'PATCH', categoryDefinition);
+    /**
+     * TODO: Please comment this method
+     * @param viewId
+     * @param categoryDefinition
+     */
+    async addCategory(viewId: string, categoryDefinition: ViewDefinitionCategory) {
+        return await this.invokeApi(`/views/${viewId}/categories`, 'PATCH', categoryDefinition);
     }
 
-    deleteCategory(viewId: string, categoryName: string) {
-        return this.invokeApi(`/views/${viewId}/categories/${categoryName}`, 'DELETE');
+    /**
+     * TODO: Please comment this method
+     * @param viewId
+     * @param categoryName
+     */
+    async deleteCategory(viewId: string, categoryName: string) {
+        return await this.invokeApi(`/views/${viewId}/categories/${categoryName}`, 'DELETE');
     }
 
-    listFieldsOfViews(viewName: string) {
-        return this.invokeApi(`/views/fields/${viewName}`, 'GET');
+    /**
+     * TODO: Please comment this method
+     * @param viewName
+     */
+    async listFieldsOfViews(viewName: string) {
+        return await this.invokeApi(`/views/fields/${viewName}`, 'GET');
     }
 
-    getBySchemaAndName(schemaId: string, viewName: string) {
-        return this.invokeApi(`/views/schema/${schemaId}/name/${viewName}`, 'GET');
+    /**
+     * TODO: Please comment this method
+     * @param schemaId
+     * @param viewName
+     */
+    async fetchBySchemaAndName(schemaId: string, viewName: string) {
+        return await this.invokeApi(`/views/schema/${schemaId}/name/${viewName}`, 'GET');
     }
 }
 

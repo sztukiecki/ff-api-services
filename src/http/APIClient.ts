@@ -1,11 +1,11 @@
 import ConsulClient from '@flowfact/consul-client';
-import axios, { AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
+import axios, {AxiosRequestConfig, AxiosResponse, CancelToken} from 'axios';
 import * as isNode from 'detect-node';
-import { stringify } from 'qs';
+import {stringify} from 'qs';
 import Authentication from '../authentication/Authentication';
-import EnvironmentManagement, { StageTypes } from '../util/EnvironmentManagement';
+import EnvironmentManagement, {StageTypes} from '../util/EnvironmentManagement';
 import Interceptor from '../util/Interceptor';
-import { APIService } from './APIMapping';
+import {APIService} from './APIMapping';
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
 
@@ -15,13 +15,15 @@ export interface APIClientAdditionalParams extends AxiosRequestConfig {
     cancelToken?: CancelToken;
 }
 
+export type MethodTypes = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'OPTIONS' | 'PATCH' | 'HEAD' | 'CONNECT' | 'TRACE';
+
 export default abstract class APIClient {
-    userId: string;
 
+    private userId: string;
     private _consulClient?: ConsulClient;
-    private _serviceName: string;
+    private readonly _serviceName: string;
 
-    constructor(service: APIService) {
+    protected constructor(service: APIService) {
         this._serviceName = service.name;
     }
 
@@ -30,9 +32,9 @@ export default abstract class APIClient {
         return this;
     }
 
-    public async invokeApi<T = any>(path: string, method: string = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<T>> {
+    public async invokeApi<T = any>(path: string, method: MethodTypes = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<T>> {
         if (!path.startsWith('/')) {
-            throw new Error('missing slash at the beginning');
+            throw new Error('Your path has to start with a slash. Path: ' + path);
         }
 
         const {queryParams, headers, cancelToken, ...others} = additionalParams;
@@ -58,8 +60,7 @@ export default abstract class APIClient {
 
                 if (supportToken.length === 0) {
                     userIdentification = {
-                        cognitoToken: (await Authentication.getCurrentSession())!.getIdToken()!.getJwtToken(),
-                        'x-cognito-access-token': (await Authentication.getCurrentSession())!.getAccessToken()!.getJwtToken()
+                        cognitoToken: (await Authentication.getCurrentSession())!.getIdToken()!.getJwtToken()
                     };
                 } else {
                     userIdentification = {

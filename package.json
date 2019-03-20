@@ -1,11 +1,11 @@
 {
   "name": "@flowfact/api-services",
-  "version": "9.0.0-SNAPSHOT",
+  "version": "10.0.0-SNAPSHOT",
   "description": "middleware of flowfact to interact between frontend and backend",
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
-  "repository": "ssh://git@bb.flowfact.com:7999/npmmod/ff-api-services.git",
+  "repository": "ssh://git@github.com:FLOWFACTCorp/ff-api-services.git",
   "author": "FLOWFACT GmbH",
   "license": "SEE LICENSE IN LICENSE",
   "sideEffects": false,

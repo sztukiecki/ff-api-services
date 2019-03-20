@@ -7,7 +7,11 @@ export class CognitoClientService extends APIClient {
         super(APIMapping.cognitoClientService);
     }
 
-    fetchLoginNameByAliasMailAddress(aliasMailAddress: string): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param aliasMailAddress
+     */
+    async fetchLoginNameByAliasMailAddress(aliasMailAddress: string): Promise<AxiosResponse> {
         return this.invokeApi(`/public/users/loginname/`, 'GET', undefined, {
             queryParams: {
                 aliasMailAddress: aliasMailAddress
@@ -15,7 +19,11 @@ export class CognitoClientService extends APIClient {
         });
     }
 
-    linkAccount(aliasMailAddress: string): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param aliasMailAddress
+     */
+    async linkAccount(aliasMailAddress: string): Promise<AxiosResponse> {
         return this.invokeApi(`/public/users/link`, 'POST', undefined, {
             queryParams: {
                 aliasMailAddress: aliasMailAddress
@@ -23,7 +31,11 @@ export class CognitoClientService extends APIClient {
         });
     }
 
-    resetPassword(aliasMailAddress: string): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param aliasMailAddress
+     */
+    async resetPassword(aliasMailAddress: string): Promise<AxiosResponse> {
         return this.invokeApi(`/users/password`, 'DELETE', {username: aliasMailAddress});
     }
 }

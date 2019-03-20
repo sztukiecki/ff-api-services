@@ -1,5 +1,5 @@
-import { APIClient, APIMapping } from '../http';
-import { AxiosPromise, AxiosResponse } from 'axios';
+import {APIClient, APIMapping} from '../http';
+import {AxiosResponse} from 'axios';
 
 interface ImportBundle {
     bundleName: string;
@@ -12,30 +12,46 @@ export class SampleDataService extends APIClient {
         super(APIMapping.sampleDataService);
     }
 
-    importSampleData(bundleName: string = 'All'): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param bundleName
+     */
+    async importSampleData(bundleName: string = 'All'): Promise<AxiosResponse> {
         const queryParams: any = {
             bundleName: bundleName
         };
 
-        return this.invokeApi('/import', 'POST', undefined, {queryParams});
+        return await this.invokeApi('/import', 'POST', undefined, {queryParams});
     }
 
-    removeSampleData(bundleName: string = 'All'): AxiosPromise {
+    /**
+     * TODO: Please comment this method
+     * @param bundleName
+     */
+    async removeSampleData(bundleName: string = 'All'): Promise<AxiosResponse> {
         const queryParams: any = {
             bundleName: bundleName
         };
 
-        return this.invokeApi('/remove', 'DELETE', undefined, {queryParams});
+        return await this.invokeApi('/remove', 'DELETE', undefined, {queryParams});
     }
 
-    importSampleDataBatch(bundles: ImportBundle[]): Promise<AxiosResponse> {
-        return this.invokeApi('/batchimport', 'POST', {
+    /**
+     * TODO: Please comment this method
+     * @param bundles
+     */
+    async importSampleDataBatch(bundles: ImportBundle[]): Promise<AxiosResponse> {
+        return await this.invokeApi('/batchimport', 'POST', {
             bundles: bundles
         });
     }
 
-    fetchBundles(scope: 'FLOWFACT' | 'CUSTOM' = 'FLOWFACT'): Promise<AxiosResponse> {
-        return this.invokeApi('/bundles', 'GET', undefined, {
+    /**
+     * TODO: Please comment this method
+     * @param scope
+     */
+    async fetchBundles(scope: 'FLOWFACT' | 'CUSTOM' = 'FLOWFACT'): Promise<AxiosResponse> {
+        return await this.invokeApi('/bundles', 'GET', undefined, {
             queryParams: {
                 scope: scope
             }

@@ -6,8 +6,11 @@ export class PresetService extends APIClient {
         super(APIMapping.presetService);
     }
 
-    getPresets() {
-        return this.invokeApi('/preset', 'GET').then(s => s.data);
+    /**
+     * TODO: Please comment this method
+     */
+    async fetchPresets() {
+        return await this.invokeApi('/preset', 'GET').then(s => s.data);
     }
 }
 

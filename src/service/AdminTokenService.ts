@@ -6,7 +6,10 @@ export class AdminTokenService extends APIClient {
         super(APIMapping.adminTokenService);
     }
 
-    createOrReturnAdminToken(): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     */
+    async createOrReturnAdminToken(): Promise<AxiosResponse> {
         return this.invokeApi('/createOrReturnAdminToken', 'POST');
     }
 
@@ -15,7 +18,7 @@ export class AdminTokenService extends APIClient {
      * @param {string} platformToken
      * @returns {Promise<AxiosResponse>}
      */
-    authenticate(platformToken: string): Promise<AxiosResponse> {
+    async authenticate(platformToken: string): Promise<AxiosResponse> {
         return this.invokeApi('/public/adminUser/authenticate', 'GET', undefined, {
             headers: {
                 token: platformToken
@@ -28,7 +31,7 @@ export class AdminTokenService extends APIClient {
      * @param {string} platformToken
      * @returns {Promise<AxiosResponse>}
      */
-    authenticateAndReturnUsernameWithToken(platformToken: string): Promise<AxiosResponse> {
+    async authenticateAndReturnUsernameWithToken(platformToken: string): Promise<AxiosResponse> {
         return this.invokeApi('/public/adminUser/authenticateAndReturnUsernameWithToken', 'GET', undefined, {
             headers: {
                 token: platformToken

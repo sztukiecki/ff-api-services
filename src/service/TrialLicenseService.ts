@@ -6,20 +6,36 @@ export class TrialLicenseService extends APIClient {
         super(APIMapping.trialLicenseServive);
     }
 
-    getCustomerDataBySubmissionGuid(submissionGuid: string) {
-        return this.invokeApi(`/public/freeTrial/submissionId/${submissionGuid}`, 'GET');
+    /**
+     * TODO: Please comment this method
+     * @param submissionGuid
+     */
+    async fetchCustomerDataBySubmissionGuid(submissionGuid: string) {
+        return await this.invokeApi(`/public/freeTrial/submissionId/${submissionGuid}`, 'GET');
     }
 
-    getCustomerDataByEmail(submissionGuid: string) {
-        return this.invokeApi(`/public/freeTrial/email/${submissionGuid}`, 'GET');
+    /**
+     * TODO: Please comment this method
+     * @param submissionGuid
+     */
+    async fetchCustomerDataByEmail(submissionGuid: string) {
+        return await this.invokeApi(`/public/freeTrial/email/${submissionGuid}`, 'GET');
     }
 
-    createNewSubscription(payload: any) {
-        return this.invokeApi('/public/buy', 'POST', payload);
+    /**
+     * TODO: Please comment this method
+     * @param payload
+     */
+    async createNewSubscription(payload: any) {
+        return await this.invokeApi('/public/buy', 'POST', payload);
     }
 
-    upgradeAccount(hostedPageId: string) {
-        return this.invokeApi('/upgradeAccount/' + hostedPageId, 'POST');
+    /**
+     * TODO: Please comment this method
+     * @param hostedPageId
+     */
+    async upgradeAccount(hostedPageId: string) {
+        return await this.invokeApi('/upgradeAccount/' + hostedPageId, 'POST');
     }
 }
 

@@ -15,11 +15,11 @@ export class MultimediaService extends APIClient {
      * @returns
      *      the url to request this file
      */
-    upload(file: any, entityId: string): Promise<AxiosResponse> {
+    async upload(file: any, entityId: string): Promise<AxiosResponse> {
         const formData = new FormData();
         formData.append('file', file);
 
-        return this.invokeApi(`/upload/${entityId}`, 'POST', formData, {
+        return await this.invokeApi(`/upload/${entityId}`, 'POST', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -33,8 +33,8 @@ export class MultimediaService extends APIClient {
      * @returns
      *      the url to request this file
      */
-    fetchFile(fileUrl: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/download`, 'GET', undefined, {
+    async fetchFile(fileUrl: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/download`, 'GET', undefined, {
             queryParams: {
                 uri: fileUrl
             },
@@ -50,8 +50,8 @@ export class MultimediaService extends APIClient {
      *
      * @returns well.. 200 OK?
      */
-    deleteFile(bucketType: 'Image' | 'Document', entityId: string, filename: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/deleteFile`, 'DELETE', {
+    async deleteFile(bucketType: 'Image' | 'Document', entityId: string, filename: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/deleteFile`, 'DELETE', {
             bucketType,
             entityId,
             filename

@@ -18,16 +18,28 @@ export class InteractiveExposeDeliveryService extends APIClient {
         super(APIMapping.interactiveExposeDeliveryService);
     }
 
+    /**
+     * TODO: Please comment this method
+     * @param model
+     */
     async sendInteractiveExposes(model: SendInteractiveExposeModel[]): Promise<AxiosResponse> {
-        return this.invokeApi('/interactiveExposes', 'POST', model);
+        return await this.invokeApi('/interactiveExposes', 'POST', model);
     }
 
+    /**
+     * TODO: Please comment this method
+     * @param model
+     */
     async sendInteractiveExposesV2(model: InteractiveExposeDeliveryModel) {
-        return this.invokeApi('/interactiveExposes/send', 'POST', model);
+        return await this.invokeApi('/interactiveExposes/send', 'POST', model);
     }
 
+    /**
+     * TODO: Please comment this method
+     * @param requestId
+     */
     async fetchSendingStatus(requestId: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/interactiveExposes/status/${requestId}`, 'GET');
+        return await this.invokeApi(`/interactiveExposes/status/${requestId}`, 'GET');
     }
 }
 

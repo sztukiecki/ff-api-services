@@ -9,16 +9,31 @@ export class PropertyMarketingPhaseService extends APIClient {
         super(APIMapping.propertyMarketingPhaseService);
     }
 
-    fetchPhases(schemaId: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/${schemaId}/phases`, 'GET');
+    /**
+     * TODO: Please comment this method
+     * @param schemaId
+     */
+    async fetchPhases(schemaId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/${schemaId}/phases`, 'GET');
     }
 
-    fetchPhase(schemaId: string, phaseName: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/${schemaId}/phases/${phaseName}`, 'GET');
+    /**
+     * TODO: Please comment this method
+     * @param schemaId
+     * @param phaseName
+     */
+    async fetchPhase(schemaId: string, phaseName: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/${schemaId}/phases/${phaseName}`, 'GET');
     }
 
-    fetchEntitiesInPhase(phaseName: string, page: number = 1, size: number = 50) {
-        return this.invokeApi<string[]>(`/phases/${phaseName}/entities`, 'GET', undefined, {
+    /**
+     * TODO: Please comment this method
+     * @param phaseName
+     * @param page
+     * @param size
+     */
+    async fetchEntitiesInPhase(phaseName: string, page: number = 1, size: number = 50) {
+        return await this.invokeApi<string[]>(`/phases/${phaseName}/entities`, 'GET', undefined, {
             queryParams: {
                 archived: 'true',
                 inactive: 'true',
@@ -28,8 +43,15 @@ export class PropertyMarketingPhaseService extends APIClient {
         });
     }
 
-    fetchEntitiesInPhaseAndSchema(phaseName: string, schemaId: string, page: number = 1, size: number = 50) {
-        return this.invokeApi<string[]>(`/phases/${phaseName}/entities/${schemaId}`, 'GET', undefined, {
+    /**
+     * TODO: Please comment this method
+     * @param phaseName
+     * @param schemaId
+     * @param page
+     * @param size
+     */
+    async fetchEntitiesInPhaseAndSchema(phaseName: string, schemaId: string, page: number = 1, size: number = 50) {
+        return await this.invokeApi<string[]>(`/phases/${phaseName}/entities/${schemaId}`, 'GET', undefined, {
             queryParams: {
                 archived: 'true',
                 inactive: 'true',
@@ -39,12 +61,24 @@ export class PropertyMarketingPhaseService extends APIClient {
         });
     }
 
-    fetchCurrentPhase(schemaId: string, entityId: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/${schemaId}/${entityId}/currentPhase`, 'GET');
+    /**
+     * TODO: Please comment this method
+     * @param schemaId
+     * @param entityId
+     */
+    async fetchCurrentPhase(schemaId: string, entityId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/${schemaId}/${entityId}/currentPhase`, 'GET');
     }
 
-    updateStep(schemaId: string, entityId: string, stepId: string, completed: boolean): Promise<AxiosResponse> {
-        return this.invokeApi(`/${schemaId}/${entityId}/updateStep`, 'POST', {
+    /**
+     * TODO: Please comment this method
+     * @param schemaId
+     * @param entityId
+     * @param stepId
+     * @param completed
+     */
+    async updateStep(schemaId: string, entityId: string, stepId: string, completed: boolean): Promise<AxiosResponse> {
+        return await this.invokeApi(`/${schemaId}/${entityId}/updateStep`, 'POST', {
             stepId: stepId,
             completed: completed
         });
@@ -58,12 +92,16 @@ export class PropertyMarketingPhaseService extends APIClient {
      * @param source as string / enum, represents either KANBAN or LIFECYCLE
      * @returns {Promise<any>} Status OK or REJECTED and a list of widgets if rejected.
      */
-    changeCurrentStep(schemaId: string, entityId: string, stepId: string, source?: 'KANBAN' | 'LIFECYCLE'): Promise<AxiosResponse> {
-        return this.invokeApi(`/${schemaId}/${entityId}/switchToStep`, 'POST', {stepId, source});
+    async changeCurrentStep(schemaId: string, entityId: string, stepId: string, source?: 'KANBAN' | 'LIFECYCLE'): Promise<AxiosResponse> {
+        return await this.invokeApi(`/${schemaId}/${entityId}/switchToStep`, 'POST', {stepId, source});
     }
 
-    fetchPhaseStatistics(maxCount: number = 50): Promise<AxiosResponse> {
-        return this.invokeApi(`/phases/stats`, 'GET', undefined, {
+    /**
+     * TODO: Please comment this method
+     * @param maxCount
+     */
+    async fetchPhaseStatistics(maxCount: number = 50): Promise<AxiosResponse> {
+        return await this.invokeApi(`/phases/stats`, 'GET', undefined, {
             queryParams: {
                 archived: 'true',
                 inactive: 'true',
@@ -72,37 +110,70 @@ export class PropertyMarketingPhaseService extends APIClient {
         });
     }
 
-    fetchTotalCommissionForAllPhases(): Promise<AxiosResponse> {
-        return this.invokeApi(`/calculateTotalCommissionForAllPhases`, 'GET');
+    /**
+     * TODO: Please comment this method
+     */
+    async fetchTotalCommissionForAllPhases(): Promise<AxiosResponse> {
+        return await this.invokeApi(`/calculateTotalCommissionForAllPhases`, 'GET');
     }
 
-    fetchCurrentPhaseOfSomeEntities(entities: EntityQuery[]): Promise<AxiosResponse<EntityPhaseInformation[]>> {
-        return this.invokeApi(`/phases`, 'POST', entities);
+    /**
+     * TODO: Please comment this method
+     * @param entities
+     */
+    async fetchCurrentPhaseOfSomeEntities(entities: EntityQuery[]): Promise<AxiosResponse<EntityPhaseInformation[]>> {
+        return await this.invokeApi(`/phases`, 'POST', entities);
     }
 
-    fetchAllPhasesForEstate(schemaId: string, entityId: string) {
-        return this.invokeApi(`/${schemaId}/${entityId}/phases`, 'GET');
+    /**
+     * TODO: Please comment this method
+     * @param schemaId
+     * @param entityId
+     */
+    async fetchAllPhasesForEstate(schemaId: string, entityId: string) {
+        return await this.invokeApi(`/${schemaId}/${entityId}/phases`, 'GET');
     }
 
-    validateStep(stepId: string, schemaId: string, entityId: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/validateStep/stepId/${stepId}/schemaId/${schemaId}/entityId/${entityId}`, 'POST');
+    /**
+     * TODO: Please comment this method
+     * @param stepId
+     * @param schemaId
+     * @param entityId
+     */
+    async validateStep(stepId: string, schemaId: string, entityId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/validateStep/stepId/${stepId}/schemaId/${schemaId}/entityId/${entityId}`, 'POST');
     }
 
-    deleteEntityInformation(schemaId: uuid, entityId: uuid): Promise<AxiosResponse> {
-        return this.invokeApi(`/steps/${schemaId}/${entityId}`, 'DELETE');
+    /**
+     * TODO: Please comment this method
+     * @param schemaId
+     * @param entityId
+     */
+    async deleteEntityInformation(schemaId: uuid, entityId: uuid): Promise<AxiosResponse> {
+        return await this.invokeApi(`/steps/${schemaId}/${entityId}`, 'DELETE');
     }
 
-    // --- phase configurations ---
-    fetchConfigurations() {
-        return this.invokeApi('/phaseconfigurations', 'GET');
+    /**
+     * TODO: Please comment this method
+     */
+    async fetchConfigurations() {
+        return await this.invokeApi('/phaseconfigurations', 'GET');
     }
 
-    saveOrUpdateConfiguration(phaseConfigurationInformation: PhaseConfigurationInformation): Promise<AxiosResponse> {
-        return this.invokeApi('/phaseconfigurations', 'POST', phaseConfigurationInformation);
+    /**
+     * TODO: Please comment this method
+     * @param phaseConfigurationInformation
+     */
+    async saveOrUpdateConfiguration(phaseConfigurationInformation: PhaseConfigurationInformation): Promise<AxiosResponse> {
+        return await this.invokeApi('/phaseconfigurations', 'POST', phaseConfigurationInformation);
     }
 
-    deleteCustomConfiguration(id: uuid): Promise<AxiosResponse> {
-        return this.invokeApi(`/phaseconfigurations/${id}`, 'DELETE');
+    /**
+     * TODO: Please comment this method
+     * @param id
+     */
+    async deleteCustomConfiguration(id: uuid): Promise<AxiosResponse> {
+        return await this.invokeApi(`/phaseconfigurations/${id}`, 'DELETE');
     }
 }
 

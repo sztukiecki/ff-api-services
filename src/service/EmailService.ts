@@ -19,14 +19,26 @@ export class EmailService extends APIClient {
         super(APIMapping.emailService);
     }
 
+    /**
+     * TODO: Please comment this method
+     * @param domain
+     */
     async createDomain(domain: string): Promise<EmailServiceVerifyResponse> {
         return (await this.invokeApi('/configuration/whitelabel', 'POST', {domain})).data;
     }
 
+    /**
+     * TODO: Please comment this method
+     * @param domain
+     */
     async verifyDomain(domain: string): Promise<EmailServiceVerifyResponse> {
         return (await this.invokeApi('/configuration/whitelabel/verify', 'POST', {domain})).data;
     }
 
+    /**
+     * TODO: Please comment this method
+     * @param s3Key
+     */
     async fetchMailBody(s3Key: string): Promise<AxiosResponse<String>> {
         return this.invokeApi('/body/html', 'GET', undefined, {
             queryParams: {

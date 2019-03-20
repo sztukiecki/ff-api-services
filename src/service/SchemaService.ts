@@ -6,12 +6,21 @@ export class SchemaService extends APIClient {
         super(APIMapping.schemaService);
     }
 
-    loadStats(withGroups: boolean = false): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param withGroups
+     */
+    async loadStats(withGroups: boolean = false): Promise<AxiosResponse> {
         const additionalParams = withGroups ? {queryParams: {groups: 'true'}} : undefined;
-        return this.invokeApi('/stats', 'GET', undefined, additionalParams);
+        return await this.invokeApi('/stats', 'GET', undefined, additionalParams);
     }
 
-    getAllSchemas(withGroups: boolean = false, short: boolean = false): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param withGroups
+     * @param short
+     */
+    async fetchAllSchemas(withGroups: boolean = false, short: boolean = false): Promise<AxiosResponse> {
         let queryParams: any = {
             transform: true
         };
@@ -27,7 +36,13 @@ export class SchemaService extends APIClient {
         return this.invokeApi('/schemas', 'GET', undefined, {queryParams});
     }
 
-    getDataBySchemaId(schemaId: string, page: number = 1, size?: number): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param schemaId
+     * @param page
+     * @param size
+     */
+    async fetchDataBySchemaId(schemaId: string, page: number = 1, size?: number): Promise<AxiosResponse> {
         let queryParams: any = {
             page: page.toString(),
         };
@@ -37,63 +52,111 @@ export class SchemaService extends APIClient {
         return this.invokeApi(`/data/${schemaId}`, 'GET', undefined, {queryParams});
     }
 
-    getSchema(schemaId: string, queryParams: any = {}): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param schemaId
+     * @param queryParams
+     */
+    async fetchSchema(schemaId: string, queryParams: any = {}): Promise<AxiosResponse> {
         queryParams.transform = true;
         return this.invokeApi(`/schemas/${schemaId}`, 'GET', undefined, {queryParams});
     }
 
-    createSchema(schema: any): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param schema
+     */
+    async createSchema(schema: any): Promise<AxiosResponse> {
         return this.invokeApi('/schemas?transform=true', 'POST', schema);
     }
 
-    deleteSchema(schemaId: string): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param schemaId
+     */
+    async deleteSchema(schemaId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/schemas/${schemaId}`, 'DELETE');
     }
 
     /**
+     * TODO: Please comment this method
      * deletes all groups and schemas
      * @constructor
      * @param {string} key - if you are sure you want delete all schemas then set key = DELETE
      */
-    deleteAllSchema(key: string): Promise<AxiosResponse> {
+    async deleteAllSchema(key: string): Promise<AxiosResponse> {
         if (!key || key !== 'DELETE') {
             return Promise.reject('you need to set key = DELETE if you are sure you want delete all schemas');
         }
         return this.invokeApi(`/schemas/deleteAll?key=${key}`, 'DELETE');
     }
 
-    updateSchema(schema: any): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param schema
+     */
+    async updateSchema(schema: any): Promise<AxiosResponse> {
         return this.invokeApi(`/schemas/${schema.id}?transform=true`, 'PUT', schema);
     }
 
-    getIntegrationsForSchema(schemaId: string): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param schemaId
+     */
+    async fetchIntegrationsForSchema(schemaId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/integrations?schemaId=${schemaId}&transform=true`, 'GET');
     }
 
-    createIntegrationForSchema(schemaId: string, label: string): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param schemaId
+     * @param label
+     */
+    async createIntegrationForSchema(schemaId: string, label: string): Promise<AxiosResponse> {
         const integration = {
             schemaId, label
         };
         return this.invokeApi('/integrations?transform=true', 'POST', integration);
     }
 
-    updateIntegration(integrationId: string, data: any): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param integrationId
+     * @param data
+     */
+    async updateIntegration(integrationId: string, data: any): Promise<AxiosResponse> {
         return this.invokeApi(`/integrations/${integrationId}/formdata?transform=true`, 'POST', data);
     }
 
-    deleteIntegration(integrationId: string): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param integrationId
+     */
+    async deleteIntegration(integrationId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/integrations/${integrationId}`, 'DELETE');
     }
 
-    getResponseForIntegrationGetUrlByUrl(url: string): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param url
+     */
+    async fetchResponseForIntegrationGetUrlByUrl(url: string): Promise<AxiosResponse> {
         return this.invokeApi(url, 'GET');
     }
 
-    getResponseForIntegrationGetUrlById(integrationId: string): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param integrationId
+     */
+    async fetchResponseForIntegrationGetUrlById(integrationId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/integrations/${integrationId}/data`, 'GET');
     }
 
-    getAllMembersOfGroup(groupId: string): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param groupId
+     */
+    async fetchAllMembersOfGroup(groupId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/groups/${groupId}/members`, 'GET');
     }
 }

@@ -6,6 +6,12 @@ export class OmniChannelService extends APIClient {
         super(APIMapping.omniChannelService);
     }
 
+    /**
+     * TODO: Please comment this method
+     * @param from
+     * @param to
+     * @param message
+     */
     sendSMS(from: string, to: string, message: string): Promise<AxiosResponse> {
         return this.invokeApi('/sendSMS', 'POST', {
             from,

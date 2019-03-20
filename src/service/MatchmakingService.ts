@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
-import { Contact } from '../util/ContactModels';
-import { MatchCountForEstate, MatchmakingPagingResponse, MatchScoreContact, MatchScoreEstate } from '../util/MatchmakingModels';
+import { Contact } from '../models/ContactModels';
+import { MatchCountForEstate, MatchmakingPagingResponse, MatchScoreContact, MatchScoreEstate } from '../models/MatchmakingModels';
 
 export class MatchmakingService extends APIClient {
 
@@ -11,39 +11,64 @@ export class MatchmakingService extends APIClient {
 
     getAllMatches(page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<Contact>>>> {
         console.warn('getAllMatches() is deprecated! Use getAllMatchesForContacts() instead!');
-        return this.getAllMatchesForContacts(page);
+        return this.fetchAllMatchesForContacts(page);
     }
 
-    getAllMatchesForContacts(page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<Contact>>>> {
-        return this.invokeApi('/matches/contacts', 'GET', undefined, {
+    /**
+     * TODO: Please comment this method
+     * @param page
+     */
+    async fetchAllMatchesForContacts(page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<Contact>>>> {
+        return await this.invokeApi('/matches/contacts', 'GET', undefined, {
             queryParams: { page }
         });
     }
 
-    getAllMatchesForEstates(page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<Contact>>>> {
-        return this.invokeApi('/matches/estates', 'GET', undefined, {
+    /**
+     * TODO: Please comment this method
+     * @param page
+     */
+    async fetchAllMatchesForEstates(page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<Contact>>>> {
+        return await this.invokeApi('/matches/estates', 'GET', undefined, {
             queryParams: { page }
         });
     }
 
-    getMatchesByContact(contactId: string, page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<MatchScoreContact>>>> {
-        return this.invokeApi(`/matches/contacts/${contactId}`, 'GET', undefined, {
+    /**
+     * TODO: Please comment this method
+     * @param contactId
+     * @param page
+     */
+    async fetchMatchesByContact(contactId: string, page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<MatchScoreContact>>>> {
+        return await this.invokeApi(`/matches/contacts/${contactId}`, 'GET', undefined, {
             queryParams: { page }
         });
     }
 
-    getMatchesByEstate(estateId: string, page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<MatchScoreEstate>>>> {
-        return this.invokeApi(`/matches/estates/${estateId}`, 'GET', undefined, {
+    /**
+     * TODO: Please comment this method
+     * @param estateId
+     * @param page
+     */
+    async fetchMatchesByEstate(estateId: string, page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<MatchScoreEstate>>>> {
+        return await this.invokeApi(`/matches/estates/${estateId}`, 'GET', undefined, {
             queryParams: { page }
         });
     }
 
-    getMatchCountByEstate(estateId: string): Promise<AxiosResponse<MatchCountForEstate>> {
-        return this.invokeApi(`/matches/estates/${estateId}/count`, 'GET');
+    /**
+     * TODO: Please comment this method
+     * @param estateId
+     */
+    async fetchMatchCountByEstate(estateId: string): Promise<AxiosResponse<MatchCountForEstate>> {
+        return await this.invokeApi(`/matches/estates/${estateId}/count`, 'GET');
     }
 
-    initialImport(): Promise<AxiosResponse> {
-        return this.invokeApi('/trigger/initial', 'POST');
+    /**
+     * TODO: Please comment this method
+     */
+    async initialImport(): Promise<AxiosResponse> {
+        return await this.invokeApi('/trigger/initial', 'POST');
     }
 }
 

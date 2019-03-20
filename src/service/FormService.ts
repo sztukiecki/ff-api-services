@@ -6,7 +6,11 @@ export class FormService extends APIClient {
         super(APIMapping.formService);
     }
 
-    render(integrationId: string) {
+    /**
+     * TODO: Please comment this method
+     * @param integrationId
+     */
+    async render(integrationId: string) {
         return this.invokeApi(`/render/${integrationId}`, 'POST').then(s => s.data);
     }
 }

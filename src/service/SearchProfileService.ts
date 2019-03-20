@@ -1,6 +1,12 @@
-import InquiryCreatedMessage from '../util/searchprofile-service/InquiryCreatedMessage';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
+
+export interface InquiryCreatedMessage {
+    inquirySchemaId: string;
+    inquiryId: string;
+    estateId: string;
+    contactId: string;
+}
 
 export class SearchProfileService extends APIClient {
 
@@ -8,12 +14,19 @@ export class SearchProfileService extends APIClient {
         super(APIMapping.searchProfileService);
     }
 
-    getSchema(): Promise<AxiosResponse> {
-        return this.invokeApi(`/searchprofile/schema`, 'GET');
+    /**
+     * TODO: Please comment this method
+     */
+    async fetchSchema(): Promise<AxiosResponse> {
+        return await this.invokeApi(`/searchprofile/schema`, 'GET');
     }
 
-    createSearchprofileFromInquiry(message: InquiryCreatedMessage): Promise<AxiosResponse> {
-        return this.invokeApi(`/searchprofile/fromInquiry`, 'POST', message);
+    /**
+     * TODO: Please comment this method
+     * @param message
+     */
+    async createSearchprofileFromInquiry(message: InquiryCreatedMessage): Promise<AxiosResponse> {
+        return await this.invokeApi(`/searchprofile/fromInquiry`, 'POST', message);
     }
 }
 

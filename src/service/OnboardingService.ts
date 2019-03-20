@@ -10,36 +10,56 @@ export class OnboardingService extends APIClient {
      * Onboards the current user and triggers all the necessary steps
      * @returns {Promise<AxiosResponse>}
      */
-    onboardCurrentUser(): Promise<AxiosResponse> {
-        return this.invokeApi('/customer', 'POST');
+    async onboardCurrentUser(): Promise<AxiosResponse> {
+        return await this.invokeApi('/customer', 'POST');
     }
 
-    setupAccount(bundleName: string, withEntities: boolean = true): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param bundleName
+     * @param withEntities
+     */
+    async setupAccount(bundleName: string, withEntities: boolean = true): Promise<AxiosResponse> {
         const queryParams: any = {
             bundleName: bundleName,
             withEntities: withEntities.toString()
         };
 
-        return this.invokeApi('/customer/setup', 'POST', undefined, {queryParams});
+        return await this.invokeApi('/customer/setup', 'POST', undefined, {queryParams});
     }
 
-    createNewSubscription(numberOfUsers: string) {
+    /**
+     * TODO: Please comment this method
+     * @param numberOfUsers
+     */
+    async createNewSubscription(numberOfUsers: string) {
         const queryParams: any = {
             numberOfUsers: numberOfUsers
         };
-        return this.invokeApi('/buypage/generateUrl', 'POST', undefined, {queryParams});
+        return await this.invokeApi('/buypage/generateUrl', 'POST', undefined, {queryParams});
     }
 
-    getQualificationQuestions() {
+    /**
+     * TODO: Please comment this method
+     */
+    async fetchQualificationQuestions() {
         return this.invokeApi('/qualifications', 'GET');
     }
 
-    answerQuestion(questionId: number, answer: any) {
-        return this.invokeApi('/qualifications/answer/' + questionId, 'POST', {answer});
+    /**
+     * TODO: Please comment this method
+     * @param questionId
+     * @param answer
+     */
+    async answerQuestion(questionId: number, answer: any) {
+        return await this.invokeApi('/qualifications/answer/' + questionId, 'POST', {answer});
     }
 
-    trackBuyNowClicked() {
-        return this.invokeApi('/track/buynowclicked', 'POST');
+    /**
+     * TODO: Please comment this method
+     */
+    async trackBuyNowClicked() {
+        return await this.invokeApi('/track/buynowclicked', 'POST');
     }
 
 }

@@ -1,6 +1,6 @@
 import { APIClient, APIMapping } from '../http';
-import FileModel from '../util/FileModel';
 import { AxiosResponse } from 'axios';
+import FileModel from "../models/FileModel";
 
 export interface InteractiveExposeColors {
     accent: string;

@@ -11,8 +11,8 @@ export class ModuleService extends APIClient {
      * Get all active modules for the current company
      * @returns {Promise<AxiosResponse>}
      */
-    getActiveModules(): Promise<AxiosResponse> {
-        return this.invokeApi('/modules', 'GET', undefined, {
+    async fetchActiveModules(): Promise<AxiosResponse> {
+        return await this.invokeApi('/modules', 'GET', undefined, {
             queryParams: {
                 active: 'true'
             }
@@ -23,8 +23,8 @@ export class ModuleService extends APIClient {
      * Get all modules for the current company
      * @returns {Promise<AxiosResponse>}
      */
-    getAllModules(): Promise<AxiosResponse> {
-        return this.invokeApi('/modules', 'GET');
+    async fetchAllModules(): Promise<AxiosResponse> {
+        return await this.invokeApi('/modules', 'GET');
     }
 
     /**
@@ -32,8 +32,8 @@ export class ModuleService extends APIClient {
      * @param {string} moduleName
      * @returns {Promise<AxiosResponse>}
      */
-    getModule(moduleName: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/modules/${moduleName}`, 'GET');
+    async fetchModule(moduleName: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/modules/${moduleName}`, 'GET');
     }
 
     /**
@@ -41,8 +41,8 @@ export class ModuleService extends APIClient {
      * @param {string} moduleName
      * @returns {Promise<AxiosResponse>}
      */
-    activateModule(moduleName: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/modules/activateModule/${moduleName}`, 'POST');
+    async activateModule(moduleName: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/modules/activateModule/${moduleName}`, 'POST');
     }
 
     /**
@@ -50,8 +50,8 @@ export class ModuleService extends APIClient {
      * @param {string} moduleName
      * @returns {Promise<AxiosResponse>}
      */
-    deactivateModule(moduleName: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/modules/deactivateModule/${moduleName}`, 'POST');
+    async deactivateModule(moduleName: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/modules/deactivateModule/${moduleName}`, 'POST');
     }
 }
 

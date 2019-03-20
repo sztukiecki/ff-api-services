@@ -1,19 +1,6 @@
-import { APIClient, APIMapping } from '../http';
-import { AxiosResponse } from 'axios';
-
-export interface LegislationCheckbox {
-    value: string;
-    label: string;
-    required: boolean;
-    defaultChecked: boolean;
-}
-
-export interface LegislationText {
-    id: string;
-    legislationTextName: string;
-    legislationTextContent: string;
-    legislationCheckboxes: LegislationCheckbox[];
-}
+import {APIClient, APIMapping} from '../http';
+import {AxiosResponse} from 'axios';
+import Company, {LegislationText} from "../models/Company";
 
 export class CompanyService extends APIClient {
 
@@ -21,8 +8,13 @@ export class CompanyService extends APIClient {
         super(APIMapping.companyService);
     }
 
-    // domain -> can also be an email
-    createCompany(companyName: string, companyUrl: string, domain: string): Promise<AxiosResponse> {
+    /**
+     * domain -> can also be an email
+     * @param companyName
+     * @param companyUrl
+     * @param domain
+     */
+    async createCompany(companyName: string, companyUrl: string, domain: string): Promise<AxiosResponse> {
         return this.invokeApi('/company', 'POST', {
             companyName,
             companyUrl,
@@ -30,55 +22,96 @@ export class CompanyService extends APIClient {
         });
     }
 
-    usePreset(presets: any) {
+    /**
+     * TODO: Please comment this method
+     * @param presets
+     */
+    async usePreset(presets: any) {
         return this.invokeApi('/company/usepreset', 'PUT', {
             presets
         });
     }
 
-    startTrial(companyId: string) {
+    /**
+     * TODO: Please comment this method
+     * @param companyId
+     */
+    async startTrial(companyId: string) {
         return this.invokeApi(`/internal/company/${companyId}/startTrial`, 'PUT');
     }
 
-    endTrial(companyId: string) {
+    /**
+     * TODO: Please comment this method
+     * @param companyId
+     */
+    async endTrial(companyId: string) {
         return this.invokeApi(`/internal/company/${companyId}/endTrial`, 'PUT');
     }
 
-    updateCompany(body: any) {
+    /**
+     * Update a company
+     * @param body
+     */
+    async updateCompany(body: Company) {
         return this.invokeApi('/company', 'PUT', body);
     }
 
-    findCompany(companyId: string) {
+    /**
+     * Find a company by id and return it.
+     * @param companyId
+     */
+    async findCompany(companyId: string): Promise<AxiosResponse<Company>> {
         return this.invokeApi(`/company/${encodeURIComponent(companyId)}`, 'GET');
     }
 
-    memberCountByEMailAddress(mailaddress: string) {
+    /**
+     * TODO: Please comment this method
+     * @param mailaddress
+     */
+    async memberCountByEMailAddress(mailaddress: string) {
         return this.invokeApi('/company/numberOfUsers', 'PUT', {
             mailaddress: mailaddress
         });
     }
 
-    postImage(image: any) {
+    /**
+     * TODO: Please comment this method
+     * @param image
+     */
+    async postImage(image: any) {
         const formData = new FormData();
         formData.append('logo', image);
         return this.invokeApi('/company/logo', 'POST', formData,
-                              {headers: {'Content-Type': 'multipart/form-data'}});
+            {headers: {'Content-Type': 'multipart/form-data'}});
     }
 
-    postTerms(terms: any) {
+    /**
+     * TODO: Please comment this method
+     * @param terms
+     */
+    async postTerms(terms: any) {
         const formData = new FormData();
         formData.append('terms-file', terms);
         return this.invokeApi('/company/terms/upload', 'POST', formData,
-                              {headers: {'Content-Type': 'multipart/form-data'}});
+            {headers: {'Content-Type': 'multipart/form-data'}});
     }
 
-    removeTerms(fileName: string) {
+    /**
+     * TODO: Please comment this method
+     * @param fileName
+     */
+    async removeTerms(fileName: string) {
         const formData = new FormData();
         formData.append('file-name', fileName);
         return this.invokeApi('/company/terms/remove', 'POST', formData);
     }
 
-    renameTerms(currentName: string, newName: string) {
+    /**
+     * TODO: Please comment this method
+     * @param currentName
+     * @param newName
+     */
+    async renameTerms(currentName: string, newName: string) {
         const formData = new FormData();
         formData.append('current-name', currentName);
         formData.append('new-name', newName);
@@ -90,11 +123,15 @@ export class CompanyService extends APIClient {
      * Get all legislations texts from the company as JSON
      * @returns {Promise<AxiosResponse>}
      */
-    getLegislationTexts(): Promise<AxiosResponse> {
+    async fetchLegislationTexts(): Promise<AxiosResponse> {
         return this.invokeApi('/legislationTexts', 'GET');
     }
 
-    fetchLegislationTextsByCompanyId(companyId: string): Promise<AxiosResponse> {
+    /**
+     * TODO: Please comment this method
+     * @param companyId
+     */
+    async fetchLegislationTextsByCompanyId(companyId: string): Promise<AxiosResponse> {
         return this.invokeApi('/public/legislationTexts', 'GET', undefined, {
             queryParams: {
                 companyId: companyId
@@ -107,7 +144,7 @@ export class CompanyService extends APIClient {
      * @param {LegislationText} legislationText
      * @returns {Promise<AxiosResponse>}
      */
-    createOrUpdateLegislationText(legislationText: LegislationText): Promise<AxiosResponse> {
+    async createOrUpdateLegislationText(legislationText: LegislationText): Promise<AxiosResponse> {
         return this.invokeApi('/legislationTexts', 'PUT', legislationText);
     }
 
@@ -116,7 +153,7 @@ export class CompanyService extends APIClient {
      * @param {string} id
      * @returns {Promise<AxiosResponse>}
      */
-    deleteLegislationText(id: string): Promise<AxiosResponse> {
+    async deleteLegislationText(id: string): Promise<AxiosResponse> {
         return this.invokeApi(`/legislationTexts/${id}`, 'DELETE');
     }
 
@@ -124,7 +161,7 @@ export class CompanyService extends APIClient {
      * Gets the currently valid consent text that the user must accept before we put our example legislation texts into his or her system.
      * Thats because we do not want to hold the text in the client, but in the service so the customer has no chance to modify it.
      */
-    fetchCurrentlyValidConsentText(): Promise<AxiosResponse> {
+    async fetchCurrentlyValidConsentText(): Promise<AxiosResponse> {
         return this.invokeApi('/legislationTexts/consentText', 'GET');
     }
 
@@ -132,7 +169,7 @@ export class CompanyService extends APIClient {
      * Restore default legislation texts of the company.
      * Other texts then the ones from FLOWFACT will not be modified.
      */
-    restoreDefaults(): Promise<AxiosResponse> {
+    async restoreDefaults(): Promise<AxiosResponse> {
         return this.invokeApi(
             '/legislationTexts/restoreDefaults',
             'PUT',
