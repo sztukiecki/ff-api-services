@@ -18,7 +18,8 @@
     "rebuild-package-cjs": "rimraf lib/ && npm run build-package-cjs",
     "rebuild-package-esm": "rimraf es/ && npm run build-package-esm",
     "prepare": "npm run rebuild-package-cjs && npm run rebuild-package-esm",
-    "lint": "tslint --project ."
+    "lint": "tslint --project .",
+    "doc": "typedoc --out doc/"
   },
   "dependencies": {
     "@flowfact/consul-client": "^0.20180913.16",
@@ -43,6 +44,7 @@
     "recursive-search": "^1.0.1",
     "rimraf": "^2.6.2",
     "tslint": "^5.9.1",
+    "typedoc": "0.14.2",
     "typescript": "^3.0.3"
   }
 }
