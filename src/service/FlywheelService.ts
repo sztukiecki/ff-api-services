@@ -32,7 +32,6 @@ interface ExcludeMasterFilter {
     type: 'EXCLUDE_MASTER';
 }
 
-
 export class FlywheelService extends APIClient {
 
     constructor() {
@@ -121,8 +120,8 @@ export class FlywheelService extends APIClient {
      * Return all transactions for a specific phase
      * @param phaseName
      */
-    async fetchTransactionsForPhase(phaseName: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/transactions/phases/${phaseName}`);
+    async fetchTransactionsForPhase(phaseName: string, view: string  = 'card'): Promise<AxiosResponse> {
+        return this.invokeApi(`/transactions/phases/${phaseName}?view=${view}`);
     }
 
     /**
