@@ -2,3 +2,5 @@ teams:
   - developer
 type: library
 build: npm
+pipeline:
+  - repo: flowfact
