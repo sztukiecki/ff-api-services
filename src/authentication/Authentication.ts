@@ -1,5 +1,5 @@
 import Amplify, { Auth } from 'aws-amplify';
-import { CognitoUser, CognitoUserSession } from 'amazon-cognito-identity-js';
+import { CognitoUser, CognitoUserSession, ISignUpResult } from 'amazon-cognito-identity-js';
 import EnvironmentManagement, { StageTypes } from '../util/EnvironmentManagement';
 import CustomStorage from './CustomStorage';
 
@@ -103,7 +103,7 @@ class Authentication {
      * @param password
      * @param email
      */
-    public async register(username: string, password: string, email: string) {
+    public async register(username: string, password: string, email: string): Promise<ISignUpResult> {
         return await Auth.signUp({
             username: username,
             password: password,
