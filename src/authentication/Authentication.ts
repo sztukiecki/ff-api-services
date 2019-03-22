@@ -70,7 +70,7 @@ class Authentication {
      * @param global
      *      if true, then the user will be globally log out on all devices.
      */
-    public async logout(global: boolean = false): Promise<any> {
+    public async logout(global: boolean = false) {
         return Auth.signOut({
             global: global
         });
@@ -161,7 +161,7 @@ class Authentication {
      * Set the user into the "forgot password"-mode. The user will receive an email with a confirm code.
      * @param username
      */
-    public forgotPassword(username: string): Promise<any> {
+    public forgotPassword(username: string) {
         return Auth.forgotPassword(username);
     }
 
