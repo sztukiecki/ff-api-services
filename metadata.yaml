@@ -3,4 +3,5 @@ teams:
 type: library
 build: npm
 pipeline:
-  - repo: flowfact
+  repos:
+    - flowfact
