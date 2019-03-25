@@ -44,11 +44,11 @@ interface AuthRequest {
 interface AuthRequestSettings {
     imapHost: string,
     imapPort: string,
-    imapUser: string,
+    imapUsername: string,
     imapPassword: string,
     smtpHost: string,
     smtpPort: string,
-    smtpUser: string,
+    smtpUsername: string,
     smtpPassword: string
 }
 
