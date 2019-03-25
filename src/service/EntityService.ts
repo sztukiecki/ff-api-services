@@ -21,9 +21,30 @@ export class EntityService extends APIClient {
      * TODO: Please comment this method
      * @param schemaId
      * @param entity
+     * @return the created entity id
      */
     async createEntity(schemaId: string, entity: any): Promise<AxiosResponse> {
         return this.invokeApi(`/schemas/${schemaId}`, 'POST', entity || {});
+    }
+
+    /**
+     * This method creates a new entity and automatically add values of the fields with the same name of the previous
+     * schema/entity. The new entity schema can be different as the previous schema.
+     * @param schemaId
+     *      The schema id of the new entity
+     * @param previousSchemaId
+     *      The schema id of the previous entity
+     * @param previousEntityId
+     *      The entity of the previous entity
+     * @return the created entity id
+     */
+    async createEntityFromPrevious(schemaId: string, previousSchemaId: string, previousEntityId: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/schemas/${schemaId}/previous`, 'POST', undefined, {
+            queryParams: {
+                previousSchemaId,
+                previousEntityId
+            }
+        });
     }
 
     /**
