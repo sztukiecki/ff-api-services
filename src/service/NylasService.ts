@@ -34,6 +34,27 @@ interface NylasConfig {
     emails: EmailAddress[];
 }
 
+interface AuthRequest {
+    email: string,
+    name: string,
+    provider: string,
+    settings: AuthRequestSettings
+}
+
+interface AuthRequestSettings {
+    imapHost: string,
+    imapPort: string,
+    imapUser: string,
+    imapPassword: string,
+    smtpHost: string,
+    smtpPort: string,
+    smtpUser: string,
+    smtpPassword: string
+}
+
+/**
+ * See https://docs.nylas.com/reference for more info
+ */
 export class NylasService extends APIClient {
 
     constructor() {
@@ -41,7 +62,7 @@ export class NylasService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Authorize a user with the code from the nylas callback
      * @param code
      */
     async authorizeUser(code: string): Promise<AxiosResponse> {
@@ -53,8 +74,20 @@ export class NylasService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
-     * @param emailAccount
+     * Authorize a user with specific credentials
+     * @param authRequest IMAP/SMTP credentials
+     */
+    async nativeAuth(authRequest: AuthRequest): Promise<AxiosResponse> {
+        return await this.invokeApi('/authorize', 'POST', authRequest, {
+            queryParams: {
+                nativeAuth: true
+            }
+        });
+    }
+
+    /**
+     * Sends an email using the nylas api
+     * @param emailAccount the email to be sending from
      * @param email
      */
     async sendMail(emailAccount: string, email: SendEmailRequest): Promise<AxiosResponse> {
@@ -66,16 +99,16 @@ export class NylasService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     *
      */
     async fetchConfig(): Promise<AxiosResponse<NylasConfig>> {
         return await this.invokeApi('/config', 'GET');
     }
 
     /**
-     * TODO: Please comment this method
+     * Generate a url that follows the nylas hosted authorization flow
      * @param email
-     * @param callbackUrl
+     * @param callbackUrl URL that has to be confiured
      */
     async getRegistrationUrl(email: string, callbackUrl?: string): Promise<AxiosResponse<RegistrationUrl>> {
         return await this.invokeApi('/registration-url', 'GET', undefined, {
