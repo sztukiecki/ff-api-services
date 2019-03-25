@@ -22,14 +22,21 @@ export interface MatchCountForEstate {
     matches: number;
 }
 
+export type InquiryStatus = 'active' | 'pinned' | 'done';
+
 export interface Inquiry {
-    inquiree: string;
-    estate: string;
-    portal: null;
-    inquiryText: string;
-    userDefinedFields: null;
-    status: null;
     id: string;
+    iexSendAt: number;
+    iexOpenedAt: number;
+    contact: string;
+    estate: string;
+    portalId: string;
+    inquiryText: string;
+    status: InquiryStatus;
+    isSendingIEXAutomaticallyEnabled: true;
+    realEstateAgent: string;
+    inquiryRecipient: string;
+    created: number;
 }
 
 export interface MatchmakingPagingResponse<T> {
