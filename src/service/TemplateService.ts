@@ -22,6 +22,10 @@ export class TemplateService extends APIClient {
         return this.invokeApi(`/templates?templateType=${type}`, 'GET').then(s => s.data).then(s => s ? s : []);
     }
 
+    fetchFullTemplatesByType(type: string) {
+        return this.invokeApi(`/templates?full=true&templateType=${type}`, 'GET').then(s => s.data).then(s => s ? s : []);
+    }
+
     /**
      * TODO: Please comment this method
      * @param body
