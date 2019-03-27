@@ -81,7 +81,10 @@ export class TemplateService extends APIClient {
      * @param withResponse
      */
     
-    delete({id, withResponse= false}: {id: string; withResponse?: boolean}) {
+    delete(id: string, withResponse?: boolean) {
+        if (!withResponse) {
+           withResponse = false;
+        }
         return this.invokeApi(`/templates/${id}`, 'DELETE').then(response => withResponse ? response : response.data);
     }
 
