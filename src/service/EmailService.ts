@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from '../http';
-import {AxiosResponse} from "axios";
+import { AxiosResponse } from 'axios';
 
 export interface EmailServiceVerifyDnsEntry {
     valid: boolean;
@@ -12,6 +12,18 @@ export interface EmailServiceVerifyResponse {
     domain: string;
     valid: boolean;
     dnsEntries: EmailServiceVerifyDnsEntry[];
+}
+
+export interface Mail {
+    mailFrom: string;
+    replyTo: string;
+    recipientList: string[];
+    blindCopyList?: string[];
+    carbonCopyList?: string[];
+    subject: string;
+    body: string;
+    schemaId?: string;
+    entityId?: string;
 }
 
 export class EmailService extends APIClient {
@@ -42,9 +54,15 @@ export class EmailService extends APIClient {
     async fetchMailBody(s3Key: string): Promise<AxiosResponse<String>> {
         return this.invokeApi('/body/html', 'GET', undefined, {
             queryParams: {
-                s3key: s3Key
-            }
+                s3key: s3Key,
+            },
         });
+    }
+
+    async sendMail(mail: Mail): Promise<AxiosResponse> {
+        const formData = new FormData();
+        formData.append('model', JSON.stringify(mail));
+        return this.invokeApi('/mails/html', 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
     }
 }
 
