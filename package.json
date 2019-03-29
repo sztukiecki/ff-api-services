@@ -40,7 +40,7 @@
     "wpapi": "1.1.2"
   },
   "devDependencies": {
-    "amazon-cognito-identity-js": "^3.0.7",
+    "amazon-cognito-identity-js": "3.0.7",
     "recursive-search": "^1.0.1",
     "rimraf": "^2.6.2",
     "tslint": "^5.9.1",
