@@ -13,11 +13,11 @@
     "registry": "https://arm.flowfact-ops.cloud/content/repositories/ffnpm/"
   },
   "scripts": {
-    "build-package-cjs": "tsc",
-    "build-package-esm": "tsc --project tsconfig.esm.json",
-    "rebuild-package-cjs": "rimraf lib/ && npm run build-package-cjs",
-    "rebuild-package-esm": "rimraf es/ && npm run build-package-esm",
-    "prepare": "npm run rebuild-package-cjs && npm run rebuild-package-esm",
+    "build:cjs": "tsc",
+    "build:esm": "tsc --project tsconfig.esm.json",
+    "rebuild:cjs": "rimraf lib/ && npm run build:cjs",
+    "rebuild:esm": "rimraf es/ && npm run build:esm",
+    "prepare": "npm run rebuild:cjs && npm run rebuild:esm",
     "lint": "tslint --project .",
     "doc": "typedoc --out doc/"
   },
