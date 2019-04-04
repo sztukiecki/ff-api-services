@@ -15,11 +15,12 @@
   "scripts": {
     "build:cjs": "tsc",
     "build:esm": "tsc --project tsconfig.esm.json",
-    "rebuild:cjs": "rimraf lib/ && npm run build:cjs",
-    "rebuild:esm": "rimraf es/ && npm run build:esm",
-    "prepare": "npm run rebuild:cjs && npm run rebuild:esm",
+    "rebuild:cjs": "rimraf lib/ && yarn run build:cjs",
+    "rebuild:esm": "rimraf es/ && yarn run build:esm",
+    "prepare": "yarn run rebuild:cjs && yarn run rebuild:esm",
     "lint": "tslint --project .",
-    "doc": "typedoc --out doc/"
+    "doc": "typedoc --out doc/",
+    "local": "rimraf api-services.tgz && yarn run prepare && yarn pack --filename api-services.tgz && yarn cache clean @flowfact/*"
   },
   "dependencies": {
     "@flowfact/consul-client": "0.20190322.4",
