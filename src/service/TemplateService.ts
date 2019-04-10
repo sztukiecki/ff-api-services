@@ -88,6 +88,10 @@ export class TemplateService extends APIClient {
         return this.invokeApi(`/templates/${id}`, 'DELETE').then(response => withResponse ? response : response.data);
     }
 
+    fetchPlaceholderPrefixesById(id: string) {
+        return this.invokeApi(`/templates/getPlaceholderPrefixes/${id}`, 'GET').then(response => response.data);
+    }
+
     /**
      * TODO: Please comment this method
      * @param body
