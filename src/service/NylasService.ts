@@ -86,6 +86,18 @@ export class NylasService extends APIClient {
     }
 
     /**
+     * Reactivates a 'cancelled' account and sets it back to 'paid' in nylas
+     * @param email the email address to reactivate
+     */
+    async reactivate(email: string): Promise<AxiosResponse> {
+        return await this.invokeApi('/reactivate', 'POST', undefined, {
+            queryParams: {
+                email: email
+            }
+        });
+    }
+
+    /**
      * Sends an email using the nylas api
      * @param emailAccount the email to be sending from
      * @param email
