@@ -62,6 +62,10 @@ export class SchemaService extends APIClient {
         return this.invokeApi(`/schemas/${schemaId}`, 'GET', undefined, {queryParams});
     }
 
+    async fetchSchemaByIdOrName(schemaIdOrName: string) {
+        return this.invokeApi(`/v2/schemas/${schemaIdOrName}`, 'GET').then(response => response.data);
+    }
+
     /**
      * TODO: Please comment this method
      * @param schema
