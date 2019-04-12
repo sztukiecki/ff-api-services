@@ -32,11 +32,11 @@ export class CognitoClientService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * This method resets the password of a specific user
      * @param aliasMailAddress
      */
     async resetPassword(aliasMailAddress: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/users/password`, 'DELETE', {username: aliasMailAddress});
+        return this.invokeApi(`/users/password`, 'POST', {username: aliasMailAddress});
     }
 }
 
