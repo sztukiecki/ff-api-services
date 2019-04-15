@@ -52,6 +52,12 @@ interface AuthRequestSettings {
     smtpPassword: string
 }
 
+interface NylasConfigPatch {
+    email: string,
+    owner?: string,
+    settings?: {}
+}
+
 /**
  * See https://docs.nylas.com/reference for more info
  */
@@ -132,29 +138,45 @@ export class NylasService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Sets the email account values to the supplied settings, nulls them if they are left out
      * @param email
      * @param settings
      */
-    async overwriteSettings(email: string, settings: object): Promise<AxiosResponse> {
-        return await this.invokeApi('/config', 'POST', {
-                email: email,
-                configValues: settings
-            }
-        );
+    async overwriteSettings(email: string, settings?: object, owner?: string): Promise<AxiosResponse> {
+        const patch: NylasConfigPatch = {
+            email: email
+        };
+
+        if(owner) {
+            patch.owner = owner;
+        }
+
+        if(settings) {
+            patch.settings = settings;
+        }
+
+        return await this.invokeApi('/config', 'POST', patch);
     }
 
     /**
-     * TODO: Please comment this method
+     * Updates the settings to the specified values, keeps existing values if none are supplied
      * @param email
      * @param settings
      */
-    async updateSettings(email: string, settings: object): Promise<AxiosResponse> {
-        return await this.invokeApi('/config', 'PATCH', {
-                email: email,
-                configValues: settings
-            }
-        );
+    async updateSettings(email: string, settings?: object, owner?: string): Promise<AxiosResponse> {
+        const patch: NylasConfigPatch = {
+            email: email
+        };
+
+        if(owner) {
+            patch.owner = owner;
+        }
+
+        if(settings) {
+            patch.settings = settings;
+        }
+
+        return await this.invokeApi('/config', 'PATCH', patch);
     }
 
     /**
