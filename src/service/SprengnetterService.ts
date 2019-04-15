@@ -39,10 +39,6 @@ export class SprengnetterService extends APIClient {
         return await this.invokeApi('/api/rent', 'POST', body);
     }
 
-    async fetchHtmlView(entityId: any): Promise<AxiosResponse> {
-        return await this.invokeApi('/htmlView/' + entityId , 'GET');
-    }
-
 }
 
 export default new SprengnetterService();
