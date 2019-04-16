@@ -92,7 +92,7 @@ export class TemplateService extends APIClient {
         return this.invokeApi(`/templates/getPlaceholderPrefixes/${id}`, 'GET').then(response => response.data);
     }
 
-    fillTemplate(requestBody: string) {
+    fillTemplate(requestBody: any) {
         return this.invokeApi('/templates/fillTemplate', 'POST', requestBody).then(response => response.data);
     }
     /**
