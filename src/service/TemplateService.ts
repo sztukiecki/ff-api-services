@@ -80,7 +80,7 @@ export class TemplateService extends APIClient {
      * @param id
      * @param withResponse
      */
-    
+
     delete(id: string, withResponse?: boolean) {
         if (!withResponse) {
            withResponse = false;
@@ -92,6 +92,9 @@ export class TemplateService extends APIClient {
         return this.invokeApi(`/templates/getPlaceholderPrefixes/${id}`, 'GET').then(response => response.data);
     }
 
+    fillTemplate(requestBody: string) {
+        return this.invokeApi('/templates/fillTemplate', 'POST', requestBody).then(response => response.data);
+    }
     /**
      * TODO: Please comment this method
      * @param body
