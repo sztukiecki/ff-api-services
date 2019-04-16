@@ -55,7 +55,7 @@ interface AuthRequestSettings {
 interface NylasConfigPatch {
     email: string,
     owner?: string,
-    settings?: {}
+    configValues?: {}
 }
 
 /**
@@ -152,7 +152,7 @@ export class NylasService extends APIClient {
         }
 
         if(settings) {
-            patch.settings = settings;
+            patch.configValues = settings;
         }
 
         return await this.invokeApi('/config', 'POST', patch);
@@ -173,7 +173,7 @@ export class NylasService extends APIClient {
         }
 
         if(settings) {
-            patch.settings = settings;
+            patch.configValues = settings;
         }
 
         return await this.invokeApi('/config', 'PATCH', patch);
