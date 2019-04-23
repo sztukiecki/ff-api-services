@@ -44,7 +44,6 @@ const APIMapping = {
     relogService: new APIService('relog-service'),
     sampleDataService: new APIService('sampledata-service'),
     schemaService: new APIService('schema-service'),
-    searchProfileService: new APIService('searchprofile-service'),
     searchService: new APIService('search-service'),
     slackIntegrationService: new APIService('slack-integration-service'),
     spregnetterService: new APIService('sprengnetter-service'),
