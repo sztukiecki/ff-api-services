@@ -1,15 +1,9 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 import { Flowdsl } from '@flowfact/node-flowdsl/lib/Flowdsl';
-import { Entity, EntityACLType, EntityValues, EntityView } from '@flowfact/types';
+import { Entity, EntityACLType, EntityValues, EntityView, EntityAccess } from '@flowfact/types';
 import { EntityQuery, ParamList, SearchResult, UniformObject } from '../util/InternalTypes';
 import { v4 as uuid } from 'uuid/interfaces';
-
-export interface HasRightsModel {
-    schemaId: string;
-    entityId: string;
-    hasAccess: boolean;
-}
 
 export class EntityService extends APIClient {
 
@@ -164,7 +158,7 @@ export class EntityService extends APIClient {
      * @param entities
      */
     async hasAccessForMultipleEntities(userId: string, accessType: EntityACLType, entities: EntityQuery[]) {
-        return this.invokeApi<HasRightsModel[]>(`/users/${userId}/hasaccess/${accessType}`, 'POST', entities);
+        return this.invokeApi<EntityAccess[]>(`/users/${userId}/hasaccess/${accessType}`, 'POST', entities);
     }
 
     /**

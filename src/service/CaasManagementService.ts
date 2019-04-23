@@ -1,12 +1,13 @@
+import {
+    ContainerCreate,
+    ContainerLogsResponse,
+    ContainerResponse,
+    ContainerUpdate,
+    GetAllContainersResponse
+} from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import APIClient from '../http/APIClient';
 import APIMapping from '../http/APIMapping';
-import {
-    ContainerCreateModel,
-    ContainerLogsResponse,
-    ContainerResponse,
-    ContainerUpdateModel, GetAllContainersResponse
-} from '../models/Container';
 
 export class CaasManagementService extends APIClient {
 
@@ -45,7 +46,7 @@ export class CaasManagementService extends APIClient {
      * @param containerConfiguration
      * @return {ContainerResponse}
      */
-    async createContainer(containerConfiguration: ContainerCreateModel): Promise<AxiosResponse<ContainerResponse>> {
+    async createContainer(containerConfiguration: ContainerCreate): Promise<AxiosResponse<ContainerResponse>> {
         return await this.invokeApi('/containers', 'POST', containerConfiguration);
     }
 
@@ -55,7 +56,7 @@ export class CaasManagementService extends APIClient {
      * @param containerConfiguration
      * @return {ContainerResponse}
      */
-    async updateContainer(id: string, containerConfiguration: ContainerUpdateModel): Promise<AxiosResponse<ContainerResponse>> {
+    async updateContainer(id: string, containerConfiguration: ContainerUpdate): Promise<AxiosResponse<ContainerResponse>> {
         return await this.invokeApi(`/containers/${id}`, 'PUT', containerConfiguration);
     }
 
@@ -68,6 +69,7 @@ export class CaasManagementService extends APIClient {
     }
 
     /* ############ Databases ############ */
+
     // TODO: This section is WIP
 
     /**

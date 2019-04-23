@@ -5,3 +5,5 @@
 .project
 /doc
 /api-services.tgz
+/.yalc
+yalc.lock

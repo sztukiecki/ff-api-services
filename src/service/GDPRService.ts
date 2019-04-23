@@ -1,22 +1,8 @@
+import { DataChangeRequestType, ExportRequestBody, Settings } from '@flowfact/types';
 import APIClient from '../http/APIClient';
 import APIMapping from '../http/APIMapping';
 import { AxiosResponse } from 'axios';
 import { EntityQuery } from '../util/InternalTypes';
-
-export type ExportType = 'JSON' | 'CSV' | 'XML';
-
-export interface ExportRequestBody {
-    contactId: string;
-    exportType: ExportType;
-    recipientEmail: string;
-}
-
-export interface Settings {
-    companyId: string;
-    contactApproachAlwaysAllowed: boolean;
-}
-
-export type DataChangeRequestType = 'DELETE' | 'CHANGE' | 'PROCESS_LIMITATION';
 
 export class GDPRService extends APIClient {
 

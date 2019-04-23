@@ -1,11 +1,6 @@
-import {APIClient, APIMapping} from '../http';
-import {AxiosResponse} from 'axios';
-
-interface ImportBundle {
-    bundleName: string;
-    scope: string;
-    withEntities: boolean;
-}
+import { ImportBundle } from '@flowfact/types';
+import { AxiosResponse } from 'axios';
+import { APIClient, APIMapping } from '../http';
 
 export class SampleDataService extends APIClient {
     constructor() {
@@ -21,7 +16,7 @@ export class SampleDataService extends APIClient {
             bundleName: bundleName
         };
 
-        return await this.invokeApi('/import', 'POST', undefined, {queryParams});
+        return await this.invokeApi('/import', 'POST', undefined, { queryParams });
     }
 
     /**
@@ -33,7 +28,7 @@ export class SampleDataService extends APIClient {
             bundleName: bundleName
         };
 
-        return await this.invokeApi('/remove', 'DELETE', undefined, {queryParams});
+        return await this.invokeApi('/remove', 'DELETE', undefined, { queryParams });
     }
 
     /**

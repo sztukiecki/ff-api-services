@@ -3,13 +3,7 @@ import { AxiosResponse } from 'axios';
 import { DslBuilder } from '@flowfact/node-flowdsl';
 import { Flowdsl, FlowdslConditionUnion, EntityIdCondition, HasFieldWithValueCondition } from '@flowfact/node-flowdsl/lib/Flowdsl';
 import { SearchResult } from '../util/InternalTypes';
-import { Entity } from '@flowfact/types';
-
-export interface FilterConfiguration {
-    value: string;
-    fields: string[];
-    limitResponse?: boolean; // if true, than just the fields in the fields array will be returned
-}
+import { Entity, FilterConfiguration } from '@flowfact/types';
 
 export class SearchService extends APIClient {
 

@@ -1,7 +1,12 @@
+import {
+    Contact,
+    MatchCountForEstate,
+    MatchmakingPagingResponse,
+    MatchScoreContact,
+    MatchScoreEstate
+} from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
-import { Contact } from '../models/ContactModels';
-import { MatchCountForEstate, MatchmakingPagingResponse, MatchScoreContact, MatchScoreEstate } from '../models/MatchmakingModels';
 
 export class MatchmakingService extends APIClient {
 

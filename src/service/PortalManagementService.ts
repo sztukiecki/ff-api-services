@@ -1,46 +1,6 @@
+import { Portal, PortalAuthenticationModel, PortalEstateSettings, PortalType, PublishRequest } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
-
-export interface PortalAuthenticationModel {
-    callbackUrl: string;
-}
-
-export interface PublishRequest {
-    portalId: string;
-    entries: PublishRequestEntry[];
-}
-
-export interface PublishRequestEntry {
-    entityId: string;
-    externalId?: string;
-    targetStatus: 'OFFLINE' | 'ONLINE';
-}
-
-export interface Portal {
-    companyId?: string;
-    description?: string;
-    ftpConnectionType?: 'FTP';
-    ftpPort?: number;
-    ftpServer?: string;
-    id?: string;
-    loginName?: string;
-    logo?: string;
-    name?: string;
-    password?: string;
-    portalKey?: string;
-    portalType?: PortalType;
-}
-
-export interface PortalEstateSettings {
-    id: string;
-    portalId: string;
-    schemaId: string;
-    entityId: string;
-    externalId: string;
-    showAddress: boolean;
-}
-
-export type PortalType = 'IS24' | 'OPENIMMO' | 'WORDPRESS';
 
 export class PortalManagementService extends APIClient {
 

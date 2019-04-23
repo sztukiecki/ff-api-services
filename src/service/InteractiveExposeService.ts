@@ -1,74 +1,15 @@
-import { APIClient, APIMapping } from '../http';
+import {
+    DesignTemplate,
+    DesignTemplateAssignment,
+    File,
+    InteractiveExposeMapping,
+    InteractiveExposeSettings,
+    InteractiveExposeSettingsWithLogos,
+    InteractiveExposeTemplate,
+    SendInteractiveExposeModel
+} from '@flowfact/types';
 import { AxiosResponse } from 'axios';
-import FileModel from "../models/FileModel";
-
-export interface InteractiveExposeColors {
-    accent: string;
-    accentContrast: string;
-}
-
-export interface InteractiveExposeSettings {
-    colors: InteractiveExposeColors;
-    theme: string;
-    urlIdentifier: string;
-    allowSendFromOtherContext?: boolean;
-}
-
-export interface InteractiveExposeLogos {
-    dark: string;
-    light: string;
-}
-
-export interface InteractiveExposeSettingsWithLogos extends InteractiveExposeSettings {
-    logos: InteractiveExposeLogos;
-}
-
-export interface InteractiveExposeTemplate {
-    id: string;
-    name: string;
-    description: string;
-    body: string;
-    type: string;
-    role: string;
-    assignedSchemas: string[];
-    creatorId: string;
-    updaterId: string;
-}
-
-export interface SendInteractiveExposeModel {
-    objectId: string;
-    recipientId: string;
-    recipientMailAddress?: string;
-    callbackUrl?: string;
-    hideRecommendations: boolean;
-    emailTemplate?: {
-        templateId: string
-    };
-}
-
-export interface InteractiveExposeMapping {
-    schemaId: string;
-    maxStageCount: number;
-    settings: any;
-    ratingSettings: any;
-    initialAgreement: any;
-    stageConfigurations: any;
-    additionalData: any;
-    sections: any;
-    advancedStageConfigurationMappings: any;
-}
-
-export interface DesignTemplate {
-    templateName: string;
-    templateNiceName: string;
-    default: boolean;
-}
-
-export interface DesignTemplateAssignment {
-    companyId: string;
-    templateName: string;
-    isDefault: boolean;
-}
+import { APIClient, APIMapping } from '../http';
 
 export class InteractiveExposeService extends APIClient {
 
@@ -96,10 +37,11 @@ export class InteractiveExposeService extends APIClient {
         return await this.invokeApi('/interactiveExposes', 'POST', model);
     }
 
-    async changeLogo(type: 'light' | 'dark', image: File): Promise<FileModel> {
+    async changeLogo(type: 'light' | 'dark', image: File): Promise<File> {
         const formData = new FormData();
+        // TODO: Check this TS error
         formData.append('logo', image);
-        return (await this.invokeApi(`/settings/logos/${type}`, 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}})).data;
+        return (await this.invokeApi(`/settings/logos/${type}`, 'POST', formData, { headers: { 'Content-Type': 'multipart/form-data' } })).data;
     }
 
     async deleteLogo(type: 'light' | 'dark'): Promise<AxiosResponse> {
@@ -181,7 +123,7 @@ export class InteractiveExposeService extends APIClient {
      * Add a domain to the company.
      */
     async addDomain(domain: string): Promise<AxiosResponse> {
-        return this.invokeApi('/domain', 'POST', '', {queryParams: {domain}});
+        return this.invokeApi('/domain', 'POST', '', { queryParams: { domain } });
     }
 
     /**
@@ -224,7 +166,7 @@ export class InteractiveExposeService extends APIClient {
      */
     async restoreDefaults(): Promise<AxiosResponse> {
         return this.invokeApi('/mapping/restoreDefaults', 'PUT', undefined, {
-            headers: {'Content-Type': 'application/json'}
+            headers: { 'Content-Type': 'application/json' }
         });
     }
 

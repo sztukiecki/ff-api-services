@@ -1,30 +1,6 @@
+import { EmailServiceVerifyResponse, Mail } from '@flowfact/types';
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
-
-export interface EmailServiceVerifyDnsEntry {
-    valid: boolean;
-    type: 'a' | 'cname';
-    host: string;
-    data: string;
-}
-
-export interface EmailServiceVerifyResponse {
-    domain: string;
-    valid: boolean;
-    dnsEntries: EmailServiceVerifyDnsEntry[];
-}
-
-export interface Mail {
-    mailFrom: string;
-    replyTo: string;
-    recipientList: string[];
-    blindCopyList?: string[];
-    carbonCopyList?: string[];
-    subject: string;
-    body: string;
-    schemaId?: string;
-    entityId?: string;
-}
 
 export class EmailService extends APIClient {
     constructor() {

@@ -1,36 +1,6 @@
-import { APIClient, APIMapping } from '../http';
-import Phase from '../models/Phase';
-import Flywheel from '../models/Flywheel';
+import { Flywheel, FlywheelFilter, Phase } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
-
-type Filter = ExcludeStepsFilter |
-    ExcludeKanbansFilter |
-    SchemaIdFilter |
-    ExcludeCustomerFilter |
-    ExcludeMasterFilter;
-
-interface ExcludeStepsFilter {
-    type: 'EXCLUDE_PHASE_STEPS';
-}
-
-interface ExcludeKanbansFilter {
-    type: 'EXCLUDE_PHASE_NON_STEPS';
-}
-
-interface SchemaIdFilter {
-    type: 'MATCH_SCHEMA_ID';
-    data: {
-        schemaId: string;
-    };
-}
-
-interface ExcludeCustomerFilter {
-    type: 'EXCLUDE_CUSTOMER';
-}
-
-interface ExcludeMasterFilter {
-    type: 'EXCLUDE_MASTER';
-}
+import { APIClient, APIMapping } from '../http';
 
 export class FlywheelService extends APIClient {
 
@@ -98,7 +68,7 @@ export class FlywheelService extends APIClient {
      * TODO: Please comment this method
      * @param filters
      */
-    async fetchAllPhases(filters?: Filter[]): Promise<AxiosResponse> {
+    async fetchAllPhases(filters?: FlywheelFilter[]): Promise<AxiosResponse> {
         const params: any = {};
         if (filters) {
             params.queryParams = {
@@ -119,8 +89,9 @@ export class FlywheelService extends APIClient {
     /**
      * Return all transactions for a specific phase
      * @param phaseName
+     * @param view
      */
-    async fetchTransactionsForPhase(phaseName: string, view: string  = 'card'): Promise<AxiosResponse> {
+    async fetchTransactionsForPhase(phaseName: string, view: string = 'card'): Promise<AxiosResponse> {
         return this.invokeApi(`/transactions/phases/${phaseName}?view=${view}`);
     }
 
@@ -131,7 +102,7 @@ export class FlywheelService extends APIClient {
      * @param toPhaseName
      */
     async moveTransaction(transactionId: string, fromPhaseName: string, toPhaseName: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/transactions/${transactionId}`, 'PUT', {fromPhaseName, toPhaseName});
+        return this.invokeApi(`/transactions/${transactionId}`, 'PUT', { fromPhaseName, toPhaseName });
     }
 
     /**

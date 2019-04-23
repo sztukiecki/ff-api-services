@@ -1,62 +1,7 @@
+import { AuthRequest, NylasConfig, NylasConfigPatch, RegistrationUrl, SendEmailRequest } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import APIClient from '../http/APIClient';
 import APIMapping from '../http/APIMapping';
-
-interface SendEmailRequest {
-    subject: string;
-    to: EmailAddress[];
-    cc: EmailAddress[];
-    bcc: EmailAddress[];
-    from: EmailAddress[];
-    reply_to: EmailAddress[];
-    body: string;
-    file_ids: string[];
-    tracking: Tracking;
-}
-
-interface EmailAddress {
-    email: string;
-    name: string;
-}
-
-interface Tracking {
-    links: boolean;
-    opens: boolean;
-    thread_replies: boolean;
-    payload: string;
-}
-
-interface RegistrationUrl {
-    registrationUrl: string;
-}
-
-interface NylasConfig {
-    emails: EmailAddress[];
-}
-
-interface AuthRequest {
-    email: string,
-    name: string,
-    provider: string,
-    settings: AuthRequestSettings
-}
-
-interface AuthRequestSettings {
-    imapHost: string,
-    imapPort: string,
-    imapUsername: string,
-    imapPassword: string,
-    smtpHost: string,
-    smtpPort: string,
-    smtpUsername: string,
-    smtpPassword: string
-}
-
-interface NylasConfigPatch {
-    email: string,
-    owner?: string,
-    configValues?: {}
-}
 
 /**
  * See https://docs.nylas.com/reference for more info
@@ -141,17 +86,18 @@ export class NylasService extends APIClient {
      * Sets the email account values to the supplied settings, nulls them if they are left out
      * @param email
      * @param settings
+     * @param owner
      */
     async overwriteSettings(email: string, settings?: object, owner?: string): Promise<AxiosResponse> {
         const patch: NylasConfigPatch = {
             email: email
         };
 
-        if(owner) {
+        if (owner) {
             patch.owner = owner;
         }
 
-        if(settings) {
+        if (settings) {
             patch.configValues = settings;
         }
 
@@ -162,17 +108,18 @@ export class NylasService extends APIClient {
      * Updates the settings to the specified values, keeps existing values if none are supplied
      * @param email
      * @param settings
+     * @param owner
      */
     async updateSettings(email: string, settings?: object, owner?: string): Promise<AxiosResponse> {
         const patch: NylasConfigPatch = {
             email: email
         };
 
-        if(owner) {
+        if (owner) {
             patch.owner = owner;
         }
 
-        if(settings) {
+        if (settings) {
             patch.configValues = settings;
         }
 
@@ -182,6 +129,7 @@ export class NylasService extends APIClient {
     /**
      * TODO: Please comment this method
      */
+
     /* UNDER DEVELOPMENT; DOES NOT WORK YET */
     async deleteAccount(email: string): Promise<AxiosResponse> {
         return await this.invokeApi('/account', 'DELETE', undefined, {

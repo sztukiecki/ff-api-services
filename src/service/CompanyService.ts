@@ -1,6 +1,6 @@
-import {APIClient, APIMapping} from '../http';
-import {AxiosResponse} from 'axios';
-import Company, {LegislationText} from "../models/Company";
+import { Company, LegislationText } from '@flowfact/types';
+import { AxiosResponse } from 'axios';
+import { APIClient, APIMapping } from '../http';
 
 export class CompanyService extends APIClient {
 
@@ -81,8 +81,7 @@ export class CompanyService extends APIClient {
     async postImage(image: any) {
         const formData = new FormData();
         formData.append('logo', image);
-        return this.invokeApi('/company/logo', 'POST', formData,
-            {headers: {'Content-Type': 'multipart/form-data'}});
+        return this.invokeApi('/company/logo', 'POST', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
     }
 
     /**
@@ -92,8 +91,7 @@ export class CompanyService extends APIClient {
     async postTerms(terms: any) {
         const formData = new FormData();
         formData.append('terms-file', terms);
-        return this.invokeApi('/company/terms/upload', 'POST', formData,
-            {headers: {'Content-Type': 'multipart/form-data'}});
+        return this.invokeApi('/company/terms/upload', 'POST', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
     }
 
     /**
@@ -175,7 +173,7 @@ export class CompanyService extends APIClient {
             'PUT',
             undefined,
             {
-                headers: {'Content-Type': 'application/json'}
+                headers: { 'Content-Type': 'application/json' }
             });
     }
 }

@@ -1,6 +1,6 @@
-import {APIClient, APIMapping} from '../http';
-import {AxiosResponse} from 'axios';
-import User from '../models/User';
+import { User } from '@flowfact/types';
+import { AxiosResponse } from 'axios';
+import { APIClient, APIMapping } from '../http';
 
 export class UserService extends APIClient {
 
@@ -45,7 +45,7 @@ export class UserService extends APIClient {
     async postImage(image: Blob): Promise<AxiosResponse<any>> {
         const formData = new FormData();
         formData.append('contactPicture', image, 'contactPicture');
-        return this.invokeApi('/users/picture', 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
+        return this.invokeApi('/users/picture', 'POST', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
     }
 
     /**
@@ -56,7 +56,7 @@ export class UserService extends APIClient {
     async postImageForUser(userId: string, image: Blob): Promise<AxiosResponse<any>> {
         const formData = new FormData();
         formData.append('contactPicture', image, 'contactPicture');
-        return this.invokeApi(`/users/${userId}/picture`, 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
+        return this.invokeApi(`/users/${userId}/picture`, 'POST', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
     }
 
     /**
@@ -148,7 +148,7 @@ export class UserService extends APIClient {
      * @param userId
      */
     async deactivateUser(userId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/users/${userId}`, 'PATCH', [{op: 'deactivate'}], {
+        return await this.invokeApi(`/users/${userId}`, 'PATCH', [{ op: 'deactivate' }], {
                 headers: {
                     'Content-Type': 'application/json-patch+json'
                 }

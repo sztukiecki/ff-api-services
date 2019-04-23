@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
-import { Contact, ContactGroupResponse, Schema, SearchResultOfContact } from '../models/ContactModels';
+import { Contact, ContactGroupResponse, SearchResultOfContact } from '@flowfact/types';
 
 export class ContactService extends APIClient {
 
@@ -131,16 +131,9 @@ export class ContactService extends APIClient {
 
     /**
      * TODO: Please comment this method
-     */
-    async fetchContactSchema(): Promise<AxiosResponse<Schema>> {
-        return this.invokeApi('/contact', 'GET');
-    }
-
-    /**
-     * TODO: Please comment this method
      * @param pastedAddress
      */
-    async parsePastedAddress(pastedAddress: string): Promise<AxiosResponse<Schema>> {
+    async parsePastedAddress(pastedAddress: string): Promise<AxiosResponse<Contact>> {
         return this.invokeApi('/parse', 'POST', pastedAddress, { headers: { 'Content-Type': 'text/plain' } });
     }
 }
