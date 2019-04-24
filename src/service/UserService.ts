@@ -77,11 +77,23 @@ export class UserService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Checks if any user has the given aliasMailAddress. Will throw an error if more then one user was found.
      * @param aliasMailAddress
      */
     async isUserAlreadyKnown(aliasMailAddress: string): Promise<AxiosResponse<any>> {
         return await this.invokeApi('/public/users/exists', 'GET', undefined, {
+            queryParams: {
+                aliasMailAddress: aliasMailAddress
+            }
+        });
+    }
+
+    /**
+     * Searchs for users with the given aliasMailAddress and if we found exactly one, then we return his businessMailAddress
+     * @param aliasMailAddress
+     */
+    async resolveAliasMailAddress(aliasMailAddress: string): Promise<AxiosResponse<any>> {
+        return await this.invokeApi('/public/users/resolve', 'GET', undefined, {
             queryParams: {
                 aliasMailAddress: aliasMailAddress
             }
