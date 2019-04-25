@@ -4,5 +4,5 @@ type: library
 build: npm
 pipeline:
   repos:
-    - flowfact
     - npm
+    - flowfact
