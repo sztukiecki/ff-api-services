@@ -9,9 +9,6 @@
   "author": "FLOWFACT GmbH",
   "license": "SEE LICENSE IN LICENSE",
   "sideEffects": false,
-  "publishConfig": {
-    "registry": "https://arm.flowfact-ops.cloud/content/repositories/ffnpm/"
-  },
   "scripts": {
     "build:cjs": "tsc",
     "build:esm": "tsc --project tsconfig.esm.json",
