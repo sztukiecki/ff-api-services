@@ -86,10 +86,10 @@
   dependencies:
     "@aws-amplify/core" "^1.0.22"
 
-"@flowfact/consul-client@0.20190322.4":
-  version "0.20190322.4"
-  resolved "https://arm.flowfact-ops.cloud/content/repositories/ffnpm/@flowfact/consul-client/-/consul-client-0.20190322.4.tgz#86393be7b6b8521895915c4ac5a32e950628b6aa"
-  integrity sha512-5fpkKuT3O8i7SeJt39RIzoJXblDc9X9YVXbS0t9B0ZlKUDTXxCtbjSw8csndnNEGC1WWEePHLM2Omptfdtc1jg==
+"@flowfact/consul-client@^0.20190425.7":
+  version "0.20190425.7"
+  resolved "https://registry.yarnpkg.com/@flowfact/consul-client/-/consul-client-0.20190425.7.tgz#f68aad85d241a02f75b16a7e4b1b5a0c3c393924"
+  integrity sha512-kO3W/KT/uKNUPtSF1yfOF3Kuau/nGHxPDszyLncpNII81TIi/P36v+aeGcarGQ6+kSIN/Ir1O3dgsgvLtE+gCQ==
   dependencies:
     "@types/consul" "^0.23.32"
     "@types/es6-promisify" "^5.0.0"
@@ -99,17 +99,17 @@
     properties "^1.2.1"
     tslib "^1.7.1"
 
-"@flowfact/node-flowdsl@0.20190322.5":
-  version "0.20190322.5"
-  resolved "https://arm.flowfact-ops.cloud/content/repositories/ffnpm/@flowfact/node-flowdsl/-/node-flowdsl-0.20190322.5.tgz#ce7a427ef45d34dc0ba46bf53c144300a72402fb"
-  integrity sha512-42o+hsMqWvBSbqbVEOSDzMtK+IXmxU9PvqpYWKigM7fb4NE/pwWzFZOWgUg72qRwDxctqiBh51jkJsliHYUikw==
+"@flowfact/node-flowdsl@^0.20190425.9":
+  version "0.20190425.9"
+  resolved "https://registry.yarnpkg.com/@flowfact/node-flowdsl/-/node-flowdsl-0.20190425.9.tgz#e7d121c90a403f81939cf936abf93b5dd58a4eaf"
+  integrity sha512-v8E1bHPtz9jeHSaVYjOms4+P/qByIdcT5aXRIBons4GOF2gAzpAFdOxa4l7gsxSwUFIeif4BLMhA3OnMiRSyKA==
   dependencies:
     tslib "^1.7.1"
 
-"@flowfact/types@0.20190328.13":
-  version "0.20190328.13"
-  resolved "https://arm.flowfact-ops.cloud/content/repositories/ffnpm/@flowfact/types/-/types-0.20190328.13.tgz#0770647db319cae066056922fa35d18e176918aa"
-  integrity sha512-06PkEoWDHMtSrYFueWEJZO2SyTwj5m0vi8RPfdaHg6FYdziK6yCVrfkpd6oau9/CozXMdF5Hbcysb8js50POCw==
+"@flowfact/types@^0.20190425.24":
+  version "0.20190425.24"
+  resolved "https://registry.yarnpkg.com/@flowfact/types/-/types-0.20190425.24.tgz#c2f9ec9ed3c5130df38871a57a51bf6644ad5781"
+  integrity sha512-4XO/dUYBVOZSuz/fuj4PVK3htUbALelpMf9G3hGB/axECq/45S5rPnLQfKq+d+J6S1sIMYLjP2YnZoy4zKdNGQ==
   dependencies:
     "@types/node" "^10.11.0"
     tslib "^1.7.1"

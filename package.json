@@ -20,9 +20,9 @@
     "local": "rimraf api-services.tgz && yarn run prepare && yarn pack --filename api-services.tgz && yarn cache clean @flowfact/*"
   },
   "dependencies": {
-    "@flowfact/consul-client": "0.20190322.4",
-    "@flowfact/node-flowdsl": "0.20190322.5",
-    "@flowfact/types": "0.20190328.13",
+    "@flowfact/consul-client": "^0.20190425.7",
+    "@flowfact/node-flowdsl": "^0.20190425.9",
+    "@flowfact/types": "^0.20190425.24",
     "@types/graphql": "14.0.7",
     "@types/node": "^8.5.9",
     "@types/prop-types": "^15.5.1",
