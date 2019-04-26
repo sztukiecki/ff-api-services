@@ -1,11 +1,11 @@
 import {
     DesignTemplate,
     DesignTemplateAssignment,
-    File,
     InteractiveExposeMapping,
     InteractiveExposeSettings,
     InteractiveExposeSettingsWithLogos,
     InteractiveExposeTemplate,
+    S3File,
     SendInteractiveExposeModel,
 } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
@@ -37,9 +37,8 @@ export class InteractiveExposeService extends APIClient {
         return await this.invokeApi('/interactiveExposes', 'POST', model);
     }
 
-    async changeLogo(type: 'light' | 'dark', image: File): Promise<File> {
+    async changeLogo(type: 'light' | 'dark', image: File): Promise<S3File> {
         const formData = new FormData();
-        // TODO: Check this TS error
         formData.append('logo', image);
         return (await this.invokeApi(`/settings/logos/${type}`, 'POST', formData, { headers: { 'Content-Type': 'multipart/form-data' } })).data;
     }
