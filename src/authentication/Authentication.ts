@@ -9,18 +9,18 @@ const stageSettings = {
     development: {
         identityPoolId: 'eu-central-1:079515e9-300a-42c6-b608-930f84fed704',
         userPoolId: 'eu-central-1_8kCTHzIgR',
-        clientId: '4gql86evdegfa9otnpa30rf47i'
+        clientId: '4gql86evdegfa9otnpa30rf47i',
     },
     staging: {
         identityPoolId: 'eu-central-1:a344597d-b532-4b94-81ef-5d31bf56e504',
         userPoolId: 'eu-central-1_8R899yNNH',
-        clientId: '7qpfm5e3625hrf5mpieph9cu2a'
+        clientId: '7qpfm5e3625hrf5mpieph9cu2a',
     },
     production: {
         identityPoolId: 'eu-central-1:2b79058f-3250-492a-a7a8-91bb06911ae9',
         userPoolId: 'eu-central-1_RdHzlSKS0',
-        clientId: '57brn8csff678o6aee3k1ia00n'
-    }
+        clientId: '57brn8csff678o6aee3k1ia00n',
+    },
 };
 
 class Authentication {
@@ -42,8 +42,8 @@ class Authentication {
             Auth: {
                 region: region,
                 userPoolId: stageSettings[stage].userPoolId,
-                userPoolWebClientId: stageSettings[stage].clientId
-            }
+                userPoolWebClientId: stageSettings[stage].clientId,
+            },
         });
 
         Authentication.instance = this;
@@ -66,7 +66,7 @@ class Authentication {
      */
     public async logout(global: boolean = false) {
         return Auth.signOut({
-            global: global
+            global: global,
         });
     }
 
@@ -103,8 +103,8 @@ class Authentication {
             password: password,
             validationData: [],
             attributes: {
-                email: email
-            }
+                email: email,
+            },
         });
     }
 
@@ -116,7 +116,7 @@ class Authentication {
     public async confirmRegistration(code: string, username: string) {
         return await Auth.confirmSignUp(username, code, {
             // Force user confirmation irrespective of existing alias
-            forceAliasCreation: true
+            forceAliasCreation: true,
         });
     }
 
@@ -138,7 +138,7 @@ class Authentication {
             await this.login(username, Math.random().toString(36).substring(7));
             return {
                 exists: true,
-                statusCode: null
+                statusCode: null,
             };
         } catch (error) {
             const code = error.code;
@@ -149,12 +149,12 @@ class Authentication {
                 case 'UserNotConfirmedException':
                     return {
                         exists: true,
-                        statusCode: code
+                        statusCode: code,
                     };
                 default:
                     return {
                         exists: false,
-                        statusCode: code
+                        statusCode: code,
                     };
             }
         }

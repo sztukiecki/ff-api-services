@@ -1,6 +1,6 @@
 import { CommissionEntry, TotalCommission } from '@flowfact/types';
-import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
+import { APIClient, APIMapping } from '../http';
 
 export class CommissionCalculationService extends APIClient {
     constructor() {

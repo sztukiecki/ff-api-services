@@ -19,8 +19,8 @@ export class NylasService extends APIClient {
     async authorizeUser(code: string): Promise<AxiosResponse> {
         return await this.invokeApi('/authorize', 'POST', undefined, {
             queryParams: {
-                code: code
-            }
+                code: code,
+            },
         });
     }
 
@@ -31,8 +31,8 @@ export class NylasService extends APIClient {
     async nativeAuth(authRequest: AuthRequest): Promise<AxiosResponse> {
         return await this.invokeApi('/authorize', 'POST', authRequest, {
             queryParams: {
-                nativeAuth: true
-            }
+                nativeAuth: true,
+            },
         });
     }
 
@@ -43,8 +43,8 @@ export class NylasService extends APIClient {
     async reactivate(email: string): Promise<AxiosResponse> {
         return await this.invokeApi('/reactivate', 'POST', undefined, {
             queryParams: {
-                email: email
-            }
+                email: email,
+            },
         });
     }
 
@@ -56,8 +56,8 @@ export class NylasService extends APIClient {
     async sendMail(emailAccount: string, email: SendEmailRequest): Promise<AxiosResponse> {
         return await this.invokeApi('/nylas/send', 'POST', email, {
             'queryParams': {
-                'email': emailAccount
-            }
+                'email': emailAccount,
+            },
         });
     }
 
@@ -77,8 +77,8 @@ export class NylasService extends APIClient {
         return await this.invokeApi('/registration-url', 'GET', undefined, {
             queryParams: {
                 email: email,
-                callbackUrl: callbackUrl
-            }
+                callbackUrl: callbackUrl,
+            },
         });
     }
 
@@ -90,7 +90,7 @@ export class NylasService extends APIClient {
      */
     async overwriteSettings(email: string, settings?: object, owner?: string): Promise<AxiosResponse> {
         const patch: NylasConfigPatch = {
-            email: email
+            email: email,
         };
 
         if (owner) {
@@ -112,7 +112,7 @@ export class NylasService extends APIClient {
      */
     async updateSettings(email: string, settings?: object, owner?: string): Promise<AxiosResponse> {
         const patch: NylasConfigPatch = {
-            email: email
+            email: email,
         };
 
         if (owner) {
@@ -134,8 +134,8 @@ export class NylasService extends APIClient {
     async deleteAccount(email: string): Promise<AxiosResponse> {
         return await this.invokeApi('/account', 'DELETE', undefined, {
             queryParams: {
-                email: email
-            }
+                email: email,
+            },
         });
     }
 }

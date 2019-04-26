@@ -1,7 +1,7 @@
 import { InteractiveExposeDeliveryModel, SendInteractiveExposeModel } from '@flowfact/types';
+import { AxiosResponse } from 'axios';
 import { APIClient } from '../http';
 import APIMapping from '../http/APIMapping';
-import { AxiosResponse } from 'axios';
 
 export class InteractiveExposeDeliveryService extends APIClient {
 

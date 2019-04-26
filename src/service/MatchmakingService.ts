@@ -3,7 +3,7 @@ import {
     MatchCountForEstate,
     MatchmakingPagingResponse,
     MatchScoreContact,
-    MatchScoreEstate
+    MatchScoreEstate,
 } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
@@ -25,7 +25,7 @@ export class MatchmakingService extends APIClient {
      */
     async fetchAllMatchesForContacts(page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<Contact>>>> {
         return await this.invokeApi('/matches/contacts', 'GET', undefined, {
-            queryParams: { page }
+            queryParams: { page },
         });
     }
 
@@ -35,7 +35,7 @@ export class MatchmakingService extends APIClient {
      */
     async fetchAllMatchesForEstates(page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<Contact>>>> {
         return await this.invokeApi('/matches/estates', 'GET', undefined, {
-            queryParams: { page }
+            queryParams: { page },
         });
     }
 
@@ -46,7 +46,7 @@ export class MatchmakingService extends APIClient {
      */
     async fetchMatchesByContact(contactId: string, page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<MatchScoreContact>>>> {
         return await this.invokeApi(`/matches/contacts/${contactId}`, 'GET', undefined, {
-            queryParams: { page }
+            queryParams: { page },
         });
     }
 
@@ -57,7 +57,7 @@ export class MatchmakingService extends APIClient {
      */
     async fetchMatchesByEstate(estateId: string, page: number = 0): Promise<AxiosResponse<MatchmakingPagingResponse<Array<MatchScoreEstate>>>> {
         return await this.invokeApi(`/matches/estates/${estateId}`, 'GET', undefined, {
-            queryParams: { page }
+            queryParams: { page },
         });
     }
 

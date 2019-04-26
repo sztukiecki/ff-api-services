@@ -13,7 +13,7 @@ export class SampleDataService extends APIClient {
      */
     async importSampleData(bundleName: string = 'All'): Promise<AxiosResponse> {
         const queryParams: any = {
-            bundleName: bundleName
+            bundleName: bundleName,
         };
 
         return await this.invokeApi('/import', 'POST', undefined, { queryParams });
@@ -25,7 +25,7 @@ export class SampleDataService extends APIClient {
      */
     async removeSampleData(bundleName: string = 'All'): Promise<AxiosResponse> {
         const queryParams: any = {
-            bundleName: bundleName
+            bundleName: bundleName,
         };
 
         return await this.invokeApi('/remove', 'DELETE', undefined, { queryParams });
@@ -37,7 +37,7 @@ export class SampleDataService extends APIClient {
      */
     async importSampleDataBatch(bundles: ImportBundle[]): Promise<AxiosResponse> {
         return await this.invokeApi('/batchimport', 'POST', {
-            bundles: bundles
+            bundles: bundles,
         });
     }
 
@@ -48,8 +48,8 @@ export class SampleDataService extends APIClient {
     async fetchBundles(scope: 'FLOWFACT' | 'CUSTOM' = 'FLOWFACT'): Promise<AxiosResponse> {
         return await this.invokeApi('/bundles', 'GET', undefined, {
             queryParams: {
-                scope: scope
-            }
+                scope: scope,
+            },
         });
     }
 }

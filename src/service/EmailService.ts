@@ -1,6 +1,6 @@
 import { EmailServiceVerifyResponse, Mail } from '@flowfact/types';
-import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
+import { APIClient, APIMapping } from '../http';
 
 export class EmailService extends APIClient {
     constructor() {
@@ -12,7 +12,7 @@ export class EmailService extends APIClient {
      * @param domain
      */
     async createDomain(domain: string): Promise<EmailServiceVerifyResponse> {
-        return (await this.invokeApi('/configuration/whitelabel', 'POST', {domain})).data;
+        return (await this.invokeApi('/configuration/whitelabel', 'POST', { domain })).data;
     }
 
     /**
@@ -20,7 +20,7 @@ export class EmailService extends APIClient {
      * @param domain
      */
     async verifyDomain(domain: string): Promise<EmailServiceVerifyResponse> {
-        return (await this.invokeApi('/configuration/whitelabel/verify', 'POST', {domain})).data;
+        return (await this.invokeApi('/configuration/whitelabel/verify', 'POST', { domain })).data;
     }
 
     /**
@@ -38,7 +38,7 @@ export class EmailService extends APIClient {
     async sendMail(mail: Mail): Promise<AxiosResponse> {
         const formData = new FormData();
         formData.append('model', JSON.stringify(mail));
-        return this.invokeApi('/mails/html', 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
+        return this.invokeApi('/mails/html', 'POST', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
     }
 }
 

@@ -18,7 +18,7 @@ export class CompanyService extends APIClient {
         return this.invokeApi('/company', 'POST', {
             companyName,
             companyUrl,
-            domain
+            domain,
         });
     }
 
@@ -28,7 +28,7 @@ export class CompanyService extends APIClient {
      */
     async usePreset(presets: any) {
         return this.invokeApi('/company/usepreset', 'PUT', {
-            presets
+            presets,
         });
     }
 
@@ -70,7 +70,7 @@ export class CompanyService extends APIClient {
      */
     async memberCountByEMailAddress(mailaddress: string) {
         return this.invokeApi('/company/numberOfUsers', 'PUT', {
-            mailaddress: mailaddress
+            mailaddress: mailaddress,
         });
     }
 
@@ -132,8 +132,8 @@ export class CompanyService extends APIClient {
     async fetchLegislationTextsByCompanyId(companyId: string): Promise<AxiosResponse> {
         return this.invokeApi('/public/legislationTexts', 'GET', undefined, {
             queryParams: {
-                companyId: companyId
-            }
+                companyId: companyId,
+            },
         });
     }
 
@@ -173,7 +173,7 @@ export class CompanyService extends APIClient {
             'PUT',
             undefined,
             {
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json' },
             });
     }
 }
@@ -184,18 +184,18 @@ const StatusMapping = {
     create: {
         ALREADY_EXIST: 400,
         MANDANTORY_FIELD_NOT_FILLED: 422,
-        INTERNAL_SERVER_ERROR: 500
+        INTERNAL_SERVER_ERROR: 500,
     },
     findByEmail: {
         NO_COMPANY_FOUND: 204,
-        INTERNAL_SERVER_ERROR: 500
+        INTERNAL_SERVER_ERROR: 500,
     },
     findById: {
         ID_NOT_FOUND: 204,
-        INTERNAL_SERVER_ERROR: 500
-    }
+        INTERNAL_SERVER_ERROR: 500,
+    },
 };
 
 export {
-    StatusMapping
+    StatusMapping,
 };

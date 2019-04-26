@@ -6,7 +6,7 @@ import {
     InteractiveExposeSettings,
     InteractiveExposeSettingsWithLogos,
     InteractiveExposeTemplate,
-    SendInteractiveExposeModel
+    SendInteractiveExposeModel,
 } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
@@ -29,7 +29,7 @@ export class InteractiveExposeService extends APIClient {
         return (await this.invokeApi('/preview', 'POST', {
             entityId: entityId,
             templateName: templateName,
-            attachDocuments: attachDocuments
+            attachDocuments: attachDocuments,
         })).data;
     }
 
@@ -56,8 +56,8 @@ export class InteractiveExposeService extends APIClient {
         if (role) {
             return this.invokeApi('/templates', 'GET', {}, {
                 queryParams: {
-                    role: role
-                }
+                    role: role,
+                },
             });
         }
 
@@ -98,8 +98,8 @@ export class InteractiveExposeService extends APIClient {
     async createTemplate(template: InteractiveExposeTemplate, fillDefaultContent: boolean = false): Promise<AxiosResponse> {
         const queryParams = {
             queryParams: {
-                fillDefaultContent: String(fillDefaultContent)
-            }
+                fillDefaultContent: String(fillDefaultContent),
+            },
         };
 
         return this.invokeApi('/templates', 'POST', template, queryParams);
@@ -166,7 +166,7 @@ export class InteractiveExposeService extends APIClient {
      */
     async restoreDefaults(): Promise<AxiosResponse> {
         return this.invokeApi('/mapping/restoreDefaults', 'PUT', undefined, {
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
         });
     }
 
@@ -181,9 +181,9 @@ export class InteractiveExposeService extends APIClient {
             {
                 queryParams: {
                     token,
-                    userSessionId
-                }
-            }
+                    userSessionId,
+                },
+            },
         );
     }
 }

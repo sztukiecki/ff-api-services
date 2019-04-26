@@ -22,7 +22,7 @@ export class HistoryModuleService extends APIClient {
             schemaId: schemaId,
             entityId: entityId,
             size: size,
-            offset: offset
+            offset: offset,
         };
 
         if (filter) {

@@ -15,9 +15,9 @@ export class PortalManagementService extends APIClient {
     async fetchPortals(ignoreInactivePortals: boolean = false): Promise<AxiosResponse> {
         return await this.invokeApi('/portals', 'GET', undefined, {
                 queryParams: {
-                    ignoreInactivePortals
-                }
-            }
+                    ignoreInactivePortals,
+                },
+            },
         );
     }
 
@@ -59,8 +59,8 @@ export class PortalManagementService extends APIClient {
     async createPortal(portalType: PortalType, portal: Portal): Promise<AxiosResponse> {
         return await this.invokeApi(`/portals/create/${portalType}`, 'POST', portal, {
             headers: {
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
         });
     }
 
@@ -144,8 +144,8 @@ export class PortalManagementService extends APIClient {
             queryParams: {
                 oauth_verifier: verifier,
                 oauth_token: token,
-                state: state
-            }
+                state: state,
+            },
         });
     }
 

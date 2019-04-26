@@ -14,7 +14,7 @@ export class FlywheelService extends APIClient {
      */
     async createFlywheel(title: string): Promise<AxiosResponse> {
         return this.invokeApi<Flywheel>('/flywheels', 'POST', {
-            title: title
+            title: title,
         });
     }
 
@@ -58,9 +58,9 @@ export class FlywheelService extends APIClient {
         return this.invokeApi<Phase[]>('/phases', 'GET', undefined, {
             queryParams: {
                 filters: JSON.stringify({
-                    type: 'EXCLUDE_PHASE_STEPS'
-                })
-            }
+                    type: 'EXCLUDE_PHASE_STEPS',
+                }),
+            },
         });
     }
 
@@ -72,7 +72,7 @@ export class FlywheelService extends APIClient {
         const params: any = {};
         if (filters) {
             params.queryParams = {
-                filters: JSON.stringify(filters)
+                filters: JSON.stringify(filters),
             };
         }
         return this.invokeApi<Phase[]>('/phases', 'GET', undefined, params);
@@ -120,8 +120,8 @@ export class FlywheelService extends APIClient {
     async updatePhase(phase: object): Promise<AxiosResponse> {
         return this.invokeApi('/phases', 'PUT', phase, {
             headers: {
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
         });
     }
 
@@ -143,13 +143,13 @@ export class FlywheelService extends APIClient {
             `/flywheels/${flywheelName}`, 'PATCH',
             [{
                 op: 'set-phases',
-                phaseNames: phaseNames
+                phaseNames: phaseNames,
             }],
             {
                 headers: {
-                    'Content-Type': 'application/json-patch+json'
-                }
-            }
+                    'Content-Type': 'application/json-patch+json',
+                },
+            },
         );
     }
 
@@ -161,13 +161,13 @@ export class FlywheelService extends APIClient {
         return this.invokeApi(
             `/transactions/${transactionId}`, 'PATCH',
             [{
-                op: 'exitPhase'
+                op: 'exitPhase',
             }],
             {
                 headers: {
-                    'Content-Type': 'application/json-patch+json'
-                }
-            }
+                    'Content-Type': 'application/json-patch+json',
+                },
+            },
         );
     }
 
@@ -183,13 +183,13 @@ export class FlywheelService extends APIClient {
             [{
                 op: 'linkTransaction',
                 entityId,
-                targetPhase
+                targetPhase,
             }],
             {
                 headers: {
-                    'Content-Type': 'application/json-patch+json'
-                }
-            }
+                    'Content-Type': 'application/json-patch+json',
+                },
+            },
         );
     }
 }

@@ -1,7 +1,7 @@
 import { DataChangeRequestType, ExportRequestBody, Settings } from '@flowfact/types';
+import { AxiosResponse } from 'axios';
 import APIClient from '../http/APIClient';
 import APIMapping from '../http/APIMapping';
-import { AxiosResponse } from 'axios';
 import { EntityQuery } from '../util/InternalTypes';
 
 export class GDPRService extends APIClient {
@@ -17,8 +17,8 @@ export class GDPRService extends APIClient {
     async fetchConsentData(token: string): Promise<AxiosResponse> {
         return await this.invokeApi('/public/consents/consentdata', 'GET', undefined, {
             queryParams: {
-                token: token
-            }
+                token: token,
+            },
         });
     }
 
@@ -31,8 +31,8 @@ export class GDPRService extends APIClient {
         return await this.invokeApi('/public/company', 'GET', undefined, {
             queryParams: {
                 userId: userId,
-                companyId: companyId
-            }
+                companyId: companyId,
+            },
         });
     }
 
@@ -47,8 +47,8 @@ export class GDPRService extends APIClient {
             queryParams: {
                 contactId: contactId,
                 userId: userId,
-                companyId: companyId
-            }
+                companyId: companyId,
+            },
         });
     }
 
@@ -62,8 +62,8 @@ export class GDPRService extends APIClient {
         return await this.invokeApi('/public/export', 'POST', body, {
             queryParams: {
                 userId: userId,
-                companyId: companyId
-            }
+                companyId: companyId,
+            },
         });
     }
 
@@ -77,8 +77,8 @@ export class GDPRService extends APIClient {
         return await this.invokeApi('/public/resolveEntities', 'POST', body, {
             queryParams: {
                 userId: userId,
-                companyId: companyId
-            }
+                companyId: companyId,
+            },
         });
     }
 
@@ -94,12 +94,12 @@ export class GDPRService extends APIClient {
         return await this.invokeApi('/public/changeRequests', 'POST', {
             contactId: contactId,
             type: type,
-            changes: changes
-        },                          {
+            changes: changes,
+        }, {
             queryParams: {
                 userId: userId,
-                companyId: companyId
-            }
+                companyId: companyId,
+            },
         });
     }
 
@@ -114,8 +114,8 @@ export class GDPRService extends APIClient {
             queryParams: {
                 contactId: contactId,
                 userId: userId,
-                companyId: companyId
-            }
+                companyId: companyId,
+            },
         });
     }
 
@@ -131,8 +131,8 @@ export class GDPRService extends APIClient {
 
         return await this.invokeApi(`/changeRequests/${changeRequestId}/status/${status}`, 'POST', formData, {
             headers: {
-                'Content-Type': 'multipart/form-data'
-            }
+                'Content-Type': 'multipart/form-data',
+            },
         });
     }
 
@@ -147,8 +147,8 @@ export class GDPRService extends APIClient {
         return await this.invokeApi(`/public/consents/schemaId/${consentSchemaId}/entityId/${consentId}/revoke`, 'POST', undefined, {
             queryParams: {
                 userId: userId,
-                companyId: companyId
-            }
+                companyId: companyId,
+            },
         });
     }
 
@@ -162,8 +162,8 @@ export class GDPRService extends APIClient {
         return await this.invokeApi('/public/consents', 'POST', consentEntity, {
             queryParams: {
                 userId: userId,
-                companyId: companyId
-            }
+                companyId: companyId,
+            },
         });
     }
 
@@ -180,7 +180,7 @@ export class GDPRService extends APIClient {
      * @param contactIds
      */
     async fetchConsentForContacts(contactIds: object): Promise<AxiosResponse> {
-        return await  this.invokeApi('/consents/forContacts', 'POST', contactIds);
+        return await this.invokeApi('/consents/forContacts', 'POST', contactIds);
     }
 
     /**
@@ -215,8 +215,8 @@ export class GDPRService extends APIClient {
             queryParams: {
                 status: 'CONSENT_PENDING',
                 page: page,
-                size: size
-            }
+                size: size,
+            },
         });
     }
 
@@ -227,8 +227,8 @@ export class GDPRService extends APIClient {
     async isContactBlocked(contactId: string): Promise<AxiosResponse> {
         return await this.invokeApi('/contact/blocked', 'GET', undefined, {
             queryParams: {
-                contactId: contactId
-            }
+                contactId: contactId,
+            },
         });
     }
 
@@ -239,8 +239,8 @@ export class GDPRService extends APIClient {
     async consentStatus(contactId: string): Promise<AxiosResponse> {
         return await this.invokeApi('/consents/status', 'GET', undefined, {
             queryParams: {
-                contactId: contactId
-            }
+                contactId: contactId,
+            },
         });
     }
 
@@ -252,12 +252,12 @@ export class GDPRService extends APIClient {
     async blockContact(contactId: string, block: boolean): Promise<AxiosResponse> {
         return await this.invokeApi('/contact/block', 'POST', undefined, {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             queryParams: {
                 block: block,
-                contactId: contactId
-            }
+                contactId: contactId,
+            },
         });
     }
 
@@ -288,8 +288,8 @@ export class GDPRService extends APIClient {
             queryParams: {
                 companyId: companyId,
                 contactId: contactId,
-                userId: userId
-            }
+                userId: userId,
+            },
         });
     }
 

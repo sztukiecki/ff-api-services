@@ -1,6 +1,6 @@
+import { Contact, ContactGroupResponse, SearchResultOfContact } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
-import { Contact, ContactGroupResponse, SearchResultOfContact } from '@flowfact/types';
 
 export class ContactService extends APIClient {
 
@@ -16,7 +16,7 @@ export class ContactService extends APIClient {
      */
     async fetchContact(email: string, firstName?: string, lastName?: string): Promise<AxiosResponse<Contact>> {
         return this.invokeApi('/contact', 'GET', undefined, {
-            queryParams: { email, firstName, lastName }
+            queryParams: { email, firstName, lastName },
         });
     }
 
@@ -72,7 +72,7 @@ export class ContactService extends APIClient {
      */
     async fetchContactGroup(email: string, firstName?: string, lastName?: string): Promise<AxiosResponse<ContactGroupResponse>> {
         return this.invokeApi('/contact', 'GET', undefined, {
-            queryParams: { email, firstName, lastName }
+            queryParams: { email, firstName, lastName },
         });
     }
 

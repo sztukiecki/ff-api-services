@@ -3,7 +3,7 @@ import {
     ContainerLogsResponse,
     ContainerResponse,
     ContainerUpdate,
-    GetAllContainersResponse
+    GetAllContainersResponse,
 } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import APIClient from '../http/APIClient';

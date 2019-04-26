@@ -20,7 +20,7 @@ export class UserService extends APIClient {
             firstname: firstName,
             lastname: lastName,
             businessMailAddress: mailAddress,
-            companyId: companyID
+            companyId: companyID,
         });
     }
 
@@ -83,8 +83,8 @@ export class UserService extends APIClient {
     async isUserAlreadyKnown(aliasMailAddress: string): Promise<AxiosResponse<any>> {
         return await this.invokeApi('/public/users/exists', 'GET', undefined, {
             queryParams: {
-                aliasMailAddress: aliasMailAddress
-            }
+                aliasMailAddress: aliasMailAddress,
+            },
         });
     }
 
@@ -95,8 +95,8 @@ export class UserService extends APIClient {
     async resolveAliasMailAddress(aliasMailAddress: string): Promise<AxiosResponse<any>> {
         return await this.invokeApi('/public/users/resolve', 'GET', undefined, {
             queryParams: {
-                aliasMailAddress: aliasMailAddress
-            }
+                aliasMailAddress: aliasMailAddress,
+            },
         });
     }
 
@@ -107,8 +107,8 @@ export class UserService extends APIClient {
     async fetchUserByAliasMailAddressInternal(aliasMailAddress: string): Promise<AxiosResponse<User>> {
         return await this.invokeApi('/internal/users', 'GET', undefined, {
             queryParams: {
-                aliasMailAddress: aliasMailAddress
-            }
+                aliasMailAddress: aliasMailAddress,
+            },
         });
     }
 
@@ -119,8 +119,8 @@ export class UserService extends APIClient {
     async fetchUserByLoginInternal(loginMailAddress: string): Promise<AxiosResponse<User>> {
         return await this.invokeApi('/internal/users', 'GET', undefined, {
             queryParams: {
-                login: loginMailAddress
-            }
+                login: loginMailAddress,
+            },
         });
     }
 
@@ -133,13 +133,13 @@ export class UserService extends APIClient {
             `/users/${userId}`,
             'PATCH',
             [{
-                op: 'activate'
+                op: 'activate',
             }],
             {
                 headers: {
-                    'Content-Type': 'application/json-patch+json'
-                }
-            }
+                    'Content-Type': 'application/json-patch+json',
+                },
+            },
         );
     }
 
@@ -150,9 +150,9 @@ export class UserService extends APIClient {
     async deactivateUser(userId: string): Promise<AxiosResponse> {
         return await this.invokeApi(`/users/${userId}`, 'PATCH', [{ op: 'deactivate' }], {
                 headers: {
-                    'Content-Type': 'application/json-patch+json'
-                }
-            }
+                    'Content-Type': 'application/json-patch+json',
+                },
+            },
         );
     }
 }
@@ -164,14 +164,14 @@ const StatusMapping = {
         CREATED: 201,
         ALREADY_EXISTS: 400,
         MANDANTORY_FIELD_NOT_FILLED: 422,
-        INTERNAL_SERVER_ERROR: 500
+        INTERNAL_SERVER_ERROR: 500,
     },
     current: {
         NOT_FOUND: 404,
-        INTERNAL_SERVER_ERROR: 500
-    }
+        INTERNAL_SERVER_ERROR: 500,
+    },
 };
 
 export {
-    StatusMapping
+    StatusMapping,
 };

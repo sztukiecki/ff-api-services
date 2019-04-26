@@ -15,8 +15,8 @@ export class ViewDefinitionService extends APIClient {
     async fetchDefinitionsForSchema(schemaId: string): Promise<AxiosResponse> {
         return await this.invokeApi('/views', 'GET', undefined, {
             queryParams: {
-                schemaId
-            }
+                schemaId,
+            },
         });
     }
 
