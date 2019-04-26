@@ -1,14 +1,6 @@
-import { APIClient, APIMapping } from '../http';
+import { CommissionEntry, TotalCommission } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
-
-export interface TotalCommission {
-    totalCommission: number;
-}
-
-export interface CommissionEntry {
-    entityId: string;
-    commission: number;
-}
+import { APIClient, APIMapping } from '../http';
 
 export class CommissionCalculationService extends APIClient {
     constructor() {

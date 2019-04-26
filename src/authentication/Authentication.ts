@@ -1,19 +1,8 @@
-import Amplify, { Auth } from 'aws-amplify';
+import { AuthenticationData, CheckUsernameResult } from '@flowfact/types';
 import { CognitoUser, CognitoUserSession, ISignUpResult } from 'amazon-cognito-identity-js';
+import Amplify, { Auth } from 'aws-amplify';
 import EnvironmentManagement, { StageTypes } from '../util/EnvironmentManagement';
 import CustomStorage from './CustomStorage';
-
-export interface TokenModel {
-    idToken: string;
-    accessToken: string;
-    refreshToken: string;
-    username: string;
-}
-
-export interface CheckUsernameResult {
-    exists: boolean;
-    statusCode?: string | null;
-}
 
 const region = 'eu-central-1';
 const stageSettings = {
@@ -45,7 +34,7 @@ class Authentication {
         }
 
         const stage = EnvironmentManagement.getStage() === StageTypes.LOCAL
-            ? StageTypes.DEVELOPMENT : EnvironmentManagement.getStage();
+                      ? StageTypes.DEVELOPMENT : EnvironmentManagement.getStage();
 
         // Configure amplify auth
         Amplify.configure({
@@ -83,9 +72,9 @@ class Authentication {
 
     /**
      * Directly insert the cognito token into the storage
-     * @param tokenModel
+     * @param authenticationData
      */
-    public loginWithTokens(tokenModel: TokenModel): Promise<CognitoUserSession> {
+    public loginWithTokens(authenticationData: AuthenticationData): Promise<CognitoUserSession> {
         let stage = EnvironmentManagement.getStage();
         if (stage === StageTypes.LOCAL) {
             stage = StageTypes.DEVELOPMENT;
@@ -93,10 +82,10 @@ class Authentication {
 
         // set the new tokens in the store
         const key = `CognitoIdentityServiceProvider.${stageSettings[stage].clientId}`;
-        localStorage.setItem(`${key}.LastAuthUser`, tokenModel.username);
-        localStorage.setItem(`${key}.${tokenModel.username}.idToken`, tokenModel.idToken);
-        localStorage.setItem(`${key}.${tokenModel.username}.refreshToken`, tokenModel.refreshToken);
-        localStorage.setItem(`${key}.${tokenModel.username}.accessToken`, tokenModel.accessToken);
+        localStorage.setItem(`${key}.LastAuthUser`, authenticationData.username);
+        localStorage.setItem(`${key}.${authenticationData.username}.idToken`, authenticationData.idToken);
+        localStorage.setItem(`${key}.${authenticationData.username}.refreshToken`, authenticationData.refreshToken);
+        localStorage.setItem(`${key}.${authenticationData.username}.accessToken`, authenticationData.accessToken);
 
         return this.getCurrentSession();
     }

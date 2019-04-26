@@ -1,11 +1,7 @@
+import { HistoryFilter } from '@flowfact/types';
+import { AxiosResponse } from 'axios';
 import APIClient from '../http/APIClient';
 import APIMapping from '../http/APIMapping';
-import { AxiosResponse } from 'axios';
-
-export interface Filter {
-    includedTypes?: string[],
-    excludedTypes?: string[]
-}
 
 export class HistoryModuleService extends APIClient {
 
@@ -21,15 +17,15 @@ export class HistoryModuleService extends APIClient {
      * @param offset
      * @param filter
      */
-    async fetchHistory(schemaId: string, entityId: string, size: number = 20, offset: number = 0, filter?: Filter): Promise<AxiosResponse> {
+    async fetchHistory(schemaId: string, entityId: string, size: number = 20, offset: number = 0, filter?: HistoryFilter): Promise<AxiosResponse> {
         let body: any = {
             schemaId: schemaId,
             entityId: entityId,
             size: size,
-            offset: offset
+            offset: offset,
         };
 
-        if(filter) {
+        if (filter) {
             body.filter = filter;
         }
 

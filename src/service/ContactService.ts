@@ -1,6 +1,6 @@
+import { Contact, ContactGroupResponse, SearchResultOfContact } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
-import { Contact, ContactGroupResponse, Schema, SearchResultOfContact } from '../models/ContactModels';
 
 export class ContactService extends APIClient {
 
@@ -16,7 +16,7 @@ export class ContactService extends APIClient {
      */
     async fetchContact(email: string, firstName?: string, lastName?: string): Promise<AxiosResponse<Contact>> {
         return this.invokeApi('/contact', 'GET', undefined, {
-            queryParams: { email, firstName, lastName }
+            queryParams: { email, firstName, lastName },
         });
     }
 
@@ -72,7 +72,7 @@ export class ContactService extends APIClient {
      */
     async fetchContactGroup(email: string, firstName?: string, lastName?: string): Promise<AxiosResponse<ContactGroupResponse>> {
         return this.invokeApi('/contact', 'GET', undefined, {
-            queryParams: { email, firstName, lastName }
+            queryParams: { email, firstName, lastName },
         });
     }
 
@@ -131,16 +131,9 @@ export class ContactService extends APIClient {
 
     /**
      * TODO: Please comment this method
-     */
-    async fetchContactSchema(): Promise<AxiosResponse<Schema>> {
-        return this.invokeApi('/contact', 'GET');
-    }
-
-    /**
-     * TODO: Please comment this method
      * @param pastedAddress
      */
-    async parsePastedAddress(pastedAddress: string): Promise<AxiosResponse<Schema>> {
+    async parsePastedAddress(pastedAddress: string): Promise<AxiosResponse<Contact>> {
         return this.invokeApi('/parse', 'POST', pastedAddress, { headers: { 'Content-Type': 'text/plain' } });
     }
 }

@@ -1,15 +1,14 @@
-import { APIClient, APIMapping } from '../http';
-import { AxiosResponse } from 'axios';
 import { DslBuilder } from '@flowfact/node-flowdsl';
-import { Flowdsl, FlowdslConditionUnion, EntityIdCondition, HasFieldWithValueCondition } from '@flowfact/node-flowdsl/lib/Flowdsl';
+import {
+    EntityIdCondition,
+    Flowdsl,
+    FlowdslConditionUnion,
+    HasFieldWithValueCondition,
+} from '@flowfact/node-flowdsl/lib/Flowdsl';
+import { Entity, FilterConfiguration } from '@flowfact/types';
+import { AxiosResponse } from 'axios';
+import { APIClient, APIMapping } from '../http';
 import { SearchResult } from '../util/InternalTypes';
-import { Entity } from '@flowfact/types';
-
-export interface FilterConfiguration {
-    value: string;
-    fields: string[];
-    limitResponse?: boolean; // if true, than just the fields in the fields array will be returned
-}
 
 export class SearchService extends APIClient {
 
@@ -76,8 +75,8 @@ export class SearchService extends APIClient {
         return await this.invokeApi<SearchResult<Entity>>('/schemas/' + index, 'POST', query, {
             queryParams: queryParams,
             headers: {
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
         });
     }
 
@@ -89,8 +88,8 @@ export class SearchService extends APIClient {
     async count(query: Flowdsl, index: string) {
         return await this.invokeApi('/schemas/' + index + '/count', 'POST', query, {
             headers: {
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
         });
     }
 
@@ -115,8 +114,8 @@ export class SearchService extends APIClient {
         return await this.invokeApi<SearchResult<Entity>>('/schemas/' + index, 'POST', this.buildQuery(filter, sorting), {
             queryParams: queryParams,
             headers: {
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
         });
     }
 
@@ -129,22 +128,22 @@ export class SearchService extends APIClient {
             if (filterConfiguration.value && filterConfiguration.value !== '') {
                 const conditions: FlowdslConditionUnion[] = filterConfiguration.fields.map(field => {
                     if (field === 'id') {
-                        return <EntityIdCondition> {
+                        return {
                             type: 'ENTITYID',
-                            values: [filterConfiguration.value]
-                        };
+                            values: [filterConfiguration.value],
+                        } as EntityIdCondition;
                     }
-                    return <HasFieldWithValueCondition> {
+                    return {
                         type: 'HASFIELDWITHVALUE',
                         field: field,
                         value: filterConfiguration.value,
-                        operator: 'LIKE'
-                    };
+                        operator: 'LIKE',
+                    } as HasFieldWithValueCondition;
                 });
 
                 builder.withCondition({
                     type: 'OR',
-                    conditions: conditions
+                    conditions: conditions,
                 });
             }
 

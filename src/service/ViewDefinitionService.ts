@@ -1,21 +1,6 @@
+import { ViewDefinition, ViewDefinitionCategory } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
-
-export interface ShortViewDefinition {
-    id: string;
-    name: string;
-    schemaId: string;
-}
-
-export interface ViewDefinitionCategory {
-    name: string;
-    fields: string[];
-}
-
-export interface ViewDefinition extends ShortViewDefinition {
-    componentId: string;
-    categories: ViewDefinitionCategory[];
-}
 
 export class ViewDefinitionService extends APIClient {
 
@@ -30,8 +15,8 @@ export class ViewDefinitionService extends APIClient {
     async fetchDefinitionsForSchema(schemaId: string): Promise<AxiosResponse> {
         return await this.invokeApi('/views', 'GET', undefined, {
             queryParams: {
-                schemaId
-            }
+                schemaId,
+            },
         });
     }
 

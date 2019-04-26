@@ -17,7 +17,8 @@
     "prepare": "yarn run rebuild:cjs && yarn run rebuild:esm",
     "lint": "tslint --project .",
     "doc": "typedoc --out doc/",
-    "local": "rimraf api-services.tgz && yarn run prepare && yarn pack --filename api-services.tgz && yarn cache clean @flowfact/*"
+    "local": "rimraf api-services.tgz && yarn run prepare && yarn pack --filename api-services.tgz && yarn cache clean @flowfact/*",
+    "upgradeTypes": "yarn upgrade --latest @flowfact/types"
   },
   "dependencies": {
     "@flowfact/consul-client": "^0.20190425.7",

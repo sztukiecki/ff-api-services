@@ -1,30 +1,6 @@
-import { APIClient, APIMapping } from '../http';
+import { EmailServiceVerifyResponse, Mail } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
-
-export interface EmailServiceVerifyDnsEntry {
-    valid: boolean;
-    type: 'a' | 'cname';
-    host: string;
-    data: string;
-}
-
-export interface EmailServiceVerifyResponse {
-    domain: string;
-    valid: boolean;
-    dnsEntries: EmailServiceVerifyDnsEntry[];
-}
-
-export interface Mail {
-    mailFrom: string;
-    replyTo: string;
-    recipientList: string[];
-    blindCopyList?: string[];
-    carbonCopyList?: string[];
-    subject: string;
-    body: string;
-    schemaId?: string;
-    entityId?: string;
-}
+import { APIClient, APIMapping } from '../http';
 
 export class EmailService extends APIClient {
     constructor() {
@@ -36,7 +12,7 @@ export class EmailService extends APIClient {
      * @param domain
      */
     async createDomain(domain: string): Promise<EmailServiceVerifyResponse> {
-        return (await this.invokeApi('/configuration/whitelabel', 'POST', {domain})).data;
+        return (await this.invokeApi('/configuration/whitelabel', 'POST', { domain })).data;
     }
 
     /**
@@ -44,7 +20,7 @@ export class EmailService extends APIClient {
      * @param domain
      */
     async verifyDomain(domain: string): Promise<EmailServiceVerifyResponse> {
-        return (await this.invokeApi('/configuration/whitelabel/verify', 'POST', {domain})).data;
+        return (await this.invokeApi('/configuration/whitelabel/verify', 'POST', { domain })).data;
     }
 
     /**
@@ -62,7 +38,7 @@ export class EmailService extends APIClient {
     async sendMail(mail: Mail): Promise<AxiosResponse> {
         const formData = new FormData();
         formData.append('model', JSON.stringify(mail));
-        return this.invokeApi('/mails/html', 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
+        return this.invokeApi('/mails/html', 'POST', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
     }
 }
 

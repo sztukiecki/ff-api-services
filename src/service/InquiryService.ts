@@ -1,6 +1,6 @@
+import { Inquiry } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
-import { Inquiry } from '../models/MatchmakingModels';
 
 export class InquiryService extends APIClient {
 

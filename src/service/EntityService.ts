@@ -1,15 +1,9 @@
-import { APIClient, APIMapping } from '../http';
-import { AxiosResponse } from 'axios';
 import { Flowdsl } from '@flowfact/node-flowdsl/lib/Flowdsl';
-import { Entity, EntityACLType, EntityValues, EntityView } from '@flowfact/types';
-import { EntityQuery, ParamList, SearchResult, UniformObject } from '../util/InternalTypes';
+import { Entity, EntityAccess, EntityACLType, EntityValues, EntityView } from '@flowfact/types';
+import { AxiosResponse } from 'axios';
 import { v4 as uuid } from 'uuid/interfaces';
-
-export interface HasRightsModel {
-    schemaId: string;
-    entityId: string;
-    hasAccess: boolean;
-}
+import { APIClient, APIMapping } from '../http';
+import { EntityQuery, ParamList, SearchResult, UniformObject } from '../util/InternalTypes';
 
 export class EntityService extends APIClient {
 
@@ -42,8 +36,8 @@ export class EntityService extends APIClient {
         return this.invokeApi(`/schemas/${schemaId}/previous`, 'POST', undefined, {
             queryParams: {
                 previousSchemaId,
-                previousEntityId
-            }
+                previousEntityId,
+            },
         });
     }
 
@@ -69,11 +63,11 @@ export class EntityService extends APIClient {
         const queryParams: ParamList = {
             page,
             size,
-            viewName
+            viewName,
         };
 
         return this.invokeApi<SearchResult<EntityView>>(`/search/schemas/${index}`, 'POST', flowdsl, {
-            queryParams: queryParams
+            queryParams: queryParams,
         });
     }
 
@@ -89,11 +83,11 @@ export class EntityService extends APIClient {
         const queryParams: ParamList = {
             offset,
             size,
-            viewName
+            viewName,
         };
 
         return this.invokeApi<SearchResult<EntityView>>(`/search/schemas/${index}`, 'POST', flowdsl, {
-            queryParams: queryParams
+            queryParams: queryParams,
         });
     }
 
@@ -164,7 +158,7 @@ export class EntityService extends APIClient {
      * @param entities
      */
     async hasAccessForMultipleEntities(userId: string, accessType: EntityACLType, entities: EntityQuery[]) {
-        return this.invokeApi<HasRightsModel[]>(`/users/${userId}/hasaccess/${accessType}`, 'POST', entities);
+        return this.invokeApi<EntityAccess[]>(`/users/${userId}/hasaccess/${accessType}`, 'POST', entities);
     }
 
     /**
