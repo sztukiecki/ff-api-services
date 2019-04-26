@@ -3,7 +3,10 @@ import {
     ContainerLogsResponse,
     ContainerResponse,
     ContainerUpdate,
+    Database,
+    DatabaseCreate,
     GetAllContainersResponse,
+    GetAllDatabasesResponse,
 } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import APIClient from '../http/APIClient';
@@ -14,6 +17,8 @@ export class CaasManagementService extends APIClient {
     constructor() {
         super(APIMapping.caasManamgentService);
     }
+
+    /* ############ Containers ############ */
 
     /**
      * Fetches all containers in their short representation
@@ -70,15 +75,39 @@ export class CaasManagementService extends APIClient {
 
     /* ############ Databases ############ */
 
-    // TODO: This section is WIP
-
     /**
      * Fetches all databases
+     * @return {GetAllDatabasesResponse}
      */
-    async fetchAllDatabases(): Promise<AxiosResponse> {
+    async fetchAllDatabases(): Promise<AxiosResponse<GetAllDatabasesResponse>> {
         return await this.invokeApi('/databases', 'GET');
     }
 
+    /**
+     * Fetches the database with the given id
+     * @param id
+     * @return {Database}
+     */
+    async fetchDatabase(id: string): Promise<AxiosResponse<Database>> {
+        return await this.invokeApi(`/databases/${id}`, 'GET');
+    }
+
+    /**
+     * Creates a database with the given configuration
+     * @param databaseConfiguration
+     * @return {Database}
+     */
+    async createDatabase(databaseConfiguration: DatabaseCreate): Promise<AxiosResponse<Database>> {
+        return await this.invokeApi('/databases', 'POST', databaseConfiguration);
+    }
+
+    /**
+     * Deletes the database with the given id
+     * @param id
+     */
+    async deleteDatabase(id: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/databases/${id}`, 'DELETE');
+    }
 }
 
 export default new CaasManagementService();
