@@ -18,12 +18,12 @@
     "lint": "tslint --project .",
     "doc": "typedoc --out doc/",
     "local": "rimraf api-services.tgz && yarn run prepare && yarn pack --filename api-services.tgz && yarn cache clean @flowfact/*",
-    "upgradeTypes": "yarn upgrade --latest @flowfact/types"
+    "upgradeTypes": "yarn add @flowfact/types --latest"
   },
   "dependencies": {
     "@flowfact/consul-client": "^0.20190425.7",
     "@flowfact/node-flowdsl": "^0.20190425.9",
-    "@flowfact/types": "^1.20190503.34",
+    "@flowfact/types": "^1.20190510.37",
     "@types/graphql": "14.0.7",
     "@types/node": "^8.5.9",
     "@types/prop-types": "^15.5.1",

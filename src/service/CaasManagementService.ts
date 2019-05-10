@@ -2,11 +2,14 @@ import {
     ContainerCreate,
     ContainerLogsResponse,
     ContainerResponse,
-    ContainerUpdate,
+    ContainerDetails,
     Database,
     DatabaseCreate,
     GetAllContainersResponse,
     GetAllDatabasesResponse,
+    GetAllProjectsResponse,
+    Project,
+    ProjectCreate,
 } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import APIClient from '../http/APIClient';
@@ -16,6 +19,42 @@ export class CaasManagementService extends APIClient {
 
     constructor() {
         super(APIMapping.caasManamgentService);
+    }
+
+    /* ############ Projects ############ */
+
+    /**
+     * Fetches all projects
+     * @return {GetAllProjectsResponse}
+     */
+    async fetchAllProjects(): Promise<AxiosResponse<GetAllProjectsResponse>> {
+        return await this.invokeApi('/projects', 'GET');
+    }
+
+    /**
+     * Fetches the project with the given id
+     * @param id
+     * @return {Project}
+     */
+    async fetchProject(id: string): Promise<AxiosResponse<Project>> {
+        return await this.invokeApi(`/projects/${id}`, 'GET');
+    }
+
+    /**
+     * Creates a project with the given configuration
+     * @param projectConfiguration
+     * @return {Project}
+     */
+    async createProject(projectConfiguration: ProjectCreate): Promise<AxiosResponse<Project>> {
+        return await this.invokeApi('/projects', 'POST', projectConfiguration);
+    }
+
+    /**
+     * Deletes the project with the given id
+     * @param id
+     */
+    async deleteProject(id: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/projects/${id}`, 'DELETE');
     }
 
     /* ############ Containers ############ */
@@ -61,7 +100,7 @@ export class CaasManagementService extends APIClient {
      * @param containerConfiguration
      * @return {ContainerResponse}
      */
-    async updateContainer(id: string, containerConfiguration: ContainerUpdate): Promise<AxiosResponse<ContainerResponse>> {
+    async updateContainer(id: string, containerConfiguration: ContainerDetails): Promise<AxiosResponse<ContainerResponse>> {
         return await this.invokeApi(`/containers/${id}`, 'PUT', containerConfiguration);
     }
 
