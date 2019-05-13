@@ -9,7 +9,7 @@ import {
     GetAllDatabasesResponse,
     GetAllProjectsResponse,
     Project,
-    ProjectCreate,
+    ProjectCreate, NiceNameUniqueResponse,
 } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import APIClient from '../http/APIClient';
@@ -110,6 +110,14 @@ export class CaasManagementService extends APIClient {
      */
     async deleteContainer(id: string): Promise<AxiosResponse> {
         return await this.invokeApi(`/containers/${id}`, 'DELETE');
+    }
+
+    /**
+     * Checks whether the nice name is globally unique
+     * @param niceName
+     */
+    async isNiceNameUnique(niceName: string): Promise<AxiosResponse<NiceNameUniqueResponse>> {
+        return await this.invokeApi(`/containers/nice-name-unique?value=${niceName}`, 'GET');
     }
 
     /* ############ Databases ############ */
