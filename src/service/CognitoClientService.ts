@@ -42,6 +42,15 @@ export class CognitoClientService extends APIClient {
             businessMailAddress: businessMailAddress
         });
     }
+
+    /**
+     * check if the specific mail address is blocked, return 200 when the email is blocked, otherwise 404
+     * @param mailAddress mail address to check
+     */
+    isMailBlocked = (mailAddress: string) => {
+        return this.invokeApi(`/public/mailing/blocks/${mailAddress}`, 'GET');
+    };
+
 }
 
 export default new CognitoClientService();
