@@ -56,12 +56,18 @@ export class OnboardingService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Tells backend, that the "Buy Now" button was clicked.
      */
     async trackBuyNowClicked() {
         return await this.invokeApi('/track/buynowclicked', 'POST');
     }
 
+    /**
+     * Tells backend, that the terms where confirmed. (For example: After click onto the "order now" button)
+     */
+    async trackTermsConfirmed() {
+        return await this.invokeApi('/track/termsconfirmed', 'POST')
+    }
 }
 
 export default new OnboardingService();
