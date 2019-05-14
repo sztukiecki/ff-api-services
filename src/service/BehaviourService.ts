@@ -9,7 +9,7 @@ export class BehaviourService extends APIClient {
     }
 
     async trackLogin(): Promise<AxiosResponse> {
-        return await this.invokeApi(`/users/currentUser/trackLogin`, 'GET');
+        return await this.invokeApi('/users/currentUser/trackLogin', 'GET');
     }
 
 }
