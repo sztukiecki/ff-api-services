@@ -48,6 +48,7 @@ export { default as ViewDefinitionService } from './service/ViewDefinitionServic
 export { default as EnvironmentManagement } from './util/EnvironmentManagement';
 export { default as Authentication } from './authentication/Authentication';
 export { default as OmniChannelService } from './service/OmniChannelService';
+export { default as BehaviourService } from './service/BehaviourService';
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
 export * from './service/RelogService';

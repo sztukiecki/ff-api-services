@@ -12,6 +12,7 @@ const APIMapping = {
     adminTokenService: new APIService('admin-token-service'),
     agentRecommendationService: new APIService('agent-recommendation-service'),
     appointmentBookingService: new APIService('appointment-booking-service'),
+    behaviourService: new APIService('behaviour-service'),
     caasManamgentService: new APIService('caas-management-service'),
     cognitoClientService: new APIService('cognito-client-service'),
     commissionCalculationService: new APIService('commission-calculation-service'),
