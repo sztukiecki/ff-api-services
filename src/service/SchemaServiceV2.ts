@@ -52,7 +52,7 @@ export class SchemaServiceV2 extends APIClient {
      * @param schemaName - The schema's name
      */
     exists =  async (schemaName: string): Promise<AxiosResponse<string>> => {
-        return this.invokeApi(`/v2/schemas/${schemaName}/exists`, 'GET', undefined);
+        return this.invokeApi(`/v2/schemas/${schemaName}/exists`, 'GET');
     }
 
     /**
@@ -81,7 +81,7 @@ export class SchemaServiceV2 extends APIClient {
      * @param identifier - Id for groups and schemas
      */
     resolveIndices = async (identifier: string): Promise<AxiosResponse> => {
-        return this.invokeApi(`/v2/schemas/resolveIndices?identifier=${identifier}`, 'GET', undefined);
+        return this.invokeApi(`/v2/schemas/resolveIndices?identifier=${identifier}`, 'GET');
     }
 
     /**
@@ -89,7 +89,7 @@ export class SchemaServiceV2 extends APIClient {
      * @param name - A name of a schema or group
      */
     resolveName = async (name: string): Promise<AxiosResponse<string>> => {
-        return this.invokeApi(`/v2/schemas/resolveName?name=${name}`, 'GET', undefined);
+        return this.invokeApi(`/v2/schemas/resolveName?name=${name}`, 'GET');
     }
 }
 
