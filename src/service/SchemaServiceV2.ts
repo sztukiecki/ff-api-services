@@ -1,10 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 
-export interface Interface {
-
-}
-
 export class SchemaServiceV2 extends APIClient {
     constructor() {
         super(APIMapping.schemaService);
