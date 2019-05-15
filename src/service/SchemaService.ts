@@ -62,11 +62,6 @@ export class SchemaService extends APIClient {
         return this.invokeApi(`/schemas/${schemaId}`, 'GET', undefined, {queryParams});
     }
 
-    async fetchSchemaByIdOrName(schemaIdOrName: string, queryParams: any = {}): Promise<AxiosResponse> {
-        queryParams.resolveGroup = true;
-        return this.invokeApi(`/v2/schemas/${schemaIdOrName}`, 'GET', undefined, {queryParams}).then(response => response.data);
-    }
-
     /**
      * TODO: Please comment this method
      * @param schema
