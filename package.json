@@ -17,7 +17,7 @@
     "prepare": "yarn run rebuild:cjs && yarn run rebuild:esm",
     "lint": "tslint --project .",
     "doc": "typedoc --out doc/",
-    "local": "rimraf api-services.tgz && yarn run prepare && yarn pack --filename api-services.tgz && yarn cache clean @flowfact/*",
+    "local": "node pack.js platform-apps",
     "upgradeTypes": "yarn add @flowfact/types --latest"
   },
   "dependencies": {
