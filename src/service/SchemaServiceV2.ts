@@ -1,6 +1,6 @@
+import { SchemaV2 } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
-import { SchemaV2 } from '../util/InternalTypes';
 
 export class SchemaServiceV2 extends APIClient {
     constructor() {
@@ -100,6 +100,55 @@ export class SchemaServiceV2 extends APIClient {
      */
     resolveName = async (schemaName: string): Promise<AxiosResponse<string>> => {
         return this.invokeApi(`/v2/schemas/resolveName?name=${schemaName}`, 'GET');
+    };
+
+    /* -- Schema groups */
+
+    /**
+     * Returns all groups
+     */
+    getAllGroups = async (): Promise<AxiosResponse> => {
+        return this.invokeApi(`/groups/`, 'GET', undefined, { headers: {'x-ff-version': 2}});
+    };
+
+    /**
+     * Creates a schema group
+     * @param group - The group that should be created
+     */
+    createGroup = async (group: any): Promise<AxiosResponse<string>> => {
+        return this.invokeApi(`/groups/`, 'POST', group, { headers: {'x-ff-version': 2}});
+    };
+
+    /**
+     * Updates a schema group
+     * @param group - The group that should be updated
+     */
+    updateGroup = async (group: any): Promise<AxiosResponse<string>> => {
+        return this.invokeApi(`/groups/${group.id}`, 'PUT', group, { headers: {'x-ff-version': 2}});
+    };
+
+    /**
+     * Retrieves a schema group by it's identifier (id or name)
+     * @param identifier - The schema groups identifier (id or name)
+     */
+    fetchGroupByIdentifier = async (identifier: string): Promise<AxiosResponse<any>> => {
+        return this.invokeApi(`/groups/${identifier}`, 'GET', undefined, { headers: {'x-ff-version': 2}});
+    };
+
+    /**
+     * Deletes a schema group by it's identifier (id or name)
+     * @param identifier - The schema groups identifier (id or name)
+     */
+    deleteGroupById = async (identifier: string): Promise<AxiosResponse> => {
+        return this.invokeApi(`/groups/${identifier}`, 'DELETE', undefined, { headers: {'x-ff-version': 2}});
+    };
+
+    /**
+     * Tells you if the given identifier belongs to a group
+     * @param identifier - The schema groups identifier (id or name)
+     */
+    isGroup = async (identifier: string): Promise<AxiosResponse> => {
+        return this.invokeApi(`/groups/${identifier}/is-group`, 'GET', undefined, { headers: {'x-ff-version': 2}});
     };
 }
 
