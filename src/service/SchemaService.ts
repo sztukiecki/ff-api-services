@@ -53,7 +53,8 @@ export class SchemaService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * @deprecated Please use SchemaServiceV2.fetchSchemaByIdOrName
+     * Retrieves a schema by schemaId
      * @param schemaId
      * @param queryParams
      */
@@ -63,7 +64,8 @@ export class SchemaService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * @deprecated Please use SchemaServiceV2.createSchema
+     * Creates a schema
      * @param schema
      */
     async createSchema(schema: any): Promise<AxiosResponse> {
@@ -71,7 +73,8 @@ export class SchemaService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * @deprecated Please use SchemaServiceV2.deleteSchema
+     * Deletes a schema
      * @param schemaId
      */
     async deleteSchema(schemaId: string): Promise<AxiosResponse> {
@@ -79,7 +82,7 @@ export class SchemaService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * @deprecated Please use SchemaServiceV2.deleteAllSchema
      * deletes all groups and schemas
      * @constructor
      * @param {string} key - if you are sure you want delete all schemas then set key = DELETE
@@ -92,7 +95,8 @@ export class SchemaService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * @deprecated Please use SchemaServiceV2.updateSchema
+     * Updates a schema
      * @param schema
      */
     async updateSchema(schema: any): Promise<AxiosResponse> {
