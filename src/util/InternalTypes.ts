@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid/interfaces';
 
-export type UniformObject<T> = {[key: string]: T};
+export type UniformObject<T> = { [key: string]: T };
 export type ParamList = UniformObject<string | number | undefined>;
 
 export interface SearchResult<T> {
@@ -13,6 +13,37 @@ export interface SearchResult<T> {
 export interface EntityQuery {
     entityId: string;
     schemaId: string;
+}
+
+export interface Captions {
+    [key: string]: string;
+}
+
+export interface SchemaV2Field {
+    value: string;
+    captions: Captions;
+    [key: string]: any;
+}
+
+export interface SchemaV2Settings {
+    unit?: string;
+    type?: string;
+    subType?: string;
+    displayInList?: boolean;
+    captions?: Captions;
+    fields?: {
+        [key: string]: SchemaV2Field;
+    };
+    [key: string]: any;
+}
+
+export interface SchemaV2 {
+    id: string;
+    groups: string[];
+    captions: Captions;
+    settings: {
+        [key: string]: SchemaV2Settings;
+    };
 }
 
 // --- property-marketing-phase-service ---
