@@ -35,6 +35,7 @@ export { default as PropertyMarketingPhaseService } from './service/PropertyMark
 export { default as RelogService } from './service/RelogService';
 export { default as SampleDataService } from './service/SampleDataService';
 export { default as SchemaService } from './service/SchemaService';
+export { default as SchemaServiceV2 } from './service/SchemaServiceV2';
 export { default as SearchService } from './service/SearchService';
 export { default as SlackIntegrationService } from './service/SlackIntegrationService';
 export { default as SprengnetterService } from './service/SprengnetterService';
@@ -52,3 +53,4 @@ export { default as BehaviourService } from './service/BehaviourService';
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
 export * from './service/RelogService';
+export * from './util/InternalTypes';
