@@ -7,7 +7,7 @@ export class SchemaServiceV2 extends APIClient {
     }
 
     /**
-     * A schema it creates. Also needed groups are created if not existent.
+     * Creates a schema. Also needed groups are created if not existent.
      * @param schema - The schema that should be created
      */
     async createSchema(schema: any): Promise<AxiosResponse> {
@@ -16,9 +16,13 @@ export class SchemaServiceV2 extends APIClient {
 
     /**
      * Returns all schemas
-     * @param withGroups - Filters all schemas for given group name.
+     * @param group - Filters all schemas for given group name.
      */
-    async fetchAllSchemas(params: { group?: string } = {}): Promise<AxiosResponse> {
+    async fetchAllSchemas(group?: string): Promise<AxiosResponse> {
+        let params: any = undefined;
+        if (group) {
+            params = { group: group };
+        }
         return this.invokeApi(`/v2/schemas`, 'GET', undefined, { params });
     }
 
@@ -31,7 +35,7 @@ export class SchemaServiceV2 extends APIClient {
     }
 
     /**
-     * A schema it updates. Also needed groups are created if not existent.
+     * Updates a schema. Also needed groups are created if not existent.
      * @param schema - The schema to be updated
      */
     async updateSchema(schema: any): Promise<AxiosResponse> {
@@ -43,7 +47,11 @@ export class SchemaServiceV2 extends APIClient {
      * @param schemaIdOrName - The schema's id or schema name
      * @param resolveGroup - resolves groups, like estates, to hist children - Default value : false
      */
-    async fetchSchemaByIdOrName(schemaIdOrName: string, params: { resolveGroup?: boolean } = {}): Promise<AxiosResponse> {
+    async fetchSchemaByIdOrName(schemaIdOrName: string, resolveGroup: boolean = false): Promise<AxiosResponse> {
+        let params: any = undefined;
+        if (resolveGroup) {
+            params = { resolveGroup: resolveGroup.toString() };
+        }
         return this.invokeApi(`/v2/schemas/${schemaIdOrName}`, 'GET', undefined, { params });
     }
 
