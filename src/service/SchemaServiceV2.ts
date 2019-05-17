@@ -1,6 +1,8 @@
-import { SchemaV2 } from '@flowfact/types';
+import { GroupAllResponse, GroupV2, SchemaV2 } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
+
+const v2Header = { headers: { 'x-ff-version': 2 } };
 
 export class SchemaServiceV2 extends APIClient {
     constructor() {
@@ -107,32 +109,32 @@ export class SchemaServiceV2 extends APIClient {
     /**
      * Returns all groups
      */
-    getAllGroups = async (): Promise<AxiosResponse> => {
-        return this.invokeApi(`/groups/`, 'GET', undefined, { headers: {'x-ff-version': 2}});
+    getAllGroups = async (): Promise<AxiosResponse<GroupAllResponse>> => {
+        return this.invokeApi(`/groups/`, 'GET', undefined, v2Header);
     };
 
     /**
      * Creates a schema group
      * @param group - The group that should be created
      */
-    createGroup = async (group: any): Promise<AxiosResponse<string>> => {
-        return this.invokeApi(`/groups/`, 'POST', group, { headers: {'x-ff-version': 2}});
+    createGroup = async (group: GroupV2): Promise<AxiosResponse<string>> => {
+        return this.invokeApi(`/groups/`, 'POST', group, v2Header);
     };
 
     /**
      * Updates a schema group
      * @param group - The group that should be updated
      */
-    updateGroup = async (group: any): Promise<AxiosResponse<string>> => {
-        return this.invokeApi(`/groups/${group.id}`, 'PUT', group, { headers: {'x-ff-version': 2}});
+    updateGroup = async (group: GroupV2): Promise<AxiosResponse<GroupV2>> => {
+        return this.invokeApi(`/groups/${group.id}`, 'PUT', group, v2Header);
     };
 
     /**
      * Retrieves a schema group by it's identifier (id or name)
      * @param identifier - The schema groups identifier (id or name)
      */
-    fetchGroupByIdentifier = async (identifier: string): Promise<AxiosResponse<any>> => {
-        return this.invokeApi(`/groups/${identifier}`, 'GET', undefined, { headers: {'x-ff-version': 2}});
+    fetchGroupByIdentifier = async (identifier: string): Promise<AxiosResponse<GroupV2>> => {
+        return this.invokeApi(`/groups/${identifier}`, 'GET', undefined, v2Header);
     };
 
     /**
@@ -140,7 +142,7 @@ export class SchemaServiceV2 extends APIClient {
      * @param identifier - The schema groups identifier (id or name)
      */
     deleteGroupById = async (identifier: string): Promise<AxiosResponse> => {
-        return this.invokeApi(`/groups/${identifier}`, 'DELETE', undefined, { headers: {'x-ff-version': 2}});
+        return this.invokeApi(`/groups/${identifier}`, 'DELETE', undefined, v2Header);
     };
 
     /**
@@ -148,7 +150,7 @@ export class SchemaServiceV2 extends APIClient {
      * @param identifier - The schema groups identifier (id or name)
      */
     isGroup = async (identifier: string): Promise<AxiosResponse> => {
-        return this.invokeApi(`/groups/${identifier}/is-group`, 'GET', undefined, { headers: {'x-ff-version': 2}});
+        return this.invokeApi(`/groups/${identifier}/is-group`, 'GET', undefined, v2Header);
     };
 }
 

@@ -157,7 +157,8 @@ export class SchemaService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * @deprecated Please use SchemaServiceV2.fetchAllSchemas and pass in the group's name to filter
+     * Retrieves all members (schemas) of a given groupId
      * @param groupId
      */
     async fetchAllMembersOfGroup(groupId: string): Promise<AxiosResponse> {

@@ -9,7 +9,7 @@ export class ContactService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Retrieves a contact
      * @param email
      * @param firstName
      * @param lastName
@@ -21,8 +21,8 @@ export class ContactService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
-     * @param contact
+     * Creates a contact
+     * @param {Contact} contact
      */
     async createContact(contact: Contact): Promise<AxiosResponse<string>> {
         return this.invokeApi('/contact', 'POST', contact);
@@ -39,16 +39,16 @@ export class ContactService extends APIClient {
 
     /**
      * TODO: Please comment this method
-     * @param contact
+     * @param {Contact} contact
      */
     async updateContact(contact: Contact): Promise<AxiosResponse<Contact>> {
         return this.invokeApi('/contact', 'PUT', contact);
     }
 
     /**
-     * TODO: Please comment this method
-     * @param id
-     * @param contact
+     * Updates a contact using it's id
+     * @param id - The id of the contact that needs to be updated
+     * @param {Contact} contact
      */
     async updateContactById(id: string, contact: Contact): Promise<AxiosResponse<Contact>> {
         return this.invokeApi(`/contact/${id}`, 'PUT', contact);
