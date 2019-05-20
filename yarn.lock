@@ -99,10 +99,10 @@
     properties "^1.2.1"
     tslib "^1.7.1"
 
-"@flowfact/node-flowdsl@^0.20190425.9":
-  version "0.20190425.9"
-  resolved "https://registry.yarnpkg.com/@flowfact/node-flowdsl/-/node-flowdsl-0.20190425.9.tgz#e7d121c90a403f81939cf936abf93b5dd58a4eaf"
-  integrity sha512-v8E1bHPtz9jeHSaVYjOms4+P/qByIdcT5aXRIBons4GOF2gAzpAFdOxa4l7gsxSwUFIeif4BLMhA3OnMiRSyKA==
+"@flowfact/node-flowdsl@^1.20190520.14":
+  version "1.20190520.14"
+  resolved "https://registry.yarnpkg.com/@flowfact/node-flowdsl/-/node-flowdsl-1.20190520.14.tgz#bd1ac8a2c9b134f92763708e5d395c67ab0d5dd1"
+  integrity sha512-rSh0qhVcaU2dvvNKAk81PsxHrop5drSCnRolhIH1XFgGlydivIpFbb2niK289QyxuqeW2QywAZdVJVGgymBMRw==
   dependencies:
     tslib "^1.7.1"
 
