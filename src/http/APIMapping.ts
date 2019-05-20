@@ -38,6 +38,7 @@ const APIMapping = {
     matchmakingService: new APIService('matchmaking-service'),
     moduleService: new APIService('module-service'),
     nylasService: new APIService('nylas-service'),
+    nylasContactSyncService: new APIService('nylas-contact-sync-service'),
     multimediaService: new APIService('multimedia-service'),
     office365AuthenticationService: new APIService('office365-authentication-service'),
     portalManagementService: new APIService('portal-management-service'),
