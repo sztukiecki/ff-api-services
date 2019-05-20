@@ -106,7 +106,7 @@ export class EntityService extends APIClient {
      * @param entityId
      * @param field
      */
-    async updateEntityField(schemaId: string, entityId: string, field: UniformObject<EntityValues<Entity>>) {
+    async updateEntityField(schemaId: string, entityId: string, field: UniformObject<EntityValues>) {
         return this.invokeApi<Entity>(`/schemas/${schemaId}/entities/${entityId}`, 'PATCH', field);
     }
 
