@@ -1,7 +1,7 @@
+import { NylasContactSyncEntry, NylasContactSyncEntryPostModel } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import APIClient from '../http/APIClient';
 import APIMapping from '../http/APIMapping';
-import { NylasContactSyncEntry } from '@flowfact/types';
 
 export class NylasContactSyncService extends APIClient {
 
@@ -10,17 +10,18 @@ export class NylasContactSyncService extends APIClient {
     }
 
     /**
-     * Retrieves all syncEntries for a given companyId and entityId
-     * @param companyId - The id of a company
-     * @param contactId - The id of a contact
+     * Retrieves all syncEntries for the given entityId
+     * @param {string} entityId - The id of the entity you want to retrieve the syncEntries for
+     * @return {NylasContactSyncEntry[]}
      */
-    fetchByCompanyAndEntityId = async (params: { companyId: string, contactId: string }): Promise<AxiosResponse<NylasContactSyncEntry[]>> => {
-        return await this.invokeApi(`/syncEntries`, 'GET', undefined, { params });
+    fetchByEntityId = async (entityId: string): Promise<AxiosResponse<NylasContactSyncEntry[]>> => {
+        return await this.invokeApi(`/syncEntries`, 'GET', undefined, { params: {entityId} });
     };
 
     /**
-     * Retrieves all syncEntries for a given companyId and entityId
-     * @param syncEntryId - The id of a syncEntry
+     * Retrieves the syncEntry with the given id
+     * @param {string} syncEntryId - The id of a syncEntry
+     * @return {NylasContactSyncEntry}
      */
     fetchBySyncEntryId = async (syncEntryId: string): Promise<AxiosResponse<NylasContactSyncEntry>> => {
         return await this.invokeApi(`/syncEntries/${syncEntryId}`, 'GET');
@@ -28,15 +29,16 @@ export class NylasContactSyncService extends APIClient {
 
     /**
      * Creates a syncEntry
-     * @param syncEntry - A syncEntry
+     * @param {NylasContactSyncEntryPostModel} syncEntry - The syncEntry you want to create
+     * @return {NylasContactSyncEntry}
      */
-    createSyncEntry = async (syncEntry: any): Promise<AxiosResponse<NylasContactSyncEntry>> => {
+    createSyncEntry = async (syncEntry: NylasContactSyncEntryPostModel): Promise<AxiosResponse<NylasContactSyncEntry>> => {
         return await this.invokeApi(`/syncEntries`, 'POST', syncEntry);
     };
 
     /**
      * Delete a syncEntry by it's id
-     * @param syncEntryId - The id of a syncEntry
+     * @param {string} syncEntryId - The id of a syncEntry
      */
     deleteSyncEntryById = async (syncEntryId: string): Promise<AxiosResponse> => {
         return await this.invokeApi(`/syncEntries/${syncEntryId}`, 'DELETE');
