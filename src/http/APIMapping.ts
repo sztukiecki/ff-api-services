@@ -60,7 +60,8 @@ const APIMapping = {
     historyModuleService: new APIService('history-module-service'),
     onboardingService: new APIService('onboarding-service'),
     csvToEntityImporterService: new APIService('csv-to-entity-importer-service'),
-    omniChannelService: new APIService('omnichannel-service')
+    omniChannelService: new APIService('omnichannel-service'),
+    clientNotificationService: new APIService('client-notification-service')
 };
 
 export default APIMapping;
