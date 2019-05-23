@@ -10,12 +10,12 @@ export class NylasContactSyncService extends APIClient {
     }
 
     /**
-     * Retrieves all syncEntries for the given entityId
-     * @param {string} entityId - The id of the entity you want to retrieve the syncEntries for
+     * Retrieves all syncEntries for the given contactId
+     * @param {string} contactId - The id of the contact you want to retrieve the syncEntries for
      * @return {NylasContactSyncEntry[]}
      */
-    fetchByEntityId = async (entityId: string): Promise<AxiosResponse<NylasContactSyncEntry[]>> => {
-        return await this.invokeApi(`/syncEntries`, 'GET', undefined, { params: {entityId} });
+    fetchByContactId = async (contactId: string): Promise<AxiosResponse<NylasContactSyncEntry[]>> => {
+        return await this.invokeApi(`/syncEntries`, 'GET', undefined, { params: {contactId} });
     };
 
     /**
