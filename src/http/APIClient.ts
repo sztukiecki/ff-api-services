@@ -1,11 +1,11 @@
 import ConsulClient from '@flowfact/consul-client';
-import axios, {AxiosRequestConfig, AxiosResponse, CancelToken} from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
 import * as isNode from 'detect-node';
-import {stringify} from 'qs';
+import { stringify } from 'qs';
 import Authentication from '../authentication/Authentication';
-import EnvironmentManagement, {StageTypes} from '../util/EnvironmentManagement';
+import EnvironmentManagement from '../util/EnvironmentManagement';
 import Interceptor from '../util/Interceptor';
-import {APIService} from './APIMapping';
+import { APIService } from './APIMapping';
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
 
@@ -100,12 +100,7 @@ export default abstract class APIClient {
             return `https://${currentConfig['com.flowfact.router.host']}/${this._serviceName}`;
         }
 
-        const stage = EnvironmentManagement.getStage();
-        const account = stage === StageTypes.DEVELOPMENT ? 'flowfact-dev' : 'flowfact-prod';
-        const baseUrl = stage === StageTypes.LOCAL
-            ? 'http://localhost:8080'
-            : `https://api.${stage}.cloudios.${account}.cloud`;
-        return `${baseUrl}/${this._serviceName}/${EnvironmentManagement.getVersionTag()}`;
+        return `${EnvironmentManagement.getBaseUrl()}/${this._serviceName}/${EnvironmentManagement.getVersionTag()}`;
     }
 
     private _getConsulClient(): ConsulClient {

@@ -22,6 +22,7 @@ const defaultStage = isNode ? (process.env.STAGE_NAME || StageTypes.DEVELOPMENT)
 const defaultVersionTag = defaultStage === StageTypes.PRODUCTION ? VersionTagTypes.STABLE : VersionTagTypes.LATEST;
 
 let instance: EnvironmentManagement | null = null;
+
 export class EnvironmentManagement {
 
     constructor() {
@@ -53,6 +54,14 @@ export class EnvironmentManagement {
             store.set(StoreKeys.edgeServiceVersionTag, versionTag);
         }
     }
+
+    getBaseUrl = () => {
+        const stage = this.getStage();
+        const account = stage === StageTypes.DEVELOPMENT ? 'flowfact-dev' : 'flowfact-prod';
+        return stage === StageTypes.LOCAL
+            ? 'http://localhost:8080'
+            : `https://api.${stage}.cloudios.${account}.cloud`;
+    };
 
     isDefaultApi() {
         return (this.getStage() === defaultStage) && (this.getVersionTag() === defaultVersionTag);
