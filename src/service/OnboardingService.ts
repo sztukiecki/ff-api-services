@@ -1,6 +1,33 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
+interface ZohoPlan {
+    planCode: string;
+    name: string;
+    description: string;
+    setupFee: number;
+    recurringPrice: number;
+    interval: number;
+    unit: string;
+    storeMarkupDescription: string;
+    status: string;
+    productId: string;
+    accountId: string;
+    accountName: string;
+    trialPeriod: number;
+    setupFeeAccountId: string;
+    setupFeeAccountName: string;
+    tags: any;
+    customFields: any;
+    billingCycles: number;
+    url: string;
+    taxId: string;
+    productType: string;
+    hsnOrSac: string;
+    createdTime: string;
+    updatedTime: string;
+}
+
 export class OnboardingService extends APIClient {
     constructor() {
         super(APIMapping.onboardingService);
@@ -37,6 +64,14 @@ export class OnboardingService extends APIClient {
             numberOfUsers: numberOfUsers
         };
         return await this.invokeApi('/buypage/generateUrl', 'POST', undefined, {queryParams});
+    }
+
+
+    /**
+     * Fetch the default zoho plan, to get current information on pricing
+     */
+    async fetchSubscriptionPlan(): Promise<AxiosResponse<ZohoPlan>>  {
+        return this.invokeApi('/plan', 'GET');
     }
 
     /**
