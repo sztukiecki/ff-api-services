@@ -61,7 +61,8 @@ const APIMapping = {
     onboardingService: new APIService('onboarding-service'),
     csvToEntityImporterService: new APIService('csv-to-entity-importer-service'),
     omniChannelService: new APIService('omnichannel-service'),
-    clientNotificationService: new APIService('client-notification-service')
+    clientNotificationService: new APIService('client-notification-service'),
+    is24PublishService: new APIService('is24-publish-service')
 };
 
 export default APIMapping;
