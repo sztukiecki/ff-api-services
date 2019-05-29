@@ -32,7 +32,7 @@ export interface PriceBracket {
     price: number;
 }
 
-export interface Addon {
+export interface ZohoAddon {
     name: string;
     addonCode: string;
     description: string;
@@ -106,7 +106,7 @@ export class OnboardingService extends APIClient {
     /**
      * Fetch the default zoho additional user addon
      */
-    async fetchAddon(): Promise<AxiosResponse<ZohoPlan>>  {
+    async fetchAddon(): Promise<AxiosResponse<ZohoAddon>>  {
         return this.invokeApi('/addon', 'GET');
     }
 
