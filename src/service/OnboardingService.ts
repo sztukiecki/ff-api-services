@@ -28,6 +28,35 @@ interface ZohoPlan {
     updatedTime: string;
 }
 
+export interface PriceBracket {
+    price: number;
+}
+
+export interface Addon {
+    name: string;
+    addonCode: string;
+    description: string;
+    status: string;
+    unitName: string;
+    productId: string;
+    taxId: string;
+    taxName: string;
+    taxPercentage: number;
+    taxType: string;
+    applicableToAllPlans: boolean;
+    productType: string;
+    showInWidget: boolean;
+    storeDescription: string;
+    storeMarkupDescription: string;
+    type: string;
+    intervalUnit: string;
+    createdTime: Date;
+    updatedTime: Date;
+    pricingScheme: string;
+    plans: any[];
+    priceBrackets: PriceBracket[];
+}
+
 export class OnboardingService extends APIClient {
     constructor() {
         super(APIMapping.onboardingService);
@@ -72,6 +101,13 @@ export class OnboardingService extends APIClient {
      */
     async fetchSubscriptionPlan(): Promise<AxiosResponse<ZohoPlan>>  {
         return this.invokeApi('/plan', 'GET');
+    }
+
+    /**
+     * Fetch the default zoho additional user addon
+     */
+    async fetchAddon(): Promise<AxiosResponse<ZohoPlan>>  {
+        return this.invokeApi('/addon', 'GET');
     }
 
     /**
