@@ -133,9 +133,13 @@ class Authentication {
      * @param username
      */
     public async checkUsername(username: string): Promise<CheckUsernameResult> {
+
         try {
-            // Generate a random password that won't be right for the current user.
-            await this.login(username, Math.random().toString(36).substring(7));
+            const code = '000000';
+            await Auth.confirmSignUp(username, code, {
+                // If set to False, the API will throw an AliasExistsException error if the phone number/email used already exists as an alias with a different user
+                forceAliasCreation: false
+            });
             return {
                 exists: true,
                 statusCode: null,
@@ -144,6 +148,10 @@ class Authentication {
             const code = error.code;
             console.log(error);
             switch (code) {
+
+                case 'AliasExistsException':
+                case 'CodeMismatchException':
+                case 'ExpiredCodeException':
                 case 'NotAuthorizedException':
                 case 'PasswordResetRequiredException':
                 case 'UserNotConfirmedException':
