@@ -1,4 +1,4 @@
-import { ZohoAddon, ZohoPlan } from '@flowfact/types';
+import { CreateNewSubscriptionResponse, ZohoAddon, ZohoPlan } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 
@@ -30,10 +30,10 @@ export class OnboardingService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Generates a Zoho hosted page for checkout
      * @param numberOfUsers
      */
-    async createNewSubscription(numberOfUsers: string) {
+    async createNewSubscription(numberOfUsers: string): Promise<AxiosResponse<CreateNewSubscriptionResponse>> {
         const queryParams: any = {
             numberOfUsers: numberOfUsers,
         };
@@ -57,7 +57,7 @@ export class OnboardingService extends APIClient {
     /**
      * TODO: Please comment this method
      */
-    async fetchQualificationQuestions() {
+    async fetchQualificationQuestions(): Promise<AxiosResponse<any>> {
         return this.invokeApi('/qualifications', 'GET');
     }
 
@@ -66,21 +66,21 @@ export class OnboardingService extends APIClient {
      * @param questionId
      * @param answer
      */
-    async answerQuestion(questionId: number, answer: any) {
+    async answerQuestion(questionId: number, answer: any): Promise<AxiosResponse> {
         return this.invokeApi('/qualifications/answer/' + questionId, 'POST', { answer });
     }
 
     /**
      * Tells backend, that the "Buy Now" button was clicked.
      */
-    async trackBuyNowClicked() {
+    async trackBuyNowClicked(): Promise<AxiosResponse> {
         return this.invokeApi('/track/buynowclicked', 'POST');
     }
 
     /**
      * Tells backend, that the terms where confirmed. (For example: After click onto the "order now" button)
      */
-    async trackTermsConfirmed() {
+    async trackTermsConfirmed(): Promise<AxiosResponse> {
         return this.invokeApi('/track/termsconfirmed', 'POST');
     }
 }
