@@ -63,7 +63,8 @@ const APIMapping = {
     omniChannelService: new APIService('omnichannel-service'),
     clientNotificationService: new APIService('client-notification-service'),
     is24PublishService: new APIService('is24-publish-service'),
-    filterDefinitionService: new APIService('filter-definition-service')
+    filterDefinitionService: new APIService('filter-definition-service'),
+    contractService: new APIService('contract-service')
 };
 
 export default APIMapping;
