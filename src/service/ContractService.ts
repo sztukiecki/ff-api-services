@@ -10,7 +10,7 @@ class ContractService extends APIClient {
      * Get all available template contracts for a specific origin.
      * @param origin
      */
-    fetchTemplatesByOrigin = async (origin: 'BOORBERG') => {
+    fetchTemplates = async (origin: 'BOORGBERG' | undefined) => {
         return await this.invokeApi('/templates', 'GET', undefined, {
             queryParams: {
                 origin: origin
