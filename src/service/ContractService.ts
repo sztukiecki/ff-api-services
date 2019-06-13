@@ -23,7 +23,9 @@ class ContractService extends APIClient {
      * @param templateId
      */
     downloadTemplate = async (templateId: string) => {
-        return await this.invokeApi(`/templates/${templateId}/download`, 'GET');
+        return await this.invokeApi(`/templates/${templateId}/download`, 'GET', undefined, {
+            responseType: 'arraybuffer'
+        });
     }
 }
 
