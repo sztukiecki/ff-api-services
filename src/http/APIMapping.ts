@@ -52,7 +52,6 @@ const APIMapping = {
     spregnetterService: new APIService('sprengnetter-service'),
     taggingService: new APIService('tagging-service'),
     tagService: new APIService('tag-service'),
-    taskService: new APIService('task-entity-service'),
     templateService: new APIService('template-service'),
     trialLicenseServive: new APIService('trial-license-service'),
     userService: new APIService('user-service'),
