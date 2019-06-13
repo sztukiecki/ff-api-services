@@ -116,7 +116,9 @@ export class NylasService extends APIClient {
      * @param mail
      */
     async fetchMailSettings(mail: string): Promise<AxiosResponse> {
-        return await this.invokeApi('/mailsettings', 'POST', mail);
+        return await this.invokeApi('/mailsettings', 'POST', {
+            mail: mail
+        });
     }
 }
 
