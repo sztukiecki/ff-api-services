@@ -22,9 +22,7 @@ export interface FFAdditionalElkData {
     companyId?: string;
     requestId?: string;
     docker_host?: string;
-    className?: string;
-    methodName?: string;
-    functionName?: string;
+    sourceName?: string;
 }
 
 export type FFElkData = MandatoryElkData & FFAdditionalElkData;
