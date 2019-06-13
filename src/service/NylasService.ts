@@ -110,6 +110,14 @@ export class NylasService extends APIClient {
             }
         });
     }
+
+    /**
+     * This method returns all information of the given provider.
+     * @param mail
+     */
+    async fetchMailSettings(mail: string): Promise<AxiosResponse> {
+        return await this.invokeApi('/mailsettings', 'POST', mail);
+    }
 }
 
 export default new NylasService();
