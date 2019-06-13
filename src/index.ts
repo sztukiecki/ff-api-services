@@ -42,7 +42,6 @@ export { default as SlackIntegrationService } from './service/SlackIntegrationSe
 export { default as SprengnetterService } from './service/SprengnetterService';
 export { default as TaggingService } from './service/TaggingService';
 export { default as TagsService } from './service/TagService';
-export { default as TaskService } from './service/TaskService';
 export { default as TemplateService } from './service/TemplateService';
 export { default as TrialLicenseService } from './service/TrialLicenseService';
 export { default as UserService } from './service/UserService';
