@@ -1,4 +1,4 @@
-import { Inquiry } from '@flowfact/types';
+import { Flowdsl, Inquiry } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 
@@ -13,8 +13,18 @@ export class InquiryService extends APIClient {
      * @param {number} page - Number of times the result will be offset by given size.
      * @param {number} size - Number of entities to fetch.
      */
-    async fetchAll(page: number = 1, size: number = 100): Promise<AxiosResponse<Array<Inquiry>>> {
-        return await this.invokeApi(`/inquiry?page=${page}&size=${size}`, 'GET');
+    fetchAll(page: number = 1, size: number = 100): Promise<AxiosResponse<Array<Inquiry>>> {
+        return this.invokeApi(`/inquiry?page=${page}&size=${size}`, 'GET');
+    }
+
+    /**
+     * Fetches all inquiries with pagination support
+     * @param {Flowdsl} flowDsl - Search what you like.
+     * @param {number} page - Number of times the result will be offset by given size.
+     * @param {number} size - Number of entities to fetch.
+     */
+    fetchWithFlowDsl(flowDsl: Flowdsl, page: number = 1, size: number = 100): Promise<AxiosResponse<Array<Inquiry>>> {
+        return this.invokeApi(`/inquiry?page=${page}&size=${size}`, 'POST', flowDsl);
     }
 
     /**
@@ -23,8 +33,8 @@ export class InquiryService extends APIClient {
      * @param {string} estateId - ID of the estate that will be linked to the inquiry.
      * @returns the updated inquiry
      */
-    async linkEstateAndStartAutomation(inquiryId: string, estateId: string): Promise<AxiosResponse<Inquiry>> {
-        return await this.invokeApi(`/inquiry/${inquiryId}/setEstate/${estateId}`, 'POST');
+    linkEstateAndStartAutomation(inquiryId: string, estateId: string): Promise<AxiosResponse<Inquiry>> {
+        return this.invokeApi(`/inquiry/${inquiryId}/setEstate/${estateId}`, 'POST');
     }
 
 }
