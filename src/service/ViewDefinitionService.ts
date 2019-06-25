@@ -1,4 +1,4 @@
-import { ViewDefinition, ViewDefinitionCategory } from '@flowfact/types';
+import { ViewDefinition, ViewDefinitionCategory, ViewType } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 
@@ -96,6 +96,15 @@ export class ViewDefinitionService extends APIClient {
      */
     async fetchBySchemaAndName(schemaId: string, viewName: string) {
         return await this.invokeApi(`/views/schema/${schemaId}/name/${viewName}`, 'GET');
+    }
+
+    /**
+     * Returns views of the current company with a specific type
+     * @param schemaId
+     * @param viewType
+     */
+    async fetchBySchemaAndType(schemaId: string, viewType: ViewType) {
+        return await this.invokeApi(`/views/schema/${schemaId}/type/${viewType}`, 'GET');
     }
 }
 
