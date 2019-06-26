@@ -22,7 +22,7 @@ lock(resource: "${env.JOB_NAME}_${env.BRANCH_NAME}", inversePrecedence: false) {
             env.serviceName = "${env.JOB_NAME}".split('/')[1]
 
             stage('Checkout') {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github_admin_ffoperations', name: 'origin', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://github.com/FLOWFACTCorp/' + serviceName + '.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github_admin_ffoperationscol', name: 'origin', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://github.com/FLOWFACTCorp/' + serviceName + '.git']]])
                 sh "mkdir pipeline"
                 dir('pipeline') {
                     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'github_admin_ffoperations', name: 'origin', refspec: '+refs/heads/master:refs/remotes/origin/master', url: 'https://github.com/FLOWFACTCorp/jenkins-pipeline-steps.git']]])
