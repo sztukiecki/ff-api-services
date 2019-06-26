@@ -72,7 +72,7 @@ export class EntityService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Searchs for entities and returns the entity merged with the schema and the view
      * @param index
      * @param viewName
      * @param flowdsl
@@ -88,6 +88,29 @@ export class EntityService extends APIClient {
 
         return this.invokeApi<SearchResult<EntityView>>(`/search/schemas/${index}`, 'POST', flowdsl, {
             queryParams: queryParams,
+        });
+    }
+
+    /**
+     * Searchs for entities and return the entity merged with the view and not like in v1 with the schema.
+     * @param index
+     * @param viewName
+     * @param flowdsl
+     * @param offset
+     * @param size
+     */
+    async fetchEntitiesVirtualizedV2(index: string, viewName: string, flowdsl?: Flowdsl, offset: number = 0, size: number = 20) {
+        const queryParams: ParamList = {
+            offset,
+            size,
+            viewName,
+        };
+
+        return this.invokeApi<SearchResult<EntityView>>(`/search/schemas/${index}`, 'POST', flowdsl, {
+            queryParams: queryParams,
+            headers: {
+                'x-ff-version': 2
+            }
         });
     }
 
