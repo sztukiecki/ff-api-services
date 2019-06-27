@@ -6,7 +6,6 @@
 </p>
 
 ## Installation
-
 @flowfact/api-services is available as an [npm package](https://www.npmjs.com/package/@flowfact/api-services).
 
 ```sh
@@ -17,12 +16,15 @@ npm install @flowfact/api-services
 yarn add @flowfact/api-services
 ```
 
-## Changelog
-<ul>
-    <li>
-        10.20190320.27
-    </li>
-</ul>
+## Issue tracking
+Please open a issue if you find a bug or do you want to make a feature request.
+
+## Be a contributor
+We would like it if you want to make any changes, that you do a pull-request. We will check your changes and if everything
+is ok, we will merge your pull-request.
+
+## Testing
+Currently we don't have any tests in this library. This will coming soon...
 
 ## License
 This project is licensed under the terms of the
