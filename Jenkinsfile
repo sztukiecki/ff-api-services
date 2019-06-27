@@ -7,7 +7,6 @@ durTime = 0
 lock(resource: "${env.JOB_NAME}_${env.BRANCH_NAME}", inversePrecedence: false) {
     node() {
         deleteDir()
-        step([$class: 'StashNotifier'])
 
         //################################
         // STATIC VAR!!!
@@ -68,7 +67,6 @@ lock(resource: "${env.JOB_NAME}_${env.BRANCH_NAME}", inversePrecedence: false) {
             end.endPositive()
 
             currentBuild.result = 'SUCCESS'
-            step([$class: 'StashNotifier'])
 
         } catch (err) {
 
@@ -83,7 +81,6 @@ lock(resource: "${env.JOB_NAME}_${env.BRANCH_NAME}", inversePrecedence: false) {
             end.endNegative()
 
             currentBuild.result = 'FAILED'
-            step([$class: 'StashNotifier'])
 
             println err
             throw err
