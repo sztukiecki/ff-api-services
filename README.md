@@ -17,11 +17,10 @@ yarn add @flowfact/api-services
 ```
 
 ## Issue tracking
-Please open a issue if you find a bug or do you want to make a feature request.
+Please open a issue if you find a bug or you want to make a feature request.
 
 ## Be a contributor
-We would like it if you want to make any changes, that you do a pull-request. We will check your changes and if everything
-is ok, we will merge your pull-request.
+Please make pull-requests, if you want to make some changes :)
 
 ## Testing
 Currently we don't have any tests in this library. This will coming soon...
