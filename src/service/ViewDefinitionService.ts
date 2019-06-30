@@ -29,6 +29,14 @@ export class ViewDefinitionService extends APIClient {
     }
 
     /**
+     * Returns statistics for all views of a specific schema
+     * @param schemaIdOrName
+     */
+    async fetchStatistics(schemaIdOrName: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/views/${schemaIdOrName}/statistics`, 'GET');
+    }
+
+    /**
      * TODO: Please comment this method
      * @param viewDefinitionId
      * @param viewDefinition
