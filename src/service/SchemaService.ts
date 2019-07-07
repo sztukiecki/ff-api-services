@@ -104,6 +104,18 @@ export class SchemaService extends APIClient {
     }
 
     /**
+     * Fetchs a transformed integration by his id.
+     * @param integrationId
+     */
+    async fetchIntegration(integrationId: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/integrations/${integrationId}`, 'GET', undefined, {
+            queryParams: {
+                transform: true
+            }
+        });
+    }
+
+    /**
      * TODO: Please comment this method
      * @param schemaId
      */
