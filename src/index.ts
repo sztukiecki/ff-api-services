@@ -54,6 +54,7 @@ export { default as BehaviourService } from './service/BehaviourService';
 export { default as ContractService } from './service/ContractService';
 export { default as FilterDefinitionService } from './service/FilterDefinitionService';
 export { default as SoftLinksEntityService } from './service/SoftLinksEntityService';
+export { default as OpenimmoFtpAccessService } from './service/OpenimmoFtpAccessService';
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
 export * from './service/RelogService';
