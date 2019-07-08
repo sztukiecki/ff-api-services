@@ -8,10 +8,15 @@ export class OpenimmoFtpAccessService extends APIClient {
         super(APIMapping.openimmoFtpAccessService);
     }
 
+    /**
+     * get all openimmmos
+     */
     async fetchAllOpenimmos(): Promise<AxiosResponse> {
         return await this.invokeApi('/ftp', 'GET', undefined);
     }
+
     /**
+     * get one openimmo by using user
      * @param user
      */
     async fetchOpenimmo(user: string): Promise<AxiosResponse> {
@@ -19,6 +24,7 @@ export class OpenimmoFtpAccessService extends APIClient {
     }
 
     /**
+     * update an openimmo
      * @param user
      * @param openimmo
      */
@@ -27,6 +33,7 @@ export class OpenimmoFtpAccessService extends APIClient {
     }
 
     /**
+     * create an openimmo
      * @param openimmo
      */
     async createOpenimmo(openimmo: Openimmo) {
@@ -34,6 +41,7 @@ export class OpenimmoFtpAccessService extends APIClient {
     }
 
     /**
+     * delete an openimmo
      * @param user
      */
     async deleteOpenimmo(user: string) {
