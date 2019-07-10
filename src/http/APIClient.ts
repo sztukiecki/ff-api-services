@@ -15,7 +15,7 @@ export interface APIClientAdditionalParams extends AxiosRequestConfig {
     cancelToken?: CancelToken;
 }
 
-export type MethodTypes = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'OPTIONS' | 'PATCH' | 'HEAD' | 'CONNECT' | 'TRACE';
+export type MethodTypes = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'OPTIONS' | 'PATCH' | 'HEAD';
 
 export default abstract class APIClient {
 
@@ -42,7 +42,7 @@ export default abstract class APIClient {
         // add parameters to the url
         let url = (await this.buildAPIUrl()) + path;
         if (queryParams) {
-            const queryString = this._buildCanonicalQueryString(queryParams);
+            const queryString = stringify(queryParams, {addQueryPrefix: true});
             if (queryString && queryString !== '') {
                 url += queryString;
             }
@@ -117,13 +117,5 @@ export default abstract class APIClient {
         }
 
         return this._consulClient!;
-    }
-
-    private _buildCanonicalQueryString(queryParams: ParamMap) {
-        if (!queryParams) {
-            return '';
-        }
-
-        return stringify(queryParams, {addQueryPrefix: true});
     }
 }
