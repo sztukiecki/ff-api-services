@@ -65,7 +65,8 @@ const APIMapping = {
     filterDefinitionService: new APIService('filter-definition-service'),
     contractService: new APIService('contract-service'),
     softLinksEntityService: new APIService('softlinks-entity-service'),
-    openimmoFtpAccessService: new APIService('openimmo-ftp-access-service')
+    openimmoFtpAccessService: new APIService('openimmo-ftp-access-service'),
+    workflowService: new APIService('workflow-service')
 };
 
 export default APIMapping;
