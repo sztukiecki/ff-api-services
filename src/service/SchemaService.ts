@@ -130,22 +130,32 @@ export class SchemaService extends APIClient {
      */
     async createIntegrationForSchema(schemaId: string, label: string): Promise<AxiosResponse> {
         const integration = {
-            schemaId, label
+            schemaId: schemaId,
+            label: label
         };
         return this.invokeApi('/integrations?transform=true', 'POST', integration);
     }
 
     /**
-     * TODO: Please comment this method
+     * This updates just the formData of an integration
      * @param integrationId
      * @param data
      */
-    async updateIntegration(integrationId: string, data: any): Promise<AxiosResponse> {
+    async updateIntegrationFormData(integrationId: string, data: any): Promise<AxiosResponse> {
         return this.invokeApi(`/integrations/${integrationId}/formdata?transform=true`, 'POST', data);
     }
 
     /**
-     * TODO: Please comment this method
+     * This updates the whole integration
+     * @param integrationId
+     * @param data
+     */
+    async updateIntegration(integrationId: string, data: any): Promise<AxiosResponse> {
+        return this.invokeApi(`/integrations/${integrationId}`, 'PUT', data);
+    }
+
+    /**
+     * Delete an integration by the representing id.
      * @param integrationId
      */
     async deleteIntegration(integrationId: string): Promise<AxiosResponse> {
