@@ -7,7 +7,7 @@ class WorkflowService extends APIClient {
         super(APIMapping.workflowService);
     }
 
-    fetchAvailableConditions = async (): Promise<AxiosResponse<String[]>> => {
+    fetchAvailableConditions = async(): Promise<AxiosResponse<String[]>> => {
         return await this.invokeApi('/action/ids', 'GET', undefined, {
             queryParams: {
                 type: 'condition'
@@ -15,12 +15,19 @@ class WorkflowService extends APIClient {
         });
     };
 
-    fetchAvailableActions = async (): Promise<AxiosResponse<String[]>> => {
+    fetchAvailableActions = async(): Promise<AxiosResponse<String[]>> => {
         return await this.invokeApi('/action/ids', 'GET', undefined, {
             queryParams: {
                 type: 'action'
             }
         });
+    };
+
+    /**
+     * Fetch all available templates
+     */
+    fetchTemplates = async(): Promise<AxiosResponse> => {
+        return await this.invokeApi('/flow-type/templates', 'GET');
     };
 }
 
