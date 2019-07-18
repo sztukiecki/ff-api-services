@@ -7,7 +7,7 @@ class WorkflowService extends APIClient {
         super(APIMapping.workflowService);
     }
 
-    fetchAvailableConditions = async(): Promise<AxiosResponse<String[]>> => {
+    fetchAvailableConditions = async (): Promise<AxiosResponse<String[]>> => {
         return await this.invokeApi('/action/ids', 'GET', undefined, {
             queryParams: {
                 type: 'condition'
@@ -15,7 +15,7 @@ class WorkflowService extends APIClient {
         });
     };
 
-    fetchAvailableActions = async(): Promise<AxiosResponse<String[]>> => {
+    fetchAvailableActions = async (): Promise<AxiosResponse<String[]>> => {
         return await this.invokeApi('/action/ids', 'GET', undefined, {
             queryParams: {
                 type: 'action'
@@ -26,7 +26,7 @@ class WorkflowService extends APIClient {
     /**
      * Fetch all available templates
      */
-    fetchTemplates = async(): Promise<AxiosResponse> => {
+    fetchTemplates = async (): Promise<AxiosResponse> => {
         return await this.invokeApi('/flow-type/templates', 'GET');
     };
 
@@ -35,8 +35,32 @@ class WorkflowService extends APIClient {
      * @param workflowId
      *  The id of the workflow
      */
-    fetchWorkflow = async(workflowId: string) => {
+    fetchWorkflow = async (workflowId: string): Promise<AxiosResponse> => {
         return await this.invokeApi(`/flow/${workflowId}`, 'GET');
+    };
+
+    /**
+     * Creates a workflow by his name.
+     * @param name
+     *  The name of the parameter. Can be optional.
+     */
+    createWorkflow = async (name: string = ''): Promise<AxiosResponse> => {
+        return await this.invokeApi('/flow', 'POST', {
+            name: name,
+            step: {
+                startAt: null,
+                states: {}
+            }
+        });
+    };
+
+    /**
+     * Updates a workflow by his id.
+     * @param workflowId
+     * @param workflow
+     */
+    updateWorkflow = async (workflowId: string, workflow: object): Promise<AxiosResponse> => {
+        return await this.invokeApi(`/flow/${workflowId}`, 'PUT', workflow);
     }
 }
 
