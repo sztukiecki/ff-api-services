@@ -2,6 +2,29 @@ import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 import { Workflows, Workflow } from '@flowfact/types';
 
+interface WorkflowPatchRequest {
+    patches: [{
+        id: string;
+        patch: [{
+            op: string;
+            path: string;
+            value: string;
+        }];
+    }];
+}
+
+interface WorkflowPatchResult {
+    results: [{
+        id: string;
+        success: boolean;
+        error?: {
+            type: string;
+            description: string;
+            additionalInfo: string
+        }
+    }];
+}
+
 class WorkflowService extends APIClient {
 
     constructor() {
@@ -83,7 +106,11 @@ class WorkflowService extends APIClient {
 
     deleteWorkflow = async (workflowId: string): Promise<AxiosResponse> => {
         return await this.invokeApi(`/flow/${workflowId}`, 'DELETE');
-    }
+    };
+
+    patchWorkflow = async (body: WorkflowPatchRequest): Promise<AxiosResponse<WorkflowPatchResult>> => {
+        return await this.invokeApi('/flow', 'PATCH', body);
+    };
 }
 
 export default new WorkflowService();
