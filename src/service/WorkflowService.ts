@@ -1,10 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
-import { Workflow } from '@flowfact/types';
-
-interface Workflows {
-    workflows: Workflow[]
-};
+import { Workflows, Workflow } from '@flowfact/types';
 
 class WorkflowService extends APIClient {
 
