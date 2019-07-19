@@ -60,7 +60,7 @@ class WorkflowService extends APIClient {
      * Fetches statistics for the given workflow ids. If the array is empty, it returns all statistics for all workflows
      * @param workflowIds
      */
-    fetchStatisticWorkflows = async (workflowIds: string[]): Promise<AxiosResponse<Workflows>> => {
+    fetchWorkflowsStatistics = async (workflowIds: string[]): Promise<AxiosResponse<Workflows>> => {
         return await this.invokeApi(`/flow`, 'GET', undefined, {
             queryParams: {
                 stats: true,
