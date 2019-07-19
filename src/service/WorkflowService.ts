@@ -41,6 +41,18 @@ class WorkflowService extends APIClient {
     };
 
     /**
+     * Fetches specific workflows by the ids. If the array is empty, all workflows will be returned.
+     * @param workflowIds
+     */
+    fetchWorkflows = async (workflowIds: string[]): Promise<AxiosResponse> => {
+        return await this.invokeApi(`/flow`, 'GET', undefined, {
+            queryParams: {
+                ids: workflowIds.join(',')
+            }
+        });
+    };
+
+    /**
      * Creates a workflow by his name.
      */
     createWorkflow = async (workflow: Workflow): Promise<AxiosResponse<Workflow>> => {
@@ -54,6 +66,10 @@ class WorkflowService extends APIClient {
      */
     updateWorkflow = async (workflowId: string, workflow: Workflow): Promise<AxiosResponse<Workflow>> => {
         return await this.invokeApi(`/flow/${workflowId}`, 'PUT', workflow);
+    };
+
+    deleteWorkflow = async (workflowId: string): Promise<AxiosResponse> => {
+        return await this.invokeApi(`/flow/${workflowId}`, 'DELETE');
     }
 }
 
