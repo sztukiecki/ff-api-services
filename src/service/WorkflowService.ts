@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
+import { Workflow } from '@flowfact/types';
 
 class WorkflowService extends APIClient {
 
@@ -35,23 +36,15 @@ class WorkflowService extends APIClient {
      * @param workflowId
      *  The id of the workflow
      */
-    fetchWorkflow = async (workflowId: string): Promise<AxiosResponse> => {
+    fetchWorkflow = async (workflowId: string): Promise<AxiosResponse<Workflow>> => {
         return await this.invokeApi(`/flow/${workflowId}`, 'GET');
     };
 
     /**
      * Creates a workflow by his name.
-     * @param name
-     *  The name of the parameter. Can be optional.
      */
-    createWorkflow = async (name: string = ''): Promise<AxiosResponse> => {
-        return await this.invokeApi('/flow', 'POST', {
-            name: name,
-            step: {
-                startAt: null,
-                states: {}
-            }
-        });
+    createWorkflow = async (workflow: Workflow): Promise<AxiosResponse<Workflow>> => {
+        return await this.invokeApi('/flow', 'POST', workflow);
     };
 
     /**
@@ -59,7 +52,7 @@ class WorkflowService extends APIClient {
      * @param workflowId
      * @param workflow
      */
-    updateWorkflow = async (workflowId: string, workflow: object): Promise<AxiosResponse> => {
+    updateWorkflow = async (workflowId: string, workflow: Workflow): Promise<AxiosResponse<Workflow>> => {
         return await this.invokeApi(`/flow/${workflowId}`, 'PUT', workflow);
     }
 }
