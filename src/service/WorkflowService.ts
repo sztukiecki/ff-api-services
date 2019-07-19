@@ -2,6 +2,10 @@ import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 import { Workflow } from '@flowfact/types';
 
+interface Workflows {
+    workflows: Workflow[]
+};
+
 class WorkflowService extends APIClient {
 
     constructor() {
@@ -44,9 +48,22 @@ class WorkflowService extends APIClient {
      * Fetches specific workflows by the ids. If the array is empty, all workflows will be returned.
      * @param workflowIds
      */
-    fetchWorkflows = async (workflowIds: string[]): Promise<AxiosResponse> => {
+    fetchWorkflows = async (workflowIds: string[]): Promise<AxiosResponse<Workflows>> => {
         return await this.invokeApi(`/flow`, 'GET', undefined, {
             queryParams: {
+                ids: workflowIds.join(',')
+            }
+        });
+    };
+
+    /**
+     * Fetches statistics for the given workflow ids. If the array is empty, it returns all statistics for all workflows
+     * @param workflowIds
+     */
+    fetchStatisticWorkflows = async (workflowIds: string[]): Promise<AxiosResponse<Workflows>> => {
+        return await this.invokeApi(`/flow`, 'GET', undefined, {
+            queryParams: {
+                stats: true,
                 ids: workflowIds.join(',')
             }
         });
