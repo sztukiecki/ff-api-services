@@ -33,11 +33,10 @@ class Authentication {
             return Authentication.instance;
         }
 
-        const stage = EnvironmentManagement.getStage() === StageTypes.LOCAL
-                      ? StageTypes.DEVELOPMENT : EnvironmentManagement.getStage();
-        console.log('Stage', stage);
-        console.log('Environment-stage', EnvironmentManagement.getStage());
-        console.log('Environment', JSON.stringify(process.env));
+        let stage = EnvironmentManagement.getStage() === StageTypes.LOCAL ? StageTypes.DEVELOPMENT : EnvironmentManagement.getStage();
+        if(!stage) {
+            stage = StageTypes.DEVELOPMENT;
+        }
 
         // Configure amplify auth
         Amplify.configure({
