@@ -35,6 +35,9 @@ class Authentication {
 
         const stage = EnvironmentManagement.getStage() === StageTypes.LOCAL
                       ? StageTypes.DEVELOPMENT : EnvironmentManagement.getStage();
+        console.log('Stage', stage);
+        console.log('Environment-stage', EnvironmentManagement.getStage());
+        console.log('Environment', JSON.stringify(process.env));
 
         // Configure amplify auth
         Amplify.configure({
