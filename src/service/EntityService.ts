@@ -3,7 +3,7 @@ import { Entity, EntityAccess, EntityACLType, EntityValues, EntityView } from '@
 import { AxiosResponse } from 'axios';
 import { v4 as uuid } from 'uuid/interfaces';
 import { APIClient, APIMapping } from '../http';
-import { EntityQuery, ParamList, SearchResult, UniformObject } from '../util/InternalTypes';
+import { EntityQuery, ParamList, SearchResult, UniformObject } from '..';
 
 export class EntityService extends APIClient {
 
@@ -60,7 +60,7 @@ export class EntityService extends APIClient {
      * @param size
      * @param withCount
      */
-    async searchEntity(index: string, viewName: string, flowdsl?: Flowdsl, page: number = 1, size: number = 20, withCount?: string) {
+    async searchEntity(index: string, viewName: string, flowdsl?: Flowdsl, page: number = 1, size: number = 20, withCount?: boolean) {
         const queryParams: ParamList = {
             page,
             size,
@@ -82,7 +82,7 @@ export class EntityService extends APIClient {
      * @param size
      * @param withCount
      */
-    async fetchEntitiesVirtualized(index: string, viewName: string, flowdsl?: Flowdsl, offset: number = 0, size: number = 20, withCount?: string) {
+    async fetchEntitiesVirtualized(index: string, viewName: string, flowdsl?: Flowdsl, offset: number = 0, size: number = 20, withCount?: boolean) {
         const queryParams: ParamList = {
             offset,
             size,
@@ -104,7 +104,7 @@ export class EntityService extends APIClient {
      * @param size
      * @param withCount
      */
-    async fetchEntitiesVirtualizedV2(index: string, viewName: string, flowdsl?: Flowdsl, offset: number = 0, size: number = 20, withCount?: string) {
+    async fetchEntitiesVirtualizedV2(index: string, viewName: string, flowdsl?: Flowdsl, offset: number = 0, size: number = 20, withCount?: boolean) {
         const queryParams: ParamList = {
             offset,
             size,
