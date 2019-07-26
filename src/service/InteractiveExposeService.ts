@@ -104,7 +104,23 @@ export class InteractiveExposeService extends APIClient {
     return this.invokeApi(
       "/interactiveExposes/templates/assignments",
       "POST",
-      designTemplates
+      designTemplates,
+      {
+        headers: { "Content-Type": "application/json" }
+      }
+    );
+  }
+
+  async deleteDesignTemplates(
+    designTemplates: DesignTemplateAssignment[]
+  ): Promise<AxiosResponse> {
+    return this.invokeApi(
+      "/interactiveExposes/templates/assignments",
+      "DELETE",
+      designTemplates,
+      {
+        headers: { "Content-Type": "application/json" }
+      }
     );
   }
 
@@ -127,14 +143,74 @@ export class InteractiveExposeService extends APIClient {
     return this.invokeApi("/templates", "POST", template, queryParams);
   }
 
-  /**
-   * Create ExposeTemplate
-   */
   async createInteractiveExposeTemplate(templateName: string, body: FormData) {
     return this.invokeApi(
       "/interactiveExposes/templates/" + templateName,
       "POST",
-      body
+      body,
+      {
+        headers: { "Content-Type": "multipart/form-data" }
+      }
+    );
+  }
+
+  async uploudInteractiveExposeTemplateFiles(
+    templateName: string,
+    body: FormData
+  ) {
+    return this.invokeApi(
+      "/interactiveExposes/templates/" + templateName,
+      "PUT",
+      body,
+      {
+        headers: { "Content-Type": "multipart/form-data" }
+      }
+    );
+  }
+
+  async deleteInteractiveExposeTemplate(templateName: string) {
+    return this.invokeApi(
+      "/interactiveExposes/templates/" + templateName,
+      "DELETE"
+    );
+  }
+
+  async getInteractiveExposeTemplateFiles(templateName: string) {
+    return this.invokeApi(
+      "/public/interactiveExposes/templates/" + templateName,
+      "GET"
+    );
+  }
+
+  async getInteractiveExposeTemplateFilesByFileType(
+    templateName: string,
+    fileType: String
+  ) {
+    return this.invokeApi(
+      "/public/interactiveExposes/templates/" +
+        templateName +
+        "/fileType/" +
+        fileType,
+      "GET"
+    );
+  }
+
+  async getInteractiveExposeTemplateFileData(
+    templateName: string,
+    fileType: string,
+    body: string[]
+  ) {
+    return this.invokeApi(
+      "/public/interactiveExposes/templates/" +
+        templateName +
+        "/fileType/" +
+        fileType +
+        "/content",
+      "POST",
+      body,
+      {
+        headers: { "Content-Type": "application/json" }
+      }
     );
   }
 
