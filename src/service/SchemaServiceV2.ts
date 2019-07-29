@@ -21,10 +21,16 @@ export class SchemaServiceV2 extends APIClient {
      * Returns all schemas
      * @param group - Filters all schemas for given group name.
      */
-    fetchAllSchemas = async (group?: string): Promise<AxiosResponse<SchemaV2[]>> => {
+    fetchAllSchemas = async (group?: string, languages?: string): Promise<AxiosResponse<SchemaV2[]>> => {
         let params: any = undefined;
         if (group) {
             params = { group: group };
+        }
+        if (languages) {
+            if (!params) {
+                params = {};
+            }
+            params.headers = { 'Accept-Language': languages };
         }
         return this.invokeApi(`/v2/schemas`, 'GET', undefined, { params });
     };
@@ -55,7 +61,11 @@ export class SchemaServiceV2 extends APIClient {
      * @param schemaIdOrName - The schema's id or schema name
      * @param {FetchSchemaByIdOrNameQueryParam} params - resolves groups, like estates, to hist children - Default value : false
      */
-    fetchSchemaByIdOrName = async (schemaIdOrName: string, params: { resolveGroup?: boolean } = {}): Promise<AxiosResponse<SchemaV2>> => {
+    fetchSchemaByIdOrName = async (schemaIdOrName: string, sendParams: { resolveGroup?: boolean } = {}, languages?: string): Promise<AxiosResponse<SchemaV2>> => {
+        let params: any = sendParams;
+        if (languages) {
+            params.headers = { 'Accept-Language': languages };
+        }
         return this.invokeApi(`/v2/schemas/${schemaIdOrName}`, 'GET', undefined, { params });
     };
 
