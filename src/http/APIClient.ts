@@ -75,7 +75,7 @@ export default abstract class APIClient {
             }
         }
 
-        const languages: any = { 'Accept-Languages': APIClient.languages };
+        const languages: any = { 'Accept-Language': APIClient.languages };
 
         let request: AxiosRequestConfig = {
             method: method,
