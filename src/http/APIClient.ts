@@ -22,6 +22,11 @@ export default abstract class APIClient {
     private userId: string;
     private _consulClient?: ConsulClient;
     private readonly _serviceName: string;
+    private static languages: string = 'de';
+
+    public static changeLanguages(newLanguages: string) {
+        this.languages = newLanguages;
+    }
 
     protected constructor(service: APIService) {
         this._serviceName = service.name;
@@ -37,12 +42,12 @@ export default abstract class APIClient {
             throw new Error('Your path has to start with a slash. Path: ' + path);
         }
 
-        const {queryParams, headers, cancelToken, ...others} = additionalParams;
+        const { queryParams, headers, cancelToken, ...others } = additionalParams;
 
         // add parameters to the url
         let url = (await this.buildAPIUrl()) + path;
         if (queryParams) {
-            const queryString = stringify(queryParams, {addQueryPrefix: true});
+            const queryString = stringify(queryParams, { addQueryPrefix: true });
             if (queryString && queryString !== '') {
                 url += queryString;
             }
@@ -70,10 +75,12 @@ export default abstract class APIClient {
             }
         }
 
+        const languages: any = { 'Accept-Languages': APIClient.languages };
+
         let request: AxiosRequestConfig = {
             method: method,
             url: url,
-            headers: Object.assign({}, userIdentification, headers || {}),
+            headers: Object.assign({}, userIdentification, languages, headers || {}),
             data: body,
             cancelToken: cancelToken,
             ...others
