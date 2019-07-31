@@ -11,7 +11,7 @@ export class SchemaService extends APIClient {
      * @param withGroups
      */
     async loadStats(withGroups: boolean = false): Promise<AxiosResponse> {
-        const additionalParams = withGroups ? {queryParams: {groups: 'true'}} : undefined;
+        const additionalParams = withGroups ? { queryParams: { groups: 'true' } } : undefined;
         return await this.invokeApi('/stats', 'GET', undefined, additionalParams);
     }
 
@@ -33,7 +33,7 @@ export class SchemaService extends APIClient {
             queryParams.short = 'true';
         }
 
-        return this.invokeApi('/schemas', 'GET', undefined, {queryParams});
+        return this.invokeApi('/schemas', 'GET', undefined, { queryParams });
     }
 
     /**
@@ -49,7 +49,7 @@ export class SchemaService extends APIClient {
         if (size) {
             queryParams.size = size.toString();
         }
-        return this.invokeApi(`/data/${schemaId}`, 'GET', undefined, {queryParams});
+        return this.invokeApi(`/data/${schemaId}`, 'GET', undefined, { queryParams });
     }
 
     /**
@@ -60,7 +60,7 @@ export class SchemaService extends APIClient {
      */
     async fetchSchema(schemaId: string, queryParams: any = {}): Promise<AxiosResponse> {
         queryParams.transform = true;
-        return this.invokeApi(`/schemas/${schemaId}`, 'GET', undefined, {queryParams});
+        return this.invokeApi(`/schemas/${schemaId}`, 'GET', undefined, { queryParams });
     }
 
     /**

@@ -22,10 +22,19 @@ export class SchemaServiceV2 extends APIClient {
      * Returns all schemas
      * @param group - Filters all schemas for given group name.
      */
-    fetchAllSchemas = async (group?: string): Promise<AxiosResponse<SchemaV2[]>> => {
+    fetchAllSchemas = async (group?: string, size?: number, page?: number): Promise<AxiosResponse<SchemaV2[]>> => {
         let params: any = undefined;
-        if (group) {
-            params = { group: group };
+        if (group || size || page) {
+            params = {};
+            if (group) {
+                params.group = group;
+            }
+            if (size) {
+                params.size = size;
+            }
+            if (page) {
+                params.page = page;
+            }
         }
         return this.invokeApi(`/v2/schemas`, 'GET', undefined, { params });
     };
