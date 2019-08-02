@@ -43,8 +43,8 @@ class Authentication {
             storage: CustomStorage,
             Auth: {
                 region: region,
-                userPoolId: (stageSettings[stage] || stageSettings['development']).userPoolId,
-                userPoolWebClientId: (stageSettings[stage] || stageSettings['development']).clientId,
+                userPoolId: stageSettings[stage].userPoolId,
+                userPoolWebClientId: stageSettings[stage].clientId,
             },
         });
 
