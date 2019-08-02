@@ -38,11 +38,11 @@ export class InquiryService extends APIClient {
     }
 
     isInquiryAutomationActive(companyId: string): Promise<AxiosResponse<InquiryAutomation>> {
-        return this.invokeApi(`/inquiry/inquiryAutomation/${companyId}`, 'GET');
+        return this.invokeApi(`/inquiry/automation/${companyId}`, 'GET');
     }
 
     toggleAutomation(companyId: string): Promise<AxiosResponse<InquiryAutomation>> {
-        return this.invokeApi(`/inquiry/inquiryAutomation/${companyId}`, 'POST');
+        return this.invokeApi(`/inquiry/automation/${companyId}`, 'POST');
     }
 
 }
