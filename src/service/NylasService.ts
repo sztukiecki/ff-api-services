@@ -73,11 +73,12 @@ export class NylasService extends APIClient {
      * @param email
      * @param callbackUrl URL that has to be confiured
      */
-    async getRegistrationUrl(email: string, callbackUrl?: string): Promise<AxiosResponse<RegistrationUrl>> {
+    async getRegistrationUrl(email: string, callbackUrl?: string, isGmail: boolean = false): Promise<AxiosResponse<RegistrationUrl>> {
         return await this.invokeApi('/registration-url', 'GET', undefined, {
             queryParams: {
                 email: email,
-                callbackUrl: callbackUrl
+                callbackUrl: callbackUrl,
+                isGmail: isGmail
             }
         });
     }
