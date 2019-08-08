@@ -38,7 +38,7 @@ class Authentication {
             stage = StageTypes.DEVELOPMENT;
         }
 
-        console.error({stageSettings}, {StageTypes}, {stage});
+        console.warn({stageSettings}, {StageTypes}, {stage});
 
         // Configure amplify auth
         Amplify.configure({
