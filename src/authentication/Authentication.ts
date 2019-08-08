@@ -34,11 +34,9 @@ class Authentication {
         }
 
         let stage = EnvironmentManagement.getStage() === StageTypes.LOCAL ? StageTypes.DEVELOPMENT : EnvironmentManagement.getStage();
-        if (!stage) {
+        if(!stage) {
             stage = StageTypes.DEVELOPMENT;
         }
-
-        console.warn({stageSettings}, {StageTypes}, {stage});
 
         // Configure amplify auth
         Amplify.configure({
