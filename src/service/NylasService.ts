@@ -34,7 +34,8 @@ export class NylasService extends APIClient {
     async nativeAuth(authRequest: AuthRequest): Promise<AxiosResponse> {
         return await this.invokeApi('/account', 'POST', authRequest, {
             queryParams: {
-                nativeAuth: true
+                nativeAuth: true,
+                command: 'authorize'
             }
         });
     }
