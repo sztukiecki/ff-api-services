@@ -195,7 +195,7 @@ export class InteractiveExposeService extends APIClient {
     );
   }
 
-  async getInteractiveExposeTemplateFileData(
+  async fetchInteractiveExposeTemplateFileData(
     templateName: string,
     fileType: string,
     body: string[]
