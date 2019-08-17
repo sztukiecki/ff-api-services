@@ -175,7 +175,7 @@ export class InteractiveExposeService extends APIClient {
     );
   }
 
-  async getInteractiveExposeTemplateFiles(templateName: string) {
+  async fetchInteractiveExposeTemplateFiles(templateName: string) {
     return this.invokeApi(
       "/public/interactiveExposes/templates/" + templateName,
       "GET"
