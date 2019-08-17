@@ -187,10 +187,7 @@ export class InteractiveExposeService extends APIClient {
     fileType: String
   ) {
     return this.invokeApi(
-      "/public/interactiveExposes/templates/" +
-        templateName +
-        "/fileType/" +
-        fileType,
+      `/public/interactiveExposes/templates/${templateName}/fileType/${fileType}`,
       "GET"
     );
   }
@@ -201,11 +198,7 @@ export class InteractiveExposeService extends APIClient {
     body: string[]
   ) {
     return this.invokeApi(
-      "/public/interactiveExposes/templates/" +
-        templateName +
-        "/fileType/" +
-        fileType +
-        "/content",
+      `/public/interactiveExposes/templates/${templateName}/fileType/${fileType}/content`,
       "POST",
       body,
       {
