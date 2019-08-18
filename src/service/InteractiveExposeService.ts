@@ -7,9 +7,9 @@ import {
   InteractiveExposeTemplate,
   S3File,
   SendInteractiveExposeModel
-} from "@flowfact/types";
-import { AxiosResponse } from "axios";
-import { APIClient, APIMapping } from "../http";
+} from '@flowfact/types';
+import { AxiosResponse } from 'axios';
+import { APIClient, APIMapping } from '../http';
 
 export class InteractiveExposeService extends APIClient {
   constructor() {
@@ -17,21 +17,21 @@ export class InteractiveExposeService extends APIClient {
   }
 
   async getSettings(): Promise<InteractiveExposeSettingsWithLogos> {
-    return (await this.invokeApi("/settings", "GET")).data;
+    return (await this.invokeApi('/settings', 'GET')).data;
   }
 
   async changeSettings(
     settings: InteractiveExposeSettings
   ): Promise<InteractiveExposeSettingsWithLogos> {
-    return (await this.invokeApi("/settings", "POST", settings)).data;
+    return (await this.invokeApi('/settings', 'POST', settings)).data;
   }
 
   async getPreviewUrl(
     entityId: string,
-    templateName: string = "standard",
+    templateName: string = 'standard',
     attachDocuments: boolean = false
   ): Promise<string> {
-    return (await this.invokeApi("/preview", "POST", {
+    return (await this.invokeApi('/preview', 'POST', {
       entityId: entityId,
       templateName: templateName,
       attachDocuments: attachDocuments
@@ -41,30 +41,30 @@ export class InteractiveExposeService extends APIClient {
   async sendInteractiveExpose(
     model: SendInteractiveExposeModel
   ): Promise<AxiosResponse> {
-    return await this.invokeApi("/interactiveExposes", "POST", model);
+    return await this.invokeApi('/interactiveExposes', 'POST', model);
   }
 
-  async changeLogo(type: "light" | "dark", image: File): Promise<S3File> {
+  async changeLogo(type: 'light' | 'dark', image: File): Promise<S3File> {
     const formData = new FormData();
-    formData.append("logo", image);
-    return (await this.invokeApi(`/settings/logos/${type}`, "POST", formData, {
-      headers: { "Content-Type": "multipart/form-data" }
+    formData.append('logo', image);
+    return (await this.invokeApi(`/settings/logos/${type}`, 'POST', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
     })).data;
   }
 
-  async deleteLogo(type: "light" | "dark"): Promise<AxiosResponse> {
-    return await this.invokeApi(`/settings/logos/${type}`, "DELETE");
+  async deleteLogo(type: 'light' | 'dark'): Promise<AxiosResponse> {
+    return await this.invokeApi(`/settings/logos/${type}`, 'DELETE');
   }
 
   /**
    * Get all interactive expose templates.
    * Add a role parameter to filter the templates by the roles.
    */
-  async getTemplates(role?: "OFFER" | "REPORT"): Promise<AxiosResponse> {
+  async getTemplates(role?: 'OFFER' | 'REPORT'): Promise<AxiosResponse> {
     if (role) {
       return this.invokeApi(
-        "/templates",
-        "GET",
+        '/templates',
+        'GET',
         {},
         {
           queryParams: {
@@ -74,39 +74,39 @@ export class InteractiveExposeService extends APIClient {
       );
     }
 
-    return this.invokeApi("/templates", "GET");
+    return this.invokeApi('/templates', 'GET');
   }
 
   /**
    * Check requirements of the interactive exposé and if necessary solve them
    */
   async checkRequirements(): Promise<AxiosResponse> {
-    return this.invokeApi(`/interactiveExposes/checkRequirements`, "GET");
+    return this.invokeApi(`/interactiveExposes/checkRequirements`, 'GET');
   }
 
   /**
    * Get a template by its id.
    */
   async getTemplateById(templateId: string): Promise<AxiosResponse> {
-    return this.invokeApi(`/templates/${templateId}`, "GET");
+    return this.invokeApi(`/templates/${templateId}`, 'GET');
   }
 
   /**
    * Gets all existing design Templates of a company
    */
   async fetchDesignTemplates(): Promise<AxiosResponse<DesignTemplate[]>> {
-    return this.invokeApi("/interactiveExposes/templates/assignments", "GET");
+    return this.invokeApi('/interactiveExposes/templates/assignments', 'GET');
   }
 
   async updateDesignTemplates(
     designTemplates: DesignTemplateAssignment[]
   ): Promise<AxiosResponse> {
     return this.invokeApi(
-      "/interactiveExposes/templates/assignments",
-      "POST",
+      '/interactiveExposes/templates/assignments',
+      'POST',
       designTemplates,
       {
-        headers: { "Content-Type": "application/json" }
+        headers: { 'Content-Type': 'application/json' }
       }
     );
   }
@@ -115,11 +115,11 @@ export class InteractiveExposeService extends APIClient {
     designTemplates: DesignTemplateAssignment[]
   ): Promise<AxiosResponse> {
     return this.invokeApi(
-      "/interactiveExposes/templates/assignments",
-      "DELETE",
+      '/interactiveExposes/templates/assignments',
+      'DELETE',
       designTemplates,
       {
-        headers: { "Content-Type": "application/json" }
+        headers: { 'Content-Type': 'application/json' }
       }
     );
   }
@@ -140,16 +140,16 @@ export class InteractiveExposeService extends APIClient {
       }
     };
 
-    return this.invokeApi("/templates", "POST", template, queryParams);
+    return this.invokeApi('/templates', 'POST', template, queryParams);
   }
 
   async createInteractiveExposeTemplate(templateName: string, body: FormData) {
     return this.invokeApi(
-      "/interactiveExposes/templates/" + templateName,
-      "POST",
+      '/interactiveExposes/templates/' + templateName,
+      'POST',
       body,
       {
-        headers: { "Content-Type": "multipart/form-data" }
+        headers: { 'Content-Type': 'multipart/form-data' }
       }
     );
   }
@@ -159,26 +159,26 @@ export class InteractiveExposeService extends APIClient {
     body: FormData
   ) {
     return this.invokeApi(
-      "/interactiveExposes/templates/" + templateName,
-      "PUT",
+      '/interactiveExposes/templates/' + templateName,
+      'PUT',
       body,
       {
-        headers: { "Content-Type": "multipart/form-data" }
+        headers: { 'Content-Type': 'multipart/form-data' }
       }
     );
   }
 
   async deleteInteractiveExposeTemplate(templateName: string) {
     return this.invokeApi(
-      "/interactiveExposes/templates/" + templateName,
-      "DELETE"
+      '/interactiveExposes/templates/' + templateName,
+      'DELETE'
     );
   }
 
   async fetchInteractiveExposeTemplateFiles(templateName: string) {
     return this.invokeApi(
-      "/public/interactiveExposes/templates/" + templateName,
-      "GET"
+      '/public/interactiveExposes/templates/' + templateName,
+      'GET'
     );
   }
 
@@ -188,7 +188,7 @@ export class InteractiveExposeService extends APIClient {
   ) {
     return this.invokeApi(
       `/public/interactiveExposes/templates/${templateName}/fileType/${fileType}`,
-      "GET"
+      'GET'
     );
   }
 
@@ -199,10 +199,10 @@ export class InteractiveExposeService extends APIClient {
   ) {
     return this.invokeApi(
       `/public/interactiveExposes/templates/${templateName}/fileType/${fileType}/content`,
-      "POST",
+      'POST',
       body,
       {
-        headers: { "Content-Type": "application/json" }
+        headers: { 'Content-Type': 'application/json' }
       }
     );
   }
@@ -214,51 +214,51 @@ export class InteractiveExposeService extends APIClient {
     templateId: string,
     template: InteractiveExposeTemplate
   ): Promise<AxiosResponse> {
-    return this.invokeApi(`/templates/${templateId}`, "PUT", template);
+    return this.invokeApi(`/templates/${templateId}`, 'PUT', template);
   }
 
   /**
    * Delete a interactive expose template on the server.
    */
   async deleteTemplate(templateId: string): Promise<AxiosResponse> {
-    return this.invokeApi(`/templates/${templateId}`, "DELETE");
+    return this.invokeApi(`/templates/${templateId}`, 'DELETE');
   }
 
   /**
    * Add a domain to the company.
    */
   async addDomain(domain: string): Promise<AxiosResponse> {
-    return this.invokeApi("/domain", "POST", "", { queryParams: { domain } });
+    return this.invokeApi('/domain', 'POST', '', { queryParams: { domain } });
   }
 
   /**
    * Uninitialize the company domain.
    */
   async startDomainTeardown(): Promise<AxiosResponse> {
-    return this.invokeApi("/domain/startTeardown", "POST");
+    return this.invokeApi('/domain/startTeardown', 'POST');
   }
 
   /**
    * Perform the setup steps for the domain.
    */
   async setupDomain(): Promise<AxiosResponse> {
-    return this.invokeApi("/domain/setup", "POST");
+    return this.invokeApi('/domain/setup', 'POST');
   }
 
   /**
    * Get interactive expose mapping. Default mapping is just named so, cause of convienience
    */
   async getMappingOrDefault(
-    schemaId: string = "defaultMapping"
+    schemaId: string = 'defaultMapping'
   ): Promise<AxiosResponse> {
-    return this.invokeApi(`/mapping/${schemaId}`, "GET");
+    return this.invokeApi(`/mapping/${schemaId}`, 'GET');
   }
 
   /**
    * Get interactive expose mapping. Default mapping is just named so, cause of convienience
    */
   async getAllMappings(): Promise<AxiosResponse> {
-    return this.invokeApi("/mapping/all", "GET");
+    return this.invokeApi('/mapping/all', 'GET');
   }
 
   /**
@@ -267,15 +267,15 @@ export class InteractiveExposeService extends APIClient {
   async updateMapping(
     mapping: InteractiveExposeMapping
   ): Promise<AxiosResponse> {
-    return this.invokeApi("/mapping", "PUT", mapping);
+    return this.invokeApi('/mapping', 'PUT', mapping);
   }
 
   /**
    * Put restored example legislation texts into the company scoped default mapping
    */
   async restoreDefaults(): Promise<AxiosResponse> {
-    return this.invokeApi("/mapping/restoreDefaults", "PUT", undefined, {
-      headers: { "Content-Type": "application/json" }
+    return this.invokeApi('/mapping/restoreDefaults', 'PUT', undefined, {
+      headers: { 'Content-Type': 'application/json' }
     });
   }
 
@@ -284,8 +284,8 @@ export class InteractiveExposeService extends APIClient {
    */
   keepAlive(token: string, userSessionId: string): Promise<AxiosResponse> {
     return this.invokeApi(
-      "/public/interactiveExposes/keepAlive",
-      "GET",
+      '/public/interactiveExposes/keepAlive',
+      'GET',
       {},
       {
         queryParams: {
