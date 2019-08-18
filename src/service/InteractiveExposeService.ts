@@ -154,7 +154,7 @@ export class InteractiveExposeService extends APIClient {
     );
   }
 
-  async uploudInteractiveExposeTemplateFiles(
+  async uploadInteractiveExposeTemplateFiles(
     templateName: string,
     body: FormData
   ) {
