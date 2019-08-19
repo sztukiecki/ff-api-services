@@ -72,7 +72,7 @@ export class SearchService extends APIClient {
         if (size) {
             queryParams.size = size;
         }
-        if (withCount) {
+        if (typeof withCount === 'boolean') {
             queryParams.withCount = withCount;
         }
 
