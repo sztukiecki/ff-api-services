@@ -125,6 +125,18 @@ export class NylasService extends APIClient {
             mail: mail
         });
     }
+
+    /**
+     * This method returns all available calendars for the account
+     * @param email
+     */
+    async fetchCalendars(email: string): Promise<AxiosResponse> {
+        return await this.invokeApi('/nylas/calendars', 'GET', undefined, {
+            queryParams: {
+                email: email
+            }
+        });
+    }
 }
 
 export default new NylasService();
