@@ -14,10 +14,10 @@ export class PortalManagementService extends APIClient {
      */
     async fetchPortals(ignoreInactivePortals: boolean = false): Promise<AxiosResponse> {
         return await this.invokeApi('/portals', 'GET', undefined, {
-                queryParams: {
-                    ignoreInactivePortals,
-                },
+            queryParams: {
+                ignoreInactivePortals,
             },
+        },
         );
     }
 
@@ -130,6 +130,14 @@ export class PortalManagementService extends APIClient {
      */
     async fetchPublishInformation(estateId: string): Promise<AxiosResponse> {
         return await this.invokeApi(`/estates/${estateId}/portals`, 'GET');
+    }
+
+    /**
+     * Fetches app published estates for special portal
+     * @param portalId
+     */
+    async fetchPortalEstates(portalId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/portals/${portalId}/estates`, 'GET');
     }
 
     /**
