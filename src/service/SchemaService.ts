@@ -186,6 +186,17 @@ export class SchemaService extends APIClient {
     async fetchAllMembersOfGroup(groupId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/groups/${groupId}/members`, 'GET');
     }
+
+    /**
+     * Fetches all complex data types
+     */
+    async fetchDataTypes(): Promise<AxiosResponse> {
+        return this.invokeApi('/datatypes/alltypes', 'GET', undefined, {
+            queryParams: {
+                transform: true
+            }
+        });
+    }
 }
 
 export default new SchemaService();
