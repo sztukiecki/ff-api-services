@@ -5,10 +5,11 @@ import { TrackingEvent } from '@flowfact/types';
 
 export class BehaviourService extends APIClient {
     private events: TrackingEvent[] = [];
-    private currentRequest?: Promise<AxiosResponse>;
 
     constructor() {
         super(APIMapping.behaviourService);
+
+        setInterval(this.postEvents, 5000);
     }
 
     /**
@@ -24,27 +25,18 @@ export class BehaviourService extends APIClient {
      */
     track(event: TrackingEvent) {
         this.events.push(event);
-        this.postEvents();
     }
 
     private postEvents = () => {
-        if (this.currentRequest) {
+        if (this.events.length === 0) {
             return;
         }
 
         const eventBatch = this.events;
         this.events = [];
 
-        this.currentRequest = this.invokeApi('/events', 'POST', {events: eventBatch});
-        this.currentRequest.then(this.repostEvents, this.repostEvents);
-    }
-
-    private repostEvents = () => {
-        this.currentRequest = undefined;
-        if (this.events.length > 0) {
-            this.postEvents();
-        }
-    }
+        this.invokeApi('/events', 'POST', {events: eventBatch});
+    };
 }
 
 export default new BehaviourService();
