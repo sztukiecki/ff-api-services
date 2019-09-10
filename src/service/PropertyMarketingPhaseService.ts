@@ -35,8 +35,8 @@ export class PropertyMarketingPhaseService extends APIClient {
     async fetchEntitiesInPhase(phaseName: string, page: number = 1, size: number = 50, archived = true, inactive = true) {
         return await this.invokeApi<string[]>(`/phases/${phaseName}/entities`, 'GET', undefined, {
             queryParams: {
-                archived.toString(),
-                inactive.toString(),
+                archived: archived.toString(),
+                inactive: inactive.toString(),
                 page,
                 size
             }
@@ -53,8 +53,8 @@ export class PropertyMarketingPhaseService extends APIClient {
     async fetchEntitiesInPhaseAndSchema(phaseName: string, schemaId: string, page: number = 1, size: number = 50, archived = true, inactive = true) {
         return await this.invokeApi<string[]>(`/phases/${phaseName}/entities/${schemaId}`, 'GET', undefined, {
             queryParams: {
-                archived.toString(),
-                inactive.toString(),
+                archived: archived.toString(),
+                inactive: inactive.toString(),
                 page,
                 size
             }
