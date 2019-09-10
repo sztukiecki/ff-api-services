@@ -1,4 +1,4 @@
-import { Company, LegislationText } from '@flowfact/types';
+import { Company, CompanyGroup, LegislationText } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 
@@ -175,6 +175,13 @@ export class CompanyService extends APIClient {
             {
                 headers: { 'Content-Type': 'application/json' },
             });
+    }
+
+    /**
+     * Gets the details of a company group.
+     */
+    async fetchGroup(name: string) {
+        return this.invokeApi<CompanyGroup>(`/internal/company/groups/${name}`);
     }
 }
 
