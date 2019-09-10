@@ -1,6 +1,7 @@
 import { Company, CompanyGroup, LegislationText } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
+import { OwnerClass } from '@flowfact/types';
 
 export class CompanyService extends APIClient {
 
@@ -182,6 +183,16 @@ export class CompanyService extends APIClient {
      */
     async fetchGroup(name: string) {
         return this.invokeApi<CompanyGroup>(`/internal/company/groups/${name}`);
+    }
+
+    /**
+     * This ressource is used for setting the ownerClass of a company.
+     * @param {string} companyId - The companyId of the company that should be updated
+     * @param {OwnerClass} ownerClass - The OwnerClass that the company should get. Values: "INTERNAL/CUSTOMER/EXTERNAL_DEVELOPER"
+     * @returns {Promise<AxiosResponse>}
+     */
+    async setOwnerClassForCompany(companyId: string, ownerClass: OwnerClass) {
+        return this.invokeApi(`/${companyId}/ownerclass/${ownerClass}`, 'PUT');
     }
 }
 
