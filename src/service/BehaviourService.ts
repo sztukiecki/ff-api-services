@@ -29,12 +29,12 @@ export class BehaviourService extends APIClient {
 
         this.invokeApi('/events', 'POST', {events: eventBatch});
 
-        this.timeout = <any> setTimeout(
+        this.timeout = setTimeout(
             () => {
                 this.timeout = undefined;
                 this.postEvents();
             },
-            5000);
+            5000) as any;
     };
 }
 
