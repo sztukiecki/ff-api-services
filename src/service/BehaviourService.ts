@@ -1,22 +1,13 @@
 import APIClient from '../http/APIClient';
 import { APIMapping } from '../http';
-import { AxiosResponse } from 'axios';
 import { TrackingEvent } from '@flowfact/types';
 
 export class BehaviourService extends APIClient {
     private events: TrackingEvent[] = [];
+    private timeout?: number;
 
     constructor() {
         super(APIMapping.behaviourService);
-
-        setInterval(this.postEvents, 5000);
-    }
-
-    /**
-     * @deprecated
-     */
-    async trackLogin(): Promise<AxiosResponse> {
-        return await this.invokeApi('/users/currentUser/trackLogin', 'GET');
     }
 
     /**
@@ -25,10 +16,11 @@ export class BehaviourService extends APIClient {
      */
     track(event: TrackingEvent) {
         this.events.push(event);
+        this.postEvents();
     }
 
     private postEvents = () => {
-        if (this.events.length === 0) {
+        if (this.timeout || this.events.length === 0) {
             return;
         }
 
@@ -36,6 +28,13 @@ export class BehaviourService extends APIClient {
         this.events = [];
 
         this.invokeApi('/events', 'POST', {events: eventBatch});
+
+        this.timeout = setTimeout(
+            () => {
+                this.timeout = undefined;
+                this.postEvents();
+            },
+            5000) as any;
     };
 }
 

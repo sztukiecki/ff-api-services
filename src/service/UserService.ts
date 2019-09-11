@@ -1,6 +1,8 @@
-import { User } from '@flowfact/types';
+import { User, UserRole } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
+
+const v2Header = {headers: {'x-ff-version': 2}};
 
 export class UserService extends APIClient {
 
@@ -9,13 +11,26 @@ export class UserService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Creates a user and adds it to either an existing company using the same domain, a new company during registration or the company of the current user.
      * @param companyID
      * @param mailAddress
      * @param firstName
      * @param lastName
      */
-    async createUser(companyID: string, mailAddress: string, firstName: string, lastName: string): Promise<AxiosResponse<User>> {
+    async createUser(companyID: string, mailAddress: string, firstName: string, lastName: string, useV2: boolean = false): Promise<AxiosResponse<User>> {
+        if (useV2) {
+            return await this.invokeApi(
+                '/users',
+                'POST',
+                {
+                    firstname: firstName,
+                    lastname: lastName,
+                    businessMailAddress: mailAddress,
+                    companyId: companyID,
+                },
+                v2Header);
+        }
+
         return await this.invokeApi('/users', 'POST', {
             firstname: firstName,
             lastname: lastName,
@@ -45,7 +60,7 @@ export class UserService extends APIClient {
     async postImage(image: Blob): Promise<AxiosResponse<any>> {
         const formData = new FormData();
         formData.append('contactPicture', image, 'contactPicture');
-        return this.invokeApi('/users/picture', 'POST', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+        return this.invokeApi('/users/picture', 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
     }
 
     /**
@@ -56,24 +71,39 @@ export class UserService extends APIClient {
     async postImageForUser(userId: string, image: Blob): Promise<AxiosResponse<any>> {
         const formData = new FormData();
         formData.append('contactPicture', image, 'contactPicture');
-        return this.invokeApi(`/users/${userId}/picture`, 'POST', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+        return this.invokeApi(`/users/${userId}/picture`, 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
     }
 
     /**
-     * TODO: Please comment this method
+     * Update the currently logged in user
      * @param user
      */
-    async updateUser(user: User): Promise<AxiosResponse<any>> {
+    async updateUser(user: User, useV2: boolean = false): Promise<AxiosResponse<any>> {
+        if (useV2) {
+            return await this.invokeApi('/users', 'PUT', user, v2Header);
+        }
         return await this.invokeApi('/users', 'PUT', user);
     }
 
     /**
-     * TODO: Please comment this method
+     * Update a user from the same company
      * @param userId
      * @param user
      */
-    async updateUserById(userId: string, user: User): Promise<AxiosResponse<any>> {
+    async updateUserById(userId: string, user: User, useV2: boolean = false): Promise<AxiosResponse<any>> {
+        if (useV2) {
+            return await this.invokeApi(`/users/${userId}`, 'PUT', user, v2Header);
+        }
         return await this.invokeApi(`/users/${userId}`, 'PUT', user);
+    }
+
+    /**
+     * Assignes roles to the user, must be called by an ADMIN user
+     * @param userId
+     * @param roles
+     */
+    async assignRoles(userId: string, roles: UserRole[]): Promise<AxiosResponse<any>> {
+        return await this.invokeApi(`/users/${userId}/roles`, 'PUT', roles, v2Header);
     }
 
     /**
@@ -128,7 +158,7 @@ export class UserService extends APIClient {
      * TODO: Please comment this method
      * @param userId
      */
-    async activateUser(userId: string): Promise<AxiosResponse> {
+    async activateUser(userId: string, useV2: boolean = false): Promise<AxiosResponse> {
         return await this.invokeApi(
             `/users/${userId}`,
             'PATCH',
@@ -138,6 +168,7 @@ export class UserService extends APIClient {
             {
                 headers: {
                     'Content-Type': 'application/json-patch+json',
+                    'x-ff-version': useV2 ? 2 : 1,
                 },
             },
         );
@@ -147,10 +178,15 @@ export class UserService extends APIClient {
      * TODO: Please comment this method
      * @param userId
      */
-    async deactivateUser(userId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/users/${userId}`, 'PATCH', [{ op: 'deactivate' }], {
+    async deactivateUser(userId: string, useV2: boolean = false): Promise<AxiosResponse> {
+        return await this.invokeApi(
+            `/users/${userId}`,
+            'PATCH',
+            [{op: 'deactivate'}],
+            {
                 headers: {
                     'Content-Type': 'application/json-patch+json',
+                    'x-ff-version': useV2 ? 2 : 1,
                 },
             },
         );
