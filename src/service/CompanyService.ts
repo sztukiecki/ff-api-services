@@ -192,7 +192,7 @@ export class CompanyService extends APIClient {
      * @returns {Promise<AxiosResponse>}
      */
     async setOwnerClassForCompany(companyId: string, ownerClass: OwnerClass) {
-        return this.invokeApi(`/${companyId}/ownerclass/${ownerClass}`, 'PUT');
+        return this.invokeApi(`/company/${companyId}/ownerclass/${ownerClass}`, 'PUT');
     }
 }
 
