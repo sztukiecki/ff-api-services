@@ -9,6 +9,7 @@ export class APIService {
 }
 
 const APIMapping = {
+    aclGroupService: new APIService('acl-group-service'),
     adminTokenService: new APIService('admin-token-service'),
     agentRecommendationService: new APIService('agent-recommendation-service'),
     appointmentBookingService: new APIService('appointment-booking-service'),

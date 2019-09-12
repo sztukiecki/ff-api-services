@@ -1,3 +1,4 @@
+export { default as AclGroupService } from './service/AclGroupService';
 export { default as AdminTokenService } from './service/AdminTokenService';
 export { default as AgentRecommendationService } from './service/AgentRecommendationService';
 export { default as AppointmentBookingService } from './service/AppointmentBookingService';
