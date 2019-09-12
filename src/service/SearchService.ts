@@ -85,7 +85,7 @@ export class SearchService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Fetches the number of entities matching the given query
      * @param query
      * @param index
      */
@@ -94,6 +94,23 @@ export class SearchService extends APIClient {
             headers: {
                 'Content-Type': 'application/json',
             },
+        });
+    }
+
+    /**
+     * Fetches the number of entities matching the given query
+     * @param companyId
+     * @param query
+     * @param index
+     */
+    async internalCount(companyId: string, query: Flowdsl, index: string) {
+        return this.invokeApi('/internal/schemas/' + index + '/count', 'POST', query, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            params: {
+                companyId
+            }
         });
     }
 
@@ -146,9 +163,9 @@ export class SearchService extends APIClient {
                 });
 
                 builder.withCondition({
-                    type: 'OR',
-                    conditions: conditions,
-                });
+                                          type: 'OR',
+                                          conditions: conditions,
+                                      });
             }
 
             if (filterConfiguration.limitResponse) {
