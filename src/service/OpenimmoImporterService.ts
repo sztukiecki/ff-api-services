@@ -7,7 +7,7 @@ export class OpenimmoImporterService extends APIClient {
     }
 
     async fetchLastUsedSenderSoftwareForCompanies(companyIds: string[]) {
-        return this.invokeApi<string[]>('/public/statistics/lastUsedSenderSoftwares', 'POST', companyIds);
+        return this.invokeApi<Record<string, string>>('/public/statistics/lastUsedSenderSoftwares', 'POST', companyIds);
     }
 }
 
