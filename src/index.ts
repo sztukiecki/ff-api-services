@@ -55,6 +55,7 @@ export { default as ContractService } from './service/ContractService';
 export { default as FilterDefinitionService } from './service/FilterDefinitionService';
 export { default as SoftLinksEntityService } from './service/SoftLinksEntityService';
 export { default as OpenimmoFtpAccessService } from './service/OpenimmoFtpAccessService';
+export { default as OpenimmoImporterService } from './service/OpenimmoImporterService';
 export { default as WorkflowService } from './service/WorkflowService';
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';

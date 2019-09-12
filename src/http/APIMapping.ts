@@ -66,6 +66,7 @@ const APIMapping = {
     contractService: new APIService('contract-service'),
     softLinksEntityService: new APIService('softlinks-entity-service'),
     openimmoFtpAccessService: new APIService('openimmo-ftp-access-service'),
+    openimmoImporterService: new APIService('openimmo-importer-service'),
     workflowService: new APIService('workflow-service')
 };
 
