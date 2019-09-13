@@ -6,6 +6,7 @@ import Authentication from '../authentication/Authentication';
 import EnvironmentManagement from '../util/EnvironmentManagement';
 import Interceptor from '../util/Interceptor';
 import { APIService } from './APIMapping';
+import * as url from 'url';
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
 
@@ -45,11 +46,11 @@ export default abstract class APIClient {
         const { queryParams, headers, cancelToken, ...others } = additionalParams;
 
         // add parameters to the url
-        let url = (await this.buildAPIUrl()) + path;
+        let apiUrl = (await this.buildAPIUrl()) + path;
         if (queryParams) {
             const queryString = stringify(queryParams, { addQueryPrefix: true });
             if (queryString && queryString !== '') {
-                url += queryString;
+                apiUrl += queryString;
             }
         }
 
@@ -79,7 +80,7 @@ export default abstract class APIClient {
 
         let request: AxiosRequestConfig = {
             method: method,
-            url: url,
+            url: apiUrl,
             headers: Object.assign({}, userIdentification, languages, headers || {}),
             data: body,
             cancelToken: cancelToken,
@@ -112,15 +113,13 @@ export default abstract class APIClient {
 
     private _getConsulClient(): ConsulClient {
         if (!this._consulClient) {
-            // Dirty hack: Remove the protocol from the environment value. The Java Consul Client needs it, so the value
-            // might contain the protocol. The nodejs consul client does not accept it for whatever reason.
-            // @ts-ignore
-            const consulUrl = (process.env.CONSUL_CLIENT_HOST || 'consulclients.development.flowfact-dev.cloud').replace(/https?:\/\//, '');
-            // @ts-ignore
-            const consulPort = process.env.CONSUL_CLIENT_PORT || '8500';
+            const consulUrl = process.env.CONSUL_CLIENT_HOST || process.env.CONSUL_HOST || 'http://consulclients.development.flowfact-dev.cloud:8500';
+            const consulUrlParsed = url.parse(consulUrl);
+            const consulHost = consulUrlParsed.hostname!;
+            const consulPort = consulUrlParsed.port || '8500';
 
             // TODO figure out a way to get the name of the executing service here
-            this._consulClient = new ConsulClient(consulUrl, consulPort, 'api-services', EnvironmentManagement.getStage(), EnvironmentManagement.getVersionTag());
+            this._consulClient = new ConsulClient(consulHost, consulPort, 'api-services', EnvironmentManagement.getStage(), EnvironmentManagement.getVersionTag());
         }
 
         return this._consulClient!;
