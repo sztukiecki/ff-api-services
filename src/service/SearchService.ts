@@ -102,14 +102,16 @@ export class SearchService extends APIClient {
      * @param companyId
      * @param query
      * @param index
+     * @param withAclGroups
      */
-    async internalCount(companyId: string, query: Flowdsl, index: string) {
+    async internalCount(companyId: string, query: Flowdsl, index: string, withAclGroups: boolean = false) {
         return this.invokeApi('/internal/schemas/' + index + '/count', 'POST', query, {
             headers: {
                 'Content-Type': 'application/json',
             },
             params: {
-                companyId
+                companyId,
+                withAclGroups: withAclGroups.toString()
             }
         });
     }
