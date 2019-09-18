@@ -40,6 +40,19 @@ export class UserService extends APIClient {
     }
 
     /**
+     * Creates a user based on a user-model object. This is necessary to make the new createUser Ressource work for some cases.
+     * @param user - The usermodel that is used to create the user.
+     */
+    async createUserByModel(user: object) {
+        return await this.invokeApi(
+            '/users',
+            'POST',
+            user,
+            v2Header
+        );
+    }
+
+    /**
      * TODO: Please comment this method
      */
     async fetchCurrentUser(): Promise<AxiosResponse<User>> {
