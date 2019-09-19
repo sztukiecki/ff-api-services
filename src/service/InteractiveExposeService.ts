@@ -98,6 +98,13 @@ export class InteractiveExposeService extends APIClient {
     return this.invokeApi('/interactiveExposes/templates/assignments', 'GET');
   }
 
+  /**
+   * Returns all design templates for the company the user is logged in for of the specified type.
+   */
+  async fetchDesignTemplatesOfType(type: string): Promise<AxiosResponse<DesignTemplate[]>> {
+    return this.invokeApi('/interactiveExposes/templates/assignments/?type=' + type, 'GET');
+  }
+
   async updateDesignTemplates(
     designTemplates: DesignTemplateAssignment[]
   ): Promise<AxiosResponse> {
