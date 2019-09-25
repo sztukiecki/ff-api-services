@@ -29,12 +29,13 @@ export class InteractiveExposeService extends APIClient {
   async getPreviewUrl(
     entityId: string,
     templateName: string = 'standard',
-    attachDocuments: boolean = false
-  ): Promise<string> {
+    attachDocuments: boolean = false,
+    creatorId?: string): Promise<string> {
     return (await this.invokeApi('/preview', 'POST', {
       entityId: entityId,
       templateName: templateName,
-      attachDocuments: attachDocuments
+      attachDocuments: attachDocuments,
+      creatorId: creatorId,
     })).data;
   }
 
