@@ -35,7 +35,7 @@ export class SchemaServiceV2 extends APIClient {
         if (page) {
             queryParams.page = page;
         }
-        return this.invokeApi(`/v2/schemas`, 'GET', undefined, { queryParams });
+        return this.invokeApi(`/v2/schemas?extensions=all`, 'GET', undefined, { queryParams });
     };
 
     /**
@@ -65,7 +65,7 @@ export class SchemaServiceV2 extends APIClient {
      * @param {FetchSchemaByIdOrNameQueryParam} queryParams - resolves groups, like estates, to hist children - Default value : false
      */
     fetchSchemaByIdOrName = async (schemaIdOrName: string, queryParams: { resolveGroup?: boolean } = {}): Promise<AxiosResponse<SchemaV2>> => {
-        return this.invokeApi(`/v2/schemas/${schemaIdOrName}`, 'GET', undefined, { queryParams });
+        return this.invokeApi(`/v2/schemas/${schemaIdOrName}?extensions=all`, 'GET', undefined, { queryParams });
     };
 
     /**
