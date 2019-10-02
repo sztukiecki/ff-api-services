@@ -23,8 +23,9 @@ export class SchemaServiceV2 extends APIClient {
      * @param group - Filters all schemas for given group name.
      * @param size - Page size of the response.
      * @param page - Page number of the response.
+     * @param extensions - Extensions that should be added to the schema
      */
-    fetchAllSchemas = async (group?: string, size?: number, page?: number): Promise<AxiosResponse<SchemaV2[]>> => {
+    fetchAllSchemas = async (group?: string, size?: number, page?: number, extensions = 'all'): Promise<AxiosResponse<SchemaV2[]>> => {
         let queryParams: any = {};
         if (group) {
             queryParams.group = group;
@@ -34,6 +35,9 @@ export class SchemaServiceV2 extends APIClient {
         }
         if (page) {
             queryParams.page = page;
+        }
+        if (extensions) {
+            queryParams.extensions = extensions;
         }
         return this.invokeApi(`/v2/schemas`, 'GET', undefined, { queryParams });
     };
@@ -64,7 +68,7 @@ export class SchemaServiceV2 extends APIClient {
      * @param schemaIdOrName - The schema's id or schema name
      * @param {FetchSchemaByIdOrNameQueryParam} queryParams - resolves groups, like estates, to hist children - Default value : false
      */
-    fetchSchemaByIdOrName = async (schemaIdOrName: string, queryParams: { resolveGroup?: boolean } = {}): Promise<AxiosResponse<SchemaV2>> => {
+    fetchSchemaByIdOrName = async (schemaIdOrName: string, queryParams: { resolveGroup?: boolean , extensions?: string } = {extensions: 'all'}): Promise<AxiosResponse<SchemaV2>> => {
         return this.invokeApi(`/v2/schemas/${schemaIdOrName}`, 'GET', undefined, { queryParams });
     };
 
