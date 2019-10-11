@@ -7,6 +7,35 @@ export class SearchProfileService extends APIClient {
     }
 
     /**
+     * Fetches the configuration on how the Matchmaking-UI should be displayed
+     * Tries to retrieve config for current company, when none is found, falls back to a global config
+     */
+    async fetchConfiguration(): Promise<AxiosResponse> {
+        return this.invokeApi(`/matchmaking/configuration`, 'GET');
+    }
+
+    /**
+     * Creates a configuration on how the Matchmaking-UI should be displayed for the current company
+     */
+    async createConfiguration(config: any): Promise<AxiosResponse> {
+        return this.invokeApi(`/matchmaking/configuration`, 'POST', config);
+    }
+
+    /**
+     * Updates the configuration on how the Matchmaking-UI should be displayed for the current company
+     */
+    async updateConfiguration(config: any): Promise<AxiosResponse> {
+        return this.invokeApi(`/matchmaking/configuration`, 'PUT', config);
+    }
+
+    /**
+     * Deletes the configuration on how the Matchmaking-UI should be displayed for the current company
+     */
+    async deleteConfiguration(): Promise<AxiosResponse> {
+        return this.invokeApi(`/matchmaking/configuration`, 'DELETE');
+    }
+
+    /**
      * TODO: Please comment this method
      * @param schemaGroup
      * @param schema
