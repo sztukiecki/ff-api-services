@@ -173,6 +173,13 @@ export class SchemaServiceV2 extends APIClient {
     fetchExtensionsBySchema = async (schemaName: string): Promise<AxiosResponse> => {
         return this.invokeApi(`/extensions/schemas/${schemaName}`, 'GET', undefined, v2Header);
     };
+
+    /**
+     * Fetches all extensions for a specific company
+     */
+    fetchExtensions = async (): Promise<AxiosResponse> => {
+        return this.invokeApi(`/extensions`, 'GET', undefined, v2Header);
+    };
 }
 
 export default new SchemaServiceV2();
