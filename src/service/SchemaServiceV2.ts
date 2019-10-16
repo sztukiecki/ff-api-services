@@ -165,6 +165,14 @@ export class SchemaServiceV2 extends APIClient {
     isGroup = async (identifier: string): Promise<AxiosResponse> => {
         return this.invokeApi(`/groups/${identifier}/is-group`, 'GET', undefined, v2Header);
     };
+
+    /**
+     * Fetches all extensions for a specific combination of schema and company
+     * @param schemaName - The schema name
+     */
+    fetchExtensionsBySchema = async (schemaName: string): Promise<AxiosResponse> => {
+        return this.invokeApi(`/extensions/schemas/${schemaName}`, 'GET', undefined, v2Header);
+    };
 }
 
 export default new SchemaServiceV2();
