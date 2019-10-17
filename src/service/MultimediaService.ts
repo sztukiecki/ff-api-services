@@ -34,7 +34,7 @@ export class MultimediaService extends APIClient {
      *      the url to request this file
      */
     async fetchFile(fileUrl: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/download`, 'GET', undefined, {
+        return await this.invokeApi('/download', 'GET', undefined, {
             queryParams: {
                 uri: fileUrl
             },
@@ -51,11 +51,19 @@ export class MultimediaService extends APIClient {
      * @returns well.. 200 OK?
      */
     async deleteFile(bucketType: 'Image' | 'Document', entityId: string, filename: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/deleteFile`, 'DELETE', {
+        return await this.invokeApi('/deleteFile', 'DELETE', {
             bucketType,
             entityId,
             filename
         });
+    }
+
+    /**
+     * Fetches all available album definitions for a schema
+     * @param schemaName
+     */
+    async fetchAlbums(schemaName: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/albums/schemas/${schemaName}`, 'GET');
     }
 }
 
