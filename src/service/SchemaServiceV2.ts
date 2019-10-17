@@ -92,7 +92,7 @@ export class SchemaServiceV2 extends APIClient {
 
     /**
      * Deletes all schemas in current company scope
-     * @param {string} key - if you are sure you want delete all schemas then set key = DELETE
+     * @param key - if you are sure you want delete all schemas then set key = DELETE
      */
     deleteAllSchema = async (key: string): Promise<AxiosResponse> => {
         if (!key || key !== 'DELETE') {
@@ -176,7 +176,7 @@ export class SchemaServiceV2 extends APIClient {
 
     /**
      * Fetches extension by name.
-     * @Param {string} name - The extenion's name.
+     * @param name - The extenion's name.
      */
     fetchExtension = async (name: string): Promise<AxiosResponse> => {
         return this.invokeApi(`/extensions/${name}`, 'GET', undefined, v2Header);
@@ -184,8 +184,8 @@ export class SchemaServiceV2 extends APIClient {
 
     /**
      * Create or Updates extension by name.
-     * @Param {string} name - The extension's name.
-     * @Param {Extension} extension - The extension object, that should be created or updated.
+     * @param name - The extension's name.
+     * @param extension - The extension object, that should be created or updated.
      */
     createOrUpdateExtension = async (name: string, extension: Extension): Promise<AxiosResponse> => {
         return this.invokeApi(`/extensions/${name}`, 'PUT', extension, v2Header);
@@ -193,7 +193,7 @@ export class SchemaServiceV2 extends APIClient {
 
     /**
      * Deletes extension by name.
-     * @Param {string} name - The extension's name.
+     * @param name - The extension's name.
      */
     deleteExtension = async (name: string): Promise<AxiosResponse> => {
         return this.invokeApi(`/extensions/${name}`, 'DELETE', undefined, v2Header);
@@ -201,7 +201,7 @@ export class SchemaServiceV2 extends APIClient {
 
     /**
      * Fetches all extensions for a specific combination of schema and company.
-     * @param {string} schemaName - The schema name
+     * @param schemaName - The schema name
      */
     fetchExtensionsBySchema = async (schemaName: string): Promise<AxiosResponse> => {
         return this.invokeApi(`/extensions/schemas/${schemaName}`, 'GET', undefined, v2Header);
@@ -218,7 +218,7 @@ export class SchemaServiceV2 extends APIClient {
     /**
      * Assigns extension by name of a extension.
      * It will be assigned to the schemas, which are mentioned within the extension and nowhere else.
-     * @Param {string} name - The extension's name.
+     * @Param name - The extension's name.
      */
     addExtensionAssignment = async (name: string): Promise<AxiosResponse> => {
         return this.invokeApi(`/extensions/assignments/${name}`, 'POST', undefined, v2Header);
@@ -226,7 +226,7 @@ export class SchemaServiceV2 extends APIClient {
 
     /**
      * Revokes assignment of an extension by its name.
-     * @Param {string} name - The extension's name.
+     * @Param name - The extension's name.
      */
     removeExtensionAssignment = async (name: string): Promise<AxiosResponse> => {
         return this.invokeApi(`/extensions/assignments/${name}`, 'DELETE', undefined, v2Header);
