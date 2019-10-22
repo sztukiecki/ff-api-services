@@ -1,6 +1,6 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
-import { Album, MultimediaAssignments, MultimediaItem, UploadRequestItem } from '@flowfact/types';
+import { Album, AlbumAssignmentRequest, MultimediaAssignments, MultimediaItem } from '@flowfact/types';
 
 export class MultimediaService extends APIClient {
 
@@ -9,6 +9,7 @@ export class MultimediaService extends APIClient {
     }
 
     /**
+     * @Deprecated
      * Upload a file for a entity
      *
      * @param file
@@ -28,6 +29,7 @@ export class MultimediaService extends APIClient {
     }
 
     /**
+     * @Deprecated
      * Fetches the file
      *
      * @param fileUrl
@@ -92,6 +94,32 @@ export class MultimediaService extends APIClient {
     }
 
     /**
+     * Uploads a multimedia item.
+     * @param schemaName
+     *      The name of the current schema
+     * @param entityId
+     *      The uuid of the current entity
+     * @param file
+     *      The file that should be uploaded
+     * @param onUploadProgress
+     *      Callback function to get the current upload progress
+     * @param albumAssignments
+     *      Some album assignments.
+     */
+    async uploadMediaItem(schemaName: string, entityId: string, file: any, onUploadProgress: (progressEvent: any) => void, albumAssignments: AlbumAssignmentRequest[] = []) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('albumAssignments', JSON.stringify(albumAssignments));
+
+        return await this.invokeApi(`/items/schemas/${schemaName}/entities/${entityId}`, 'POST', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            onUploadProgress: onUploadProgress
+        });
+    }
+
+    /**
      * Adds an link to an entity
      * @param schemaName
      *      The name of the schema
@@ -101,11 +129,11 @@ export class MultimediaService extends APIClient {
      *      The url
      * @param albumAssignments
      */
-    async addLink(schemaName: string, entityId: string, url: string, albumAssignments: UploadRequestItem[] = []) {
-        return await this.invokeApi(`/upload/schema/${schemaName}/entity/${entityId}/link`, 'POST', {
+    async addLink(schemaName: string, entityId: string, url: string, albumAssignments: AlbumAssignmentRequest[] = []) {
+        return await this.invokeApi(`/items/schemas/${schemaName}/entities/${entityId}/link`, 'POST', {
             link: url,
-            albums: albumAssignments
-        }, {headers: {'x-ff-version': 2}});
+            albumAssignments: albumAssignments
+        });
     }
 
     /**
