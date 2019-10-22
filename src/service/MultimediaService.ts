@@ -113,12 +113,10 @@ export class MultimediaService extends APIClient {
     /**
      * Updates a property of a media item
      * @param mediaItemId
-     * @param property
-     * @param value
+     * @param jsonPatch
      */
-    async patchMediaItem(mediaItemId: number, property: string, value: any) {
-        const request = [{op: 'update', path: `/${property}`, value: value}];
-        return await this.invokeApi(`/items/${mediaItemId}`, 'PATCH', request);
+    async patchMediaItem(mediaItemId: number, jsonPatch: object[]) {
+        return await this.invokeApi(`/items/${mediaItemId}`, 'PATCH', jsonPatch);
     }
 
     /**
