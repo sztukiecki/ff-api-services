@@ -1,5 +1,6 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
+import { Album, MultimediaAssignments, MultimediaItem, UploadRequestItem } from '@flowfact/types';
 
 export class MultimediaService extends APIClient {
 
@@ -57,7 +58,7 @@ export class MultimediaService extends APIClient {
      * Fetchs a Multimedia item by his id
      * @param mediaItemId
      */
-    async fetchMediaItem(mediaItemId: number) {
+    async fetchMediaItem(mediaItemId: number): Promise<AxiosResponse<MultimediaItem>> {
         return await this.invokeApi(`/items/${mediaItemId}`, 'GET');
     }
 
@@ -86,7 +87,7 @@ export class MultimediaService extends APIClient {
      * Fetches all available album definitions for a schema
      * @param schemaName
      */
-    async fetchAlbums(schemaName: string): Promise<AxiosResponse> {
+    async fetchAlbums(schemaName: string): Promise<AxiosResponse<Album[]>> {
         return await this.invokeApi(`/albums/schemas/${schemaName}`, 'GET');
     }
 
@@ -98,16 +99,13 @@ export class MultimediaService extends APIClient {
      *      The uuid of the entity
      * @param url
      *      The url
+     * @param albumAssignments
      */
-    async addLink(schemaName: string, entityId: string, url: string) {
-        return await this.invokeApi(`/upload/schema/${schemaName}/entity/${entityId}/link`, 'POST', undefined, {
-            queryParams: {
-                link: encodeURI(url)
-            },
-            headers: {
-                'x-ff-version': 2
-            }
-        });
+    async addLink(schemaName: string, entityId: string, url: string, albumAssignments: UploadRequestItem[] = []) {
+        return await this.invokeApi(`/upload/schema/${schemaName}/entity/${entityId}/link`, 'POST', {
+            link: url,
+            albums: albumAssignments
+        }, {headers: {'x-ff-version': 2}});
     }
 
     /**
@@ -115,7 +113,7 @@ export class MultimediaService extends APIClient {
      * @param mediaItemId
      * @param jsonPatch
      */
-    async patchMediaItem(mediaItemId: number, jsonPatch: object[]) {
+    async patchMediaItem(mediaItemId: number, jsonPatch: object[]): Promise<AxiosResponse<MultimediaItem>> {
         return await this.invokeApi(`/items/${mediaItemId}`, 'PATCH', jsonPatch);
     }
 
@@ -123,28 +121,26 @@ export class MultimediaService extends APIClient {
      * Fetches all assigned media item of a given album. Use the short parameter if you just want to get ids.
      * @param entityId
      * @param albumName
-     * @param short
      */
-    async fetchAssignedMediaItems(entityId: string, albumName: string, short: boolean = false) {
-        return await this.invokeApi(`/assigned/entities/${entityId}`, 'GET', undefined, {
+    async fetchAssignments(schemaName: string, entityId: string, albumName: string): Promise<AxiosResponse<MultimediaAssignments>> {
+        return await this.invokeApi(`/assigned/schemas/${schemaName}/entities/${entityId}`, 'GET', undefined, {
             queryParams: {
                 albumName: albumName,
-                short: short
+                short: true
             }
         });
     }
 
     /**
-     * Get all unassiged media items of a given album. Use the short parameter if you just want to get ids.
+     * Get all unassigned media items of a given album. Use the short parameter if you just want to get ids.
      * @param entityId
      * @param albumName
-     * @param short
      */
-    async fetchUnassignedMediaItems(entityId: string, albumName: string, short: boolean = false) {
+    async fetchUnassignedMediaItemIds(entityId: string, albumName: string): Promise<AxiosResponse<{ unassignedIds: number[] }>> {
         return await this.invokeApi(`/unassigned/entities/${entityId}`, 'GET', undefined, {
             queryParams: {
                 albumName: albumName,
-                short: short
+                short: true
             }
         });
     }
