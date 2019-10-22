@@ -47,10 +47,10 @@ export class MultimediaService extends APIClient {
     }
 
     /**
-     * Fetchs all media items of the current company.
+     * Fetchs all media items of the current company and the given entity.
      * @param entityId
      */
-    async fetchAllMediaItemsOfCurrentCompany(entityId: string) {
+    async fetchMediaItems(entityId: string) {
         return await this.invokeApi(`/items/entities/${entityId}`, 'GET');
     }
 
@@ -119,6 +119,7 @@ export class MultimediaService extends APIClient {
 
     /**
      * Fetches all assigned media item of a given album. Use the short parameter if you just want to get ids.
+     * @param schemaName
      * @param entityId
      * @param albumName
      */
