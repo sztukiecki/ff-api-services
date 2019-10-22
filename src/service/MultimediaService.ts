@@ -103,8 +103,22 @@ export class MultimediaService extends APIClient {
         return await this.invokeApi(`/upload/schema/${schemaName}/entity/${entityId}/link`, 'POST', undefined, {
             queryParams: {
                 link: encodeURI(url)
+            },
+            headers: {
+                'x-ff-version': 2
             }
         });
+    }
+
+    /**
+     * Updates a property of a media item
+     * @param mediaItemId
+     * @param property
+     * @param value
+     */
+    async patchMediaItem(mediaItemId: number, property: string, value: any) {
+        const request = [{op: 'update', path: `/${property}`, value: value}];
+        return await this.invokeApi(`/items/${mediaItemId}`, 'PATCH', request);
     }
 
     /**
