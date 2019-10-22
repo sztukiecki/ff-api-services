@@ -1,6 +1,7 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 import { Album, AlbumAssignmentRequest, MultimediaAssignments, MultimediaItem } from '@flowfact/types';
+import { MultimediaAssignment } from '@flowfact/types/src/Multimedia';
 
 export class MultimediaService extends APIClient {
 
@@ -172,6 +173,27 @@ export class MultimediaService extends APIClient {
                 short: true
             }
         });
+    }
+
+    /**
+     * Update assignments of the given album.
+     * @param schemaName
+     * @param entityId
+     * @param albumName
+     * @param assignments
+     */
+    async updateAssignments(schemaName: string, entityId: string, albumName: string, assignments: { [key: string]: MultimediaAssignment[] }): Promise<AxiosResponse<MultimediaAssignments>> {
+        return await this.invokeApi(
+            `/assigned/schemas/${schemaName}/entities/${entityId}`, 'PUT',
+            {
+                assignments: assignments
+            },
+            {
+                queryParams: {
+                    albumName: albumName,
+                    short: true
+                }
+            });
     }
 }
 
