@@ -166,7 +166,7 @@ export class MultimediaService extends APIClient {
      * @param entityId
      * @param albumName
      */
-    async fetchUnassignedMediaItemIds(entityId: string, albumName: string): Promise<AxiosResponse<{ unassignedIds: number[] }>> {
+    async fetchUnassignedMediaItemIds(entityId: string, albumName: string | undefined): Promise<AxiosResponse<{ unassignedIds: number[] }>> {
         return await this.invokeApi(`/unassigned/entities/${entityId}`, 'GET', undefined, {
             queryParams: {
                 albumName: albumName,
