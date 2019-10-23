@@ -1,6 +1,6 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
-import { Album, AlbumAssignmentRequest, MultimediaAssignments, MultimediaItem } from '@flowfact/types';
+import { Album, AlbumAssignmentRequest, MultimediaAssignments, MultimediaItem, UploadResponse } from '@flowfact/types';
 import { MultimediaAssignment } from '@flowfact/types/src/Multimedia';
 
 export class MultimediaService extends APIClient {
@@ -107,7 +107,7 @@ export class MultimediaService extends APIClient {
      * @param albumAssignments
      *      Some album assignments.
      */
-    async uploadMediaItem(schemaName: string, entityId: string, file: any, onUploadProgress: (progressEvent: any) => void, albumAssignments: AlbumAssignmentRequest[] = []) {
+    async uploadMediaItem(schemaName: string, entityId: string, file: any, onUploadProgress: (progressEvent: any) => void, albumAssignments: AlbumAssignmentRequest[] = []): Promise<AxiosResponse<UploadResponse>> {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('albumAssignments', JSON.stringify(albumAssignments));
@@ -130,7 +130,7 @@ export class MultimediaService extends APIClient {
      *      The url
      * @param albumAssignments
      */
-    async addLink(schemaName: string, entityId: string, url: string, albumAssignments: AlbumAssignmentRequest[] = []) {
+    async addLink(schemaName: string, entityId: string, url: string, albumAssignments: AlbumAssignmentRequest[] = []): Promise<AxiosResponse<UploadResponse>> {
         return await this.invokeApi(`/items/schemas/${schemaName}/entities/${entityId}/link`, 'POST', {
             link: url,
             albumAssignments: albumAssignments
