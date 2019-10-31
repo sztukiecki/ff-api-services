@@ -195,6 +195,16 @@ export class MultimediaService extends APIClient {
                 }
             });
     }
+
+    /**
+     * Get all albums where a item is assigned too
+     * @param schemaName
+     * @param entityId
+     * @param mediaItemId
+     */
+    async fetchAssignedAlbums(schemaName: string, entityId: string, mediaItemId: number): Promise<AxiosResponse<{ albums: Album }>> {
+        return await this.invokeApi(`/assigned/schemas/${schemaName}/entities/${entityId}/items/${mediaItemId}`, 'GET');
+    }
 }
 
 export default new MultimediaService();
