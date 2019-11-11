@@ -152,11 +152,11 @@ export class MultimediaService extends APIClient {
      * @param entityId
      * @param albumName
      */
-    async fetchAssignments(schemaName: string, entityId: string, albumName: string): Promise<AxiosResponse<MultimediaAssignments>> {
+    async fetchAssignments(schemaName: string, entityId: string, albumName: string, short = true): Promise<AxiosResponse<MultimediaAssignments>> {
         return await this.invokeApi(`/assigned/schemas/${schemaName}/entities/${entityId}`, 'GET', undefined, {
             queryParams: {
                 albumName: albumName,
-                short: true
+                short: short
             }
         });
     }
