@@ -100,6 +100,15 @@ export class MultimediaService extends APIClient {
     }
 
     /**
+     * Fechtes a specific album
+     * @param albumName
+     * @param schemaName
+     */
+    async fetchAlbum(albumName: string, schemaName: string): Promise<AxiosResponse<Album>> {
+        return await this.invokeApi(`/albums/${albumName}/schemas/${schemaName}`);
+    }
+
+    /**
      * Uploads a multimedia item.
      * @param schemaName
      *      The name of the current schema
