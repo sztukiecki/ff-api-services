@@ -52,9 +52,14 @@ export class MultimediaService extends APIClient {
     /**
      * Fetchs all media items of the current company and the given entity.
      * @param entityId
+     * @param contentCategory
      */
-    async fetchMediaItems(entityId: string) {
-        return await this.invokeApi(`/items/entities/${entityId}`, 'GET');
+    async fetchMediaItems(entityId: string, contentCategory = undefined) {
+        return await this.invokeApi(`/items/entities/${entityId}`, 'GET', undefined, {
+            queryParams: {
+                contentCategory: contentCategory
+            }
+        });
     }
 
     /**
