@@ -86,7 +86,7 @@ export class SchemaServiceV2 extends APIClient {
      * @param fieldName - Identifies the field name
      * @param value - The value that should be added
      */
-    addSchemaFields = async (schemaName: string, fieldName: string, value: any): Promise<AxiosResponse> => {
+    addPossibleValues = async (schemaName: string, fieldName: string, value: any): Promise<AxiosResponse> => {
         return this.invokeApi(`/v2/schemas/${schemaName}/fields/${fieldName}/possiblevalues`, 'POST', value);
     };
 
