@@ -1,4 +1,4 @@
-import { ViewDefinition, ViewDefinitionCategory, ViewType } from '@flowfact/types';
+import { Customisation, ViewDefinition, ViewDefinitionCategory, ViewType } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 import * as qs from 'qs';
@@ -126,6 +126,14 @@ export class ViewDefinitionService extends APIClient {
             params: {types: viewTypes},
             paramsSerializer: params => qs.stringify(params, {indices: false})
         });
+    }
+
+    /**
+     * Saves the given customisation and triggers an event applying the customisation
+     * @param customisation
+     */
+    async saveCustomisation(customisation: Customisation): Promise<void> {
+        await this.invokeApi('/customisations', 'POST', customisation);
     }
 }
 
