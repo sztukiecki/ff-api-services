@@ -32,6 +32,7 @@ const APIMapping = {
     funnelService: new APIService('funnel-service'),
     gdprService: new APIService('gdpr-service'),
     geolocationService: new APIService('geolocation-service'),
+    importPreparationService: new APIService('import-preparation-service'),
     inquiryService: new APIService('inquiry-service'),
     interactiveExposeDeliveryService: new APIService('interactive-expose-delivery-service'),
     interactiveExposeService: new APIService('interactive-expose-service'),
@@ -68,7 +69,7 @@ const APIMapping = {
     softLinksEntityService: new APIService('softlinks-entity-service'),
     openimmoFtpAccessService: new APIService('openimmo-ftp-access-service'),
     openimmoImporterService: new APIService('openimmo-importer-service'),
-    workflowService: new APIService('workflow-service')
+    workflowService: new APIService('workflow-service'),
 };
 
 export default APIMapping;
