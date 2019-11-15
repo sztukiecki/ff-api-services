@@ -20,6 +20,7 @@ export { default as FunnelService } from './service/FunnelService';
 export { default as GDPRService } from './service/GDPRService';
 export { default as GeolocationService } from './service/GeolocationService';
 export { default as HistoryModuleService } from './service/HistoryModuleService';
+export { default as ImportPreparationService } from './service/ImportPreparationService';
 export { default as InquiryService } from './service/InquiryService';
 export { default as InteractiveExposeDeliveryService } from './service/InteractiveExposeDeliveryService';
 export { default as InteractiveExposeService } from './service/InteractiveExposeService';
