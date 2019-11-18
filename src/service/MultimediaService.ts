@@ -10,6 +10,28 @@ export class MultimediaService extends APIClient {
     }
 
     /**
+     * Get eTag of an image
+     * @returns the current eTag of an image
+     */
+    async fetchETag(itemId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`${itemId}/file`, 'GET');
+    }
+
+    /**
+     * Update image binary of item with itemId
+     * @param image
+     * @param itemId
+     * @returns the url and the new eTag
+     */
+    async updateImage(image: FormData, itemId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`${itemId}/file`, 'POST', image, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+    }
+
+    /**
      * @Deprecated
      * Upload a file for a entity
      *
@@ -54,7 +76,7 @@ export class MultimediaService extends APIClient {
      * @param entityId
      * @param contentCategory
      */
-    async fetchMediaItems(entityId: string, contentCategory = undefined) {
+    async fetchMediaItems(entityId: string, contentCategory: string | undefined = undefined) {
         return await this.invokeApi(`/items/entities/${entityId}`, 'GET', undefined, {
             queryParams: {
                 contentCategory: contentCategory
