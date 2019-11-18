@@ -135,6 +135,15 @@ export class ViewDefinitionService extends APIClient {
     async saveCustomisation(customisation: Customisation): Promise<void> {
         await this.invokeApi('/customisations', 'POST', customisation);
     }
+
+    /**
+     * This function sends a whole view definition to the view-definition-service. The service compares the new view definition to
+     * the current one in the database to save which changes are made.
+     * @param viewDefinition
+     */
+    async saveCustomisations(viewDefinition: ViewDefinition): Promise<void> {
+        await this.invokeApi(`/customisations/view/${viewDefinition.id}`, 'PUT', viewDefinition);
+    }
 }
 
 export default new ViewDefinitionService();
