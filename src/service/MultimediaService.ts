@@ -14,7 +14,7 @@ export class MultimediaService extends APIClient {
      * @returns the current eTag of an image
      */
     async fetchETag(itemId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`${itemId}/file`, 'GET');
+        return await this.invokeApi(`/items/${itemId}/file`, 'GET');
     }
 
     /**
@@ -24,7 +24,7 @@ export class MultimediaService extends APIClient {
      * @returns the url and the new eTag
      */
     async updateImage(image: FormData, itemId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`${itemId}/file`, 'POST', image, {
+        return await this.invokeApi(`/items/${itemId}/file`, 'POST', image, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
