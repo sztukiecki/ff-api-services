@@ -25,7 +25,7 @@ export class SchemaServiceV2 extends APIClient {
      * @param page - Page number of the response.
      * @param extensions - Extensions that should be added to the schema
      */
-    fetchAllSchemas = async (group?: string, size?: number, page?: number, extensions = 'all'): Promise<AxiosResponse<SchemaV2[]>> => {
+    fetchAllSchemas = async (group?: string, size?: number, page?: number, extensions?: string): Promise<AxiosResponse<SchemaV2[]>> => {
         let queryParams: any = {};
         if (group) {
             queryParams.group = group;
