@@ -167,10 +167,12 @@ export class MultimediaService extends APIClient {
      * @param albumAssignments
      */
     async addLink(schemaName: string, entityId: string, url: string, albumAssignments: AlbumAssignmentRequest[] = []): Promise<AxiosResponse<UploadResponse>> {
-        return await this.invokeApi(`/items/schemas/${schemaName}/entities/${entityId}/link`, 'POST', {
+        const body = {
             link: url,
             albumAssignments: albumAssignments
-        });
+        };
+
+        return await this.invokeApi(`/items/schemas/${schemaName}/entities/${entityId}/link`, 'POST', body);
     }
 
     /**
@@ -187,8 +189,9 @@ export class MultimediaService extends APIClient {
      * @param schemaName
      * @param entityId
      * @param albumName
+     * @param short
      */
-    async fetchAssignments(schemaName: string, entityId: string, albumName: string, short = true): Promise<AxiosResponse<MultimediaAssignments>> {
+    async fetchAssignments(schemaName: string, entityId: string, albumName: string, short: boolean = true): Promise<AxiosResponse<MultimediaAssignments>> {
         return await this.invokeApi(`/assigned/schemas/${schemaName}/entities/${entityId}`, 'GET', undefined, {
             queryParams: {
                 albumName: albumName,
@@ -240,6 +243,20 @@ export class MultimediaService extends APIClient {
      */
     async fetchAssignedAlbums(schemaName: string, entityId: string, mediaItemId: number): Promise<AxiosResponse<{ albums: Album }>> {
         return await this.invokeApi(`/assigned/schemas/${schemaName}/entities/${entityId}/items/${mediaItemId}`, 'GET');
+    }
+
+    /**
+     * This function assign items to an album and add these items intelligent to any possible category if no categories are set.
+     * @param albumName
+     * @param mediaItemIds
+     * @param categories
+     */
+    async assignMediaItems(albumName: string, mediaItemIds: Number[], categories: string[] = []): Promise<AxiosResponse> {
+        return await this.invokeApi('/assigned/items', 'PUT', {
+            albumName: albumName,
+            categories: categories,
+            multimediaItemIds: mediaItemIds
+        });
     }
 }
 
