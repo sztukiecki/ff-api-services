@@ -10,14 +10,6 @@ export class MultimediaService extends APIClient {
     }
 
     /**
-     * Get eTag of an image
-     * @returns the current eTag of an image
-     */
-    async fetchETag(itemId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/items/${itemId}/file`, 'GET');
-    }
-
-    /**
      * Update image binary of item with itemId
      * @param image
      * @param itemId
@@ -143,7 +135,13 @@ export class MultimediaService extends APIClient {
      * @param albumAssignments
      *      Some album assignments.
      */
-    async uploadMediaItem(schemaName: string, entityId: string, file: any, onUploadProgress: (progressEvent: any) => void, albumAssignments: AlbumAssignmentRequest[] = []): Promise<AxiosResponse<UploadResponse>> {
+    async uploadMediaItem(
+        schemaName: string,
+        entityId: string,
+        file: any,
+        onUploadProgress: (progressEvent: any) => void,
+        albumAssignments: AlbumAssignmentRequest[] = []
+    ): Promise<AxiosResponse<UploadResponse>> {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('albumAssignments', JSON.stringify(albumAssignments));
