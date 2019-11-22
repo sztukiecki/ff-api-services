@@ -247,12 +247,14 @@ export class MultimediaService extends APIClient {
 
     /**
      * This function assign items to an album and add these items intelligent to any possible category if no categories are set.
+     * @param schemaName
+     * @param entityId
      * @param albumName
      * @param mediaItemIds
      * @param categories
      */
-    async assignMediaItems(albumName: string, mediaItemIds: Number[], categories: string[] = []): Promise<AxiosResponse> {
-        return await this.invokeApi('/assigned/items', 'PUT', {
+    async assignMediaItems(schemaName: string, entityId: string, albumName: string, mediaItemIds: Number[], categories: string[] = []): Promise<AxiosResponse> {
+        return await this.invokeApi(`/assigned/schemas/${schemaName}/entities/${entityId}/items`, 'PUT', {
             albumName: albumName,
             categories: categories,
             multimediaItemIds: mediaItemIds
