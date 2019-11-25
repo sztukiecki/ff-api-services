@@ -82,6 +82,23 @@ export class SearchProfileService extends APIClient {
     async deleteSearchProfile(searchProfileId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/search-profiles/${searchProfileId}`, 'DELETE', undefined);
     }
+
+    /**
+     * TODO: Please comment this method
+     * @param model
+     */
+    async searchEntities(model: SearchprofileServiceTypes.Searchprofile): Promise<AxiosResponse<any[]>> {
+        return this.invokeApi(`/search`, 'POST', model);
+    }
+
+    /**
+     * TODO: Please comment this method
+     * @param model
+     * @param schemaGroup
+     */
+    async searchProfiles(model: any, schemaGroup: string = 'estates'): Promise<AxiosResponse> {
+        return this.invokeApi(`/search/reverse/${schemaGroup}`, 'POST', model);
+    }
 }
 
 export default new SearchProfileService();
