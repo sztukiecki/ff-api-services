@@ -59,6 +59,7 @@ export { default as SoftLinksEntityService } from './service/SoftLinksEntityServ
 export { default as OpenimmoFtpAccessService } from './service/OpenimmoFtpAccessService';
 export { default as OpenimmoImporterService } from './service/OpenimmoImporterService';
 export { default as WorkflowService } from './service/WorkflowService';
+export { default as SearchProfileService } from './service/SearchProfileService';
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
 export * from './service/RelogService';
