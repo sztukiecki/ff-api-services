@@ -32,6 +32,7 @@ const APIMapping = {
     funnelService: new APIService('funnel-service'),
     gdprService: new APIService('gdpr-service'),
     geolocationService: new APIService('geolocation-service'),
+    importPreparationService: new APIService('import-preparation-service'),
     inquiryService: new APIService('inquiry-service'),
     interactiveExposeDeliveryService: new APIService('interactive-expose-delivery-service'),
     interactiveExposeService: new APIService('interactive-expose-service'),

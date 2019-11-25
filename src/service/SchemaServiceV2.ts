@@ -1,4 +1,4 @@
-import { GroupAllResponse, GroupV2, SchemaV2 } from '@flowfact/types';
+import { Extension, GroupAllResponse, GroupV2, SchemaV2 } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 
@@ -23,8 +23,9 @@ export class SchemaServiceV2 extends APIClient {
      * @param group - Filters all schemas for given group name.
      * @param size - Page size of the response.
      * @param page - Page number of the response.
+     * @param extensions - Extensions that should be added to the schema
      */
-    fetchAllSchemas = async (group?: string, size?: number, page?: number): Promise<AxiosResponse<SchemaV2[]>> => {
+    fetchAllSchemas = async (group?: string, size?: number, page?: number, extensions?: string): Promise<AxiosResponse<SchemaV2[]>> => {
         let queryParams: any = {};
         if (group) {
             queryParams.group = group;
@@ -34,6 +35,9 @@ export class SchemaServiceV2 extends APIClient {
         }
         if (page) {
             queryParams.page = page;
+        }
+        if (extensions) {
+            queryParams.extensions = extensions;
         }
         return this.invokeApi(`/v2/schemas`, 'GET', undefined, { queryParams });
     };
@@ -64,7 +68,7 @@ export class SchemaServiceV2 extends APIClient {
      * @param schemaIdOrName - The schema's id or schema name
      * @param {FetchSchemaByIdOrNameQueryParam} queryParams - resolves groups, like estates, to hist children - Default value : false
      */
-    fetchSchemaByIdOrName = async (schemaIdOrName: string, queryParams: { resolveGroup?: boolean } = {}): Promise<AxiosResponse<SchemaV2>> => {
+    fetchSchemaByIdOrName = async (schemaIdOrName: string, queryParams: { resolveGroup?: boolean , extensions?: string } = {extensions: 'all'}): Promise<AxiosResponse<SchemaV2>> => {
         return this.invokeApi(`/v2/schemas/${schemaIdOrName}`, 'GET', undefined, { queryParams });
     };
 
@@ -82,13 +86,13 @@ export class SchemaServiceV2 extends APIClient {
      * @param fieldName - Identifies the field name
      * @param value - The value that should be added
      */
-    addSchemaFields = async (schemaName: string, fieldName: string, value: any): Promise<AxiosResponse> => {
+    addPossibleValues = async (schemaName: string, fieldName: string, value: any): Promise<AxiosResponse> => {
         return this.invokeApi(`/v2/schemas/${schemaName}/fields/${fieldName}/possiblevalues`, 'POST', value);
     };
 
     /**
      * Deletes all schemas in current company scope
-     * @param {string} key - if you are sure you want delete all schemas then set key = DELETE
+     * @param key - if you are sure you want delete all schemas then set key = DELETE
      */
     deleteAllSchema = async (key: string): Promise<AxiosResponse> => {
         if (!key || key !== 'DELETE') {
@@ -160,6 +164,72 @@ export class SchemaServiceV2 extends APIClient {
      */
     isGroup = async (identifier: string): Promise<AxiosResponse> => {
         return this.invokeApi(`/groups/${identifier}/is-group`, 'GET', undefined, v2Header);
+    };
+
+    // Extension Controller
+    /**
+     * Fetches all extensions.
+     */
+    fetchExtensions = async (): Promise<AxiosResponse> => {
+        return this.invokeApi(`/extensions`, 'GET', undefined, v2Header);
+    };
+
+    /**
+     * Fetches extension by name.
+     * @param name - The extenion's name.
+     */
+    fetchExtension = async (name: string): Promise<AxiosResponse> => {
+        return this.invokeApi(`/extensions/${name}`, 'GET', undefined, v2Header);
+    };
+
+    /**
+     * Create or Updates extension by name.
+     * @param name - The extension's name.
+     * @param extension - The extension object, that should be created or updated.
+     */
+    createOrUpdateExtension = async (name: string, extension: Extension): Promise<AxiosResponse> => {
+        return this.invokeApi(`/extensions/${name}`, 'PUT', extension, v2Header);
+    };
+
+    /**
+     * Deletes extension by name.
+     * @param name - The extension's name.
+     */
+    deleteExtension = async (name: string): Promise<AxiosResponse> => {
+        return this.invokeApi(`/extensions/${name}`, 'DELETE', undefined, v2Header);
+    };
+
+    /**
+     * Fetches all extensions for a specific combination of schema and company.
+     * @param schemaName - The schema name
+     */
+    fetchExtensionsBySchema = async (schemaName: string): Promise<AxiosResponse> => {
+        return this.invokeApi(`/extensions/schemas/${schemaName}`, 'GET', undefined, v2Header);
+    };
+
+    // Extension-Assignment-Controller
+    /**
+     * Fetches stats overs all assigned extensions.
+     */
+    fetchExtensionAssignments = async (): Promise<AxiosResponse> => {
+        return this.invokeApi(`/extensions/assignments`, 'GET', undefined, v2Header);
+    };
+
+    /**
+     * Assigns extension by name of a extension.
+     * It will be assigned to the schemas, which are mentioned within the extension and nowhere else.
+     * @Param name - The extension's name.
+     */
+    addExtensionAssignment = async (name: string): Promise<AxiosResponse> => {
+        return this.invokeApi(`/extensions/assignments/${name}`, 'POST', undefined, v2Header);
+    };
+
+    /**
+     * Revokes assignment of an extension by its name.
+     * @Param name - The extension's name.
+     */
+    removeExtensionAssignment = async (name: string): Promise<AxiosResponse> => {
+        return this.invokeApi(`/extensions/assignments/${name}`, 'DELETE', undefined, v2Header);
     };
 }
 

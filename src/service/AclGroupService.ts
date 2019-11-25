@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from '../http';
-import { ShortAclGroup } from '@flowfact/types';
+import { AclGroup, ShortAclGroup } from '@flowfact/types';
 
 export interface OwnerIdsReply {
     aclGroups: ShortAclGroup[];
@@ -14,6 +14,22 @@ export class AclGroupService extends APIClient {
 
     async fetchAclGroupsWithAccessBy(companyId: string) {
         return this.invokeApi<OwnerIdsReply>(`/internal/acl-groups/by-member-id/${companyId}/owner-ids`, 'GET');
+    }
+
+    async fetchAllGroups() {
+        return this.invokeApi<AclGroup[]>('/groups');
+    }
+
+    async createGroup(group: AclGroup) {
+        return this.invokeApi<AclGroup>('/groups', 'POST', group);
+    }
+
+    async updateGroup(id: string, group: AclGroup) {
+        return this.invokeApi<AclGroup>(`/groups/${id}`, 'PUT', group);
+    }
+
+    async removeGroup(id: string) {
+        return this.invokeApi(`/groups/${id}`, 'DELETE');
     }
 }
 
