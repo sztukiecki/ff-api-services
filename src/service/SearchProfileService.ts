@@ -37,7 +37,7 @@ export class SearchProfileService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Retrieves all searchprofiles of a company
      * @param page
      * @param size
      */
@@ -52,7 +52,7 @@ export class SearchProfileService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Creates a new searchprofile
      * @param searchProfile
      */
     async createSearchProfile(searchProfile: SearchprofileServiceTypes.Searchprofile): Promise<AxiosResponse<SearchprofileServiceTypes.Searchprofile>> {
@@ -60,7 +60,7 @@ export class SearchProfileService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Retrieves an existing searchprofile by its id
      * @param searchProfileId
      */
     async fetchSearchProfile(searchProfileId: string): Promise<AxiosResponse<SearchprofileServiceTypes.Searchprofile>> {
@@ -68,7 +68,7 @@ export class SearchProfileService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Updates an existing searchprofile
      * @param searchProfile
      */
     async updateSearchProfile(searchProfile: SearchprofileServiceTypes.Searchprofile): Promise<AxiosResponse<SearchprofileServiceTypes.Searchprofile>> {
@@ -76,11 +76,28 @@ export class SearchProfileService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Deletes a searchprofile by its id
      * @param searchProfileId
      */
     async deleteSearchProfile(searchProfileId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/search-profiles/${searchProfileId}`, 'DELETE', undefined);
+    }
+
+    /**
+     * Executes a search using the search terms (conditions) in the searchprofile
+     * @param model
+     */
+    async searchEntities(model: SearchprofileServiceTypes.Searchprofile): Promise<AxiosResponse<any[]>> {
+        return this.invokeApi(`/search`, 'POST', model);
+    }
+
+    /**
+     * Executes a reverse search against saved searchprofiles for the specified schemaGroup and saved entity (by Id)
+     * @param entityId
+     * @param schemaGroup
+     */
+    async searchProfiles(entityId: string, schemaGroup: string = 'estates'): Promise<AxiosResponse> {
+        return this.invokeApi(`/search/reverse/schema/${schemaGroup}/entity/${entityId}`, 'POST');
     }
 }
 
