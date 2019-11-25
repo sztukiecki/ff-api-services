@@ -2,7 +2,6 @@ import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 import { SearchprofileService as SearchprofileServiceTypes } from '@flowfact/types';
 
-
 export class SearchProfileService extends APIClient {
     constructor() {
         super(APIMapping.searchProfileService);
