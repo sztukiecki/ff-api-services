@@ -122,7 +122,7 @@
   dependencies:
     tslib "^1.7.1"
 
-"@flowfact/types@^1.20191125.89":
+"@flowfact/types@^1.20191125.90":
   version "1.20191125.90"
   resolved "https://registry.yarnpkg.com/@flowfact/types/-/types-1.20191125.90.tgz#c3fbe51e3ec31763c9f4f1bc87a66657f89de83b"
   integrity sha512-6/1YpzXkNeRRi7+6oN7hoh6sJWgWPCcBzKpiM0k/WHFl5Rkunq54UfkC3lyF9a9+5ec3h6DvsMu96xpi9HEW0w==
