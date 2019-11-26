@@ -25,6 +25,7 @@ const APIMapping = {
     emailService: new APIService('email-service'),
     entityExportService: new APIService('entity-export-service'),
     entityService: new APIService('entity-service'),
+    excelExporterService: new APIService('excel-exporter-service'),
     flowfactExporterInternalService: new APIService('flowfact-exporter-internal-service'),
     flywheelService: new APIService('flywheel-service'),
     formService: new APIService('form-service'),
