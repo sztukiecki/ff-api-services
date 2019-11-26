@@ -1,7 +1,7 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
-export class ExcelExporterService extends APIClient {
+class ExcelExporterService extends APIClient {
     constructor() {
         super(APIMapping.excelExporterService);
     }
@@ -29,3 +29,5 @@ export class ExcelExporterService extends APIClient {
         return this.invokeApi(`/export/schema/download/${fileId}`, 'GET');
     }
 }
+
+export default new ExcelExporterService();

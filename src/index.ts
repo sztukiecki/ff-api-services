@@ -12,6 +12,7 @@ export { default as CustomerLegitimationArchiveService } from './service/Custome
 export { default as DynamicLayoutService } from './service/DynamicLayoutService';
 export { default as EmailService } from './service/EmailService';
 export { default as EntityService } from './service/EntityService';
+export { default as ExcelExporterService } from './service/ExcelExporterService';
 export { default as FlowfactExportInternalService } from './service/FlowfactExportInternalService';
 export { default as FlywheelService } from './service/FlywheelService';
 export { default as FormService } from './service/FormService';
