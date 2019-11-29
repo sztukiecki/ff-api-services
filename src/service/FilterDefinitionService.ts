@@ -44,6 +44,14 @@ class FilterDefinitionService extends APIClient {
     async updateSavedFilter(filterId: string, filterDefinition: FilterDefinition): Promise<AxiosResponse<FilterDefinition>> {
         return await this.invokeApi(`/filters/saved/${filterId}`, 'PATCH', filterDefinition);
     }
+
+    /**
+     * Delete a saved filter by his id.
+     * @param filterId
+     */
+    async deleteSavedFilter(filterId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/filters/saved/${filterId}`, 'DELETE');
+    }
 }
 
 export default new FilterDefinitionService();
