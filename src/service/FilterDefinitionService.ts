@@ -24,7 +24,7 @@ class FilterDefinitionService extends APIClient {
      * Get all saved filters for a schema
      * @param schemaName
      */
-    async fetchSavedFilters(schemaName: string): Promise<AxiosResponse<FilterDefinition[]>> {
+    async fetchSavedFilters(schemaName: string): Promise<AxiosResponse<{ entries: FilterDefinition[] }>> {
         return await this.invokeApi('/filters/saved', 'GET');
     }
 
