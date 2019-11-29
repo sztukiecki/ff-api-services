@@ -18,7 +18,7 @@
     "lint": "tslint --project .",
     "doc": "typedoc --out doc/",
     "local": "node pack.js platform-apps",
-    "upgradeTypes": "yarn add @flowfact/types --latest"
+    "upgradeTypes": "yarn && yarn add @flowfact/types --latest"
   },
   "dependencies": {
     "@flowfact/consul-client": "^0.20190425.7",
