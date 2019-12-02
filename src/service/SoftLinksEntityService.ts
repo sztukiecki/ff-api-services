@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
+import { Softlinks } from '@flowfact/types';
 
 export class SoftLinksEntityService extends APIClient {
 
@@ -8,14 +9,11 @@ export class SoftLinksEntityService extends APIClient {
     }
 
     /**
-    * Create link between the entities with ids from source and destination 
-    * @param sourceId
-    * @param destinationId
-    * @param label
-    */
-    async createLink(sourceId: string, destinationId: string, label: string): Promise<AxiosResponse> {
-        const body = { "source": sourceId, "destination": destinationId, "label": label };
-        return this.invokeApi(`/link`, 'POST', body || {},{
+     * Create link between the entities with ids from source and destination
+     * @param link
+     */
+    async createLink(link: Softlinks.CreateSoftlinkRequest): Promise<AxiosResponse<Softlinks.Softlink[]>> {
+        return this.invokeApi(`/link`, 'POST', link || {}, {
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -23,18 +21,18 @@ export class SoftLinksEntityService extends APIClient {
     }
 
     /**
-    * Delete link
-    * @param linkId
-    */
+     * Delete link
+     * @param linkId
+     */
     async deleteLink(linkId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/link/${linkId}`, 'DELETE');
     }
 
     /**
-    * Search link by label
-    * @param label
-    */
-    async searchLinksByLabel(label: string): Promise<AxiosResponse> {
+     * Search link by label
+     * @param label
+     */
+    async searchLinksByLabel(label: string): Promise<AxiosResponse<{ count: number, label: string }>> {
         return this.invokeApi(`/link/search`, 'GET', undefined, {
             queryParams: {
                 label
@@ -43,17 +41,13 @@ export class SoftLinksEntityService extends APIClient {
     }
 
     /**
-    * Search links with pagination
-    * @param linkId
-    * @param sourceId
-    * @param destinationId
-    * @param label
-    * @param page
-    * @param size
-    */
-    async searchLinksWithPagination(linkId: string, sourceId: string, destinationId: string, label: string, page: number = 1, size: number = 20): Promise<AxiosResponse> {
-        const body = { "id": linkId, "source": sourceId, "destination": destinationId, "label": label };
-        return this.invokeApi(`/link/search`, 'POST', body || {}, {
+     * Search links with pagination
+     * @param link
+     * @param page
+     * @param size
+     */
+    async searchLinksWithPagination(link: Softlinks.NulleableSoftlinkSearch, page: number = 1, size: number = 20): Promise<AxiosResponse> {
+        return this.invokeApi(`/link/search`, 'POST', link || {}, {
             queryParams: {
                 page,
                 size
@@ -65,15 +59,14 @@ export class SoftLinksEntityService extends APIClient {
     }
 
     /**
-    * Search all links with pagination
-    * @param entityIds
-    * @param label
-    * @param page
-    * @param size
-    */
-    async searchAllSoftLinks(entityIds: Array<string>, label: string, page: number = 1, size: number = 20): Promise<AxiosResponse> {
-        const body = { "entityIds": entityIds, "label": label };
-        return this.invokeApi(`/link/search/all-softlinks`, 'POST', body || {}, {
+     * Search all links with pagination
+     * @param request
+     * @param label
+     * @param page
+     * @param size
+     */
+    async searchAllSoftLinks(request: Softlinks.AllSoftlinksRequest, page: number = 1, size: number = 20): Promise<AxiosResponse> {
+        return this.invokeApi(`/link/search/all-softlinks`, 'POST', request || {}, {
             queryParams: {
                 page,
                 size
