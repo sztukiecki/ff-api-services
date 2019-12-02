@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
-import { Softlinks } from '@flowfact/types';
+import { Softlinks, PagedResult } from '@flowfact/types';
 
 export class SoftLinksEntityService extends APIClient {
 
@@ -12,7 +12,7 @@ export class SoftLinksEntityService extends APIClient {
      * Create link between the entities with ids from source and destination
      * @param link
      */
-    async createLink(link: Softlinks.CreateSoftlinkRequest): Promise<AxiosResponse<Softlinks.Softlink[]>> {
+    async createLink(link: Softlinks.CreateSoftlinkRequest): Promise<AxiosResponse<Softlinks.CreateSoftlinkRequest>> {
         return this.invokeApi(`/link`, 'POST', link || {}, {
             headers: {
                 'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ export class SoftLinksEntityService extends APIClient {
      * @param page
      * @param size
      */
-    async searchLinksWithPagination(link: Softlinks.NulleableSoftlinkSearch, page: number = 1, size: number = 20): Promise<AxiosResponse> {
+    async searchLinksWithPagination(link: Softlinks.NulleableSoftlinkSearch, page: number = 1, size: number = 20): Promise<AxiosResponse<PagedResult<Softlinks.Softlink>>> {
         return this.invokeApi(`/link/search`, 'POST', link || {}, {
             queryParams: {
                 page,
@@ -61,11 +61,10 @@ export class SoftLinksEntityService extends APIClient {
     /**
      * Search all links with pagination
      * @param request
-     * @param label
      * @param page
      * @param size
      */
-    async searchAllSoftLinks(request: Softlinks.AllSoftlinksRequest, page: number = 1, size: number = 20): Promise<AxiosResponse> {
+    async searchAllSoftLinks(request: Softlinks.AllSoftlinksRequest, page: number = 1, size: number = 20): Promise<AxiosResponse<PagedResult<Softlinks.Softlink>>> {
         return this.invokeApi(`/link/search/all-softlinks`, 'POST', request || {}, {
             queryParams: {
                 page,
