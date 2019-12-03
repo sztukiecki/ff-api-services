@@ -93,7 +93,7 @@ export class AclGroupService extends APIClient {
     }
 
     async removeGroup(id: string) {
-        return this.invokeGqlMutation<string>(
+        return this.invokeGqlMutation<boolean>(
             gql`
                 mutation AclGroupRemove($id: ID!) {
                     deleteAclGroup(id: $id)
@@ -140,7 +140,7 @@ export class AclGroupService extends APIClient {
     }
 
     async joinCooperation(code: string) {
-        return this.invokeGqlMutation<LinkCode>(
+        return this.invokeGqlMutation<{ joinCooperation: LinkCode }>(
             gql`
                 mutation CooperationJoin($code: String!) {
                     joinCooperation(code: $code) {
