@@ -131,7 +131,7 @@ export class UserService extends APIClient {
         });
     }
 
-    async hasScoutSso(aliasMailAddress: string): Promise<AxiosResponse<any>> {
+    async hasScoutSso(aliasMailAddress: string): Promise<AxiosResponse<boolean>> {
         return await this.invokeApi('public/users/sso/scout', 'GET', undefined, {
             queryParams: {
                 aliasMailAddress: aliasMailAddress,
