@@ -4,7 +4,7 @@ import { AxiosResponse } from 'axios';
 export class IS24ImportService extends APIClient {
 
     constructor() {
-        super(APIMapping.viewDefinitionService);
+        super(APIMapping.is24ImportService);
     }
 
     /**
