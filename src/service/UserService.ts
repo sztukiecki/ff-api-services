@@ -131,10 +131,11 @@ export class UserService extends APIClient {
         });
     }
 
-    async hasScoutSso(aliasMailAddress: string): Promise<AxiosResponse<boolean>> {
-        return await this.invokeApi('/public/users/sso/scout', 'GET', undefined, {
+    async hasSsoOfType(aliasMailAddress: string, ssoType: string): Promise<AxiosResponse<boolean>> {
+        return await this.invokeApi('/public/users/sso', 'GET', undefined, {
             queryParams: {
                 aliasMailAddress: aliasMailAddress,
+                ssoType: ssoType
             },
         });
     }
