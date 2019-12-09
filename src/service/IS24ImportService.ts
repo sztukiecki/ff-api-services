@@ -1,6 +1,17 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
+interface IS24Property {
+    id: string;
+    headline: string;
+    type: string;
+    mainImageUrl: string;
+    city: string;
+    price: string;
+    zip: string;
+    status: 'ACTIVE' | 'INACTIVE' | 'TO_BE_DELETED' | 'DRAFT' | 'ARCHIVED';
+}
+
 export class IS24ImportService extends APIClient {
 
     constructor() {
@@ -14,14 +25,9 @@ export class IS24ImportService extends APIClient {
      * @param pageSize
      */
     async fetchProperties(portalId: string, page: number = 1, pageSize: number = 10): Promise<AxiosResponse<{
-        id: string;
-        headline: string;
-        type: string;
-        mainImageUrl: string;
-        city: string;
-        price: string;
-        zip: string;
-        status: 'ACTIVE' | 'INACTIVE' | 'TO_BE_DELETED' | 'DRAFT' | 'ARCHIVED';
+        entities: IS24Property[],
+        totalCount: number;
+        page: number;
     }>> {
         return this.invokeApi(`/${portalId}/previews`, 'GET', undefined, {
             queryParams: {
