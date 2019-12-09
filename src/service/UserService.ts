@@ -131,6 +131,14 @@ export class UserService extends APIClient {
         });
     }
 
+    async hasScoutSso(aliasMailAddress: string): Promise<AxiosResponse<any>> {
+        return await this.invokeApi('public/users/sso/scout', 'GET', undefined, {
+            queryParams: {
+                aliasMailAddress: aliasMailAddress,
+            },
+        });
+    }
+
     /**
      * Searchs for users with the given aliasMailAddress and if we found exactly one, then we return his businessMailAddress
      * @param aliasMailAddress
