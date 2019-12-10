@@ -43,7 +43,9 @@ export class IS24ImportService extends APIClient {
      * @param propertyIds
      */
     async importProperties(portalId: string, propertyIds: string[]): Promise<AxiosResponse> {
-        return await this.invokeApi(`/${portalId}/import`, 'POST', propertyIds);
+        return await this.invokeApi(`/${portalId}/import`, 'POST', {
+            is24EstateIds: propertyIds
+        });
     }
 }
 
