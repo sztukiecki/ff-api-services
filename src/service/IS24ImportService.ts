@@ -39,10 +39,11 @@ export class IS24ImportService extends APIClient {
 
     /**
      * Imports is24 properties into the FLOWFACT platform
+     * @param portalId
      * @param propertyIds
      */
-    async importProperties(propertyIds: string[]): Promise<AxiosResponse> {
-        return await this.invokeApi('/import', 'POST', propertyIds);
+    async importProperties(portalId: string, propertyIds: string[]): Promise<AxiosResponse> {
+        return await this.invokeApi(`/${portalId}/import`, 'POST', propertyIds);
     }
 }
 
