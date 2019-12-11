@@ -62,6 +62,7 @@ export { default as OpenimmoFtpAccessService } from './service/OpenimmoFtpAccess
 export { default as OpenimmoImporterService } from './service/OpenimmoImporterService';
 export { default as WorkflowService } from './service/WorkflowService';
 export { default as SearchProfileService } from './service/SearchProfileService';
+export { default as IS24ImportService } from './service/IS24ImportService';
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
 export * from './service/RelogService';

@@ -7,6 +7,10 @@ import EnvironmentManagement from '../util/EnvironmentManagement';
 import Interceptor from '../util/Interceptor';
 import { APIService } from './APIMapping';
 import * as url from 'url';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache, IntrospectionFragmentMatcher, NormalizedCacheObject } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
+import { setContext } from 'apollo-link-context';
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
 
@@ -24,18 +28,69 @@ export default abstract class APIClient {
     private _consulClient?: ConsulClient;
     private readonly _serviceName: string;
     private static languages: string = 'de';
+    private gql: ApolloClient<NormalizedCacheObject>;
 
     public static changeLanguages(newLanguages: string) {
         this.languages = newLanguages;
     }
 
-    protected constructor(service: APIService) {
+    protected constructor(service: APIService, fragmentTypes?: any) {
         this._serviceName = service.name;
+
+        const fragmentMatcher = fragmentTypes ? new IntrospectionFragmentMatcher({ introspectionQueryResultData: fragmentTypes }) : undefined;
+
+        const httpLink = new HttpLink({
+            uri: `${this.buildClientAPIUrl()}/gql`
+        });
+        const authLink = setContext(async (_, { headers }) => ({
+            headers: {
+                ...headers,
+                ...(await this.getUserIdentification())
+            }
+        }));
+        const link = authLink.concat(httpLink);
+        const cache = new InMemoryCache({ fragmentMatcher });
+        this.gql = new ApolloClient({
+            link,
+            cache
+        });
     }
 
     public withUserId(userId: string): this {
         this.userId = userId;
         return this;
+    }
+
+    private async getUserIdentification() {
+        // setup the request
+        if (isNode) {
+            if (this.userId) {
+                return {
+                    userId: this.userId
+                };
+            }
+            return {};
+        }
+
+        const supportToken = localStorage.getItem('flowfact.support.token') || '';
+
+        if (supportToken.length === 0) {
+            return {
+                cognitoToken: (await Authentication.getCurrentSession())!.getIdToken()!.getJwtToken()
+            };
+        } else {
+            return {
+                'x-ff-support-token': supportToken
+            };
+        }
+    }
+
+    public async invokeGqlQuery<T = any>(query: any, variables?: any) {
+        return this.gql.query<T>({ query, variables, errorPolicy: 'all' });
+    }
+
+    public async invokeGqlMutation<T = any>(mutation: any, variables?: any) {
+        return this.gql.mutate<T>({ mutation, variables, errorPolicy: 'all' });
     }
 
     public async invokeApi<T = any>(path: string, method: MethodTypes = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<T>> {
@@ -54,28 +109,7 @@ export default abstract class APIClient {
             }
         }
 
-        let userIdentification = {};
-        if (!path.startsWith('/public')) {
-            // setup the request
-            if (isNode && this.userId) {
-                userIdentification = {
-                    userId: this.userId
-                };
-            } else if (!isNode) {
-                const supportToken = localStorage.getItem('flowfact.support.token') || '';
-
-                if (supportToken.length === 0) {
-                    userIdentification = {
-                        cognitoToken: (await Authentication.getCurrentSession())!.getIdToken()!.getJwtToken()
-                    };
-                } else {
-                    userIdentification = {
-                        'x-ff-support-token': supportToken
-                    };
-                }
-            }
-        }
-
+        const userIdentification = path.startsWith('/public') ? {} : await this.getUserIdentification();
         const languages: any = { 'Accept-Language': APIClient.languages };
 
         let request: AxiosRequestConfig = {
@@ -108,6 +142,10 @@ export default abstract class APIClient {
             return `https://${currentConfig['com.flowfact.router.host']}/${this._serviceName}`;
         }
 
+        return this.buildClientAPIUrl();
+    }
+
+    public buildClientAPIUrl() {
         return `${EnvironmentManagement.getBaseUrl()}/${this._serviceName}/${EnvironmentManagement.getVersionTag()}`;
     }
 

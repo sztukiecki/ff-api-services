@@ -131,6 +131,15 @@ export class UserService extends APIClient {
         });
     }
 
+    async hasSsoOfType(aliasMailAddress: string, ssoType: string): Promise<AxiosResponse<boolean>> {
+        return await this.invokeApi('/public/users/sso', 'GET', undefined, {
+            queryParams: {
+                aliasMailAddress: aliasMailAddress,
+                ssoType: ssoType
+            },
+        });
+    }
+
     /**
      * Searchs for users with the given aliasMailAddress and if we found exactly one, then we return his businessMailAddress
      * @param aliasMailAddress
