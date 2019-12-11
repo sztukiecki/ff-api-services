@@ -12,6 +12,12 @@ interface IS24Property {
     status: 'ACTIVE' | 'INACTIVE' | 'TO_BE_DELETED' | 'DRAFT' | 'ARCHIVED';
 }
 
+interface PossibleUser {
+    firstName: string;
+    lastName: string;
+    email: string;
+}
+
 export class IS24ImportService extends APIClient {
 
     constructor() {
@@ -46,6 +52,14 @@ export class IS24ImportService extends APIClient {
         return await this.invokeApi(`/${portalId}/import`, 'POST', {
             is24EstateIds: propertyIds
         });
+    }
+
+    /**
+     * Fetches possible users. A possible user can be a contact person of a estate
+     * @param portalId
+     */
+    async fetchPossibleUsers(portalId: string): Promise<AxiosResponse<{ users: PossibleUser[] }>> {
+        return await this.invokeApi(`/${portalId}/possibleUsers`, 'GET');
     }
 }
 
