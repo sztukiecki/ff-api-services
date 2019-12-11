@@ -1,5 +1,6 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
+import EnvironmentManagement from '../util/EnvironmentManagement';
 
 export class IS24EntitlementService extends APIClient {
 
@@ -17,6 +18,10 @@ export class IS24EntitlementService extends APIClient {
                 is24Token: temporaryToken
             }
         });
+    }
+
+    get authenticationRedirectURL() {
+        return `${EnvironmentManagement.getBaseUrl()}/is24-entitlement-service/public/authenticate`;
     }
 
 }
