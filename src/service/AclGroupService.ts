@@ -1,7 +1,6 @@
 import { APIClient, APIMapping } from '../http';
 import { AclGroup, LinkCode, LinkCodeQueryType, ShortAclGroup } from '@flowfact/types';
 import gql from 'graphql-tag';
-import fragmentTypes from '../schemas/acl-group-service.fragmentTypes';
 
 export interface OwnerIdsReply {
     aclGroups: ShortAclGroup[];
@@ -46,7 +45,7 @@ export const GROUP_MANAGEMENT_FRAGMENT = gql`
 export class AclGroupService extends APIClient {
 
     constructor() {
-        super(APIMapping.aclGroupService, fragmentTypes);
+        super(APIMapping.aclGroupService);
     }
 
     async fetchAclGroupsWithAccessBy(companyId: string) {

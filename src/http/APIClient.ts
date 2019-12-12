@@ -1,4 +1,3 @@
-import ConsulClient from '@flowfact/consul-client';
 import axios, { AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
 import * as isNode from 'detect-node';
 import { stringify } from 'qs';
@@ -6,11 +5,11 @@ import Authentication from '../authentication/Authentication';
 import EnvironmentManagement from '../util/EnvironmentManagement';
 import Interceptor from '../util/Interceptor';
 import { APIService } from './APIMapping';
-import * as url from 'url';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache, IntrospectionFragmentMatcher, NormalizedCacheObject } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
+import fragmentTypes from '../schemas/fragmentTypes';
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
 
@@ -25,7 +24,6 @@ export type MethodTypes = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'OPTIONS' | 'PATCH
 export default abstract class APIClient {
 
     private userId: string;
-    private _consulClient?: ConsulClient;
     private readonly _serviceName: string;
     private static languages: string = 'de';
     private gql: ApolloClient<NormalizedCacheObject>;
@@ -34,13 +32,13 @@ export default abstract class APIClient {
         this.languages = newLanguages;
     }
 
-    protected constructor(service: APIService, fragmentTypes?: any) {
+    protected constructor(service: APIService) {
         this._serviceName = service.name;
 
-        const fragmentMatcher = fragmentTypes ? new IntrospectionFragmentMatcher({ introspectionQueryResultData: fragmentTypes }) : undefined;
+        const fragmentMatcher = new IntrospectionFragmentMatcher({ introspectionQueryResultData: fragmentTypes });
 
         const httpLink = new HttpLink({
-            uri: `${this.buildClientAPIUrl()}/gql`
+            uri: `${EnvironmentManagement.getBaseUrl(isNode)}/gql`
         });
         const authLink = setContext(async (_, { headers }) => ({
             headers: {
@@ -101,7 +99,7 @@ export default abstract class APIClient {
         const { queryParams, headers, cancelToken, ...others } = additionalParams;
 
         // add parameters to the url
-        let apiUrl = (await this.buildAPIUrl()) + path;
+        let apiUrl = `${EnvironmentManagement.getBaseUrl(isNode)}/${this._serviceName}${path}`;
         if (queryParams) {
             const queryString = stringify(queryParams, { addQueryPrefix: true });
             if (queryString && queryString !== '') {
@@ -134,32 +132,5 @@ export default abstract class APIClient {
         // NEVER put a catch here because it prevents all other error handling
         // i.e. you can't handle a service returning an http code >= 400 (which is possibly expected)
         return client.request<T>(request);
-    }
-
-    public async buildAPIUrl() {
-        if (isNode) {
-            const currentConfig = await this._getConsulClient().config.getCurrent();
-            return `https://${currentConfig['com.flowfact.router.host']}/${this._serviceName}`;
-        }
-
-        return this.buildClientAPIUrl();
-    }
-
-    public buildClientAPIUrl() {
-        return `${EnvironmentManagement.getBaseUrl()}/${this._serviceName}/${EnvironmentManagement.getVersionTag()}`;
-    }
-
-    private _getConsulClient(): ConsulClient {
-        if (!this._consulClient) {
-            const consulUrl = process.env.CONSUL_CLIENT_HOST || process.env.CONSUL_HOST || 'http://consulclients.development.flowfact-dev.cloud:8500';
-            const consulUrlParsed = url.parse(consulUrl);
-            const consulHost = consulUrlParsed.hostname!;
-            const consulPort = consulUrlParsed.port || '8500';
-
-            // TODO figure out a way to get the name of the executing service here
-            this._consulClient = new ConsulClient(consulHost, consulPort, 'api-services', EnvironmentManagement.getStage(), EnvironmentManagement.getVersionTag());
-        }
-
-        return this._consulClient!;
     }
 }

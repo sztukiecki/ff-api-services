@@ -55,12 +55,16 @@ export class EnvironmentManagement {
         }
     }
 
-    getBaseUrl = () => {
+    getBaseUrl = (internal = false) => {
         const stage = this.getStage();
         const account = stage === StageTypes.DEVELOPMENT ? 'flowfact-dev' : 'flowfact-prod';
-        return stage === StageTypes.LOCAL
-            ? 'http://localhost:8080'
-            : `https://api.${stage}.cloudios.${account}.cloud`;
+        if (stage === StageTypes.LOCAL) {
+            return 'http://localhost:8080';
+        }
+        if (internal) {
+            return `https://router-vs.${stage}.cloudios.internal.${account}.cloud`;
+        }
+        return `https://api.${stage}.cloudios.${account}.cloud`;
     };
 
     isDefaultApi() {

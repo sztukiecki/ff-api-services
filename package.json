@@ -21,7 +21,6 @@
     "upgradeTypes": "yarn && yarn add @flowfact/types --latest"
   },
   "dependencies": {
-    "@flowfact/consul-client": "^0.20190425.7",
     "@flowfact/node-flowdsl": "^1.20190520.14",
     "@flowfact/types": "^1.20191129.100",
     "@types/graphql": "14.0.7",
