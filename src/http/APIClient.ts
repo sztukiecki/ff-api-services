@@ -86,12 +86,11 @@ export default abstract class APIClient {
     public async invokeGqlQuery<T = any>(query: any, variables?: any) {
         const result = await this.gql.query<T>({ query, variables, errorPolicy: 'all' });
         if (result.errors) {
-            if (result.data) {
-                console.warn('GQL query has warnings', result.errors);
-            } else {
-                // tslint:disable-next-line:no-console
-                console.error('GQL query failed', result.errors);
+            // intentional ==, do not change to ===
+            if (result.data == null) {
+                throw new Error(`GQL query failed:\n\n${JSON.stringify(result.errors, null, 2)}`);
             }
+            console.warn('GQL query has warnings', result.errors);
         }
         return result;
     }
@@ -99,12 +98,11 @@ export default abstract class APIClient {
     public async invokeGqlMutation<T = any>(mutation: any, variables?: any) {
         const result = await this.gql.mutate<T>({ mutation, variables, errorPolicy: 'all' });
         if (result.errors) {
-            if (result.data) {
-                console.warn('GQL mutation has warnings', result.errors);
-            } else {
-                // tslint:disable-next-line:no-console
-                console.error('GQL mutation failed', result.errors);
+            // intentional ==, do not change to ===
+            if (result.data == null) {
+                throw new Error(`GQL mutation failed:\n\n${JSON.stringify(result.errors, null, 2)}`);
             }
+            console.warn('GQL mutation has warnings', result.errors);
         }
         return result;
     }
