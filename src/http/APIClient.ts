@@ -84,11 +84,29 @@ export default abstract class APIClient {
     }
 
     public async invokeGqlQuery<T = any>(query: any, variables?: any) {
-        return this.gql.query<T>({ query, variables, errorPolicy: 'all' });
+        const result = await this.gql.query<T>({ query, variables, errorPolicy: 'all' });
+        if (result.errors) {
+            if (result.data) {
+                console.warn('GQL query has warnings', result.errors);
+            } else {
+                // tslint:disable-next-line:no-console
+                console.error('GQL query failed', result.errors);
+            }
+        }
+        return result;
     }
 
     public async invokeGqlMutation<T = any>(mutation: any, variables?: any) {
-        return this.gql.mutate<T>({ mutation, variables, errorPolicy: 'all' });
+        const result = await this.gql.mutate<T>({ mutation, variables, errorPolicy: 'all' });
+        if (result.errors) {
+            if (result.data) {
+                console.warn('GQL mutation has warnings', result.errors);
+            } else {
+                // tslint:disable-next-line:no-console
+                console.error('GQL mutation failed', result.errors);
+            }
+        }
+        return result;
     }
 
     public async invokeApi<T = any>(path: string, method: MethodTypes = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<T>> {
