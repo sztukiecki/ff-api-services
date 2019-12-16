@@ -157,7 +157,7 @@ export class AclGroupService extends APIClient {
     }
 
     async leaveCooperation(code: string) {
-        return this.invokeGqlMutation<boolean>(
+        return this.invokeGqlMutation<{ leaveCooperation: boolean }>(
             gql`
                 mutation CooperationLeave($code: String!) {
                     leaveCooperation(code: $code)
@@ -168,7 +168,7 @@ export class AclGroupService extends APIClient {
     }
 
     async removeCooperation(code: string) {
-        return this.invokeGqlMutation<boolean>(
+        return this.invokeGqlMutation<{ removeCooperation: boolean }>(
             gql`
                 mutation CooperationDelete($code: String!) {
                     deleteCooperation(code: $code)
