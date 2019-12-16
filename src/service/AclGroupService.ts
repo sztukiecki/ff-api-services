@@ -92,7 +92,7 @@ export class AclGroupService extends APIClient {
     }
 
     async removeGroup(id: string) {
-        return this.invokeGqlMutation<boolean>(
+        return this.invokeGqlMutation<{ deleteAclGroup: boolean }>(
             gql`
                 mutation AclGroupRemove($id: ID!) {
                     deleteAclGroup(id: $id)
