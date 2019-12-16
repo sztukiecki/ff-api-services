@@ -4,6 +4,13 @@ import { APIClient, APIMapping } from '../http';
 
 const v2Header = { headers: { 'x-ff-version': 2 } };
 
+interface SchemaV2Response {
+    entries: SchemaV2[],
+    totalCount: number;
+    page: number;
+    pageSize: number;
+}
+
 export class SchemaServiceV2 extends APIClient {
 
     constructor() {
@@ -25,7 +32,7 @@ export class SchemaServiceV2 extends APIClient {
      * @param page - Page number of the response.
      * @param extensions - Extensions that should be added to the schema
      */
-    fetchAllSchemas = async (group?: string, size?: number, page?: number, extensions?: string): Promise<AxiosResponse<SchemaV2[]>> => {
+    fetchAllSchemas = async (group?: string, size?: number, page?: number, extensions?: string): Promise<AxiosResponse<SchemaV2Response>> => {
         let queryParams: any = {};
         if (group) {
             queryParams.group = group;
