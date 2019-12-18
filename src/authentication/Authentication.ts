@@ -5,7 +5,7 @@ import EnvironmentManagement, { StageTypes } from '../util/EnvironmentManagement
 import CustomStorage from './CustomStorage';
 
 const region = 'eu-central-1';
-const stageSettings = {
+export const stageSettings = {
     development: {
         identityPoolId: 'eu-central-1:079515e9-300a-42c6-b608-930f84fed704',
         userPoolId: 'eu-central-1_8kCTHzIgR',
