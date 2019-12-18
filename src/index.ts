@@ -67,4 +67,3 @@ export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
 export * from './service/RelogService';
 export * from './util/InternalTypes';
-export { stageSettings } from './authentication/Authentication';

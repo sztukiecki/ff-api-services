@@ -5,7 +5,7 @@ import EnvironmentManagement, { StageTypes } from '../util/EnvironmentManagement
 import CustomStorage from './CustomStorage';
 
 const region = 'eu-central-1';
-export const stageSettings = {
+const stageSettings = {
     development: {
         identityPoolId: 'eu-central-1:079515e9-300a-42c6-b608-930f84fed704',
         userPoolId: 'eu-central-1_8kCTHzIgR',
@@ -33,18 +33,13 @@ class Authentication {
             return Authentication.instance;
         }
 
-        let stage = EnvironmentManagement.getStage() === StageTypes.LOCAL ? StageTypes.DEVELOPMENT : EnvironmentManagement.getStage();
-        if(!stage) {
-            stage = StageTypes.DEVELOPMENT;
-        }
-
         // Configure amplify auth
         Amplify.configure({
             storage: CustomStorage,
             Auth: {
                 region: region,
-                userPoolId: stageSettings[stage].userPoolId,
-                userPoolWebClientId: stageSettings[stage].clientId,
+                userPoolId: stageSettings[this.stage].userPoolId,
+                userPoolWebClientId: stageSettings[this.stage].clientId,
             },
         });
 
@@ -230,6 +225,22 @@ class Authentication {
         }
 
         return accessToken;
+    }
+
+    get stage(): string {
+        let stage = EnvironmentManagement.getStage() === StageTypes.LOCAL ? StageTypes.DEVELOPMENT : EnvironmentManagement.getStage();
+        if (!stage) {
+            stage = StageTypes.DEVELOPMENT;
+        }
+        return stage;
+    }
+
+    get region(): string {
+        return region;
+    }
+
+    get stageSettings() {
+        return stageSettings[this.stage];
     }
 }
 
