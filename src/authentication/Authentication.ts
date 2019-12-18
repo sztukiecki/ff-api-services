@@ -46,6 +46,10 @@ class Authentication {
         Authentication.instance = this;
     }
 
+    public reconfigure(config: object) {
+        return Amplify.configure(config);
+    }
+
     /**
      * Logins a user with the given username and password.
      * This function returns a promise.
