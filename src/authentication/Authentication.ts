@@ -77,8 +77,9 @@ class Authentication {
             stage = StageTypes.DEVELOPMENT;
         }
 
+        const clientId: string = (Auth.configure(null) as any).userPoolWebClientId || stageSettings[stage].clientId;
         // set the new tokens in the store
-        const key = `CognitoIdentityServiceProvider.${stageSettings[stage].clientId}`;
+        const key = `CognitoIdentityServiceProvider.${clientId}`;
         localStorage.setItem(`${key}.LastAuthUser`, authenticationData.username);
         localStorage.setItem(`${key}.${authenticationData.username}.idToken`, authenticationData.idToken);
         localStorage.setItem(`${key}.${authenticationData.username}.refreshToken`, authenticationData.refreshToken);
