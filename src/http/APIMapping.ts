@@ -25,6 +25,7 @@ const APIMapping = {
     emailService: new APIService('email-service'),
     entityExportService: new APIService('entity-export-service'),
     entityService: new APIService('entity-service'),
+    excelExporterService: new APIService('excel-exporter-service'),
     flowfactExporterInternalService: new APIService('flowfact-exporter-internal-service'),
     flywheelService: new APIService('flywheel-service'),
     formService: new APIService('form-service'),
@@ -32,6 +33,7 @@ const APIMapping = {
     funnelService: new APIService('funnel-service'),
     gdprService: new APIService('gdpr-service'),
     geolocationService: new APIService('geolocation-service'),
+    importPreparationService: new APIService('import-preparation-service'),
     inquiryService: new APIService('inquiry-service'),
     interactiveExposeDeliveryService: new APIService('interactive-expose-delivery-service'),
     interactiveExposeService: new APIService('interactive-expose-service'),
@@ -63,12 +65,15 @@ const APIMapping = {
     omniChannelService: new APIService('omnichannel-service'),
     clientNotificationService: new APIService('client-notification-service'),
     is24PublishService: new APIService('is24-publish-service'),
+    is24EntitlementService: new APIService('is24-entitlement-service'),
     filterDefinitionService: new APIService('filter-definition-service'),
     contractService: new APIService('contract-service'),
     softLinksEntityService: new APIService('softlinks-entity-service'),
     openimmoFtpAccessService: new APIService('openimmo-ftp-access-service'),
     openimmoImporterService: new APIService('openimmo-importer-service'),
-    workflowService: new APIService('workflow-service')
+    workflowService: new APIService('workflow-service'),
+    searchProfileService: new APIService('v2-search-service'),
+    is24ImportService: new APIService('is24-import-service')
 };
 
 export default APIMapping;

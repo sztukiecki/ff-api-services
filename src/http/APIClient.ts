@@ -1,4 +1,3 @@
-import ConsulClient from '@flowfact/consul-client';
 import axios, { AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
 import * as isNode from 'detect-node';
 import { stringify } from 'qs';
@@ -6,7 +5,11 @@ import Authentication from '../authentication/Authentication';
 import EnvironmentManagement from '../util/EnvironmentManagement';
 import Interceptor from '../util/Interceptor';
 import { APIService } from './APIMapping';
-import * as url from 'url';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache, IntrospectionFragmentMatcher, NormalizedCacheObject } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
+import { setContext } from 'apollo-link-context';
+import fragmentTypes from '../schemas/fragmentTypes';
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
 
@@ -21,9 +24,9 @@ export type MethodTypes = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'OPTIONS' | 'PATCH
 export default abstract class APIClient {
 
     private userId: string;
-    private _consulClient?: ConsulClient;
     private readonly _serviceName: string;
     private static languages: string = 'de';
+    private gql: ApolloClient<NormalizedCacheObject>;
 
     public static changeLanguages(newLanguages: string) {
         this.languages = newLanguages;
@@ -31,11 +34,77 @@ export default abstract class APIClient {
 
     protected constructor(service: APIService) {
         this._serviceName = service.name;
+
+        const fragmentMatcher = new IntrospectionFragmentMatcher({ introspectionQueryResultData: fragmentTypes });
+
+        const httpLink = new HttpLink({
+            uri: `${EnvironmentManagement.getBaseUrl(isNode)}/gql`
+        });
+        const authLink = setContext(async (_, { headers }) => ({
+            headers: {
+                ...headers,
+                ...(await this.getUserIdentification())
+            }
+        }));
+        const link = authLink.concat(httpLink);
+        const cache = new InMemoryCache({ fragmentMatcher });
+        this.gql = new ApolloClient({
+            link,
+            cache
+        });
     }
 
     public withUserId(userId: string): this {
         this.userId = userId;
         return this;
+    }
+
+    private async getUserIdentification() {
+        // setup the request
+        if (isNode) {
+            if (this.userId) {
+                return {
+                    userId: this.userId
+                };
+            }
+            return {};
+        }
+
+        const supportToken = localStorage.getItem('flowfact.support.token') || '';
+
+        if (supportToken.length === 0) {
+            return {
+                cognitoToken: (await Authentication.getCurrentSession())!.getIdToken()!.getJwtToken()
+            };
+        } else {
+            return {
+                'x-ff-support-token': supportToken
+            };
+        }
+    }
+
+    public async invokeGqlQuery<T = any>(query: any, variables?: any) {
+        const result = await this.gql.query<T>({ query, variables, errorPolicy: 'all' });
+        if (result.errors) {
+            // intentional ==, do not change to ===
+            if (result.data == null) {
+                throw new Error(`GQL query failed:\n\n${JSON.stringify(result.errors, null, 2)}`);
+            }
+            console.warn('GQL query has warnings', result.errors);
+        }
+        return result;
+    }
+
+    public async invokeGqlMutation<T = any>(mutation: any, variables?: any) {
+        const result = await this.gql.mutate<T>({ mutation, variables, errorPolicy: 'all' });
+        if (result.errors) {
+            // intentional ==, do not change to ===
+            if (result.data == null) {
+                throw new Error(`GQL mutation failed:\n\n${JSON.stringify(result.errors, null, 2)}`);
+            }
+            console.warn('GQL mutation has warnings', result.errors);
+        }
+        return result;
     }
 
     public async invokeApi<T = any>(path: string, method: MethodTypes = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<T>> {
@@ -46,7 +115,7 @@ export default abstract class APIClient {
         const { queryParams, headers, cancelToken, ...others } = additionalParams;
 
         // add parameters to the url
-        let apiUrl = (await this.buildAPIUrl()) + path;
+        let apiUrl = `${EnvironmentManagement.getBaseUrl(isNode)}/${this._serviceName}${path}`;
         if (queryParams) {
             const queryString = stringify(queryParams, { addQueryPrefix: true });
             if (queryString && queryString !== '') {
@@ -54,28 +123,7 @@ export default abstract class APIClient {
             }
         }
 
-        let userIdentification = {};
-        if (!path.startsWith('/public')) {
-            // setup the request
-            if (isNode && this.userId) {
-                userIdentification = {
-                    userId: this.userId
-                };
-            } else if (!isNode) {
-                const supportToken = localStorage.getItem('flowfact.support.token') || '';
-
-                if (supportToken.length === 0) {
-                    userIdentification = {
-                        cognitoToken: (await Authentication.getCurrentSession())!.getIdToken()!.getJwtToken()
-                    };
-                } else {
-                    userIdentification = {
-                        'x-ff-support-token': supportToken
-                    };
-                }
-            }
-        }
-
+        const userIdentification = path.startsWith('/public') ? {} : await this.getUserIdentification();
         const languages: any = { 'Accept-Language': APIClient.languages };
 
         let request: AxiosRequestConfig = {
@@ -100,28 +148,5 @@ export default abstract class APIClient {
         // NEVER put a catch here because it prevents all other error handling
         // i.e. you can't handle a service returning an http code >= 400 (which is possibly expected)
         return client.request<T>(request);
-    }
-
-    public async buildAPIUrl() {
-        if (isNode) {
-            const currentConfig = await this._getConsulClient().config.getCurrent();
-            return `https://${currentConfig['com.flowfact.router.host']}/${this._serviceName}`;
-        }
-
-        return `${EnvironmentManagement.getBaseUrl()}/${this._serviceName}/${EnvironmentManagement.getVersionTag()}`;
-    }
-
-    private _getConsulClient(): ConsulClient {
-        if (!this._consulClient) {
-            const consulUrl = process.env.CONSUL_CLIENT_HOST || process.env.CONSUL_HOST || 'http://consulclients.development.flowfact-dev.cloud:8500';
-            const consulUrlParsed = url.parse(consulUrl);
-            const consulHost = consulUrlParsed.hostname!;
-            const consulPort = consulUrlParsed.port || '8500';
-
-            // TODO figure out a way to get the name of the executing service here
-            this._consulClient = new ConsulClient(consulHost, consulPort, 'api-services', EnvironmentManagement.getStage(), EnvironmentManagement.getVersionTag());
-        }
-
-        return this._consulClient!;
     }
 }

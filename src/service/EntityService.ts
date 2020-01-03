@@ -70,6 +70,9 @@ export class EntityService extends APIClient {
 
         return this.invokeApi<SearchResult<EntityView>>(`/search/schemas/${index}`, 'POST', flowdsl, {
             queryParams: queryParams,
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
     }
 

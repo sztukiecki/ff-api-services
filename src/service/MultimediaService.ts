@@ -10,6 +10,20 @@ export class MultimediaService extends APIClient {
     }
 
     /**
+     * Update image binary of item with itemId
+     * @param image
+     * @param itemId
+     * @returns the url and the new eTag
+     */
+    async updateImage(image: FormData, itemId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/items/${itemId}/file`, 'POST', image, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+    }
+
+    /**
      * @Deprecated
      * Upload a file for a entity
      *
@@ -54,7 +68,7 @@ export class MultimediaService extends APIClient {
      * @param entityId
      * @param contentCategory
      */
-    async fetchMediaItems(entityId: string, contentCategory = undefined) {
+    async fetchMediaItems(entityId: string, contentCategory: string | undefined = undefined) {
         return await this.invokeApi(`/items/entities/${entityId}`, 'GET', undefined, {
             queryParams: {
                 contentCategory: contentCategory
@@ -121,7 +135,13 @@ export class MultimediaService extends APIClient {
      * @param albumAssignments
      *      Some album assignments.
      */
-    async uploadMediaItem(schemaName: string, entityId: string, file: any, onUploadProgress: (progressEvent: any) => void, albumAssignments: AlbumAssignmentRequest[] = []): Promise<AxiosResponse<UploadResponse>> {
+    async uploadMediaItem(
+        schemaName: string,
+        entityId: string,
+        file: any,
+        onUploadProgress: (progressEvent: any) => void,
+        albumAssignments: AlbumAssignmentRequest[] = []
+    ): Promise<AxiosResponse<UploadResponse>> {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('albumAssignments', JSON.stringify(albumAssignments));
@@ -145,10 +165,12 @@ export class MultimediaService extends APIClient {
      * @param albumAssignments
      */
     async addLink(schemaName: string, entityId: string, url: string, albumAssignments: AlbumAssignmentRequest[] = []): Promise<AxiosResponse<UploadResponse>> {
-        return await this.invokeApi(`/items/schemas/${schemaName}/entities/${entityId}/link`, 'POST', {
+        const body = {
             link: url,
             albumAssignments: albumAssignments
-        });
+        };
+
+        return await this.invokeApi(`/items/schemas/${schemaName}/entities/${entityId}/link`, 'POST', body);
     }
 
     /**
@@ -165,8 +187,9 @@ export class MultimediaService extends APIClient {
      * @param schemaName
      * @param entityId
      * @param albumName
+     * @param short
      */
-    async fetchAssignments(schemaName: string, entityId: string, albumName: string, short = true): Promise<AxiosResponse<MultimediaAssignments>> {
+    async fetchAssignments(schemaName: string, entityId: string, albumName: string, short: boolean = true): Promise<AxiosResponse<MultimediaAssignments>> {
         return await this.invokeApi(`/assigned/schemas/${schemaName}/entities/${entityId}`, 'GET', undefined, {
             queryParams: {
                 albumName: albumName,
@@ -218,6 +241,22 @@ export class MultimediaService extends APIClient {
      */
     async fetchAssignedAlbums(schemaName: string, entityId: string, mediaItemId: number): Promise<AxiosResponse<{ albums: Album }>> {
         return await this.invokeApi(`/assigned/schemas/${schemaName}/entities/${entityId}/items/${mediaItemId}`, 'GET');
+    }
+
+    /**
+     * This function assign items to an album and add these items intelligent to any possible category if no categories are set.
+     * @param schemaName
+     * @param entityId
+     * @param albumName
+     * @param mediaItemIds
+     * @param categories
+     */
+    async assignMediaItems(schemaName: string, entityId: string, albumName: string, mediaItemIds: Number[], categories: string[] = []): Promise<AxiosResponse> {
+        return await this.invokeApi(`/assigned/schemas/${schemaName}/entities/${entityId}/items`, 'PUT', {
+            albumName: albumName,
+            categories: categories,
+            multimediaItemIds: mediaItemIds
+        });
     }
 }
 
