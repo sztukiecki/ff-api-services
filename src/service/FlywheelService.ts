@@ -1,5 +1,4 @@
-import { Flowdsl } from '@flowfact/node-flowdsl/lib/Flowdsl';
-import { Flywheel, FlywheelFilter, Phase } from '@flowfact/types';
+import { Flowdsl, Flywheel, FlywheelFilter, Phase } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 
@@ -101,7 +100,7 @@ export class FlywheelService extends APIClient {
      * Return all transactions for a specific phase
      * @param phaseName
      * @param view
-     * @param flowdsl
+     * @param {Flowdsl} flowdsl
      */
     async fetchTransactionsForPhaseWithFilter(phaseName: string, view: string = 'card', flowdsl?: Flowdsl): Promise<AxiosResponse> {
         return this.invokeApi(`/transactions/phases/${phaseName}?view=${view}`, 'POST', flowdsl);
