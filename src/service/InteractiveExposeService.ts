@@ -30,8 +30,9 @@ export class InteractiveExposeService extends APIClient {
     entityId: string,
     templateName: string = 'standard',
     attachDocuments: boolean = false,
-    showFinanceCalculator: boolean = false,
-    creatorId?: string): Promise<string> {
+    creatorId?: string,
+    showFinanceCalculator: boolean = false
+    ): Promise<string> {
     return (await this.invokeApi('/preview', 'POST', {
       entityId: entityId,
       templateName: templateName,
