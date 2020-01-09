@@ -40,6 +40,18 @@ export class EmailService extends APIClient {
         formData.append('model', JSON.stringify(mail));
         return this.invokeApi('/mails/html', 'POST', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
     }
+
+    /**
+     * Sync a mail manually into the platform
+     * @param emailAccount
+     * @param subject
+     */
+    async syncEmail(emailAccount: string, subject: string): Promise<AxiosResponse> {
+        return this.invokeApi('/emails/sync', 'POST', {
+            emailAccount: emailAccount,
+            subject: subject
+        });
+    }
 }
 
 export default new EmailService();
