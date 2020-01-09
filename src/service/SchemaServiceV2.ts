@@ -1,15 +1,8 @@
-import { Extension, GroupAllResponse, GroupV2, SchemaV2 } from '@flowfact/types';
+import { Extension, GroupAllResponse, GroupV2, SchemaV2, SchemaV2Response } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 
 const v2Header = { headers: { 'x-ff-version': 2 } };
-
-interface SchemaV2Response {
-    entries: SchemaV2[],
-    totalCount: number;
-    page: number;
-    pageSize: number;
-}
 
 export class SchemaServiceV2 extends APIClient {
 
