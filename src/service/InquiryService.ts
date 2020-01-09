@@ -1,6 +1,7 @@
-import { Flowdsl, Inquiry, InquiryAutomation } from '@flowfact/types';
+import { Inquiry, InquiryAutomation } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
+import { Flowdsl } from '@flowfact/node-flowdsl';
 
 export class InquiryService extends APIClient {
 
