@@ -1,4 +1,4 @@
-import { Flowdsl } from '@flowfact/node-flowdsl/lib/Flowdsl';
+import { Flowdsl } from '@flowfact/node-flowdsl';
 import { Entity, EntityAccess, EntityACLType, EntityValues, EntityView } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { v4 as uuid } from 'uuid/interfaces';
@@ -55,7 +55,7 @@ export class EntityService extends APIClient {
      * TODO: Please comment this method
      * @param index
      * @param viewName
-     * @param flowdsl
+     * @param {Flowdsl} flowdsl
      * @param page
      * @param size
      * @param withCount
@@ -80,7 +80,7 @@ export class EntityService extends APIClient {
      * Searchs for entities and returns the entity merged with the schema and the view
      * @param index
      * @param viewName
-     * @param flowdsl
+     * @param {Flowdsl} flowdsl
      * @param offset
      * @param size
      * @param withCount
@@ -102,7 +102,7 @@ export class EntityService extends APIClient {
      * Searchs for entities and return the entity merged with the view and not like in v1 with the schema.
      * @param index
      * @param viewName
-     * @param flowdsl
+     * @param {Flowdsl} flowdsl
      * @param offset
      * @param size
      * @param withCount
