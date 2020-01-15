@@ -20,6 +20,14 @@ export class IS24PublishService extends APIClient {
             },
         });
     };
+
+    /**
+     * Fetches projects for special portal
+     * @param portalId
+     */
+    fetchProjects = async (portalId: string) => {
+        return await this.invokeApi(`/portals/${portalId}/projects`, 'GET');
+    };
 }
 
 export default new IS24PublishService();
