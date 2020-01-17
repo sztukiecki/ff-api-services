@@ -1,5 +1,5 @@
 <div>
-  <a href="https://flowfact.me" rel="noopener" target="_blank"><img width="150" src="https://my.flowfact.com/wp-content/uploads/2018/09/cropped-FLOWFACT-logo-small.png" alt="FLOWFACT logo"></a></p>
+  <a href="https://flowfact.de" rel="noopener" target="_blank"><img width="150" src="https://www.flowfact.de/wp-content/uploads/2019/10/cropped-cropped-FLOWFACT-Logo.png" alt="FLOWFACT logo"></a></p>
   <h2 style="text-align: center;">
       @flowfact/api-services
   </h2>
