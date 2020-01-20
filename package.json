@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
-  "repository": "ssh://git@github.com:FLOWFACTCorp/ff-api-services.git",
+  "repository": "ssh://git@github.com:FLOWFACT/ff-api-services.git",
   "author": "FLOWFACT GmbH",
   "license": "SEE LICENSE IN LICENSE",
   "sideEffects": false,
