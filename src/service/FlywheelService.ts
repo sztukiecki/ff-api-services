@@ -1,6 +1,7 @@
-import { Flowdsl, Flywheel, FlywheelFilter, Phase } from '@flowfact/types';
+import { Flywheel, FlywheelFilter, Phase } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
+import { Flowdsl } from '@flowfact/node-flowdsl';
 
 export class FlywheelService extends APIClient {
 

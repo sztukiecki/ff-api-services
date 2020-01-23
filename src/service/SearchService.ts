@@ -1,10 +1,4 @@
-import { DslBuilder } from '@flowfact/node-flowdsl';
-import {
-    EntityIdCondition,
-    Flowdsl,
-    FlowdslConditionUnion,
-    HasFieldWithValueCondition,
-} from '@flowfact/node-flowdsl/lib/Flowdsl';
+import { DslBuilder, EntityIdCondition, Flowdsl, FlowdslConditionUnion, HasFieldWithValueCondition } from '@flowfact/node-flowdsl';
 import { Entity, FilterConfiguration } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
@@ -111,8 +105,8 @@ export class SearchService extends APIClient {
             },
             params: {
                 companyId,
-                withAclGroups: withAclGroups.toString()
-            }
+                withAclGroups: withAclGroups.toString(),
+            },
         });
     }
 
@@ -164,10 +158,10 @@ export class SearchService extends APIClient {
                     } as HasFieldWithValueCondition;
                 });
 
-                builder.withCondition({
-                                          type: 'OR',
-                                          conditions: conditions,
-                                      });
+                builder.withCondition([{
+                    type: 'OR',
+                    conditions: conditions,
+                }]);
             }
 
             if (filterConfiguration.limitResponse) {
