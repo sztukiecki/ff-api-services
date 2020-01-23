@@ -102,10 +102,10 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@flowfact/node-flowdsl@^2.20200123.17":
-  version "2.20200123.17"
-  resolved "https://registry.yarnpkg.com/@flowfact/node-flowdsl/-/node-flowdsl-2.20200123.17.tgz#2dad71fcfc1f9b9add863f89c8a0dd84e8d1e9ed"
-  integrity sha512-WzMQhuJn6SX+10L22/epLu2MEilB/+CCBnnb7F0iNkvfv7Z1IEV11pyV/ocHrFGC9FEZS6CEx+Kn+stoBQx3RQ==
+"@flowfact/node-flowdsl@^2.20200123.18":
+  version "2.20200123.18"
+  resolved "https://registry.yarnpkg.com/@flowfact/node-flowdsl/-/node-flowdsl-2.20200123.18.tgz#163c5f84fb41c7cc0fbcd38ca9a73c85046b9f49"
+  integrity sha512-WBn3jgwR6J3GdYidPR9rwC0xjXIc1HSXQXMGLT0GdyZFGLXpkh1IAWIrDO+ikGQqAXNUZWW5wwGHLYUP8XrNZQ==
   dependencies:
     tslib "^1.10.0"
 

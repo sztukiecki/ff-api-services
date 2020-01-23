@@ -21,7 +21,7 @@
     "upgradeTypes": "yarn && yarn add @flowfact/types --latest"
   },
   "dependencies": {
-    "@flowfact/node-flowdsl": "^2.20200123.17",
+    "@flowfact/node-flowdsl": "^2.20200123.18",
     "@flowfact/types": "^2.20200123.110",
     "@types/graphql": "14.0.7",
     "@types/node": "^11.15.4",
