@@ -56,6 +56,7 @@ const APIMapping = {
     taggingService: new APIService('tagging-service'),
     tagService: new APIService('tag-service'),
     templateService: new APIService('template-service'),
+    proofOfActivityService: new APIService('proof-of-activity-service'),
     trialLicenseServive: new APIService('trial-license-service'),
     userService: new APIService('user-service'),
     viewDefinitionService: new APIService('view-definition-service'),
