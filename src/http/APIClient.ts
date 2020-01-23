@@ -35,23 +35,23 @@ export default abstract class APIClient {
     protected constructor(service: APIService) {
         this._serviceName = service.name;
 
-        const fragmentMatcher = new IntrospectionFragmentMatcher({ introspectionQueryResultData: fragmentTypes });
+        const fragmentMatcher = new IntrospectionFragmentMatcher({introspectionQueryResultData: fragmentTypes});
 
         const httpLink = new HttpLink({
-            uri: `${EnvironmentManagement.getBaseUrl(isNode)}/gql`
-        });
-        const authLink = setContext(async (_, { headers }) => ({
+                                          uri: `${EnvironmentManagement.getBaseUrl(isNode)}/gql`
+                                      });
+        const authLink = setContext(async (_, {headers}) => ({
             headers: {
                 ...headers,
                 ...(await this.getUserIdentification())
             }
         }));
         const link = authLink.concat(httpLink);
-        const cache = new InMemoryCache({ fragmentMatcher });
+        const cache = new InMemoryCache({fragmentMatcher});
         this.gql = new ApolloClient({
-            link,
-            cache
-        });
+                                        link,
+                                        cache
+                                    });
     }
 
     public withUserId(userId: string): this {
@@ -71,20 +71,21 @@ export default abstract class APIClient {
         }
 
         const supportToken = localStorage.getItem('flowfact.support.token') || '';
+        const apiToken = localStorage.getItem('flowfact.api.token') || '';
 
-        if (supportToken.length === 0) {
+        if (supportToken.length === 0 && apiToken.length === 0) {
             return {
                 cognitoToken: (await Authentication.getCurrentSession())!.getIdToken()!.getJwtToken()
             };
         } else {
             return {
-                'x-ff-support-token': supportToken
+                [`x-ff-${apiToken ? 'api' : 'support'}-token`]: apiToken || supportToken
             };
         }
     }
 
     public async invokeGqlQuery<T = any>(query: any, variables?: any) {
-        const result = await this.gql.query<T>({ query, variables, errorPolicy: 'all' });
+        const result = await this.gql.query<T>({query, variables, errorPolicy: 'all'});
         if (result.errors) {
             // intentional ==, do not change to ===
             if (result.data == null) {
@@ -96,7 +97,7 @@ export default abstract class APIClient {
     }
 
     public async invokeGqlMutation<T = any>(mutation: any, variables?: any) {
-        const result = await this.gql.mutate<T>({ mutation, variables, errorPolicy: 'all' });
+        const result = await this.gql.mutate<T>({mutation, variables, errorPolicy: 'all'});
         if (result.errors) {
             // intentional ==, do not change to ===
             if (result.data == null) {
@@ -112,19 +113,19 @@ export default abstract class APIClient {
             throw new Error('Your path has to start with a slash. Path: ' + path);
         }
 
-        const { queryParams, headers, cancelToken, ...others } = additionalParams;
+        const {queryParams, headers, cancelToken, ...others} = additionalParams;
 
         // add parameters to the url
         let apiUrl = `${EnvironmentManagement.getBaseUrl(isNode)}/${this._serviceName}${path}`;
         if (queryParams) {
-            const queryString = stringify(queryParams, { addQueryPrefix: true });
+            const queryString = stringify(queryParams, {addQueryPrefix: true});
             if (queryString && queryString !== '') {
                 apiUrl += queryString;
             }
         }
 
         const userIdentification = path.startsWith('/public') ? {} : await this.getUserIdentification();
-        const languages: any = { 'Accept-Language': APIClient.languages };
+        const languages: any = {'Accept-Language': APIClient.languages};
 
         let request: AxiosRequestConfig = {
             method: method,

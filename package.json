@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "lib/index.d.ts",
-  "repository": "ssh://git@github.com:FLOWFACTCorp/ff-api-services.git",
+  "repository": "ssh://git@github.com:FLOWFACT/ff-api-services.git",
   "author": "FLOWFACT GmbH",
   "license": "SEE LICENSE IN LICENSE",
   "sideEffects": false,
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@flowfact/node-flowdsl": "^1.20190520.14",
-    "@flowfact/types": "^1.20191129.100",
+    "@flowfact/types": "^1.20200109.103",
     "@types/graphql": "14.0.7",
     "@types/node": "^8.5.9",
     "@types/prop-types": "^15.5.1",
