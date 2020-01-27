@@ -61,6 +61,18 @@ export class UserService extends APIClient {
 
     /**
      * TODO: Please comment this method
+     * @param aliasMailAddress
+     */
+    async fetchLoginNameByAliasMailAddress(aliasMailAddress: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/public/cognito-users/loginname/`, 'GET', undefined, {
+            queryParams: {
+                aliasMailAddress: aliasMailAddress
+            }
+        });
+    }
+
+    /**
+     * TODO: Please comment this method
      */
     async fetchAllUsersOfTheCompany(): Promise<AxiosResponse<User[]>> {
         return await this.invokeApi('/users', 'GET');
