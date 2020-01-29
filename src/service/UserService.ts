@@ -143,6 +143,21 @@ export class UserService extends APIClient {
         });
     }
 
+    /**
+     * Returns the identifier (Cognito user name) for a login (can be a preferred user name, an email, or an alias).
+     * For aliases the user name cannot be determined with absolute certainty and hence in the returned object
+     * the [identifiersOfMatchingAliases]-field lists the matching identifiers.
+     * Otherwise the [identifier]-field holds the identifier in the returned object.
+     * @param loginName
+     */
+    async identifyUser(loginName: string): Promise<AxiosResponse<any>> {
+        return await this.invokeApi(`/public/cognito-users/usernames/`, 'GET', undefined, {
+            queryParams: {
+                name: loginName,
+            },
+        });
+    }
+
     async hasSsoOfType(aliasMailAddress: string, ssoType: string): Promise<AxiosResponse<boolean>> {
         return await this.invokeApi('/public/users/sso', 'GET', undefined, {
             queryParams: {
