@@ -106,6 +106,7 @@ class Authentication {
             validationData: [],
             attributes: {
                 email: email,
+                preferred_username: username.toLowerCase(),
             },
         });
     }
