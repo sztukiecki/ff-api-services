@@ -226,6 +226,7 @@ export class UserService extends APIClient {
     /**
      * TODO: Please comment this method
      * @param userId
+     * @param useV2
      */
     async deactivateUser(userId: string, useV2: boolean = false): Promise<AxiosResponse> {
         return await this.invokeApi(
@@ -240,23 +241,49 @@ export class UserService extends APIClient {
             },
         );
     }
+
+    /**
+     * Updated the loginName of a user
+     * @param userId
+     * @param loginName
+     */
+    async updateLoginName(userId: string, loginName: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/users/${userId}/loginname`, 'PUT', {
+            desiredLoginName: loginName
+        });
+    }
+
+    /**
+     * Resets the passwort of a cognito account. A mail will be to one of the aliasMailAddress or businessMailAddress.
+     * @param aliasMailAddress
+     * @param businessMailAddress
+     */
+    async resetPassword(aliasMailAddress: string, businessMailAddress: string) {
+        return await this.invokeApi('/cognito-user/password', 'POST', { aliasMailAddress, businessMailAddress });
+    }
+
+    /**
+     * Checks if a mail is blocked by congito
+     * 200 = when the mail address is blocked
+     * 404 = when the mail address is not blocked
+     * @param mailAddress
+     */
+    async isMailBlocked(mailAddress: string) {
+        return await this.invokeApi(`/public/cognito/mailing/blocks/${mailAddress}`, 'GET');
+    }
+
+    /**
+     *
+     This resource is used to add the aliasMailAddress of a user to the email user-attribute of the given cognito-user. Additional it will store the cognito-username add the user
+     * @param aliasMailAddress
+     */
+    async link(aliasMailAddress: string) {
+        return this.invokeApi(`/public/cognito-users/link`, 'POST', undefined, {
+            queryParams: {
+                aliasMailAddress: aliasMailAddress
+            }
+        });
+    }
 }
 
 export default new UserService();
-
-const StatusMapping = {
-    create: {
-        CREATED: 201,
-        ALREADY_EXISTS: 400,
-        MANDANTORY_FIELD_NOT_FILLED: 422,
-        INTERNAL_SERVER_ERROR: 500,
-    },
-    current: {
-        NOT_FOUND: 404,
-        INTERNAL_SERVER_ERROR: 500,
-    },
-};
-
-export {
-    StatusMapping,
-};

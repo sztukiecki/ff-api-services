@@ -197,23 +197,3 @@ export class CompanyService extends APIClient {
 }
 
 export default new CompanyService();
-
-const StatusMapping = {
-    create: {
-        ALREADY_EXIST: 400,
-        MANDANTORY_FIELD_NOT_FILLED: 422,
-        INTERNAL_SERVER_ERROR: 500,
-    },
-    findByEmail: {
-        NO_COMPANY_FOUND: 204,
-        INTERNAL_SERVER_ERROR: 500,
-    },
-    findById: {
-        ID_NOT_FOUND: 204,
-        INTERNAL_SERVER_ERROR: 500,
-    },
-};
-
-export {
-    StatusMapping,
-};
