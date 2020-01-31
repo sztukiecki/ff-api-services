@@ -9,7 +9,8 @@ import { ProofOfActivityEmailFromTo,
   ProofOfActivityResultViewColumns,
   ProofOfActivityActivity,
   ProofOfActivityActivityDataUpdate,
-  ProofOfActivityUpdateTemplateData 
+  ProofOfActivityUpdateTemplateData,
+  ProofOfActivityExcludeItems
 } from '@flowfact/types';
 
 export class ProofOfActivityService extends APIClient {
@@ -25,9 +26,10 @@ export class ProofOfActivityService extends APIClient {
     activityId: string,
     templateId: string,
     entity: ProofOfActivityEntityIdSchema,
+    excludeItems?: ProofOfActivityExcludeItems[],
     options?: APIClientAdditionalParams): Promise<AxiosResponse> {
     try {
-      return await this.invokeApi('/email/send', 'POST', {email, dateRange, activityId, templateId, entity}, options);
+      return await this.invokeApi('/email/send', 'POST', {email, dateRange, activityId, templateId, entity, excludeItems}, options);
     } catch (error) {
       throw(error);
     }
@@ -40,12 +42,13 @@ export class ProofOfActivityService extends APIClient {
     activityId: string,
     templateId: string,
     entity: ProofOfActivityEntityIdSchema,
+    excludeItems?: ProofOfActivityExcludeItems[],
     options?: APIClientAdditionalParams): Promise<AxiosResponse> {
     try {
       return await this.invokeApi(
         '/email/preview',
         'POST',
-        {email, dateRange, activityId, templateId, entity},
+        {email, dateRange, activityId, templateId, entity, excludeItems},
         {...{headers: { 'content-type': 'application/json', 'Accept': 'text/html' }}, ...options}
       );
     } catch (error) {
@@ -60,12 +63,13 @@ export class ProofOfActivityService extends APIClient {
     activityId: string,
     templateId: string,
     entity: ProofOfActivityEntityIdSchema,
+    excludeItems?: ProofOfActivityExcludeItems[],
     options?: APIClientAdditionalParams): Promise<AxiosResponse> {
     try {
       return await this.invokeApi(
         '/email/template-model',
         'POST',
-        {email, dateRange, activityId, templateId, entity},
+        {email, dateRange, activityId, templateId, entity, excludeItems},
         {...{ headers: { 'content-type': 'application/json' } }, ...options}
       );
     } catch (error) {
@@ -198,6 +202,15 @@ export class ProofOfActivityService extends APIClient {
   async uploadTemplateFile(id: string, body: FormData, options?: APIClientAdditionalParams): Promise<AxiosResponse> {
     try {
       return await this.invokeApi(`/template/${id}/upload-file`, 'PUT', body, options);
+    } catch (error) {
+      throw(error);
+    }
+  }
+
+  // [post] /example
+  async createExample() {
+    try {
+      return await this.invokeApi('/example', 'POST');
     } catch (error) {
       throw(error);
     }
