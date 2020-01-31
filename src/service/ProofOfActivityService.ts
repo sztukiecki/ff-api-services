@@ -210,7 +210,7 @@ export class ProofOfActivityService extends APIClient {
   // [post] /example
   async createExample() {
     try {
-      return await this.invokeApi('/example', 'POST');
+      return await this.invokeApi('/examples', 'POST');
     } catch (error) {
       throw(error);
     }
