@@ -79,7 +79,7 @@ export class ProofOfActivityService extends APIClient {
 
   // ProofOfActivity
   // [GET] / 
-  async getActivitys(lastId?: String, size?: Number, options?: APIClientAdditionalParams): Promise<AxiosResponse<ProofOfActivityActivity>> {
+  async getActivities(lastId?: String, size?: Number, options?: APIClientAdditionalParams): Promise<AxiosResponse<ProofOfActivityActivity>> {
     try {
       return await this.invokeApi('/', 'GET', {lastId, size}, options);
     } catch (error) {
