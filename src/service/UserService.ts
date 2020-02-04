@@ -144,18 +144,6 @@ export class UserService extends APIClient {
     }
 
     /**
-     * Searchs for users with the given aliasMailAddress and if we found exactly one, then we return his businessMailAddress
-     * @param aliasMailAddress
-     */
-    async resolveAliasMailAddress(aliasMailAddress: string): Promise<AxiosResponse<any>> {
-        return await this.invokeApi('/public/users/resolve', 'GET', undefined, {
-            queryParams: {
-                aliasMailAddress: aliasMailAddress,
-            },
-        });
-    }
-
-    /**
      * TODO: Please comment this method
      * @param aliasMailAddress
      */
