@@ -120,18 +120,6 @@ export class UserService extends APIClient {
     }
 
     /**
-     * Checks if any user has the given aliasMailAddress. Will throw an error if more then one user was found.
-     * @param aliasMailAddress
-     */
-    async isUserAlreadyKnown(aliasMailAddress: string): Promise<AxiosResponse<any>> {
-        return await this.invokeApi('/public/users/exists', 'GET', undefined, {
-            queryParams: {
-                aliasMailAddress: aliasMailAddress,
-            },
-        });
-    }
-
-    /**
      * Returns the identifier (Cognito user name) for a login (can be a preferred user name, an email, or an alias).
      * For aliases the user name cannot be determined with absolute certainty and hence in the returned object
      * the [identifiersOfMatchingAliases]-field lists the matching identifiers.
