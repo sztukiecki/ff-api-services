@@ -242,12 +242,11 @@ export class UserService extends APIClient {
     }
 
     /**
-     * Resets the passwort of a cognito account. A mail will be to one of the aliasMailAddress or businessMailAddress.
-     * @param aliasMailAddress
-     * @param businessMailAddress
+     * Resets the password of a selected user. A mail will be sent to the contact email
+     * @param userId main identifier of the user
      */
-    async resetPassword(aliasMailAddress: string, businessMailAddress: string) {
-        return await this.invokeApi('/cognito-user/password', 'POST', { aliasMailAddress, businessMailAddress });
+    async resetPassword(userId: string) {
+        return await this.invokeApi(`/users/${userId}/password`, 'DELETE');
     }
 
     /**
@@ -261,8 +260,8 @@ export class UserService extends APIClient {
     }
 
     /**
-     *
-     This resource is used to add the aliasMailAddress of a user to the email user-attribute of the given cognito-user. Additional it will store the cognito-username add the user
+     * This resource is used to add the aliasMailAddress of a user to the email user-attribute of the given cognito-user.
+     * Additional it will store the cognito-username add the user
      * @param aliasMailAddress
      */
     async link(aliasMailAddress: string) {
