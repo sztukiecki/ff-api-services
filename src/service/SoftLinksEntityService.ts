@@ -12,7 +12,7 @@ export class SoftLinksEntityService extends APIClient {
      * Create link between the entities with ids from source and destination
      * @param link
      */
-    async createLink(link: Softlinks.CreateSoftlinkRequest): Promise<AxiosResponse<Softlinks.CreateSoftlinkRequest>> {
+    async createLink(link: Softlinks.CreateSoftlinkRequest): Promise<AxiosResponse<Softlinks.Softlink>> {
         return this.invokeApi(`/link`, 'POST', link || {}, {
             headers: {
                 'Content-Type': 'application/json',
