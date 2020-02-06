@@ -120,18 +120,6 @@ export class UserService extends APIClient {
     }
 
     /**
-     * Checks if any user has the given aliasMailAddress. Will throw an error if more then one user was found.
-     * @param aliasMailAddress
-     */
-    async isUserAlreadyKnown(aliasMailAddress: string): Promise<AxiosResponse<any>> {
-        return await this.invokeApi('/public/users/exists', 'GET', undefined, {
-            queryParams: {
-                aliasMailAddress: aliasMailAddress,
-            },
-        });
-    }
-
-    /**
      * Returns the identifier (Cognito user name) for a login (can be a preferred user name, an email, or an alias).
      * For aliases the user name cannot be determined with absolute certainty and hence in the returned object
      * the [identifiersOfMatchingAliases]-field lists the matching identifiers.
@@ -146,23 +134,11 @@ export class UserService extends APIClient {
         });
     }
 
-    async hasSsoOfType(aliasMailAddress: string, ssoType: string): Promise<AxiosResponse<boolean>> {
+    async hasSsoOfType(businessMailAddress: string, ssoType: string): Promise<AxiosResponse<boolean>> {
         return await this.invokeApi('/public/users/sso', 'GET', undefined, {
             queryParams: {
-                aliasMailAddress: aliasMailAddress,
+                aliasMailAddress: businessMailAddress,
                 ssoType: ssoType
-            },
-        });
-    }
-
-    /**
-     * Searchs for users with the given aliasMailAddress and if we found exactly one, then we return his businessMailAddress
-     * @param aliasMailAddress
-     */
-    async resolveAliasMailAddress(aliasMailAddress: string): Promise<AxiosResponse<any>> {
-        return await this.invokeApi('/public/users/resolve', 'GET', undefined, {
-            queryParams: {
-                aliasMailAddress: aliasMailAddress,
             },
         });
     }
@@ -242,12 +218,11 @@ export class UserService extends APIClient {
     }
 
     /**
-     * Resets the passwort of a cognito account. A mail will be to one of the aliasMailAddress or businessMailAddress.
-     * @param aliasMailAddress
-     * @param businessMailAddress
+     * Resets the password of a selected user. A mail will be sent to the contact email
+     * @param userId main identifier of the user
      */
-    async resetPassword(aliasMailAddress: string, businessMailAddress: string) {
-        return await this.invokeApi('/cognito-user/password', 'POST', { aliasMailAddress, businessMailAddress });
+    async resetPassword(userId: string) {
+        return await this.invokeApi(`/users/${userId}/password`, 'DELETE');
     }
 
     /**
@@ -261,8 +236,8 @@ export class UserService extends APIClient {
     }
 
     /**
-     *
-     This resource is used to add the aliasMailAddress of a user to the email user-attribute of the given cognito-user. Additional it will store the cognito-username add the user
+     * This resource is used to add the aliasMailAddress of a user to the email user-attribute of the given cognito-user.
+     * Additional it will store the cognito-username add the user
      * @param aliasMailAddress
      */
     async link(aliasMailAddress: string) {
