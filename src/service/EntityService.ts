@@ -1,5 +1,5 @@
 import { Flowdsl } from '@flowfact/node-flowdsl';
-import { Entity, EntityAccess, EntityACLType, EntityValues, EntityView } from '@flowfact/types';
+import { Entity, EntityDescriptor, EntityAccess, EntityACLType, EntityValues, EntityView } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { v4 as uuid } from 'uuid/interfaces';
 import { APIClient, APIMapping } from '../http';
@@ -159,6 +159,18 @@ export class EntityService extends APIClient {
      */
     async fetchEntity(schemaId: string, entityId: string) {
         return this.invokeApi<Entity>(`/schemas/${schemaId}/entities/${entityId}`, 'GET');
+    }
+
+    /**
+     * fetches the entity detail information just by id
+     * @param entityId
+     */
+    async fetchEntityDescriptor(entityId: string) {
+        return this.invokeApi<EntityDescriptor>(`/entities/${entityId}`, 'GET', undefined, {
+            headers: {
+                Accept: 'application/json+descriptor'
+            }
+        });
     }
 
     /**
