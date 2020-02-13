@@ -1,6 +1,11 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
+interface CreateAPIUserResponse {
+    userId: string;
+    token: string;
+}
+
 export class AdminTokenService extends APIClient {
     constructor() {
         super(APIMapping.adminTokenService);
@@ -11,6 +16,27 @@ export class AdminTokenService extends APIClient {
      */
     async createOrReturnAdminToken(): Promise<AxiosResponse> {
         return this.invokeApi('/createOrReturnAdminToken', 'POST');
+    }
+
+    /**
+     * This method creates a new api user. A normal user with type API will be created and a valid token will be safed for this
+     * created user.
+     * This ressource returns a userId and the token.
+     */
+    async createAPIUser(): Promise<AxiosResponse<CreateAPIUserResponse>> {
+        return this.invokeApi('/admin-token', 'POST', undefined, {
+            queryParams: {
+                userType: 'API'
+            }
+        });
+    }
+
+    /**
+     * Fetches a admin token related to a specific user.
+     * @param userId
+     */
+    async fetchAdminToken(userId: string): Promise<AxiosResponse<string>> {
+        return this.invokeApi(`/admin-token/${userId}`, 'GET', undefined);
     }
 
     /**

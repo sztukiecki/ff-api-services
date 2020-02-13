@@ -1,4 +1,4 @@
-import { User, UserRole } from '@flowfact/types';
+import { User, UserRole, UserType } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 
@@ -60,10 +60,15 @@ export class UserService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Fetches all users of the company.
+     * Use the userTypes array parameter to filter users by their type
      */
-    async fetchAllUsersOfTheCompany(): Promise<AxiosResponse<User[]>> {
-        return await this.invokeApi('/users', 'GET');
+    async fetchAllUsersOfTheCompany(userTypes: UserType[] = []): Promise<AxiosResponse<User[]>> {
+        return await this.invokeApi('/users', 'GET', undefined, {
+            queryParams: {
+                userType: userTypes.join(',')
+            }
+        });
     }
 
     /**
@@ -90,6 +95,7 @@ export class UserService extends APIClient {
     /**
      * Update the currently logged in user
      * @param user
+     * @param useV2
      */
     async updateUser(user: User, useV2: boolean = false): Promise<AxiosResponse<any>> {
         if (useV2) {
@@ -102,6 +108,7 @@ export class UserService extends APIClient {
      * Update a user from the same company
      * @param userId
      * @param user
+     * @param useV2
      */
     async updateUserById(userId: string, user: User, useV2: boolean = false): Promise<AxiosResponse<any>> {
         if (useV2) {
