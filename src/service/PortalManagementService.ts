@@ -140,6 +140,10 @@ export class PortalManagementService extends APIClient {
         return await this.invokeApi(`/portals/${portalId}/estates`, 'GET');
     }
 
+    async getNumberOfPublishedEstates(portalId: string): Promise<AxiosResponse> {
+        return await this.invokeApi('/portals/${portalId}/estates/count', 'GET');
+    }
+
     /**
      * TODO: Please comment this method
      * @param portalId
