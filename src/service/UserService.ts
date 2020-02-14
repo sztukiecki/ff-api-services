@@ -254,6 +254,14 @@ export class UserService extends APIClient {
             }
         });
     }
+
+    /**
+     * Deletes a user and the associated cognito user.
+     * @param userId
+     */
+    async deleteUser(userId: string) {
+        return this.invokeApi(`/users/${userId}`, 'DELETE');
+    }
 }
 
 export default new UserService();
