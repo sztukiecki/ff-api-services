@@ -1,6 +1,5 @@
 import {APIClient, APIMapping} from '../../http';
-import {AxiosResponse} from 'axios';
-import {Flywheel} from '@flowfact/types';
+import {Flywheel} from './types';
 
 export class FlywheelController extends APIClient {
     constructor() {
@@ -11,7 +10,7 @@ export class FlywheelController extends APIClient {
      * Creates a new flywheel based on the title
      * @param title
      */
-    async create(title: string): Promise<AxiosResponse> {
+    async create(title: string) {
         return this.invokeApi<Flywheel>('/flywheels', 'POST', {
             title: title,
         });
@@ -21,7 +20,7 @@ export class FlywheelController extends APIClient {
      * Deletes a flywheel based on the name (id)
      * @param flywheelName
      */
-    async delete(flywheelName: string): Promise<AxiosResponse> {
+    async delete(flywheelName: string) {
         return this.invokeApi(`/flywheels/${flywheelName}`, 'DELETE');
     }
 
@@ -29,7 +28,7 @@ export class FlywheelController extends APIClient {
      * TODO: Please comment this method
      * Returns all flywheels with no param given or no-content
      */
-    async fetchAll(): Promise<AxiosResponse<Flywheel[]>> {
+    async fetchAll() {
         return this.invokeApi<Flywheel[]>('/flywheels', 'GET');
     }
 
@@ -38,7 +37,7 @@ export class FlywheelController extends APIClient {
      * Return a specific flywheel by name or not-found
      * @param flywheelName
      */
-    async fetch(flywheelName: string): Promise<AxiosResponse<Flywheel>> {
+    async fetch(flywheelName: string) {
         return this.invokeApi<Flywheel>(`/flywheels/${flywheelName}`);
     }
 

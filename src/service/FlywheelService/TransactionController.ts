@@ -1,5 +1,4 @@
 import {APIClient, APIMapping} from '../../http';
-import {AxiosResponse} from 'axios';
 import {Flowdsl} from '@flowfact/node-flowdsl';
 
 export class TransactionController extends APIClient {
@@ -13,7 +12,7 @@ export class TransactionController extends APIClient {
      * @param view
      * @deprecated Because same functionality plus filter possibility can be found in POST method: fetchTransactionsForPhaseWithFilter
      */
-    async fetchForPhase(phaseName: string, view: string = 'card'): Promise<AxiosResponse> {
+    async fetchForPhase(phaseName: string, view: string = 'card') {
         return this.invokeApi(`/transactions/phases/${phaseName}?view=${view}`);
     }
 
@@ -23,7 +22,7 @@ export class TransactionController extends APIClient {
      * @param view
      * @param {Flowdsl} flowdsl
      */
-    async fetchForPhaseWithFilter(phaseName: string, view: string = 'card', flowdsl?: Flowdsl): Promise<AxiosResponse> {
+    async fetchForPhaseWithFilter(phaseName: string, view: string = 'card', flowdsl?: Flowdsl) {
         return this.invokeApi(`/transactions/phases/${phaseName}?view=${view}`, 'POST', flowdsl);
     }
 
@@ -33,7 +32,7 @@ export class TransactionController extends APIClient {
      * @param fromPhaseName
      * @param toPhaseName
      */
-    async move(transactionId: string, fromPhaseName: string, toPhaseName: string): Promise<AxiosResponse> {
+    async move(transactionId: string, fromPhaseName: string, toPhaseName: string) {
         return this.invokeApi(`/transactions/${transactionId}`, 'PUT', {fromPhaseName, toPhaseName});
     }
 

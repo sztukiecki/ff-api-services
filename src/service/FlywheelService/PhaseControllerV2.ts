@@ -1,6 +1,5 @@
 import {APIClient, APIMapping} from '../../http';
-import {AxiosResponse} from 'axios';
-import {Phase} from '@flowfact/types';
+import {FlywheelPhase} from './types';
 
 export class PhaseControllerV2 extends APIClient {
     constructor() {
@@ -11,8 +10,8 @@ export class PhaseControllerV2 extends APIClient {
      * Return a specific phase
      * @param phaseName
      */
-    async fetch(phaseName: string): Promise<AxiosResponse> {
-        return this.invokeApi<Phase>(`/phases/${phaseName}`, 'GET', undefined, {
+    async fetch(phaseName: string) {
+        return this.invokeApi<FlywheelPhase>(`/phases/${phaseName}`, 'GET', undefined, {
             headers: {
                 'x-ff-version': 2
             }
