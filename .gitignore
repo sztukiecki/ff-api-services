@@ -1,6 +1,5 @@
 /.idea
-/es
-/lib
+/build
 /node_modules
 .project
 /doc
