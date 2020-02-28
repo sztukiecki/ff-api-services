@@ -70,4 +70,3 @@ export { default as AclGroupServiceRest } from './AclGroupServiceRest';
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
 export * from './RelogService';
-export * from './util/InternalTypes';
