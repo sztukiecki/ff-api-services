@@ -2,7 +2,7 @@ import { DslBuilder, EntityIdCondition, Flowdsl, FlowdslConditionUnion, HasField
 import { Entity, FilterConfiguration } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
-import { SearchResult } from '..';
+import { SearchResult } from '../util/InternalTypes';
 
 export class SearchService extends APIClient {
 

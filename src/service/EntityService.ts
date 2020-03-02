@@ -3,7 +3,7 @@ import { Entity, EntityDescriptor, EntityAccess, EntityACLType, EntityValues, En
 import { AxiosResponse } from 'axios';
 import { v4 as uuid } from 'uuid/interfaces';
 import { APIClient, APIMapping } from '../http';
-import { EntityQuery, ParamList, SearchResult, UniformObject } from '..';
+import { EntityQuery, ParamList, SearchResult, UniformObject } from '../util/InternalTypes';
 
 export class EntityService extends APIClient {
 
