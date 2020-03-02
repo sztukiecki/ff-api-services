@@ -156,13 +156,16 @@ export default abstract class APIClient {
         try {
             const result = await this.invokeApi<T>(path, method, body, additionalParams);
             const response: ApiResponse<T> = {
-                isSuccessful2xx: result.status >= 200 && result.status < 300,
-                data: defaultValue
+                isSuccessful2xx: result.status >= 200 && result.status < 300
             };
 
             return !result
                 ? response
-                : {...response, ...result};
+                : {
+                    ...response,
+                    ...result,
+                    data: result.data ? defaultValue : result.data
+                };
 
         } catch (e) {
             return {isSuccessful2xx: false, data: e?.response?.data ?? defaultValue};
