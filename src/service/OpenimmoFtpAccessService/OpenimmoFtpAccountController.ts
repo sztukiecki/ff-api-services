@@ -1,6 +1,7 @@
-import { AxiosResponse } from 'axios';
-import { APIClient, APIMapping } from '../../http';
+import {AxiosResponse} from 'axios';
+import {APIClient, APIMapping} from '../../http';
 import {OpenImmoFtpAccountTypes} from './OpenimmoFtpAccessService.Types';
+import OpenimmoFtpAccount = OpenImmoFtpAccountTypes.OpenimmoFtpAccount;
 
 export default class OpenimmoFtpAccountController extends APIClient {
 
@@ -11,7 +12,7 @@ export default class OpenimmoFtpAccountController extends APIClient {
     /**
      * get all openimmmos
      */
-    async fetchAll(): Promise<AxiosResponse<OpenImmoFtpAccountTypes.OpenimmoFtpAccount[]>> {
+    async fetchAll(): Promise<AxiosResponse<OpenimmoFtpAccount[]>> {
         return await this.invokeApi('/ftp', 'GET', undefined);
     }
 
@@ -19,7 +20,7 @@ export default class OpenimmoFtpAccountController extends APIClient {
      * get one openimmo by using user
      * @param user
      */
-    async fetch(user: string): Promise<AxiosResponse<OpenImmoFtpAccountTypes.OpenimmoFtpAccount>> {
+    async fetch(user: string): Promise<AxiosResponse<OpenimmoFtpAccount>> {
         return await this.invokeApi(`/ftp/${user}`, 'GET');
     }
 
@@ -28,7 +29,7 @@ export default class OpenimmoFtpAccountController extends APIClient {
      * @param user
      * @param openimmo
      */
-    async update(user: string, openimmo: OpenImmoFtpAccountTypes.OpenimmoFtpAccount): Promise<AxiosResponse<OpenImmoFtpAccountTypes.OpenimmoFtpAccount>> {
+    async update(user: string, openimmo: OpenimmoFtpAccount): Promise<AxiosResponse<OpenimmoFtpAccount>> {
         return await this.invokeApi(`/ftp/${user}`, 'PUT', openimmo);
     }
 
@@ -36,7 +37,7 @@ export default class OpenimmoFtpAccountController extends APIClient {
      * create an openimmo
      * @param openimmo
      */
-    async create(openimmo: OpenImmoFtpAccountTypes.OpenimmoFtpAccount): Promise<AxiosResponse<OpenImmoFtpAccountTypes.OpenimmoFtpAccount>> {
+    async create(openimmo: OpenimmoFtpAccount): Promise<AxiosResponse<OpenimmoFtpAccount>> {
         return await this.invokeApi('/ftp', 'POST', openimmo);
     }
 
