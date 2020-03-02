@@ -13,7 +13,7 @@ export class TransactionController extends APIClient {
      * @deprecated Because same functionality plus filter possibility can be found in POST method: fetchTransactionsForPhaseWithFilter
      */
     async fetchForPhase(phaseName: string, view: string = 'card') {
-        return this.invokeApi(`/transactions/phases/${phaseName}?view=${view}`);
+        return this.invokeApiWithErrorHandling(`/transactions/phases/${phaseName}?view=${view}`);
     }
 
     /**
@@ -23,7 +23,7 @@ export class TransactionController extends APIClient {
      * @param {Flowdsl} flowdsl
      */
     async fetchForPhaseWithFilter(phaseName: string, view: string = 'card', flowdsl?: Flowdsl) {
-        return this.invokeApi(`/transactions/phases/${phaseName}?view=${view}`, 'POST', flowdsl);
+        return this.invokeApiWithErrorHandling(`/transactions/phases/${phaseName}?view=${view}`, 'POST', flowdsl);
     }
 
     /**
@@ -33,7 +33,7 @@ export class TransactionController extends APIClient {
      * @param toPhaseName
      */
     async move(transactionId: string, fromPhaseName: string, toPhaseName: string) {
-        return this.invokeApi(`/transactions/${transactionId}`, 'PUT', {fromPhaseName, toPhaseName});
+        return this.invokeApiWithErrorHandling(`/transactions/${transactionId}`, 'PUT', {fromPhaseName, toPhaseName});
     }
 
     /**
@@ -41,7 +41,7 @@ export class TransactionController extends APIClient {
      * @param transactionId
      */
     async exitPhase(transactionId: number) {
-        return this.invokeApi(
+        return this.invokeApiWithErrorHandling(
             `/transactions/${transactionId}`, 'PATCH',
             [{
                 op: 'exitPhase',
@@ -61,7 +61,7 @@ export class TransactionController extends APIClient {
      * @param targetPhase
      */
     async link(transactionId: number, entityId: string, targetPhase: number) {
-        return this.invokeApi(
+        return this.invokeApiWithErrorHandling(
             `/transactions/${transactionId}`, 'PATCH',
             [{
                 op: 'linkTransaction',

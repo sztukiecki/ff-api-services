@@ -12,7 +12,7 @@ export class PhaseControllerV2 extends APIClient {
      * @param phaseName
      */
     async fetch(phaseName: string) {
-        return this.invokeApi<FlywheelPhase>(`/phases/${phaseName}`, 'GET', undefined, {
+        return this.invokeApiWithErrorHandling<FlywheelPhase>(`/phases/${phaseName}`, 'GET', undefined, {
             headers: {
                 'x-ff-version': 2
             }

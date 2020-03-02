@@ -12,7 +12,7 @@ export class FlywheelController extends APIClient {
      * @param title
      */
     async create(title: string) {
-        return this.invokeApi<Flywheel>('/flywheels', 'POST', {
+        return this.invokeApiWithErrorHandling<Flywheel>('/flywheels', 'POST', {
             title: title,
         });
     }
@@ -22,7 +22,7 @@ export class FlywheelController extends APIClient {
      * @param flywheelName
      */
     async delete(flywheelName: string) {
-        return this.invokeApi(`/flywheels/${flywheelName}`, 'DELETE');
+        return this.invokeApiWithErrorHandling(`/flywheels/${flywheelName}`, 'DELETE');
     }
 
     /**
@@ -30,7 +30,7 @@ export class FlywheelController extends APIClient {
      * Returns all flywheels with no param given or no-content
      */
     async fetchAll() {
-        return this.invokeApi<Flywheel[]>('/flywheels', 'GET');
+        return this.invokeApiWithErrorHandling<Flywheel[]>('/flywheels', 'GET');
     }
 
 
@@ -39,7 +39,7 @@ export class FlywheelController extends APIClient {
      * @param flywheelName
      */
     async fetch(flywheelName: string) {
-        return this.invokeApi<Flywheel>(`/flywheels/${flywheelName}`);
+        return this.invokeApiWithErrorHandling<Flywheel>(`/flywheels/${flywheelName}`);
     }
 
     /**
@@ -48,7 +48,7 @@ export class FlywheelController extends APIClient {
      * @param phaseNames
      */
     async updatePhases(flywheelName: string, phaseNames: string[]) {
-        return this.invokeApi<Flywheel>(
+        return this.invokeApiWithErrorHandling<Flywheel>(
             `/flywheels/${flywheelName}`, 'PATCH',
             [{
                 op: 'set-phases',

@@ -25,7 +25,7 @@ export class PhaseController extends APIClient {
                 filters: filters ? JSON.stringify(filters) : this.defaultFilter,
             };
         }
-        return this.invokeApi<FlywheelPhase[]>('/phases', 'GET', undefined, params);
+        return this.invokeApiWithErrorHandling<FlywheelPhase[]>('/phases', 'GET', undefined, params);
     }
 
     /**
@@ -33,7 +33,7 @@ export class PhaseController extends APIClient {
      * @param phaseName
      */
     async fetch(phaseName: string) {
-        return this.invokeApi<FlywheelPhaseTree>(`/phases/${phaseName}`);
+        return this.invokeApiWithErrorHandling<FlywheelPhaseTree>(`/phases/${phaseName}`);
     }
 
 
@@ -42,7 +42,7 @@ export class PhaseController extends APIClient {
      * @param phase
      */
     async create(phase: FlywheelPhase) {
-        return this.invokeApi<FlywheelPhase>('/phases', 'POST', phase);
+        return this.invokeApiWithErrorHandling<FlywheelPhase>('/phases', 'POST', phase);
     }
 
     /**
@@ -51,7 +51,7 @@ export class PhaseController extends APIClient {
      * @param command
      */
     async sync(phaseName: string, command: PhaseSyncCommands) {
-        return this.invokeApi(`/phases/${phaseName}`, 'POST', undefined, {
+        return this.invokeApiWithErrorHandling(`/phases/${phaseName}`, 'POST', undefined, {
             queryParams: {
                 command
             }
@@ -63,7 +63,7 @@ export class PhaseController extends APIClient {
      * @param phase
      */
     async update(phase: FlywheelPhase) {
-        return this.invokeApi<FlywheelPhase>('/phases', 'PUT', phase, {
+        return this.invokeApiWithErrorHandling<FlywheelPhase>('/phases', 'PUT', phase, {
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -75,7 +75,7 @@ export class PhaseController extends APIClient {
      * @param phaseName
      */
     async delete(phaseName: string) {
-        return this.invokeApi(`/phases/${phaseName}`, 'DELETE');
+        return this.invokeApiWithErrorHandling(`/phases/${phaseName}`, 'DELETE');
     }
 
 }

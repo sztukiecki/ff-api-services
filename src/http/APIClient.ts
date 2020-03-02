@@ -1,14 +1,14 @@
-import axios, { AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
+import axios, {AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken} from 'axios';
 import * as isNode from 'detect-node';
-import { stringify } from 'qs';
+import {stringify} from 'qs';
 import Authentication from '../authentication/Authentication';
 import EnvironmentManagement from '../util/EnvironmentManagement';
 import Interceptor from '../util/Interceptor';
-import { APIService } from './APIMapping';
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache, IntrospectionFragmentMatcher, NormalizedCacheObject } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
-import { setContext } from 'apollo-link-context';
+import {APIService} from './APIMapping';
+import {ApolloClient} from 'apollo-client';
+import {InMemoryCache, IntrospectionFragmentMatcher, NormalizedCacheObject} from 'apollo-cache-inmemory';
+import {HttpLink} from 'apollo-link-http';
+import {setContext} from 'apollo-link-context';
 import fragmentTypes from '../schemas/fragmentTypes';
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
@@ -38,8 +38,8 @@ export default abstract class APIClient {
         const fragmentMatcher = new IntrospectionFragmentMatcher({introspectionQueryResultData: fragmentTypes});
 
         const httpLink = new HttpLink({
-                                          uri: `${EnvironmentManagement.getBaseUrl(isNode)}/gql`
-                                      });
+            uri: `${EnvironmentManagement.getBaseUrl(isNode)}/gql`
+        });
         const authLink = setContext(async (_, {headers}) => ({
             headers: {
                 ...headers,
@@ -49,9 +49,9 @@ export default abstract class APIClient {
         const link = authLink.concat(httpLink);
         const cache = new InMemoryCache({fragmentMatcher});
         this.gql = new ApolloClient({
-                                        link,
-                                        cache
-                                    });
+            link,
+            cache
+        });
     }
 
     public withUserId(userId: string): this {
@@ -150,4 +150,34 @@ export default abstract class APIClient {
         // i.e. you can't handle a service returning an http code >= 400 (which is possibly expected)
         return client.request<T>(request);
     }
+
+
+    public async invokeApiWithErrorHandling<T = any>(path: string, method: MethodTypes = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}, defaultValue?: T): Promise<ApiResponse<T>> {
+        try {
+            const result = await this.invokeApi<T>(path, method, body, additionalParams);
+            const response: ApiResponse<T> = {
+                isSuccessful2xx: result.status >= 200 && result.status < 300,
+                data: defaultValue
+            };
+
+            return !result
+                ? response
+                : {...response, ...result};
+
+        } catch (e) {
+            return {isSuccessful2xx: false, data: e?.response?.data ?? defaultValue};
+        }
+    }
 }
+
+
+export interface ApiResponseSuccess<T> extends Partial<AxiosResponse<T>> {
+    isSuccessful2xx: true;
+}
+
+export interface ApiResponseError<T> extends Partial<AxiosError<T>> {
+    isSuccessful2xx: false;
+    data?: T
+}
+
+export type ApiResponse<T> = ApiResponseSuccess<T> | ApiResponseError<T>;

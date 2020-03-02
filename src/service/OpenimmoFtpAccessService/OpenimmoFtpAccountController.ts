@@ -1,4 +1,3 @@
-import {AxiosResponse} from 'axios';
 import {APIClient, APIMapping} from '../../http';
 import {OpenImmoFtpAccountTypes} from './OpenimmoFtpAccessService.Types';
 import OpenimmoFtpAccount = OpenImmoFtpAccountTypes.OpenimmoFtpAccount;
@@ -12,16 +11,16 @@ export default class OpenimmoFtpAccountController extends APIClient {
     /**
      * get all openimmmos
      */
-    async fetchAll(): Promise<AxiosResponse<OpenimmoFtpAccount[]>> {
-        return await this.invokeApi('/ftp', 'GET', undefined);
+    async fetchAll() {
+        return await this.invokeApiWithErrorHandling<OpenimmoFtpAccount[]>('/ftp', 'GET', undefined);
     }
 
     /**
      * get one openimmo by using user
      * @param user
      */
-    async fetch(user: string): Promise<AxiosResponse<OpenimmoFtpAccount>> {
-        return await this.invokeApi(`/ftp/${user}`, 'GET');
+    async fetch(user: string) {
+        return await this.invokeApiWithErrorHandling<OpenimmoFtpAccount>(`/ftp/${user}`, 'GET');
     }
 
     /**
@@ -29,16 +28,16 @@ export default class OpenimmoFtpAccountController extends APIClient {
      * @param user
      * @param openimmo
      */
-    async update(user: string, openimmo: OpenimmoFtpAccount): Promise<AxiosResponse<OpenimmoFtpAccount>> {
-        return await this.invokeApi(`/ftp/${user}`, 'PUT', openimmo);
+    async update(user: string, openimmo: OpenimmoFtpAccount) {
+        return await this.invokeApiWithErrorHandling<OpenimmoFtpAccount>(`/ftp/${user}`, 'PUT', openimmo);
     }
 
     /**
      * create an openimmo
      * @param openimmo
      */
-    async create(openimmo: OpenimmoFtpAccount): Promise<AxiosResponse<OpenimmoFtpAccount>> {
-        return await this.invokeApi('/ftp', 'POST', openimmo);
+    async create(openimmo: OpenimmoFtpAccount) {
+        return await this.invokeApiWithErrorHandling<OpenimmoFtpAccount>('/ftp', 'POST', openimmo);
     }
 
     /**
@@ -46,6 +45,6 @@ export default class OpenimmoFtpAccountController extends APIClient {
      * @param user
      */
     async delete(user: string) {
-        return await this.invokeApi(`/ftp/${user}`, 'DELETE');
+        return await this.invokeApiWithErrorHandling<OpenimmoFtpAccount>(`/ftp/${user}`, 'DELETE');
     }
 }
