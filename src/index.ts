@@ -14,7 +14,6 @@ export { default as EmailService } from './service/EmailService';
 export { default as EntityService } from './service/EntityService';
 export { default as ExcelExporterService } from './service/ExcelExporterService';
 export { default as FlowfactExportInternalService } from './service/FlowfactExportInternalService';
-export * from './service/FlywheelService';
 export { default as FormService } from './service/FormService';
 export { default as FullTextSearchService } from './service/FullTextSearchService';
 export { default as FunnelService } from './service/FunnelService';
@@ -59,13 +58,15 @@ export { default as BehaviourService } from './service/BehaviourService';
 export { default as ContractService } from './service/ContractService';
 export { default as FilterDefinitionService } from './service/FilterDefinitionService';
 export { default as SoftLinksEntityService } from './service/SoftLinksEntityService';
-export * from './service/OpenimmoFtpAccessService';
 export { default as OpenimmoImporterService } from './service/OpenimmoImporterService';
 export { default as WorkflowService } from './service/WorkflowService';
 export { default as SearchProfileService } from './service/SearchProfileService';
 export { default as IS24ImportService } from './service/IS24ImportService';
 export { default as ImporterFlowFactTransferService } from './service/ImporterFlowFactTransferService';
 export { default as AclGroupServiceRest } from './service/AclGroupServiceRest';
+
+export * from './service/OpenimmoFtpAccessService';
+export * from './service/FlywheelService';
 
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
