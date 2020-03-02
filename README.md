@@ -5,6 +5,8 @@
   </h2>
 </div>
 
+[Changelog](/Changelog.md)
+
 ## Installation
 @flowfact/api-services is available as an [npm package](https://www.npmjs.com/package/@flowfact/api-services).
 
