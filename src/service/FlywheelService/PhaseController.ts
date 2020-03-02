@@ -1,5 +1,9 @@
 import {APIClient, APIMapping} from '../../http';
-import {FlywheelFilter, FlywheelPhase, FlywheelPhaseTree, PhaseSyncCommands} from './types';
+import {FlywheelServiceTypes} from './FlywheelService.Types';
+import FlywheelFilter = FlywheelServiceTypes.FlywheelFilter;
+import FlywheelPhase = FlywheelServiceTypes.FlywheelPhase;
+import FlywheelPhaseTree = FlywheelServiceTypes.FlywheelPhaseTree;
+import PhaseSyncCommands = FlywheelServiceTypes.PhaseSyncCommands;
 
 export class PhaseController extends APIClient {
     private defaultFilter: string = JSON.stringify({

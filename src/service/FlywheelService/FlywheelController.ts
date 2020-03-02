@@ -1,5 +1,6 @@
 import {APIClient, APIMapping} from '../../http';
-import {Flywheel} from './types';
+import {FlywheelServiceTypes} from './FlywheelService.Types';
+import Flywheel = FlywheelServiceTypes.Flywheel;
 
 export class FlywheelController extends APIClient {
     constructor() {
