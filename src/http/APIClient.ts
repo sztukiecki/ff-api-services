@@ -164,7 +164,7 @@ export default abstract class APIClient {
                 : {
                     ...response,
                     ...result,
-                    data: result.data ? defaultValue : result.data
+                    data: result.data ? result.data : defaultValue
                 };
 
         } catch (e) {
