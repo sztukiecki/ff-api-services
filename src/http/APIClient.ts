@@ -168,7 +168,7 @@ export default abstract class APIClient {
                 };
 
         } catch (e) {
-            return {isSuccessful2xx: false, data: e?.response?.data ?? defaultValue};
+            return {...e, isSuccessful2xx: false, data: e?.response?.data ?? defaultValue};
         }
     }
 }
