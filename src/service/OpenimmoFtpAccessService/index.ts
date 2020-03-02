@@ -2,7 +2,7 @@ import OpenimmoFtpAccountController from './OpenimmoFtpAccountController';
 
 export * from './OpenimmoFtpAccessService.Types';
 
-export default class OpenimmoFtpAccessService {
+export class OpenimmoFtpAccessService {
 
     public static instance = new OpenimmoFtpAccessService();
 

@@ -5,7 +5,7 @@ import {TransactionController} from './TransactionController';
 
 export * from './FlywheelService.Types';
 
-export default class FlywheelService {
+export class FlywheelService {
 
     public static instance = new FlywheelService();
 
