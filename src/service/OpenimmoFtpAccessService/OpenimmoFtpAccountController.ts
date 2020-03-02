@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../../http';
-import {OpenImmoFtpAccountTypes} from './types';
+import {OpenImmoFtpAccountTypes} from './OpenimmoFtpAccessService.Types';
 
 export default class OpenimmoFtpAccountController extends APIClient {
 

@@ -1,14 +1,14 @@
 import OpenimmoFtpAccountController from './OpenimmoFtpAccountController';
 
-export * from './types';
+export * from './OpenimmoFtpAccessService.Types';
 
 export default class OpenimmoFtpAccessService {
 
     public static instance = new OpenimmoFtpAccessService();
 
-    public readonly FtpAccount: OpenimmoFtpAccountController;
+    public readonly ftpAccount: OpenimmoFtpAccountController;
 
     constructor() {
-        this.FtpAccount = new OpenimmoFtpAccountController();
+        this.ftpAccount = new OpenimmoFtpAccountController();
     }
 }
