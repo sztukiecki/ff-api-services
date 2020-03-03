@@ -45,6 +45,7 @@ const APIMapping = {
     nylasContactSyncService: new APIService('nylas-contact-sync-service'),
     multimediaService: new APIService('multimedia-service'),
     office365AuthenticationService: new APIService('office365-authentication-service'),
+    openimmoPublishService: new APIService('openimmo-publish-service'),
     portalManagementService: new APIService('portal-management-service'),
     presetService: new APIService('preset-service'),
     propertyMarketingPhaseService: new APIService('property-marketing-phase-service'),

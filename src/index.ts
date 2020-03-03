@@ -31,6 +31,7 @@ export { default as MultimediaService } from './service/MultimediaService';
 export { default as NylasService } from './service/NylasService';
 export { default as NylasContactSyncService } from './service/NylasContactSyncService';
 export { default as Office365AuthenticationService } from './service/Office365AuthenticationService';
+export { default as OpenimmoPublishService } from './service/OpenimmoPublishService';
 export { default as OnboardingService } from './service/OnboardingService';
 export { default as PortalManagementService } from './service/PortalManagementService';
 export { default as PresetService } from './service/PresetService';
