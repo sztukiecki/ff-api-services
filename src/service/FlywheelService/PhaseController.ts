@@ -3,6 +3,7 @@ import {FlywheelServiceTypes} from './FlywheelService.Types';
 import FlywheelFilter = FlywheelServiceTypes.FlywheelFilter;
 import FlywheelPhase = FlywheelServiceTypes.FlywheelPhase;
 import FlywheelPhaseTree = FlywheelServiceTypes.FlywheelPhaseTree;
+import FlywheelPhasePatch = FlywheelServiceTypes.FlywheelPhasePatch;
 import PhaseSyncCommands = FlywheelServiceTypes.PhaseSyncCommands;
 
 export class PhaseController extends APIClient {
@@ -64,6 +65,19 @@ export class PhaseController extends APIClient {
      */
     async update(phase: FlywheelPhase) {
         return this.invokeApiWithErrorHandling<FlywheelPhase>('/phases', 'PUT', phase, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    }
+
+    /**
+     * TODO: Please comment this method
+     * @param phaseName
+     * @param patchOperations
+     */
+    async patch(phaseName: string, ...patchOperations: FlywheelPhasePatch[]) {
+        return this.invokeApiWithErrorHandling(`/phases/$\{phaseName}`, 'PATCH', patchOperations, {
             headers: {
                 'Content-Type': 'application/json',
             },
