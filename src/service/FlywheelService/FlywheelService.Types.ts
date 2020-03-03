@@ -2,7 +2,6 @@ import {Captions} from '@flowfact/types';
 import {FlowdslConditionUnion} from '@flowfact/node-flowdsl';
 
 
-
 export namespace FlywheelServiceTypes {
     export type Flywheel = {
         id: number;
@@ -23,6 +22,7 @@ export namespace FlywheelServiceTypes {
         noStepIfChildless?: boolean;
         flowIds: string[];
         conditions?: FlowdslConditionUnion[];
+        importType: ImportType;
     };
 
     export type FlywheelPhaseTree = {
@@ -71,8 +71,10 @@ export namespace FlywheelServiceTypes {
         type: 'EXCLUDE_MASTER';
     }
 
-    type PhasePatch = {
+    export type PhasePatch = {
         op: 'set-import-type',
-        value: 'only_new' | 'new_and_old'
+        value: ImportType
     }
+
+    export type ImportType = 'only_new' | 'new_and_old';
 }
