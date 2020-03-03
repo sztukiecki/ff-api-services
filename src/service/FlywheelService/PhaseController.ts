@@ -77,7 +77,7 @@ export class PhaseController extends APIClient {
      * @param patchOperations
      */
     async patch(phaseName: string, ...patchOperations: FlywheelPhasePatch[]) {
-        return this.invokeApiWithErrorHandling(`/phases/$\{phaseName}`, 'PATCH', patchOperations, {
+        return this.invokeApiWithErrorHandling(`/phases/${phaseName}`, 'PATCH', patchOperations, {
             headers: {
                 'Content-Type': 'application/json',
             },
