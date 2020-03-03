@@ -20,7 +20,7 @@ export namespace FlywheelServiceTypes {
         schema: string;
         entityAmount: number;
         noStepIfChildless?: boolean;
-        flowIds: number[];
+        flowIds: string[];
         conditions?: FlowdslConditionUnion[];
     };
 
