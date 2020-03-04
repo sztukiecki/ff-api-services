@@ -21,3 +21,5 @@ export class FlywheelService {
         this.transaction = new TransactionController();
     }
 }
+
+export const FlywheelServiceInstance = new FlywheelService();

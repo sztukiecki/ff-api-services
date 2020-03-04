@@ -6,9 +6,6 @@ import FlywheelPhaseTree = FlywheelServiceTypes.FlywheelPhaseTree;
 import PhaseSyncCommands = FlywheelServiceTypes.PhaseSyncCommands;
 
 export class PhaseController extends APIClient {
-    private defaultFilter: string = JSON.stringify({
-        type: 'EXCLUDE_PHASE_STEPS',
-    });
 
     constructor() {
         super(APIMapping.flywheelService);
@@ -18,13 +15,14 @@ export class PhaseController extends APIClient {
      * TODO: Please comment this method
      * @param filters
      */
-    async fetchAll(filters?: FlywheelFilter[]) {
+    async fetchAll(filters?: FlywheelFilter | FlywheelFilter[]) {
         const params: any = {};
-        if (filters) {
+        if(filters) {
             params.queryParams = {
-                filters: filters ? JSON.stringify(filters) : this.defaultFilter,
+                filters: JSON.stringify(filters)
             };
         }
+
         return this.invokeApiWithErrorHandling<FlywheelPhase[]>('/phases', 'GET', undefined, params);
     }
 
