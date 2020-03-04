@@ -22,6 +22,7 @@ export namespace FlywheelServiceTypes {
         noStepIfChildless?: boolean;
         flowIds: string[];
         conditions?: FlowdslConditionUnion[];
+        importType: ImportType;
     };
 
     export type FlywheelPhaseTree = {
@@ -33,6 +34,9 @@ export namespace FlywheelServiceTypes {
         flowIds: number[];
         conditions?: FlowdslConditionUnion[];
     };
+
+
+    export type FlywheelPhasePatch = PhasePatch
 
     export type FlywheelFilter =
         ExcludeStepsFilter |
@@ -67,5 +71,10 @@ export namespace FlywheelServiceTypes {
         type: 'EXCLUDE_MASTER';
     }
 
+    export type PhasePatch = {
+        op: 'set-import-type',
+        value: ImportType
+    }
 
+    export type ImportType = 'only_new' | 'new_and_old';
 }
