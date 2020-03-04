@@ -30,6 +30,6 @@ export default class NavigationController extends APIClient {
      * This resource can just be called as a ADMIN user.
      */
     async updateNavigation(navigation: Navigation) {
-        return this.invokeApiWithErrorHandling<Navigation>('/navigations/admin', 'PUT');
+        return this.invokeApiWithErrorHandling<Navigation>('/navigations/admin', 'PUT', navigation);
     }
 }
