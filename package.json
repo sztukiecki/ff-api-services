@@ -13,7 +13,7 @@
     "build:cjs": "tsc",
     "build:esm": "tsc --project tsconfig.esm.json",
     "prepare": "rimraf build/ && yarn run build:cjs && yarn run build:esm",
-    "lint": "tslint --project .",
+    "lint": "eslint src/*",
     "doc": "typedoc --out doc/",
     "local": "node pack.js platform-apps",
     "upgradeTypes": "yarn && yarn add @flowfact/types --latest"
@@ -41,10 +41,13 @@
     "tslib": "^1.10.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
     "amazon-cognito-identity-js": "3.0.9",
+    "eslint": "^6.8.0",
+    "eslint-plugin-import": "^2.20.1",
     "recursive-search": "^1.0.1",
     "rimraf": "^2.7.1",
-    "tslint": "^5.20.1",
     "typescript": "^3.7.4"
   }
 }
