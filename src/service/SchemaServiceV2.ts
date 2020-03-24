@@ -231,6 +231,13 @@ export class SchemaServiceV2 extends APIClient {
     removeExtensionAssignment = async (name: string): Promise<AxiosResponse> => {
         return this.invokeApi(`/extensions/assignments/${name}`, 'DELETE', undefined, v2Header);
     };
+
+    /**
+     * Fetches all complex data types
+     */
+    async fetchDataTypes(): Promise<AxiosResponse> {
+        return this.invokeApi('/datatypes/alltypes', 'GET', undefined, v2Header);
+    }
 }
 
 export default new SchemaServiceV2();
