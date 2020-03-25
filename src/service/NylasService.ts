@@ -16,7 +16,7 @@ export class NylasService extends APIClient {
      * Authorize a user with the code from the nylas callback
      * @param code
      */
-    async authorizeUser(code: string, isGmail:boolean = false): Promise<AxiosResponse> {
+    async authorizeUser(code: string, isGmail: boolean = false): Promise<AxiosResponse> {
         return await this.invokeApi('/account', 'POST', undefined, {
             queryParams: {
                 command: 'authorize',
@@ -136,6 +136,23 @@ export class NylasService extends APIClient {
                 email: email
             }
         });
+    }
+
+    /**
+     * This method returns all existing Scheduler pages for the specified nylas account
+     * @param accountId
+     */
+    async getSchedulerPages(accountId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/schedule/manage/pages?account_id=${accountId}`, 'GET');
+    }
+
+    /**
+     * This method creates a scheduler page with the given payload. Since this object is really generic there is no good way
+     * to map it into an own class therefore it is an object.
+     * @param payload
+     */
+    async createSchedulerPage(payload: object): Promise<AxiosResponse> {
+        return await this.invokeApi('/schedule/manage/pages', 'POST', payload);
     }
 }
 
