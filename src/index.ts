@@ -26,7 +26,6 @@ export { default as InteractiveExposeService } from './service/InteractiveExpose
 export { default as InteractiveExposeStatisticsService } from './service/InteractiveExposeStatisticsService';
 export { default as MatchmakingService } from './service/MatchmakingService';
 export { default as ModuleService } from './service/ModuleService';
-export { default as MultimediaService } from './service/MultimediaService';
 export { default as NylasService } from './service/NylasService';
 export { default as NylasContactSyncService } from './service/NylasContactSyncService';
 export { default as Office365AuthenticationService } from './service/Office365AuthenticationService';
@@ -68,6 +67,7 @@ export { default as AclGroupServiceRest } from './service/AclGroupServiceRest';
 export * from './service/OpenimmoFtpAccessService';
 export * from './service/FlywheelService';
 export * from './service/DynamicLayoutService';
+export * from './service/MultimediaService/index';
 
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
