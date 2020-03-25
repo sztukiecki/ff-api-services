@@ -150,9 +150,10 @@ export class NylasService extends APIClient {
      * This method creates a scheduler page with the given payload. Since this object is really generic there is no good way
      * to map it into an own class therefore it is an object.
      * @param payload
+     * @param accountId
      */
-    async createSchedulerPage(payload: object): Promise<AxiosResponse> {
-        return await this.invokeApi('/schedule/manage/pages', 'POST', payload);
+    async createSchedulerPage(accountId: string, payload: object): Promise<AxiosResponse> {
+        return await this.invokeApi(`/schedule/manage/pages?account_id=${accountId}`, 'POST', payload);
     }
 }
 
