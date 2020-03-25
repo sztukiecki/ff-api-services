@@ -9,7 +9,6 @@ export { default as CompanyService } from './service/CompanyService';
 export { default as ContactService } from './service/ContactService';
 export { default as CsvToEntityImporterService } from './service/CsvToEntityImporterService';
 export { default as CustomerLegitimationArchiveService } from './service/CustomerLegitimationArchiveService';
-export { default as DynamicLayoutService } from './service/DynamicLayoutService';
 export { default as EmailService } from './service/EmailService';
 export { default as EntityService } from './service/EntityService';
 export { default as ExcelExporterService } from './service/ExcelExporterService';
@@ -67,6 +66,7 @@ export { default as AclGroupServiceRest } from './service/AclGroupServiceRest';
 
 export * from './service/OpenimmoFtpAccessService';
 export * from './service/FlywheelService';
+export * from './service/DynamicLayoutService';
 export * from './service/MultimediaService/index';
 
 export { APIService, APIMapping, APIClient } from './http';
