@@ -1,7 +1,9 @@
 import { AuthRequest, NylasConfig, NylasConfigPatch, RegistrationUrl, SendEmailRequest } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
-import APIClient from '../http/APIClient';
-import APIMapping from '../http/APIMapping';
+import APIClient from '../../http/APIClient';
+import APIMapping from '../../http/APIMapping';
+import { NylasServiceTypes } from './NylasService.Types';
+import NylasSchedulerPage = NylasServiceTypes.NylasSchedulerPage;
 
 /**
  * See https://docs.nylas.com/reference for more info
@@ -142,8 +144,8 @@ export class NylasService extends APIClient {
      * This method returns all existing Scheduler pages for the specified nylas account
      * @param accountId
      */
-    async getSchedulerPages(accountId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/schedule/manage/pages?account_id=${accountId}`, 'GET');
+    async fetchSchedulerPages(accountId: string) {
+        return await this.invokeApi<NylasSchedulerPage[]>(`/schedule/manage/pages?account_id=${accountId}`, 'GET');
     }
 
     /**
@@ -152,8 +154,17 @@ export class NylasService extends APIClient {
      * @param payload
      * @param accountId
      */
-    async createSchedulerPage(accountId: string, payload: object): Promise<AxiosResponse> {
-        return await this.invokeApi(`/schedule/manage/pages?account_id=${accountId}`, 'POST', payload);
+    async createSchedulerPage(accountId: string, payload: NylasSchedulerPage) {
+        return await this.invokeApi<NylasSchedulerPage>(`/schedule/manage/pages?account_id=${accountId}`, 'POST', payload);
+    }
+
+    /**
+     * This method enables Delete-Requests for a schedulerpage with the give pageId and accountId
+     * @param accountId
+     * @param pageId
+     */
+    async deleteSchedulerPage(accountId: string, pageId: number) {
+        return await this.invokeApi<string>(`/schedule/manage/pages/${pageId}?account_id=${accountId}`, 'DELETE');
     }
 }
 
