@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 import APIClient from '../../http/APIClient';
 import APIMapping from '../../http/APIMapping';
 import { NylasServiceTypes } from './NylasService.Types';
-import NylasSchedulerPage = NylasServiceTypes.NylasSchedulerPage;
+import SchedulerPage = NylasServiceTypes.SchedulerPage;
 
 /**
  * See https://docs.nylas.com/reference for more info
@@ -145,7 +145,7 @@ export class NylasService extends APIClient {
      * @param accountId
      */
     async fetchSchedulerPages(accountId: string) {
-        return await this.invokeApi<NylasSchedulerPage[]>(`/schedule/manage/pages?account_id=${accountId}`, 'GET');
+        return await this.invokeApi<SchedulerPage[]>(`/schedule/manage/pages?account_id=${accountId}`, 'GET');
     }
 
     /**
@@ -154,8 +154,8 @@ export class NylasService extends APIClient {
      * @param payload
      * @param accountId
      */
-    async createSchedulerPage(accountId: string, payload: NylasSchedulerPage) {
-        return await this.invokeApi<NylasSchedulerPage>(`/schedule/manage/pages?account_id=${accountId}`, 'POST', payload);
+    async createSchedulerPage(accountId: string, payload: SchedulerPage) {
+        return await this.invokeApi<SchedulerPage>(`/schedule/manage/pages?account_id=${accountId}`, 'POST', payload);
     }
 
     /**

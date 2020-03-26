@@ -5,9 +5,9 @@
  */
 
 export namespace NylasServiceTypes {
-    export interface NylasSchedulerPage {
+    export interface SchedulerPage {
         slug: string;
-        config: NylasSchedulerPageConfig;
+        config: PageConfig;
         access_tokens: string[];
         app_client_id: string;
         created_at: string;
@@ -17,22 +17,22 @@ export namespace NylasServiceTypes {
         name: string;
     }
 
-    export interface NylasSchedulerPageConfig {
+    export interface PageConfig {
         calendar_ids: object;
         timezone: string;
-        event: NylasSchedulerPageConfigEvent;
-        appearance: NylasSchedulerPageConfigAppearance;
+        event: ConfigEvent;
+        appearance: ConfigAppearance;
         reminders: any[];
-        booking: NylasSchedulerPageConfigBooking;
+        booking: ConfigBooking;
     }
 
-    export interface NylasSchedulerPageConfigEvent {
+    export interface ConfigEvent {
         duration: number;
         location: string;
         title: string;
     }
 
-    export interface NylasSchedulerPageConfigAppearance {
+    export interface ConfigAppearance {
         color: string;
         company_name: string;
         submit_text: string;
@@ -40,18 +40,18 @@ export namespace NylasServiceTypes {
         logo: string;
     }
 
-    export interface NylasSchedulerPageConfigBooking {
+    export interface ConfigBooking {
         additional_fields: any[];
         available_days_in_future: number;
         confirmation_method: string;
         min_booking_notice: number;
         min_buffer: number;
         min_cancellation_notice: number;
-        opening_hours: NylasSchedulerPageConfigBookingOpeningHours[];
+        opening_hours: BookingOpeningHours[];
         scheduling_method: string;
     }
 
-    export interface NylasSchedulerPageConfigBookingOpeningHours {
+    export interface BookingOpeningHours {
         days: string[];
         start: string;
         end: string;
