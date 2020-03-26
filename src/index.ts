@@ -34,7 +34,6 @@ export { default as OnboardingService } from './service/OnboardingService';
 export { default as PortalManagementService } from './service/PortalManagementService';
 export { default as PresetService } from './service/PresetService';
 export { default as PropertyMarketingPhaseService } from './service/PropertyMarketingPhaseService';
-export { default as RelogService } from './service/RelogService';
 export { default as SampleDataService } from './service/SampleDataService';
 export { default as SchemaService } from './service/SchemaService';
 export { default as SchemaServiceV2 } from './service/SchemaServiceV2';
@@ -48,7 +47,6 @@ export { default as ProofOfActivityService } from './service/ProofOfActivityServ
 export { default as TrialLicenseService } from './service/TrialLicenseService';
 export { default as UserService } from './service/UserService';
 export { default as ViewDefinitionService } from './service/ViewDefinitionService';
-export { default as EnvironmentManagement } from './util/EnvironmentManagement';
 export { default as Authentication } from './authentication/Authentication';
 export { default as OmniChannelService } from './service/OmniChannelService';
 export { default as IS24PublishService } from './service/IS24PublishService';

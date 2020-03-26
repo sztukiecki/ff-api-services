@@ -57,4 +57,4 @@ export class RelogService extends APIClient {
     }
 }
 
-export default new RelogService();
+export const RelogServiceInstance = new RelogService();
