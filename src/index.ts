@@ -26,7 +26,7 @@ export { default as InteractiveExposeService } from './service/InteractiveExpose
 export { default as InteractiveExposeStatisticsService } from './service/InteractiveExposeStatisticsService';
 export { default as MatchmakingService } from './service/MatchmakingService';
 export { default as ModuleService } from './service/ModuleService';
-export { default as NylasService } from './service/NylasService';
+export { default as NylasService } from './service/NylasService/NylasService';
 export { default as NylasContactSyncService } from './service/NylasContactSyncService';
 export { default as Office365AuthenticationService } from './service/Office365AuthenticationService';
 export { default as OpenimmoPublishService } from './service/OpenimmoPublishService';

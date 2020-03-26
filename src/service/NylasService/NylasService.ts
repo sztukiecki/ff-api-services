@@ -1,7 +1,9 @@
 import { AuthRequest, NylasConfig, NylasConfigPatch, RegistrationUrl, SendEmailRequest } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
-import APIClient from '../http/APIClient';
-import APIMapping from '../http/APIMapping';
+import APIClient from '../../http/APIClient';
+import APIMapping from '../../http/APIMapping';
+import { NylasServiceTypes } from './NylasService.Types';
+import SchedulerPage = NylasServiceTypes.SchedulerPage;
 
 /**
  * See https://docs.nylas.com/reference for more info
@@ -16,7 +18,7 @@ export class NylasService extends APIClient {
      * Authorize a user with the code from the nylas callback
      * @param code
      */
-    async authorizeUser(code: string, isGmail:boolean = false): Promise<AxiosResponse> {
+    async authorizeUser(code: string, isGmail: boolean = false): Promise<AxiosResponse> {
         return await this.invokeApi('/account', 'POST', undefined, {
             queryParams: {
                 command: 'authorize',
@@ -136,6 +138,33 @@ export class NylasService extends APIClient {
                 email: email
             }
         });
+    }
+
+    /**
+     * This method returns all existing Scheduler pages for the specified nylas account
+     * @param accountId
+     */
+    async fetchSchedulerPages(accountId: string) {
+        return await this.invokeApi<SchedulerPage[]>(`/schedule/manage/pages?account_id=${accountId}`, 'GET');
+    }
+
+    /**
+     * This method creates a scheduler page with the given payload. Since this object is really generic there is no good way
+     * to map it into an own class therefore it is an object.
+     * @param payload
+     * @param accountId
+     */
+    async createSchedulerPage(accountId: string, payload: SchedulerPage) {
+        return await this.invokeApi<SchedulerPage>(`/schedule/manage/pages?account_id=${accountId}`, 'POST', payload);
+    }
+
+    /**
+     * This method enables Delete-Requests for a schedulerpage with the give pageId and accountId
+     * @param accountId
+     * @param pageId
+     */
+    async deleteSchedulerPage(accountId: string, pageId: number) {
+        return await this.invokeApi<string>(`/schedule/manage/pages/${pageId}?account_id=${accountId}`, 'DELETE');
     }
 }
 
