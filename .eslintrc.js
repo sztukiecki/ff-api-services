@@ -33,6 +33,7 @@ module.exports = {
     'rules': {
         'no-setter-return': 'error',
         'yoda': 'error',
+        'no-unused-vars': 'warn',
         'import/no-internal-modules': [
             'error',
             {
