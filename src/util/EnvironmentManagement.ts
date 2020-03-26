@@ -3,7 +3,7 @@ import * as isNode from 'detect-node';
 
 const StoreKeys = {
     edgeServiceStage: 'HTTPCLIENT.APICLIENT.STAGE',
-    edgeServiceVersionTag: 'HTTPCLIENT.APICLIENT.VERSIONTAG'
+    edgeServiceVersionTag: 'HTTPCLIENT.APICLIENT.VERSIONTAG',
 };
 
 enum StageTypes {
@@ -72,9 +72,11 @@ export class EnvironmentManagement {
     }
 }
 
-export default new EnvironmentManagement();
+const EnvironmentManagementInstance = new EnvironmentManagement();
+
 export {
     StoreKeys,
     VersionTagTypes,
-    StageTypes
+    StageTypes,
+    EnvironmentManagementInstance,
 };
