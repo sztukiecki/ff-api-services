@@ -5,13 +5,6 @@ module.exports = {
         'node': true,
         'jest': true,
     },
-    'globals': {
-        'i18n': true,
-        'buildRoutePath': true,
-        'buildUrlPath': true,
-        'guid': true,
-        'Loader': true,
-    },
     'extends': [
         'eslint:recommended',
         'plugin:import/errors',
@@ -20,9 +13,6 @@ module.exports = {
     ],
     'parser': '@typescript-eslint/parser',
     'parserOptions': {
-        'ecmaFeatures': {
-            'jsx': true,
-        },
         'project': './tsconfig.json',
         'sourceType': 'module',
     },
