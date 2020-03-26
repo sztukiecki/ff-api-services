@@ -21,9 +21,7 @@ module.exports = {
     'parser': '@typescript-eslint/parser',
     'parserOptions': {
         'ecmaFeatures': {
-            'experimentalObjectRestSpread': true,
             'jsx': true,
-            'legacyDecorators': true,
         },
         'project': './tsconfig.json',
         'sourceType': 'module',
