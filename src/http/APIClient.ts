@@ -1,14 +1,14 @@
-import axios, {AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken} from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
 import * as isNode from 'detect-node';
-import {stringify} from 'qs';
+import { stringify } from 'qs';
 import Authentication from '../authentication/Authentication';
-import EnvironmentManagement from '../util/EnvironmentManagement';
+import { EnvironmentManagementInstance } from '../util/EnvironmentManagement';
 import Interceptor from '../util/Interceptor';
-import {APIService} from './APIMapping';
-import {ApolloClient} from 'apollo-client';
-import {InMemoryCache, IntrospectionFragmentMatcher, NormalizedCacheObject} from 'apollo-cache-inmemory';
-import {HttpLink} from 'apollo-link-http';
-import {setContext} from 'apollo-link-context';
+import { APIService } from './APIMapping';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache, IntrospectionFragmentMatcher, NormalizedCacheObject } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
+import { setContext } from 'apollo-link-context';
 import fragmentTypes from '../schemas/fragmentTypes';
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
@@ -35,22 +35,22 @@ export default abstract class APIClient {
     protected constructor(service: APIService) {
         this._serviceName = service.name;
 
-        const fragmentMatcher = new IntrospectionFragmentMatcher({introspectionQueryResultData: fragmentTypes});
+        const fragmentMatcher = new IntrospectionFragmentMatcher({ introspectionQueryResultData: fragmentTypes });
 
         const httpLink = new HttpLink({
-            uri: `${EnvironmentManagement.getBaseUrl(isNode)}/gql`
+            uri: `${EnvironmentManagementInstance.getBaseUrl(isNode)}/gql`,
         });
-        const authLink = setContext(async (_, {headers}) => ({
+        const authLink = setContext(async (_, { headers }) => ({
             headers: {
                 ...headers,
-                ...(await this.getUserIdentification())
-            }
+                ...(await this.getUserIdentification()),
+            },
         }));
         const link = authLink.concat(httpLink);
-        const cache = new InMemoryCache({fragmentMatcher});
+        const cache = new InMemoryCache({ fragmentMatcher });
         this.gql = new ApolloClient({
             link,
-            cache
+            cache,
         });
     }
 
@@ -64,7 +64,7 @@ export default abstract class APIClient {
         if (isNode) {
             if (this.userId) {
                 return {
-                    userId: this.userId
+                    userId: this.userId,
                 };
             }
             return {};
@@ -75,17 +75,17 @@ export default abstract class APIClient {
 
         if (supportToken.length === 0 && apiToken.length === 0) {
             return {
-                cognitoToken: (await Authentication.getCurrentSession())!.getIdToken()!.getJwtToken()
+                cognitoToken: (await Authentication.getCurrentSession())!.getIdToken()!.getJwtToken(),
             };
         } else {
             return {
-                [`x-ff-${apiToken ? 'api' : 'support'}-token`]: apiToken || supportToken
+                [`x-ff-${apiToken ? 'api' : 'support'}-token`]: apiToken || supportToken,
             };
         }
     }
 
     public async invokeGqlQuery<T = any>(query: any, variables?: any) {
-        const result = await this.gql.query<T>({query, variables, errorPolicy: 'all'});
+        const result = await this.gql.query<T>({ query, variables, errorPolicy: 'all' });
         if (result.errors) {
             // intentional ==, do not change to ===
             if (result.data == null) {
@@ -97,7 +97,7 @@ export default abstract class APIClient {
     }
 
     public async invokeGqlMutation<T = any>(mutation: any, variables?: any) {
-        const result = await this.gql.mutate<T>({mutation, variables, errorPolicy: 'all'});
+        const result = await this.gql.mutate<T>({ mutation, variables, errorPolicy: 'all' });
         if (result.errors) {
             // intentional ==, do not change to ===
             if (result.data == null) {
@@ -108,24 +108,27 @@ export default abstract class APIClient {
         return result;
     }
 
-    public async invokeApi<T = any>(path: string, method: MethodTypes = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<T>> {
+    public async invokeApi<T = any>(
+        path: string, method: MethodTypes = 'GET', body: string | {} = '',
+        additionalParams: APIClientAdditionalParams = {},
+    ): Promise<AxiosResponse<T>> {
         if (!path.startsWith('/')) {
             throw new Error('Your path has to start with a slash. Path: ' + path);
         }
 
-        const {queryParams, headers, cancelToken, ...others} = additionalParams;
+        const { queryParams, headers, cancelToken, ...others } = additionalParams;
 
         // add parameters to the url
-        let apiUrl = `${EnvironmentManagement.getBaseUrl(isNode)}/${this._serviceName}${path}`;
+        let apiUrl = `${EnvironmentManagementInstance.getBaseUrl(isNode)}/${this._serviceName}${path}`;
         if (queryParams) {
-            const queryString = stringify(queryParams, {addQueryPrefix: true});
+            const queryString = stringify(queryParams, { addQueryPrefix: true });
             if (queryString && queryString !== '') {
                 apiUrl += queryString;
             }
         }
 
         const userIdentification = path.startsWith('/public') ? {} : await this.getUserIdentification();
-        const languages: any = {'Accept-Language': APIClient.languages};
+        const languages: any = { 'Accept-Language': APIClient.languages };
 
         let request: AxiosRequestConfig = {
             method: method,
@@ -133,7 +136,7 @@ export default abstract class APIClient {
             headers: Object.assign({}, userIdentification, languages, headers || {}),
             data: body,
             cancelToken: cancelToken,
-            ...others
+            ...others,
         };
 
         const client = axios.create();
@@ -152,11 +155,14 @@ export default abstract class APIClient {
     }
 
 
-    public async invokeApiWithErrorHandling<T = any>(path: string, method: MethodTypes = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}, defaultValue?: T): Promise<ApiResponse<T>> {
+    public async invokeApiWithErrorHandling<T = any>(
+        path: string, method: MethodTypes = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {},
+        defaultValue?: T,
+    ): Promise<ApiResponse<T>> {
         try {
             const result = await this.invokeApi<T>(path, method, body, additionalParams);
             const response: ApiResponse<T> = {
-                isSuccessful2xx: result.status >= 200 && result.status < 300
+                isSuccessful2xx: result.status >= 200 && result.status < 300,
             };
 
             return !result
@@ -164,11 +170,12 @@ export default abstract class APIClient {
                 : {
                     ...response,
                     ...result,
-                    data: result.data ? result.data : defaultValue
+                    data: result.data ? result.data : defaultValue,
                 };
 
-        } catch (e) {
-            return {...e, isSuccessful2xx: false, data: e?.response?.data ?? defaultValue};
+        }
+        catch (e) {
+            return { ...e, isSuccessful2xx: false, data: e?.response?.data ?? defaultValue };
         }
     }
 }

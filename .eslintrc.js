@@ -25,7 +25,7 @@ module.exports = {
         'yoda': 'error',
         'no-unused-vars': 'warn',
         'import/no-internal-modules': [
-            'error',
+            'warn',
             {
                 'allow': [
                     '**/actions/*',

@@ -1,7 +1,7 @@
 import { AuthenticationData, CheckUsernameResult } from '@flowfact/types';
 import { CognitoUser, CognitoUserSession, ISignUpResult } from 'amazon-cognito-identity-js';
 import Amplify, { Auth } from 'aws-amplify';
-import EnvironmentManagement, { StageTypes } from '../util/EnvironmentManagement';
+import {EnvironmentManagementInstance, StageTypes } from '../util/EnvironmentManagement';
 import CustomStorage from './CustomStorage';
 
 const region = 'eu-central-1';
@@ -76,7 +76,7 @@ class Authentication {
      * @param authenticationData
      */
     public loginWithTokens(authenticationData: AuthenticationData): Promise<CognitoUserSession> {
-        let stage = EnvironmentManagement.getStage();
+        let stage = EnvironmentManagementInstance.getStage();
         if (stage === StageTypes.LOCAL) {
             stage = StageTypes.DEVELOPMENT;
         }
@@ -234,7 +234,7 @@ class Authentication {
     }
 
     get stage(): string {
-        let stage = EnvironmentManagement.getStage() === StageTypes.LOCAL ? StageTypes.DEVELOPMENT : EnvironmentManagement.getStage();
+        let stage = EnvironmentManagementInstance.getStage() === StageTypes.LOCAL ? StageTypes.DEVELOPMENT : EnvironmentManagementInstance.getStage();
         if (!stage) {
             stage = StageTypes.DEVELOPMENT;
         }
