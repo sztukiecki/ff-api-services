@@ -1,5 +1,6 @@
 import {APIClient, APIMapping} from '../../http';
 import {Flowdsl} from '@flowfact/node-flowdsl';
+import {FlywheelServiceTypes} from './FlywheelService.Types';
 
 export class TransactionController extends APIClient {
     constructor() {
@@ -13,7 +14,7 @@ export class TransactionController extends APIClient {
      * @deprecated Because same functionality plus filter possibility can be found in POST method: fetchTransactionsForPhaseWithFilter
      */
     async fetchForPhase(phaseName: string, view: string = 'card') {
-        return this.invokeApiWithErrorHandling(`/transactions/phases/${phaseName}?view=${view}`);
+        return this.invokeApiWithErrorHandling<FlywheelServiceTypes.Transaction[]>(`/transactions/phases/${phaseName}?view=${view}`);
     }
 
     /**
@@ -23,7 +24,7 @@ export class TransactionController extends APIClient {
      * @param {Flowdsl} flowdsl
      */
     async fetchForPhaseWithFilter(phaseName: string, view: string = 'card', flowdsl?: Flowdsl) {
-        return this.invokeApiWithErrorHandling(`/transactions/phases/${phaseName}?view=${view}`, 'POST', flowdsl);
+        return this.invokeApiWithErrorHandling<FlywheelServiceTypes.Transaction[]>(`/transactions/phases/${phaseName}?view=${view}`, 'POST', flowdsl);
     }
 
     /**

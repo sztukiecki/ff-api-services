@@ -35,6 +35,13 @@ export namespace FlywheelServiceTypes {
         conditions?: FlowdslConditionUnion[];
     };
 
+    export type Transaction = {
+        transactionId: number;
+        phaseName: string;
+        sequence: number;
+        entity: any
+    }
+
 
     export type FlywheelPhasePatch = PhasePatch
 
