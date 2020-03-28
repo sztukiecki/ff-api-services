@@ -66,6 +66,7 @@ export * from './service/OpenimmoFtpAccessService';
 export * from './service/FlywheelService';
 export * from './service/DynamicLayoutService';
 export * from './service/MultimediaService/index';
+export * from './service/DocumentGeneratorService';
 
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
