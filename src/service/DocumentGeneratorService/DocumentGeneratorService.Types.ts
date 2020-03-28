@@ -8,7 +8,7 @@ export interface EntityDefinition {
 export type GenerationStatusType = 'PENDING' | 'SUCCESS' | 'ERROR';
 export interface GenerationStatus {
     id: string;
-    s3UrL: string;
+    s3Url: string;
     type: GenerationStatusType;
     created: Date
 }
