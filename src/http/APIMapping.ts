@@ -76,7 +76,8 @@ const APIMapping = {
     openimmoImporterService: new APIService('openimmo-importer-service'),
     workflowService: new APIService('workflow-service'),
     searchProfileService: new APIService('v2-search-service'),
-    is24ImportService: new APIService('is24-import-service')
+    is24ImportService: new APIService('is24-import-service'),
+    documentGeneratorService: new APIService('document-generator-service')
 };
 
 export default APIMapping;
