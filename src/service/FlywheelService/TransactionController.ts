@@ -33,7 +33,7 @@ export class TransactionController extends APIClient {
      * @param fromPhaseName
      * @param toPhaseName
      */
-    async move(transactionId: string, fromPhaseName: string, toPhaseName: string) {
+    async move(transactionId: number, fromPhaseName: string, toPhaseName: string) {
         return this.invokeApiWithErrorHandling(`/transactions/${transactionId}`, 'PUT', {fromPhaseName, toPhaseName});
     }
 
