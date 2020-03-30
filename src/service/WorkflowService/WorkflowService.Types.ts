@@ -5,7 +5,7 @@ export namespace WorkflowServiceTypes {
     }
 
     export type Workflow = {
-        id: string;
+        id?: string;
         name: string;
         active: boolean;
         step: WorkflowStep;
