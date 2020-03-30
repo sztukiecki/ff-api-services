@@ -4,8 +4,16 @@ export namespace WorkflowServiceTypes {
         workflows: Workflow[];
     }
 
-    export type Workflow = {
+    export type CreateWorkflowRequest = {
         id?: string;
+        name: string;
+        active: boolean;
+        step: WorkflowStep;
+        stats?: WorkflowStats;
+    };
+
+    export type Workflow = {
+        id: string;
         name: string;
         active: boolean;
         step: WorkflowStep;

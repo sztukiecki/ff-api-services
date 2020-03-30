@@ -6,6 +6,7 @@ import WorkflowMultiPatchRequest = WorkflowServiceTypes.WorkflowMultiPatchReques
 import WorkflowMultiPatchResult = WorkflowServiceTypes.WorkflowMultiPatchResult;
 import WorkflowPatchRequest = WorkflowServiceTypes.WorkflowPatchRequest;
 import WorkflowPatchResult = WorkflowServiceTypes.WorkflowPatchResult;
+import CreateWorkflowRequest = WorkflowServiceTypes.CreateWorkflowRequest;
 
 export class FlowController extends APIClient {
     constructor() {
@@ -46,7 +47,7 @@ export class FlowController extends APIClient {
      * Creates a workflow
      * @param workflow
      */
-    async createWorkflow(workflow: Workflow) {
+    async createWorkflow(workflow: CreateWorkflowRequest) {
         return this.invokeApiWithErrorHandling<Workflow>('/flow', 'POST', workflow);
     };
 
