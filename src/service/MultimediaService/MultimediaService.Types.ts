@@ -1,5 +1,7 @@
 import { Captions } from '@flowfact/types';
 
+export type ContentCategory = 'IMAGE' | 'DOCUMENT' | 'LINK' | 'VIDEO';
+
 export interface MultimediaItem {
     id: number;
     entityId: string;
@@ -8,7 +10,7 @@ export interface MultimediaItem {
     title?: string;
     fileName?: string;
     contentType?: string;
-    contentCategory: 'IMAGE' | 'DOCUMENT' | 'LINK' | 'VIDEO';
+    contentCategory: ContentCategory;
     fileReference: string;
     fileSize?: number;
 }
@@ -35,7 +37,7 @@ export interface Category {
     captions: Captions;
     maxItems?: number;
     sorting: number;
-    allowedContentCategories: ('IMAGE' | 'DOCUMENT' | 'LINK' | 'VIDEO')[];
+    allowedContentCategories: ContentCategory[];
 }
 
 export interface Album {
