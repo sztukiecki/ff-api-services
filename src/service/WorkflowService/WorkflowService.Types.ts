@@ -14,8 +14,10 @@ export namespace WorkflowServiceTypes {
 
     export interface WorkflowStep {
         comment?: string;
-        configuration: number;
-        startAt: string | null;
+        configuration?: {
+            [key: string]: any;
+        };
+        startAt?: string;
         states: WorkflowStates;
     }
 
