@@ -12,7 +12,7 @@ export class FlowTypeController extends APIClient {
      * Fetch all available templates
      */
     async fetchTemplates(){
-        return this.invokeApi<Templates>('/flow-type/templates', 'GET');
+        return this.invokeApiWithErrorHandling<Templates>('/flow-type/templates', 'GET');
     };
 
     /**
