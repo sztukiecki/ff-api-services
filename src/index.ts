@@ -56,7 +56,6 @@ export { default as ContractService } from './service/ContractService';
 export { default as FilterDefinitionService } from './service/FilterDefinitionService';
 export { default as SoftLinksEntityService } from './service/SoftLinksEntityService';
 export { default as OpenimmoImporterService } from './service/OpenimmoImporterService';
-export { default as WorkflowService } from './service/WorkflowService';
 export { default as SearchProfileService } from './service/SearchProfileService';
 export { default as IS24ImportService } from './service/IS24ImportService';
 export { default as ImporterFlowFactTransferService } from './service/ImporterFlowFactTransferService';
@@ -64,6 +63,7 @@ export { default as AclGroupServiceRest } from './service/AclGroupServiceRest';
 
 export * from './service/OpenimmoFtpAccessService';
 export * from './service/FlywheelService';
+export * from './service/WorkflowService';
 export * from './service/DynamicLayoutService';
 export * from './service/MultimediaService';
 export * from './service/DocumentGeneratorService';
