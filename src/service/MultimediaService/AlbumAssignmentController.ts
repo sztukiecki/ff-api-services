@@ -1,7 +1,6 @@
 import { APIClient, APIMapping } from '../../http';
-import { Album, MultimediaAssignments } from '@flowfact/types';
-import { MultimediaAssignment } from '@flowfact/types/src/Multimedia';
 import { ApiResponseError, ApiResponseSuccess } from '../../http/APIClient';
+import { Album, MultimediaAssignment, MultimediaAssignments } from './MultimediaService.Types';
 
 export class AlbumAssignmentController extends APIClient {
 
