@@ -44,9 +44,8 @@ export class AlbumsController extends APIClient {
     /**
      * Deletes a local album for the current company
      * @param albumId
-     * @param album
      */
-    async deleteAlbum(albumId: string, album: Album) {
+    async deleteAlbum(albumId: string) {
         return await this.invokeApiWithErrorHandling<Album>(`/albums/${albumId}`, 'DELETE');
     }
 }
