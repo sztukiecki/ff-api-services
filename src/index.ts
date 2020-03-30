@@ -65,7 +65,7 @@ export { default as AclGroupServiceRest } from './service/AclGroupServiceRest';
 export * from './service/OpenimmoFtpAccessService';
 export * from './service/FlywheelService';
 export * from './service/DynamicLayoutService';
-export * from './service/MultimediaService/index';
+export * from './service/MultimediaService';
 export * from './service/DocumentGeneratorService';
 
 export { APIService, APIMapping, APIClient } from './http';

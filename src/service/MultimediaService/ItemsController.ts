@@ -1,6 +1,6 @@
 import { APIClient, APIMapping } from '../../http';
-import { AlbumAssignmentRequest, MultimediaItem, UploadResponse } from '@flowfact/types';
 import { ApiResponseError, ApiResponseSuccess } from '../../http/APIClient';
+import { AlbumAssignmentRequest, MultimediaItem, UploadResponse } from './MultimediaService.Types';
 
 export class ItemsController extends APIClient {
 
