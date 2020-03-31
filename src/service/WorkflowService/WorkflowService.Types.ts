@@ -35,6 +35,7 @@ export namespace WorkflowServiceTypes {
     };
 
     export interface WorkflowNode {
+        id: string;
         type: string;
         next?: string;
         end?: boolean;
