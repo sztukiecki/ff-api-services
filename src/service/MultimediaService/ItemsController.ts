@@ -1,6 +1,5 @@
 import { APIClient, APIMapping } from '../../http';
-import { ApiResponseError, ApiResponseSuccess } from '../../http/APIClient';
-import { AlbumAssignmentRequest, MultimediaItem, UploadResponse } from './MultimediaService.Types';
+import { AlbumAssignmentRequest, ContentCategory, MultimediaItem, UploadResponse } from './MultimediaService.Types';
 
 export class ItemsController extends APIClient {
 
@@ -14,8 +13,8 @@ export class ItemsController extends APIClient {
      * @param itemId
      * @returns the url and the new eTag
      */
-    async updateImage(image: FormData, itemId: string): Promise<ApiResponseSuccess<any> | ApiResponseError<any>> {
-        return await this.invokeApiWithErrorHandling(`/items/${itemId}/file`, 'POST', image, {
+    async updateImage(image: FormData, itemId: string) {
+        return await this.invokeApiWithErrorHandling<{ url: string, etag: string }>(`/items/${itemId}/file`, 'POST', image, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -31,7 +30,7 @@ export class ItemsController extends APIClient {
      * @returns
      *      the url to request this file
      */
-    async upload(file: any, entityId: string): Promise<ApiResponseSuccess<any> | ApiResponseError<any>> {
+    async upload(file: any, entityId: string) {
         const formData = new FormData();
         formData.append('file', file);
 
@@ -50,7 +49,7 @@ export class ItemsController extends APIClient {
      * @returns
      *      the url to request this file
      */
-    async fetchFile(fileUrl: string): Promise<ApiResponseSuccess<any> | ApiResponseError<any>> {
+    async fetchFile(fileUrl: string) {
         return await this.invokeApiWithErrorHandling('/download', 'GET', undefined, {
             queryParams: {
                 uri: fileUrl
@@ -67,8 +66,8 @@ export class ItemsController extends APIClient {
      * @param entityId
      * @param contentCategory
      */
-    async fetchMediaItems(entityId: string, contentCategory: string | undefined = undefined): Promise<ApiResponseSuccess<any> | ApiResponseError<any>> {
-        return await this.invokeApiWithErrorHandling(`/items/entities/${entityId}`, 'GET', undefined, {
+    async fetchMediaItems(entityId: string, contentCategory: ContentCategory | undefined = undefined) {
+        return await this.invokeApiWithErrorHandling<MultimediaItem[]>(`/items/entities/${entityId}`, 'GET', undefined, {
             queryParams: {
                 contentCategory: contentCategory
             }
@@ -79,15 +78,15 @@ export class ItemsController extends APIClient {
      * Fetchs a Multimedia item by his id
      * @param mediaItemId
      */
-    async fetchMediaItem(mediaItemId: number): Promise<ApiResponseSuccess<MultimediaItem> | ApiResponseError<any>> {
-        return await this.invokeApiWithErrorHandling(`/items/${mediaItemId}`, 'GET');
+    async fetchMediaItem(mediaItemId: number) {
+        return await this.invokeApiWithErrorHandling<MultimediaItem>(`/items/${mediaItemId}`, 'GET');
     }
 
     /**
      * Deletes an multimedia item and removes alles assignments.
      * @param mediaItemId
      */
-    async deleteMediaItem(mediaItemId: number): Promise<ApiResponseSuccess<any> | ApiResponseError<any>> {
+    async deleteMediaItem(mediaItemId: number) {
         return await this.invokeApiWithErrorHandling(`/items/${mediaItemId}`, 'DELETE');
     }
 
@@ -96,7 +95,7 @@ export class ItemsController extends APIClient {
      *
      * @returns well.. 200 OK?
      */
-    async deleteFile(bucketType: 'Image' | 'Document', entityId: string, filename: string): Promise<ApiResponseSuccess<any> | ApiResponseError<any>> {
+    async deleteFile(bucketType: 'Image' | 'Document', entityId: string, filename: string) {
         return await this.invokeApiWithErrorHandling('/deleteFile', 'DELETE', {
             bucketType,
             entityId,
@@ -123,12 +122,12 @@ export class ItemsController extends APIClient {
         file: any,
         onUploadProgress: (progressEvent: any) => void = () => {},
         albumAssignments: AlbumAssignmentRequest[] = []
-    ): Promise<ApiResponseSuccess<UploadResponse> | ApiResponseError<any>> {
+    ) {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('albumAssignments', JSON.stringify(albumAssignments));
 
-        return await this.invokeApiWithErrorHandling(`/items/schemas/${schemaName}/entities/${entityId}`, 'POST', formData, {
+        return await this.invokeApiWithErrorHandling<UploadResponse>(`/items/schemas/${schemaName}/entities/${entityId}`, 'POST', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             },
@@ -146,13 +145,13 @@ export class ItemsController extends APIClient {
      *      The url
      * @param albumAssignments
      */
-    async addLink(schemaName: string, entityId: string, url: string, albumAssignments: AlbumAssignmentRequest[] = []): Promise<ApiResponseSuccess<UploadResponse> | ApiResponseError<any>> {
+    async addLink(schemaName: string, entityId: string, url: string, albumAssignments: AlbumAssignmentRequest[] = []) {
         const body = {
             link: url,
             albumAssignments: albumAssignments
         };
 
-        return await this.invokeApiWithErrorHandling(`/items/schemas/${schemaName}/entities/${entityId}/link`, 'POST', body);
+        return await this.invokeApiWithErrorHandling<UploadResponse>(`/items/schemas/${schemaName}/entities/${entityId}/link`, 'POST', body);
     }
 
     /**
@@ -160,7 +159,7 @@ export class ItemsController extends APIClient {
      * @param mediaItemId
      * @param jsonPatch
      */
-    async patchMediaItem(mediaItemId: number, jsonPatch: object[]): Promise<ApiResponseSuccess<MultimediaItem> | ApiResponseError<any>> {
-        return await this.invokeApiWithErrorHandling(`/items/${mediaItemId}`, 'PATCH', jsonPatch);
+    async patchMediaItem(mediaItemId: number, jsonPatch: object[]) {
+        return await this.invokeApiWithErrorHandling<MultimediaItem>(`/items/${mediaItemId}`, 'PATCH', jsonPatch);
     }
 }
