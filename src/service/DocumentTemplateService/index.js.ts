@@ -1,6 +1,8 @@
 import { TemplateController } from './TemplateController';
 import { CategoriesController } from './CategoriesController';
 
+export * from './DocumentTemplateService.Types';
+
 export class DocumentTemplateService {
 
     public readonly template: TemplateController;
