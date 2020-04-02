@@ -67,6 +67,7 @@ export * from './service/WorkflowService';
 export * from './service/DynamicLayoutService';
 export * from './service/MultimediaService';
 export * from './service/DocumentGeneratorService';
+export * from './service/DocumentGeneratorService';
 
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
