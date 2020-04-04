@@ -3,6 +3,7 @@ import { Captions } from '@flowfact/types';
 export interface NeededPlaceholder {
     alias: string;
     schemaName: string;
+    captions: Captions
 }
 
 export interface BaseTemplate {
