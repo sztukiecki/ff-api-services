@@ -7,7 +7,7 @@ export interface NeededPlaceholder {
 
 export interface BaseTemplate {
     name: string;
-    categoryName?: string;
+    categoryName: string;
     captions: Captions;
     fileType: string;
     neededPlaceholders: NeededPlaceholder[]
