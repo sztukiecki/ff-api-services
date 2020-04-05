@@ -11,10 +11,13 @@ export class GeneratorController extends APIClient {
      * Generates a document
      * @param s3Url
      * @param entities
+     * @param userId
+     *  The user id for the placeholder-service
      */
-    generate(s3Url: string, entities: EntityDefinition[]) {
+    generate(s3Url: string, entities: EntityDefinition[], userId?: string) {
         return this.invokeApiWithErrorHandling<{ requestId: string}>('/generator/generate', 'POST', {
             s3Url: s3Url,
+            userId: typeof userId === 'string' ? userId : null,
             entities: entities
         });
     }
