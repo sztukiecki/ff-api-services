@@ -71,4 +71,5 @@ export * from './service/DocumentTemplateService';
 
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
+export * from './util/InternalTypes';
 export * from './service/RelogService';
