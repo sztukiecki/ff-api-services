@@ -1,5 +1,5 @@
 import OpenimmoFtpAccountController from './OpenimmoFtpAccountController';
-import OpenimmoReportRecipientController from './OpenimmoAlertRecipientController';
+import OpenimmoReportRecipientController from './OpenimmoReportRecipientController';
 
 export * from './OpenimmoFtpAccessService.Types';
 
