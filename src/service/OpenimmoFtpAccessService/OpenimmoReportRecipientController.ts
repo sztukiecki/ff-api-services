@@ -12,14 +12,14 @@ export default class OpenimmoReportRecipientsController extends APIClient {
      * get all global alert recipients
      */
     async fetchAll() {
-        return await this.invokeApiWithErrorHandling<{ recipients: OpenimmoReportRecipient[] }>('/alert', 'GET', undefined);
+        return await this.invokeApiWithErrorHandling<{ recipients: OpenimmoReportRecipient[] }>('/report', 'GET');
     }
 
     /**
      * update all alert recipients
      * @param recipients
      */
-    async put(recipients: OpenimmoReportRecipient[]) {
-        return await this.invokeApiWithErrorHandling<{ recipients: OpenimmoReportRecipient[] }>(`/alert`, 'PUT', { recipients });
+    async updateReportRecipients(recipients: OpenimmoReportRecipient[]) {
+        return await this.invokeApiWithErrorHandling<{ recipients: OpenimmoReportRecipient[] }>(`/report`, 'PUT', { recipients });
     }
 }
