@@ -8,10 +8,10 @@ export class OpenimmoFtpAccessService {
     public static instance = new OpenimmoFtpAccessService();
 
     public readonly ftpAccount: OpenimmoFtpAccountController;
-    public readonly alertRecipient: OpenimmoReportRecipientController;
+    public readonly reportRecipients: OpenimmoReportRecipientController;
 
     constructor() {
         this.ftpAccount = new OpenimmoFtpAccountController();
-        this.alertRecipient = new OpenimmoReportRecipientController();
+        this.reportRecipients = new OpenimmoReportRecipientController();
     }
 }
