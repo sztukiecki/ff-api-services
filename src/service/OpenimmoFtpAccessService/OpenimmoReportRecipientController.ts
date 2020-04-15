@@ -1,6 +1,7 @@
 import { APIClient, APIMapping } from '../../http';
 import { OpenImmoReportRecipientTypes } from './OpenimmoReportRecipientService.Types';
 import OpenimmoReportRecipient = OpenImmoReportRecipientTypes.OpenimmoReportRecipient;
+import OpenimmoReportRequestRecipient = OpenImmoReportRecipientTypes.OpenimmoReportRequestRecipient;
 
 export default class OpenimmoReportRecipientsController extends APIClient {
 
@@ -19,7 +20,7 @@ export default class OpenimmoReportRecipientsController extends APIClient {
      * update all alert recipients
      * @param recipients
      */
-    async updateReportRecipients(recipients: OpenimmoReportRecipient[]) {
+    async updateReportRecipients(recipients: OpenimmoReportRequestRecipient[]) {
         return await this.invokeApiWithErrorHandling<{ recipients: OpenimmoReportRecipient[] }>(`/report`, 'PUT', { recipients });
     }
 }

@@ -3,4 +3,9 @@ export namespace OpenImmoReportRecipientTypes {
         id: string;
         email: string;
     }
+
+    export interface OpenimmoReportRequestRecipient {
+        id?: string;
+        email: string;
+    }
 }
