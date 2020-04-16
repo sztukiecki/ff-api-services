@@ -25,6 +25,20 @@ export namespace FlywheelServiceTypes {
         importType: ImportType;
     };
 
+    export type CreateFlywheelPhase = {
+        id?: number;
+        name: string;
+        global?: boolean;
+        captions: Captions;
+        childrenNames?: string[];
+        schema: string;
+        entityAmount?: number;
+        noStepIfChildless?: boolean;
+        flowIds?: string[];
+        conditions?: FlowdslConditionUnion[];
+        importType?: ImportType;
+    };
+
     export type FlywheelPhaseTree = {
         name: string;
         global: boolean;

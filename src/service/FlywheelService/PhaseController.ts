@@ -5,6 +5,7 @@ import FlywheelPhase = FlywheelServiceTypes.FlywheelPhase;
 import FlywheelPhaseTree = FlywheelServiceTypes.FlywheelPhaseTree;
 import FlywheelPhasePatch = FlywheelServiceTypes.FlywheelPhasePatch;
 import PhaseSyncCommands = FlywheelServiceTypes.PhaseSyncCommands;
+import CreateFlywheelPhase = FlywheelServiceTypes.CreateFlywheelPhase;
 
 export class PhaseController extends APIClient {
 
@@ -40,7 +41,7 @@ export class PhaseController extends APIClient {
      * Creates or updates a phase.
      * @param phase
      */
-    async create(phase: FlywheelPhase) {
+    async create(phase: CreateFlywheelPhase) {
         return this.invokeApiWithErrorHandling<FlywheelPhase>('/phases', 'POST', phase);
     }
 
