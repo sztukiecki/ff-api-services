@@ -94,6 +94,6 @@ export class TemplateController extends APIClient {
      * @param jsonPatch
      */
     async patchTemplate(name: string, jsonPatch: JSONPatch[]) {
-        return this.invokeApiWithErrorHandling(`/template/${name}`, 'PATCH', jsonPatch);
+        return this.invokeApiWithErrorHandling(`/templates/${name}`, 'PATCH', jsonPatch);
     }
 }
