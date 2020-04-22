@@ -20,7 +20,7 @@ export interface ReadTemplate extends BaseTemplate {
 }
 
 export interface BaseCategory {
-    parentName?: string;
+    parentName: string | null;
     name: string;
     captions: Captions;
 }
