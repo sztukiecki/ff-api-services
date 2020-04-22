@@ -31,6 +31,4 @@ export interface JSONPatch {
     value?: any;
 }
 
-export interface ReadCategory extends BaseCategory {}
-export interface WriteCategory extends BaseCategory {}
 export interface WriteTemplate extends BaseTemplate {}

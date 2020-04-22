@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from '../../http';
-import { ReadCategory, WriteCategory } from './DocumentTemplateService.Types';
+import { BaseCategory } from './DocumentTemplateService.Types';
 
 export class CategoriesController extends APIClient {
 
@@ -8,15 +8,15 @@ export class CategoriesController extends APIClient {
     }
 
     async fetchAllCategories() {
-        return this.invokeApiWithErrorHandling<{ entries: ReadCategory[] }>('/categories', 'GET');
+        return this.invokeApiWithErrorHandling<{ entries: BaseCategory[] }>('/categories', 'GET');
     }
 
-    async createCategory(data: WriteCategory) {
-        return this.invokeApiWithErrorHandling<ReadCategory>('/templates', 'POST', data);
+    async createCategory(data: BaseCategory) {
+        return this.invokeApiWithErrorHandling<BaseCategory>('/templates', 'POST', data);
     }
 
-    async updateCategory(name: string, data: WriteCategory) {
-        return this.invokeApiWithErrorHandling<ReadCategory>(`/templates/${name}`, 'PUT', data);
+    async updateCategory(name: string, data: BaseCategory) {
+        return this.invokeApiWithErrorHandling<BaseCategory>(`/templates/${name}`, 'PUT', data);
     }
 
     async deleteCategory(name: string) {
