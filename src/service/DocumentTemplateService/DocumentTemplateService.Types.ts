@@ -25,15 +25,12 @@ export interface BaseCategory {
     captions: Captions;
 }
 
-export interface ReadCategory {
-    children: ReadCategory[];
-}
-
 export interface JSONPatch {
     op: 'replace' | 'add' | 'remove',
     path: string;
     value?: any;
 }
 
+export interface ReadCategory extends BaseCategory {}
 export interface WriteCategory extends BaseCategory {}
 export interface WriteTemplate extends BaseTemplate {}
