@@ -50,6 +50,7 @@ export { default as ViewDefinitionService } from './service/ViewDefinitionServic
 export { default as Authentication } from './authentication/Authentication';
 export { default as OmniChannelService } from './service/OmniChannelService';
 export { default as IS24PublishService } from './service/IS24PublishService';
+export { default as IS24LeadService } from './service/IS24LeadService';
 export { default as IS24EntitlementService } from './service/IS24EntitlementService';
 export { default as BehaviourService } from './service/BehaviourService';
 export { default as ContractService } from './service/ContractService';
