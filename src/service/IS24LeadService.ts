@@ -1,5 +1,4 @@
 import { APIClient, APIMapping } from '../http';
-import { AxiosResponse } from 'axios';
 
 type LeadImport = 'NONE' | 'ONLY_RECENT' | 'ALL';
 
@@ -14,7 +13,7 @@ export class IS24LeadService extends APIClient {
      * @param portalId
      */
     async getImportMode(portalId: string) {
-        return await this.invokeApi<{ leadImportSetting: LeadImport }>(`/portals/${portalId}`, 'GET');
+        return await this.invokeApiWithErrorHandling<{ leadImportSetting: LeadImport }>(`/portals/${portalId}`, 'GET');
     }
 
     /**
@@ -22,8 +21,8 @@ export class IS24LeadService extends APIClient {
      * @param portalId
      * @param importMode
      */
-    async setImportMode(portalId: string, importMode: LeadImport): Promise<AxiosResponse> {
-        return await this.invokeApi<{ leadImportSetting: LeadImport }>(`/portals/${portalId}`, 'PUT', { leadImportSetting: importMode });
+    async setImportMode(portalId: string, importMode: LeadImport) {
+        return await this.invokeApiWithErrorHandling(`/portals/${portalId}`, 'PUT', { leadImportSetting: importMode });
     }
 
 }
