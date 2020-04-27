@@ -12,3 +12,5 @@ export class IS24LeadService {
         this.leads = new IS24LeadsController();
     }
 }
+
+export const IS24LeadServiceInstance = new IS24LeadService();
