@@ -12,3 +12,5 @@ export interface GenerationStatus {
     type: GenerationStatusType;
     created: Date
 }
+
+export type SaveFormat = 'pdf' | 'docx';
