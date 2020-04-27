@@ -50,7 +50,6 @@ export { default as ViewDefinitionService } from './service/ViewDefinitionServic
 export { default as Authentication } from './authentication/Authentication';
 export { default as OmniChannelService } from './service/OmniChannelService';
 export { default as IS24PublishService } from './service/IS24PublishService';
-export { default as IS24LeadService } from './service/IS24LeadService';
 export { default as IS24EntitlementService } from './service/IS24EntitlementService';
 export { default as BehaviourService } from './service/BehaviourService';
 export { default as ContractService } from './service/ContractService';
@@ -62,6 +61,7 @@ export { default as IS24ImportService } from './service/IS24ImportService';
 export { default as ImporterFlowFactTransferService } from './service/ImporterFlowFactTransferService';
 export { default as AclGroupServiceRest } from './service/AclGroupServiceRest';
 
+export * from './service/IS24LeadService';
 export * from './service/OpenimmoFtpAccessService';
 export * from './service/FlywheelService';
 export * from './service/WorkflowService';
