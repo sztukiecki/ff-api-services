@@ -12,7 +12,7 @@ export default class IS24LeadsContoller extends APIClient {
      * This method returns the lead import mode.
      * @param portalId
      */
-    async getImportMode(portalId: string) {
+    async fetchImportMode(portalId: string) {
         return await this.invokeApiWithErrorHandling<{ leadImportSetting: LeadImportMode }>(`/portals/${portalId}`, 'GET');
     }
 
@@ -21,7 +21,7 @@ export default class IS24LeadsContoller extends APIClient {
      * @param portalId
      * @param importMode
      */
-    async setImportMode(portalId: string, importMode: LeadImportMode) {
+    async updateImportMode(portalId: string, importMode: LeadImportMode) {
         return await this.invokeApiWithErrorHandling(`/portals/${portalId}`, 'PUT', { leadImportSetting: importMode });
     }
 }
