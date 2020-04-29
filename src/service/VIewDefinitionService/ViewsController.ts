@@ -1,7 +1,6 @@
 import { APIClient, APIMapping } from '../../http';
-import { ShortViewDefinition, ViewDefinition, ViewDefinitionCategory, ViewType } from '@flowfact/types';
 import * as qs from 'qs';
-import { ViewDefinitionStatistic } from './ViewDefinitionService.Types';
+import { ShortViewDefinition, ViewDefinition, ViewDefinitionCategory, ViewDefinitionStatistic, ViewType } from './ViewDefinitionService.Types';
 
 export class ViewsController extends APIClient {
 
