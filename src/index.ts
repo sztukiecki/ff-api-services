@@ -46,7 +46,6 @@ export { default as TemplateService } from './service/TemplateService';
 export { default as ProofOfActivityService } from './service/ProofOfActivityService';
 export { default as TrialLicenseService } from './service/TrialLicenseService';
 export { default as UserService } from './service/UserService';
-export { default as ViewDefinitionService } from './service/ViewDefinitionService';
 export { default as Authentication } from './authentication/Authentication';
 export { default as OmniChannelService } from './service/OmniChannelService';
 export { default as IS24PublishService } from './service/IS24PublishService';
@@ -69,6 +68,7 @@ export * from './service/DynamicLayoutService';
 export * from './service/MultimediaService';
 export * from './service/DocumentGeneratorService';
 export * from './service/DocumentTemplateService';
+export * from './service/VIewDefinitionService';
 
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';

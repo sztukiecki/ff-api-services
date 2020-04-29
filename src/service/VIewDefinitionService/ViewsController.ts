@@ -1,9 +1,9 @@
-import { Customisation, ViewDefinition, ViewDefinitionCategory, ViewType } from '@flowfact/types';
-import { AxiosResponse } from 'axios';
-import { APIClient, APIMapping } from '../http';
+import { APIClient, APIMapping } from '../../http';
+import { ShortViewDefinition, ViewDefinition, ViewDefinitionCategory, ViewType } from '@flowfact/types';
 import * as qs from 'qs';
+import { ViewDefinitionStatistic } from './ViewDefinitionService.Types';
 
-export class ViewDefinitionService extends APIClient {
+export class ViewsController extends APIClient {
 
     constructor() {
         super(APIMapping.viewDefinitionService);
@@ -13,8 +13,8 @@ export class ViewDefinitionService extends APIClient {
      * TODO: Please comment this method
      * @param schemaId
      */
-    async fetchDefinitionsForSchema(schemaId: string): Promise<AxiosResponse> {
-        return await this.invokeApi('/views', 'GET', undefined, {
+    async fetchDefinitionsForSchema(schemaId?: string) {
+        return await this.invokeApiWithErrorHandling<ShortViewDefinition[]>('/views', 'GET', undefined, {
             queryParams: {
                 schemaId,
             },
@@ -25,25 +25,26 @@ export class ViewDefinitionService extends APIClient {
      * TODO: Please comment this method
      * @param viewDefinitionId
      */
-    async fetchDefinition(viewDefinitionId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/views/${viewDefinitionId}`, 'GET');
+    async fetchDefinition(viewDefinitionId: string) {
+        return await this.invokeApiWithErrorHandling<ViewDefinition>(`/views/${viewDefinitionId}`, 'GET');
     }
 
     /**
      * Returns statistics for all views of a specific schema
      * @param schemaIdOrName
      */
-    async fetchStatistics(schemaIdOrName: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/views/${schemaIdOrName}/statistics`, 'GET');
+    async fetchStatistics(schemaIdOrName: string) {
+        return await this.invokeApiWithErrorHandling<ViewDefinitionStatistic[]>(`/views/${schemaIdOrName}/statistics`, 'GET');
     }
 
     /**
      * TODO: Please comment this method
+     * @deprecated Please use the CustomisationController
      * @param viewDefinitionId
      * @param viewDefinition
      */
     async updateDefinition(viewDefinitionId: string, viewDefinition: ViewDefinition) {
-        return await this.invokeApi(`/views/${viewDefinitionId}`, 'PUT', viewDefinition);
+        return await this.invokeApiWithErrorHandling<ViewDefinition>(`/views/${viewDefinitionId}`, 'PUT', viewDefinition);
     }
 
     /**
@@ -51,7 +52,7 @@ export class ViewDefinitionService extends APIClient {
      * @param viewDefinition
      */
     async createDefinition(viewDefinition: ViewDefinition) {
-        return await this.invokeApi('/views', 'POST', viewDefinition);
+        return await this.invokeApiWithErrorHandling<ViewDefinition>('/views', 'POST', viewDefinition);
     }
 
     /**
@@ -59,7 +60,7 @@ export class ViewDefinitionService extends APIClient {
      * @param viewDefinitionId
      */
     async deleteDefinition(viewDefinitionId: string) {
-        return await this.invokeApi(`/views/${viewDefinitionId}`, 'DELETE');
+        return await this.invokeApiWithErrorHandling(`/views/${viewDefinitionId}`, 'DELETE');
     }
 
     /**
@@ -69,7 +70,7 @@ export class ViewDefinitionService extends APIClient {
      * @param categoryDefinition
      */
     async updateCategory(viewId: string, categoryName: string, categoryDefinition: ViewDefinitionCategory) {
-        return await this.invokeApi(`/views/${viewId}/categories/${categoryName}`, 'PATCH', categoryDefinition);
+        return await this.invokeApiWithErrorHandling<ViewDefinition>(`/views/${viewId}/categories/${categoryName}`, 'PATCH', categoryDefinition);
     }
 
     /**
@@ -78,7 +79,7 @@ export class ViewDefinitionService extends APIClient {
      * @param categoryDefinition
      */
     async addCategory(viewId: string, categoryDefinition: ViewDefinitionCategory) {
-        return await this.invokeApi(`/views/${viewId}/categories`, 'PATCH', categoryDefinition);
+        return await this.invokeApiWithErrorHandling<ViewDefinition>(`/views/${viewId}/categories`, 'PATCH', categoryDefinition);
     }
 
     /**
@@ -87,7 +88,7 @@ export class ViewDefinitionService extends APIClient {
      * @param categoryName
      */
     async deleteCategory(viewId: string, categoryName: string) {
-        return await this.invokeApi(`/views/${viewId}/categories/${categoryName}`, 'DELETE');
+        return await this.invokeApiWithErrorHandling<ViewDefinition>(`/views/${viewId}/categories/${categoryName}`, 'DELETE');
     }
 
     /**
@@ -95,16 +96,17 @@ export class ViewDefinitionService extends APIClient {
      * @param viewName
      */
     async listFieldsOfViews(viewName: string) {
-        return await this.invokeApi(`/views/fields/${viewName}`, 'GET');
+        return await this.invokeApiWithErrorHandling<ViewDefinition[]>(`/views/fields/${viewName}`, 'GET');
     }
 
     /**
      * TODO: Please comment this method
      * @param schemaId
      * @param viewName
+     * @param short
      */
-    async fetchBySchemaAndName(schemaId: string, viewName: string) {
-        return await this.invokeApi(`/views/schema/${schemaId}/name/${viewName}`, 'GET');
+    async fetchBySchemaAndName(schemaId: string, viewName: string, short: boolean = false) {
+        return await this.invokeApiWithErrorHandling<ViewDefinition | ShortViewDefinition>(`/views/schema/${schemaId}/name/${viewName}`, 'GET');
     }
 
     /**
@@ -113,7 +115,7 @@ export class ViewDefinitionService extends APIClient {
      * @param viewType
      */
     async fetchBySchemaAndType(schemaId: string, viewType: ViewType) {
-        return await this.invokeApi(`/views/schema/${schemaId}/type/${viewType}`, 'GET');
+        return await this.invokeApiWithErrorHandling<{ views: ViewDefinition[] }>(`/views/schema/${schemaId}/type/${viewType}`, 'GET');
     }
 
     /**
@@ -122,28 +124,9 @@ export class ViewDefinitionService extends APIClient {
      * @param viewTypes
      */
     async fetchBySchemaAndTypes(schemaId: string, viewTypes: ViewType[]) {
-        return await this.invokeApi(`/views/schema/${schemaId}`, 'GET', undefined, {
+        return await this.invokeApiWithErrorHandling<{ views: ViewDefinition[] }>(`/views/schema/${schemaId}`, 'GET', undefined, {
             params: {types: viewTypes},
             paramsSerializer: params => qs.stringify(params, {indices: false})
         });
     }
-
-    /**
-     * Saves the given customisation and triggers an event applying the customisation
-     * @param customisation
-     */
-    async saveCustomisation(customisation: Customisation): Promise<void> {
-        await this.invokeApi('/customisations', 'POST', customisation);
-    }
-
-    /**
-     * This function sends a whole view definition to the view-definition-service. The service compares the new view definition to
-     * the current one in the database to save which changes are made.
-     * @param viewDefinition
-     */
-    async saveCustomisations(viewDefinition: ViewDefinition): Promise<void> {
-        await this.invokeApi(`/customisations/view/${viewDefinition.id}`, 'PUT', viewDefinition);
-    }
 }
-
-export default new ViewDefinitionService();

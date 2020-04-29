@@ -5,7 +5,7 @@ interface GenerateParameters {
     s3Url: string;
     entities: EntityDefinition[];
     userId?: string;
-    saveFormat: SaveFormat;
+    saveFormat?: SaveFormat;
     fileName?: string;
 }
 
