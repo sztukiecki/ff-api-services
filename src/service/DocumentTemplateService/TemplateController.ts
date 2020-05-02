@@ -32,7 +32,7 @@ export class TemplateController extends APIClient {
     }
 
     /**
-     *
+     * Updates a template and the file
      * @param file
      * @param data
      */
@@ -46,6 +46,14 @@ export class TemplateController extends APIClient {
                 'Content-Type': 'multipart/*'
             }
         });
+    }
+
+    /**
+     * Updates a template without updating the file
+     * @param data
+     */
+    async updateTemplateWithoutFile(data: WriteTemplate) {
+        return this.invokeApiWithErrorHandling<ReadTemplate>(`/templates/${data.name}`, 'PUT', data);
     }
 
     /**
