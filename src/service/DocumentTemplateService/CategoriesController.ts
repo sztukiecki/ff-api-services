@@ -12,19 +12,14 @@ export class CategoriesController extends APIClient {
     }
 
     async createCategory(data: BaseCategory) {
-        return this.invokeApiWithErrorHandling<BaseCategory>('/templates', 'POST', data, {
-            headers: {
-                // We have to set the content type manually here, because otherwise the Content-Type application/problem+json will be set. I don't know why :x
-                'Content-Type': 'application/json'
-            }
-        });
+        return this.invokeApiWithErrorHandling<BaseCategory>('/categories', 'POST', data);
     }
 
     async updateCategory(name: string, data: BaseCategory) {
-        return this.invokeApiWithErrorHandling<BaseCategory>(`/templates/${name}`, 'PUT', data);
+        return this.invokeApiWithErrorHandling<BaseCategory>(`/categories/${name}`, 'PUT', data);
     }
 
     async deleteCategory(name: string) {
-        return this.invokeApiWithErrorHandling(`/templates/${name}`, 'DELETE');
+        return this.invokeApiWithErrorHandling(`/categories/${name}`, 'DELETE');
     }
 }
