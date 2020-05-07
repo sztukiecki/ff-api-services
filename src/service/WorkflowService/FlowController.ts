@@ -84,4 +84,12 @@ export class FlowController extends APIClient {
     async patchWorkflows (body: WorkflowMultiPatchRequest) {
         return this.invokeApiWithErrorHandling<WorkflowMultiPatchResult>('/flow', 'PATCH', body);
     };
+
+    /**
+     * Duplicate a workflow
+     * @param id
+     */
+    async duplicateWorkflow (id: string) {
+        return this.invokeApiWithErrorHandling<Workflow>(`/flow/${id}/duplicate`, 'POST');
+    };
 }
