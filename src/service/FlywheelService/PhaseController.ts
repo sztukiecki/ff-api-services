@@ -91,4 +91,14 @@ export class PhaseController extends APIClient {
         return this.invokeApiWithErrorHandling(`/phases/${phaseName}`, 'DELETE');
     }
 
+    /**
+     * Create a duplicate based on the given sourcePhaseName
+     * The resulting phase will always be a local one
+     * @param sourcePhaseName
+     * @param targetPhaseName
+     */
+    async duplicate(sourcePhaseName: string, targetPhaseName: string) {
+        return this.invokeApiWithErrorHandling(`/phases/${sourcePhaseName}/duplicate/${targetPhaseName}`, 'POST');
+    }
+
 }
