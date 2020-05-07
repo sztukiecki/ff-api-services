@@ -29,6 +29,6 @@ export class TemplateController extends APIClient {
      * @param newSchemaName
      */
     async createKanbanFromTemplate(newKanbanName: string, newSchemaName: string) {
-        return this.invokeApiWithErrorHandling<FlywheelPhase>('/templates/kanban/{newKanbanName}/schema/{newSchemaName}', 'POST');
+        return this.invokeApiWithErrorHandling<FlywheelPhase>(`/templates/kanban/${newKanbanName}/schema/${newSchemaName}`, 'POST');
     }
 }
