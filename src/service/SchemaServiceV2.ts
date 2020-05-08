@@ -59,6 +59,19 @@ export class SchemaServiceV2 extends APIClient {
     };
 
     /**
+     * Duplicates a schema
+     * @param sourceSchemaName
+     * @param targetSchemaName
+     */
+    duplicateSchema = async (sourceSchemaName: string, targetSchemaName: string): Promise<AxiosResponse<SchemaV2>> => {
+        let queryParams: any = {};
+        queryParams.sourceSchemaName = sourceSchemaName;
+        queryParams.targetSchemaName = targetSchemaName;
+
+        return this.invokeApi(`/v2/schemas`, 'POST',undefined, { queryParams });
+    };
+
+    /**
      * @typedef {Object} FetchSchemaByIdOrNameQueryParam
      * @property {boolean} resolveGroup
      */
@@ -68,7 +81,7 @@ export class SchemaServiceV2 extends APIClient {
      * @param schemaIdOrName - The schema's id or schema name
      * @param {FetchSchemaByIdOrNameQueryParam} queryParams - resolves groups, like estates, to hist children - Default value : false
      */
-    fetchSchemaByIdOrName = async (schemaIdOrName: string, queryParams: { resolveGroup?: boolean , extensions?: string } = {extensions: 'all'}): Promise<AxiosResponse<SchemaV2>> => {
+    fetchSchemaByIdOrName = async (schemaIdOrName: string, queryParams: { resolveGroup?: boolean, extensions?: string } = { extensions: 'all' }): Promise<AxiosResponse<SchemaV2>> => {
         return this.invokeApi(`/v2/schemas/${schemaIdOrName}`, 'GET', undefined, { queryParams });
     };
 
