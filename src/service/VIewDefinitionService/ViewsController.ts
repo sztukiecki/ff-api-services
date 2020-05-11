@@ -35,7 +35,7 @@ export class ViewsController extends APIClient {
    * @param schemaId
    * @param viewType
    */
-  async fetchDefinitionsV2ForSchema(schemaId?: string, viewType?: ViewType) {
+  async fetchDefinitionsV2ForSchema(schemaName?: string, viewType?: ViewType) {
     return await this.invokeApiWithErrorHandling<ShortViewDefinition[]>(
       "/views",
       "GET",
@@ -45,7 +45,7 @@ export class ViewsController extends APIClient {
           "X-FF-Version": 2,
         },
         queryParams: {
-          schema: schemaId,
+          schema: schemaName,
           type: viewType,
         },
       }
