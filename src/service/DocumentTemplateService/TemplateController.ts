@@ -111,6 +111,6 @@ export class TemplateController extends APIClient {
      *     The name of the templates that should be duplicated
      */
     async duplicateTemplate(name: string) {
-        return this.invokeApiWithErrorHandling<ReadTemplate>(`/templates/duplicate/${name}`, 'POST');
+        return this.invokeApiWithErrorHandling<ReadTemplate>(`/templates/${name}/duplicate`, 'POST');
     }
 }
