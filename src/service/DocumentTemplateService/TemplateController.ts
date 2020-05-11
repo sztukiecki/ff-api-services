@@ -104,4 +104,13 @@ export class TemplateController extends APIClient {
     async patchTemplate(name: string, jsonPatch: JSONPatch[]) {
         return this.invokeApiWithErrorHandling(`/templates/${name}`, 'PATCH', jsonPatch);
     }
+
+    /**
+     * Duplicates a template by their name
+     * @param name
+     *     The name of the templates that should be duplicated
+     */
+    async duplicateTemplate(name: string) {
+        return this.invokeApiWithErrorHandling<ReadTemplate>(`/templates/duplicate/${name}`, 'POST');
+    }
 }
