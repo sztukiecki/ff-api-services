@@ -67,7 +67,7 @@ export class IS24ImportService extends APIClient {
      * @param portalId
      */
     async importDeveloperProjects(portalId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/portals/${portalId}/import-projects`, 'GET');
+        return await this.invokeApi(`/portals/${portalId}/import-projects`, 'POST');
     }
 }
 
