@@ -63,12 +63,12 @@ export class SchemaServiceV2 extends APIClient {
      * @param sourceSchemaName
      * @param targetSchemaName
      */
-    duplicateSchema = async (sourceSchemaName: string, targetSchemaName: string): Promise<AxiosResponse<SchemaV2>> => {
+    async duplicateSchema(sourceSchemaName: string, targetSchemaName: string) {
         let queryParams: any = {};
         queryParams.sourceSchemaName = sourceSchemaName;
         queryParams.targetSchemaName = targetSchemaName;
 
-        return this.invokeApi(`/v2/schemas`, 'POST',undefined, { queryParams });
+        return this.invokeApiWithErrorHandling<SchemaV2>(`/v2/schemas`, 'POST',undefined, { queryParams });
     };
 
     /**
