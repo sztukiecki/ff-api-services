@@ -12,7 +12,7 @@ export class AlbumsController extends APIClient {
      * @param schemaName
      */
     async fetchAlbums(schemaName: string) {
-        return await this.invokeApiWithErrorHandling<Album>(`/albums/schemas/${schemaName}`, 'GET');
+        return await this.invokeApiWithErrorHandling<Album[]>(`/albums/schemas/${schemaName}`, 'GET');
     }
 
     /**
