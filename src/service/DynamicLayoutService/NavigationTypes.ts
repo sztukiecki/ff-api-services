@@ -1,4 +1,4 @@
-import { Captions, LayoutContainer } from '@flowfact/types';
+import { Captions, Layout } from '@flowfact/types';
 
 export namespace NavigationTypes {
     export interface ACP {
@@ -43,7 +43,7 @@ export namespace WidgetLayoutTypes {
         id: string;
         schema: string;
         global: boolean;
-        layout: LayoutContainer;
+        layout: Layout;
     }
 
     export interface PagedWidgetLayouts {
