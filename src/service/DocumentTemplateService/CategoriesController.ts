@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from '../../http';
-import { BaseCategory } from './DocumentTemplateService.Types';
+import { BaseCategory, ReadCategory } from './DocumentTemplateService.Types';
 
 export class CategoriesController extends APIClient {
 
@@ -8,7 +8,7 @@ export class CategoriesController extends APIClient {
     }
 
     async fetchAllCategories() {
-        return this.invokeApiWithErrorHandling<{ entries: BaseCategory[] }>('/categories', 'GET');
+        return this.invokeApiWithErrorHandling<{ entries: ReadCategory[] }>('/categories', 'GET');
     }
 
     async createCategory(data: BaseCategory) {

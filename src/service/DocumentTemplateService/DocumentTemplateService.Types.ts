@@ -17,12 +17,17 @@ export interface BaseTemplate {
 export interface ReadTemplate extends BaseTemplate {
     id: string;
     url: string;
+    custom: boolean;
 }
 
 export interface BaseCategory {
     parentName: string | null;
     name: string;
     captions: Captions;
+}
+
+export interface ReadCategory extends BaseCategory {
+    custom: boolean;
 }
 
 export interface JSONPatch {
@@ -32,3 +37,4 @@ export interface JSONPatch {
 }
 
 export interface WriteTemplate extends BaseTemplate {}
+export interface WriteCategory extends BaseCategory {}
