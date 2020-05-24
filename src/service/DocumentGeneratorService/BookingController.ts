@@ -7,7 +7,7 @@ class BookingController extends APIClient {
     }
 
     async bookDocument(requestId: string, entities: ({ entityId: string, schema: string})[]) {
-        return this.invokeApiWithErrorHandling('/booking', 'POST', {
+        return this.invokeApiWithErrorHandling<{ entityId: string; }>('/booking', 'POST', {
             requestId,
             entities
         });
