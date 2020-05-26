@@ -19,7 +19,6 @@ export { default as FunnelService } from './service/FunnelService';
 export { default as GDPRService } from './service/GDPRService';
 export { default as GeolocationService } from './service/GeolocationService';
 export { default as HistoryModuleService } from './service/HistoryModuleService';
-export { default as ImportPreparationService } from './service/ImportPreparationService';
 export { default as InquiryService } from './service/InquiryService';
 export { default as InteractiveExposeDeliveryService } from './service/InteractiveExposeDeliveryService';
 export { default as InteractiveExposeService } from './service/InteractiveExposeService';
@@ -68,6 +67,7 @@ export * from './service/DynamicLayoutService';
 export * from './service/MultimediaService';
 export * from './service/DocumentGeneratorService';
 export * from './service/DocumentTemplateService';
+export * from './service/ImportPreparationService';
 
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
