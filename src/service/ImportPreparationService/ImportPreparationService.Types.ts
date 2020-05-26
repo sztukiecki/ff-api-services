@@ -9,4 +9,11 @@ export namespace ImportPreparationServiceTypes {
         isDoneCount: number;
         state: ImporterState;
     }
+
+    export interface TableDependency {
+        id: string;
+        sourceSystem: string;
+        tableName: string;
+        dependency: string;
+    }
 }

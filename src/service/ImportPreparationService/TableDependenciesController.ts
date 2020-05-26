@@ -1,0 +1,20 @@
+import {APIClient, APIMapping} from "../../http";
+import {ImportPreparationServiceTypes} from "./ImportPreparationService.Types";
+import TableDependency = ImportPreparationServiceTypes.TableDependency;
+
+export class TableDependenciesController extends APIClient {
+
+    constructor() {
+        super(APIMapping.importPreparationService);
+    }
+    /**
+     * Gets all ( when sourceSystem = '' ) or specific table dependencies
+     */
+    async getTableDependencies(sourceSystem: string = 'performer') {
+        return await this.invokeApiWithErrorHandling<TableDependency[]>('/table-dependencies', 'GET', undefined, {
+            queryParams: {
+                sourceSystem
+            }
+        });
+    }
+}
