@@ -10,7 +10,7 @@ export class TableDependenciesController extends APIClient {
     /**
      * Gets all ( when sourceSystem = '' ) or specific table dependencies
      */
-    async getTableDependencies(sourceSystem: string = 'performer') {
+    async fetch(sourceSystem: string = 'performer') {
         return await this.invokeApiWithErrorHandling<TableDependency[]>('/table-dependencies', 'GET', undefined, {
             queryParams: {
                 sourceSystem
