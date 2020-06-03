@@ -61,6 +61,14 @@ export class IS24ImportService extends APIClient {
     async fetchPossibleUsers(portalId: string): Promise<AxiosResponse<{ users: PossibleUser[] }>> {
         return await this.invokeApi(`/${portalId}/possibleUsers`, 'GET');
     }
+
+    /**
+     * Trigger import of developer projects
+     * @param portalId
+     */
+    async importDeveloperProjects(portalId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/portals/${portalId}/import-projects`, 'POST');
+    }
 }
 
 export default new IS24ImportService();
