@@ -7,6 +7,7 @@ export class TableDependenciesController extends APIClient {
     constructor() {
         super(APIMapping.importPreparationService);
     }
+
     /**
      * Gets all ( when sourceSystem = '' ) or specific table dependencies
      */

@@ -7,7 +7,6 @@ export class UserTokenManagementController extends APIClient {
         super(APIMapping.importPreparationService);
     }
 
-
     /**
      * Gets the importer user. If it does not exist, it will be created.
      */
@@ -28,5 +27,4 @@ export class UserTokenManagementController extends APIClient {
     async createImporterToken(importerUserId: string) {
         return this.invokeApiWithErrorHandling<UserTokenEntity>(`/userAndTokenManagement/token/importerUser/${importerUserId}`, 'POST', {});
     }
-
 }
