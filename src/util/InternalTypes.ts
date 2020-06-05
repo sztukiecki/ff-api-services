@@ -10,6 +10,13 @@ export interface SearchResult<T> {
     pageSize: number;
 }
 
+export interface PagedResponse<T> {
+    entities: T[];
+    totalCount: number;
+    page: number;
+    size: number;
+}
+
 export interface EntityQuery {
     entityId: string;
     schemaId: string;

@@ -55,11 +55,11 @@ export { default as FilterDefinitionService } from './service/FilterDefinitionSe
 export { default as SoftLinksEntityService } from './service/SoftLinksEntityService';
 export { default as OpenimmoImporterService } from './service/OpenimmoImporterService';
 export { default as SearchProfileService } from './service/SearchProfileService';
-export { default as IS24ImportService } from './service/IS24ImportService';
 export { default as ImporterFlowFactTransferService } from './service/ImporterFlowFactTransferService';
 export { default as AclGroupServiceRest } from './service/AclGroupServiceRest';
 
 export * from './service/IS24LeadService';
+export * from './service/IS24ImportService';
 export * from './service/OpenimmoFtpAccessService';
 export * from './service/FlywheelService';
 export * from './service/WorkflowService';
