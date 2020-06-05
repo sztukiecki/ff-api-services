@@ -15,4 +15,13 @@ export namespace IS24ImportServiceTypes {
         lastName: string;
         email: string;
     }
+
+    export interface ProjectInfo {
+        id: string;
+        companyId: string;
+        flowfactId: string;
+        portalId: string;
+        scoutId: string;
+    }
+
 }
