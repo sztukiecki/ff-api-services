@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import { PagedResponse } from '../..';
 import { APIClient, APIMapping } from '../../http';
 import { IS24ImportServiceTypes } from './IS24ImportService.Types';
 import IS24Property = IS24ImportServiceTypes.IS24Property;
@@ -16,16 +16,12 @@ export default class IS24ImportContoller extends APIClient {
      * @param page
      * @param pageSize
      */
-    async fetchProperties(portalId: string, page: number = 1, pageSize: number = 10): Promise<AxiosResponse<{
-        entities: IS24Property[],
-        totalCount: number;
-        page: number;
-    }>> {
-        return this.invokeApi(`/${portalId}/previews`, 'GET', undefined, {
+    async fetchProperties(portalId: string, page: number = 1, pageSize: number = 10) {
+        return this.invokeApiWithErrorHandling<PagedResponse<IS24Property>>(`/${portalId}/previews`, 'GET', undefined, {
             queryParams: {
                 page: page,
-                pageSize: pageSize
-            }
+                pageSize: pageSize,
+            },
         });
     }
 
@@ -34,9 +30,9 @@ export default class IS24ImportContoller extends APIClient {
      * @param portalId
      * @param propertyIds
      */
-    async importProperties(portalId: string, propertyIds: string[]): Promise<AxiosResponse> {
-        return await this.invokeApi(`/${portalId}/import`, 'POST', {
-            is24EstateIds: propertyIds
+    async importProperties(portalId: string, propertyIds: string[]) {
+        return await this.invokeApiWithErrorHandling(`/${portalId}/import`, 'POST', {
+            is24EstateIds: propertyIds,
         });
     }
 
@@ -44,16 +40,16 @@ export default class IS24ImportContoller extends APIClient {
      * Fetches possible users. A possible user can be a contact person of a estate
      * @param portalId
      */
-    async fetchPossibleUsers(portalId: string): Promise<AxiosResponse<{ users: PossibleUser[] }>> {
-        return await this.invokeApi(`/${portalId}/possibleUsers`, 'GET');
+    async fetchPossibleUsers(portalId: string) {
+        return await this.invokeApiWithErrorHandling<{ users: PossibleUser[] }>(`/${portalId}/possibleUsers`, 'GET');
     }
 
     /**
      * Trigger import of developer projects
      * @param portalId
      */
-    async importDeveloperProjects(portalId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/portals/${portalId}/import-projects`, 'POST');
+    async importDeveloperProjects(portalId: string) {
+        return await this.invokeApiWithErrorHandling(`/portals/${portalId}/import-projects`, 'POST');
     }
 
 }
