@@ -107,6 +107,22 @@ export class PortalManagementService extends APIClient {
     }
 
     /**
+     * Publishes all units of a developer project to its service providers
+     * @param projectId main identifier of the project entity
+     */
+    async publishProject(projectId: String): Promise<AxiosResponse> {
+        return await this.invokeApi(`/projects/${projectId}/publish`, 'POST');
+    }
+
+    /**
+     * Unpublishes all units of a developer project from its service providers
+     * @param projectId main identifier of the project entity
+     */
+    async unpublishProject(projectId: String): Promise<AxiosResponse> {
+        return await this.invokeApi(`/projects/${projectId}/unpublish`, 'POST');
+    }
+
+    /**
      * TODO: Please comment this method
      * @param portalId
      * @param estateId
