@@ -2,6 +2,19 @@ import { Portal, PortalAuthenticationModel, PortalEstateSettings, PortalType, Pu
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 
+export interface ProjectPublishResponse {
+    targetStatus: 'OFFLINE' | 'ONLINE';
+    warnings: ProjectPublishResponseEntry[];
+    errors: ProjectPublishResponseEntry[];
+}
+
+export interface ProjectPublishResponseEntry {
+    entityId: string;
+    schemaId: string;
+    schema: string;
+    messages: string[];
+}
+
 export class PortalManagementService extends APIClient {
 
     constructor() {
@@ -14,10 +27,10 @@ export class PortalManagementService extends APIClient {
      */
     async fetchPortals(ignoreInactivePortals: boolean = false): Promise<AxiosResponse> {
         return await this.invokeApi('/portals', 'GET', undefined, {
-            queryParams: {
-                ignoreInactivePortals,
+                queryParams: {
+                    ignoreInactivePortals,
+                },
             },
-        },
         );
     }
 
@@ -110,7 +123,7 @@ export class PortalManagementService extends APIClient {
      * Publishes all units of a developer project to its service providers
      * @param projectId main identifier of the project entity
      */
-    async publishProject(projectId: String): Promise<AxiosResponse> {
+    async publishProject(projectId: string): Promise<AxiosResponse<ProjectPublishResponse>> {
         return await this.invokeApi(`/projects/${projectId}/publish`, 'POST');
     }
 
@@ -118,7 +131,7 @@ export class PortalManagementService extends APIClient {
      * Unpublishes all units of a developer project from its service providers
      * @param projectId main identifier of the project entity
      */
-    async unpublishProject(projectId: String): Promise<AxiosResponse> {
+    async unpublishProject(projectId: string): Promise<AxiosResponse<ProjectPublishResponse>> {
         return await this.invokeApi(`/projects/${projectId}/unpublish`, 'POST');
     }
 
