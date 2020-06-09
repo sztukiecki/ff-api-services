@@ -1,5 +1,5 @@
-import {APIClient, APIMapping} from "../../http";
-import {ImportPreparationServiceTypes} from "./ImportPreparationService.Types";
+import {APIClient, APIMapping} from '../../http';
+import {ImportPreparationServiceTypes} from './ImportPreparationService.Types';
 import TableDependency = ImportPreparationServiceTypes.TableDependency;
 
 export class TableDependenciesController extends APIClient {
@@ -17,5 +17,12 @@ export class TableDependenciesController extends APIClient {
                 sourceSystem
             }
         });
+    }
+
+    /**
+     * get all deps for "my" current system
+     */
+    async fetchMySystem() {
+        return await this.invokeApiWithErrorHandling<TableDependency[]>('/table-dependencies/my-system', 'GET');
     }
 }
