@@ -45,6 +45,14 @@ class WidgetLayoutsController extends APIClient {
     async updateLayout(layout: WidgetLayout) {
         return this.invokeApiWithErrorHandling<WidgetLayout>(`/widget-layouts/${layout.id}`, 'PUT', layout);
     }
+
+    /**
+     * Deletes a custom layout
+     * @param layoutId
+     */
+    async deleteCustomLayout(layoutId: string) {
+        return this.invokeApiWithErrorHandling(`/widget-layouts/${layoutId}`, 'DELETE');
+    }
 }
 
 export default WidgetLayoutsController;
