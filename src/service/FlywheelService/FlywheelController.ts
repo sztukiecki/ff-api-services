@@ -30,7 +30,7 @@ export class FlywheelController extends APIClient {
      * Returns all flywheels with no param given or no-content
      */
     async fetchAll(page = 0) {
-        return this.invokeApiWithErrorHandling<Flywheel[]>(`/flywheels?page=${page}`, 'GET');
+        return this.invokeApiWithErrorHandling<Flywheel[]>('/flywheels?page=' + page, 'GET');
     }
 
 
