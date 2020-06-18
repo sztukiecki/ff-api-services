@@ -56,6 +56,13 @@ export namespace FlywheelServiceTypes {
         entity: any
     }
 
+    export type PagedTransaction = {
+        boardName: string;
+        stepName: string;
+        page: number;
+        transactions?: Transaction[];
+    }
+
 
     export type FlywheelPhasePatch = PhasePatch
 
