@@ -31,10 +31,11 @@ export class TransactionController extends APIClient {
      * @param page
      */
     async fetchForPhaseAndStepWithFilter(phaseName: string, stepName: string, view: string = 'card', flowdsl?: Flowdsl, page: number = 0) {
-        return this.invokeApiWithErrorHandling<FlywheelServiceTypes.PagedTransactions>(`/transactions/phases/${phaseName}/${stepName}?view=${view}&page=${page}`, 'POST', flowdsl, {
+        return this.invokeApiWithErrorHandling<FlywheelServiceTypes.PagedTransactions>(`/transactions/phases/${phaseName}/${stepName}`, 'POST', flowdsl, {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            queryParams: {page, view}
         });
     }
 
