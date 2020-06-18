@@ -17,7 +17,10 @@ class WidgetLayoutsController extends APIClient {
     async fetchLayouts(schemaNames: string[] = []) {
         return this.invokeApiWithErrorHandling<PagedWidgetLayouts>('/widget-layouts', 'GET', undefined, {
             queryParams: {
-                schema: schemaNames.join(',')
+                schema: schemaNames.join(','),
+            },
+            headers: {
+                'x-ff-version': 2
             }
         });
     }
@@ -27,7 +30,11 @@ class WidgetLayoutsController extends APIClient {
      * @param layout
      */
     async createLayout(layout: WidgetLayout) {
-        return this.invokeApiWithErrorHandling<WidgetLayout>('/widget-layouts', 'POST', layout);
+        return this.invokeApiWithErrorHandling<WidgetLayout>('/widget-layouts', 'POST', layout, {
+            headers: {
+                'x-ff-version': 2
+            }
+        });
     }
 
     /**
@@ -35,7 +42,11 @@ class WidgetLayoutsController extends APIClient {
      * @param layoutId
      */
     async fetchLayout(layoutId: string) {
-        return this.invokeApiWithErrorHandling<WidgetLayout>(`/widget-layouts/${layoutId}`, 'GET');
+        return this.invokeApiWithErrorHandling<WidgetLayout>(`/widget-layouts/${layoutId}`, 'GET', {
+            headers: {
+                'x-ff-version': 2
+            }
+        });
     }
 
     /**
@@ -43,7 +54,11 @@ class WidgetLayoutsController extends APIClient {
      * @param layout
      */
     async updateLayout(layout: WidgetLayout) {
-        return this.invokeApiWithErrorHandling<WidgetLayout>(`/widget-layouts/${layout.id}`, 'PUT', layout);
+        return this.invokeApiWithErrorHandling<WidgetLayout>(`/widget-layouts/${layout.id}`, 'PUT', layout, {
+            headers: {
+                'x-ff-version': 2
+            }
+        });
     }
 
     /**
