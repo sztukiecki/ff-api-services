@@ -200,11 +200,20 @@ export class PortalManagementService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Checks if a portal is authenticated or not
      * @param portalId
      */
     async checkAuthentication(portalId: string): Promise<AxiosResponse> {
         return await this.invokeApi(`/portals/${portalId}/checkAuthentication`, 'GET');
+    }
+
+    /**
+     * Unlinks a estate from a portal
+     * @param portalId
+     * @param entityId
+     */
+    async unlink(portalId: string, entityId: string) {
+        return await this.invokeApi(`/portals/${portalId}/estates/${entityId}`, 'DELETE');
     }
 }
 
