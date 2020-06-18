@@ -56,7 +56,7 @@ export namespace FlywheelServiceTypes {
         entity: any
     }
 
-    export type PagedTransaction = {
+    export type PagedTransactions = {
         boardName: string;
         stepName: string;
         page: number;
