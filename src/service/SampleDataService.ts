@@ -46,7 +46,7 @@ export class SampleDataService extends APIClient {
      * @param scope of FLOWFACT or CUSTOM
      * @param onlySelectableByCustomer as null, true or false. When not set, returns all.
      */
-    async fetchBundles(scope: 'FLOWFACT' | 'CUSTOM' = 'FLOWFACT', onlySelectableByCustomer: true | false = true): Promise<AxiosResponse> {
+    async fetchBundles(scope: 'FLOWFACT' | 'CUSTOM' = 'FLOWFACT', onlySelectableByCustomer: boolean = true): Promise<AxiosResponse> {
         return await this.invokeApi('/bundles', 'GET', undefined, {
             queryParams: {
                 scope: scope,
