@@ -30,7 +30,7 @@ export class TransactionController extends APIClient {
      * @param {Flowdsl} flowdsl
      * @param page
      */
-    async fetchForPhaseAndStepWithFilter(phaseName: string, stepName: string, view: string = 'card', flowdsl?: Flowdsl, page: number = 0) {
+    async fetchForPhaseAndStepWithFilter(phaseName: string, stepName: string, view: string = 'card', flowdsl?: Flowdsl, page: number = 1) {
         return this.invokeApiWithErrorHandling<FlywheelServiceTypes.PagedTransactions>(`/transactions/phases/${phaseName}/${stepName}`, 'POST', flowdsl, {
             headers: {
                 'Content-Type': 'application/json'
