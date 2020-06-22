@@ -1,9 +1,10 @@
 import { Captions } from '@flowfact/types';
 
 export interface NeededPlaceholder {
+    type: 'USER_INPUT' | 'ENTITY_PICK';
     alias: string;
-    schemaName: string;
-    captions: Captions
+    schemaName?: string;
+    captions: Captions;
 }
 
 export interface BaseTemplate {
