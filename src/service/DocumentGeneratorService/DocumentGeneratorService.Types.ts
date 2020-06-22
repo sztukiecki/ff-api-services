@@ -1,7 +1,12 @@
 
-export interface EntityDefinition {
+export interface EntityPickData {
     entityId: string;
     schemaName: string;
+    alias: string;
+}
+
+export interface UserInputData {
+    value: string;
     alias: string;
 }
 
