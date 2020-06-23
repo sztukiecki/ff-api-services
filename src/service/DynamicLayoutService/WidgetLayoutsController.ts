@@ -62,6 +62,16 @@ class WidgetLayoutsController extends APIClient {
     }
 
     /**
+     * Checks if a custom layout has a global layout or not
+     * 204 = yes there is a global layout
+     * 404 = There is no global layout
+     * @param layoutId
+     */
+    async checkHasGlobalLayout(layoutId: string) {
+        return this.invokeApiWithErrorHandling(`/widget-layouts/assignments/${layoutId}`, 'GET');
+    }
+
+    /**
      * Deletes a custom layout
      * @param layoutId
      */
