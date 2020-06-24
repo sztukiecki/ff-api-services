@@ -60,6 +60,7 @@ export namespace FlywheelServiceTypes {
         boardName: string;
         stepName: string;
         page: number;
+        totalCount: number;
         transactions?: Transaction[];
     }
 
