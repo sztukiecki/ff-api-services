@@ -63,7 +63,7 @@ export class SampleDataService extends APIClient {
     async fetchBundle(scope: 'FLOWFACT' | 'CUSTOM' = 'FLOWFACT', bundleName: string): Promise<AxiosResponse> {
         return await this.invokeApi(`/bundles/${bundleName}`, 'GET', undefined, {
             queryParams: {
-                scope: scope,
+                scope,
             },
         });
     }
