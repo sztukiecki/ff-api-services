@@ -54,6 +54,19 @@ export class SampleDataService extends APIClient {
             },
         });
     }
+
+    /**
+     * Fetches one bundle by name and further params.
+     * @param scope of FLOWFACT or CUSTOM
+     * @param bundleName for bundle to fetch
+     */
+    async fetchBundle(scope: 'FLOWFACT' | 'CUSTOM' = 'FLOWFACT', bundleName: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/bundles/${bundleName}`, 'GET', undefined, {
+            queryParams: {
+                scope: scope,
+            },
+        });
+    }
 }
 
 export default new SampleDataService();
