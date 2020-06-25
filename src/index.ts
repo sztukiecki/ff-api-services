@@ -32,7 +32,6 @@ export { default as OnboardingService } from './service/OnboardingService';
 export { default as PortalManagementService } from './service/PortalManagementService';
 export { default as PresetService } from './service/PresetService';
 export { default as PropertyMarketingPhaseService } from './service/PropertyMarketingPhaseService';
-export { default as SampleDataService } from './service/SampleDataService';
 export { default as SchemaService } from './service/SchemaService';
 export { default as SchemaServiceV2 } from './service/SchemaServiceV2';
 export { default as SearchService } from './service/SearchService';
@@ -68,6 +67,7 @@ export * from './service/DocumentGeneratorService';
 export * from './service/DocumentTemplateService';
 export * from './service/ViewDefinitionService';
 export * from './service/ImportPreparationService';
+export * from './service/SampleDataService';
 
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
