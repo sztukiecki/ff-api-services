@@ -23,6 +23,41 @@ export class TransactionController extends APIClient {
     }
 
     /**
+     * Return count of transactions of a specific phase
+     * @param phaseName
+     * * @param flowdsl
+     */
+    async fetchCountOfAllTransactionsInPhase(phaseName: string, flowdsl?: Flowdsl) {
+        return this.invokeApiWithErrorHandling<FlywheelServiceTypes.Transaction[]>(`/transactions/phases/${phaseName}/count`, 'POST', {
+                flowDsl: flowdsl
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            },
+        );
+    }
+
+    /**
+     * Return transactions count of a specific step
+     * @param phaseName
+     * @param stepName
+     * @param flowdsl
+     */
+    async fetchCountOfAllTransactionsInStep(phaseName: string, stepName: string, flowdsl?: Flowdsl) {
+        return this.invokeApiWithErrorHandling<FlywheelServiceTypes.Transaction[]>(`/transactions/phases/${phaseName}/${stepName}/count`, 'POST', {
+                flowDsl: flowdsl
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            },
+        );
+    }
+
+    /**
      * Return paged transactions for a specific phase and step
      * @param phaseName
      * @param stepName
