@@ -25,26 +25,36 @@ export class TransactionController extends APIClient {
     /**
      * Return all transactions of a specific phase
      * @param phaseName
+     * * @param flowdsl
      */
-    async fetchCountOfAllTransactionsInPhase(phaseName: string) {
+    async fetchCountOfAllTransactionsInPhase(phaseName: string, flowdsl?: Flowdsl) {
         return this.invokeApiWithErrorHandling<FlywheelServiceTypes.Transaction[]>(`/transactions/phases/${phaseName}/count`, 'POST', {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
+                flowDsl: flowdsl
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            },
+        );
     }
 
     /**
      * Return all transactions of a specific step
      * @param phaseName
      * @param stepName
+     * @param flowdsl
      */
-    async fetchCountOfAllTransactionsInStep(phaseName: string, stepName: string) {
+    async fetchCountOfAllTransactionsInStep(phaseName: string, stepName: string, flowdsl?: Flowdsl) {
         return this.invokeApiWithErrorHandling<FlywheelServiceTypes.Transaction[]>(`/transactions/phases/${phaseName}/${stepName}/count`, 'POST', {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
+                flowDsl: flowdsl
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            },
+        );
     }
 
     /**
