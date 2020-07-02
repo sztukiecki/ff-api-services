@@ -23,6 +23,31 @@ export class TransactionController extends APIClient {
     }
 
     /**
+     * Return all transactions of a specific phase
+     * @param phaseName
+     */
+    async fetchCountOfAllTransactionsInPhase(phaseName: string) {
+        return this.invokeApiWithErrorHandling<FlywheelServiceTypes.Transaction[]>(`/transactions/phases/${phaseName}/count`, 'POST', {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+
+    /**
+     * Return all transactions of a specific step
+     * @param phaseName
+     * @param stepName
+     */
+    async fetchCountOfAllTransactionsInStep(phaseName: string, stepName: string) {
+        return this.invokeApiWithErrorHandling<FlywheelServiceTypes.Transaction[]>(`/transactions/phases/${phaseName}/${stepName}/count`, 'POST', {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+
+    /**
      * Moves a transaction to another phase
      * @param transactionId
      * @param fromPhaseName
