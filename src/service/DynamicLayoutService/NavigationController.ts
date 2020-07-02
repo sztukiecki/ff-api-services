@@ -1,6 +1,6 @@
 import { APIClient, APIMapping } from '../../http';
-import { DynamicLayoutServiceTypes } from './DynamicLayoutService.Types';
-import Navigation = DynamicLayoutServiceTypes.Navigation;
+import { NavigationTypes } from './NavigationTypes';
+import Navigation = NavigationTypes.Navigation;
 
 export default class NavigationController extends APIClient {
 

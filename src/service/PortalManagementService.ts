@@ -2,6 +2,19 @@ import { Portal, PortalAuthenticationModel, PortalEstateSettings, PortalType, Pu
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 
+export interface ProjectPublishResponse {
+    targetStatus: 'OFFLINE' | 'ONLINE';
+    warnings: ProjectPublishResponseEntry[];
+    errors: ProjectPublishResponseEntry[];
+}
+
+export interface ProjectPublishResponseEntry {
+    entityId: string;
+    schemaId: string;
+    schema: string;
+    messages: string[];
+}
+
 export class PortalManagementService extends APIClient {
 
     constructor() {
@@ -14,10 +27,10 @@ export class PortalManagementService extends APIClient {
      */
     async fetchPortals(ignoreInactivePortals: boolean = false): Promise<AxiosResponse> {
         return await this.invokeApi('/portals', 'GET', undefined, {
-            queryParams: {
-                ignoreInactivePortals,
+                queryParams: {
+                    ignoreInactivePortals,
+                },
             },
-        },
         );
     }
 
@@ -107,6 +120,22 @@ export class PortalManagementService extends APIClient {
     }
 
     /**
+     * Publishes all units of a developer project to its service providers
+     * @param projectId main identifier of the project entity
+     */
+    async publishProject(projectId: string): Promise<AxiosResponse<ProjectPublishResponse>> {
+        return await this.invokeApi(`/projects/${projectId}/publish`, 'POST');
+    }
+
+    /**
+     * Unpublishes all units of a developer project from its service providers
+     * @param projectId main identifier of the project entity
+     */
+    async unpublishProject(projectId: string): Promise<AxiosResponse<ProjectPublishResponse>> {
+        return await this.invokeApi(`/projects/${projectId}/unpublish`, 'POST');
+    }
+
+    /**
      * TODO: Please comment this method
      * @param portalId
      * @param estateId
@@ -140,6 +169,15 @@ export class PortalManagementService extends APIClient {
         return await this.invokeApi(`/portals/${portalId}/estates`, 'GET');
     }
 
+    /**
+     * Fetches a specified app published estate for special portal
+     * @param portalId
+     * @param estateId
+     */
+    async fetchPortalEstate(portalId: string, estateId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/portals/${portalId}/estates/${estateId}`, 'GET');
+    }
+
     async getNumberOfPublishedEstates(portalId: string): Promise<AxiosResponse> {
         return await this.invokeApi(`/portals/${portalId}/estates/count`, 'GET');
     }
@@ -162,11 +200,20 @@ export class PortalManagementService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Checks if a portal is authenticated or not
      * @param portalId
      */
     async checkAuthentication(portalId: string): Promise<AxiosResponse> {
         return await this.invokeApi(`/portals/${portalId}/checkAuthentication`, 'GET');
+    }
+
+    /**
+     * Unlinks a estate from a portal
+     * @param portalId
+     * @param entityId
+     */
+    async unlink(portalId: string, entityId: string) {
+        return await this.invokeApi(`/portals/${portalId}/estates/${entityId}`, 'DELETE');
     }
 }
 

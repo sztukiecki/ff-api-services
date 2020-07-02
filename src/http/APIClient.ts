@@ -5,11 +5,6 @@ import Authentication from '../authentication/Authentication';
 import { EnvironmentManagementInstance } from '../util/EnvironmentManagement';
 import Interceptor from '../util/Interceptor';
 import { APIService } from './APIMapping';
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache, IntrospectionFragmentMatcher, NormalizedCacheObject } from 'apollo-cache-inmemory';
-import { HttpLink } from 'apollo-link-http';
-import { setContext } from 'apollo-link-context';
-import fragmentTypes from '../schemas/fragmentTypes';
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
 
@@ -26,7 +21,6 @@ export default abstract class APIClient {
     private userId: string;
     private readonly _serviceName: string;
     private static languages: string = 'de';
-    private gql: ApolloClient<NormalizedCacheObject>;
 
     public static changeLanguages(newLanguages: string) {
         this.languages = newLanguages;
@@ -34,24 +28,6 @@ export default abstract class APIClient {
 
     protected constructor(service: APIService) {
         this._serviceName = service.name;
-
-        const fragmentMatcher = new IntrospectionFragmentMatcher({ introspectionQueryResultData: fragmentTypes });
-
-        const httpLink = new HttpLink({
-            uri: `${EnvironmentManagementInstance.getBaseUrl(isNode)}/gql`,
-        });
-        const authLink = setContext(async (_, { headers }) => ({
-            headers: {
-                ...headers,
-                ...(await this.getUserIdentification()),
-            },
-        }));
-        const link = authLink.concat(httpLink);
-        const cache = new InMemoryCache({ fragmentMatcher });
-        this.gql = new ApolloClient({
-            link,
-            cache,
-        });
     }
 
     public withUserId(userId: string): this {
@@ -82,30 +58,6 @@ export default abstract class APIClient {
                 [`x-ff-${apiToken ? 'api' : 'support'}-token`]: apiToken || supportToken,
             };
         }
-    }
-
-    public async invokeGqlQuery<T = any>(query: any, variables?: any) {
-        const result = await this.gql.query<T>({ query, variables, errorPolicy: 'all' });
-        if (result.errors) {
-            // intentional ==, do not change to ===
-            if (result.data == null) {
-                throw new Error(`GQL query failed:\n\n${JSON.stringify(result.errors, null, 2)}`);
-            }
-            console.warn('GQL query has warnings', result.errors);
-        }
-        return result;
-    }
-
-    public async invokeGqlMutation<T = any>(mutation: any, variables?: any) {
-        const result = await this.gql.mutate<T>({ mutation, variables, errorPolicy: 'all' });
-        if (result.errors) {
-            // intentional ==, do not change to ===
-            if (result.data == null) {
-                throw new Error(`GQL mutation failed:\n\n${JSON.stringify(result.errors, null, 2)}`);
-            }
-            console.warn('GQL mutation has warnings', result.errors);
-        }
-        return result;
     }
 
     public async invokeApi<T = any>(

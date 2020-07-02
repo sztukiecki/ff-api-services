@@ -8,7 +8,6 @@ export class StatusController extends APIClient {
         super(APIMapping.importPreparationService);
     }
 
-
     /**
      * Gets the status of the currently running import.
      */

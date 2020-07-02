@@ -2,6 +2,8 @@ import { AlbumAssignmentController } from './AlbumAssignmentController';
 import { ItemsController } from './ItemsController';
 import { AlbumsController } from './AlbumsController';
 
+export * from './MultimediaService.Types';
+
 export class MultimediaService {
 
     public static instance = new MultimediaService();

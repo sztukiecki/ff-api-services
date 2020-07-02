@@ -1,7 +1,6 @@
-import { Captions } from '@flowfact/types';
+import { Captions, Layout } from '@flowfact/types';
 
-export namespace DynamicLayoutServiceTypes {
-
+export namespace NavigationTypes {
     export interface ACP {
         id: string;
         grantType: 'template' | 'group';
@@ -37,5 +36,19 @@ export namespace DynamicLayoutServiceTypes {
     export interface Navigation {
         entries: NavigationEntry[];
     }
+}
 
+export namespace WidgetLayoutTypes {
+    export interface WidgetLayout {
+        id: string;
+        schema: string;
+        global: boolean;
+        layout: Layout;
+    }
+
+    export interface PagedWidgetLayouts {
+        offset: number;
+        total: number;
+        items: WidgetLayout[];
+    }
 }

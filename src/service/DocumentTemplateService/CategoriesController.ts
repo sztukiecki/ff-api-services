@@ -12,14 +12,14 @@ export class CategoriesController extends APIClient {
     }
 
     async createCategory(data: WriteCategory) {
-        return this.invokeApiWithErrorHandling<ReadCategory>('/templates', 'POST', data);
+        return this.invokeApiWithErrorHandling<ReadCategory>('/categories', 'POST', data);
     }
 
     async updateCategory(name: string, data: WriteCategory) {
-        return this.invokeApiWithErrorHandling<ReadCategory>(`/templates/${name}`, 'PUT', data);
+        return this.invokeApiWithErrorHandling<ReadCategory>(`/categories/${name}`, 'PUT', data);
     }
 
     async deleteCategory(name: string) {
-        return this.invokeApiWithErrorHandling(`/templates/${name}`, 'DELETE');
+        return this.invokeApiWithErrorHandling(`/categories/${name}`, 'DELETE');
     }
 }

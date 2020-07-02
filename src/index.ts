@@ -1,4 +1,3 @@
-export { default as AclGroupService } from './service/AclGroupService';
 export { default as AdminTokenService } from './service/AdminTokenService';
 export { default as AgentRecommendationService } from './service/AgentRecommendationService';
 export { default as AppointmentBookingService } from './service/AppointmentBookingService';
@@ -33,7 +32,6 @@ export { default as OnboardingService } from './service/OnboardingService';
 export { default as PortalManagementService } from './service/PortalManagementService';
 export { default as PresetService } from './service/PresetService';
 export { default as PropertyMarketingPhaseService } from './service/PropertyMarketingPhaseService';
-export { default as SampleDataService } from './service/SampleDataService';
 export { default as SchemaService } from './service/SchemaService';
 export { default as SchemaServiceV2 } from './service/SchemaServiceV2';
 export { default as SearchService } from './service/SearchService';
@@ -45,7 +43,6 @@ export { default as TemplateService } from './service/TemplateService';
 export { default as ProofOfActivityService } from './service/ProofOfActivityService';
 export { default as TrialLicenseService } from './service/TrialLicenseService';
 export { default as UserService } from './service/UserService';
-export { default as ViewDefinitionService } from './service/ViewDefinitionService';
 export { default as Authentication } from './authentication/Authentication';
 export { default as OmniChannelService } from './service/OmniChannelService';
 export { default as IS24PublishService } from './service/IS24PublishService';
@@ -56,10 +53,11 @@ export { default as FilterDefinitionService } from './service/FilterDefinitionSe
 export { default as SoftLinksEntityService } from './service/SoftLinksEntityService';
 export { default as OpenimmoImporterService } from './service/OpenimmoImporterService';
 export { default as SearchProfileService } from './service/SearchProfileService';
-export { default as IS24ImportService } from './service/IS24ImportService';
 export { default as ImporterFlowFactTransferService } from './service/ImporterFlowFactTransferService';
 export { default as AclGroupServiceRest } from './service/AclGroupServiceRest';
 
+export * from './service/IS24LeadService';
+export * from './service/IS24ImportService';
 export * from './service/OpenimmoFtpAccessService';
 export * from './service/FlywheelService';
 export * from './service/WorkflowService';
@@ -67,7 +65,9 @@ export * from './service/DynamicLayoutService';
 export * from './service/MultimediaService';
 export * from './service/DocumentGeneratorService';
 export * from './service/DocumentTemplateService';
+export * from './service/ViewDefinitionService';
 export * from './service/ImportPreparationService';
+export * from './service/SampleDataService';
 
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
