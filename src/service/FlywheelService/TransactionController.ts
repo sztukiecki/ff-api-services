@@ -23,7 +23,7 @@ export class TransactionController extends APIClient {
     }
 
     /**
-     * Return all transactions of a specific phase
+     * Return count of transactions of a specific phase
      * @param phaseName
      * * @param flowdsl
      */
@@ -40,7 +40,7 @@ export class TransactionController extends APIClient {
     }
 
     /**
-     * Return all transactions of a specific step
+     * Return transactions count of a specific step
      * @param phaseName
      * @param stepName
      * @param flowdsl
