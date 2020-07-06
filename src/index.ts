@@ -68,8 +68,8 @@ export * from './service/DocumentTemplateService';
 export * from './service/ViewDefinitionService';
 export * from './service/ImportPreparationService';
 export * from './service/SampleDataService';
+export * from './service/RelogService';
 
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
 export * from './util/InternalTypes';
-export * from './service/RelogService';
