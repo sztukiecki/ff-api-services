@@ -178,6 +178,14 @@ export class PortalManagementService extends APIClient {
         return await this.invokeApi(`/portals/${portalId}/estates/${estateId}`, 'GET');
     }
 
+    /**
+     * Fetches all assigned projects for given estate
+     * @param estateId
+     */
+    async fetchAssignedProjectsByEstateId(estateId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/estates/${estateId}/projects`, 'GET');
+    }
+
     async getNumberOfPublishedEstates(portalId: string): Promise<AxiosResponse> {
         return await this.invokeApi(`/portals/${portalId}/estates/count`, 'GET');
     }
