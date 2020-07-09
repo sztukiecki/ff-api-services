@@ -31,18 +31,19 @@ export class ViewsController extends APIClient {
   }
 
   /**
-   * TODO: Please comment this method
-   * @param schemaId
+   * This function converts view definition v1 models to view definition v2
+   * @param schemaName
    * @param viewType
    */
   async fetchDefinitionsV2ForSchema(schemaName?: string, viewType?: ViewType) {
-    return await this.invokeApiWithErrorHandling<ShortViewDefinition[]>(
+    // TODO: Define ViewDefinitionV2
+    return await this.invokeApiWithErrorHandling<{ items: any[] }>(
       "/views",
       "GET",
       undefined,
       {
         headers: {
-          "X-FF-Version": 2,
+          "x-ff-version": 2,
         },
         queryParams: {
           schema: schemaName,
