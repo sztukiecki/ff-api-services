@@ -1,7 +1,7 @@
 import { Portal, PortalAuthenticationModel, PortalEstateSettings, PortalType, PublishRequest } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
-import {IS24ImportServiceTypes} from './IS24ImportService';
+import { IS24ImportServiceTypes } from './IS24ImportService';
 import ProjectInfo = IS24ImportServiceTypes.ProjectInfo;
 
 export interface ProjectPublishResponse {
@@ -17,14 +17,14 @@ export interface ProjectPublishResponseEntry {
     messages: string[];
 }
 
-export interface ProjectDetails {
+interface ProjectDetails {
     id: string;
     schema: string;
     name: string;
     title: string;
 }
 
-export interface ProjectestateResponse {
+interface ProjectEstateResponse {
     assignedProjects: ProjectDetails[];
     importedProjects: ProjectInfo[];
 }
@@ -196,8 +196,8 @@ export class PortalManagementService extends APIClient {
      * Fetches all assigned projects for given estate
      * @param estateId
      */
-    async fetchAssignedProjectsByEstateId(estateId: string): Promise<AxiosResponse<ProjectestateResponse>> {
-        return await this.invokeApi(`/estates/${estateId}/projects`, 'GET');
+    async fetchAssignedProjectsByEstateId(estateId: string) {
+        return await this.invokeApi<ProjectEstateResponse>(`/estates/${estateId}/projects`, 'GET');
     }
 
     async getNumberOfPublishedEstates(portalId: string): Promise<AxiosResponse> {
