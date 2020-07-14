@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from '../../http';
-import { WidgetLayoutTypes } from './NavigationTypes';
+import { WidgetLayoutTypes } from './WidgetLayoutTypes';
 
 import PagedWidgetLayouts = WidgetLayoutTypes.PagedWidgetLayouts;
 import WidgetLayout = WidgetLayoutTypes.WidgetLayout;

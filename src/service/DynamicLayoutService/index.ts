@@ -5,6 +5,7 @@ import WidgetStoreController from './WidgetStoreController';
 
 export * from './NavigationTypes';
 export * from './WidgetTypes';
+export * from './WidgetLayoutTypes';
 
 export class DynamicLayoutService {
 
