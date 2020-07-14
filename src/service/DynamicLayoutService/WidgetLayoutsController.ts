@@ -13,11 +13,14 @@ class WidgetLayoutsController extends APIClient {
     /**
      * If schemas are specified, only layouts of those schemas are returned.
      * @param schemaNames
+     * @param short
+     *  Return short variants or not
      */
-    async fetchLayouts(schemaNames: string[] = []) {
+    async fetchLayouts(schemaNames: string[] = [], short: boolean = false) {
         return this.invokeApiWithErrorHandling<PagedWidgetLayouts>('/widget-layouts', 'GET', undefined, {
             queryParams: {
                 schema: schemaNames.join(','),
+                short: short
             },
             headers: {
                 'x-ff-version': 2
