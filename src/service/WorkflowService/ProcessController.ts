@@ -2,6 +2,7 @@ import { APIClient, APIMapping } from '../../http';
 import { WorkflowServiceTypes } from './WorkflowService.Types';
 import ProcessInfo = WorkflowServiceTypes.ProcessInfo;
 import ProcessRequest = WorkflowServiceTypes.ProcessRequest;
+import ProcessEntityRequest = WorkflowServiceTypes.ProcessEntityRequest;
 
 export class ProcessController extends APIClient {
     constructor() {
@@ -23,5 +24,14 @@ export class ProcessController extends APIClient {
      */
     async startProcess(key: string, processRequest: ProcessRequest) {
         return this.invokeApiWithErrorHandling<ProcessInfo>(`/process/${key}`, 'POST', processRequest);
+    };
+
+    /**
+     * Creates a workflow by it's id´s on several entities.
+     * @param workflowId
+     * @param processRequest
+     */
+    async createWorkflowOnSeveralEntities (workflowId: string, processRequest: ProcessEntityRequest) {
+        return this.invokeApiWithErrorHandling<ProcessInfo>(`/process/${workflowId}/entities`, 'POST', processRequest);
     };
 }
