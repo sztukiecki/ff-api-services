@@ -106,4 +106,9 @@ export namespace WorkflowServiceTypes {
         attributes: { [key: string]: any };
     }
 
+    export interface ProcessEntityRequest {
+        schema: string;
+        entityIds: string[];
+    }
+
 }
