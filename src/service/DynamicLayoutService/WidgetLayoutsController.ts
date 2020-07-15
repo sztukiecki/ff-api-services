@@ -45,7 +45,7 @@ class WidgetLayoutsController extends APIClient {
      * @param layoutId
      */
     async fetchLayout(layoutId: string) {
-        return this.invokeApiWithErrorHandling<WidgetLayout>(`/widget-layouts/${layoutId}`, 'GET', {
+        return this.invokeApiWithErrorHandling<WidgetLayout>(`/widget-layouts/${layoutId}`, 'GET', undefined,{
             headers: {
                 'x-ff-version': 2
             }
