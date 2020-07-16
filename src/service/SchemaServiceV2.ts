@@ -1,4 +1,4 @@
-import { Extension, GroupAllResponse, GroupV2, SchemaV2, SchemaV2Response } from '@flowfact/types';
+import {Extension, GroupAllResponse, GroupV2, SchemaV2, SchemaV2Properties, SchemaV2Response} from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 
@@ -159,7 +159,7 @@ export class SchemaServiceV2 extends APIClient {
      * Retrieves a schema group by it's identifier (id or name)
      * @param identifier - The schema groups identifier (id or name)
      */
-    fetchGroupByIdentifier = async (identifier: string): Promise<AxiosResponse<GroupV2>> => {
+    fetchGroupByIdentifier = async (identifier: string): Promise<AxiosResponse<GroupV2 & { properties: SchemaV2Properties }>> => {
         return this.invokeApi(`/groups/${identifier}`, 'GET', undefined, v2Header);
     };
 
