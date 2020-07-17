@@ -79,7 +79,7 @@ export class MatchmakingService extends APIClient {
      * @param offset
      */
     async fetchMatchesBySearchprofile(searchprofileId: string, page: number = 0, size: number = 10, offset: number = 0) {
-        return await this.invokeApiWithErrorHandling<PagedResponse<SearchprofileMatch>>(`/matches/searchprofile/${searchprofileId}`, 'GET', undefined, {
+        return await this.invokeApiWithErrorHandling<PagedResponse<SearchprofileMatch>>(`/match/searchprofile/${searchprofileId}`, 'GET', undefined, {
             queryParams: { page, size, offset },
         });
     }
