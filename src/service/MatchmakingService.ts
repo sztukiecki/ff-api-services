@@ -4,6 +4,8 @@ import {
     MatchmakingPagingResponse,
     MatchScoreContact,
     MatchScoreEstate,
+    PagedResult,
+    SearchprofileMatch
 } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
@@ -67,6 +69,19 @@ export class MatchmakingService extends APIClient {
      */
     async fetchMatchCountByEstate(estateId: string): Promise<AxiosResponse<MatchCountForEstate>> {
         return await this.invokeApi(`/matches/estates/${estateId}/count`, 'GET');
+    }
+
+    /**
+     * Fetch matches for a given searchprofile
+     * @param searchpofileId
+     * @param page
+     * @param size
+     * @param offset
+     */
+    async fetchMatchesBySearchprofile(searchprofileId: string, page: number = 0, size: number = 10, offset: number = 0): Promise<AxiosResponse<PagedResult<SearchprofileMatch>>> {
+        return await this.invokeApi(`/matches/searchprofile/${searchprofileId}`, 'GET', undefined, {
+            queryParams: { page, size, offset },
+        });
     }
 
     /**
