@@ -78,8 +78,8 @@ export class MatchmakingService extends APIClient {
      * @param size
      * @param offset
      */
-    async fetchMatchesBySearchprofile(searchprofileId: string, page: number = 0, size: number = 10, offset: number = 0): Promise<AxiosResponse<PagedResult<SearchprofileMatch>>> {
-        return await this.invokeApi(`/matches/searchprofile/${searchprofileId}`, 'GET', undefined, {
+    async fetchMatchesBySearchprofile(searchprofileId: string, page: number = 0, size: number = 10, offset: number = 0) {
+        return await this.invokeApiWithErrorHandling<PagedResult<SearchprofileMatch>>(`/matches/searchprofile/${searchprofileId}`, 'GET', undefined, {
             queryParams: { page, size, offset },
         });
     }
