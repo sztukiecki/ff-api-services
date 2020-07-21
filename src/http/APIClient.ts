@@ -138,7 +138,7 @@ export interface ApiResponseSuccess<T> extends Partial<AxiosResponse<T>> {
 }
 
 export interface ApiResponseError<T> extends Partial<AxiosError<T>> {
-    isSuccessful2xx: false;
+    isSuccessful2xx: false | undefined;
     data?: T
 }
 
