@@ -63,7 +63,7 @@ export class SchemaServiceV2 extends APIClient {
      * @param sourceSchemaName
      * @param targetSchemaName
      */
-    async duplicateSchema(sourceSchemaName: string, targetSchemaName: string) {
+    duplicateSchema = async (sourceSchemaName: string, targetSchemaName: string) => {
         let queryParams: any = {};
         queryParams.sourceSchemaName = sourceSchemaName;
         queryParams.targetSchemaName = targetSchemaName;
