@@ -17,14 +17,14 @@ export interface ProjectPublishResponseEntry {
     messages: string[];
 }
 
-interface ProjectDetails {
+export interface ProjectDetails {
     id: string;
     schema: string;
     name: string;
     title: string;
 }
 
-interface ProjectEstateResponse {
+export interface ProjectEstateResponse {
     assignedProjects: ProjectDetails[];
     importedProjects: ProjectInfo[];
 }
