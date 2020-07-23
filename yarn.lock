@@ -114,10 +114,10 @@
   dependencies:
     tslib "^1.10.0"
 
-"@flowfact/types@^3.20200717.152":
-  version "3.20200717.152"
-  resolved "https://registry.yarnpkg.com/@flowfact/types/-/types-3.20200717.152.tgz#fa6840a202f664646b6803b7294a509372e9e8e6"
-  integrity sha512-DBTnlfM70SyOaJNvKqmgyYPTYwZvOpA7do/p+KHb7+cx2Kn03vazUVYegS0mcoPasvHXZpJ92uD5ip8nr8fNHA==
+"@flowfact/types@^3.20200723.154":
+  version "3.20200723.154"
+  resolved "https://registry.yarnpkg.com/@flowfact/types/-/types-3.20200723.154.tgz#1b8d90ded9e6981889f3366f2bbf3f30f7a1785d"
+  integrity sha512-XvGabY8O7uxy2/Cfj3eUZqjxV04R/zOvBz6EXjZxss1AUchCqF6+/7PyOZSIdHx6enTw85jEe7R/jTstBQtWxg==
   dependencies:
     "@types/node" "^11.15.4"
     tslib "^1.10.0"
