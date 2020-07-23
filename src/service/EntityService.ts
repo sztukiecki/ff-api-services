@@ -134,14 +134,15 @@ export class EntityService extends APIClient {
 
     /**
      * Deletes some entities of a specific schema. The schema can be a group as well.
-     * Example:
-     *  You want to delete a task and a appointment, then you have to set the schemaName to the corresponding group.
-     *  In this case, it will be "taskboard".
-     * @param entityIds
-     * @param schemaName
+     * @param data
      */
-    async deleteEntities(entityIds: string[], schemaName: string) {
-        return this.invokeApi(`/schemas/${schemaName}/entities`, 'DELETE')
+    async deleteEntities(data: ({ entityId: string; schema: string; })[]) {
+        return this.invokeApi(`/entities`, 'DELETE', data, {
+            headers: {
+                // The v2 header is important, otherwise a customer could delete his whole system
+                'x-ff-version': 2
+            }
+        });
     }
 
     /**
