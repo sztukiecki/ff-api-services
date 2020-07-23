@@ -145,7 +145,7 @@ export class EntityService extends APIClient {
      * Deletes some entities of a specific schema. The schema can be a group as well.
      * @param data
      */
-    async deleteEntities(data: EntitySchemaQuery[]) {
+    async deleteEntities(data: { entities: EntitySchemaQuery[] }) {
         return this.invokeApiWithErrorHandling<DeleteEntitiesResponse<string>>(`/entities`, 'DELETE', data, {
             headers: {
                 // The v2 header is important, otherwise a customer could delete his whole system
