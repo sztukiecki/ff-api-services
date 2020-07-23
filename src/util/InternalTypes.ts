@@ -22,6 +22,11 @@ export interface EntityQuery {
     schemaId: string;
 }
 
+export interface EntitySchemaQuery {
+    entityId: string;
+    schema: string;
+}
+
 // --- property-marketing-phase-service ---
 
 export interface PhaseConfigurationInformation {

@@ -3,7 +3,16 @@ import { Entity, EntityDescriptor, EntityAccess, EntityACLType, EntityValues, En
 import { AxiosResponse } from 'axios';
 import { v4 as uuid } from 'uuid/interfaces';
 import { APIClient, APIMapping } from '../http';
-import { EntityQuery, ParamList, SearchResult, UniformObject } from '../util/InternalTypes';
+import { EntityQuery, EntitySchemaQuery, ParamList, SearchResult, UniformObject } from '..';
+
+export interface DeleteEntitiesResponse<T> {
+    responses: {
+        [entityId: string]: {
+            response: T;
+            statusCode: number;
+        }
+    }
+}
 
 export class EntityService extends APIClient {
 
@@ -136,8 +145,8 @@ export class EntityService extends APIClient {
      * Deletes some entities of a specific schema. The schema can be a group as well.
      * @param data
      */
-    async deleteEntities(data: ({ entityId: string; schema: string; })[]) {
-        return this.invokeApi(`/entities`, 'DELETE', data, {
+    async deleteEntities(data: EntitySchemaQuery[]) {
+        return this.invokeApiWithErrorHandling<DeleteEntitiesResponse<string>>(`/entities`, 'DELETE', data, {
             headers: {
                 // The v2 header is important, otherwise a customer could delete his whole system
                 'x-ff-version': 2
