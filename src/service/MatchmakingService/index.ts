@@ -3,10 +3,10 @@ import { IS24LeadService } from '../IS24LeadService';
 
 export class MatchmakingService {
 
-    public readonly matchController: MatchController;
+    public readonly match: MatchController;
 
     public constructor() {
-        this.matchController = new MatchController();
+        this.match = new MatchController();
     }
 }
 
