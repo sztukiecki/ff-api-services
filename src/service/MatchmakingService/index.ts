@@ -1,5 +1,4 @@
 import MatchController from './MatchController';
-import { IS24LeadService } from '../IS24LeadService';
 
 export class MatchmakingService {
 
@@ -10,4 +9,4 @@ export class MatchmakingService {
     }
 }
 
-export const MatchmakingServiceInstance  = new IS24LeadService();
+export const MatchmakingServiceInstance  = new MatchmakingService();
