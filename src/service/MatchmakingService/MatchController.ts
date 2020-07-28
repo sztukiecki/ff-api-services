@@ -16,7 +16,7 @@ export default class MatchController extends APIClient {
      * @param offset
      */
     async fetchMatchesBySearchProfile(searchProfileId: string, page: number = 0, size: number = 10, offset: number = 0) {
-        return await this.invokeApiWithErrorHandling<PagedResponse<MatchmakingTypes.MatchedSearchProfile>>(`/match/search-profile/${searchProfileId}`, 'GET', undefined, {
+        return await this.invokeApiWithErrorHandling<PagedResponse<MatchmakingTypes.MatchedEstate>>(`/match/search-profile/${searchProfileId}`, 'GET', undefined, {
             queryParams: { page, size, offset },
         });
     }
