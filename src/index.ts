@@ -22,7 +22,6 @@ export { default as InquiryService } from './service/InquiryService';
 export { default as InteractiveExposeDeliveryService } from './service/InteractiveExposeDeliveryService';
 export { default as InteractiveExposeService } from './service/InteractiveExposeService';
 export { default as InteractiveExposeStatisticsService } from './service/InteractiveExposeStatisticsService';
-export { default as MatchmakingService } from './service/MatchmakingService';
 export { default as ModuleService } from './service/ModuleService';
 export { default as NylasService } from './service/NylasService/NylasService';
 export { default as NylasContactSyncService } from './service/NylasContactSyncService';
@@ -69,6 +68,7 @@ export * from './service/ViewDefinitionService';
 export * from './service/ImportPreparationService';
 export * from './service/SampleDataService';
 export * from './service/RelogService';
+export * from './service/MatchmakingService';
 
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
