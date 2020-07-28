@@ -1,10 +1,16 @@
-import { PagedResponse } from '../..';
 import { APIClient, APIMapping } from '../../http';
 import { IS24ImportServiceTypes } from './IS24ImportService.Types';
 import IS24Property = IS24ImportServiceTypes.IS24Property;
 import PossibleUser = IS24ImportServiceTypes.PossibleUser;
 
-export default class IS24ImportContoller extends APIClient {
+export interface PagedResponse<T> {
+    entities: T[];
+    totalCount: number;
+    page: number;
+    size: number;
+}
+
+export default class IS24ImportController extends APIClient {
 
     constructor() {
         super(APIMapping.is24ImportService);

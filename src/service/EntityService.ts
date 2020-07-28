@@ -1,9 +1,9 @@
 import { Flowdsl } from '@flowfact/node-flowdsl';
-import { Entity, EntityDescriptor, EntityAccess, EntityACLType, EntityValues, EntityView } from '@flowfact/types';
+import { Entity, EntityDescriptor, EntityAccess, EntityACLType, EntityValues, EntityView, PagedResponse } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { v4 as uuid } from 'uuid/interfaces';
 import { APIClient, APIMapping } from '../http';
-import { EntityQuery, EntitySchemaQuery, ParamList, SearchResult, UniformObject } from '..';
+import { EntityQuery, EntitySchemaQuery, ParamList, UniformObject } from '..';
 
 export interface DeleteEntitiesResponse<T> {
     responses: {
@@ -77,7 +77,7 @@ export class EntityService extends APIClient {
             withCount
         };
 
-        return this.invokeApi<SearchResult<EntityView>>(`/search/schemas/${index}`, 'POST', flowdsl, {
+        return this.invokeApi<PagedResponse<EntityView>>(`/search/schemas/${index}`, 'POST', flowdsl, {
             queryParams: queryParams,
             headers: {
                 'Content-Type': 'application/json'
@@ -102,7 +102,7 @@ export class EntityService extends APIClient {
             withCount
         };
 
-        return this.invokeApi<SearchResult<EntityView>>(`/search/schemas/${index}`, 'POST', flowdsl, {
+        return this.invokeApi<PagedResponse<EntityView>>(`/search/schemas/${index}`, 'POST', flowdsl, {
             queryParams: queryParams,
         });
     }
@@ -124,7 +124,7 @@ export class EntityService extends APIClient {
             withCount
         };
 
-        return this.invokeApi<SearchResult<EntityView>>(`/search/schemas/${index}`, 'POST', flowdsl, {
+        return this.invokeApi<PagedResponse<EntityView>>(`/search/schemas/${index}`, 'POST', flowdsl, {
             queryParams: queryParams,
             headers: {
                 'x-ff-version': 2

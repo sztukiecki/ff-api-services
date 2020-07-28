@@ -1,8 +1,7 @@
 import { DslBuilder, EntityIdCondition, Flowdsl, FlowdslConditionUnion, HasFieldWithValueCondition } from '@flowfact/node-flowdsl';
-import { Entity, FilterConfiguration } from '@flowfact/types';
+import { Entity, FilterConfiguration, PagedResponse } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
-import { SearchResult } from '../util/InternalTypes';
 
 export class SearchService extends APIClient {
 
@@ -70,7 +69,7 @@ export class SearchService extends APIClient {
             queryParams.withCount = withCount;
         }
 
-        return await this.invokeApi<SearchResult<Entity>>('/schemas/' + index, 'POST', query, {
+        return await this.invokeApi<PagedResponse<Entity>>('/schemas/' + index, 'POST', query, {
             queryParams: queryParams,
             headers: {
                 'Content-Type': 'application/json',
@@ -128,7 +127,7 @@ export class SearchService extends APIClient {
             queryParams.size = size;
         }
 
-        return await this.invokeApi<SearchResult<Entity>>('/schemas/' + index, 'POST', this.buildQuery(filter, sorting), {
+        return await this.invokeApi<PagedResponse<Entity>>('/schemas/' + index, 'POST', this.buildQuery(filter, sorting), {
             queryParams: queryParams,
             headers: {
                 'Content-Type': 'application/json',

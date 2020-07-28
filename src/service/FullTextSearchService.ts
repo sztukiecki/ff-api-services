@@ -1,6 +1,6 @@
 import { APIClient, APIMapping } from '../http';
-import { ParamList, SearchResult } from '../util/InternalTypes';
-import { Entity } from '@flowfact/types';
+import { ParamList } from '../util/InternalTypes';
+import { Entity, PagedResponse } from '@flowfact/types';
 
 export class FullTextSearchService extends APIClient {
 
@@ -17,7 +17,7 @@ export class FullTextSearchService extends APIClient {
      * @param params
      */
     async search(schemaName: string, searchTerm: string, page: number = 1, size?: number, params: ParamList = {}) {
-        return this.invokeApi<SearchResult<Entity>>('/search/' + schemaName, 'GET', '', {
+        return this.invokeApi<PagedResponse<Entity>>('/search/' + schemaName, 'GET', '', {
             queryParams: {
                 page,
                 size,
