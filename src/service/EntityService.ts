@@ -1,5 +1,5 @@
 import { Flowdsl } from '@flowfact/node-flowdsl';
-import { Entity, EntityDescriptor, EntityAccess, EntityACLType, EntityValues, EntityView, PagedResponse } from '@flowfact/types';
+import { Entity, EntityDescriptor, EntityAccess, EntityACLType, EntityFieldValues, EntityView, PagedResponse } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { v4 as uuid } from 'uuid/interfaces';
 import { APIClient, APIMapping } from '../http';
@@ -160,7 +160,7 @@ export class EntityService extends APIClient {
      * @param entityId
      * @param field
      */
-    async updateEntityField(schemaId: string, entityId: string, field: UniformObject<EntityValues>) {
+    async updateEntityField(schemaId: string, entityId: string, field: UniformObject<EntityFieldValues>) {
         return this.invokeApi<Entity>(`/schemas/${schemaId}/entities/${entityId}`, 'PATCH', field);
     }
 

@@ -1,7 +1,29 @@
-import { Inquiry, InquiryAutomation } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 import { Flowdsl } from '@flowfact/node-flowdsl';
+
+export type InquiryStatus = 'active' | 'pinned' | 'done';
+
+export interface Inquiry {
+    id: string;
+    iexSendAt: number;
+    iexOpenedAt: number;
+    contact: string;
+    estate: string;
+    portalId: string;
+    inquiryText: string;
+    status: InquiryStatus;
+    isSendingIEXAutomaticallyEnabled: true;
+    realEstateAgent: string;
+    inquiryRecipient: string;
+    created: number;
+}
+
+export interface InquiryAutomation {
+    id: string;
+    companyId: string;
+    isActive: boolean;
+}
 
 export class InquiryService extends APIClient {
 
