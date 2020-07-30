@@ -26,9 +26,9 @@ export default class MatchController extends APIClient {
      * @param size
      * @param offset
      */
-    async fetchArchivedEstatesBySearchProfile(searchProfileId: string, size: number = 10, offset: number = 0) {
+    async fetchArchivedEstatesBySearchProfile(searchProfileId: string, query: MatchmakingTypes.EstatesBySearchProfileQuery = {}, size: number = 10, offset: number = 0) {
         return await this.invokeApiWithErrorHandling<PagedResponse<MatchmakingTypes.MatchedEstate>>(`/match/search-profile/${searchProfileId}/blacklist`, 'GET', undefined, {
-            queryParams: { size, offset },
+            queryParams: { ...query, size, offset },
         });
     }
 
