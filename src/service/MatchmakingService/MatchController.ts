@@ -16,7 +16,8 @@ export default class MatchController extends APIClient {
      * @param offset
      */
     async fetchMatchesBySearchProfile(searchProfileId: string, query: MatchmakingTypes.EstatesBySearchProfileQuery = {}, sorting: Sort[] = [], size: number = 10, offset: number = 0) {
-        const sort: string = sorting.map(item => (item.field + (item.direction === 'ASC' ? '+' : '-'))).join(',');
+        // converts sorting to a string like "+fieldName,-fieldName2"
+        const sort: string = sorting.map(item => ((item.direction === 'ASC' ? '+' : '-') + item.field)).join(',');
         return await this.invokeApiWithErrorHandling<PagedResponse<MatchmakingTypes.MatchedEstate>>(`/match/search-profile/${searchProfileId}`, 'GET', undefined, {
             queryParams: { ...query, size, offset, ...(sort && { sort }) },
         });
