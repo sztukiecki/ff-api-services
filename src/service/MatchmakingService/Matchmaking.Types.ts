@@ -20,4 +20,9 @@ export namespace MatchmakingTypes {
     export interface MatchedSearchProfile extends AbstractMatch {
         searchProfile: Entity;
     }
+
+    export interface EstatesBySearchProfileQuery {
+        ignored?: boolean;
+        offered?: boolean;
+    }
 }
