@@ -107,10 +107,10 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@flowfact/node-flowdsl@^2.20200707.32":
-  version "2.20200707.32"
-  resolved "https://registry.yarnpkg.com/@flowfact/node-flowdsl/-/node-flowdsl-2.20200707.32.tgz#b4342e52c7f6c7038dade717a394adcdf3913863"
-  integrity sha512-XXr4uMaPhLd5yQ16Sz/VPVmRLR7+XR4AbukDVh7ZGKPUo+he24ha0SEw0zyfsFtB936S202D37mYo6nqyHxLRg==
+"@flowfact/node-flowdsl@^2.20200730.33":
+  version "2.20200730.33"
+  resolved "https://registry.yarnpkg.com/@flowfact/node-flowdsl/-/node-flowdsl-2.20200730.33.tgz#85e5bc774e355d075a5961be8551ad9b671e59b6"
+  integrity sha512-MdC6Ticqp+QhNhTeQkSev6fdYBnBDxc+RwLZCW9VBjVOaVIR2WghaoBQFsh3HXO+iymXCQW9+wuGUL+19bPu/w==
   dependencies:
     tslib "^1.10.0"
 
