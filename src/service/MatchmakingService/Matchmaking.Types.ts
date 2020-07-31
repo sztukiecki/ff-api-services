@@ -25,9 +25,4 @@ export namespace MatchmakingTypes {
         ignored?: boolean;
         offered?: boolean;
     }
-
-    export interface EstatesBySearchProfileSorting {
-        sortingFields?: string[];
-        sortingDirection?: 'ASC' | 'DESC';
-    }
 }

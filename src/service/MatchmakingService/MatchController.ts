@@ -1,6 +1,7 @@
 import { APIClient, APIMapping } from '../../http';
 import { PagedResponse } from '@flowfact/types';
 import { MatchmakingTypes } from './Matchmaking.Types';
+import { Sort } from '@flowfact/node-flowdsl';
 
 export default class MatchController extends APIClient {
 
@@ -14,16 +15,10 @@ export default class MatchController extends APIClient {
      * @param size
      * @param offset
      */
-    async fetchMatchesBySearchProfile(searchProfileId: string, query: MatchmakingTypes.EstatesBySearchProfileQuery = {}, sorting: MatchmakingTypes.EstatesBySearchProfileSorting = {}, size: number = 10, offset: number = 0) {
-        const preparedSorting: { sortingFields?: string; sortingDirection?: string } = {};
-        if (sorting.sortingFields?.length) {
-            preparedSorting.sortingFields = sorting.sortingFields.join(',');
-        }
-        if (sorting.sortingDirection) {
-            preparedSorting.sortingDirection = sorting.sortingDirection;
-        }
+    async fetchMatchesBySearchProfile(searchProfileId: string, query: MatchmakingTypes.EstatesBySearchProfileQuery = {}, sorting: Sort[] = [], size: number = 10, offset: number = 0) {
+        const sort: string = sorting.map(item => (item.field + (item.direction === 'ASC' ? '+' : '-'))).join(',');
         return await this.invokeApiWithErrorHandling<PagedResponse<MatchmakingTypes.MatchedEstate>>(`/match/search-profile/${searchProfileId}`, 'GET', undefined, {
-            queryParams: { ...query, ...preparedSorting, size, offset, },
+            queryParams: { ...query, size, offset, ...(sort && { sort }) },
         });
     }
 
