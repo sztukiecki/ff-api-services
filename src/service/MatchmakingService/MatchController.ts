@@ -12,6 +12,9 @@ export default class MatchController extends APIClient {
     /**
      * Fetch matches for a given search profile id
      * @param searchProfileId
+     * @param query
+     *      The query to filter special results
+     * @param sorting
      * @param size
      * @param offset
      */
