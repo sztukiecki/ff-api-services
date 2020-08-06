@@ -1,6 +1,7 @@
 import {APIClient, APIMapping} from "../../http";
 import {PortalManagementTypes} from "./PortalManagementService.Types";
 import PortalEstateSettings = PortalManagementTypes.PortalEstateSettings;
+import PortalEstate = PortalManagementTypes.PortalEstate;
 
 export class PortalEstateController extends APIClient {
     constructor() {
@@ -11,7 +12,7 @@ export class PortalEstateController extends APIClient {
     * @param estateId
     */
      async fetchPublishInformation(estateId: string) {
-        return await this.invokeApiWithErrorHandling(`/estates/${estateId}/portals`, 'GET');
+        return await this.invokeApiWithErrorHandling<PortalEstate[]>(`/estates/${estateId}/portals`, 'GET');
     }
 
     /**
@@ -19,7 +20,7 @@ export class PortalEstateController extends APIClient {
      * @param portalId
      */
     async fetchAll(portalId: string) {
-        return await this.invokeApiWithErrorHandling(`/portals/${portalId}/estates`, 'GET');
+        return await this.invokeApiWithErrorHandling<PortalEstate[]>(`/portals/${portalId}/estates`, 'GET');
     }
 
 

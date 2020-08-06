@@ -48,6 +48,15 @@ export namespace PortalManagementTypes {
         vendor?: string;
     }
 
+    export interface PortalEstate {
+        portalId?: string;
+        entityId?: string;
+        lastUpdate?: number;
+        onlineSince?: number;
+        showAddress?: boolean;
+        channels: PublishChannel[];
+    }
+
     export interface PortalEstateSettings {
         id: string;
         portalId: string;
@@ -95,8 +104,8 @@ export namespace PortalManagementTypes {
     }
 
     export interface PortalTypeWithCaption {
-       captions: { [key: string]: string };
-       logo: string;
-       portalType: PortalType;
+        captions: { [key: string]: string };
+        logo: string;
+        portalType: PortalType;
     }
 }
