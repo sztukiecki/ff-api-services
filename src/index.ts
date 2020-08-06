@@ -28,7 +28,6 @@ export { default as NylasContactSyncService } from './service/NylasContactSyncSe
 export { default as Office365AuthenticationService } from './service/Office365AuthenticationService';
 export { default as OpenimmoPublishService } from './service/OpenimmoPublishService';
 export { default as OnboardingService } from './service/OnboardingService';
-export { default as PortalManagementService } from './service/PortalManagementService';
 export { default as PresetService } from './service/PresetService';
 export { default as PropertyMarketingPhaseService } from './service/PropertyMarketingPhaseService';
 export { default as SchemaService } from './service/SchemaService';
@@ -69,6 +68,7 @@ export * from './service/ImportPreparationService';
 export * from './service/SampleDataService';
 export * from './service/RelogService';
 export * from './service/MatchmakingService';
+export * from './service/PortalManagementService'
 
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';

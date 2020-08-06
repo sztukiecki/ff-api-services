@@ -1,7 +1,7 @@
 {
   "name": "@flowfact/api-services",
-  "version": "20.0.0-SNAPSHOT",
-  "description": "middleware of flowfact to interact between frontend and backend",
+  "version": "21.0.0-SNAPSHOT",
+  "description": "middleware of FLOWFACT to interact between frontend and backend",
   "main": "build/index.js",
   "module": "build/es/index.js",
   "types": "build/index.d.ts",
