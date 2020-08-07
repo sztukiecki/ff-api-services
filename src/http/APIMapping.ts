@@ -76,7 +76,6 @@ const APIMapping = {
     openimmoFtpAccessService: new APIService('openimmo-ftp-access-service'),
     openimmoImporterService: new APIService('openimmo-importer-service'),
     workflowService: new APIService('workflow-service'),
-    searchProfileService: new APIService('v2-search-service'),
     is24ImportService: new APIService('is24-import-service'),
     documentGeneratorService: new APIService('document-generator-service'),
     documentTemplateService: new APIService('document-template-service')
