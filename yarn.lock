@@ -107,19 +107,19 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@flowfact/node-flowdsl@^2.20200804.36":
-  version "2.20200804.36"
-  resolved "https://registry.yarnpkg.com/@flowfact/node-flowdsl/-/node-flowdsl-2.20200804.36.tgz#e4649eadb8548d02bafe6c0fdc91918fad478cbb"
-  integrity sha512-iZlouk3SeNOVWfpyRrLIM6Cr/zjPEKBkOTUEbZb7QYhNVVS4ccM9Zry0kioDolXrC3sxVnibydW74mJyIhjX2A==
+"@flowfact/node-flowdsl@^2.20200810.37":
+  version "2.20200810.37"
+  resolved "https://registry.yarnpkg.com/@flowfact/node-flowdsl/-/node-flowdsl-2.20200810.37.tgz#92df99b48e2b7e644a928df12c2336118b17220a"
+  integrity sha512-LgnZoVIY4PWOJyVc2+E4HwOOUN+ZZoK/5mrn/VV5EhhjvUhrhTOAhfc5F00RrwutfE3HNh637W00aXjqHU96Ug==
   dependencies:
     tslib "^1.10.0"
 
-"@flowfact/types@^4.20200807.160":
-  version "4.20200807.160"
-  resolved "https://registry.yarnpkg.com/@flowfact/types/-/types-4.20200807.160.tgz#1f2fdc31033db52ceec0c6987aeb6984ccff9d0b"
-  integrity sha512-UMHQ6EVxhP+Y8IoYoyF2gwVC6ogAMSIZvXtXsjmW3+NSdUlZlp45qlKaeeL9cxzWGWsQ32YwnM64oJ03hUpbBQ==
+"@flowfact/types@^4.20200810.161":
+  version "4.20200810.161"
+  resolved "https://registry.yarnpkg.com/@flowfact/types/-/types-4.20200810.161.tgz#3af517c62130a96836738c7f9844454f82ea1660"
+  integrity sha512-0vvT5arWZJiC0rfNEE9EzjNf8I7N+REgywV/l5EYCHuGA78VS0ukrXUlbG1Cdo5WA/9J2cSrs+lGykzEzYAtYA==
   dependencies:
-    "@flowfact/node-flowdsl" "^2.20200804.36"
+    "@flowfact/node-flowdsl" "^2.20200810.37"
     "@types/node" "^11.15.4"
     tslib "^1.10.0"
 
