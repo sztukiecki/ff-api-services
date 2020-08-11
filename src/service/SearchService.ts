@@ -81,13 +81,14 @@ export class SearchService extends APIClient {
      * Fetches the number of entities matching the given query
      * @param query
      * @param index
+     * @param groupBy
      */
-    async count(query: Flowdsl, index: string) {
-        return await this.invokeApi('/schemas/' + index + '/count', 'POST', query, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+    async count(query: Flowdsl, index: string, groupBy?: string) {
+        const additionalParams: any = {headers: {'Content-Type': 'application/json'}}
+        if (groupBy) {
+            additionalParams.queryParams = {groupBy: groupBy}
+        }
+        return await this.invokeApi('/schemas/' + index + '/count', 'POST', query, additionalParams);
     }
 
     /**
