@@ -1,7 +1,13 @@
-import { DslBuilder, EntityIdCondition, Flowdsl, FlowdslConditionUnion, HasFieldWithValueCondition } from '@flowfact/node-flowdsl';
-import { Entity, FilterConfiguration, PagedResponse } from '@flowfact/types';
-import { AxiosResponse } from 'axios';
-import { APIClient, APIMapping } from '../http';
+import {
+    DslBuilder,
+    EntityIdCondition,
+    Flowdsl,
+    FlowdslConditionUnion,
+    HasFieldWithValueCondition
+} from '@flowfact/node-flowdsl';
+import {Entity, FilterConfiguration, PagedResponse} from '@flowfact/types';
+import {AxiosResponse} from 'axios';
+import {APIClient, APIMapping} from '../http';
 
 export class SearchService extends APIClient {
 
@@ -84,11 +90,14 @@ export class SearchService extends APIClient {
      * @param groupBy
      */
     async count(query: Flowdsl, index: string, groupBy?: string) {
-        const additionalParams: any = {headers: {'Content-Type': 'application/json'}}
-        if (groupBy) {
-            additionalParams.queryParams = {groupBy: groupBy}
-        }
-        return await this.invokeApi('/schemas/' + index + '/count', 'POST', query, additionalParams);
+        return await this.invokeApi('/schemas/' + index + '/count', 'POST', query, {
+            queryParams: {
+                groupBy: groupBy
+            },
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
     }
 
     /**
