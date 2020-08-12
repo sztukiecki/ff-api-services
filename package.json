@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@flowfact/node-flowdsl": "^2.20200810.37",
-    "@flowfact/types": "^4.20200811.162",
+    "@flowfact/types": "^4.20200812.163",
     "@types/graphql": "14.0.7",
     "@types/node": "^11.15.4",
     "@types/prop-types": "^15.5.1",
