@@ -18,7 +18,7 @@ export default class MatchController extends APIClient {
      * @param size
      * @param offset
      */
-    async fetchMatchesBySearchProfile(searchProfileId: string, query: MatchmakingTypes.EstatesBySearchProfileQuery = {}, sorting: Sort, size: number = 10, offset: number = 0) {
+    async fetchMatchesBySearchProfile(searchProfileId: string, query: MatchmakingTypes.FilterQuery = {}, sorting: Sort, size: number = 10, offset: number = 0) {
         // converts sorting to a string like "+fieldName,-fieldName2"
         const sortParameter: string | undefined = sorting?.fields?.map(fieldName => `${sorting.direction === 'ASC' ? '+' : '-'}${fieldName}`).join(',')
         return await this.invokeApiWithErrorHandling<PagedResponse<MatchmakingTypes.MatchedEstate>>(`/match/search-profile/${searchProfileId}`, 'GET', undefined, {
@@ -29,12 +29,15 @@ export default class MatchController extends APIClient {
     /**
      * Fetch matches for a given estate id
      * @param estateId
+     * @param query
+     * @param sorting
      * @param size
      * @param offset
      */
-    async fetchMatchesByEstate(estateId: string, size: number = 10, offset: number = 0) {
+    async fetchMatchesByEstate(estateId: string, query: MatchmakingTypes.FilterQuery = {}, sorting: Sort, size: number = 10, offset: number = 0) {
+        const sortParameter: string | undefined = sorting?.fields?.map(fieldName => `${sorting.direction === 'ASC' ? '+' : '-'}${fieldName}`).join(',')
         return await this.invokeApiWithErrorHandling<PagedResponse<MatchmakingTypes.MatchedSearchProfile>>(`/match/estate/${estateId}`, 'GET', undefined, {
-            queryParams: { size, offset },
+            queryParams: { ...query, size, offset, sort: sortParameter },
         });
     }
 }

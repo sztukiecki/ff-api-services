@@ -21,7 +21,7 @@ export namespace MatchmakingTypes {
         searchProfile: Entity;
     }
 
-    export interface EstatesBySearchProfileQuery {
+    export interface FilterQuery {
         ignored?: boolean;
         offered?: boolean;
     }
