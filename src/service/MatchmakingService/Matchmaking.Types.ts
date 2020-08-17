@@ -11,6 +11,7 @@ export namespace MatchmakingTypes {
     export interface AbstractMatch {
         alreadyOffered: boolean;
         updatedFields: UpdatedField[];
+        entity: Entity;
     }
 
     export interface MatchedEstate extends AbstractMatch {
