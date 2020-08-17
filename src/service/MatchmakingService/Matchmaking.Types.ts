@@ -8,7 +8,7 @@ export namespace MatchmakingTypes {
         currentValue: string | number | object | null;
     }
 
-    interface AbstractMatch {
+    export interface AbstractMatch {
         alreadyOffered: boolean;
         updatedFields: UpdatedField[];
     }
