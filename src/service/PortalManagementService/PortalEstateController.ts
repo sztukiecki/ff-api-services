@@ -55,7 +55,7 @@ export class PortalEstateController extends APIClient {
     }
 
 
-    async getNumberOfPublishedEstates(portalId: string) {
+    async fetchNumberOfPublishedEstates(portalId: string) {
         return await this.invokeApiWithErrorHandling<number>(`/portals/${portalId}/estates/count`, 'GET');
     }
 
