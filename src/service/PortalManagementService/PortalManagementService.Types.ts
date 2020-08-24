@@ -108,4 +108,14 @@ export namespace PortalManagementTypes {
         logo: string;
         portalType: PortalType;
     }
+
+    export interface PortalPublishInformation {
+        portalId: string;
+        entityId?: string;
+        lastUpdate?: number;
+        onlineSince?: number;
+        showAddress?: boolean;
+        channels?: PublishChannel[];
+    }
+
 }
