@@ -1,4 +1,5 @@
 import { APIClient, APIMapping } from '../../http';
+import {IS24PublishTypes} from "./IS24Publish.Types";
 
 export class IS24PublishController extends APIClient {
 
@@ -35,7 +36,7 @@ export class IS24PublishController extends APIClient {
      * @param portalId
      */
     async fetchOffer(estateId: string, portalId: string) {
-        return await this.invokeApiWithErrorHandling(`/OTP/estate/${estateId}/portal/${portalId}`, 'GET');
+        return await this.invokeApiWithErrorHandling<IS24PublishTypes.IS24UpsellOffer>(`/OTP/estate/${estateId}/portal/${portalId}`, 'GET');
     }
 }
 
