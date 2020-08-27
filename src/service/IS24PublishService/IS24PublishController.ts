@@ -1,6 +1,7 @@
 import { APIClient, APIMapping } from '../../http';
 import {IS24PublishTypes} from "./IS24Publish.Types";
 
+
 export class IS24PublishController extends APIClient {
 
     constructor() {
@@ -14,7 +15,7 @@ export class IS24PublishController extends APIClient {
      * @param toDate
      */
     async fetchReport(estateId: string, startDate: any, toDate: any) {
-        return await this.invokeApiWithErrorHandling(`/statistics/estates/${estateId}`, 'GET', undefined, {
+        return await this.invokeApiWithErrorHandling<IS24PublishTypes.IS24Statistics>(`/statistics/estates/${estateId}`, 'GET', undefined, {
             queryParams: {
                 startDate: startDate,
                 toDate: toDate,
