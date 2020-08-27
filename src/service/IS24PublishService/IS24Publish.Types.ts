@@ -22,4 +22,9 @@ export namespace IS24PublishTypes {
             onShortList: number,
         }
     }
+
+    export interface IS24Projects {
+        channelId: string,
+        name: string,
+    }
 }
