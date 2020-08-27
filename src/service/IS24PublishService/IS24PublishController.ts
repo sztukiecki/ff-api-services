@@ -28,7 +28,7 @@ export class IS24PublishController extends APIClient {
      * @param portalId
      */
     async fetchProjects(portalId: string) {
-        return await this.invokeApiWithErrorHandling<IS24PublishTypes.IS24Projects>(`/portals/${portalId}/projects`, 'GET');
+        return await this.invokeApiWithErrorHandling<IS24PublishTypes.IS24Projects[]>(`/portals/${portalId}/projects`, 'GET');
     }
 
     /**
