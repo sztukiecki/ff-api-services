@@ -15,14 +15,6 @@ export class ImporterFlowFactTransferService extends APIClient {
             }
         });
     }
-
-    async getDirectoryEntries(companyId: string): Promise<AxiosResponse<string>> {
-        return this.invokeApi(`/log/company/${companyId}`, 'GET')
-    }
-
-    async getContentsInDirectoryOfCompany(companyId: string, table: string): Promise<AxiosResponse<string>> {
-        return this.invokeApi(`/log/company/${companyId}/table/${table}`, `GET`)
-    }
 }
 
 export default new ImporterFlowFactTransferService();
