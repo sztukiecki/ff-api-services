@@ -51,6 +51,7 @@ export { default as SoftLinksEntityService } from './service/SoftLinksEntityServ
 export { default as OpenimmoImporterService } from './service/OpenimmoImporterService';
 export { default as ImporterFlowFactTransferService } from './service/ImporterFlowFactTransferService';
 export { default as AclGroupServiceRest } from './service/AclGroupServiceRest';
+export { default as LambdaProxyService } from './service/LambdaProxyService';
 
 export * from './service/IS24LeadService';
 export * from './service/IS24ImportService';
