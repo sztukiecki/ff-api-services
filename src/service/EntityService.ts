@@ -179,8 +179,8 @@ export class EntityService extends APIClient {
      * @param schemaId
      * @param entityId
      */
-    async fetchEntity(entityId: string, schemaId?: string) {
-        return this.invokeApi<Entity>(schemaId ? `/schemas/${schemaId}/entities/${entityId}` : `/entities/${entityId}`, 'GET');
+    async fetchEntity(schemaId: string, entityId: string) {
+        return this.invokeApi<Entity>(`/schemas/${schemaId}/entities/${entityId}`, 'GET');
     }
 
     /**
