@@ -1,5 +1,5 @@
 import {APIClient, APIMapping} from '../../http';
-import {PossibleValue} from "./PossibleValuesService.Types";
+import {PossibleValue} from '@flowfact/types';
 
 export class PossibleValuesService extends APIClient {
   constructor() {
@@ -14,7 +14,7 @@ export class PossibleValuesService extends APIClient {
     return this.invokeApiWithErrorHandling<void>(`/schemas/${schemaName}/possiblevalues`, 'POST', possibleValues);
   }
 
-  deletePossibleValue = async (schemaName: string, fieldName: string, possibleValue: any) => {
+  deletePossibleValue = async (schemaName: string, fieldName: string, possibleValue: string) => {
     return this.invokeApiWithErrorHandling<void>(`/schemas/${schemaName}/fields/${fieldName}/possiblevalues/${possibleValue}`, 'DELETE');
   }
 }
