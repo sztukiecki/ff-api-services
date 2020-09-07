@@ -3,6 +3,8 @@ import { WidgetLayoutTypes } from './WidgetLayoutTypes';
 
 import PagedWidgetLayouts = WidgetLayoutTypes.PagedWidgetLayouts;
 import WidgetLayout = WidgetLayoutTypes.WidgetLayout;
+import LayoutType = WidgetLayoutTypes.LayoutType;
+import BaseWidgetLayout = WidgetLayoutTypes.BaseWidgetLayout;
 
 class WidgetLayoutsController extends APIClient {
 
@@ -15,12 +17,15 @@ class WidgetLayoutsController extends APIClient {
      * @param schemaNames
      * @param short
      *  Return short variants or not
+     * @param layoutType
+     *  With LayoutType.GENERAL returns layouts for General Widgets, LayoutType.SCHEMA_BOUND returns layouts for Entity Widgets.
      */
-    async fetchLayouts(schemaNames: string[] = [], short: boolean = false) {
+    async fetchLayouts(schemaNames: string[] = [], short: boolean = false, layoutType: LayoutType = LayoutType.SCHEMA_BOUND) {
         return this.invokeApiWithErrorHandling<PagedWidgetLayouts>('/widget-layouts', 'GET', undefined, {
             queryParams: {
                 schema: schemaNames.join(','),
-                short: short
+                short: short,
+                type: layoutType
             },
             headers: {
                 'x-ff-version': 2
@@ -32,8 +37,11 @@ class WidgetLayoutsController extends APIClient {
      * Creates a new layout for a specific schema
      * @param layout
      */
-    async createLayout(layout: WidgetLayout) {
-        return this.invokeApiWithErrorHandling<WidgetLayout>('/widget-layouts', 'POST', layout, {
+    async createLayout<T extends BaseWidgetLayout = WidgetLayout>(layout: T) {
+        return this.invokeApiWithErrorHandling<T>('/widget-layouts', 'POST', layout, {
+            queryParams: {
+                type: layout.type
+            },
             headers: {
                 'x-ff-version': 2
             }
@@ -44,8 +52,8 @@ class WidgetLayoutsController extends APIClient {
      * Fetches a layout by the id
      * @param layoutId
      */
-    async fetchLayout(layoutId: string) {
-        return this.invokeApiWithErrorHandling<WidgetLayout>(`/widget-layouts/${layoutId}`, 'GET', undefined,{
+    async fetchLayout<T extends BaseWidgetLayout = WidgetLayout>(layoutId: string) {
+        return this.invokeApiWithErrorHandling<T>(`/widget-layouts/${layoutId}`, 'GET', undefined,{
             headers: {
                 'x-ff-version': 2
             }
@@ -56,8 +64,11 @@ class WidgetLayoutsController extends APIClient {
      * Updates a layout by the id
      * @param layout
      */
-    async updateLayout(layout: WidgetLayout) {
-        return this.invokeApiWithErrorHandling<WidgetLayout>(`/widget-layouts/${layout.id}`, 'PUT', layout, {
+    async updateLayout<T extends BaseWidgetLayout = WidgetLayout>(layout: T) {
+        return this.invokeApiWithErrorHandling<T>(`/widget-layouts/${layout.id}`, 'PUT', layout, {
+            queryParams: {
+                type: layout.type
+            },
             headers: {
                 'x-ff-version': 2
             }
