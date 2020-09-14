@@ -3,7 +3,7 @@ import { WidgetLayoutTypes } from './WidgetLayoutTypes';
 
 import PagedWidgetLayouts = WidgetLayoutTypes.PagedWidgetLayouts;
 import SchemaBoundWidgetLayout = WidgetLayoutTypes.SchemaBoundWidgetLayout;
-import LayoutType = WidgetLayoutTypes.LayoutType;
+import LayoutDomainType = WidgetLayoutTypes.LayoutDomainType;
 import BaseWidgetLayout = WidgetLayoutTypes.BaseWidgetLayout;
 
 class WidgetLayoutsController extends APIClient {
@@ -17,15 +17,15 @@ class WidgetLayoutsController extends APIClient {
      * @param schemaNames
      * @param short
      *  Return short variants or not
-     * @param layoutType
+     * @param layoutDomainType
      *  With LayoutType.GENERAL returns layouts for General Widgets, LayoutType.SCHEMA_BOUND returns layouts for Entity Widgets.
      */
-    async fetchLayouts(schemaNames: string[] = [], short: boolean = false, layoutType: LayoutType = LayoutType.SCHEMA_BOUND) {
+    async fetchLayouts(schemaNames: string[] = [], short: boolean = false, layoutDomainType: LayoutDomainType = LayoutDomainType.SCHEMA_BOUND) {
         return this.invokeApiWithErrorHandling<PagedWidgetLayouts>('/widget-layouts', 'GET', undefined, {
             queryParams: {
                 schema: schemaNames.join(','),
                 short: short,
-                type: layoutType
+                domainType: layoutDomainType
             },
             headers: {
                 'x-ff-version': 2
@@ -39,9 +39,6 @@ class WidgetLayoutsController extends APIClient {
      */
     async createLayout<T extends BaseWidgetLayout = SchemaBoundWidgetLayout>(layout: T) {
         return this.invokeApiWithErrorHandling<T>('/widget-layouts', 'POST', layout, {
-            queryParams: {
-                type: layout.type
-            },
             headers: {
                 'x-ff-version': 2
             }
@@ -66,9 +63,6 @@ class WidgetLayoutsController extends APIClient {
      */
     async updateLayout<T extends BaseWidgetLayout = SchemaBoundWidgetLayout>(layout: T) {
         return this.invokeApiWithErrorHandling<T>(`/widget-layouts/${layout.id}`, 'PUT', layout, {
-            queryParams: {
-                type: layout.type
-            },
             headers: {
                 'x-ff-version': 2
             }

@@ -1,6 +1,8 @@
 import { APIClient, APIMapping } from '../../http';
 import { WidgetTypes } from './WidgetTypes';
 import PagedWidgets = WidgetTypes.PagedWidgets;
+import {WidgetLayoutTypes} from "./WidgetLayoutTypes";
+import LayoutDomainType = WidgetLayoutTypes.LayoutDomainType;
 
 class WidgetStoreController extends APIClient {
 
@@ -8,9 +10,10 @@ class WidgetStoreController extends APIClient {
         super(APIMapping.dynamicLayoutService);
     }
 
-    async fetchAssignments(schemaName?: string) {
+    async fetchAssignments(layoutDomainType?: LayoutDomainType, schemaName?: string) {
         return this.invokeApiWithErrorHandling<PagedWidgets>('/widget-store/widget-assignments', 'GET', undefined, {
             queryParams: {
+                domainType: layoutDomainType,
                 schema: schemaName
             }
         });

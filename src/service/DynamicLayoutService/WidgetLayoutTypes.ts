@@ -1,7 +1,7 @@
 import { Captions, Layout } from "@flowfact/types";
 
 export namespace WidgetLayoutTypes {
-  export enum LayoutType {
+  export enum LayoutDomainType {
     GENERAL = "GENERAL",
     SCHEMA_BOUND = "SCHEMA_BOUND",
   }
@@ -12,16 +12,16 @@ export namespace WidgetLayoutTypes {
     captions: Captions;
     global: boolean;
     layout: Layout;
-    type: LayoutType;
+    domainType: LayoutDomainType;
   }
 
   export interface GeneralWidgetLayout extends BaseWidgetLayout {
-    type: LayoutType.GENERAL;
+    domainType: LayoutDomainType.GENERAL;
   }
 
   export interface SchemaBoundWidgetLayout extends BaseWidgetLayout {
     schema: string;
-    type: LayoutType.SCHEMA_BOUND;
+    domainType: LayoutDomainType.SCHEMA_BOUND;
   }
 
   export interface PagedWidgetLayouts {
