@@ -19,7 +19,7 @@ export namespace WidgetLayoutTypes {
     type: LayoutType.GENERAL;
   }
 
-  export interface WidgetLayout extends BaseWidgetLayout {
+  export interface SchemaBoundWidgetLayout extends BaseWidgetLayout {
     schema: string;
     type: LayoutType.SCHEMA_BOUND;
   }
@@ -27,6 +27,6 @@ export namespace WidgetLayoutTypes {
   export interface PagedWidgetLayouts {
     offset: number;
     total: number;
-    items: WidgetLayout[];
+    items: SchemaBoundWidgetLayout[];
   }
 }
