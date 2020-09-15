@@ -79,7 +79,8 @@ const APIMapping = {
     is24ImportService: new APIService('is24-import-service'),
     documentGeneratorService: new APIService('document-generator-service'),
     documentTemplateService: new APIService('document-template-service'),
-    lambdaProxyService: new APIService('lambda')
+    lambdaProxyService: new APIService('lambda'),
+    placeholderService: new APIService('placeholder-service')
 };
 
 export default APIMapping;

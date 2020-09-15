@@ -70,6 +70,7 @@ export * from './service/RelogService';
 export * from './service/MatchmakingService';
 export * from './service/PortalManagementService';
 export * from './service/IS24PublishService';
+export * from './service/PlaceholderService';
 
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
