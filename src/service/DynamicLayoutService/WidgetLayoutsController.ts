@@ -18,7 +18,7 @@ class WidgetLayoutsController extends APIClient {
      * @param short
      *  Return short variants or not
      * @param layoutDomainType
-     *  With LayoutType.GENERAL returns layouts for General Widgets, LayoutType.SCHEMA_BOUND returns layouts for Entity Widgets.
+     *  With LayoutDomainType.GENERAL returns layouts for General Widgets, LayoutDomainType.SCHEMA_BOUND returns layouts for Entity Widgets.
      */
     async fetchLayouts(schemaNames: string[] = [], short: boolean = false, layoutDomainType: LayoutDomainType = LayoutDomainType.SCHEMA_BOUND) {
         return this.invokeApiWithErrorHandling<PagedWidgetLayouts>('/widget-layouts', 'GET', undefined, {
