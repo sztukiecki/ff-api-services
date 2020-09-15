@@ -10,10 +10,10 @@ class WidgetStoreController extends APIClient {
         super(APIMapping.dynamicLayoutService);
     }
 
-    async fetchAssignments(layoutDomainType: LayoutDomainType, schemaName?: string) {
+    async fetchAssignments(layoutDomainTypes: LayoutDomainType[], schemaName?: string) {
         return this.invokeApiWithErrorHandling<PagedWidgets>('/widget-store/widget-assignments', 'GET', undefined, {
             queryParams: {
-                domainType: layoutDomainType,
+                domainType: layoutDomainTypes.join(','),
                 schema: schemaName
             }
         });
