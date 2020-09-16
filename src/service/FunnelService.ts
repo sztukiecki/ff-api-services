@@ -11,7 +11,7 @@ export class FunnelService extends APIClient {
      * @param funnelId
      */
     async fethcPossibleTags(funnelId: string) {
-        return this.invokeApi(`/funnels/${funnelId}/possibletags`, 'GET').then(s => s.data);
+        return this.invokeApi(`/funnels/${funnelId}/possibletags`, 'GET').then((s) => s.data);
     }
 
     /**
@@ -20,7 +20,7 @@ export class FunnelService extends APIClient {
      * @param tagName
      */
     async fetchKeysForTag(funnelId: string, tagName: string) {
-        return this.invokeApi(`/funnels/${funnelId}/tags/${tagName}/metadata/keys`, 'GET').then(s => s.data);
+        return this.invokeApi(`/funnels/${funnelId}/tags/${tagName}/metadata/keys`, 'GET').then((s) => s.data);
     }
 
     /**
@@ -30,7 +30,7 @@ export class FunnelService extends APIClient {
      * @param metadataKey
      */
     async fetchValuesForTagKey(funnelId: string, tagName: string, metadataKey: string) {
-        return this.invokeApi(`/funnels/${funnelId}/tags/${tagName}/metadata/keys/${metadataKey}/values`, 'GET').then(s => s.data);
+        return this.invokeApi(`/funnels/${funnelId}/tags/${tagName}/metadata/keys/${metadataKey}/values`, 'GET').then((s) => s.data);
     }
 
     /**
@@ -38,7 +38,7 @@ export class FunnelService extends APIClient {
      * @param funnelId
      */
     async fetchFunnelStatistics(funnelId: string) {
-        return this.invokeApi(`/funnels/${funnelId}/statistics`, 'GET').then(s => s.data);
+        return this.invokeApi(`/funnels/${funnelId}/statistics`, 'GET').then((s) => s.data);
     }
 
     /**
@@ -49,7 +49,7 @@ export class FunnelService extends APIClient {
      * @param size
      */
     async fetchFunnelStageEntities(funnelId: string, stageId: string, page: number = 1, size: number = 10) {
-        return (await this.invokeApi(`/funnels/${funnelId}/stage/${stageId}/entities`, 'GET', {page, size})).data;
+        return (await this.invokeApi(`/funnels/${funnelId}/stage/${stageId}/entities`, 'GET', { page, size })).data;
     }
 
     /**
@@ -57,7 +57,7 @@ export class FunnelService extends APIClient {
      * @param funnelToCreate
      */
     async createFunnel(funnelToCreate: any) {
-        return this.invokeApi('/funnels', 'POST', funnelToCreate || {}).then(s => s.data);
+        return this.invokeApi('/funnels', 'POST', funnelToCreate || {}).then((s) => s.data);
     }
 
     /**
@@ -74,11 +74,18 @@ export class FunnelService extends APIClient {
      * @param includeEntityIds
      */
     async findFunnelById(funnelId: string, includeEntityIds?: boolean) {
-        return this.invokeApi(`/funnels/${funnelId}`, 'GET', undefined, includeEntityIds ? {
-            queryParams: {
-                includeEntityIds: `${includeEntityIds}`
-            }
-        } : undefined);
+        return this.invokeApi(
+            `/funnels/${funnelId}`,
+            'GET',
+            undefined,
+            includeEntityIds
+                ? {
+                      queryParams: {
+                          includeEntityIds: `${includeEntityIds}`,
+                      },
+                  }
+                : undefined
+        );
     }
 
     /**
@@ -86,7 +93,7 @@ export class FunnelService extends APIClient {
      * @param funnelId
      */
     async deleteFunnelById(funnelId: string) {
-        return this.invokeApi(`/funnels/${funnelId}`, 'DELETE').then(s => s.data);
+        return this.invokeApi(`/funnels/${funnelId}`, 'DELETE').then((s) => s.data);
     }
 
     /**
@@ -94,7 +101,7 @@ export class FunnelService extends APIClient {
      * @param funnelId
      */
     async fetchAllStagesOfAnFunnel(funnelId: string) {
-        return this.invokeApi(`/funnels/${funnelId}/stages`, 'GET').then(s => s.data);
+        return this.invokeApi(`/funnels/${funnelId}/stages`, 'GET').then((s) => s.data);
     }
 
     /**
@@ -103,7 +110,7 @@ export class FunnelService extends APIClient {
      * @param stage
      */
     async addStageAtTheEndOfTheFunnel(funnelId: string, stage: any) {
-        return this.invokeApi(`/funnels/${funnelId}/stages`, 'POST', stage || {}).then(s => s.data);
+        return this.invokeApi(`/funnels/${funnelId}/stages`, 'POST', stage || {}).then((s) => s.data);
     }
 
     /**
@@ -112,7 +119,7 @@ export class FunnelService extends APIClient {
      * @param stageId
      */
     async findStageById(funnelId: string, stageId: string) {
-        return this.invokeApi(`/funnels/${funnelId}/stages/${stageId}`, 'GET').then(s => s.data);
+        return this.invokeApi(`/funnels/${funnelId}/stages/${stageId}`, 'GET').then((s) => s.data);
     }
 
     /**
@@ -122,7 +129,7 @@ export class FunnelService extends APIClient {
      * @param stage
      */
     async addStageAfterGivenStageOfGivenFunnel(funnelId: string, stageId: string, stage: any) {
-        return this.invokeApi(`/funnels/${funnelId}/stages/${stageId}`, 'POST', stage).then(s => s.data);
+        return this.invokeApi(`/funnels/${funnelId}/stages/${stageId}`, 'POST', stage).then((s) => s.data);
     }
 
     /**
@@ -132,7 +139,7 @@ export class FunnelService extends APIClient {
      * @param stage
      */
     async changeAStagesOfAFunnel(funnelId: string, stageId: string, stage: any) {
-        return this.invokeApi(`/funnels/${funnelId}/stages/${stageId}`, 'PUT', stage).then(s => s.data);
+        return this.invokeApi(`/funnels/${funnelId}/stages/${stageId}`, 'PUT', stage).then((s) => s.data);
     }
 
     /**
@@ -141,7 +148,7 @@ export class FunnelService extends APIClient {
      * @param stageId
      */
     async deleteStageFromFunnel(funnelId: string, stageId: string) {
-        return this.invokeApi(`/funnels/${funnelId}/stages/${stageId}`, 'DELETE').then(s => s.data);
+        return this.invokeApi(`/funnels/${funnelId}/stages/${stageId}`, 'DELETE').then((s) => s.data);
     }
 
     /**
@@ -149,7 +156,7 @@ export class FunnelService extends APIClient {
      * @param funnelId
      */
     async fetchStateOfTheFunnel(funnelId: string) {
-        return this.invokeApi(`/funnels/${funnelId}/state`, 'GET').then(s => s.data);
+        return this.invokeApi(`/funnels/${funnelId}/state`, 'GET').then((s) => s.data);
     }
 
     /**
@@ -158,7 +165,7 @@ export class FunnelService extends APIClient {
      * @param state
      */
     async changeStateOfTheFunnel(funnelId: string, state: any) {
-        return this.invokeApi(`/funnels/${funnelId}/state`, 'POST', state || {}).then(s => s.data);
+        return this.invokeApi(`/funnels/${funnelId}/state`, 'POST', state || {}).then((s) => s.data);
     }
 
     /**
@@ -166,7 +173,7 @@ export class FunnelService extends APIClient {
      * @param type
      */
     async fetchAllActions(type: string = 'automatic') {
-        return this.invokeApi('/funnels/actions/?type=' + type, 'GET').then(s => s.data);
+        return this.invokeApi('/funnels/actions/?type=' + type, 'GET').then((s) => s.data);
     }
 
     /**
@@ -185,9 +192,9 @@ export class FunnelService extends APIClient {
      */
     async fetchDashboardInformation(state: any) {
         if (state) {
-            return this.invokeApi('/funnels/dashboard', 'GET', undefined, {queryParams: {state}}).then(s => s.data.dashboardFunnels);
+            return this.invokeApi('/funnels/dashboard', 'GET', undefined, { queryParams: { state } }).then((s) => s.data.dashboardFunnels);
         }
-        return this.invokeApi('/funnels/dashboard', 'GET').then(s => s.data.dashboardFunnels);
+        return this.invokeApi('/funnels/dashboard', 'GET').then((s) => s.data.dashboardFunnels);
     }
 
     /**
@@ -195,7 +202,7 @@ export class FunnelService extends APIClient {
      * @param schemaId
      */
     async fetchAvailableEntryConditionsForSchema(schemaId: string) {
-        return this.invokeApi(`/availableEntryConditions/${schemaId}`, 'GET').then(s => s.data);
+        return this.invokeApi(`/availableEntryConditions/${schemaId}`, 'GET').then((s) => s.data);
     }
 
     /**
@@ -204,7 +211,7 @@ export class FunnelService extends APIClient {
      * @param stageId
      */
     async fetchAvailableEntryConditionsForPrevStage(funnelId: string, stageId: string) {
-        return this.invokeApi(`/funnels/${funnelId}/stages/${stageId}/availableEntryConditions`, 'GET').then(s => s.data);
+        return this.invokeApi(`/funnels/${funnelId}/stages/${stageId}/availableEntryConditions`, 'GET').then((s) => s.data);
     }
 
     /**

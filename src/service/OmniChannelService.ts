@@ -16,7 +16,7 @@ export class OmniChannelService extends APIClient {
         return this.invokeApi('/sendSMS', 'POST', {
             from,
             to,
-            message
+            message,
         });
     }
 }

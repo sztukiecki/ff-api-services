@@ -2,7 +2,6 @@ import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
 export class CustomerLegitimationArchiveService extends APIClient {
-
     constructor() {
         super(APIMapping.customerLegitimationArchiveService);
     }

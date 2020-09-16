@@ -1,7 +1,6 @@
 import { APIClient, APIMapping } from '../http';
 
 class ContractService extends APIClient {
-
     constructor() {
         super(APIMapping.contractService);
     }
@@ -13,8 +12,8 @@ class ContractService extends APIClient {
     fetchTemplates = async (origin: 'BOORGBERG' | undefined) => {
         return await this.invokeApi('/templates', 'GET', undefined, {
             queryParams: {
-                origin: origin
-            }
+                origin: origin,
+            },
         });
     };
 
@@ -24,9 +23,9 @@ class ContractService extends APIClient {
      */
     downloadTemplate = async (templateId: string) => {
         return await this.invokeApi(`/templates/${templateId}/download`, 'GET', undefined, {
-            responseType: 'arraybuffer'
+            responseType: 'arraybuffer',
         });
-    }
+    };
 }
 
 export default new ContractService();

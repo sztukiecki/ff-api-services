@@ -3,7 +3,6 @@ import { ApiResponseError, ApiResponseSuccess } from '../../http/APIClient';
 import { Album, MultimediaAssignment, MultimediaAssignments } from './MultimediaService.Types';
 
 export class AlbumAssignmentController extends APIClient {
-
     constructor() {
         super(APIMapping.multimediaService);
     }
@@ -15,12 +14,17 @@ export class AlbumAssignmentController extends APIClient {
      * @param albumName
      * @param short
      */
-    async fetchAssignments(schemaName: string, entityId: string, albumName: string, short: boolean = true): Promise<ApiResponseSuccess<MultimediaAssignments> | ApiResponseError<any>> {
+    async fetchAssignments(
+        schemaName: string,
+        entityId: string,
+        albumName: string,
+        short: boolean = true
+    ): Promise<ApiResponseSuccess<MultimediaAssignments> | ApiResponseError<any>> {
         return await this.invokeApiWithErrorHandling(`/assigned/schemas/${schemaName}/entities/${entityId}`, 'GET', undefined, {
             queryParams: {
                 albumName: albumName,
-                short: short
-            }
+                short: short,
+            },
         });
     }
 
@@ -29,12 +33,15 @@ export class AlbumAssignmentController extends APIClient {
      * @param entityId
      * @param albumName
      */
-    async fetchUnassignedMediaItemIds(entityId: string, albumName: string | undefined = undefined): Promise<ApiResponseSuccess<{ unassignedIds: number[] }> | ApiResponseError<any>> {
+    async fetchUnassignedMediaItemIds(
+        entityId: string,
+        albumName: string | undefined = undefined
+    ): Promise<ApiResponseSuccess<{ unassignedIds: number[] }> | ApiResponseError<any>> {
         return await this.invokeApiWithErrorHandling(`/unassigned/entities/${entityId}`, 'GET', undefined, {
             queryParams: {
                 albumName: albumName,
-                short: true
-            }
+                short: true,
+            },
         });
     }
 
@@ -45,18 +52,25 @@ export class AlbumAssignmentController extends APIClient {
      * @param albumName
      * @param assignments
      */
-    async updateAssignments(schemaName: string, entityId: string, albumName: string, assignments: { [key: string]: MultimediaAssignment[] }): Promise<ApiResponseSuccess<MultimediaAssignments> | ApiResponseError<any>> {
+    async updateAssignments(
+        schemaName: string,
+        entityId: string,
+        albumName: string,
+        assignments: { [key: string]: MultimediaAssignment[] }
+    ): Promise<ApiResponseSuccess<MultimediaAssignments> | ApiResponseError<any>> {
         return await this.invokeApiWithErrorHandling(
-            `/assigned/schemas/${schemaName}/entities/${entityId}`, 'PUT',
+            `/assigned/schemas/${schemaName}/entities/${entityId}`,
+            'PUT',
             {
-                assignments: assignments
+                assignments: assignments,
             },
             {
                 queryParams: {
                     albumName: albumName,
-                    short: true
-                }
-            });
+                    short: true,
+                },
+            }
+        );
     }
 
     /**
@@ -65,7 +79,11 @@ export class AlbumAssignmentController extends APIClient {
      * @param entityId
      * @param mediaItemId
      */
-    async fetchAssignedAlbums(schemaName: string, entityId: string, mediaItemId: number): Promise<ApiResponseSuccess<{ albums: Album }> | ApiResponseError<any>> {
+    async fetchAssignedAlbums(
+        schemaName: string,
+        entityId: string,
+        mediaItemId: number
+    ): Promise<ApiResponseSuccess<{ albums: Album }> | ApiResponseError<any>> {
         return await this.invokeApiWithErrorHandling(`/assigned/schemas/${schemaName}/entities/${entityId}/items/${mediaItemId}`, 'GET');
     }
 
@@ -77,11 +95,17 @@ export class AlbumAssignmentController extends APIClient {
      * @param mediaItemIds
      * @param categories
      */
-    async assignMediaItems(schemaName: string, entityId: string, albumName: string, mediaItemIds: Number[], categories: string[] = []): Promise<ApiResponseSuccess<any> | ApiResponseError<any>> {
+    async assignMediaItems(
+        schemaName: string,
+        entityId: string,
+        albumName: string,
+        mediaItemIds: Number[],
+        categories: string[] = []
+    ): Promise<ApiResponseSuccess<any> | ApiResponseError<any>> {
         return await this.invokeApiWithErrorHandling(`/assigned/schemas/${schemaName}/entities/${entityId}/items`, 'PUT', {
             albumName: albumName,
             categories: categories,
-            multimediaItemIds: mediaItemIds
+            multimediaItemIds: mediaItemIds,
         });
     }
 }

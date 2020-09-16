@@ -12,7 +12,7 @@ export interface BaseTemplate {
     categoryName?: string;
     captions: Captions;
     fileType: string;
-    neededPlaceholders: NeededPlaceholder[]
+    neededPlaceholders: NeededPlaceholder[];
 }
 
 export interface ReadTemplate extends BaseTemplate {
@@ -32,7 +32,7 @@ export interface ReadCategory extends BaseCategory {
 }
 
 export interface JSONPatch {
-    op: 'replace' | 'add' | 'remove',
+    op: 'replace' | 'add' | 'remove';
     path: string;
     value?: any;
 }

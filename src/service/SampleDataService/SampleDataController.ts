@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from '../../http';
-import {SampleDataServiceTypes} from './SampleDataService.Types';
+import { SampleDataServiceTypes } from './SampleDataService.Types';
 import ImportBundle = SampleDataServiceTypes.ImportBundle;
 import BatchImportResult = SampleDataServiceTypes.BatchImportResult;
 

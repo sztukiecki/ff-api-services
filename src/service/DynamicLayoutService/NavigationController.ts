@@ -3,7 +3,6 @@ import { NavigationTypes } from './NavigationTypes';
 import Navigation = NavigationTypes.Navigation;
 
 export default class NavigationController extends APIClient {
-
     constructor() {
         super(APIMapping.dynamicLayoutService);
     }

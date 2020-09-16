@@ -1,12 +1,11 @@
-import {APIClient, APIMapping} from '../../http';
-import {Flowdsl} from '@flowfact/node-flowdsl';
-import {FlywheelServiceTypes} from './FlywheelService.Types';
+import { APIClient, APIMapping } from '../../http';
+import { Flowdsl } from '@flowfact/node-flowdsl';
+import { FlywheelServiceTypes } from './FlywheelService.Types';
 
 export class TransactionController extends APIClient {
     constructor() {
         super(APIMapping.flywheelService);
     }
-
 
     /**
      * Return all transactions for a specific phase
@@ -15,11 +14,16 @@ export class TransactionController extends APIClient {
      * @param {Flowdsl} flowdsl
      */
     async fetchForPhaseWithFilter(phaseName: string, view: string = 'card', flowdsl?: Flowdsl) {
-        return this.invokeApiWithErrorHandling<FlywheelServiceTypes.Transaction[]>(`/transactions/phases/${phaseName}?view=${view}`, 'POST', flowdsl, {
-            headers: {
-                'Content-Type': 'application/json'
+        return this.invokeApiWithErrorHandling<FlywheelServiceTypes.Transaction[]>(
+            `/transactions/phases/${phaseName}?view=${view}`,
+            'POST',
+            flowdsl,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
             }
-        });
+        );
     }
 
     /**
@@ -28,13 +32,11 @@ export class TransactionController extends APIClient {
      * * @param flowdsl
      */
     async fetchCountOfAllTransactionsInPhase(phaseName: string, flowdsl?: Flowdsl) {
-        return this.invokeApiWithErrorHandling<number>(`/transactions/phases/${phaseName}/count`, 'POST', flowdsl,
-            {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+        return this.invokeApiWithErrorHandling<number>(`/transactions/phases/${phaseName}/count`, 'POST', flowdsl, {
+            headers: {
+                'Content-Type': 'application/json',
             },
-        );
+        });
     }
 
     /**
@@ -44,13 +46,11 @@ export class TransactionController extends APIClient {
      * @param flowdsl
      */
     async fetchCountOfAllTransactionsInStep(phaseName: string, stepName: string, flowdsl?: Flowdsl) {
-        return this.invokeApiWithErrorHandling<number>(`/transactions/phases/${phaseName}/${stepName}/count`, 'POST', flowdsl,
-            {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+        return this.invokeApiWithErrorHandling<number>(`/transactions/phases/${phaseName}/${stepName}/count`, 'POST', flowdsl, {
+            headers: {
+                'Content-Type': 'application/json',
             },
-        );
+        });
     }
 
     /**
@@ -62,12 +62,17 @@ export class TransactionController extends APIClient {
      * @param page
      */
     async fetchForPhaseAndStepWithFilter(phaseName: string, stepName: string, view: string = 'card', flowdsl?: Flowdsl, page: number = 1) {
-        return this.invokeApiWithErrorHandling<FlywheelServiceTypes.PagedTransactions>(`/transactions/phases/${phaseName}/${stepName}`, 'POST', flowdsl, {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            queryParams: {page, view}
-        });
+        return this.invokeApiWithErrorHandling<FlywheelServiceTypes.PagedTransactions>(
+            `/transactions/phases/${phaseName}/${stepName}`,
+            'POST',
+            flowdsl,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                queryParams: { page, view },
+            }
+        );
     }
 
     /**
@@ -77,7 +82,7 @@ export class TransactionController extends APIClient {
      * @param toPhaseName
      */
     async move(transactionId: number, fromPhaseName: string, toPhaseName: string) {
-        return this.invokeApiWithErrorHandling(`/transactions/${transactionId}`, 'PUT', {fromPhaseName, toPhaseName});
+        return this.invokeApiWithErrorHandling(`/transactions/${transactionId}`, 'PUT', { fromPhaseName, toPhaseName });
     }
 
     /**
@@ -86,15 +91,18 @@ export class TransactionController extends APIClient {
      */
     async exitPhase(transactionId: number) {
         return this.invokeApiWithErrorHandling(
-            `/transactions/${transactionId}`, 'PATCH',
-            [{
-                op: 'exitPhase',
-            }],
+            `/transactions/${transactionId}`,
+            'PATCH',
+            [
+                {
+                    op: 'exitPhase',
+                },
+            ],
             {
                 headers: {
                     'Content-Type': 'application/json-patch+json',
                 },
-            },
+            }
         );
     }
 
@@ -106,17 +114,20 @@ export class TransactionController extends APIClient {
      */
     async link(transactionId: number, entityId: string, targetPhase: number) {
         return this.invokeApiWithErrorHandling(
-            `/transactions/${transactionId}`, 'PATCH',
-            [{
-                op: 'linkTransaction',
-                entityId,
-                targetPhase,
-            }],
+            `/transactions/${transactionId}`,
+            'PATCH',
+            [
+                {
+                    op: 'linkTransaction',
+                    entityId,
+                    targetPhase,
+                },
+            ],
             {
                 headers: {
                     'Content-Type': 'application/json-patch+json',
                 },
-            },
+            }
         );
     }
 }

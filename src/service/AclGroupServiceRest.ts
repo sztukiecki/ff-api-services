@@ -3,7 +3,6 @@ import { APIClient, APIMapping } from '../http';
 import { AclGroup, AclGroupType, AcpTemplate } from '@flowfact/types';
 
 class AclGroupServiceRest extends APIClient {
-
     constructor() {
         super(APIMapping.aclGroupService);
     }
@@ -15,8 +14,8 @@ class AclGroupServiceRest extends APIClient {
     async fetchGroups(groupType?: AclGroupType) {
         return this.invokeApi('/groups', 'GET', undefined, {
             queryParams: {
-                groupType: groupType
-            }
+                groupType: groupType,
+            },
         });
     }
 
@@ -91,7 +90,6 @@ class AclGroupServiceRest extends APIClient {
     async deleteAcpTemplate(templateId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/templates/${templateId}`, 'DELETE');
     }
-
 }
 
 export default new AclGroupServiceRest();

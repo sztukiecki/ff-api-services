@@ -9,7 +9,6 @@ import SchedulerPage = NylasServiceTypes.SchedulerPage;
  * See https://docs.nylas.com/reference for more info
  */
 export class NylasService extends APIClient {
-
     constructor() {
         super(APIMapping.nylasService);
     }
@@ -24,8 +23,8 @@ export class NylasService extends APIClient {
                 command: 'authorize',
                 nativeAuth: false,
                 isGmail: isGmail,
-                code: code
-            }
+                code: code,
+            },
         });
     }
 
@@ -37,8 +36,8 @@ export class NylasService extends APIClient {
         return await this.invokeApi('/account', 'POST', authRequest, {
             queryParams: {
                 nativeAuth: true,
-                command: 'authorize'
-            }
+                command: 'authorize',
+            },
         });
     }
 
@@ -49,8 +48,8 @@ export class NylasService extends APIClient {
     async reactivate(email: string): Promise<AxiosResponse> {
         return await this.invokeApi('/reactivate', 'POST', undefined, {
             queryParams: {
-                email: email
-            }
+                email: email,
+            },
         });
     }
 
@@ -61,9 +60,9 @@ export class NylasService extends APIClient {
      */
     async sendMail(emailAccount: string, email: SendEmailRequest): Promise<AxiosResponse> {
         return await this.invokeApi('/nylas/send', 'POST', email, {
-            'queryParams': {
-                'email': emailAccount
-            }
+            queryParams: {
+                email: emailAccount,
+            },
         });
     }
 
@@ -84,8 +83,8 @@ export class NylasService extends APIClient {
             queryParams: {
                 email: email,
                 callbackUrl: callbackUrl,
-                isGmail: isGmail
-            }
+                isGmail: isGmail,
+            },
         });
     }
 
@@ -113,8 +112,8 @@ export class NylasService extends APIClient {
     async deleteAccount(email: string): Promise<AxiosResponse> {
         return await this.invokeApi('/account', 'DELETE', undefined, {
             queryParams: {
-                email: email
-            }
+                email: email,
+            },
         });
     }
 
@@ -124,7 +123,7 @@ export class NylasService extends APIClient {
      */
     async fetchMailSettings(mail: string): Promise<AxiosResponse> {
         return await this.invokeApi('/mailsettings', 'POST', {
-            mail: mail
+            mail: mail,
         });
     }
 
@@ -135,8 +134,8 @@ export class NylasService extends APIClient {
     async fetchCalendars(email: string): Promise<AxiosResponse> {
         return await this.invokeApi('/nylas/calendars', 'GET', undefined, {
             queryParams: {
-                email: email
-            }
+                email: email,
+            },
         });
     }
 

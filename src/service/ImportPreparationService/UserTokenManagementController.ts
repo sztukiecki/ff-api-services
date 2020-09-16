@@ -1,8 +1,7 @@
-import {APIClient, APIMapping} from '../../http';
-import {User, UserTokenEntity} from '@flowfact/types';
+import { APIClient, APIMapping } from '../../http';
+import { User, UserTokenEntity } from '@flowfact/types';
 
 export class UserTokenManagementController extends APIClient {
-
     constructor() {
         super(APIMapping.importPreparationService);
     }

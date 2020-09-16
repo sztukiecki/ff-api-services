@@ -1,7 +1,6 @@
 import { APIClient, APIMapping } from '../../http';
 
 class DownloadController extends APIClient {
-
     constructor() {
         super(APIMapping.documentGeneratorService);
     }
@@ -13,15 +12,14 @@ class DownloadController extends APIClient {
     async downloadDocument(s3Url: string) {
         return this.invokeApiWithErrorHandling<ArrayBuffer>('/download', 'GET', undefined, {
             queryParams: {
-                uri: s3Url
+                uri: s3Url,
             },
             headers: {
-                Accept: 'application/octet-stream'
+                Accept: 'application/octet-stream',
             },
-            responseType: 'arraybuffer'
+            responseType: 'arraybuffer',
         });
     }
-
 }
 
 export default DownloadController;

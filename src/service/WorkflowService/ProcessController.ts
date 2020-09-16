@@ -15,7 +15,7 @@ export class ProcessController extends APIClient {
      */
     async fetchProcessInfo(id: string) {
         return this.invokeApiWithErrorHandling<ProcessInfo>(`/process/${id}`, 'GET');
-    };
+    }
 
     /**
      * Starts a process by passing in a key and a process request
@@ -24,14 +24,14 @@ export class ProcessController extends APIClient {
      */
     async startProcess(key: string, processRequest: ProcessRequest) {
         return this.invokeApiWithErrorHandling<ProcessInfo>(`/process/${key}`, 'POST', processRequest);
-    };
+    }
 
     /**
      * Creates a workflow by it's id´s on several entities.
      * @param workflowId
      * @param processRequest
      */
-    async createWorkflowOnSeveralEntities (workflowId: string, processRequest: ProcessEntityRequest) {
+    async createWorkflowOnSeveralEntities(workflowId: string, processRequest: ProcessEntityRequest) {
         return this.invokeApiWithErrorHandling<ProcessInfo>(`/process/${workflowId}/entities`, 'POST', processRequest);
-    };
+    }
 }

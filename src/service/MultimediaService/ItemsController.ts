@@ -2,7 +2,6 @@ import { APIClient, APIMapping } from '../../http';
 import { AlbumAssignmentRequest, ContentCategory, MultimediaItem, UploadResponse } from './MultimediaService.Types';
 
 export class ItemsController extends APIClient {
-
     constructor() {
         super(APIMapping.multimediaService);
     }
@@ -14,10 +13,10 @@ export class ItemsController extends APIClient {
      * @returns the url and the new eTag
      */
     async updateImage(image: FormData, itemId: string) {
-        return await this.invokeApiWithErrorHandling<{ url: string, etag: string }>(`/items/${itemId}/file`, 'POST', image, {
+        return await this.invokeApiWithErrorHandling<{ url: string; etag: string }>(`/items/${itemId}/file`, 'POST', image, {
             headers: {
-                'Content-Type': 'multipart/form-data'
-            }
+                'Content-Type': 'multipart/form-data',
+            },
         });
     }
 
@@ -36,8 +35,8 @@ export class ItemsController extends APIClient {
 
         return await this.invokeApiWithErrorHandling(`/upload/${entityId}`, 'POST', formData, {
             headers: {
-                'Content-Type': 'multipart/form-data'
-            }
+                'Content-Type': 'multipart/form-data',
+            },
         });
     }
 
@@ -52,12 +51,12 @@ export class ItemsController extends APIClient {
     async fetchFile(fileUrl: string) {
         return await this.invokeApiWithErrorHandling('/download', 'GET', undefined, {
             queryParams: {
-                uri: fileUrl
+                uri: fileUrl,
             },
             headers: {
-                Accept: 'application/octet-stream'
+                Accept: 'application/octet-stream',
             },
-            responseType: 'arraybuffer'
+            responseType: 'arraybuffer',
         });
     }
 
@@ -69,8 +68,8 @@ export class ItemsController extends APIClient {
     async fetchMediaItems(entityId: string, contentCategory: ContentCategory | undefined = undefined) {
         return await this.invokeApiWithErrorHandling<MultimediaItem[]>(`/items/entities/${entityId}`, 'GET', undefined, {
             queryParams: {
-                contentCategory: contentCategory
-            }
+                contentCategory: contentCategory,
+            },
         });
     }
 
@@ -99,7 +98,7 @@ export class ItemsController extends APIClient {
         return await this.invokeApiWithErrorHandling('/deleteFile', 'DELETE', {
             bucketType,
             entityId,
-            filename
+            filename,
         });
     }
 
@@ -129,9 +128,9 @@ export class ItemsController extends APIClient {
 
         return await this.invokeApiWithErrorHandling<UploadResponse>(`/items/schemas/${schemaName}/entities/${entityId}`, 'POST', formData, {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
             },
-            onUploadProgress: onUploadProgress
+            onUploadProgress: onUploadProgress,
         });
     }
 
@@ -148,7 +147,7 @@ export class ItemsController extends APIClient {
     async addLink(schemaName: string, entityId: string, url: string, albumAssignments: AlbumAssignmentRequest[] = []) {
         const body = {
             link: url,
-            albumAssignments: albumAssignments
+            albumAssignments: albumAssignments,
         };
 
         return await this.invokeApiWithErrorHandling<UploadResponse>(`/items/schemas/${schemaName}/entities/${entityId}/link`, 'POST', body);

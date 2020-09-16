@@ -3,7 +3,6 @@ import { AxiosResponse } from 'axios';
 import { FilterDefinition } from '@flowfact/types';
 
 class FilterDefinitionService extends APIClient {
-
     constructor() {
         super(APIMapping.filterDefinitionService);
     }
@@ -15,8 +14,8 @@ class FilterDefinitionService extends APIClient {
     async fetchFilter(schemaName: string): Promise<AxiosResponse<FilterDefinition>> {
         return await this.invokeApi('/filters', 'GET', undefined, {
             queryParams: {
-                schemaName: schemaName
-            }
+                schemaName: schemaName,
+            },
         });
     }
 

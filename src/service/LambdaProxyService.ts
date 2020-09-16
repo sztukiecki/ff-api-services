@@ -10,7 +10,7 @@ export class LambdaProxyService extends APIClient {
     }
 
     async fetchDirectoryContents(table: string) {
-        return this.invokeApiWithErrorHandling('/ff-importer-v2-record-log-s3-directory-content', 'POST', {table});
+        return this.invokeApiWithErrorHandling('/ff-importer-v2-record-log-s3-directory-content', 'POST', { table });
     }
 }
 

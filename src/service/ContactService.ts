@@ -3,7 +3,6 @@ import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 
 export class ContactService extends APIClient {
-
     constructor() {
         super(APIMapping.contactService);
     }
@@ -125,7 +124,11 @@ export class ContactService extends APIClient {
      * @param schemaId
      * @param maxContacts
      */
-    async searchForContactsInSpecificShemaWithCustomSearch(flowDsl: any, schemaId: string, maxContacts: number): Promise<AxiosResponse<SearchResultOfContact>> {
+    async searchForContactsInSpecificShemaWithCustomSearch(
+        flowDsl: any,
+        schemaId: string,
+        maxContacts: number
+    ): Promise<AxiosResponse<SearchResultOfContact>> {
         return this.invokeApi(`/contact/schema/${schemaId}/customSearch`, 'POST', flowDsl, { queryParams: { maxContacts } });
     }
 

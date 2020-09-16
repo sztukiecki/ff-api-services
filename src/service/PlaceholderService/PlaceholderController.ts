@@ -3,7 +3,6 @@ import { PlaceholderServiceTypes } from './PlaceholderService.Types';
 import PlaceholderRequest = PlaceholderServiceTypes.PlaceholderRequest;
 
 export default class PlaceholderController extends APIClient {
-
     constructor() {
         super(APIMapping.placeholderService);
     }
@@ -15,5 +14,4 @@ export default class PlaceholderController extends APIClient {
     async fetchPlaceholders(placeholderRequest: PlaceholderRequest) {
         return this.invokeApiWithErrorHandling('/placeholders', 'POST', placeholderRequest);
     }
-
 }

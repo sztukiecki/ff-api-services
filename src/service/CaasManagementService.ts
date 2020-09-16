@@ -17,7 +17,6 @@ import APIClient from '../http/APIClient';
 import APIMapping from '../http/APIMapping';
 
 export class CaasManagementService extends APIClient {
-
     constructor() {
         super(APIMapping.caasManamgentService);
     }

@@ -5,7 +5,6 @@ import APIMapping from '../http/APIMapping';
 import { EntityQuery } from '../util/InternalTypes';
 
 export class GDPRService extends APIClient {
-
     constructor() {
         super(APIMapping.gdprService);
     }
@@ -90,17 +89,28 @@ export class GDPRService extends APIClient {
      * @param type
      * @param changes
      */
-    async changeData(contactId: string, userId: string, companyId: string, type: DataChangeRequestType = 'CHANGE', changes: object = {}): Promise<AxiosResponse> {
-        return await this.invokeApi('/public/changeRequests', 'POST', {
-            contactId: contactId,
-            type: type,
-            changes: changes,
-        }, {
-            queryParams: {
-                userId: userId,
-                companyId: companyId,
+    async changeData(
+        contactId: string,
+        userId: string,
+        companyId: string,
+        type: DataChangeRequestType = 'CHANGE',
+        changes: object = {}
+    ): Promise<AxiosResponse> {
+        return await this.invokeApi(
+            '/public/changeRequests',
+            'POST',
+            {
+                contactId: contactId,
+                type: type,
+                changes: changes,
             },
-        });
+            {
+                queryParams: {
+                    userId: userId,
+                    companyId: companyId,
+                },
+            }
+        );
     }
 
     /**

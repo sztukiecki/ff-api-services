@@ -22,7 +22,7 @@ export class SchemaService extends APIClient {
      */
     async fetchAllSchemas(withGroups: boolean = false, short: boolean = false): Promise<AxiosResponse> {
         let queryParams: any = {
-            transform: true
+            transform: true,
         };
 
         if (withGroups) {
@@ -110,8 +110,8 @@ export class SchemaService extends APIClient {
     async fetchIntegration(integrationId: string): Promise<AxiosResponse> {
         return this.invokeApi(`/integrations/${integrationId}`, 'GET', undefined, {
             queryParams: {
-                transform: true
-            }
+                transform: true,
+            },
         });
     }
 
@@ -131,7 +131,7 @@ export class SchemaService extends APIClient {
     async createIntegrationForSchema(schemaId: string, label: string): Promise<AxiosResponse> {
         const integration = {
             schemaId: schemaId,
-            label: label
+            label: label,
         };
         return this.invokeApi('/integrations?transform=true', 'POST', integration);
     }
@@ -193,8 +193,8 @@ export class SchemaService extends APIClient {
     async fetchDataTypes(): Promise<AxiosResponse> {
         return this.invokeApi('/datatypes/alltypes', 'GET', undefined, {
             queryParams: {
-                transform: true
-            }
+                transform: true,
+            },
         });
     }
 }

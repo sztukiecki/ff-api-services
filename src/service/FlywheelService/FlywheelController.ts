@@ -1,5 +1,5 @@
-import {APIClient, APIMapping} from '../../http';
-import {FlywheelServiceTypes} from './FlywheelService.Types';
+import { APIClient, APIMapping } from '../../http';
+import { FlywheelServiceTypes } from './FlywheelService.Types';
 import Flywheel = FlywheelServiceTypes.Flywheel;
 
 export class FlywheelController extends APIClient {
@@ -33,7 +33,6 @@ export class FlywheelController extends APIClient {
         return this.invokeApiWithErrorHandling<Flywheel[]>('/flywheels', 'GET');
     }
 
-
     /**
      * Return a specific flywheel by name or not-found
      * @param flywheelName
@@ -49,17 +48,19 @@ export class FlywheelController extends APIClient {
      */
     async updatePhases(flywheelName: string, phaseNames: string[]) {
         return this.invokeApiWithErrorHandling<Flywheel>(
-            `/flywheels/${flywheelName}`, 'PATCH',
-            [{
-                op: 'set-phases',
-                phaseNames: phaseNames,
-            }],
+            `/flywheels/${flywheelName}`,
+            'PATCH',
+            [
+                {
+                    op: 'set-phases',
+                    phaseNames: phaseNames,
+                },
+            ],
             {
                 headers: {
                     'Content-Type': 'application/json-patch+json',
                 },
-            },
+            }
         );
     }
-
 }

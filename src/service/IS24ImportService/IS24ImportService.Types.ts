@@ -23,5 +23,4 @@ export namespace IS24ImportServiceTypes {
         portalId: string;
         scoutId: string;
     }
-
 }

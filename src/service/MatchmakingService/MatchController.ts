@@ -5,11 +5,10 @@ import { Sort } from '@flowfact/node-flowdsl';
 
 const buildSortParameter = (sorting: Sort): string | undefined => {
     // converts sorting to a string like "+fieldName,-fieldName2"
-    return sorting?.fields?.map(fieldName => `${sorting.direction === 'ASC' ? '+' : '-'}${fieldName}`).join(',');
-}
+    return sorting?.fields?.map((fieldName) => `${sorting.direction === 'ASC' ? '+' : '-'}${fieldName}`).join(',');
+};
 
 export default class MatchController extends APIClient {
-
     constructor() {
         super(APIMapping.matchmakingService);
     }
@@ -23,10 +22,26 @@ export default class MatchController extends APIClient {
      * @param size
      * @param offset
      */
-    async fetchMatchesBySearchProfile(searchProfileId: string, query: MatchmakingTypes.FilterQuery = {}, sorting: Sort, size: number = 10, offset: number = 0) {
-        return await this.invokeApiWithErrorHandling<PagedResponse<MatchmakingTypes.Match>>(`/match/search-profile/${searchProfileId}`, 'GET', undefined, {
-            queryParams: { ...query, size, offset, sort: buildSortParameter(sorting) },
-        });
+    async fetchMatchesBySearchProfile(
+        searchProfileId: string,
+        query: MatchmakingTypes.FilterQuery = {},
+        sorting: Sort,
+        size: number = 10,
+        offset: number = 0
+    ) {
+        return await this.invokeApiWithErrorHandling<PagedResponse<MatchmakingTypes.Match>>(
+            `/match/search-profile/${searchProfileId}`,
+            'GET',
+            undefined,
+            {
+                queryParams: {
+                    ...query,
+                    size,
+                    offset,
+                    sort: buildSortParameter(sorting),
+                },
+            }
+        );
     }
 
     /**
@@ -39,9 +54,20 @@ export default class MatchController extends APIClient {
      * @param size
      * @param offset
      */
-    async fetchMatchesBySearchProfileBody(searchProfile: Entity, query: MatchmakingTypes.FilterQuery = {}, sorting: Sort, size: number = 10, offset: number = 0) {
+    async fetchMatchesBySearchProfileBody(
+        searchProfile: Entity,
+        query: MatchmakingTypes.FilterQuery = {},
+        sorting: Sort,
+        size: number = 10,
+        offset: number = 0
+    ) {
         return await this.invokeApiWithErrorHandling<PagedResponse<MatchmakingTypes.Match>>(`/match/search-profile`, 'POST', searchProfile, {
-            queryParams: { ...query, size, offset, sort: buildSortParameter(sorting) },
+            queryParams: {
+                ...query,
+                size,
+                offset,
+                sort: buildSortParameter(sorting),
+            },
         });
     }
 
@@ -55,7 +81,23 @@ export default class MatchController extends APIClient {
      */
     async fetchMatchesByEstate(estateId: string, query: MatchmakingTypes.FilterQuery = {}, sorting: Sort, size: number = 10, offset: number = 0) {
         return await this.invokeApiWithErrorHandling<PagedResponse<MatchmakingTypes.Match>>(`/match/estate/${estateId}`, 'GET', undefined, {
-            queryParams: { ...query, size, offset, sort: buildSortParameter(sorting) },
+            queryParams: {
+                ...query,
+                size,
+                offset,
+                sort: buildSortParameter(sorting),
+            },
         });
+    }
+
+    /**
+     * Loads all map matches to the given searchprofile
+     * @param {string} searchProfileId
+     */
+    async fetchMapMatchesBySearchProfile(searchProfileId: string) {
+        return await this.invokeApiWithErrorHandling<PagedResponse<MatchmakingTypes.MapMatch>>(
+            `match/search-profile/${searchProfileId}/map-entries`,
+            'GET'
+        );
     }
 }

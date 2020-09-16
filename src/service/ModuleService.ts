@@ -2,7 +2,6 @@ import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
 export class ModuleService extends APIClient {
-
     constructor() {
         super(APIMapping.moduleService);
     }
@@ -14,8 +13,8 @@ export class ModuleService extends APIClient {
     async fetchActiveModules(): Promise<AxiosResponse> {
         return await this.invokeApi('/modules', 'GET', undefined, {
             queryParams: {
-                active: 'true'
-            }
+                active: 'true',
+            },
         });
     }
 

@@ -4,7 +4,6 @@ import { APIClient, APIMapping } from '../http';
 import { OwnerClass } from '@flowfact/types';
 
 export class CompanyService extends APIClient {
-
     constructor() {
         super(APIMapping.companyService);
     }
@@ -169,13 +168,9 @@ export class CompanyService extends APIClient {
      * Other texts then the ones from FLOWFACT will not be modified.
      */
     async restoreDefaults(): Promise<AxiosResponse> {
-        return this.invokeApi(
-            '/legislationTexts/restoreDefaults',
-            'PUT',
-            undefined,
-            {
-                headers: { 'Content-Type': 'application/json' },
-            });
+        return this.invokeApi('/legislationTexts/restoreDefaults', 'PUT', undefined, {
+            headers: { 'Content-Type': 'application/json' },
+        });
     }
 
     /**

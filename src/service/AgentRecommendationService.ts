@@ -2,7 +2,6 @@ import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
 export class AgentRecommendationService extends APIClient {
-
     constructor() {
         super(APIMapping.agentRecommendationService);
     }
@@ -27,8 +26,8 @@ export class AgentRecommendationService extends APIClient {
         formData.append('file', file);
         return this.invokeApi(`/agent/upload/schema/${schemaId}/entity/${entityId}`, 'POST', formData, {
             headers: {
-                'Content-Type': 'multipart/form-data'
-            }
+                'Content-Type': 'multipart/form-data',
+            },
         });
     }
 
@@ -44,8 +43,8 @@ export class AgentRecommendationService extends APIClient {
         formData.append('file', file);
         return this.invokeApi(`/public/authenticated/upload/schema/${schemaId}/entity/${entityId}?accessToken=${token}`, 'POST', formData, {
             headers: {
-                'Content-Type': 'multipart/form-data'
-            }
+                'Content-Type': 'multipart/form-data',
+            },
         });
     }
 
@@ -56,8 +55,8 @@ export class AgentRecommendationService extends APIClient {
     async fetchViewForRater(token: string): Promise<AxiosResponse> {
         return this.invokeApi(`/public/authenticated/getViewForProspect?accessToken=${token}`, 'GET', undefined, {
             headers: {
-                'Accept': 'application/json'
-            }
+                Accept: 'application/json',
+            },
         });
     }
 

@@ -17,7 +17,6 @@ export interface APIClientAdditionalParams extends AxiosRequestConfig {
 export type MethodTypes = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'OPTIONS' | 'PATCH' | 'HEAD';
 
 export default abstract class APIClient {
-
     private userId: string;
     private readonly _serviceName: string;
     private static languages: string = 'de';
@@ -61,8 +60,10 @@ export default abstract class APIClient {
     }
 
     public async invokeApi<T = any>(
-        path: string, method: MethodTypes = 'GET', body: string | {} = '',
-        additionalParams: APIClientAdditionalParams = {},
+        path: string,
+        method: MethodTypes = 'GET',
+        body: string | {} = '',
+        additionalParams: APIClientAdditionalParams = {}
     ): Promise<AxiosResponse<T>> {
         if (!path.startsWith('/')) {
             throw new Error('Your path has to start with a slash. Path: ' + path);
@@ -106,10 +107,12 @@ export default abstract class APIClient {
         return client.request<T>(request);
     }
 
-
     public async invokeApiWithErrorHandling<T = any>(
-        path: string, method: MethodTypes = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {},
-        defaultValue?: T,
+        path: string,
+        method: MethodTypes = 'GET',
+        body: string | {} = '',
+        additionalParams: APIClientAdditionalParams = {},
+        defaultValue?: T
     ): Promise<ApiResponse<T>> {
         try {
             const result = await this.invokeApi<T>(path, method, body, additionalParams);
@@ -120,18 +123,15 @@ export default abstract class APIClient {
             return !result
                 ? response
                 : {
-                    ...response,
-                    ...result,
-                    data: result.data ? result.data : defaultValue,
-                };
-
-        }
-        catch (e) {
+                      ...response,
+                      ...result,
+                      data: result.data ? result.data : defaultValue,
+                  };
+        } catch (e) {
             return { ...e, isSuccessful2xx: false, data: e?.response?.data ?? defaultValue };
         }
     }
 }
-
 
 export interface ApiResponseSuccess<T> extends Partial<AxiosResponse<T>> {
     isSuccessful2xx: true;
@@ -139,7 +139,7 @@ export interface ApiResponseSuccess<T> extends Partial<AxiosResponse<T>> {
 
 export interface ApiResponseError<T> extends Partial<AxiosError<T>> {
     isSuccessful2xx: false | undefined;
-    data?: T
+    data?: T;
 }
 
 export type ApiResponse<T> = ApiResponseSuccess<T> | ApiResponseError<T>;

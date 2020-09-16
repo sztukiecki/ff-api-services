@@ -1,7 +1,6 @@
 import { APIClient, APIMapping } from '../../http';
 
 export default class OverviewController extends APIClient {
-
     constructor() {
         super(APIMapping.dynamicLayoutService);
     }

@@ -5,7 +5,6 @@ import { AlbumsController } from './AlbumsController';
 export * from './MultimediaService.Types';
 
 export class MultimediaService {
-
     public static instance = new MultimediaService();
 
     public readonly albumAssignment: AlbumAssignmentController;
@@ -17,7 +16,6 @@ export class MultimediaService {
         this.items = new ItemsController();
         this.albums = new AlbumsController();
     }
-
 }
 
 export const MultimediaServiceInstance = new MultimediaService();

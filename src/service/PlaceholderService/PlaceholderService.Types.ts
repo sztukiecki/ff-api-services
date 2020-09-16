@@ -1,5 +1,4 @@
 export namespace PlaceholderServiceTypes {
-
     export interface EntityPlaceholderMetadata {
         entityId: string;
         schemaId: string;

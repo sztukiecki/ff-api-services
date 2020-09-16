@@ -3,7 +3,6 @@ import { OpenImmoReportRecipientTypes } from './OpenimmoReportRecipientService.T
 import OpenimmoReportRecipient = OpenImmoReportRecipientTypes.OpenimmoReportRecipient;
 
 export default class OpenimmoReportRecipientsController extends APIClient {
-
     constructor() {
         super(APIMapping.openimmoFtpAccessService);
     }

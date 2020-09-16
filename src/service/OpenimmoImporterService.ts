@@ -1,7 +1,6 @@
 import { APIClient, APIMapping } from '../http';
 
 export class OpenimmoImporterService extends APIClient {
-
     constructor() {
         super(APIMapping.openimmoImporterService);
     }

@@ -3,7 +3,6 @@ import { AxiosResponse } from 'axios';
 import { EnvironmentManagementInstance } from '../util/EnvironmentManagement';
 
 export class IS24EntitlementService extends APIClient {
-
     constructor() {
         super(APIMapping.is24EntitlementService);
     }
@@ -15,15 +14,14 @@ export class IS24EntitlementService extends APIClient {
     async authenticate(temporaryToken: string): Promise<AxiosResponse> {
         return await this.invokeApi('/public/authentication/cognito', 'GET', undefined, {
             queryParams: {
-                is24Token: temporaryToken
-            }
+                is24Token: temporaryToken,
+            },
         });
     }
 
     get authenticationRedirectURL() {
         return `${EnvironmentManagementInstance.getBaseUrl()}/is24-entitlement-service/public/authenticate`;
     }
-
 }
 
 export default new IS24EntitlementService();

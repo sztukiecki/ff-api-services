@@ -1,7 +1,6 @@
 import { APIClient, APIMapping } from '../http';
 
 export class TagService extends APIClient {
-
     constructor() {
         super(APIMapping.tagService);
     }
@@ -10,7 +9,7 @@ export class TagService extends APIClient {
      * TODO: Please comment this method
      */
     async fetchAllTags() {
-        return await this.invokeApi('/tags', 'GET').then(s => s.data);
+        return await this.invokeApi('/tags', 'GET').then((s) => s.data);
     }
 
     /**
@@ -18,7 +17,7 @@ export class TagService extends APIClient {
      * @param body
      */
     async createTag(body: any) {
-        return await this.invokeApi('/tags', 'POST', body).then(s => s.data);
+        return await this.invokeApi('/tags', 'POST', body).then((s) => s.data);
     }
 
     /**
@@ -26,7 +25,7 @@ export class TagService extends APIClient {
      * @param id
      */
     async fetchTagById(id: string) {
-        return await this.invokeApi(`/tags/${id}`, 'GET').then(s => s.data);
+        return await this.invokeApi(`/tags/${id}`, 'GET').then((s) => s.data);
     }
 
     /**
@@ -35,7 +34,7 @@ export class TagService extends APIClient {
      * @param id
      */
     async updateTag(body: any, id: string) {
-        return await this.invokeApi(`/tags/${id}`, 'PUT', body).then(s => s.data);
+        return await this.invokeApi(`/tags/${id}`, 'PUT', body).then((s) => s.data);
     }
 }
 

@@ -1,10 +1,9 @@
-import {BundleController} from './BundleController';
-import {SampleDataController} from './SampleDataController';
+import { BundleController } from './BundleController';
+import { SampleDataController } from './SampleDataController';
 
 export * from './SampleDataService.Types';
 
 export class SampleDataService {
-
     public readonly bundle: BundleController;
     public readonly sampledata: SampleDataController;
 

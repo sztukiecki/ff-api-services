@@ -7,7 +7,6 @@ import LayoutDomainType = WidgetLayoutTypes.LayoutDomainType;
 import BaseWidgetLayout = WidgetLayoutTypes.BaseWidgetLayout;
 
 class WidgetLayoutsController extends APIClient {
-
     constructor() {
         super(APIMapping.dynamicLayoutService);
     }
@@ -25,11 +24,11 @@ class WidgetLayoutsController extends APIClient {
             queryParams: {
                 schema: schemaNames.join(','),
                 short: short,
-                domainType: layoutDomainType
+                domainType: layoutDomainType,
             },
             headers: {
-                'x-ff-version': 2
-            }
+                'x-ff-version': 2,
+            },
         });
     }
 
@@ -40,8 +39,8 @@ class WidgetLayoutsController extends APIClient {
     async createLayout<T extends BaseWidgetLayout = SchemaBoundWidgetLayout>(layout: T) {
         return this.invokeApiWithErrorHandling<T>('/widget-layouts', 'POST', layout, {
             headers: {
-                'x-ff-version': 2
-            }
+                'x-ff-version': 2,
+            },
         });
     }
 
@@ -50,10 +49,10 @@ class WidgetLayoutsController extends APIClient {
      * @param layoutId
      */
     async fetchLayout<T extends BaseWidgetLayout = SchemaBoundWidgetLayout>(layoutId: string) {
-        return this.invokeApiWithErrorHandling<T>(`/widget-layouts/${layoutId}`, 'GET', undefined,{
+        return this.invokeApiWithErrorHandling<T>(`/widget-layouts/${layoutId}`, 'GET', undefined, {
             headers: {
-                'x-ff-version': 2
-            }
+                'x-ff-version': 2,
+            },
         });
     }
 
@@ -64,8 +63,8 @@ class WidgetLayoutsController extends APIClient {
     async updateLayout<T extends BaseWidgetLayout = SchemaBoundWidgetLayout>(layout: T) {
         return this.invokeApiWithErrorHandling<T>(`/widget-layouts/${layout.id}`, 'PUT', layout, {
             headers: {
-                'x-ff-version': 2
-            }
+                'x-ff-version': 2,
+            },
         });
     }
 
