@@ -23,8 +23,6 @@ async function runPrettier() {
         files = glob.sync('src/**/*.{ts,tsx}');
     }
 
-    console.log('FILES', files);
-
     if (files.length === 0) {
         return process.exit(0);
     }
