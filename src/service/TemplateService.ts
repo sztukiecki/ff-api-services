@@ -2,7 +2,6 @@ import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
 export class TemplateService extends APIClient {
-
     constructor() {
         super(APIMapping.templateService);
     }
@@ -11,7 +10,9 @@ export class TemplateService extends APIClient {
      * TODO: Please comment this method
      */
     fetchAllTemplates() {
-        return this.invokeApi('/templates', 'GET').then(s => s.data).then(s => s ? s : []);
+        return this.invokeApi('/templates', 'GET')
+            .then((s) => s.data)
+            .then((s) => (s ? s : []));
     }
 
     /**
@@ -19,11 +20,15 @@ export class TemplateService extends APIClient {
      * @param type
      */
     fetchTemplatesByType(type: string) {
-        return this.invokeApi(`/templates?templateType=${type}`, 'GET').then(s => s.data).then(s => s ? s : []);
+        return this.invokeApi(`/templates?templateType=${type}`, 'GET')
+            .then((s) => s.data)
+            .then((s) => (s ? s : []));
     }
 
     fetchFullTemplatesByType(type: string) {
-        return this.invokeApi(`/templates?full=true&templateType=${type}`, 'GET').then(s => s.data).then(s => s ? s : []);
+        return this.invokeApi(`/templates?full=true&templateType=${type}`, 'GET')
+            .then((s) => s.data)
+            .then((s) => (s ? s : []));
     }
 
     /**
@@ -31,7 +36,7 @@ export class TemplateService extends APIClient {
      * @param body
      */
     createTemplate(body: any) {
-        return this.invokeApi('/templates', 'POST', body).then(s => s.data);
+        return this.invokeApi('/templates', 'POST', body).then((s) => s.data);
     }
 
     /**
@@ -72,7 +77,7 @@ export class TemplateService extends APIClient {
      * @param id
      */
     fetchTemplateById(id: string) {
-        return this.invokeApi(`/templates/${id}`, 'GET').then(s => s.data);
+        return this.invokeApi(`/templates/${id}`, 'GET').then((s) => s.data);
     }
 
     /**
@@ -83,17 +88,17 @@ export class TemplateService extends APIClient {
 
     delete(id: string, withResponse?: boolean) {
         if (!withResponse) {
-           withResponse = false;
+            withResponse = false;
         }
-        return this.invokeApi(`/templates/${id}`, 'DELETE').then(response => withResponse ? response : response.data);
+        return this.invokeApi(`/templates/${id}`, 'DELETE').then((response) => (withResponse ? response : response.data));
     }
 
     fetchPlaceholderPrefixesById(id: string) {
-        return this.invokeApi(`/templates/getPlaceholderPrefixes/${id}`, 'GET').then(response => response.data);
+        return this.invokeApi(`/templates/getPlaceholderPrefixes/${id}`, 'GET').then((response) => response.data);
     }
 
     fillTemplate(requestBody: any) {
-        return this.invokeApi('/templates/fillTemplate', 'POST', requestBody).then(response => response.data);
+        return this.invokeApi('/templates/fillTemplate', 'POST', requestBody).then((response) => response.data);
     }
     /**
      * TODO: Please comment this method
@@ -101,7 +106,7 @@ export class TemplateService extends APIClient {
      * @param id
      */
     updateTemplate(body: any, id: string) {
-        return this.invokeApi(`/templates/${id}`, 'PUT', body).then(s => s.data);
+        return this.invokeApi(`/templates/${id}`, 'PUT', body).then((s) => s.data);
     }
 }
 

@@ -1,7 +1,7 @@
 import { AuthenticationData, CheckUsernameResult } from '@flowfact/types';
 import { CognitoUser, CognitoUserSession, ISignUpResult } from 'amazon-cognito-identity-js';
 import Amplify, { Auth } from 'aws-amplify';
-import {EnvironmentManagementInstance, StageTypes } from '../util/EnvironmentManagement';
+import { EnvironmentManagementInstance, StageTypes } from '../util/EnvironmentManagement';
 import CustomStorage from './CustomStorage';
 
 const region = 'eu-central-1';
@@ -24,7 +24,6 @@ const stageSettings = {
 };
 
 class Authentication {
-
     // The authentication class should just have one instance, so we use the singleton pattern here.
     private static instance: Authentication;
 
@@ -136,12 +135,11 @@ class Authentication {
      * @param username
      */
     public async checkUsername(username: string): Promise<CheckUsernameResult> {
-
         try {
             const code = '000000';
             await Auth.confirmSignUp(username, code, {
                 // If set to False, the API will throw an AliasExistsException error if the phone number/email used already exists as an alias with a different user
-                forceAliasCreation: false
+                forceAliasCreation: false,
             });
             return {
                 exists: true,
@@ -151,7 +149,6 @@ class Authentication {
             const code = error.code;
             console.log(error);
             switch (code) {
-
                 case 'AliasExistsException':
                 case 'CodeMismatchException':
                 case 'ExpiredCodeException':

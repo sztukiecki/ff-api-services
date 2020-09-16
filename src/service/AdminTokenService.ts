@@ -26,8 +26,8 @@ export class AdminTokenService extends APIClient {
     async createAPIUser(): Promise<AxiosResponse<CreateAPIUserResponse>> {
         return this.invokeApi('/admin-token', 'POST', undefined, {
             queryParams: {
-                userType: 'API'
-            }
+                userType: 'API',
+            },
         });
     }
 
@@ -47,8 +47,8 @@ export class AdminTokenService extends APIClient {
     async authenticate(platformToken: string): Promise<AxiosResponse> {
         return this.invokeApi('/public/adminUser/authenticate', 'GET', undefined, {
             headers: {
-                token: platformToken
-            }
+                token: platformToken,
+            },
         });
     }
 
@@ -60,8 +60,8 @@ export class AdminTokenService extends APIClient {
     async authenticateAndReturnUsernameWithToken(platformToken: string): Promise<AxiosResponse> {
         return this.invokeApi('/public/adminUser/authenticateAndReturnUsernameWithToken', 'GET', undefined, {
             headers: {
-                token: platformToken
-            }
+                token: platformToken,
+            },
         });
     }
 }

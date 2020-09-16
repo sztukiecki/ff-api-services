@@ -8,7 +8,6 @@ export * from './WidgetTypes';
 export * from './WidgetLayoutTypes';
 
 export class DynamicLayoutService {
-
     public readonly overview: OverviewController;
     public readonly navigation: NavigationController;
     public readonly layouts: WidgetLayoutsController;

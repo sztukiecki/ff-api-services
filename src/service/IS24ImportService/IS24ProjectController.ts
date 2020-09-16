@@ -3,7 +3,6 @@ import { IS24ImportServiceTypes } from './IS24ImportService.Types';
 import ProjectInfo = IS24ImportServiceTypes.ProjectInfo;
 
 export default class IS24ImportContoller extends APIClient {
-
     constructor() {
         super(APIMapping.is24ImportService);
     }
@@ -15,5 +14,4 @@ export default class IS24ImportContoller extends APIClient {
     async fetchProjectInfo(projectId: string) {
         return await this.invokeApiWithErrorHandling<ProjectInfo>(`/projects/${projectId}`, 'GET');
     }
-
 }

@@ -1,5 +1,5 @@
-import {APIClient, APIMapping} from "../../http";
-import {PortalManagementTypes} from "./PortalManagementService.Types";
+import { APIClient, APIMapping } from '../../http';
+import { PortalManagementTypes } from './PortalManagementService.Types';
 import Portal = PortalManagementTypes.Portal;
 import PredefinedPortal = PortalManagementTypes.PredefinedPortal;
 import PortalAuthenticationModel = PortalManagementTypes.PortalAuthenticationModel;
@@ -16,11 +16,10 @@ export class PortalController extends APIClient {
      */
     async fetchAll(ignoreInactivePortals: boolean = false) {
         return await this.invokeApiWithErrorHandling<Portal[]>('/portals', 'GET', undefined, {
-                queryParams: {
-                    ignoreInactivePortals,
-                },
+            queryParams: {
+                ignoreInactivePortals,
             },
-        );
+        });
     }
 
     /**

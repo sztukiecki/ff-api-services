@@ -1,5 +1,5 @@
-import {APIClient, APIMapping} from '../../http';
-import {FlywheelServiceTypes} from './FlywheelService.Types';
+import { APIClient, APIMapping } from '../../http';
+import { FlywheelServiceTypes } from './FlywheelService.Types';
 import FlywheelFilter = FlywheelServiceTypes.FlywheelFilter;
 import FlywheelPhase = FlywheelServiceTypes.FlywheelPhase;
 import FlywheelPhaseTree = FlywheelServiceTypes.FlywheelPhaseTree;
@@ -8,7 +8,6 @@ import PhaseSyncCommands = FlywheelServiceTypes.PhaseSyncCommands;
 import CreateFlywheelPhase = FlywheelServiceTypes.CreateFlywheelPhase;
 
 export class PhaseController extends APIClient {
-
     constructor() {
         super(APIMapping.flywheelService);
     }
@@ -19,9 +18,9 @@ export class PhaseController extends APIClient {
      */
     async fetchAll(filters?: FlywheelFilter | FlywheelFilter[]) {
         const params: any = {};
-        if(filters) {
+        if (filters) {
             params.queryParams = {
-                filters: JSON.stringify(filters)
+                filters: JSON.stringify(filters),
             };
         }
 
@@ -35,7 +34,6 @@ export class PhaseController extends APIClient {
     async fetch(phaseName: string) {
         return this.invokeApiWithErrorHandling<FlywheelPhaseTree>(`/phases/${phaseName}`);
     }
-
 
     /**
      * Creates or updates a phase.
@@ -53,8 +51,8 @@ export class PhaseController extends APIClient {
     async sync(phaseName: string, command: PhaseSyncCommands) {
         return this.invokeApiWithErrorHandling(`/phases/${phaseName}`, 'POST', undefined, {
             queryParams: {
-                command
-            }
+                command,
+            },
         });
     }
 
@@ -100,5 +98,4 @@ export class PhaseController extends APIClient {
     async duplicate(sourcePhaseName: string, targetPhaseName: string) {
         return this.invokeApiWithErrorHandling(`/phases/${sourcePhaseName}/duplicate/${targetPhaseName}`, 'POST');
     }
-
 }

@@ -14,8 +14,8 @@ export class InteractiveExposeStatisticsService extends APIClient {
     async fetchEstateStatistics(estateId: string): Promise<AxiosResponse> {
         return await this.invokeApi('/estateStatistics', 'GET', undefined, {
             queryParams: {
-                estateId
-            }
+                estateId,
+            },
         });
     }
 
@@ -26,11 +26,18 @@ export class InteractiveExposeStatisticsService extends APIClient {
      *          or all sent iex including same contacts.
      */
     async fetchSentInteractiveExposeCount(estateId: string, singleCount?: boolean): Promise<AxiosResponse> {
-        return await this.invokeApi(`/estateStatistics/${estateId}/sent/count`, 'GET', undefined, singleCount != null ? {
-            queryParams: {
-                singleCount
-            }
-        } : {});
+        return await this.invokeApi(
+            `/estateStatistics/${estateId}/sent/count`,
+            'GET',
+            undefined,
+            singleCount != null
+                ? {
+                      queryParams: {
+                          singleCount,
+                      },
+                  }
+                : {}
+        );
     }
 
     /**
@@ -41,7 +48,6 @@ export class InteractiveExposeStatisticsService extends APIClient {
     async fetchDynamicEstateStatistics(estateId: string, requestedTypes: object): Promise<AxiosResponse> {
         return await this.invokeApi(`/dynamic/${estateId}`, 'POST', requestedTypes);
     }
-
 }
 
 export default new InteractiveExposeStatisticsService();

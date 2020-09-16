@@ -23,10 +23,10 @@ export class FlowController extends APIClient {
     async fetchWorkflow(workflowId: string, withStatistics: boolean = false) {
         return this.invokeApiWithErrorHandling<Workflow>(`/flow/${workflowId}`, 'GET', undefined, {
             queryParams: {
-                stats: withStatistics
-            }
+                stats: withStatistics,
+            },
         });
-    };
+    }
 
     /**
      * Fetches specific workflows by the given ids. If the array is empty, all workflows will be returned.
@@ -38,10 +38,10 @@ export class FlowController extends APIClient {
         return this.invokeApiWithErrorHandling<Workflows>(`/flow`, 'GET', undefined, {
             queryParams: {
                 ids: workflowIds.join(','),
-                stats: withStatistics
-            }
+                stats: withStatistics,
+            },
         });
-    };
+    }
 
     /**
      * Creates a workflow
@@ -49,47 +49,47 @@ export class FlowController extends APIClient {
      */
     async createWorkflow(workflow: CreateWorkflowRequest) {
         return this.invokeApiWithErrorHandling<Workflow>('/flow', 'POST', workflow);
-    };
+    }
 
     /**
      * Updates a workflow by it's id.
      * @param workflowId
      * @param workflow
      */
-    async updateWorkflow (workflowId: string, workflow: Workflow) {
+    async updateWorkflow(workflowId: string, workflow: Workflow) {
         return this.invokeApiWithErrorHandling<Workflow>(`/flow/${workflowId}`, 'PUT', workflow);
-    };
+    }
 
     /**
      * Deletes a workflow by it's id
      * @param workflowId
      */
-    async deleteWorkflow (workflowId: string) {
+    async deleteWorkflow(workflowId: string) {
         return this.invokeApiWithErrorHandling(`/flow/${workflowId}`, 'DELETE');
-    };
+    }
 
     /**
      * Patches a single Workflow
      * @param id
      * @param body
      */
-    async patchWorkflow (id: string, body: WorkflowPatchRequest) {
+    async patchWorkflow(id: string, body: WorkflowPatchRequest) {
         return this.invokeApiWithErrorHandling<WorkflowPatchResult>(`/flow/${id}`, 'PATCH', body);
-    };
+    }
 
     /**
      * Patches multiple Workflows
      * @param body
      */
-    async patchWorkflows (body: WorkflowMultiPatchRequest) {
+    async patchWorkflows(body: WorkflowMultiPatchRequest) {
         return this.invokeApiWithErrorHandling<WorkflowMultiPatchResult>('/flow', 'PATCH', body);
-    };
+    }
 
     /**
      * Duplicate a workflow
      * @param id
      */
-    async duplicateWorkflow (id: string) {
+    async duplicateWorkflow(id: string) {
         return this.invokeApiWithErrorHandling<Workflow>(`/flow/${id}/duplicate`, 'POST');
-    };
+    }
 }

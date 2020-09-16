@@ -11,7 +11,6 @@ interface GenerateParameters {
 }
 
 export class GeneratorController extends APIClient {
-
     constructor() {
         super(APIMapping.documentGeneratorService);
     }
@@ -30,13 +29,13 @@ export class GeneratorController extends APIClient {
      */
     // s3Url: string, entities: EntityDefinition[], userId?: string, saveFormat?: 'pdf' | 'docx'
     generate({ s3Url, entities, userInputs, userId, saveFormat = 'pdf', fileName }: GenerateParameters) {
-        return this.invokeApiWithErrorHandling<{ requestId: string}>('/generator/generate', 'POST', {
+        return this.invokeApiWithErrorHandling<{ requestId: string }>('/generator/generate', 'POST', {
             s3Url: s3Url,
             userId: typeof userId === 'string' ? userId : null,
             entities: entities,
             userInputs: userInputs,
             saveFormat: saveFormat,
-            fileName: fileName
+            fileName: fileName,
         });
     }
 

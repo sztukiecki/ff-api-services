@@ -3,7 +3,6 @@ import { IS24LeadServiceTypes } from './IS24LeadService.Types';
 import LeadImportMode = IS24LeadServiceTypes.LeadImportMode;
 
 export default class IS24LeadsContoller extends APIClient {
-
     constructor() {
         super(APIMapping.is24LeadService);
     }

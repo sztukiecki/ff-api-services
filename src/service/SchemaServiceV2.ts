@@ -1,10 +1,9 @@
-import {Extension, GroupAllResponse, GroupV2, SchemaV2, SchemaV2Response} from '@flowfact/types';
+import { Extension, GroupAllResponse, GroupV2, SchemaV2, SchemaV2Response } from '@flowfact/types';
 import { APIClient, APIMapping } from '../http';
 
 const v2Header = { headers: { 'x-ff-version': 2 } };
 
 export class SchemaServiceV2 extends APIClient {
-
     constructor() {
         super(APIMapping.schemaService);
     }
@@ -67,7 +66,7 @@ export class SchemaServiceV2 extends APIClient {
         queryParams.sourceSchemaName = sourceSchemaName;
         queryParams.targetSchemaName = targetSchemaName;
 
-        return this.invokeApiWithErrorHandling<SchemaV2>(`/v2/schemas`, 'POST',undefined, { queryParams });
+        return this.invokeApiWithErrorHandling<SchemaV2>(`/v2/schemas`, 'POST', undefined, { queryParams });
     };
 
     /**
@@ -80,7 +79,7 @@ export class SchemaServiceV2 extends APIClient {
      * @param schemaIdOrName - The schema's id or schema name
      * @param {FetchSchemaByIdOrNameQueryParam} queryParams - resolves groups, like estates, to hist children - Default value : false
      */
-    fetchSchemaByIdOrName = async (schemaIdOrName: string, queryParams: { resolveGroup?: boolean, extensions?: string } = { extensions: 'all' }) => {
+    fetchSchemaByIdOrName = async (schemaIdOrName: string, queryParams: { resolveGroup?: boolean; extensions?: string } = { extensions: 'all' }) => {
         return this.invokeApiWithErrorHandling<SchemaV2>(`/v2/schemas/${schemaIdOrName}`, 'GET', undefined, { queryParams });
     };
 

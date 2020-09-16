@@ -1,5 +1,4 @@
 export namespace WorkflowServiceTypes {
-
     export interface Workflows {
         workflows: Workflow[];
     }
@@ -51,11 +50,13 @@ export namespace WorkflowServiceTypes {
 
     export interface WorkflowPatchRequest {
         id: string;
-        patch: [{
-            op: string;
-            path: string;
-            value: string;
-        }];
+        patch: [
+            {
+                op: string;
+                path: string;
+                value: string;
+            }
+        ];
     }
 
     export interface WorkflowPatchResult {
@@ -65,7 +66,7 @@ export namespace WorkflowServiceTypes {
         error?: {
             type: string;
             description: string;
-            additionalInfo: string
+            additionalInfo: string;
         };
     }
 
@@ -82,12 +83,12 @@ export namespace WorkflowServiceTypes {
     }
 
     export interface Template {
-        templateName: string,
-        title?: string,
-        description?: string,
-        actionType: string,
-        created?: number,
-        parameters: { [key: string]: any }
+        templateName: string;
+        title?: string;
+        description?: string;
+        actionType: string;
+        created?: number;
+        parameters: { [key: string]: any };
     }
 
     export interface AllTypesResponse {
@@ -110,5 +111,4 @@ export namespace WorkflowServiceTypes {
         schema: string;
         entityIds: string[];
     }
-
 }

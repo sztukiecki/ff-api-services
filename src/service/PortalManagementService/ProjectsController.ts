@@ -1,5 +1,5 @@
-import {APIClient, APIMapping} from "../../http";
-import {PortalManagementTypes} from "./PortalManagementService.Types";
+import { APIClient, APIMapping } from '../../http';
+import { PortalManagementTypes } from './PortalManagementService.Types';
 import ProjectPublishResponse = PortalManagementTypes.ProjectPublishResponse;
 
 export class ProjectsController extends APIClient {
@@ -22,5 +22,4 @@ export class ProjectsController extends APIClient {
     async unpublish(projectId: string) {
         return await this.invokeApiWithErrorHandling<ProjectPublishResponse>(`/projects/${projectId}/unpublish`, 'POST');
     }
-
 }

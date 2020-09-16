@@ -7,7 +7,6 @@ import APIMapping from '../http/APIMapping';
  * that represent the answer that the appointment-booking-service provided.
  */
 export class AppointmentBookingService extends APIClient {
-
     constructor() {
         super(APIMapping.appointmentBookingService);
     }
@@ -39,7 +38,7 @@ export class AppointmentBookingService extends APIClient {
      * @param eventId
      */
     async deleteEvent(eventId: any): Promise<AxiosResponse> {
-        return this.invokeApi('/eventconfig/delete/event', 'POST', {eventSlotId: eventId});
+        return this.invokeApi('/eventconfig/delete/event', 'POST', { eventSlotId: eventId });
     }
 
     /**

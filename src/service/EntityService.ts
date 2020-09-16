@@ -10,12 +10,11 @@ export interface DeleteEntitiesResponse<T> {
         [entityId: string]: {
             response: T;
             statusCode: number;
-        }
-    }
+        };
+    };
 }
 
 export class EntityService extends APIClient {
-
     constructor() {
         super(APIMapping.entityService);
     }
@@ -74,14 +73,14 @@ export class EntityService extends APIClient {
             page,
             size,
             viewName,
-            withCount
+            withCount,
         };
 
         return this.invokeApi<PagedResponse<EntityView>>(`/search/schemas/${index}`, 'POST', flowdsl, {
             queryParams: queryParams,
             headers: {
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
         });
     }
 
@@ -99,7 +98,7 @@ export class EntityService extends APIClient {
             offset,
             size,
             viewName,
-            withCount
+            withCount,
         };
 
         return this.invokeApi<PagedResponse<EntityView>>(`/search/schemas/${index}`, 'POST', flowdsl, {
@@ -121,14 +120,14 @@ export class EntityService extends APIClient {
             offset,
             size,
             viewName,
-            withCount
+            withCount,
         };
 
         return this.invokeApi<PagedResponse<EntityView>>(`/search/schemas/${index}`, 'POST', flowdsl, {
             queryParams: queryParams,
             headers: {
-                'x-ff-version': 2
-            }
+                'x-ff-version': 2,
+            },
         });
     }
 
@@ -149,8 +148,8 @@ export class EntityService extends APIClient {
         return this.invokeApiWithErrorHandling<DeleteEntitiesResponse<string>>(`/entities`, 'DELETE', data, {
             headers: {
                 // The v2 header is important, otherwise a customer could delete his whole system
-                'x-ff-version': 2
-            }
+                'x-ff-version': 2,
+            },
         });
     }
 
@@ -190,8 +189,8 @@ export class EntityService extends APIClient {
     async fetchEntityDescriptor(entityId: string) {
         return this.invokeApi<EntityDescriptor>(`/entities/${entityId}`, 'GET', undefined, {
             headers: {
-                Accept: 'application/json+descriptor'
-            }
+                Accept: 'application/json+descriptor',
+            },
         });
     }
 

@@ -2,10 +2,9 @@ import { User, UserRole, UserType } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 
-const v2Header = {headers: {'x-ff-version': 2}};
+const v2Header = { headers: { 'x-ff-version': 2 } };
 
 export class UserService extends APIClient {
-
     constructor() {
         super(APIMapping.userService);
     }
@@ -17,7 +16,13 @@ export class UserService extends APIClient {
      * @param firstName
      * @param lastName
      */
-    async createUser(companyID: string, mailAddress: string, firstName: string, lastName: string, useV2: boolean = false): Promise<AxiosResponse<User>> {
+    async createUser(
+        companyID: string,
+        mailAddress: string,
+        firstName: string,
+        lastName: string,
+        useV2: boolean = false
+    ): Promise<AxiosResponse<User>> {
         if (useV2) {
             return await this.invokeApi(
                 '/users',
@@ -28,7 +33,8 @@ export class UserService extends APIClient {
                     businessMailAddress: mailAddress,
                     companyId: companyID,
                 },
-                v2Header);
+                v2Header
+            );
         }
 
         return await this.invokeApi('/users', 'POST', {
@@ -44,12 +50,7 @@ export class UserService extends APIClient {
      * @param user - The usermodel that is used to create the user.
      */
     async createUserByModel(user: User) {
-        return await this.invokeApi(
-            '/users',
-            'POST',
-            user,
-            v2Header
-        );
+        return await this.invokeApi('/users', 'POST', user, v2Header);
     }
 
     /**
@@ -66,8 +67,8 @@ export class UserService extends APIClient {
     async fetchAllUsersOfTheCompany(userTypes: UserType[] = []): Promise<AxiosResponse<User[]>> {
         return await this.invokeApi('/users', 'GET', undefined, {
             queryParams: {
-                userType: userTypes.join(',')
-            }
+                userType: userTypes.join(','),
+            },
         });
     }
 
@@ -78,7 +79,7 @@ export class UserService extends APIClient {
     async postImage(image: Blob): Promise<AxiosResponse<any>> {
         const formData = new FormData();
         formData.append('contactPicture', image, 'contactPicture');
-        return this.invokeApi('/users/picture', 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
+        return this.invokeApi('/users/picture', 'POST', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
     }
 
     /**
@@ -89,7 +90,7 @@ export class UserService extends APIClient {
     async postImageForUser(userId: string, image: Blob): Promise<AxiosResponse<any>> {
         const formData = new FormData();
         formData.append('contactPicture', image, 'contactPicture');
-        return this.invokeApi(`/users/${userId}/picture`, 'POST', formData, {headers: {'Content-Type': 'multipart/form-data'}});
+        return this.invokeApi(`/users/${userId}/picture`, 'POST', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
     }
 
     /**
@@ -145,7 +146,7 @@ export class UserService extends APIClient {
         return await this.invokeApi('/public/users/sso', 'GET', undefined, {
             queryParams: {
                 aliasMailAddress: businessMailAddress,
-                ssoType: ssoType
+                ssoType: ssoType,
             },
         });
     }
@@ -182,15 +183,17 @@ export class UserService extends APIClient {
         return await this.invokeApi(
             `/users/${userId}`,
             'PATCH',
-            [{
-                op: 'activate',
-            }],
+            [
+                {
+                    op: 'activate',
+                },
+            ],
             {
                 headers: {
                     'Content-Type': 'application/json-patch+json',
                     'x-ff-version': useV2 ? 2 : 1,
                 },
-            },
+            }
         );
     }
 
@@ -200,17 +203,12 @@ export class UserService extends APIClient {
      * @param useV2
      */
     async deactivateUser(userId: string, useV2: boolean = false): Promise<AxiosResponse> {
-        return await this.invokeApi(
-            `/users/${userId}`,
-            'PATCH',
-            [{op: 'deactivate'}],
-            {
-                headers: {
-                    'Content-Type': 'application/json-patch+json',
-                    'x-ff-version': useV2 ? 2 : 1,
-                },
+        return await this.invokeApi(`/users/${userId}`, 'PATCH', [{ op: 'deactivate' }], {
+            headers: {
+                'Content-Type': 'application/json-patch+json',
+                'x-ff-version': useV2 ? 2 : 1,
             },
-        );
+        });
     }
 
     /**
@@ -220,7 +218,7 @@ export class UserService extends APIClient {
      */
     async updateLoginName(userId: string, loginName: string): Promise<AxiosResponse> {
         return await this.invokeApi(`/users/${userId}/loginname`, 'PUT', {
-            desiredLoginName: loginName
+            desiredLoginName: loginName,
         });
     }
 
@@ -250,8 +248,8 @@ export class UserService extends APIClient {
     async link(aliasMailAddress: string) {
         return this.invokeApi(`/public/cognito-users/link`, 'POST', undefined, {
             queryParams: {
-                aliasMailAddress: aliasMailAddress
-            }
+                aliasMailAddress: aliasMailAddress,
+            },
         });
     }
 

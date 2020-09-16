@@ -5,7 +5,6 @@ import BookingController from './BookingController';
 export * from './DocumentGeneratorService.Types';
 
 export class DocumentGeneratorService {
-
     public static instance = new DocumentGeneratorService();
 
     public readonly generator: GeneratorController;
@@ -17,7 +16,6 @@ export class DocumentGeneratorService {
         this.download = new DownloadController();
         this.booking = new BookingController();
     }
-
 }
 
 export const DocumentGeneratorServiceInstance = new DocumentGeneratorService();

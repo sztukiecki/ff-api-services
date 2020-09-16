@@ -10,21 +10,20 @@ enum StageTypes {
     PRODUCTION = 'production',
     STAGING = 'staging',
     DEVELOPMENT = 'development',
-    LOCAL = 'local'
+    LOCAL = 'local',
 }
 
 enum VersionTagTypes {
     LATEST = 'latest',
-    STABLE = 'stable'
+    STABLE = 'stable',
 }
 
-const defaultStage = isNode ? (process.env.STAGE_NAME || StageTypes.DEVELOPMENT) : StageTypes.PRODUCTION;
+const defaultStage = isNode ? process.env.STAGE_NAME || StageTypes.DEVELOPMENT : StageTypes.PRODUCTION;
 const defaultVersionTag = defaultStage === StageTypes.PRODUCTION ? VersionTagTypes.STABLE : VersionTagTypes.LATEST;
 
 let instance: EnvironmentManagement | null = null;
 
 export class EnvironmentManagement {
-
     constructor() {
         if (!instance) {
             instance = this;
@@ -68,15 +67,10 @@ export class EnvironmentManagement {
     };
 
     isDefaultApi() {
-        return (this.getStage() === defaultStage) && (this.getVersionTag() === defaultVersionTag);
+        return this.getStage() === defaultStage && this.getVersionTag() === defaultVersionTag;
     }
 }
 
 const EnvironmentManagementInstance = new EnvironmentManagement();
 
-export {
-    StoreKeys,
-    VersionTagTypes,
-    StageTypes,
-    EnvironmentManagementInstance,
-};
+export { StoreKeys, VersionTagTypes, StageTypes, EnvironmentManagementInstance };

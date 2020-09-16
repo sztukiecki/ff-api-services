@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from '../../http';
-import {SampleDataServiceTypes} from './SampleDataService.Types';
+import { SampleDataServiceTypes } from './SampleDataService.Types';
 import Bundles = SampleDataServiceTypes.Bundles;
 import Bundle = SampleDataServiceTypes.Bundle;
 

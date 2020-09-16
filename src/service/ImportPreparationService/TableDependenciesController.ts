@@ -1,9 +1,8 @@
-import {APIClient, APIMapping} from '../../http';
-import {ImportPreparationServiceTypes} from './ImportPreparationService.Types';
+import { APIClient, APIMapping } from '../../http';
+import { ImportPreparationServiceTypes } from './ImportPreparationService.Types';
 import TableDependency = ImportPreparationServiceTypes.TableDependency;
 
 export class TableDependenciesController extends APIClient {
-
     constructor() {
         super(APIMapping.importPreparationService);
     }
@@ -14,8 +13,8 @@ export class TableDependenciesController extends APIClient {
     async fetch(sourceSystem: string = 'performer') {
         return await this.invokeApiWithErrorHandling<TableDependency[]>('/table-dependencies', 'GET', undefined, {
             queryParams: {
-                sourceSystem
-            }
+                sourceSystem,
+            },
         });
     }
 

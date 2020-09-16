@@ -1,9 +1,7 @@
-
 import { APIClient, APIMapping } from '../../http';
 import { JSONPatch, ReadTemplate, WriteTemplate } from './DocumentTemplateService.Types';
 
 export class TemplateController extends APIClient {
-
     constructor() {
         super(APIMapping.documentTemplateService);
     }
@@ -27,8 +25,8 @@ export class TemplateController extends APIClient {
 
         return this.invokeApiWithErrorHandling<ReadTemplate>('/templates', 'POST', formData, {
             headers: {
-                'Content-Type': 'multipart/*'
-            }
+                'Content-Type': 'multipart/*',
+            },
         });
     }
 
@@ -42,10 +40,10 @@ export class TemplateController extends APIClient {
         formData.append('file', file);
         formData.append('data', JSON.stringify(data));
 
-        return this.invokeApiWithErrorHandling<ReadTemplate>(`/templates/${data.name}`, 'PUT', formData,  {
+        return this.invokeApiWithErrorHandling<ReadTemplate>(`/templates/${data.name}`, 'PUT', formData, {
             headers: {
-                'Content-Type': 'multipart/*'
-            }
+                'Content-Type': 'multipart/*',
+            },
         });
     }
 
@@ -77,8 +75,8 @@ export class TemplateController extends APIClient {
 
         return this.invokeApiWithErrorHandling(`/templates/${name}/file`, 'PUT', formData, {
             headers: {
-                'Content-Type': 'multipart/*'
-            }
+                'Content-Type': 'multipart/*',
+            },
         });
     }
 
@@ -90,9 +88,9 @@ export class TemplateController extends APIClient {
     async downloadTemplate(name: string) {
         return this.invokeApiWithErrorHandling(`/templates/${name}/file`, 'GET', undefined, {
             headers: {
-                Accept: 'application/octet-stream'
+                Accept: 'application/octet-stream',
             },
-            responseType: 'arraybuffer'
+            responseType: 'arraybuffer',
         });
     }
 

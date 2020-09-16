@@ -1,16 +1,9 @@
-import {
-    DslBuilder,
-    EntityIdCondition,
-    Flowdsl,
-    FlowdslConditionUnion,
-    HasFieldWithValueCondition
-} from '@flowfact/node-flowdsl';
-import {Entity, FilterConfiguration, PagedResponse} from '@flowfact/types';
-import {AxiosResponse} from 'axios';
-import {APIClient, APIMapping} from '../http';
+import { DslBuilder, EntityIdCondition, Flowdsl, FlowdslConditionUnion, HasFieldWithValueCondition } from '@flowfact/node-flowdsl';
+import { Entity, FilterConfiguration, PagedResponse } from '@flowfact/types';
+import { AxiosResponse } from 'axios';
+import { APIClient, APIMapping } from '../http';
 
 export class SearchService extends APIClient {
-
     constructor() {
         super(APIMapping.searchService);
     }
@@ -92,7 +85,7 @@ export class SearchService extends APIClient {
     async count(query: Flowdsl, index: string, groupBy?: string) {
         return await this.invokeApi('/schemas/' + index + '/count', 'POST', query, {
             queryParams: {
-                groupBy: groupBy
+                groupBy: groupBy,
             },
             headers: {
                 'Content-Type': 'application/json',
@@ -152,7 +145,7 @@ export class SearchService extends APIClient {
 
         if (filterConfiguration) {
             if (filterConfiguration.value && filterConfiguration.value !== '') {
-                const conditions: FlowdslConditionUnion[] = filterConfiguration.fields.map(field => {
+                const conditions: FlowdslConditionUnion[] = filterConfiguration.fields.map((field) => {
                     if (field === 'id') {
                         return {
                             type: 'ENTITYID',
@@ -167,10 +160,12 @@ export class SearchService extends APIClient {
                     } as HasFieldWithValueCondition;
                 });
 
-                builder.withCondition([{
-                    type: 'OR',
-                    conditions: conditions,
-                }]);
+                builder.withCondition([
+                    {
+                        type: 'OR',
+                        conditions: conditions,
+                    },
+                ]);
             }
 
             if (filterConfiguration.limitResponse) {

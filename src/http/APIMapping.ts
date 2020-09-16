@@ -80,7 +80,7 @@ const APIMapping = {
     documentGeneratorService: new APIService('document-generator-service'),
     documentTemplateService: new APIService('document-template-service'),
     lambdaProxyService: new APIService('lambda'),
-    placeholderService: new APIService('placeholder-service')
+    placeholderService: new APIService('placeholder-service'),
 };
 
 export default APIMapping;

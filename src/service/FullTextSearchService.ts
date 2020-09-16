@@ -3,7 +3,6 @@ import { ParamList } from '../util/InternalTypes';
 import { Entity, PagedResponse } from '@flowfact/types';
 
 export class FullTextSearchService extends APIClient {
-
     constructor() {
         super(APIMapping.fullTextSearchService);
     }
@@ -22,11 +21,11 @@ export class FullTextSearchService extends APIClient {
                 page,
                 size,
                 searchTerm,
-                ...params
+                ...params,
             },
             headers: {
-                'Content-Type': 'application/json'
-            }
+                'Content-Type': 'application/json',
+            },
         });
     }
 }

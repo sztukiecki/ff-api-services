@@ -49,7 +49,7 @@ export class EmailService extends APIClient {
     async syncEmail(emailAccount: string, subject: string): Promise<AxiosResponse> {
         return this.invokeApi('/emails/sync', 'POST', {
             emailAccount: emailAccount,
-            subject: subject
+            subject: subject,
         });
     }
 }
