@@ -96,7 +96,7 @@ export default class MatchController extends APIClient {
      */
     async fetchMapMatchesBySearchProfile(searchProfileId: string) {
         return await this.invokeApiWithErrorHandling<PagedResponse<MatchmakingTypes.MapMatch>>(
-            `match/search-profile/${searchProfileId}/map-entries`,
+            `/match/search-profile/${searchProfileId}/map-entries`,
             'GET'
         );
     }
