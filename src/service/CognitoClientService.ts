@@ -2,7 +2,6 @@ import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
 export class CognitoClientService extends APIClient {
-
     constructor() {
         super(APIMapping.cognitoClientService);
     }
@@ -15,8 +14,8 @@ export class CognitoClientService extends APIClient {
     async fetchLoginNameByAliasMailAddress(aliasMailAddress: string): Promise<AxiosResponse> {
         return this.invokeApi(`/public/users/loginname/`, 'GET', undefined, {
             queryParams: {
-                aliasMailAddress: aliasMailAddress
-            }
+                aliasMailAddress: aliasMailAddress,
+            },
         });
     }
 
@@ -27,8 +26,8 @@ export class CognitoClientService extends APIClient {
     async linkAccount(aliasMailAddress: string): Promise<AxiosResponse> {
         return this.invokeApi(`/public/users/link`, 'POST', undefined, {
             queryParams: {
-                aliasMailAddress: aliasMailAddress
-            }
+                aliasMailAddress: aliasMailAddress,
+            },
         });
     }
 
@@ -40,7 +39,7 @@ export class CognitoClientService extends APIClient {
     async resetPassword(aliasMailAddress: string, businessMailAddress: string): Promise<AxiosResponse> {
         return this.invokeApi(`/users/password`, 'POST', {
             aliasMailAddress: aliasMailAddress,
-            businessMailAddress: businessMailAddress
+            businessMailAddress: businessMailAddress,
         });
     }
 
@@ -51,7 +50,6 @@ export class CognitoClientService extends APIClient {
     isMailBlocked = (mailAddress: string) => {
         return this.invokeApi(`/public/mailing/blocks/${mailAddress}`, 'GET');
     };
-
 }
 
 export default new CognitoClientService();

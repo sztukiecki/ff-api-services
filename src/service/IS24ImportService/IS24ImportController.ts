@@ -11,7 +11,6 @@ export interface PagedResponse<T> {
 }
 
 export default class IS24ImportController extends APIClient {
-
     constructor() {
         super(APIMapping.is24ImportService);
     }
@@ -57,5 +56,4 @@ export default class IS24ImportController extends APIClient {
     async importDeveloperProjects(portalId: string) {
         return await this.invokeApiWithErrorHandling(`/portals/${portalId}/import-projects`, 'POST');
     }
-
 }

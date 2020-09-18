@@ -1,7 +1,6 @@
 import { APIClient, APIMapping } from '../http';
 
 export class TrialLicenseService extends APIClient {
-
     constructor() {
         super(APIMapping.trialLicenseServive);
     }

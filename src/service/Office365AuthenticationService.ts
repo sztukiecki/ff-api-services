@@ -2,7 +2,6 @@ import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
 export class Office365AuthenticationService extends APIClient {
-
     constructor() {
         super(APIMapping.office365AuthenticationService);
     }
@@ -14,8 +13,8 @@ export class Office365AuthenticationService extends APIClient {
     async authenticate(temporaryToken: string): Promise<AxiosResponse> {
         return await this.invokeApi('/public/authentication/cognito', 'GET', undefined, {
             queryParams: {
-                temporaryToken: temporaryToken
-            }
+                temporaryToken: temporaryToken,
+            },
         });
     }
 
@@ -31,8 +30,8 @@ export class Office365AuthenticationService extends APIClient {
                 code,
                 redirectUrl,
                 clientId,
-                origin: 'client'
-            }
+                origin: 'client',
+            },
         });
     }
 }

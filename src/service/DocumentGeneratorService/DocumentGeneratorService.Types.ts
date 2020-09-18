@@ -1,4 +1,3 @@
-
 export interface EntityPickData {
     entityId: string;
     schemaName: string;
@@ -15,7 +14,7 @@ export interface GenerationStatus {
     id: string;
     s3Url: string;
     type: GenerationStatusType;
-    created: Date
+    created: Date;
 }
 
 export type SaveFormat = 'pdf' | 'docx';

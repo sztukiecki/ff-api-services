@@ -4,7 +4,6 @@ import APIClient from '../http/APIClient';
 import APIMapping from '../http/APIMapping';
 
 export class HistoryModuleService extends APIClient {
-
     constructor() {
         super(APIMapping.historyModuleService);
     }

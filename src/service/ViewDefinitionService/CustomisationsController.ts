@@ -2,7 +2,6 @@ import { APIClient, APIMapping } from '../../http';
 import { Customisation, ViewDefinition } from './ViewDefinitionService.Types';
 
 export class CustomisationsController extends APIClient {
-
     constructor() {
         super(APIMapping.viewDefinitionService);
     }
@@ -23,5 +22,4 @@ export class CustomisationsController extends APIClient {
     async saveCustomisations(viewDefinition: ViewDefinition) {
         await this.invokeApiWithErrorHandling(`/customisations/view/${viewDefinition.id}`, 'PUT', viewDefinition);
     }
-
 }

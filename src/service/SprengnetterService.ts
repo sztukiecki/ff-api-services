@@ -2,7 +2,6 @@ import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
 export class SprengnetterService extends APIClient {
-
     constructor() {
         super(APIMapping.spregnetterService);
     }
@@ -64,9 +63,8 @@ export class SprengnetterService extends APIClient {
      * @returns {Promise<AxiosResponse>}
      */
     async sendFeedback(rating: number, message: string): Promise<AxiosResponse> {
-        return await this.invokeApi('/feedback', 'POST', {rating: rating, message: message});
+        return await this.invokeApi('/feedback', 'POST', { rating: rating, message: message });
     }
-
 }
 
 export default new SprengnetterService();

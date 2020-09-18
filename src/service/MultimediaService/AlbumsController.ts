@@ -2,7 +2,6 @@ import { APIClient, APIMapping } from '../../http';
 import { Album } from './MultimediaService.Types';
 
 export class AlbumsController extends APIClient {
-
     constructor() {
         super(APIMapping.multimediaService);
     }

@@ -1,6 +1,5 @@
-import {Captions} from '@flowfact/types';
-import {FlowdslConditionUnion} from '@flowfact/node-flowdsl';
-
+import { Captions } from '@flowfact/types';
+import { FlowdslConditionUnion } from '@flowfact/node-flowdsl';
 
 export namespace FlywheelServiceTypes {
     export type Flywheel = {
@@ -53,8 +52,8 @@ export namespace FlywheelServiceTypes {
         transactionId: number;
         phaseName: string;
         sequence: number;
-        entity: any
-    }
+        entity: any;
+    };
 
     export type PagedTransactions = {
         boardName: string;
@@ -62,20 +61,13 @@ export namespace FlywheelServiceTypes {
         page: number;
         totalCount: number;
         transactions?: Transaction[];
-    }
+    };
 
+    export type FlywheelPhasePatch = PhasePatch;
 
-    export type FlywheelPhasePatch = PhasePatch
-
-    export type FlywheelFilter =
-        ExcludeStepsFilter |
-        ExcludeKanbansFilter |
-        SchemaIdFilter |
-        ExcludeCustomerFilter |
-        ExcludeMasterFilter;
+    export type FlywheelFilter = ExcludeStepsFilter | ExcludeKanbansFilter | SchemaIdFilter | ExcludeCustomerFilter | ExcludeMasterFilter;
 
     export type PhaseSyncCommands = 'resync';
-
 
     export interface ExcludeStepsFilter {
         type: 'EXCLUDE_PHASE_STEPS';
@@ -101,9 +93,9 @@ export namespace FlywheelServiceTypes {
     }
 
     export type PhasePatch = {
-        op: 'set-import-type',
-        value: ImportType
-    }
+        op: 'set-import-type';
+        value: ImportType;
+    };
 
     export type ImportType = 'only_new' | 'new_and_old';
 }

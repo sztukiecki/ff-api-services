@@ -1,5 +1,5 @@
-import {APIClient, APIMapping} from "../../http";
-import {PortalManagementTypes} from "./PortalManagementService.Types";
+import { APIClient, APIMapping } from '../../http';
+import { PortalManagementTypes } from './PortalManagementService.Types';
 import ProjectEstateResponse = PortalManagementTypes.ProjectEstateResponse;
 
 export class ProjectsEstateController extends APIClient {

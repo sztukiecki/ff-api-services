@@ -1,9 +1,7 @@
 import { APIClient, APIMapping } from '../../http';
-import {IS24PublishTypes} from "./IS24Publish.Types";
-
+import { IS24PublishTypes } from './IS24Publish.Types';
 
 export class IS24PublishController extends APIClient {
-
     constructor() {
         super(APIMapping.is24PublishService);
     }

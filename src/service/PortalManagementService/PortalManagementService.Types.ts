@@ -1,4 +1,4 @@
-import {IS24ImportServiceTypes} from "../IS24ImportService";
+import { IS24ImportServiceTypes } from '../IS24ImportService';
 import ProjectInfo = IS24ImportServiceTypes.ProjectInfo;
 
 export namespace PortalManagementTypes {
@@ -117,5 +117,4 @@ export namespace PortalManagementTypes {
         showAddress?: boolean;
         channels?: PublishChannel[];
     }
-
 }

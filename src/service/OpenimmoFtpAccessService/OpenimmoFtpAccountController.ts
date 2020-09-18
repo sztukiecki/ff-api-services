@@ -1,9 +1,8 @@
-import {APIClient, APIMapping} from '../../http';
-import {OpenImmoFtpAccountTypes} from './OpenimmoFtpAccessService.Types';
+import { APIClient, APIMapping } from '../../http';
+import { OpenImmoFtpAccountTypes } from './OpenimmoFtpAccessService.Types';
 import OpenimmoFtpAccount = OpenImmoFtpAccountTypes.OpenimmoFtpAccount;
 
 export default class OpenimmoFtpAccountController extends APIClient {
-
     constructor() {
         super(APIMapping.openimmoFtpAccessService);
     }

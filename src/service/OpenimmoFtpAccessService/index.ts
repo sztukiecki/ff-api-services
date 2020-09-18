@@ -4,7 +4,6 @@ import OpenimmoReportRecipientController from './OpenimmoReportRecipientControll
 export * from './OpenimmoFtpAccessService.Types';
 
 export class OpenimmoFtpAccessService {
-
     public static instance = new OpenimmoFtpAccessService();
 
     public readonly ftpAccount: OpenimmoFtpAccountController;

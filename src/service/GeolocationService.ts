@@ -2,7 +2,6 @@ import { APIClient, APIMapping } from '../http';
 import { CancelToken } from 'axios';
 
 export class GeolocationService extends APIClient {
-
     constructor() {
         super(APIMapping.geolocationService);
     }
@@ -15,11 +14,11 @@ export class GeolocationService extends APIClient {
     fetchAutocompletionResults(query: string, cancelToken: CancelToken) {
         const additionalParams = {
             queryParams: {
-                q: query
+                q: query,
             },
-            cancelToken
+            cancelToken,
         };
-        return this.invokeApi('/search', 'GET', undefined, additionalParams).then(s => s.data);
+        return this.invokeApi('/search', 'GET', undefined, additionalParams).then((s) => s.data);
     }
 
     /**
@@ -29,10 +28,10 @@ export class GeolocationService extends APIClient {
     fetchBestMatchCoordinates(query: string) {
         const additionalParams = {
             queryParams: {
-                q: query
-            }
+                q: query,
+            },
         };
-        return this.invokeApi('/getBestMatchCoordinates', 'GET', undefined, additionalParams).then(s => s.data);
+        return this.invokeApi('/getBestMatchCoordinates', 'GET', undefined, additionalParams).then((s) => s.data);
     }
 }
 

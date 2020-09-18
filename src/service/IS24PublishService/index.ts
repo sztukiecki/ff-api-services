@@ -1,9 +1,8 @@
-import {IS24PublishController} from "./IS24PublishController";
+import { IS24PublishController } from './IS24PublishController';
 
 export * from './IS24Publish.Types';
 
 export class IS24PublishService {
-
     public readonly publish: IS24PublishController;
 
     constructor() {

@@ -14,10 +14,9 @@ class ExcelExporterService extends APIClient {
      */
     async createExport(schemaName: String, filterConditions: Object): Promise<AxiosResponse> {
         return this.invokeApi(`/export/schema/${schemaName}`, 'POST', {
-              target: 'entity',
-              conditions: filterConditions
-            }
-        );
+            target: 'entity',
+            conditions: filterConditions,
+        });
     }
 
     /**

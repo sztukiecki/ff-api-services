@@ -1,7 +1,6 @@
 import { Entity } from '@flowfact/types';
 
 export namespace MatchmakingTypes {
-
     export interface UpdatedField {
         name: string;
         previousValue: string | number | object | null;
@@ -22,5 +21,24 @@ export namespace MatchmakingTypes {
     export interface FilterQuery {
         ignored?: boolean;
         offered?: boolean;
+    }
+
+    export interface MapMatchGeoLocation {
+        latitude: number;
+        longitude: number;
+    }
+
+    export interface MapMatchAddress {
+        street: string;
+        zipcode: string;
+        city: string;
+        geolocation?: MapMatchGeoLocation;
+    }
+
+    export interface MapMatch {
+        id: string;
+        addresses: {
+            values: MapMatchAddress[];
+        };
     }
 }

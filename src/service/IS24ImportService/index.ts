@@ -4,7 +4,6 @@ import IS24ProjectController from './IS24ProjectController';
 export * from './IS24ImportService.Types';
 
 export class IS24ImportService {
-
     public readonly import: IS24ImportController;
     public readonly project: IS24ProjectController;
 

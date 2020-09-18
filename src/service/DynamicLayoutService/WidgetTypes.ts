@@ -11,7 +11,7 @@ export namespace WidgetTypes {
         images: {
             thumbnail: string;
             preview: string;
-        }
+        };
     }
 
     export interface PagedWidgets {

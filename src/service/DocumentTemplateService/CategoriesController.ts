@@ -2,7 +2,6 @@ import { APIClient, APIMapping } from '../../http';
 import { ReadCategory, WriteCategory } from './DocumentTemplateService.Types';
 
 export class CategoriesController extends APIClient {
-
     constructor() {
         super(APIMapping.documentTemplateService);
     }

@@ -26,7 +26,7 @@ export interface ViewDefinitionStatistic {
     name: string;
     schema: string;
     categoryAmount: number;
-    fieldAmount: number,
+    fieldAmount: number;
     global: boolean;
 }
 

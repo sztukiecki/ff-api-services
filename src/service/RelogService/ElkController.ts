@@ -4,7 +4,6 @@ import { FFAdditionalElkData, MandatoryElkData } from './RelogService.Types';
 type ElkData = MandatoryElkData & FFAdditionalElkData;
 
 export class ElkController extends APIClient {
-
     constructor() {
         super(APIMapping.relogService);
     }
@@ -30,6 +29,6 @@ export class ElkController extends APIClient {
      * @param logEntries
      */
     async logBatch(logEntries: ElkData[]) {
-        return await this.invokeApiWithErrorHandling('/relog/elk-gelf/batch', 'POST', {batch: logEntries});
+        return await this.invokeApiWithErrorHandling('/relog/elk-gelf/batch', 'POST', { batch: logEntries });
     }
 }

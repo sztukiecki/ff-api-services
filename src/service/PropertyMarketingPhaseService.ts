@@ -4,7 +4,6 @@ import { v4 as uuid } from 'uuid/interfaces';
 import { EntityQuery, EntityPhaseInformation, PhaseConfigurationInformation } from '../util/InternalTypes';
 
 export class PropertyMarketingPhaseService extends APIClient {
-
     constructor() {
         super(APIMapping.propertyMarketingPhaseService);
     }
@@ -38,8 +37,8 @@ export class PropertyMarketingPhaseService extends APIClient {
                 archived: archived.toString(),
                 inactive: inactive.toString(),
                 page,
-                size
-            }
+                size,
+            },
         });
     }
 
@@ -56,8 +55,8 @@ export class PropertyMarketingPhaseService extends APIClient {
                 archived: archived.toString(),
                 inactive: inactive.toString(),
                 page,
-                size
-            }
+                size,
+            },
         });
     }
 
@@ -80,7 +79,7 @@ export class PropertyMarketingPhaseService extends APIClient {
     async updateStep(schemaId: string, entityId: string, stepId: string, completed: boolean): Promise<AxiosResponse> {
         return await this.invokeApi(`/${schemaId}/${entityId}/updateStep`, 'POST', {
             stepId: stepId,
-            completed: completed
+            completed: completed,
         });
     }
 
@@ -93,7 +92,7 @@ export class PropertyMarketingPhaseService extends APIClient {
      * @returns {Promise<any>} Status OK or REJECTED and a list of widgets if rejected.
      */
     async changeCurrentStep(schemaId: string, entityId: string, stepId: string, source?: 'KANBAN' | 'LIFECYCLE'): Promise<AxiosResponse> {
-        return await this.invokeApi(`/${schemaId}/${entityId}/switchToStep`, 'POST', {stepId, source});
+        return await this.invokeApi(`/${schemaId}/${entityId}/switchToStep`, 'POST', { stepId, source });
     }
 
     /**
@@ -105,8 +104,8 @@ export class PropertyMarketingPhaseService extends APIClient {
             queryParams: {
                 archived,
                 inactive,
-                size: maxCount
-            }
+                size: maxCount,
+            },
         });
     }
 

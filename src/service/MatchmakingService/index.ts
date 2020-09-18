@@ -3,7 +3,6 @@ import MatchController from './MatchController';
 export * from './Matchmaking.Types';
 
 export class MatchmakingService {
-
     public readonly match: MatchController;
 
     public constructor() {
@@ -11,4 +10,4 @@ export class MatchmakingService {
     }
 }
 
-export const MatchmakingServiceInstance  = new MatchmakingService();
+export const MatchmakingServiceInstance = new MatchmakingService();

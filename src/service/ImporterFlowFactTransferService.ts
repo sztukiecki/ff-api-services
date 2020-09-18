@@ -2,7 +2,6 @@ import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
 
 export class ImporterFlowFactTransferService extends APIClient {
-
     constructor() {
         super(APIMapping.importerFlowFactTransferService);
     }
@@ -11,8 +10,8 @@ export class ImporterFlowFactTransferService extends APIClient {
         return this.invokeApi('/id', 'GET', undefined, {
             queryParams: {
                 tableName,
-                oldId: dsn
-            }
+                oldId: dsn,
+            },
         });
     }
 }

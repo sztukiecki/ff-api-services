@@ -26,7 +26,6 @@ export interface InquiryAutomation {
 }
 
 export class InquiryService extends APIClient {
-
     constructor() {
         super(APIMapping.inquiryService);
     }
@@ -67,7 +66,6 @@ export class InquiryService extends APIClient {
     toggleAutomation(companyId: string): Promise<AxiosResponse<InquiryAutomation>> {
         return this.invokeApi(`/inquiry/automation/${companyId}`, 'POST');
     }
-
 }
 
 export default new InquiryService();

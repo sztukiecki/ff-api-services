@@ -4,7 +4,6 @@ import { APIClient } from '../http';
 import APIMapping from '../http/APIMapping';
 
 export class InteractiveExposeDeliveryService extends APIClient {
-
     constructor() {
         super(APIMapping.interactiveExposeDeliveryService);
     }
