@@ -11,6 +11,11 @@ export default class PossibleValuesController extends APIClient {
     return this.invokeApiWithErrorHandling<PossibleValue[]>(`/schemas/${schemaName}/possiblevalues`, 'GET', undefined);
   }
 
+  /**
+   * Not working at the moment
+   * @param schemaName
+   * @param possibleValues
+   */
   async addPossibleValues(schemaName: string, possibleValues: any) {
     return this.invokeApiWithErrorHandling<void>(`/schemas/${schemaName}/possiblevalues`, 'POST', possibleValues);
   }
