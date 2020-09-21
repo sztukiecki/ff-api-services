@@ -96,6 +96,7 @@ export class SchemaServiceV2 extends APIClient {
      * @param schemaName - Identifies the schema
      * @param fieldName - Identifies the field name
      * @param value - The value that should be added
+     * @deprecated - look at PossibleValuesController
      */
     addPossibleValues = async (schemaName: string, fieldName: string, value: any) => {
         return this.invokeApiWithErrorHandling(`/v2/schemas/${schemaName}/fields/${fieldName}/possiblevalues`, 'POST', value);

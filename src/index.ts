@@ -52,7 +52,6 @@ export { default as OpenimmoImporterService } from './service/OpenimmoImporterSe
 export { default as ImporterFlowFactTransferService } from './service/ImporterFlowFactTransferService';
 export { default as AclGroupServiceRest } from './service/AclGroupServiceRest';
 export { default as LambdaProxyService } from './service/LambdaProxyService';
-export { default as PossibleValuesService } from './service/PossibleValuesService/PossibleValuesService';
 
 export * from './service/IS24LeadService';
 export * from './service/IS24ImportService';
@@ -71,6 +70,7 @@ export * from './service/MatchmakingService';
 export * from './service/PortalManagementService';
 export * from './service/IS24PublishService';
 export * from './service/PlaceholderService';
+export * from './service/PossibleValuesService';
 
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
