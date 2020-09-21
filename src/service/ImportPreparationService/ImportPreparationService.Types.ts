@@ -15,4 +15,10 @@ export namespace ImportPreparationServiceTypes {
         tableName: string;
         dependency: string;
     }
+
+    export interface TokenMapping {
+        companyId: string;
+        userId: string;
+        s3Identifier: string
+    }
 }
