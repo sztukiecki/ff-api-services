@@ -1,5 +1,7 @@
 import { APIClient, APIMapping } from '../../http';
 import { User, UserTokenEntity } from '@flowfact/types';
+import { ImportPreparationServiceTypes } from './ImportPreparationService.Types';
+import TokenMapping = ImportPreparationServiceTypes.TokenMapping;
 
 export class UserTokenManagementController extends APIClient {
     constructor() {
@@ -25,5 +27,12 @@ export class UserTokenManagementController extends APIClient {
      */
     async createImporterToken(importerUserId: string) {
         return this.invokeApiWithErrorHandling<UserTokenEntity>(`/userAndTokenManagement/token/importerUser/${importerUserId}`, 'POST', {});
+    }
+
+    /**
+     * Gets the token mapping for given company.
+     */
+    async fetchTokenMapping(companyId: string) {
+        return await this.invokeApiWithErrorHandling<TokenMapping>(`/userAndTokenManagement/token/importerUser/mapping/${companyId}`)
     }
 }
