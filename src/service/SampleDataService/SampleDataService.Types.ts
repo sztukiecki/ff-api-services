@@ -1,31 +1,33 @@
+import { Captions } from '@flowfact/types';
+
 export namespace SampleDataServiceTypes {
     export interface Bundles {
         customerBundles: Bundle[];
         size: number;
     }
 
-    export type Bundle = {
+    export interface Bundle {
         id: number;
         name: string;
         scope: string;
         activatedForCustomer: boolean;
         author: string;
-        captions: object;
+        captions: Captions;
         description: string;
         selectableByCustomer: boolean;
         version: number;
-    };
+    }
 
-    export type BatchImportResult = {
+    export interface BatchImportResult {
         bundles: BatchImportResultBundle;
-    };
+    }
 
-    export type BatchImportResultBundle = {
+    export interface BatchImportResultBundle {
         bundleName: string;
         errorMessage?: string;
         scope: string;
         successful: boolean;
-    };
+    }
 
     export interface ImportBundle {
         bundleName: string;
