@@ -2,6 +2,7 @@ import { DslBuilder, EntityIdCondition, Flowdsl, FlowdslConditionUnion, HasField
 import { Entity, FilterConfiguration, PagedResponse } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
+import { GroupingResult } from './SearchServiceTypes';
 
 export class SearchService extends APIClient {
     constructor() {
@@ -89,6 +90,24 @@ export class SearchService extends APIClient {
             },
             headers: {
                 'Content-Type': 'application/json',
+            },
+        });
+    }
+
+    /**
+     * Fetches count of groups along with respective property and it's value in each group
+     * @param query - query dsl to limit result
+     * @param index - schema name
+     * @param groupBy - schema fields used for grouping
+     */
+    async groupBy(query: Flowdsl, index: string, groupBy: string[]) {
+        return await this.invokeApiWithErrorHandling<GroupingResult>('/schemas/' + index + '/count', 'POST', query, {
+            queryParams: {
+                groupBy: groupBy.join(','),
+            },
+            headers: {
+                'Content-Type': 'application/json',
+                'x-ff-version': 2
             },
         });
     }
