@@ -2,7 +2,7 @@ import { DslBuilder, EntityIdCondition, Flowdsl, FlowdslConditionUnion, HasField
 import { Entity, FilterConfiguration, PagedResponse } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../http';
-import { GroupingResult } from './SearchServiceTypes';
+import {SearchServiceTypes} from "./SearchServiceTypes";
 
 export class SearchService extends APIClient {
     constructor() {
@@ -101,7 +101,7 @@ export class SearchService extends APIClient {
      * @param groupBy - schema fields used for grouping
      */
     async groupBy(query: Flowdsl, index: string, groupBy: string[]) {
-        return await this.invokeApiWithErrorHandling<GroupingResult>('/schemas/' + index + '/count', 'POST', query, {
+        return await this.invokeApiWithErrorHandling<SearchServiceTypes.GroupingResult>('/schemas/' + index + '/count', 'POST', query, {
             queryParams: {
                 groupBy: groupBy.join(','),
             },

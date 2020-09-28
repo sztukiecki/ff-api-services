@@ -71,6 +71,8 @@ export * from './service/PortalManagementService';
 export * from './service/IS24PublishService';
 export * from './service/PlaceholderService';
 export * from './service/PossibleValuesService';
+export * from './service/SearchServiceTypes';
+
 
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
