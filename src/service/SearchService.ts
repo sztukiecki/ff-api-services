@@ -99,11 +99,13 @@ export class SearchService extends APIClient {
      * @param query - query dsl to limit result
      * @param index - schema name
      * @param groupBy - schema fields used for grouping
+     * @param treatingBlankStringValuesAsNull - if true null and empty string are treated as same value
      */
-    async groupBy(query: Flowdsl, index: string, groupBy: string[]) {
+    async groupBy(query: Flowdsl, index: string, groupBy: string[], treatingBlankStringValuesAsNull: boolean = true) {
         return await this.invokeApiWithErrorHandling<SearchServiceTypes.GroupingResult>('/schemas/' + index + '/count', 'POST', query, {
             queryParams: {
                 groupBy: groupBy.join(','),
+                treatingBlankStringValuesAsNull
             },
             headers: {
                 'Content-Type': 'application/json',
