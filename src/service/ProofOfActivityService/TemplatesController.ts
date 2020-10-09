@@ -14,7 +14,7 @@ export class TemplatesController extends APIClient {
      * @param size
      */
     async fetchTemplates(lastId?: string, size?: number) {
-        return this.invokeApiWithErrorHandling<TemplatesResponse>('/', 'GET', {
+        return this.invokeApiWithErrorHandling<TemplatesResponse>('/template', 'GET', {
             lastId,
             size
         });
