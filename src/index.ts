@@ -72,6 +72,8 @@ export * from './service/PlaceholderService';
 export * from './service/PossibleValuesService';
 export * from './service/ProofOfActivityService';
 
+export * from './service/SearchServiceTypes';
+
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
 export * from './util/InternalTypes';
