@@ -38,7 +38,6 @@ export { default as SprengnetterService } from './service/SprengnetterService';
 export { default as TaggingService } from './service/TaggingService';
 export { default as TagsService } from './service/TagService';
 export { default as TemplateService } from './service/TemplateService';
-export { default as ProofOfActivityService } from './service/ProofOfActivityService';
 export { default as TrialLicenseService } from './service/TrialLicenseService';
 export { default as UserService } from './service/UserService';
 export { default as Authentication } from './authentication/Authentication';
@@ -71,8 +70,9 @@ export * from './service/PortalManagementService';
 export * from './service/IS24PublishService';
 export * from './service/PlaceholderService';
 export * from './service/PossibleValuesService';
-export * from './service/SearchServiceTypes';
+export * from './service/ProofOfActivityService';
 
+export * from './service/SearchServiceTypes';
 
 export { APIService, APIMapping, APIClient } from './http';
 export * from './util/EnvironmentManagement';
