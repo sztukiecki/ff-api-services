@@ -130,10 +130,10 @@
   dependencies:
     tslib "^1.10.0"
 
-"@flowfact/types@^4.20200922.173":
-  version "4.20200922.173"
-  resolved "https://registry.yarnpkg.com/@flowfact/types/-/types-4.20200922.173.tgz#d901a989da1a4281656d886ba48c2be5b87710bf"
-  integrity sha512-APAmN160IhMG9T/qbL1/bVoMiXR2clE3scawEy7PJ3vWGNdQ8MwURtYCna8u7lKOdfvq2/NbcRtNUUTNgyItsA==
+"@flowfact/types@^4.20201019.174":
+  version "4.20201019.174"
+  resolved "https://registry.yarnpkg.com/@flowfact/types/-/types-4.20201019.174.tgz#5ddf9778c7dc5c1c7d4ebfd6083ce3c37495b06e"
+  integrity sha512-Gg/ZOQ5m2aFzvwiEkz1Hr8/akIeiyJ1m3rRm3BaNVV3w8x+MJq6Sjn4AMXtp0w/Ia+/K7oBf6g3SvzmvFzEV+A==
   dependencies:
     "@flowfact/node-flowdsl" "^2.20200810.37"
     "@types/node" "^11.15.4"
@@ -201,11 +201,6 @@
   version "11.15.4"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.15.4.tgz#2c8d58f726cfbbd9b76d179475fd386d650a2fda"
   integrity sha512-z7deEbNOPcS7pb7uyaZhbITh18ruGghYh86VmUL2zJPKeu9tEAqF0goQH0dhWamHoBJpkyWroNxPZjzNvbYVCw==
-
-"@types/prop-types@^15.5.1":
-  version "15.5.2"
-  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.2.tgz#3c6b8dceb2906cc87fe4358e809f9d20c8d59be1"
-  integrity sha512-pQRkAVoxiuUrLq8+CDwiQX4pTCep/PmmNgBbjIwnnsd/HoYjGpR81+FFPE030lvNXgR0haaAU6eoRtztWDE4Xw==
 
 "@types/qs@^6.5.1":
   version "6.5.1"
