@@ -78,6 +78,24 @@ export class SearchService extends APIClient {
     }
 
     /**
+     * This method searches for entities or tags. See swagger documentation of search-service for details
+     * @param query
+     * @param index
+     * @param offset
+     * @param size
+     * @param withCount
+     */
+    async searchVirtualized(query: Flowdsl, index: string, offset: number = 0, size: number = 20, withCount: boolean = true) {
+        return this.invokeApiWithErrorHandling<PagedResponse<Entity>>(`/schemas/index`, 'POST', query, {
+            queryParams: {
+                offset: offset,
+                size: size,
+                withCount: withCount
+            }
+        });
+    }
+
+    /**
      * Fetches the number of entities matching the given query
      * @param query
      * @param index
