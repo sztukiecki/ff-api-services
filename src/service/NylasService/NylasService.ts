@@ -77,13 +77,18 @@ export class NylasService extends APIClient {
      * Generate a url that follows the nylas hosted authorization flow
      * @param email
      * @param callbackUrl URL that has to be confiured
+     * @param isGmail
+     * @param syncEmails as initial sync value, if set to false or not set, email sync is inactive after creation acc.
+     * @param ownerId represents a user as acc. owner. May be different from creator.
      */
-    async getRegistrationUrl(email: string, callbackUrl?: string, isGmail: boolean = false): Promise<AxiosResponse<RegistrationUrl>> {
+    async getRegistrationUrl(email: string, callbackUrl?: string, isGmail: boolean = false, syncEmails = false, ownerId = undefined): Promise<AxiosResponse<RegistrationUrl>> {
         return await this.invokeApi('/registration-url', 'GET', undefined, {
             queryParams: {
                 email: email,
                 callbackUrl: callbackUrl,
                 isGmail: isGmail,
+                initialEmailSyncStatus: syncEmails,
+                ownerId: ownerId
             },
         });
     }
