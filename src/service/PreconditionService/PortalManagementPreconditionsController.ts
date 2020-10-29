@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from "../../http";
-import { Preconditions } from "./PreconditionsService.Types";
+import { Precondition } from "./PreconditionsService.Types";
 
 export class PortalManagementPreconditionsController extends APIClient {
     constructor() {
@@ -7,6 +7,6 @@ export class PortalManagementPreconditionsController extends APIClient {
     }
 
     async fetchPreconditions() {
-        return this.invokeApiWithErrorHandling<Preconditions>('/preconditions', 'GET');
+        return this.invokeApiWithErrorHandling<Precondition>('/preconditions/authenticatedPortal', 'GET');
     }
 }
