@@ -10,39 +10,6 @@ export class StatisticsController extends APIClient {
     }
 
     /**
-     * Returns the filled statistics data Object for a specific estate
-     * @param {string} estateId
-     */
-    async fetchEstateStatistics(estateId: string) {
-        return await this.invokeApiWithErrorHandling('/estateStatistics', 'GET', undefined, {
-            queryParams: {
-                estateId,
-            },
-        });
-    }
-
-    /**
-     * Counts all iex which were sent for en estate.
-     * @param estateId
-     * @param singleCount represent the boolean if only contacts to whom iex was sent should be counted,
-     *          or all sent iex including same contacts.
-     */
-    async fetchSentInteractiveExposeCount(estateId: string, singleCount?: boolean){
-        return await this.invokeApiWithErrorHandling(
-            `/estateStatistics/${estateId}/sent/count`,
-            'GET',
-            undefined,
-            singleCount != null
-                ? {
-                    queryParams: {
-                        singleCount,
-                    },
-                }
-                : {}
-        );
-    }
-
-    /**
      * Aggregates different statistics data for given estate by given statistics types.
      * @param estateId
      * @param requestedTypes represents a list with statistic types

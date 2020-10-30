@@ -21,7 +21,6 @@ export { default as HistoryModuleService } from './service/HistoryModuleService'
 export { default as InquiryService } from './service/InquiryService';
 export { default as InteractiveExposeDeliveryService } from './service/InteractiveExposeDeliveryService';
 export { default as InteractiveExposeService } from './service/InteractiveExposeService';
-export { default as InteractiveExposeStatisticsService } from './service/InteractiveExposeStatisticsService';
 export { default as ModuleService } from './service/ModuleService';
 export { default as NylasService } from './service/NylasService/NylasService';
 export { default as NylasContactSyncService } from './service/NylasContactSyncService';
@@ -71,6 +70,7 @@ export * from './service/PlaceholderService';
 export * from './service/PossibleValuesService';
 export * from './service/ProofOfActivityService';
 export * from './service/PropertyMarketingPhaseService';
+export * from './service/InteractiveExposeStatisticsService';
 
 export * from './service/SearchServiceTypes';
 
