@@ -1,3 +1,5 @@
-export interface Precondition {
-    satisfied: boolean;
+export namespace PreconditionServiceTypes {
+    export interface Precondition {
+        satisfied: boolean;
+    }
 }

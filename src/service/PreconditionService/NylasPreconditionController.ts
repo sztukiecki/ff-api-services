@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from "../../http";
-import { Precondition } from "./PreconditionsService.Types";
+import { PreconditionServiceTypes } from "./PreconditionsService.Types";
 
 export class NylasPreconditionController extends APIClient {
     constructor() {
@@ -7,6 +7,6 @@ export class NylasPreconditionController extends APIClient {
     }
 
     async fetchPreconditions() {
-        return this.invokeApiWithErrorHandling<Precondition>('/preconditions/activeMailAccount', 'GET');
+        return this.invokeApiWithErrorHandling<PreconditionServiceTypes.Precondition>('/preconditions/activeMailAccount', 'GET');
     }
 }

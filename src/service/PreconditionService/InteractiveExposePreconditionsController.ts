@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from "../../http";
-import { Precondition } from "./PreconditionsService.Types";
+import { PreconditionServiceTypes } from "./PreconditionsService.Types";
 
 export class InteractiveExposePreconditionsController extends APIClient {
     constructor() {
@@ -7,6 +7,6 @@ export class InteractiveExposePreconditionsController extends APIClient {
     }
 
     async fetchPreconditions() {
-        return this.invokeApiWithErrorHandling<Precondition>('/preconditions/interactiveExposeSetup', 'GET');
+        return this.invokeApiWithErrorHandling<PreconditionServiceTypes.Precondition>('/preconditions/interactiveExposeSetup', 'GET');
     }
 }
