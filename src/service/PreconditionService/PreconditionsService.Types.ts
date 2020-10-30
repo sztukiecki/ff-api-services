@@ -1,6 +1,6 @@
 export namespace PreconditionServiceTypes {
     export interface Preconditions {
-        preconditions: Precondition[];
+        preconditions: Array<Precondition & { id: string }>;
     }
 
     export interface Precondition {
