@@ -1,7 +1,7 @@
 import { PortalManagementPreconditionsController } from './PortalManagementPreconditionsController';
-import { NylasPreconditionController } from "./NylasPreconditionController";
-import { InteractiveExposePreconditionsController } from "./InteractiveExposePreconditionsController";
-import { InquiryPreconditionsController } from "./InquiryPreconditionsController";
+import { NylasPreconditionController } from './NylasPreconditionController';
+import { InteractiveExposePreconditionsController } from './InteractiveExposePreconditionsController';
+import { InquiryPreconditionsController } from './InquiryPreconditionsController';
 
 export * from './PreconditionsService.Types';
 

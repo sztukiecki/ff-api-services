@@ -1,5 +1,5 @@
-import { APIClient, APIMapping } from "../../http";
-import { PreconditionServiceTypes } from "./PreconditionsService.Types";
+import { APIClient, APIMapping } from '../../http';
+import { PreconditionServiceTypes } from './PreconditionsService.Types';
 
 export class PortalManagementPreconditionsController extends APIClient {
     constructor() {
