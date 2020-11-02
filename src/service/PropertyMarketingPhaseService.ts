@@ -1,6 +1,5 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
-import { v4 as uuid } from 'uuid/interfaces';
 import { EntityQuery, EntityPhaseInformation, PhaseConfigurationInformation } from '../util/InternalTypes';
 
 export class PropertyMarketingPhaseService extends APIClient {
@@ -148,7 +147,7 @@ export class PropertyMarketingPhaseService extends APIClient {
      * @param schemaId
      * @param entityId
      */
-    async deleteEntityInformation(schemaId: uuid, entityId: uuid): Promise<AxiosResponse> {
+    async deleteEntityInformation(schemaId: string, entityId: string): Promise<AxiosResponse> {
         return await this.invokeApi(`/steps/${schemaId}/${entityId}`, 'DELETE');
     }
 
@@ -171,7 +170,7 @@ export class PropertyMarketingPhaseService extends APIClient {
      * TODO: Please comment this method
      * @param id
      */
-    async deleteCustomConfiguration(id: uuid): Promise<AxiosResponse> {
+    async deleteCustomConfiguration(id: string): Promise<AxiosResponse> {
         return await this.invokeApi(`/phaseconfigurations/${id}`, 'DELETE');
     }
 }
