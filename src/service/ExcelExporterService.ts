@@ -27,6 +27,24 @@ class ExcelExporterService extends APIClient {
     async getDownloadLink(fileId: String): Promise<AxiosResponse> {
         return this.invokeApi(`/export/schema/download/${fileId}`, 'GET');
     }
+
+    /**
+     *
+     * @param searchId The ID of the search entity that contained list view will be exported.
+     * @returns A fileId that can be used to check if the process is finished.
+     */
+    async createSearchExport(searchId: String): Promise<AxiosResponse> {
+        return this.invokeApi(`/export/search/${searchId}`, 'POST');
+    }
+
+    /**
+     *
+     * @param fileId The Id of the file that will be created when the Exporter finished creating the results.
+     * @returns The Download-Link of the file.
+     */
+    async getSearchDownloadLink(fileId: String): Promise<AxiosResponse> {
+        return this.invokeApi(`/export/search/download/${fileId}`, 'GET');
+    }
 }
 
 export default new ExcelExporterService();
