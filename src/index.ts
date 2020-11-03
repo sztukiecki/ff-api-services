@@ -71,6 +71,7 @@ export * from './service/IS24PublishService';
 export * from './service/PlaceholderService';
 export * from './service/PossibleValuesService';
 export * from './service/ProofOfActivityService';
+export * from './service/PreconditionService';
 
 export * from './service/SearchServiceTypes';
 
