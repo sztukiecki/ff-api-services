@@ -21,7 +21,6 @@ export { default as HistoryModuleService } from './service/HistoryModuleService'
 export { default as InquiryService } from './service/InquiryService';
 export { default as InteractiveExposeDeliveryService } from './service/InteractiveExposeDeliveryService';
 export { default as InteractiveExposeService } from './service/InteractiveExposeService';
-export { default as InteractiveExposeStatisticsService } from './service/InteractiveExposeStatisticsService';
 export { default as ModuleService } from './service/ModuleService';
 export { default as NylasService } from './service/NylasService/NylasService';
 export { default as NylasContactSyncService } from './service/NylasContactSyncService';
@@ -29,7 +28,6 @@ export { default as Office365AuthenticationService } from './service/Office365Au
 export { default as OpenimmoPublishService } from './service/OpenimmoPublishService';
 export { default as OnboardingService } from './service/OnboardingService';
 export { default as PresetService } from './service/PresetService';
-export { default as PropertyMarketingPhaseService } from './service/PropertyMarketingPhaseService';
 export { default as SchemaService } from './service/SchemaService';
 export { default as SchemaServiceV2 } from './service/SchemaServiceV2';
 export { default as SearchService } from './service/SearchService';
@@ -72,6 +70,8 @@ export * from './service/PlaceholderService';
 export * from './service/PossibleValuesService';
 export * from './service/ProofOfActivityService';
 export * from './service/PreconditionService';
+export * from './service/PropertyMarketingPhaseService';
+export * from './service/InteractiveExposeStatisticsService';
 
 export * from './service/SearchServiceTypes';
 
