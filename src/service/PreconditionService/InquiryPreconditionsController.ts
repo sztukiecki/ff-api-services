@@ -7,18 +7,6 @@ export class InquiryPreconditionsController extends APIClient {
     }
 
     async fetchPreconditions() {
-        return this.invokeApiWithErrorHandling<PreconditionServiceTypes.Preconditions>('/preconditions', 'GET');
-    }
-
-    async fetchAuthenticatedPortalPrecondition() {
-        return this.invokeApiWithErrorHandling<PreconditionServiceTypes.Preconditions>('/preconditions/authenticatedPortal', 'GET');
-    }
-
-    async fetchActiveInquiryAutomationPrecondition() {
-        return this.invokeApiWithErrorHandling<PreconditionServiceTypes.Preconditions>('/preconditions/activeInquiryAutomation', 'GET');
-    }
-
-    async fetchActiveMailAccountPrecondition() {
-        return this.invokeApiWithErrorHandling<PreconditionServiceTypes.Preconditions>('/preconditions/activeMailAccount', 'GET');
+        return this.invokeApiWithErrorHandling<PreconditionServiceTypes.Precondition>('/preconditions/inquiriesSetup', 'GET');
     }
 }
