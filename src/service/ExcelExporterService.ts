@@ -1,8 +1,53 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
+import { Flowdsl } from '@flowfact/node-flowdsl';
 
-export interface BaseExportData {
+export interface ExportFieldType {
+    type: string;
+    format: string;
+    linkedSchema: string;
+    options: { [key: string]: string };
+}
+
+export interface ExportData {
+    schemaId: string;
     fileID: string;
+    exportEventType: string;
+    flowDsl: Flowdsl;
+    userDefinedFlowDsl: boolean;
+    searchName: string;
+    language: string;
+    fieldTypes: { [key: string]: ExportFieldType };
+}
+
+export interface ExportFormatModel {
+    type: string;
+    format: string;
+    unit: string;
+    linkedSchema: string;
+    options: { [key: string]: string };
+}
+
+export interface ExportContentModel {
+    type: string;
+    fieldName: string;
+    format: ExportFormatModel;
+    contentModels: ExportContentModel[];
+}
+
+export interface SearchExportViewColumns {
+    headerCaption: string;
+    contentModels?: ExportContentModel;
+}
+
+export interface SearchExportData {
+    searchId: string;
+    fileID: string;
+    entityIDList: string;
+    exportEventType: string;
+    flowDsl: Flowdsl;
+    language: string;
+    viewColumns: SearchExportViewColumns[];
 }
 
 class ExcelExporterService extends APIClient {
@@ -16,7 +61,7 @@ class ExcelExporterService extends APIClient {
      * @param filterConditions FilterConditions that should be used to define the result more specific
      * @returns A fileId that can be used to check if the process is finished.
      */
-    async createExport(schemaName: String, filterConditions: Object): Promise<AxiosResponse<BaseExportData[]>> {
+    async createExport(schemaName: String, filterConditions: Object): Promise<AxiosResponse<ExportData[]>> {
         return this.invokeApi(`/export/schema/${schemaName}`, 'POST', {
             target: 'entity',
             conditions: filterConditions,
@@ -37,7 +82,7 @@ class ExcelExporterService extends APIClient {
      * @param searchId The ID of the search entity that contained list view will be exported.
      * @returns A fileId that can be used to check if the process is finished.
      */
-    async createSearchExport(searchId: String): Promise<AxiosResponse<BaseExportData>> {
+    async createSearchExport(searchId: String): Promise<AxiosResponse<SearchExportData>> {
         return this.invokeApi(`/export/search/${searchId}`, 'POST');
     }
 
