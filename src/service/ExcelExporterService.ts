@@ -73,7 +73,7 @@ class ExcelExporterService extends APIClient {
      * @param fileId The Id of the file that will be created when the Exporter finished creating the results.
      * @returns The Download-Link of the file.
      */
-    async getDownloadLink(fileId: String): Promise<AxiosResponse<string>> {
+    async fetchDownloadLink(fileId: String): Promise<AxiosResponse<string>> {
         return this.invokeApi(`/export/schema/download/${fileId}`, 'GET');
     }
 
@@ -91,7 +91,7 @@ class ExcelExporterService extends APIClient {
      * @param fileId The Id of the file that will be created when the Exporter finished creating the results.
      * @returns The Download-Link of the file.
      */
-    async getSearchDownloadLink(fileId: String): Promise<AxiosResponse<string>> {
+    async fetchSearchDownloadLink(fileId: String): Promise<AxiosResponse<string>> {
         return this.invokeApi(`/export/search/download/${fileId}`, 'GET');
     }
 }
