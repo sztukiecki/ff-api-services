@@ -1,6 +1,10 @@
 import { APIClient, APIMapping } from '../http';
 import { AxiosResponse } from 'axios';
 
+export interface BaseExportData {
+    fileID: string;
+}
+
 class ExcelExporterService extends APIClient {
     constructor() {
         super(APIMapping.excelExporterService);
@@ -12,7 +16,7 @@ class ExcelExporterService extends APIClient {
      * @param filterConditions FilterConditions that should be used to define the result more specific
      * @returns A fileId that can be used to check if the process is finished.
      */
-    async createExport(schemaName: String, filterConditions: Object): Promise<AxiosResponse> {
+    async createExport(schemaName: String, filterConditions: Object): Promise<AxiosResponse<BaseExportData[]>> {
         return this.invokeApi(`/export/schema/${schemaName}`, 'POST', {
             target: 'entity',
             conditions: filterConditions,
@@ -24,7 +28,7 @@ class ExcelExporterService extends APIClient {
      * @param fileId The Id of the file that will be created when the Exporter finished creating the results.
      * @returns The Download-Link of the file.
      */
-    async getDownloadLink(fileId: String): Promise<AxiosResponse> {
+    async getDownloadLink(fileId: String): Promise<AxiosResponse<string>> {
         return this.invokeApi(`/export/schema/download/${fileId}`, 'GET');
     }
 
@@ -33,7 +37,7 @@ class ExcelExporterService extends APIClient {
      * @param searchId The ID of the search entity that contained list view will be exported.
      * @returns A fileId that can be used to check if the process is finished.
      */
-    async createSearchExport(searchId: String): Promise<AxiosResponse> {
+    async createSearchExport(searchId: String): Promise<AxiosResponse<BaseExportData>> {
         return this.invokeApi(`/export/search/${searchId}`, 'POST');
     }
 
@@ -42,7 +46,7 @@ class ExcelExporterService extends APIClient {
      * @param fileId The Id of the file that will be created when the Exporter finished creating the results.
      * @returns The Download-Link of the file.
      */
-    async getSearchDownloadLink(fileId: String): Promise<AxiosResponse> {
+    async getSearchDownloadLink(fileId: String): Promise<AxiosResponse<string>> {
         return this.invokeApi(`/export/search/download/${fileId}`, 'GET');
     }
 }
