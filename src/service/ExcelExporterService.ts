@@ -1,52 +1,54 @@
 import { APIClient, APIMapping } from '../http';
 import { Flowdsl, FlowdslConditionUnion } from '@flowfact/node-flowdsl';
 
-export interface ExportFieldType {
-    type: string;
-    format: string;
-    linkedSchema: string;
-    options: { [key: string]: string };
-}
+export namespace ExcelExporter {
+    export interface ExportFieldType {
+        type: string;
+        format: string;
+        linkedSchema: string;
+        options: { [key: string]: string };
+    }
 
-export interface ExportData {
-    schemaId: string;
-    fileID: string;
-    exportEventType: string;
-    flowDsl: Flowdsl;
-    userDefinedFlowDsl: boolean;
-    searchName: string;
-    language: string;
-    fieldTypes: { [key: string]: ExportFieldType };
-}
+    export interface ExportData {
+        schemaId: string;
+        fileID: string;
+        exportEventType: string;
+        flowDsl: Flowdsl;
+        userDefinedFlowDsl: boolean;
+        searchName: string;
+        language: string;
+        fieldTypes: { [key: string]: ExportFieldType };
+    }
 
-export interface ExportFormatModel {
-    type: string;
-    format: string;
-    unit: string;
-    linkedSchema: string;
-    options: { [key: string]: string };
-}
+    export interface ExportFormatModel {
+        type: string;
+        format: string;
+        unit: string;
+        linkedSchema: string;
+        options: { [key: string]: string };
+    }
 
-export interface ExportContentModel {
-    type: string;
-    fieldName: string;
-    format: ExportFormatModel;
-    contentModels: ExportContentModel[];
-}
+    export interface ExportContentModel {
+        type: string;
+        fieldName: string;
+        format: ExportFormatModel;
+        contentModels: ExportContentModel[];
+    }
 
-export interface SearchExportViewColumns {
-    headerCaption: string;
-    contentModels?: ExportContentModel;
-}
+    export interface SearchExportViewColumns {
+        headerCaption: string;
+        contentModels?: ExportContentModel;
+    }
 
-export interface SearchExportData {
-    searchId: string;
-    fileID: string;
-    entityIDList: string;
-    exportEventType: string;
-    flowDsl: Flowdsl;
-    language: string;
-    viewColumns: SearchExportViewColumns[];
+    export interface SearchExportData {
+        searchId: string;
+        fileID: string;
+        entityIDList: string;
+        exportEventType: string;
+        flowDsl: Flowdsl;
+        language: string;
+        viewColumns: SearchExportViewColumns[];
+    }
 }
 
 class ExcelExporterService extends APIClient {
@@ -61,7 +63,7 @@ class ExcelExporterService extends APIClient {
      * @returns A fileId that can be used to check if the process is finished.
      */
     async createExport(schemaName: String, filterConditions: FlowdslConditionUnion | FlowdslConditionUnion[]) {
-        return this.invokeApiWithErrorHandling<ExportData[]>(`/export/schema/${schemaName}`, 'POST', {
+        return this.invokeApiWithErrorHandling<ExcelExporter.ExportData[]>(`/export/schema/${schemaName}`, 'POST', {
             target: 'entity',
             conditions: filterConditions,
         });
@@ -83,7 +85,7 @@ class ExcelExporterService extends APIClient {
      * @returns A fileId that can be used to check if the process is finished.
      */
     async createSearchExport(searchId: string, entityIds: string[] = []) {
-        return this.invokeApiWithErrorHandling<SearchExportData>(`/export/search/${searchId}`, 'POST', JSON.stringify(entityIds));
+        return this.invokeApiWithErrorHandling<ExcelExporter.SearchExportData>(`/export/search/${searchId}`, 'POST', JSON.stringify(entityIds));
     }
 
     /**
