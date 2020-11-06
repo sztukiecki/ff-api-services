@@ -1,6 +1,5 @@
 import { APIClient, APIMapping } from '../http';
-import { AxiosResponse } from 'axios';
-import { Flowdsl } from '@flowfact/node-flowdsl';
+import { Flowdsl, FlowdslConditionUnion } from '@flowfact/node-flowdsl';
 
 export interface ExportFieldType {
     type: string;
@@ -61,8 +60,8 @@ class ExcelExporterService extends APIClient {
      * @param filterConditions FilterConditions that should be used to define the result more specific
      * @returns A fileId that can be used to check if the process is finished.
      */
-    async createExport(schemaName: String, filterConditions: Object): Promise<AxiosResponse<ExportData[]>> {
-        return this.invokeApi(`/export/schema/${schemaName}`, 'POST', {
+    async createExport(schemaName: String, filterConditions: FlowdslConditionUnion | FlowdslConditionUnion[]) {
+        return this.invokeApiWithErrorHandling<ExportData[]>(`/export/schema/${schemaName}`, 'POST', {
             target: 'entity',
             conditions: filterConditions,
         });
@@ -73,8 +72,8 @@ class ExcelExporterService extends APIClient {
      * @param fileId The Id of the file that will be created when the Exporter finished creating the results.
      * @returns The Download-Link of the file.
      */
-    async fetchDownloadLink(fileId: String): Promise<AxiosResponse<string>> {
-        return this.invokeApi(`/export/schema/download/${fileId}`, 'GET');
+    async fetchDownloadLink(fileId: string) {
+        return this.invokeApiWithErrorHandling<string>(`/export/schema/download/${fileId}`, 'GET');
     }
 
     /**
@@ -83,8 +82,8 @@ class ExcelExporterService extends APIClient {
      * @param entityIds Array of ids that should be used to limit the result
      * @returns A fileId that can be used to check if the process is finished.
      */
-    async createSearchExport(searchId: String, entityIds: Object): Promise<AxiosResponse<SearchExportData>> {
-        return this.invokeApi(`/export/search/${searchId}`, 'POST', entityIds);
+    async createSearchExport(searchId: string, entityIds: string[] = []) {
+        return this.invokeApiWithErrorHandling<SearchExportData>(`/export/search/${searchId}`, 'POST', JSON.stringify(entityIds));
     }
 
     /**
@@ -92,8 +91,8 @@ class ExcelExporterService extends APIClient {
      * @param fileId The Id of the file that will be created when the Exporter finished creating the results.
      * @returns The Download-Link of the file.
      */
-    async fetchSearchDownloadLink(fileId: String): Promise<AxiosResponse<string>> {
-        return this.invokeApi(`/export/search/download/${fileId}`, 'GET');
+    async fetchSearchDownloadLink(fileId: string) {
+        return this.invokeApiWithErrorHandling<string>(`/export/search/download/${fileId}`, 'GET');
     }
 }
 
