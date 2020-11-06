@@ -80,10 +80,11 @@ class ExcelExporterService extends APIClient {
     /**
      *
      * @param searchId The ID of the search entity that contained list view will be exported.
+     * @param entityIds Array of ids that should be used to limit the result
      * @returns A fileId that can be used to check if the process is finished.
      */
-    async createSearchExport(searchId: String): Promise<AxiosResponse<SearchExportData>> {
-        return this.invokeApi(`/export/search/${searchId}`, 'POST');
+    async createSearchExport(searchId: String, entityIds: Object): Promise<AxiosResponse<SearchExportData>> {
+        return this.invokeApi(`/export/search/${searchId}`, 'POST', entityIds);
     }
 
     /**
