@@ -52,7 +52,7 @@ export { default as LambdaProxyService } from './service/LambdaProxyService';
 export * from './service/IS24LeadService';
 export * from './service/IS24ImportService';
 export * from './service/OpenimmoFtpAccessService';
-export * from './service/ExcelExporterService';
+export { default as ExcelExporterService, ExcelExporter } from './service/ExcelExporterService';
 export * from './service/FlywheelService';
 export * from './service/WorkflowService';
 export * from './service/DynamicLayoutService';
@@ -75,6 +75,6 @@ export * from './service/InteractiveExposeStatisticsService';
 
 export * from './service/SearchServiceTypes';
 
-export { APIService, APIMapping, APIClient } from './http';
+export * from './http';
 export * from './util/EnvironmentManagement';
 export * from './util/InternalTypes';

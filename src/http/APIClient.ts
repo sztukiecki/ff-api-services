@@ -16,7 +16,7 @@ export interface APIClientAdditionalParams extends AxiosRequestConfig {
 
 export type MethodTypes = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'OPTIONS' | 'PATCH' | 'HEAD';
 
-export default abstract class APIClient {
+export abstract class APIClient {
     private userId: string;
     private readonly _serviceName: string;
     private static languages: string = 'de';
