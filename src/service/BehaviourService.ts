@@ -1,5 +1,4 @@
-import APIClient from '../http/APIClient';
-import { APIMapping } from '../http';
+import { APIClient, APIMapping } from '../http';
 import { TrackingEvent } from '@flowfact/types';
 
 export class BehaviourService extends APIClient {
