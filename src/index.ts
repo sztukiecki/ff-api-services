@@ -10,7 +10,6 @@ export { default as CsvToEntityImporterService } from './service/CsvToEntityImpo
 export { default as CustomerLegitimationArchiveService } from './service/CustomerLegitimationArchiveService';
 export { default as EmailService } from './service/EmailService';
 export { default as EntityService } from './service/EntityService';
-export { default as ExcelExporterService } from './service/ExcelExporterService';
 export { default as FlowfactExportInternalService } from './service/FlowfactExportInternalService';
 export { default as FormService } from './service/FormService';
 export { default as FullTextSearchService } from './service/FullTextSearchService';
@@ -53,6 +52,7 @@ export { default as LambdaProxyService } from './service/LambdaProxyService';
 export * from './service/IS24LeadService';
 export * from './service/IS24ImportService';
 export * from './service/OpenimmoFtpAccessService';
+export * from './service/ExcelExporterService';
 export * from './service/FlywheelService';
 export * from './service/WorkflowService';
 export * from './service/DynamicLayoutService';

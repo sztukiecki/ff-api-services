@@ -1,4 +1,7 @@
 import APIClient from './APIClient';
 import APIMapping, { APIService } from './APIMapping';
 
-export { APIMapping, APIService, APIClient };
+export { default as APIClient } from './APIClient';
+export * from './APIClient';
+
+export { APIMapping, APIService };
