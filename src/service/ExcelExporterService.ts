@@ -85,7 +85,7 @@ class ExcelExporterService extends APIClient {
      * @returns A fileId that can be used to check if the process is finished.
      */
     async createSearchExport(searchId: string, entityIds: string[] = []) {
-        return this.invokeApiWithErrorHandling<ExcelExporter.SearchExportData>(`/export/search/${searchId}`, 'POST', JSON.stringify(entityIds));
+        return this.invokeApiWithErrorHandling<ExcelExporter.SearchExportData>(`/export/search/${searchId}`, 'POST', entityIds);
     }
 
     /**
