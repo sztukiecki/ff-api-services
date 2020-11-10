@@ -8,7 +8,6 @@ export { default as CompanyService } from './service/CompanyService';
 export { default as ContactService } from './service/ContactService';
 export { default as CsvToEntityImporterService } from './service/CsvToEntityImporterService';
 export { default as CustomerLegitimationArchiveService } from './service/CustomerLegitimationArchiveService';
-export { default as EmailService } from './service/EmailService';
 export { default as EntityService } from './service/EntityService';
 export { default as FlowfactExportInternalService } from './service/FlowfactExportInternalService';
 export { default as FormService } from './service/FormService';
@@ -72,7 +71,7 @@ export * from './service/ProofOfActivityService';
 export * from './service/PreconditionService';
 export * from './service/PropertyMarketingPhaseService';
 export * from './service/InteractiveExposeStatisticsService';
-
+export * from './service/EmailService';
 export * from './service/SearchServiceTypes';
 
 export * from './http';
