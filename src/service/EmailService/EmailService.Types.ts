@@ -23,7 +23,7 @@ export namespace EmailServiceTypes {
     }
 
     export enum EmailTemplate {
-        AdviceadviceInteractiveExpose = 'adviceInteractiveExpose',
+        AdviceInteractiveExpose = 'adviceInteractiveExpose',
         AdviceEmail = 'adviceEmail',
         AdviceInquiryProcessing = 'adviceInquiryProcessing',
         AdvicePortalInsertion = 'advicePortalInsertion',
