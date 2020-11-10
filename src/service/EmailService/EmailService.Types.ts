@@ -12,7 +12,7 @@ export namespace EmailServiceTypes {
     }
     export interface Email {
         mailFrom: string;
-        replyTo: string;
+        replyTo?: string;
         recipientList: string[];
         blindCopyList?: string[];
         carbonCopyList?: string[];
