@@ -2,6 +2,10 @@ import { APIClient, APIMapping } from '../../http';
 
 import { EmailServiceTypes } from './EmailService.Types';
 
+/**
+ * REWORK OF THIS SERVICE IS NOT DONE YET!!!!
+ * Need to define controller
+ */
 export class EmailService extends APIClient {
     constructor() {
         super(APIMapping.emailService);
