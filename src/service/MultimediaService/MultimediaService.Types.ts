@@ -4,6 +4,7 @@ export type ContentCategory = 'IMAGE' | 'DOCUMENT' | 'LINK' | 'VIDEO';
 
 export interface MultimediaItem {
     id: number;
+    createdAt: number;
     entityId: string;
     schemaName: string;
     description?: string;
