@@ -12,7 +12,7 @@ export namespace EmailServiceTypes {
     }
     export interface Email {
         mailFrom: string;
-        replyTo: string;
+        replyTo?: string;
         recipientList: string[];
         blindCopyList?: string[];
         carbonCopyList?: string[];
@@ -23,7 +23,7 @@ export namespace EmailServiceTypes {
     }
 
     export enum EmailTemplate {
-        AdviceadviceInteractiveExpose = 'adviceInteractiveExpose',
+        AdviceInteractiveExpose = 'adviceInteractiveExpose',
         AdviceEmail = 'adviceEmail',
         AdviceInquiryProcessing = 'adviceInquiryProcessing',
         AdvicePortalInsertion = 'advicePortalInsertion',
