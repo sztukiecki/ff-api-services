@@ -12,7 +12,7 @@ export class ItemsController extends APIClient {
      * @param itemId
      * @returns the url and the new eTag
      */
-    async updateImage(image: FormData, itemId: string) {
+    async updateImage(image: FormData, itemId: number) {
         return await this.invokeApiWithErrorHandling<{ url: string; etag: string }>(`/items/${itemId}/file`, 'POST', image, {
             headers: {
                 'Content-Type': 'multipart/form-data',
