@@ -105,32 +105,33 @@ export abstract class APIClient {
     public async invokeApiWithErrorHandling<T = any>(path: string, method: MethodTypes = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}, defaultValue?: T): Promise<ApiResponse<T>> {
         try {
             const result = await this.invokeApi<T>(path, method, body, additionalParams);
-            const response: ApiResponseSuccess<T> = {
+            const response: ApiResponse<T> = {
                 isSuccessful2xx: result.status >= 200 && result.status < 300,
+                status: 0
             };
 
             return !result ? response : {
                 ...response,
                 ...result,
                 data: result.data ? result.data : defaultValue,
-            } as ApiResponseSuccess<T>;
+            };
         } catch (error) {
             return {
                 ...error,
                 status: error?.response?.status,
                 isSuccessful2xx: false,
                 data: error?.response?.data ?? defaultValue,
-            } as ApiResponseError<T>;
+            };
         }
     }
 }
 
 export interface ApiResponseSuccess<T> extends Partial<AxiosResponse<T>> {
-    isSuccessful2xx: boolean;
+    isSuccessful2xx: true;
 }
 
 export interface ApiResponseError<T> extends Partial<AxiosError<T>> {
-    isSuccessful2xx: boolean;
+    isSuccessful2xx: false | undefined;
     status: number;
     data?: T;
 }
