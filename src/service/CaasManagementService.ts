@@ -13,7 +13,7 @@ import {
     ProjectCreate,
 } from '@flowfact/types';
 import axios, { AxiosResponse } from 'axios';
-import APIClient from '../http/APIClient';
+import { APIClient } from '../http/APIClient';
 import APIMapping from '../http/APIMapping';
 
 export class CaasManagementService extends APIClient {

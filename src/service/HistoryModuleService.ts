@@ -1,7 +1,6 @@
 import { HistoryFilter } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
-import APIClient from '../http/APIClient';
-import APIMapping from '../http/APIMapping';
+import { APIClient, APIMapping } from '../http';
 
 export class HistoryModuleService extends APIClient {
     constructor() {

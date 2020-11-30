@@ -1,7 +1,6 @@
 import { AuthRequest, NylasConfig, NylasConfigPatch, RegistrationUrl, SendEmailRequest } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
-import APIClient from '../../http/APIClient';
-import APIMapping from '../../http/APIMapping';
+import { APIClient, APIMapping } from '../../http';
 import { NylasServiceTypes } from './NylasService.Types';
 import SchedulerPage = NylasServiceTypes.SchedulerPage;
 
@@ -81,14 +80,20 @@ export class NylasService extends APIClient {
      * @param syncEmails as initial sync value, if set to false or not set, email sync is inactive after creation acc.
      * @param ownerId represents a user as acc. owner. May be different from creator.
      */
-    async getRegistrationUrl(email: string, callbackUrl?: string, isGmail: boolean = false, syncEmails = false, ownerId = undefined): Promise<AxiosResponse<RegistrationUrl>> {
+    async getRegistrationUrl(
+        email: string,
+        callbackUrl?: string,
+        isGmail: boolean = false,
+        syncEmails = false,
+        ownerId = undefined
+    ): Promise<AxiosResponse<RegistrationUrl>> {
         return await this.invokeApi('/registration-url', 'GET', undefined, {
             queryParams: {
                 email: email,
                 callbackUrl: callbackUrl,
                 isGmail: isGmail,
                 initialEmailSyncStatus: syncEmails,
-                ownerId: ownerId
+                ownerId: ownerId,
             },
         });
     }

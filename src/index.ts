@@ -8,9 +8,7 @@ export { default as CompanyService } from './service/CompanyService';
 export { default as ContactService } from './service/ContactService';
 export { default as CsvToEntityImporterService } from './service/CsvToEntityImporterService';
 export { default as CustomerLegitimationArchiveService } from './service/CustomerLegitimationArchiveService';
-export { default as EmailService } from './service/EmailService';
 export { default as EntityService } from './service/EntityService';
-export { default as ExcelExporterService } from './service/ExcelExporterService';
 export { default as FlowfactExportInternalService } from './service/FlowfactExportInternalService';
 export { default as FormService } from './service/FormService';
 export { default as FullTextSearchService } from './service/FullTextSearchService';
@@ -21,7 +19,6 @@ export { default as HistoryModuleService } from './service/HistoryModuleService'
 export { default as InquiryService } from './service/InquiryService';
 export { default as InteractiveExposeDeliveryService } from './service/InteractiveExposeDeliveryService';
 export { default as InteractiveExposeService } from './service/InteractiveExposeService';
-export { default as InteractiveExposeStatisticsService } from './service/InteractiveExposeStatisticsService';
 export { default as ModuleService } from './service/ModuleService';
 export { default as NylasService } from './service/NylasService/NylasService';
 export { default as NylasContactSyncService } from './service/NylasContactSyncService';
@@ -29,7 +26,6 @@ export { default as Office365AuthenticationService } from './service/Office365Au
 export { default as OpenimmoPublishService } from './service/OpenimmoPublishService';
 export { default as OnboardingService } from './service/OnboardingService';
 export { default as PresetService } from './service/PresetService';
-export { default as PropertyMarketingPhaseService } from './service/PropertyMarketingPhaseService';
 export { default as SchemaService } from './service/SchemaService';
 export { default as SchemaServiceV2 } from './service/SchemaServiceV2';
 export { default as SearchService } from './service/SearchService';
@@ -55,6 +51,7 @@ export { default as LambdaProxyService } from './service/LambdaProxyService';
 export * from './service/IS24LeadService';
 export * from './service/IS24ImportService';
 export * from './service/OpenimmoFtpAccessService';
+export { default as ExcelExporterService, ExcelExporter } from './service/ExcelExporterService';
 export * from './service/FlywheelService';
 export * from './service/WorkflowService';
 export * from './service/DynamicLayoutService';
@@ -71,9 +68,12 @@ export * from './service/IS24PublishService';
 export * from './service/PlaceholderService';
 export * from './service/PossibleValuesService';
 export * from './service/ProofOfActivityService';
-
+export * from './service/PreconditionService';
+export * from './service/PropertyMarketingPhaseService';
+export * from './service/InteractiveExposeStatisticsService';
+export * from './service/EmailService';
 export * from './service/SearchServiceTypes';
 
-export { APIService, APIMapping, APIClient } from './http';
+export * from './http';
 export * from './util/EnvironmentManagement';
 export * from './util/InternalTypes';

@@ -91,14 +91,22 @@ export class PortalController extends APIClient {
     /**
      * TODO: Please comment this method
      */
-    async fetchPortalTypes() {
-        return await this.invokeApiWithErrorHandling<PortalTypeWithCaption>('/portalTypes', 'GET');
+    async fetchPortalTypes(companyMarket?: string) {
+        return await this.invokeApiWithErrorHandling<PortalTypeWithCaption>('/portalTypes', 'GET', undefined, {
+            queryParams: {
+                companyMarket
+            },
+        });
     }
 
     /**
      * TODO: Please comment this method
      */
-    async fetchPredefinedPortals() {
-        return await this.invokeApiWithErrorHandling<PredefinedPortal>('/predefinedPortals', 'GET');
+    async fetchPredefinedPortals(companyMarket?: string) {
+        return await this.invokeApiWithErrorHandling<PredefinedPortal>('/predefinedPortals', 'GET', undefined, {
+            queryParams: {
+                companyMarket
+            },
+        });
     }
 }
