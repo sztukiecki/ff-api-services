@@ -22,6 +22,6 @@ export default class CustomStorage {
 
     // clear out the storage
     static clear(): void {
-        store.clear();
+        store.clearAll();
     }
 }

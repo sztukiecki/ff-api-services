@@ -1,10 +1,10 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
+import { AxiosError, AxiosRequestConfig, AxiosResponse, CancelToken } from 'axios';
 import * as isNode from 'detect-node';
 import { stringify } from 'qs';
 import Authentication from '../authentication/Authentication';
 import { EnvironmentManagementInstance } from '../util/EnvironmentManagement';
-import Interceptor from '../util/Interceptor';
 import { APIService } from './APIMapping';
+import axiosETAGCache from './cache';
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
 
@@ -87,15 +87,7 @@ export abstract class APIClient {
             ...others,
         };
 
-        const client = axios.create();
-        for (const interceptor of Interceptor.interceptors) {
-            if (interceptor.type === 'request') {
-                axios.interceptors.request.use(interceptor.method);
-            } else if (interceptor.type === 'response') {
-                axios.interceptors.response.use(interceptor.method);
-            }
-        }
-
+        const client = axiosETAGCache();
         // fire the request
         // NEVER put a catch here because it prevents all other error handling
         // i.e. you can't handle a service returning an http code >= 400 (which is possibly expected)
