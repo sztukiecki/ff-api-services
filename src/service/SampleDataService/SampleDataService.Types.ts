@@ -18,20 +18,28 @@ export namespace SampleDataServiceTypes {
         version: number;
     }
 
-    export interface BatchImportResult {
-        bundles: BatchImportResultBundle;
-    }
-
-    export interface BatchImportResultBundle {
+    export interface ImportableBundle {
         bundleName: string;
-        errorMessage?: string;
-        scope: string;
-        successful: boolean;
+        includedEntities?: boolean;
+        resolveRelatedBundles?: boolean;
+        origin: string;
+        successfullyImported?: boolean;
     }
 
     export interface ImportBundle {
         bundleName: string;
         scope: string;
         withEntities: boolean;
+        resolveRelatedBundles?: boolean;
+    }
+
+    export interface BatchImportResult {
+        id: number;
+        bundles: ImportableBundle[];
+        companyId: string;
+        requestedByUserId: string;
+        finishedWhen?: string;
+        requestedWhen: string;
+        startedWhen: string;
     }
 }

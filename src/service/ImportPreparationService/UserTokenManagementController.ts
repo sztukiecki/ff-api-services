@@ -33,6 +33,6 @@ export class UserTokenManagementController extends APIClient {
      * Gets the token mapping for given company.
      */
     async fetchTokenMapping(companyId: string) {
-        return this.invokeApiWithErrorHandling<TokenMapping>(`/userAndTokenManagement/token/importerUser/mapping/${companyId}`)
+        return this.invokeApiWithErrorHandling<TokenMapping>(`/userAndTokenManagement/token/importerUser/mapping/${companyId}`);
     }
 }

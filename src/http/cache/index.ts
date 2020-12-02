@@ -12,7 +12,7 @@ function getUUIDByAxiosConfig(config: AxiosRequestConfig): string {
 function getHeaderCaseInsensitive(headerName: string, headers = {}) {
     const headerKeys = Object.keys(headers);
     const key = headerKeys.find((value) => value.toLowerCase() === headerName);
-    if(!key) {
+    if (!key) {
         return undefined;
     }
 

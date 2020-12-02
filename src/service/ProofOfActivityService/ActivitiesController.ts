@@ -18,14 +18,14 @@ export class ActivitiesController extends APIClient {
     async fetchActivities(lastId?: string, size?: number) {
         return this.invokeApiWithErrorHandling<ActivitiesResponse>('/', 'GET', {
             lastId,
-            size
+            size,
         });
     }
 
     async fetchActivityData(id: string, entity: EntityIdData, dateRange: DateRange) {
         return this.invokeApiWithErrorHandling<ActivityResponse>(`/${id}/data`, 'POST', {
             dateRange,
-            entity
+            entity,
         });
     }
 }

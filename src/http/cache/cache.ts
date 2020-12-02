@@ -8,7 +8,6 @@ export interface CacheValue {
 const PREFIX = 'etag-cache-';
 
 export class Cache {
-
     static get(uuid: string): CacheValue | undefined {
         return store.get(`${PREFIX}${uuid}`);
     }
@@ -19,7 +18,7 @@ export class Cache {
 
     static reset() {
         store.each((value, key) => {
-            if(key.startsWith(PREFIX)) {
+            if (key.startsWith(PREFIX)) {
                 store.remove(key);
             }
         });

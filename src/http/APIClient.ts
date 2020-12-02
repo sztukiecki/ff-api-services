@@ -59,24 +59,29 @@ export abstract class APIClient {
         }
     }
 
-    public async invokeApi<T = any>(path: string, method: MethodTypes = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {},): Promise<AxiosResponse<T>> {
+    public async invokeApi<T = any>(
+        path: string,
+        method: MethodTypes = 'GET',
+        body: string | {} = '',
+        additionalParams: APIClientAdditionalParams = {}
+    ): Promise<AxiosResponse<T>> {
         if (!path.startsWith('/')) {
             throw new Error('Your path has to start with a slash. Path: ' + path);
         }
 
-        const {queryParams, headers, cancelToken, ...others} = additionalParams;
+        const { queryParams, headers, cancelToken, ...others } = additionalParams;
 
         // add parameters to the url
         let apiUrl = `${EnvironmentManagementInstance.getBaseUrl(isNode)}/${this._serviceName}${path}`;
         if (queryParams) {
-            const queryString = stringify(queryParams, {addQueryPrefix: true});
+            const queryString = stringify(queryParams, { addQueryPrefix: true });
             if (queryString && queryString !== '') {
                 apiUrl += queryString;
             }
         }
 
         const userIdentification = path.startsWith('/public') ? {} : await this.getUserIdentification();
-        const languages: any = {'Accept-Language': APIClient.languages};
+        const languages: any = { 'Accept-Language': APIClient.languages };
 
         let request: AxiosRequestConfig = {
             method: method,
@@ -94,19 +99,27 @@ export abstract class APIClient {
         return client.request<T>(request);
     }
 
-    public async invokeApiWithErrorHandling<T = any>(path: string, method: MethodTypes = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}, defaultValue?: T): Promise<ApiResponse<T>> {
+    public async invokeApiWithErrorHandling<T = any>(
+        path: string,
+        method: MethodTypes = 'GET',
+        body: string | {} = '',
+        additionalParams: APIClientAdditionalParams = {},
+        defaultValue?: T
+    ): Promise<ApiResponse<T>> {
         try {
             const result = await this.invokeApi<T>(path, method, body, additionalParams);
             const response: ApiResponse<T> = {
                 isSuccessful2xx: result.status >= 200 && result.status < 300,
-                status: 0
+                status: 0,
             };
 
-            return !result ? response : {
-                ...response,
-                ...result,
-                data: result.data ? result.data : defaultValue,
-            };
+            return !result
+                ? response
+                : {
+                      ...response,
+                      ...result,
+                      data: result.data ? result.data : defaultValue,
+                  };
         } catch (error) {
             return {
                 ...error,

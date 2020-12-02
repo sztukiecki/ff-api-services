@@ -1,4 +1,3 @@
-
 export type UniformObject<T> = { [key: string]: T };
 export type ParamList = UniformObject<boolean | string | number | undefined>;
 

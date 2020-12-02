@@ -94,7 +94,7 @@ export class PortalController extends APIClient {
     async fetchPortalTypes(companyMarket?: string) {
         return await this.invokeApiWithErrorHandling<PortalTypeWithCaption>('/portalTypes', 'GET', undefined, {
             queryParams: {
-                companyMarket
+                companyMarket,
             },
         });
     }
@@ -105,7 +105,7 @@ export class PortalController extends APIClient {
     async fetchPredefinedPortals(companyMarket?: string) {
         return await this.invokeApiWithErrorHandling<PredefinedPortal>('/predefinedPortals', 'GET', undefined, {
             queryParams: {
-                companyMarket
+                companyMarket,
             },
         });
     }

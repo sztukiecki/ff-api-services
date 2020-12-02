@@ -1,5 +1,4 @@
 export namespace InteractiveExposeStatisticsServiceTypes {
-
     export interface DwellTimeStatistic {
         type: 'IEX_DWELL_TIME';
         min: number;
@@ -9,8 +8,7 @@ export namespace InteractiveExposeStatisticsServiceTypes {
 
     export interface OpenCountStatistic {
         type: 'IEX_OPEN_COUNT';
-        ieCreated: 4,
-        iePageVisited: 0
+        ieCreated: 4;
+        iePageVisited: 0;
     }
-
 }

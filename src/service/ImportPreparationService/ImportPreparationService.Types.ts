@@ -19,6 +19,6 @@ export namespace ImportPreparationServiceTypes {
     export interface TokenMapping {
         companyId: string;
         userId: string;
-        s3Identifier: string
+        s3Identifier: string;
     }
 }

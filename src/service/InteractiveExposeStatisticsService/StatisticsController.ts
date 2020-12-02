@@ -4,7 +4,6 @@ import OpenCountStatistic = InteractiveExposeStatisticsServiceTypes.OpenCountSta
 import DwellTimeStatistic = InteractiveExposeStatisticsServiceTypes.DwellTimeStatistic;
 
 export class StatisticsController extends APIClient {
-
     constructor() {
         super(APIMapping.interactiveExposeStatisticsService);
     }

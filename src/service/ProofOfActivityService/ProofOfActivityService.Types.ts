@@ -2,16 +2,15 @@ import { Captions, SchemaV2FieldType } from '@flowfact/types';
 import { Flowdsl } from '@flowfact/node-flowdsl';
 
 export namespace ProofOfActivityServiceTypes {
-
     export interface EmailData {
         from: {
             email: string;
-        },
+        };
         to: {
             email: string;
             entityId: string;
             schema: string;
-        }
+        };
     }
 
     export interface DateRange {
@@ -50,7 +49,7 @@ export namespace ProofOfActivityServiceTypes {
             captions: Captions;
             id: string;
             schema: string;
-            mapping: { [key: string]: string },
+            mapping: { [key: string]: string };
             search: Flowdsl;
         }
 
@@ -69,7 +68,7 @@ export namespace ProofOfActivityServiceTypes {
             sortBy: string;
             metadata: object;
             dataSources: DataSource[];
-            resultViewColumns: ResultViewColumn[]
+            resultViewColumns: ResultViewColumn[];
         }
 
         export interface ActivitiesResponse {
@@ -79,11 +78,11 @@ export namespace ProofOfActivityServiceTypes {
         }
 
         export interface ActivityStatistic {
-            count: number,
+            count: number;
             schema: {
                 caption: string;
-                email: string
-            }
+                email: string;
+            };
         }
 
         export interface ActivityEntry {
@@ -94,8 +93,7 @@ export namespace ProofOfActivityServiceTypes {
 
         export interface ActivityResponse {
             entries: ActivityEntry[];
-            stats: ActivityStatistic[]
+            stats: ActivityStatistic[];
         }
     }
-
 }

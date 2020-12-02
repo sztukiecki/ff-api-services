@@ -16,7 +16,7 @@ export class TemplatesController extends APIClient {
     async fetchTemplates(lastId?: string, size?: number) {
         return this.invokeApiWithErrorHandling<TemplatesResponse>('/template', 'GET', {
             lastId,
-            size
+            size,
         });
     }
 }

@@ -90,8 +90,8 @@ export class SearchService extends APIClient {
             queryParams: {
                 offset: offset,
                 size: size,
-                withCount: withCount
-            }
+                withCount: withCount,
+            },
         });
     }
 
@@ -123,11 +123,11 @@ export class SearchService extends APIClient {
         return await this.invokeApiWithErrorHandling<SearchServiceTypes.GroupingResult>('/schemas/' + index + '/count', 'POST', query, {
             queryParams: {
                 groupBy: groupBy.join(','),
-                treatingBlankStringValuesAsNull
+                treatingBlankStringValuesAsNull,
             },
             headers: {
                 'Content-Type': 'application/json',
-                'x-ff-version': 2
+                'x-ff-version': 2,
             },
         });
     }

@@ -1,6 +1,6 @@
 {
     "name": "@flowfact/api-services",
-    "version": "28.0.0-SNAPSHOT",
+    "version": "29.0.0-SNAPSHOT",
     "description": "middleware of FLOWFACT to interact between frontend and backend",
     "main": "build/index.js",
     "module": "build/es/index.js",
