@@ -28,4 +28,17 @@ export namespace IS24PublishTypes {
         date: number;
         exposeHits: number;
     }
+
+    export interface IS24ProjectProposal {
+        projectId: string;
+        projectName: string;
+        city: string;
+        postcode: string;
+        numberOfHousingUnits: number;
+        startDate: number;
+        companyName: string;
+        customerName: string;
+        email: string;
+        phoneNumber: string;
+    }
 }
