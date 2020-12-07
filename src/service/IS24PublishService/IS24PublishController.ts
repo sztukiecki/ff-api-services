@@ -37,6 +37,18 @@ export class IS24PublishController extends APIClient {
     async fetchOffer(estateId: string, portalId: string) {
         return await this.invokeApiWithErrorHandling<IS24PublishTypes.IS24UpsellOffer>(`/OTP/estate/${estateId}/portal/${portalId}`, 'GET');
     }
+
+    /**
+     * Creates a new project proposal in IS24
+     * @param projectProposal
+     */
+    async createProjectProposal(portalId: string, projectProposal: IS24PublishTypes.IS24ProjectProposal) {
+        return await this.invokeApiWithErrorHandling<IS24PublishTypes.IS24ProjectProposal>(
+            `/portals/${portalId}/project-proposals`,
+            'POST',
+            projectProposal
+        );
+    }
 }
 
 export default new IS24PublishController();
