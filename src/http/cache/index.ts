@@ -9,15 +9,16 @@ function getUUIDByAxiosConfig(config: AxiosRequestConfig): string {
     return config.url as string;
 }
 
-function getHeaderCaseInsensitive(headerName: string, headers = {}) {
-    const headerKeys = Object.keys(headers);
-    const key = headerKeys.find((value) => value.toLowerCase() === headerName);
-    if (!key) {
-        return undefined;
-    }
-
-    return headers[key];
-}
+// commented because of https://flowfact.atlassian.net/browse/FLOW-9170
+// function getHeaderCaseInsensitive(headerName: string, headers = {}) {
+//     const headerKeys = Object.keys(headers);
+//     const key = headerKeys.find((value) => value.toLowerCase() === headerName);
+//     if (!key) {
+//         return undefined;
+//     }
+//
+//     return headers[key];
+// }
 
 function getCacheByAxiosConfig(config: AxiosRequestConfig) {
     return Cache.get(getUUIDByAxiosConfig(config));
@@ -35,12 +36,13 @@ function requestInterceptor(config: AxiosRequestConfig) {
 }
 
 function responseInterceptor(response: AxiosResponse) {
-    if (isCacheableMethod(response.config)) {
-        const responseETAG = getHeaderCaseInsensitive('etag', response.headers);
-        if (responseETAG) {
-            Cache.set(getUUIDByAxiosConfig(response.config), responseETAG, response.data);
-        }
-    }
+    // commented because of https://flowfact.atlassian.net/browse/FLOW-9170
+    // if (isCacheableMethod(response.config)) {
+    //     const responseETAG = getHeaderCaseInsensitive('etag', response.headers);
+    //     if (responseETAG) {
+    //         Cache.set(getUUIDByAxiosConfig(response.config), responseETAG, response.data);
+    //     }
+    // }
     return response;
 }
 
