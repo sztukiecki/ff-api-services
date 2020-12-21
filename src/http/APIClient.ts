@@ -59,6 +59,11 @@ export abstract class APIClient {
         }
     }
 
+    public async getAuthenticationToken(): Promise<string> {
+        const userIdentification = await this.getUserIdentification();
+        return userIdentification.cognitoToken || userIdentification['x-ff-support-token'];
+    }
+
     public async invokeApi<T = any>(
         path: string,
         method: MethodTypes = 'GET',
