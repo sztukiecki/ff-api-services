@@ -65,7 +65,7 @@ export class SchemaServiceV2 extends APIClient {
      * @returns updated schema
      */
     fieldImport = async (targetSchemaName: string, sourceSchemaName: string, fields: string[]) => {
-        return this.invokeApiWithErrorHandling<SchemaV2>(`/v2/schemas/${targetSchemaName}/field-import`, 'POST', {
+        return this.invokeApiWithErrorHandling<SchemaV2>(`/schemas/${targetSchemaName}/field-import`, 'POST', {
             sourceSchema: sourceSchemaName,
             fields: fields,
         });
