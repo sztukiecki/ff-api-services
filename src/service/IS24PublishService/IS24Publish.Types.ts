@@ -29,7 +29,7 @@ export namespace IS24PublishTypes {
         exposeHits: number;
     }
 
-    export interface IS24ProjectProposal {
+    export interface IS24ProjectProposalRequest {
         projectId: string;
         projectName: string;
         city: string;
@@ -40,5 +40,12 @@ export namespace IS24PublishTypes {
         customerName: string;
         email: string;
         phoneNumber: string;
+    }
+
+    export interface IS24ProjectProposal {
+        projectId: string;
+        projectName: string;
+        numberOfHousingUnits: number;
+        startDate: number;
     }
 }

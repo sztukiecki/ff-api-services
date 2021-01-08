@@ -42,11 +42,22 @@ export class IS24PublishController extends APIClient {
      * Creates a new project proposal in IS24
      * @param projectProposal
      */
-    async createProjectProposal(portalId: string, projectProposal: IS24PublishTypes.IS24ProjectProposal) {
-        return await this.invokeApiWithErrorHandling<IS24PublishTypes.IS24ProjectProposal>(
+    async createProjectProposal(portalId: string, projectProposal: IS24PublishTypes.IS24ProjectProposalRequest) {
+        return await this.invokeApiWithErrorHandling<IS24PublishTypes.IS24ProjectProposalRequest>(
             `/portals/${portalId}/project-proposals`,
             'POST',
             projectProposal
+        );
+    }
+
+    /**
+     * Fetches created project proposal
+     * @param projectId
+     */
+    async fetchProjectProposal(projectId: string) {
+        return await this.invokeApiWithErrorHandling<IS24PublishTypes.IS24ProjectProposal>(
+          `/project-proposals/${projectId}`,
+          'GET',
         );
     }
 }
