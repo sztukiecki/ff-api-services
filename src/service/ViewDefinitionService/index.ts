@@ -2,6 +2,7 @@ import { ViewsController } from './ViewsController';
 import { CustomisationsController } from './CustomisationsController';
 
 export * from './ViewDefinitionService.Types';
+export * from './ViewDefinitionV2.Types';
 
 export class ViewDefinitionService {
     public readonly viewsController: ViewsController;

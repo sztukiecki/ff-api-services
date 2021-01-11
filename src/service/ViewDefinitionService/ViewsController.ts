@@ -1,6 +1,7 @@
 import { APIClient, APIMapping } from '../../http';
 import * as qs from 'qs';
 import { ShortViewDefinition, ViewDefinition, ViewDefinitionCategory, ViewDefinitionStatistic, ViewType } from './ViewDefinitionService.Types';
+import { ViewDefinitionV2 } from './ViewDefinitionV2.Types';
 
 export class ViewsController extends APIClient {
     constructor() {
@@ -25,8 +26,7 @@ export class ViewsController extends APIClient {
      * @param viewType
      */
     async fetchDefinitionsV2ForSchema(schemaName?: string, viewType?: ViewType) {
-        // TODO: Define ViewDefinitionV2
-        return await this.invokeApiWithErrorHandling<{ items: any[] }>('/views', 'GET', undefined, {
+        return await this.invokeApiWithErrorHandling<{ items: ViewDefinitionV2[] }>('/views', 'GET', undefined, {
             headers: {
                 'x-ff-version': 2,
             },

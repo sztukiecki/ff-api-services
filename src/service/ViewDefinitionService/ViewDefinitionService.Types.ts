@@ -15,11 +15,25 @@ export interface ViewDefinitionCategory {
 export interface ViewDefinition extends ShortViewDefinition {
     componentId: string;
     defaultOrder: string;
-    actions: string[];
+    actions: ViewActionType[];
     categories: ViewDefinitionCategory[];
 }
 
 export type ViewType = 'DEFAULT' | 'LIST' | 'CARD' | 'CALENDAR' | 'MAP' | 'ENTITY_RELATION';
+
+export enum ViewActionTypes {
+    DUPLICATE = 'DUPLICATE',
+    DELETE = 'DELETE',
+    ACCESS_RIGHTS = 'ACCESS_RIGHTS',
+    PRINT_PLACARD = 'PRINT_PLACARD',
+    SEND_INTERACTIVE_EXPOSE = 'SEND_INTERACTIVE_EXPOSE',
+    COMPLETE_STATUS = 'COMPLETE_STATUS',
+    EXCEL_EXPORT = 'EXCEL_EXPORT',
+    DOCUMENT_GENERATOR = 'DOCUMENT_GENERATOR',
+    DEVELOPER_PROJECT_PUBLISH = 'DEVELOPER_PROJECT_PUBLISH',
+    QUICK_ACTION = 'QUICK_ACTION',
+}
+export type ViewActionType = keyof typeof ViewActionTypes;
 
 export interface ViewDefinitionStatistic {
     id: string;
