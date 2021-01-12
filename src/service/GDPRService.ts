@@ -189,8 +189,9 @@ export class GDPRService extends APIClient {
      * TODO: Please comment this method
      * @param contactIds
      */
-    async fetchConsentForContacts(contactIds: object): Promise<AxiosResponse> {
-        return await this.invokeApi('/consents/forContacts', 'POST', contactIds);
+    async fetchConsentForContacts(contactIds: string[], gdprConsentPurposes: string[], estateIds?: string[]): Promise<AxiosResponse> {
+        const body = { contactIds, gdprConsentPurposes, estateIds: estateIds || [] };
+        return await this.invokeApi('/consents/forContacts', 'POST', body);
     }
 
     /**
