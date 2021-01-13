@@ -1,8 +1,13 @@
-import { GDPRDataChangeRequestType, GDPRExportRequestBody, GDPRConsentBody, GDPRSettings } from '@flowfact/types';
+import {
+    GDPRDataChangeRequestType,
+    GDPRExportRequestBody,
+    GDPRConsentRequestBody,
+    GDPRCompanySettings,
+    GDPRDataChangeRequestApprovalStatus,
+} from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient } from '../http/APIClient';
 import APIMapping from '../http/APIMapping';
-import { EntityQuery } from '../util/InternalTypes';
 
 export class GDPRService extends APIClient {
     constructor() {
@@ -68,21 +73,6 @@ export class GDPRService extends APIClient {
 
     /**
      * TODO: Please comment this method
-     * @param companyId
-     * @param userId
-     * @param body
-     */
-    async resolveEntities(companyId: string, userId: string, body: EntityQuery[]): Promise<AxiosResponse> {
-        return await this.invokeApi('/public/resolveEntities', 'POST', body, {
-            queryParams: {
-                userId: userId,
-                companyId: companyId,
-            },
-        });
-    }
-
-    /**
-     * TODO: Please comment this method
      * @param contactId
      * @param userId
      * @param companyId
@@ -135,7 +125,7 @@ export class GDPRService extends APIClient {
      * @param status
      * @param reason
      */
-    async updateChangeRequestStatus(changeRequestId: string, status: 'APPROVED' | 'DENIED', reason: string): Promise<AxiosResponse> {
+    async updateChangeRequestStatus(changeRequestId: string, status: GDPRDataChangeRequestApprovalStatus, reason: string): Promise<AxiosResponse> {
         const formData = new FormData();
         formData.append('reason', reason);
 
@@ -187,16 +177,16 @@ export class GDPRService extends APIClient {
 
     /**
      * TODO: returns
-     * @param body of type GDPRConsentBody
+     * @param body
      */
-    async fetchConsentForContacts(body: GDPRConsentBody): Promise<AxiosResponse> {
+    async fetchConsentForContacts(body: GDPRConsentRequestBody): Promise<AxiosResponse> {
         return await this.invokeApi('/consents/forContacts', 'POST', body);
     }
 
     /**
      * TODO: Please comment this method
      */
-    async fetchSettings(): Promise<AxiosResponse<GDPRSettings>> {
+    async fetchSettings(): Promise<AxiosResponse<GDPRCompanySettings>> {
         return await this.invokeApi('/settings', 'GET');
     }
 
@@ -204,7 +194,7 @@ export class GDPRService extends APIClient {
      * TODO: Please comment this method
      * @param settings
      */
-    async updateSettings(settings: GDPRSettings): Promise<AxiosResponse> {
+    async updateSettings(settings: GDPRCompanySettings): Promise<AxiosResponse> {
         return await this.invokeApi('/settings', 'PUT', settings);
     }
 
