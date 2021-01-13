@@ -1,4 +1,4 @@
-import { DataChangeRequestType, ExportRequestBody, Settings } from '@flowfact/types';
+import { DataChangeRequestType, ExportRequestBody, GDPRConsentRequest, Settings } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient } from '../http/APIClient';
 import APIMapping from '../http/APIMapping';
@@ -189,9 +189,8 @@ export class GDPRService extends APIClient {
      * TODO: Please comment this method
      * @param contactIds
      */
-    async fetchConsentForContacts(contactIds: string[], gdprConsentPurposes: string[], estateIds?: string[]): Promise<AxiosResponse> {
-        const body = { contactIds, gdprConsentPurposes, estateIds: estateIds || [] };
-        return await this.invokeApi('/consents/forContacts', 'POST', body);
+    async fetchConsentForContacts(contactIds: string[], gdprConsentRequests: GDPRConsentRequest[]): Promise<AxiosResponse> {
+        return await this.invokeApi('/consents/forContacts', 'POST', { contactIds, gdprConsentRequests });
     }
 
     /**
