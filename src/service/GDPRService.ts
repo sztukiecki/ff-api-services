@@ -1,4 +1,4 @@
-import { DataChangeRequestType, ExportRequestBody, GDPRConsentBody, Settings } from '@flowfact/types';
+import { GDPRDataChangeRequestType, GDPRExportRequestBody, GDPRConsentBody, GDPRSettings } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient } from '../http/APIClient';
 import APIMapping from '../http/APIMapping';
@@ -57,7 +57,7 @@ export class GDPRService extends APIClient {
      * @param companyId
      * @param body
      */
-    async exportPersonalData(userId: string, companyId: string, body: ExportRequestBody): Promise<AxiosResponse> {
+    async exportPersonalData(userId: string, companyId: string, body: GDPRExportRequestBody): Promise<AxiosResponse> {
         return await this.invokeApi('/public/export', 'POST', body, {
             queryParams: {
                 userId: userId,
@@ -93,7 +93,7 @@ export class GDPRService extends APIClient {
         contactId: string,
         userId: string,
         companyId: string,
-        type: DataChangeRequestType = 'CHANGE',
+        type: GDPRDataChangeRequestType = 'CHANGE',
         changes: object = {}
     ): Promise<AxiosResponse> {
         return await this.invokeApi(
@@ -196,7 +196,7 @@ export class GDPRService extends APIClient {
     /**
      * TODO: Please comment this method
      */
-    async fetchSettings(): Promise<AxiosResponse<Settings>> {
+    async fetchSettings(): Promise<AxiosResponse<GDPRSettings>> {
         return await this.invokeApi('/settings', 'GET');
     }
 
@@ -204,7 +204,7 @@ export class GDPRService extends APIClient {
      * TODO: Please comment this method
      * @param settings
      */
-    async updateSettings(settings: Settings): Promise<AxiosResponse> {
+    async updateSettings(settings: GDPRSettings): Promise<AxiosResponse> {
         return await this.invokeApi('/settings', 'PUT', settings);
     }
 
