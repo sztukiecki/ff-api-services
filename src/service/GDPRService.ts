@@ -4,6 +4,7 @@ import {
     GDPRConsentRequestBody,
     GDPRCompanySettings,
     GDPRDataChangeRequestApprovalStatus,
+    GDPRConsentData,
 } from '@flowfact/types';
 import { AxiosResponse } from 'axios';
 import { APIClient } from '../http/APIClient';
@@ -18,7 +19,7 @@ export class GDPRService extends APIClient {
      * TODO: Please comment this method
      * @param token
      */
-    async fetchConsentData(token: string): Promise<AxiosResponse> {
+    async fetchConsentData(token: string): Promise<AxiosResponse<GDPRConsentData>> {
         return await this.invokeApi('/public/consents/consentdata', 'GET', undefined, {
             queryParams: {
                 token: token,
