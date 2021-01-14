@@ -8,6 +8,8 @@ export class APIService {
     }
 }
 
+export class LambdaAPIService extends APIService {}
+
 const APIMapping = {
     aclGroupService: new APIService('acl-group-service'),
     adminTokenService: new APIService('admin-token-service'),
@@ -23,7 +25,7 @@ const APIMapping = {
     customerLegitimationArchiveService: new APIService('customer-legitimation-archive-service'),
     dynamicLayoutService: new APIService('dynamic-layout-service'),
     emailService: new APIService('email-service'),
-    entitlementService: new APIService('entitlement-lambda'), // TODO: via lambda proxy?
+    entitlementService: new LambdaAPIService('entitlement-lambda'), // TODO: via lambda proxy?
     entityExportService: new APIService('entity-export-service'),
     entityService: new APIService('entity-service'),
     excelExporterService: new APIService('excel-exporter-service'),

@@ -66,6 +66,13 @@ export class EnvironmentManagement {
         return `https://api.${stage}.cloudios.${account}.cloud`;
     };
 
+    getLambdaUrl = (serviceName: string) => {
+        // const stage = this.getStage();
+        // const account = stage === StageTypes.DEVELOPMENT ? 'flowfact-dev' : 'flowfact-prod';
+        // console.log({ serviceName });
+        return `http://localhost:3001/offline`;
+    };
+
     isDefaultApi() {
         return this.getStage() === defaultStage && this.getVersionTag() === defaultVersionTag;
     }
