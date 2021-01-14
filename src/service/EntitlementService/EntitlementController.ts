@@ -11,7 +11,7 @@ export class EntitlementController extends APIClient {
      *
      * @param companyId
      */
-    getEntitlements(companyId: string) {
+    getEntitlement(companyId: string) {
         return this.invokeApiWithErrorHandling<EntitlementServiceTypes.EntitlementResponse>('/getEntitlements', 'GET', undefined, {
             queryParams: {
                 companyId: companyId,
