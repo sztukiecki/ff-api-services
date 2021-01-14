@@ -2,7 +2,6 @@ import { DataChangeRequestType, ExportRequestBody, Settings } from '@flowfact/ty
 import { AxiosResponse } from 'axios';
 import { APIClient } from '../http/APIClient';
 import APIMapping from '../http/APIMapping';
-import { EntityQuery } from '../util/InternalTypes';
 
 export class GDPRService extends APIClient {
     constructor() {
