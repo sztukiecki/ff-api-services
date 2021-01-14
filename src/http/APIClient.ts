@@ -78,6 +78,11 @@ export abstract class APIClient {
 
         // add parameters to the url
         let apiUrl = `${EnvironmentManagementInstance.getBaseUrl(isNode)}/${this._serviceName}${path}`;
+
+        if (this._serviceName === 'entitlement-lambda') {
+            apiUrl = `https://entitlement-lambda.development.sf.flowfact-dev.cloud/${path}`;
+        }
+
         if (queryParams) {
             const queryString = stringify(queryParams, { addQueryPrefix: true });
             if (queryString && queryString !== '') {
