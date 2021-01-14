@@ -81,6 +81,7 @@ const APIMapping = {
     documentTemplateService: new APIService('document-template-service'),
     lambdaProxyService: new APIService('lambda'),
     placeholderService: new APIService('placeholder-service'),
+    smsIngestionService: new APIService('sms-ingestion-service'),
 };
 
 export default APIMapping;
