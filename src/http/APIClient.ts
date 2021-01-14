@@ -80,7 +80,7 @@ export abstract class APIClient {
         let apiUrl = `${EnvironmentManagementInstance.getBaseUrl(isNode)}/${this._serviceName}${path}`;
 
         if (this._serviceName === 'entitlement-lambda') {
-            apiUrl = `https://entitlement-lambda.development.sf.flowfact-dev.cloud/${path}`;
+            apiUrl = `https://entitlement-lambda.development.sf.flowfact-dev.cloud${path}`;
         }
 
         if (queryParams) {
