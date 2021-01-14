@@ -68,21 +68,6 @@ export class GDPRService extends APIClient {
 
     /**
      * TODO: Please comment this method
-     * @param companyId
-     * @param userId
-     * @param body
-     */
-    async resolveEntities(companyId: string, userId: string, body: EntityQuery[]): Promise<AxiosResponse> {
-        return await this.invokeApi('/public/resolveEntities', 'POST', body, {
-            queryParams: {
-                userId: userId,
-                companyId: companyId,
-            },
-        });
-    }
-
-    /**
-     * TODO: Please comment this method
      * @param contactId
      * @param userId
      * @param companyId
@@ -189,8 +174,8 @@ export class GDPRService extends APIClient {
      * TODO: Please comment this method
      * @param contactIds
      */
-    async fetchConsentForContacts(contactIds: object): Promise<AxiosResponse> {
-        return await this.invokeApi('/consents/forContacts', 'POST', contactIds);
+    async fetchConsentForContacts(body: object): Promise<AxiosResponse> {
+        return await this.invokeApi('/consents/forContacts', 'POST', body);
     }
 
     /**
