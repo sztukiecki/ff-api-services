@@ -1319,9 +1319,9 @@
   dependencies:
     tslib "^1.10.0"
 
-"@flowfact/types@ssh://git@github.com/FLOWFACTCorp/types#a1a96709404878d0615b89a3d693c75d6db113cb":
+"@flowfact/types@file:./types-1610627983795.tgz":
   version "4.0.0-SNAPSHOT"
-  resolved "ssh://git@github.com/FLOWFACTCorp/types#a1a96709404878d0615b89a3d693c75d6db113cb"
+  resolved "file:./types-1610627983795.tgz#9744c607134aa6899c511402b33d2a318bc2bb50"
   dependencies:
     "@flowfact/node-flowdsl" "^2.20200810.37"
     "@types/node" "^11.15.4"
