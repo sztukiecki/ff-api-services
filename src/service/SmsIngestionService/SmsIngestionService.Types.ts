@@ -1,4 +1,3 @@
-
 export namespace SmsIngestionServiceTypes {
     export interface SmsData {
         estateId?: string;
