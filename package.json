@@ -23,7 +23,7 @@
     },
     "dependencies": {
         "@flowfact/node-flowdsl": "^2.20201020.38",
-        "@flowfact/types": "file:./types-1610614733741.tgz",
+        "@flowfact/types": "ssh://git@github.com/FLOWFACTCorp/types#a1a96709404878d0615b89a3d693c75d6db113cb",
         "aws-amplify": "^3.3.8",
         "axios": "^0.21.0",
         "detect-node": "^2.0.4",
