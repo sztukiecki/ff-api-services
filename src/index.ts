@@ -73,6 +73,7 @@ export * from './service/PropertyMarketingPhaseService';
 export * from './service/InteractiveExposeStatisticsService';
 export * from './service/EmailService';
 export * from './service/SearchServiceTypes';
+export * from './service/SmsIngestionService';
 
 export * from './http';
 export * from './util/EnvironmentManagement';
