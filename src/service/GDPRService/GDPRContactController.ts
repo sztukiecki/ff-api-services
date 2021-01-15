@@ -1,5 +1,4 @@
 import { APIClient, APIMapping } from '../../http';
-import { GDPRServiceTypes } from './GDPRService.Types';
 import { Contact } from '@flowfact/types';
 
 export class GDPRContactController extends APIClient {
