@@ -7,6 +7,10 @@ export namespace GDPRServiceTypes {
     export type UserConsentStatus = 'DEFAULT' | 'BLOCKED' | 'CONSENT_PENDING' | 'CONSENT_GRANTED';
     export type ConsentSource = 'CONTACT' | 'MANUAL' | 'IMPLICIT';
 
+    export interface DataChangeRequestStatus {
+        dataChangeRequestApprovalStatus: DataChangeRequestApprovalStatus;
+    }
+
     export interface DataChangeRequest {
         id: string;
         contactId: string;

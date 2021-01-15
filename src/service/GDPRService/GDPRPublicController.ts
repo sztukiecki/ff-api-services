@@ -134,18 +134,13 @@ export class GDPRPublicController extends APIClient {
      * @param companyId
      */
     async fetchChangeRequestStatus(contactId: string, userId: string, companyId: string) {
-        return await this.invokeApiWithErrorHandling<GDPRServiceTypes.DataChangeRequestApprovalStatus>(
-            '/public/changeRequests/status',
-            'GET',
-            undefined,
-            {
-                queryParams: {
-                    contactId: contactId,
-                    userId: userId,
-                    companyId: companyId,
-                },
-            }
-        );
+        return await this.invokeApiWithErrorHandling<GDPRServiceTypes.DataChangeRequestStatus>('/public/changeRequests/status', 'GET', undefined, {
+            queryParams: {
+                contactId: contactId,
+                userId: userId,
+                companyId: companyId,
+            },
+        });
     }
 
     /**
