@@ -67,10 +67,11 @@ export class EnvironmentManagement {
     };
 
     getLambdaUrl = (serviceName: string) => {
-        // const stage = this.getStage();
-        // const account = stage === StageTypes.DEVELOPMENT ? 'flowfact-dev' : 'flowfact-prod';
-        // console.log({ serviceName });
-        return `http://localhost:3001/offline`;
+        const stage = this.getStage();
+        const account = stage === StageTypes.DEVELOPMENT ? 'flowfact-dev' : 'flowfact-prod';
+
+        return `https://${serviceName}.${stage}.sf.${account}.cloud`;
+        // return `http:.//localhost:3001/offline`
     };
 
     isDefaultApi() {
