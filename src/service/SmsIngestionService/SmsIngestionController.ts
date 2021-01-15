@@ -10,7 +10,7 @@ export class SmsIngestionController extends APIClient {
      * Sends the SMS message
      * @param smsData
      */
-    async fetchActivities(smsData: SmsIngestionServiceTypes.SmsData) {
-        return this.invokeApiWithErrorHandling<string>('/send', 'POST', smsData);
+    async sendSms(smsData: SmsIngestionServiceTypes.SmsData) {
+        return this.invokeApiWithErrorHandling<void>('/send', 'POST', smsData);
     }
 }
