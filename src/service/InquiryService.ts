@@ -25,6 +25,15 @@ export interface InquiryAutomation {
     isActive: boolean;
 }
 
+export interface EmailVerificationResult {
+    reason: string;
+    status: EmailValidationStatus
+}
+
+export enum EmailValidationStatus {
+    PROCESSED = 'PROCESSED', NOT_INQUIRY = 'NOT_INQUIRY', TO_BE_PROCESSED = 'TO_BE_PROCESSED'
+}
+
 export class InquiryService extends APIClient {
     constructor() {
         super(APIMapping.inquiryService);
@@ -65,6 +74,22 @@ export class InquiryService extends APIClient {
 
     toggleAutomation(companyId: string): Promise<AxiosResponse<InquiryAutomation>> {
         return this.invokeApi(`/inquiry/automation/${companyId}`, 'POST');
+    }
+
+    /**
+     * Trigger the inquiery processing for given email manually.
+     * @param entityId as emailId
+     */
+    replayEmail(entityId: string): Promise<AxiosResponse> {
+        return this.invokeApi(`/email/${entityId}/replay`, 'POST')
+    }
+
+    /**
+     * Checks if this email is an inquiry and can be processed or is already processed.
+     * @param entityId as emailId
+     */
+    validateEmail(entityId: string): Promise<AxiosResponse<EmailVerificationResult>> {
+        return this.invokeApi(`/email/${entityId}/verify`, 'GET')
     }
 }
 
