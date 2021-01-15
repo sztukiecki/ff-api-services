@@ -71,7 +71,6 @@ export class EnvironmentManagement {
         const account = stage === StageTypes.DEVELOPMENT ? 'flowfact-dev' : 'flowfact-prod';
 
         return `https://${serviceName}.${stage}.sf.${account}.cloud`;
-        // return `http:.//localhost:3001/offline`
     };
 
     isDefaultApi() {

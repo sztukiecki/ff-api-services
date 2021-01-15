@@ -1,6 +1,10 @@
 export namespace EntitlementServiceTypes {
+    export enum EntitlementType {
+        maxUser = 'maxUser',
+        dashboardDisabled = 'dashboardDisabled',
+    }
     export interface Entitlement {
-        name: string;
+        name: EntitlementType;
         value: boolean | number;
     }
 
