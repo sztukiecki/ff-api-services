@@ -124,7 +124,9 @@ export class CompanyService extends APIClient {
     async postWithdrawal(withdrawal: any) {
         const formData = new FormData();
         formData.append('withdrawal-file', withdrawal);
-        return this.invokeApi('/company/withdrawal/upload', 'POST', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+        return this.invokeApiWithErrorHandling('/company/withdrawal/upload', 'POST', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        });
     }
 
     /**
@@ -134,7 +136,7 @@ export class CompanyService extends APIClient {
     async removeWithdrawal(fileName: string) {
         const formData = new FormData();
         formData.append('file-name', fileName);
-        return this.invokeApi('/company/withdrawal/remove', 'POST', formData);
+        return this.invokeApiWithErrorHandling('/company/withdrawal/remove', 'POST', formData);
     }
 
     /**
