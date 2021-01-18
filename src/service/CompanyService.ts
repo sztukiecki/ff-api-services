@@ -118,6 +118,26 @@ export class CompanyService extends APIClient {
     }
 
     /**
+     * Upload custom withdrawal notice file
+     * @param withdrawal
+     */
+    async postWithdrawal(withdrawal: any) {
+        const formData = new FormData();
+        formData.append('withdrawal-file', withdrawal);
+        return this.invokeApi('/company/withdrawal/upload', 'POST', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+    }
+
+    /**
+     * Remove custom withdrawal notice file
+     * @param fileName
+     */
+    async removeWithdrawal(fileName: string) {
+        const formData = new FormData();
+        formData.append('file-name', fileName);
+        return this.invokeApi('/company/withdrawal/remove', 'POST', formData);
+    }
+
+    /**
      * Get all legislations texts from the company as JSON
      * @returns {Promise<AxiosResponse>}
      */
