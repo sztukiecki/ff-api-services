@@ -34,7 +34,7 @@ export enum EmailValidationStatus {
     PROCESSED = 'PROCESSED', NOT_INQUIRY = 'NOT_INQUIRY', TO_BE_PROCESSED = 'TO_BE_PROCESSED'
 }
 
-export class InquiryService extends APIClient {
+export class InquiryServiceClass extends APIClient {
     constructor() {
         super(APIMapping.inquiryService);
     }
@@ -93,4 +93,4 @@ export class InquiryService extends APIClient {
     }
 }
 
-export default new InquiryService();
+export const InquiryService = new InquiryServiceClass();
