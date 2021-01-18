@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { APIClient, APIMapping } from '../http';
+import {APIClient, APIMapping, ApiResponse} from '../http';
 import { Flowdsl } from '@flowfact/node-flowdsl';
 
 export type InquiryStatus = 'active' | 'pinned' | 'done';
@@ -80,16 +80,16 @@ export class InquiryService extends APIClient {
      * Trigger the inquiery processing for given email manually.
      * @param entityId as emailId
      */
-    replayEmail(entityId: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/email/${entityId}/replay`, 'POST')
+    replayEmail(entityId: string): Promise<ApiResponse<any>> {
+        return this.invokeApiWithErrorHandling(`/email/${entityId}/replay`, 'POST')
     }
 
     /**
      * Checks if this email is an inquiry and can be processed or is already processed.
      * @param entityId as emailId
      */
-    validateEmail(entityId: string): Promise<AxiosResponse<EmailVerificationResult>> {
-        return this.invokeApi(`/email/${entityId}/verify`, 'GET')
+    validateEmail(entityId: string): Promise<ApiResponse<any>> {
+        return this.invokeApiWithErrorHandling(`/email/${entityId}/verify`, 'GET')
     }
 }
 
