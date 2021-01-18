@@ -6,4 +6,11 @@ export namespace SmsIngestionServiceTypes {
         recipientsPhoneNumber: string[];
         message: string;
     }
+
+    export interface Credentials {
+        companyId: string;
+        token: string;
+        created: Date;
+        lastUpdated: Date;
+    }
 }
