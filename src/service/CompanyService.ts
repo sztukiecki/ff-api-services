@@ -118,6 +118,28 @@ export class CompanyService extends APIClient {
     }
 
     /**
+     * Upload custom revocation notice file
+     * @param revocation
+     */
+    async postRevocation(revocation: any) {
+        const formData = new FormData();
+        formData.append('revocation-file', revocation);
+        return this.invokeApiWithErrorHandling('/company/revocation/upload', 'POST', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        });
+    }
+
+    /**
+     * Remove custom revocation notice file
+     * @param fileName
+     */
+    async removeRevocation(fileName: string) {
+        const formData = new FormData();
+        formData.append('file-name', fileName);
+        return this.invokeApiWithErrorHandling('/company/revocation/remove', 'POST', formData);
+    }
+
+    /**
      * Get all legislations texts from the company as JSON
      * @returns {Promise<AxiosResponse>}
      */
