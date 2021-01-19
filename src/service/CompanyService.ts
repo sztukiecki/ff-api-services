@@ -121,7 +121,7 @@ export class CompanyService extends APIClient {
      * Upload custom revocation notice file
      * @param revocation
      */
-    async postWithdrawal(revocation: any) {
+    async postRevocation(revocation: any) {
         const formData = new FormData();
         formData.append('revocation-file', revocation);
         return this.invokeApiWithErrorHandling('/company/revocation/upload', 'POST', formData, {
