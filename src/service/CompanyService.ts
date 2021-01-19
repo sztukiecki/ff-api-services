@@ -118,25 +118,25 @@ export class CompanyService extends APIClient {
     }
 
     /**
-     * Upload custom withdrawal notice file
-     * @param withdrawal
+     * Upload custom revocation notice file
+     * @param revocation
      */
-    async postWithdrawal(withdrawal: any) {
+    async postWithdrawal(revocation: any) {
         const formData = new FormData();
-        formData.append('withdrawal-file', withdrawal);
-        return this.invokeApiWithErrorHandling('/company/withdrawal/upload', 'POST', formData, {
+        formData.append('revocation-file', revocation);
+        return this.invokeApiWithErrorHandling('/company/revocation/upload', 'POST', formData, {
             headers: { 'Content-Type': 'multipart/form-data' },
         });
     }
 
     /**
-     * Remove custom withdrawal notice file
+     * Remove custom revocation notice file
      * @param fileName
      */
-    async removeWithdrawal(fileName: string) {
+    async removeRevocation(fileName: string) {
         const formData = new FormData();
         formData.append('file-name', fileName);
-        return this.invokeApiWithErrorHandling('/company/withdrawal/remove', 'POST', formData);
+        return this.invokeApiWithErrorHandling('/company/revocation/remove', 'POST', formData);
     }
 
     /**
