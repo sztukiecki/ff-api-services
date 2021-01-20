@@ -64,11 +64,11 @@ export class IS24PublishController extends APIClient {
     /**
      * Fetches description from Retresco for given estate
      * @param portalId
-     * @param estateId
+     * @param entityId
      */
-    async fetchEstateDescription(portalId: string, estateId: string) {
+    async fetchEstateDescription(portalId: string, entityId: string) {
         return await this.invokeApiWithErrorHandling<string>(
-          `/portal/${portalId}/estate/${estateId}/description`,
+          `/portal/${portalId}/estate/${entityId}/description`,
           'GET'
         )
     }
@@ -76,11 +76,11 @@ export class IS24PublishController extends APIClient {
     /**
      * Fetches location text from Retresco for given estate
      * @param portalId
-     * @param estateId
+     * @param entityId
      */
-    async fetchEstateLocationText(portalId: string, estateId: string) {
+    async fetchEstateLocationText(portalId: string, entityId: string) {
         return await this.invokeApiWithErrorHandling<string>(
-          `/portal/${portalId}/estate/${estateId}/locationText`,
+          `/portal/${portalId}/estate/${entityId}/locationText`,
           'GET'
         )
     }
