@@ -8,6 +8,7 @@ export class InternalController extends APIClient {
 
     /**
      * start trial
+     * @deprecated
      * @param companyId
      */
     async startTrial(companyId: CompanyServiceTypes.ID) {
@@ -16,6 +17,7 @@ export class InternalController extends APIClient {
 
     /**
      * end trial
+     * @deprecated
      * @param companyId
      */
     async endTrial(companyId: CompanyServiceTypes.ID) {
@@ -23,6 +25,7 @@ export class InternalController extends APIClient {
     }
 
     /**
+     * @deprecated
      * Gets the details of a company group.
      */
     async fetchGroup(name: string) {
