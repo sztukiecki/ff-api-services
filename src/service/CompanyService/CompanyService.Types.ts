@@ -63,5 +63,9 @@ export namespace CompanyServiceTypes {
         logoUrl: string;
     }
 
-    export type OwnerClass = 'CUSTOMER' | 'INTERNAL' | 'EXTERNAL_DEVELOPER';
+    export enum OwnerClass {
+        CUSTOMER = 'CUSTOMER',
+        INTERNAL = 'INTERNAL',
+        EXTERNAL_DEVELOPER = 'EXTERNAL_DEVELOPER',
+    }
 }
