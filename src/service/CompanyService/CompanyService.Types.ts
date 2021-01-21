@@ -10,6 +10,13 @@ export namespace CompanyServiceTypes {
         membersSize: number;
     }
 
+    export interface EntitlementInfo {
+        start: string;
+        end: string;
+        entitlementOrigin: string;
+        status: string;
+    }
+
     export interface LegislationCheckbox {
         value: string;
         label: string;
@@ -26,35 +33,45 @@ export namespace CompanyServiceTypes {
 
     export interface Company {
         id: ID;
-        companyName: string;
-        companyStreet: string;
-        companyPostcode: string;
+        businessType: string;
+        companyBank: string;
+        companyBic: string;
         companyCity: string;
-        companyUrl: string;
-        companyPhoneInfo: string;
         companyFax: string;
-        companyMailInfo: string;
-        companyMarket: string;
         companyHrb: string;
         companyHrbPlace: string;
-        companyUstId: string;
-        companyUrlFacebook: string;
-        companyUrlTwitter: string;
-        companyUrlGoogle: string;
-        companyUrlLinkedin: string;
-        companyUrlImprint: string;
-        companyUrlPrivacy: string;
+        companyIban: string;
+        companyMailInfo: string;
+        companyMarket: string;
+        companyName: string;
+        companyPhoneInfo: string;
+        companyPostcode: string;
         companyResponsiblePersons: string;
-        logo: S3File;
-        terms: S3File;
-        revocation?: S3File;
-        legislationTexts: LegislationText[];
-        purposeOfDataProcessing: string;
+        companySize: string;
+        companyStreet: string;
+        companyUrl: string;
+        companyUrlFacebook: string;
+        companyUrlGoogle: string;
+        companyUrlImprint: string;
+        companyUrlLinkedin: string;
+        companyUrlPrivacy: string;
+        companyUrlTwitter: string;
+        companyUstId: string;
         creatorId: string;
-        timestamp: number;
+        domain: string;
+        entitlementInfo: EntitlementInfo;
+        legislationTexts: LegislationText[];
+        logo: S3File;
         navisionId: string;
-        verified: boolean;
+        origin: string;
+        ownerClass: string;
+        purposeOfDataProcessing: string;
+        revocation: S3File;
+        tax: number;
+        terms: S3File;
+        timestamp: number;
         trial: boolean;
+        verified: boolean;
     }
 
     export interface ShortCompany {
