@@ -14,11 +14,4 @@ export class SmsIngestionController extends APIClient {
         return this.invokeApiWithErrorHandling<void>('/send', 'POST', smsData);
     }
 
-    /**
-     * Fetches sms api credentials for given companyId
-     * @param companyId
-     */
-    async fetchCredentials(companyId: string) {
-        return this.invokeApiWithErrorHandling<SmsIngestionServiceTypes.Credentials>(`/credentials/${companyId}`, 'GET');
-    }
 }
