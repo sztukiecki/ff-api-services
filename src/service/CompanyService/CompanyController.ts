@@ -113,11 +113,14 @@ export class CompanyController extends APIClient {
      */
     async setOwnerClassForCompany(companyId: CompanyServiceTypes.ID, ownerClass: string) {
         let newOwnerClass = ownerClass.trim().toUpperCase();
-        if (
-            ![CompanyServiceTypes.OwnerClass.INTERNAL, CompanyServiceTypes.OwnerClass.EXTERNAL_DEVELOPER].includes(
-                newOwnerClass as CompanyServiceTypes.OwnerClass
-            )
-        ) {
+
+        const isValidOwnerClass = [
+            CompanyServiceTypes.OwnerClass.INTERNAL,
+            CompanyServiceTypes.OwnerClass.EXTERNAL_DEVELOPER,
+            CompanyServiceTypes.OwnerClass.CUSTOMER,
+        ].includes(newOwnerClass as CompanyServiceTypes.OwnerClass);
+
+        if (!isValidOwnerClass) {
             newOwnerClass = CompanyServiceTypes.OwnerClass.CUSTOMER;
         }
 
