@@ -1,9 +1,10 @@
 export declare namespace EntitlementServiceTypes {
     enum EntitlementType {
-        maxUser = "maxUser",
-        dashboardDisabled = "dashboardDisabled"
+        maxUser = 'maxUser',
+        dashboardDisabled = 'dashboardDisabled',
     }
-    enum MainPackageName {
+
+    enum MainPackage {
         UNLIMITED = 'UNLIMITED',
         ESSENTIAL = 'ESSENTIAL',
         EXPERT = 'EXPERT',
@@ -13,13 +14,12 @@ export declare namespace EntitlementServiceTypes {
         value: boolean | number;
     }
     interface Package {
-        name: MainPackageName;
+        name: MainPackage;
         endDate: string;
     }
     interface PackageWithEntitlements {
         packages: Package[];
         entitlements: Entitlement[];
     }
-    interface EntitlementResponse extends PackageWithEntitlements {
-    }
+    interface EntitlementResponse extends PackageWithEntitlements {}
 }
