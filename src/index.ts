@@ -4,7 +4,6 @@ export { default as AppointmentBookingService } from './service/AppointmentBooki
 export { default as CaasManagementService } from './service/CaasManagementService';
 export { default as CognitoClientService } from './service/CognitoClientService';
 export { default as CommissionCalculationService } from './service/CommissionCalculationService';
-export { default as CompanyService } from './service/CompanyService';
 export { default as ContactService } from './service/ContactService';
 export { default as CsvToEntityImporterService } from './service/CsvToEntityImporterService';
 export { default as CustomerLegitimationArchiveService } from './service/CustomerLegitimationArchiveService';
@@ -73,6 +72,7 @@ export * from './service/InteractiveExposeStatisticsService';
 export * from './service/EmailService';
 export * from './service/SearchServiceTypes';
 export * from './service/SmsIngestionService';
+export * from './service/CompanyService';
 export * from './service/SmsService';
 
 export * from './http';
