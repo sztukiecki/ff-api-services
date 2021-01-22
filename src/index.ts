@@ -18,7 +18,6 @@ export { default as HistoryModuleService } from './service/HistoryModuleService'
 export * from './service/InquiryService';
 export { default as InteractiveExposeDeliveryService } from './service/InteractiveExposeDeliveryService';
 export { default as InteractiveExposeService } from './service/InteractiveExposeService';
-export { default as ModuleService } from './service/ModuleService';
 export { default as NylasService } from './service/NylasService/NylasService';
 export { default as NylasContactSyncService } from './service/NylasContactSyncService';
 export { default as Office365AuthenticationService } from './service/Office365AuthenticationService';
@@ -74,6 +73,7 @@ export * from './service/EmailService';
 export * from './service/SearchServiceTypes';
 export * from './service/SmsIngestionService';
 export * from './service/CompanyService';
+export * from './service/SmsService';
 
 export * from './http';
 export * from './util/EnvironmentManagement';
