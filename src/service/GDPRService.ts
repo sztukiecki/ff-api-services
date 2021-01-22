@@ -2,7 +2,6 @@ import { DataChangeRequestType, ExportRequestBody, Settings } from '@flowfact/ty
 import { AxiosResponse } from 'axios';
 import { APIClient } from '../http/APIClient';
 import APIMapping from '../http/APIMapping';
-import { EntityQuery } from '../util/InternalTypes';
 
 export class GDPRService extends APIClient {
     constructor() {
@@ -59,21 +58,6 @@ export class GDPRService extends APIClient {
      */
     async exportPersonalData(userId: string, companyId: string, body: ExportRequestBody): Promise<AxiosResponse> {
         return await this.invokeApi('/public/export', 'POST', body, {
-            queryParams: {
-                userId: userId,
-                companyId: companyId,
-            },
-        });
-    }
-
-    /**
-     * TODO: Please comment this method
-     * @param companyId
-     * @param userId
-     * @param body
-     */
-    async resolveEntities(companyId: string, userId: string, body: EntityQuery[]): Promise<AxiosResponse> {
-        return await this.invokeApi('/public/resolveEntities', 'POST', body, {
             queryParams: {
                 userId: userId,
                 companyId: companyId,
@@ -186,11 +170,11 @@ export class GDPRService extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
-     * @param contactIds
+     * returns consent status given for users
+     * @param object
      */
-    async fetchConsentForContacts(contactIds: object): Promise<AxiosResponse> {
-        return await this.invokeApi('/consents/forContacts', 'POST', contactIds);
+    async fetchConsentForContacts(body: object): Promise<AxiosResponse> {
+        return await this.invokeApi('/consents/forContacts', 'POST', body);
     }
 
     /**
