@@ -40,7 +40,6 @@ const APIMapping = {
     interactiveExposeService: new APIService('interactive-expose-service'),
     interactiveExposeStatisticsService: new APIService('interactive-expose-statistics-service'),
     matchmakingService: new APIService('matchmaking-service'),
-    moduleService: new APIService('module-service'),
     nylasService: new APIService('nylas-service'),
     nylasContactSyncService: new APIService('nylas-contact-sync-service'),
     multimediaService: new APIService('multimedia-service'),
@@ -82,6 +81,7 @@ const APIMapping = {
     lambdaProxyService: new APIService('lambda'),
     placeholderService: new APIService('placeholder-service'),
     smsIngestionService: new APIService('sms-ingestion-service'),
+    smsService: new APIService('sms-service'),
 };
 
 export default APIMapping;
