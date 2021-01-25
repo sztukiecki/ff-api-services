@@ -50,6 +50,10 @@ export class GDPRContactController extends APIClient {
         });
     }
 
+    async unblockContact(contactId: string) {
+        return this.blockContact(contactId, false);
+    }
+
     /**
      * TODO: Please comment this method
      * @param contactId
