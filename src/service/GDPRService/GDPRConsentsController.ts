@@ -11,7 +11,7 @@ export class GDPRConsentsController extends APIClient {
      * @param consentEntity
      */
     async addConsent(consentEntity: GDPRServiceTypes.ConsentData) {
-        return await this.invokeApiWithErrorHandling<boolean>('/consents', 'POST', consentEntity);
+        return await this.invokeApiWithErrorHandling<Pick<GDPRServiceTypes.ConsentData, 'id'>>('/consents', 'POST', consentEntity);
     }
 
     /**

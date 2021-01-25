@@ -1,7 +1,6 @@
 import { Contact, EntityView } from '@flowfact/types';
 
 export namespace GDPRServiceTypes {
-    export type ID = string;
     export type ExportFileType = 'JSON' | 'CSV' | 'XML';
     export type DataChangeRequestApprovalStatus = 'APPROVED' | 'DENIED' | 'PENDING';
     export type DataChangeRequestType = 'DELETE' | 'CHANGE' | 'PROCESS_LIMITATION';
@@ -15,7 +14,7 @@ export namespace GDPRServiceTypes {
     }
 
     export interface DataChangeRequest {
-        id: ID;
+        id: string;
         contactId: string;
         companyId: string;
         requestDateTime: Date;
@@ -43,7 +42,9 @@ export namespace GDPRServiceTypes {
         purposeOfDataProcessing: string;
     }
 
+    // this is an entity?
     export interface ConsentData {
+        id: string;
         userId: string;
         companyId: string;
         contact: Contact;
