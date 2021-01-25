@@ -47,5 +47,6 @@ export namespace IS24PublishTypes {
         projectName: string;
         numberOfHousingUnits: number;
         startDate: number;
+        status: string;
     }
 }

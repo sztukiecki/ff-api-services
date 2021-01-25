@@ -4,7 +4,6 @@ export { default as AppointmentBookingService } from './service/AppointmentBooki
 export { default as CaasManagementService } from './service/CaasManagementService';
 export { default as CognitoClientService } from './service/CognitoClientService';
 export { default as CommissionCalculationService } from './service/CommissionCalculationService';
-export { default as CompanyService } from './service/CompanyService';
 export { default as ContactService } from './service/ContactService';
 export { default as CsvToEntityImporterService } from './service/CsvToEntityImporterService';
 export { default as CustomerLegitimationArchiveService } from './service/CustomerLegitimationArchiveService';
@@ -15,10 +14,9 @@ export { default as FullTextSearchService } from './service/FullTextSearchServic
 export { default as FunnelService } from './service/FunnelService';
 export { default as GeolocationService } from './service/GeolocationService';
 export { default as HistoryModuleService } from './service/HistoryModuleService';
-export { default as InquiryService } from './service/InquiryService';
+export * from './service/InquiryService';
 export { default as InteractiveExposeDeliveryService } from './service/InteractiveExposeDeliveryService';
 export { default as InteractiveExposeService } from './service/InteractiveExposeService';
-export { default as ModuleService } from './service/ModuleService';
 export { default as NylasService } from './service/NylasService/NylasService';
 export { default as NylasContactSyncService } from './service/NylasContactSyncService';
 export { default as Office365AuthenticationService } from './service/Office365AuthenticationService';
@@ -74,6 +72,8 @@ export * from './service/InteractiveExposeStatisticsService';
 export * from './service/EmailService';
 export * from './service/SearchServiceTypes';
 export * from './service/SmsIngestionService';
+export * from './service/CompanyService';
+export * from './service/SmsService';
 
 export * from './http';
 export * from './util/EnvironmentManagement';
