@@ -36,7 +36,7 @@ export class GDPRContactController extends APIClient {
     /**
      * TODO: Please comment this method
      * @param contactId
-     * @param block
+     * @param block should the contact be blocked
      */
     async blockContact(contactId: string, block: boolean) {
         return await this.invokeApiWithErrorHandling('/contact/block', 'POST', undefined, {
@@ -48,10 +48,6 @@ export class GDPRContactController extends APIClient {
                 contactId: contactId,
             },
         });
-    }
-
-    async unblockContact(contactId: string) {
-        return this.blockContact(contactId, false);
     }
 
     /**
