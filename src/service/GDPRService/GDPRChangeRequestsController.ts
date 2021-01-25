@@ -12,7 +12,7 @@ export class GDPRChangeRequestsController extends APIClient {
      * @param status
      * @param reason
      */
-    async updateChangeRequestStatus(changeRequestId: string, status: GDPRServiceTypes.DataChangeRequestApprovalStatus, reason: string) {
+    async updateChangeRequestStatus(changeRequestId: GDPRServiceTypes.ID, status: GDPRServiceTypes.DataChangeRequestApprovalStatus, reason: string) {
         const formData = new FormData();
         formData.append('reason', reason);
 

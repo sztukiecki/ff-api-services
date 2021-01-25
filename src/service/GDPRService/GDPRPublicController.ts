@@ -110,7 +110,7 @@ export class GDPRPublicController extends APIClient {
         type: GDPRServiceTypes.DataChangeRequestType = 'CHANGE',
         changes: object = {}
     ) {
-        return await this.invokeApiWithErrorHandling(
+        return await this.invokeApiWithErrorHandling<GDPRServiceTypes.DataChangeRequest>(
             '/public/changeRequests',
             'POST',
             {
