@@ -44,6 +44,7 @@ export class GDPRConsentsController extends APIClient {
 
     /**
      * TODO: Please comment this method
+     * @deprecated
      * @param consentId
      */
     async fetchConsentAuthor(consentId: string) {
