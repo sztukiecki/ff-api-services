@@ -112,18 +112,6 @@ export class CompanyController extends APIClient {
      * @param {OwnerClass} ownerClass - The OwnerClass that the company should get. Values: "INTERNAL/CUSTOMER/EXTERNAL_DEVELOPER"
      */
     async setOwnerClassForCompany(companyId: CompanyServiceTypes.ID, ownerClass: CompanyServiceTypes.OwnerClass) {
-        let newOwnerClass = ownerClass.trim().toUpperCase();
-
-        const isValidOwnerClass = [
-            CompanyServiceTypes.OwnerClass.INTERNAL,
-            CompanyServiceTypes.OwnerClass.EXTERNAL_DEVELOPER,
-            CompanyServiceTypes.OwnerClass.CUSTOMER,
-        ].includes(newOwnerClass as CompanyServiceTypes.OwnerClass);
-
-        if (!isValidOwnerClass) {
-            newOwnerClass = CompanyServiceTypes.OwnerClass.CUSTOMER;
-        }
-
-        return this.invokeApiWithErrorHandling(`/company/${companyId}/ownerclass/${newOwnerClass}`, 'PUT');
+        return this.invokeApiWithErrorHandling(`/company/${companyId}/ownerclass/${ownerClass}`, 'PUT');
     }
 }
