@@ -3,7 +3,7 @@ import { Contact, EntityView } from '@flowfact/types';
 export namespace GDPRServiceTypes {
     export type ID = string;
     export type ExportFileType = 'JSON' | 'CSV' | 'XML';
-    export type DataChangeRequestApprovalStatus = 'APPROVED' | 'DENIED';
+    export type DataChangeRequestApprovalStatus = 'APPROVED' | 'DENIED' | 'PENDING';
     export type DataChangeRequestType = 'DELETE' | 'CHANGE' | 'PROCESS_LIMITATION';
     export type UserConsentStatus = 'DEFAULT' | 'BLOCKED' | 'CONSENT_PENDING' | 'CONSENT_GRANTED';
     export type ConsentSource = 'CONTACT' | 'MANUAL' | 'IMPLICIT';
