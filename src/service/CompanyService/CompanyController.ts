@@ -124,6 +124,6 @@ export class CompanyController extends APIClient {
             newOwnerClass = CompanyServiceTypes.OwnerClass.CUSTOMER;
         }
 
-        return this.invokeApiWithErrorHandling(`/company/${companyId}/ownerclass/${ownerClass}`, 'PUT');
+        return this.invokeApiWithErrorHandling(`/company/${companyId}/ownerclass/${newOwnerClass}`, 'PUT');
     }
 }
