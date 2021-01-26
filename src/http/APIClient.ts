@@ -81,7 +81,7 @@ export abstract class APIClient {
         let apiUrl;
 
         if (this._service instanceof LambdaAPIService) {
-            apiUrl = `${EnvironmentManagementInstance.getLambdaUrl(this._service.name)}${path}`;
+            apiUrl = `${EnvironmentManagementInstance.getLambdaUrl(this._service)}${path}`;
         } else {
             apiUrl = `${EnvironmentManagementInstance.getBaseUrl(isNode)}/${this._service.name}${path}`;
         }
