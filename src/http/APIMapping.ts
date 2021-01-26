@@ -9,7 +9,7 @@ export class APIService {
 }
 
 export class LambdaAPIService extends APIService {
-    constructor(serviceName: string, private readonly forceUrl: string) {
+    constructor(serviceName: string, private readonly forceUrl: string | undefined = undefined) {
         super(serviceName);
         this.forceUrl = forceUrl;
     }
@@ -34,7 +34,8 @@ const APIMapping = {
     customerLegitimationArchiveService: new APIService('customer-legitimation-archive-service'),
     dynamicLayoutService: new APIService('dynamic-layout-service'),
     emailService: new APIService('email-service'),
-    entitlementService: new LambdaAPIService('entitlement-lambda', 'http://localhost:3001'), // TODO: via lambda proxy?
+    entitlementService: new LambdaAPIService('entitlement-lambda'), // TODO: via lambda proxy?
+    // entitlementService: new LambdaAPIService('entitlement-lambda', 'http://localhost:3001/offline'), // TODO: via lambda proxy?
     entityExportService: new APIService('entity-export-service'),
     entityService: new APIService('entity-service'),
     excelExporterService: new APIService('excel-exporter-service'),
