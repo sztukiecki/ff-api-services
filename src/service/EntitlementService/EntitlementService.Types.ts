@@ -11,8 +11,13 @@ export declare namespace EntitlementServiceTypes {
     }
     export interface Entitlement {
         name: EntitlementType;
-        value: boolean | number;
+        value: string;
     }
+
+    export interface EntitlementsObject {
+        [key: string]: boolean | string | number;
+    }
+
     export interface Package {
         name: MainPackage;
         endDate: string;
