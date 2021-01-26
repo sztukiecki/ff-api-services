@@ -26,7 +26,7 @@ export class GDPRConsentsController extends APIClient {
      * TODO: Please comment this method
      * @param contactId
      */
-    async getConsentStatus(contactId: string) {
+    async fetchConsentStatus(contactId: string) {
         return await this.invokeApiWithErrorHandling<GDPRServiceTypes.ConsentStatus>('/consents/status', 'GET', undefined, {
             queryParams: {
                 contactId: contactId,
