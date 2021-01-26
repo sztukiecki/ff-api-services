@@ -59,4 +59,5 @@ export interface ViewDefinitionV2 {
     actions: ViewActionType[];
     captions: Captions;
     categories: ViewDefinitionV2Category[];
+    defaultOrder?: string;
 }
