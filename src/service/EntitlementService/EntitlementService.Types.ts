@@ -1,6 +1,6 @@
 export declare namespace EntitlementServiceTypes {
     export enum EntitlementType {
-        maxUser = 'maxUser',
+        activeSeatsLimit = 'activeSeatsLimit',
         dashboardDisabled = 'dashboardDisabled',
     }
 
