@@ -1,8 +1,5 @@
 export declare namespace EntitlementServiceTypes {
-    export enum EntitlementType {
-        activeSeatsLimit = 'activeSeatsLimit',
-        dashboardDisabled = 'dashboardDisabled',
-    }
+    export type EntitlementType = 'activeSeatsLimit' | 'dashboardDisabled';
 
     export enum MainPackage {
         UNLIMITED = 'UNLIMITED',
