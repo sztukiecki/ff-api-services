@@ -1,5 +1,6 @@
 export declare namespace EntitlementServiceTypes {
     export type EntitlementType = 'activeSeatsLimit' | 'dashboardDisabled';
+    export type EntitlementValueType = boolean | string | number;
 
     export enum MainPackage {
         UNLIMITED = 'UNLIMITED',
@@ -12,7 +13,7 @@ export declare namespace EntitlementServiceTypes {
     }
 
     export interface EntitlementsObject {
-        [key: string]: boolean | string | number;
+        [key: string]: EntitlementValueType;
     }
 
     export interface Package {
