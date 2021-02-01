@@ -1,5 +1,6 @@
 import * as store from 'store';
 import * as isNode from 'detect-node';
+import { LambdaAPIService } from '../http/APIMapping';
 
 const StoreKeys = {
     edgeServiceStage: 'HTTPCLIENT.APICLIENT.STAGE',
@@ -64,6 +65,13 @@ export class EnvironmentManagement {
             return `https://router-vs.${stage}.cloudios.internal.${account}.cloud`;
         }
         return `https://api.${stage}.cloudios.${account}.cloud`;
+    };
+
+    getLambdaUrl = (service: LambdaAPIService) => {
+        const stage = this.getStage();
+        const account = stage === StageTypes.DEVELOPMENT ? 'flowfact-dev' : 'flowfact-prod';
+
+        return service.url ?? `https://${service.name}.${stage}.sf.${account}.cloud`;
     };
 
     isDefaultApi() {
