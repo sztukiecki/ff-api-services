@@ -3,7 +3,7 @@ import * as isNode from 'detect-node';
 import { stringify } from 'qs';
 import Authentication from '../authentication/Authentication';
 import { EnvironmentManagementInstance } from '../util/EnvironmentManagement';
-import { APIService } from './APIMapping';
+import { APIService, LambdaAPIService } from './APIMapping';
 import axiosETAGCache from './cache';
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
@@ -18,7 +18,8 @@ export type MethodTypes = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'OPTIONS' | 'PATCH
 
 export abstract class APIClient {
     private userId: string;
-    private readonly _serviceName: string;
+    private readonly _service: APIService;
+
     private static languages: string = 'de';
 
     public static changeLanguages(newLanguages: string) {
@@ -26,7 +27,7 @@ export abstract class APIClient {
     }
 
     protected constructor(service: APIService) {
-        this._serviceName = service.name;
+        this._service = service;
     }
 
     public withUserId(userId: string): this {
@@ -77,7 +78,14 @@ export abstract class APIClient {
         const { queryParams, headers, cancelToken, ...others } = additionalParams;
 
         // add parameters to the url
-        let apiUrl = `${EnvironmentManagementInstance.getBaseUrl(isNode)}/${this._serviceName}${path}`;
+        let apiUrl;
+
+        if (this._service instanceof LambdaAPIService) {
+            apiUrl = `${EnvironmentManagementInstance.getLambdaUrl(this._service)}${path}`;
+        } else {
+            apiUrl = `${EnvironmentManagementInstance.getBaseUrl(isNode)}/${this._service.name}${path}`;
+        }
+
         if (queryParams) {
             const queryString = stringify(queryParams, { addQueryPrefix: true });
             if (queryString && queryString !== '') {

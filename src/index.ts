@@ -12,7 +12,6 @@ export { default as FlowfactExportInternalService } from './service/FlowfactExpo
 export { default as FormService } from './service/FormService';
 export { default as FullTextSearchService } from './service/FullTextSearchService';
 export { default as FunnelService } from './service/FunnelService';
-export { default as GDPRService } from './service/GDPRService';
 export { default as GeolocationService } from './service/GeolocationService';
 export { default as HistoryModuleService } from './service/HistoryModuleService';
 export * from './service/InquiryService';
@@ -45,6 +44,7 @@ export { default as ImporterFlowFactTransferService } from './service/ImporterFl
 export { default as AclGroupServiceRest } from './service/AclGroupServiceRest';
 export { default as LambdaProxyService } from './service/LambdaProxyService';
 
+export * from './service/GDPRService';
 export * from './service/IS24LeadService';
 export * from './service/IS24ImportService';
 export * from './service/OpenimmoFtpAccessService';
@@ -69,6 +69,7 @@ export * from './service/PreconditionService';
 export * from './service/PropertyMarketingPhaseService';
 export * from './service/InteractiveExposeStatisticsService';
 export * from './service/EmailService';
+export * from './service/EntitlementService';
 export * from './service/SearchServiceTypes';
 export * from './service/SmsIngestionService';
 export * from './service/CompanyService';
