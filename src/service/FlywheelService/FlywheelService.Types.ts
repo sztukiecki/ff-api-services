@@ -98,4 +98,23 @@ export namespace FlywheelServiceTypes {
     };
 
     export type ImportType = 'only_new' | 'new_and_old';
+
+    export namespace FlywheelStatisticTypes {
+        export interface SingleStatistic {
+            id: number;
+            name: string;
+            captions: Captions;
+        }
+
+        export interface Values {
+            step: SingleStatistic;
+            board: SingleStatistic;
+            flywheels: SingleStatistic[];
+        }
+
+        export interface FlywheelStatistics {
+            values: Values[];
+            size: number;
+        }
+    }
 }
