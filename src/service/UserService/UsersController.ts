@@ -133,6 +133,6 @@ export class UsersController extends APIClient {
      * @param userId
      */
     async deleteUser(userId: string) {
-        return this.invokeApiWithErrorHandling(`/users/${userId}`, 'DELETE');
+        return await this.invokeApiWithErrorHandling(`/users/${userId}`, 'DELETE');
     }
 }
