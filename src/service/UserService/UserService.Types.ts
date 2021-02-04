@@ -15,14 +15,14 @@ export enum UserType {
     UNKNOWN = 'UNKNOWN',
 }
 
-export interface IdentifiedUserResponse {
-    identifier: string;
-    identifiersOfMatchingAliases: string[];
-}
-
 export enum IdentifiedUserStatusCodes {
     USER_NOT_FOUND = 404,
     NO_UNIQUE_USER_FOUND = 409,
+}
+
+export interface IdentifiedUserResponse {
+    identifier: string;
+    identifiersOfMatchingAliases: string[];
 }
 
 export interface User {
