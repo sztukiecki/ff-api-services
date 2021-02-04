@@ -51,7 +51,7 @@ export class PublicController extends APIClient {
      * @param aliasMailAddress
      */
     async linkAliasMailToCognitoUser(aliasMailAddress: string) {
-        return this.invokeApi(`/public/cognito-users/link`, 'POST', undefined, {
+        return await this.invokeApiWithErrorHandling(`/public/cognito-users/link`, 'POST', undefined, {
             queryParams: {
                 aliasMailAddress: aliasMailAddress,
             },
