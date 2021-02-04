@@ -2,8 +2,8 @@ import { UsersController } from './UsersController';
 
 export * from '../UserService.Types';
 
-export class UserService {
-    public static instance = new UserService();
+export class UserServiceV2 {
+    public static instance = new UserServiceV2();
 
     public readonly users: UsersController;
 
@@ -12,4 +12,4 @@ export class UserService {
     }
 }
 
-export const UserServiceInstance = new UserService();
+export const UserServiceInstanceV2 = new UserServiceV2();

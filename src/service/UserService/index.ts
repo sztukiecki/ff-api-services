@@ -2,6 +2,7 @@ import { PublicController } from './PublicController';
 import { UsersController } from './UsersController';
 
 export * from './UserService.Types';
+export * from './v2';
 
 export class UserService {
     public static instance = new UserService();
