@@ -32,7 +32,6 @@ export { default as TaggingService } from './service/TaggingService';
 export { default as TagsService } from './service/TagService';
 export { default as TemplateService } from './service/TemplateService';
 export { default as TrialLicenseService } from './service/TrialLicenseService';
-export { default as UserService } from './service/UserService';
 export { default as Authentication } from './authentication/Authentication';
 export { default as OmniChannelService } from './service/OmniChannelService';
 export { default as IS24EntitlementService } from './service/IS24EntitlementService';
@@ -75,6 +74,7 @@ export * from './service/SearchServiceTypes';
 export * from './service/SmsIngestionService';
 export * from './service/CompanyService';
 export * from './service/SmsService';
+export * from './service/UserService';
 
 export * from './http';
 export * from './util/EnvironmentManagement';

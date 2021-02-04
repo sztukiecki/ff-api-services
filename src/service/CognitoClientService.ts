@@ -9,19 +9,6 @@ export class CognitoClientService extends APIClient {
     /**
      * TODO: Please comment this method
      * @param aliasMailAddress
-     * @deprecated Moved to UserService
-     */
-    async fetchLoginNameByAliasMailAddress(aliasMailAddress: string): Promise<AxiosResponse> {
-        return this.invokeApi(`/public/users/loginname/`, 'GET', undefined, {
-            queryParams: {
-                aliasMailAddress: aliasMailAddress,
-            },
-        });
-    }
-
-    /**
-     * TODO: Please comment this method
-     * @param aliasMailAddress
      */
     async linkAccount(aliasMailAddress: string): Promise<AxiosResponse> {
         return this.invokeApi(`/public/users/link`, 'POST', undefined, {
