@@ -1,26 +1,53 @@
-import * as store from 'store';
 
-export interface CacheValue {
-    etag: string;
-    value: any;
+const cacheName = "ff-api-cache"
+
+export const ApiCache = {
+    async get(url: string): Promise<CacheValue | undefined> {
+        const item = await (await apiCache()).match(url);
+        if (!item) return;
+
+        const headers = getHeadersObject(item.headers);
+        const body = isStreamContent(headers) ? await item.arrayBuffer() : await item.json();
+        return { body, headers };
+    },
+
+    async set(url: string, body: any, headers: HeaderObject) {
+        body = isStreamContent(headers) ? body : JSON.stringify(body)
+        try {
+            return (await apiCache()).put(url, new Response(body, { headers }))
+        } catch(e) {
+            console.error("error writing to api-cache for: " + url + ". Maybe cache is full, resetting cache and trying again.", e)
+            await this.reset()
+            return (await apiCache()).put(url, new Response(body, { headers }))
+        }  
+    },
+
+    async reset() {
+        return caches.delete(cacheName)
+    }
 }
 
-const PREFIX = 'etag-cache-';
+async function apiCache() {
+    return await caches.open(cacheName)
+}
 
-export class Cache {
-    static get(uuid: string): CacheValue | undefined {
-        return store.get(`${PREFIX}${uuid}`);
+function getHeadersObject(headers: Headers) {
+    let result = {} as HeaderObject;
+    const keys = (headers as any).keys();
+    let header = keys.next();
+    while (header.value) {
+        result[header.value] = headers.get(header.value) || "";
+        header = keys.next();
     }
+    return result;
+}
 
-    static set(uuid: string, etag: string, value: any) {
-        return store.set(`${PREFIX}${uuid}`, { etag, value });
-    }
+function isStreamContent(headers: HeaderObject) {
+    return headers["content-type"]?.includes("-stream") // e.g. application/octet-stream
+}
 
-    static reset() {
-        store.each((value, key) => {
-            if (key.startsWith(PREFIX)) {
-                store.remove(key);
-            }
-        });
-    }
+export type HeaderObject = {[key: string]: string}
+export type CacheValue = {
+    body: any;
+    headers: HeaderObject;
 }
