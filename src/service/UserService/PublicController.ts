@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from '../../http';
-import { UserServiceTypes } from './UserService.Types';
+import { IdentifiedUserResponse } from './UserService.Types';
 
 export class PublicController extends APIClient {
     constructor() {
@@ -14,7 +14,7 @@ export class PublicController extends APIClient {
      * @param loginName
      */
     async identifyUser(loginName: string) {
-        return await this.invokeApiWithErrorHandling<UserServiceTypes.IdentifiedUserResponse>(`/public/cognito-users/usernames/`, 'GET', undefined, {
+        return await this.invokeApiWithErrorHandling<IdentifiedUserResponse>(`/public/cognito-users/usernames/`, 'GET', undefined, {
             queryParams: {
                 name: loginName,
             },

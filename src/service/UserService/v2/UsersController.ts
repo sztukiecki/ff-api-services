@@ -1,4 +1,4 @@
-import { User } from '@flowfact/types';
+import { User } from '../UserService.Types';
 import { APIClient, APIMapping } from '../../../http';
 
 export class UsersController extends APIClient {

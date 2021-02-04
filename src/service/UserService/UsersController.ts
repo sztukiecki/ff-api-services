@@ -1,4 +1,6 @@
-import { S3File, User, UserRole, UserType } from '@flowfact/types';
+import { S3File } from '@flowfact/types';
+import { UserType, User, UserRole } from './UserService.Types';
+
 import { APIClient, APIMapping } from '../../http';
 
 export class UsersController extends APIClient {
