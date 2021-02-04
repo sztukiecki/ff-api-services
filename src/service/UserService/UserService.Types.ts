@@ -1,7 +1,19 @@
 import { S3File } from '@flowfact/types';
 
-export type UserType = 'USER' | 'EXPORTER' | 'AUTOMATION' | 'SYSTEM' | 'API' | 'UNKNOWN';
-export type UserRole = 'USER' | 'ADMIN' | 'ACCOUNT_MANAGER';
+export enum UserRole {
+    USER = 'USER',
+    ADMIN = 'ADMIN',
+    ACCOUNT_MANAGER = 'ACCOUNT_MANAGER',
+}
+
+export enum UserType {
+    USER = 'USER',
+    EXPORTER = 'EXPORTER',
+    AUTOMATION = 'AUTOMATION',
+    SYSTEM = 'SYSTEM',
+    API = 'API',
+    UNKNOWN = 'UNKNOWN',
+}
 
 export interface IdentifiedUserResponse {
     identifier: string;

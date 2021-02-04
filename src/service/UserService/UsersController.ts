@@ -31,7 +31,7 @@ export class UsersController extends APIClient {
      * upload image for the current user
      * @param image
      */
-    async postImage(image: Blob) {
+    async postImageForCurrentUser(image: Blob) {
         const formData = new FormData();
         formData.append('contactPicture', image, 'contactPicture');
         return await this.invokeApiWithErrorHandling<S3File>('/users/picture', 'POST', formData, {
