@@ -12,33 +12,33 @@ export namespace UserServiceTypes {
         active: boolean;
         aliasMailAddress?: string;
         businessMailAddress?: string;
-        loginRelatedMailAddress: string;
         cognitoId?: string;
         cognitoUsername?: string;
         companyId?: string;
         firstname?: string;
         id?: string;
-        jobRole?: string;
         image?: S3File;
+        jobRole?: string;
         lastname?: string;
+        loginRelatedMailAddress: string;
         mobile?: string;
+        onboardingTutorialsActive?: boolean;
         phone?: string;
         position?: string;
+        roles?: UserRole[];
         salutation?: string;
+        sso?: SSO[];
         timestamp?: number;
         type?: UserType;
-        roles?: UserRole[];
-        onboardingTutorialsActive?: boolean;
-        sso?: SSO[];
     }
 
     export interface UserTokenEntity {
+        active: boolean;
+        created: string;
         id: string;
+        lastLogin: string;
         name: string;
         userId: string;
-        created: string;
-        lastLogin: string;
-        active: boolean;
     }
 
     export interface SSO {
