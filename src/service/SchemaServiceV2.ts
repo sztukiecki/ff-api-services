@@ -1,4 +1,4 @@
-import { Extension, GroupAllResponse, SchemaV2, SchemaV2Response } from '@flowfact/types';
+import { Extension, SchemaItems, SchemaV2, SchemaV2Response } from '@flowfact/types';
 import { APIClient, APIMapping } from '../http';
 
 const v2Header = { headers: { 'x-ff-version': 2 } };
@@ -150,7 +150,7 @@ export class SchemaServiceV2 extends APIClient {
      * Returns all groups
      */
     getAllGroups = async () => {
-        return this.invokeApiWithErrorHandling<GroupAllResponse>(`/groups/`, 'GET', undefined, v2Header);
+        return this.invokeApiWithErrorHandling<SchemaItems>(`/groups/`, 'GET', undefined, v2Header);
     };
 
     /**
