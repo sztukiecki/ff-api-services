@@ -1,4 +1,4 @@
-import { Extension, GroupAllResponse, GroupV2, SchemaV2, SchemaV2Response } from '@flowfact/types';
+import { Extension, GroupAllResponse, SchemaV2, SchemaV2Response } from '@flowfact/types';
 import { APIClient, APIMapping } from '../http';
 
 const v2Header = { headers: { 'x-ff-version': 2 } };
@@ -157,7 +157,7 @@ export class SchemaServiceV2 extends APIClient {
      * Creates a schema group
      * @param group - The group that should be created
      */
-    createGroup = async (group: GroupV2) => {
+    createGroup = async (group: SchemaV2) => {
         return this.invokeApiWithErrorHandling<string>(`/groups/`, 'POST', group, v2Header);
     };
 
@@ -165,8 +165,8 @@ export class SchemaServiceV2 extends APIClient {
      * Updates a schema group
      * @param group - The group that should be updated
      */
-    updateGroup = async (group: GroupV2) => {
-        return this.invokeApiWithErrorHandling<GroupV2>(`/groups/${group.id}`, 'PUT', group, v2Header);
+    updateGroup = async (group: SchemaV2) => {
+        return this.invokeApiWithErrorHandling<SchemaV2>(`/groups/${group.id}`, 'PUT', group, v2Header);
     };
 
     /**
@@ -174,7 +174,7 @@ export class SchemaServiceV2 extends APIClient {
      * @param identifier - The schema groups identifier (id or name)
      */
     fetchGroupByIdentifier = async (identifier: string) => {
-        return this.invokeApiWithErrorHandling<GroupV2>(`/groups/${identifier}`, 'GET', undefined, v2Header);
+        return this.invokeApiWithErrorHandling<SchemaV2>(`/groups/${identifier}`, 'GET', undefined, v2Header);
     };
 
     /**
