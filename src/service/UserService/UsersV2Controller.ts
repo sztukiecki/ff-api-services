@@ -1,7 +1,7 @@
-import { User } from '../UserService.Types';
-import { APIClient, APIMapping } from '../../../http';
+import { User } from './UserService.Types';
+import { APIClient, APIMapping } from '../../http';
 
-export class UsersController extends APIClient {
+export class UsersV2Controller extends APIClient {
     constructor() {
         super(APIMapping.userService, '2'); // set api version header
     }
