@@ -9,13 +9,6 @@ export class UsersController extends APIClient {
     }
 
     /**
-     * returns the currently logged in user
-     */
-    async fetchCurrentUser() {
-        return await this.invokeApiWithErrorHandling<User>('/users/currentUser', 'GET');
-    }
-
-    /**
      * Fetches all users of the company of the currently logged in user
      * Use the userTypes array parameter to filter users by their type
      */
@@ -58,57 +51,6 @@ export class UsersController extends APIClient {
      */
     async updateUser(user: User) {
         return await this.invokeApiWithErrorHandling<User>('/users', 'PUT', user);
-    }
-
-    /**
-     * Update a user from the same company
-     * @param userId
-     * @param user
-     */
-    async updateUserById(userId: string, user: User) {
-        return await this.invokeApiWithErrorHandling<User>(`/users/${userId}`, 'PUT', user);
-    }
-
-    /**
-     * Assignes roles to the user, must be called by an ADMIN user
-     * @param userId
-     * @param roles
-     */
-    async assignRoles(userId: string, roles: UserRole[]) {
-        return await this.invokeApiWithErrorHandling<User>(`/users/${userId}/roles`, 'PUT', { roles });
-    }
-
-    /**
-     * try activate the given user (might fail due to restrictions in entitlement service)
-     * @param userId
-     */
-    async activateUser(userId: string) {
-        return await this.invokeApiWithErrorHandling<User>(
-            `/users/${userId}`,
-            'PATCH',
-            [
-                {
-                    op: 'activate',
-                },
-            ],
-            {
-                headers: {
-                    'Content-Type': 'application/json-patch+json',
-                },
-            }
-        );
-    }
-
-    /**
-     * deactivate the given user
-     * @param userId
-     */
-    async deactivateUser(userId: string) {
-        return await this.invokeApiWithErrorHandling<User>(`/users/${userId}`, 'PATCH', [{ op: 'deactivate' }], {
-            headers: {
-                'Content-Type': 'application/json-patch+json',
-            },
-        });
     }
 
     /**

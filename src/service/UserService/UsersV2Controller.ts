@@ -1,5 +1,6 @@
 import { User } from './UserService.Types';
 import { APIClient, APIMapping } from '../../http';
+import { UserRole } from '@flowfact/types';
 
 export class UsersV2Controller extends APIClient {
     constructor() {
@@ -20,5 +21,63 @@ export class UsersV2Controller extends APIClient {
             businessMailAddress: mailAddress,
             companyId: companyID,
         });
+    }
+
+    /**
+     * Assignes roles to the user, must be called by an ADMIN user
+     * @param userId
+     * @param roles
+     */
+    async assignRoles(userId: string, roles: UserRole[]) {
+        return await this.invokeApiWithErrorHandling<User>(`/users/${userId}/roles`, 'PUT', { roles });
+    }
+
+    /**
+     * Update a user from the same company
+     * @param userId
+     * @param user
+     */
+    async updateUserById(userId: string, user: User) {
+        return await this.invokeApiWithErrorHandling<User>(`/users/${userId}`, 'PUT', user);
+    }
+
+    /**
+     * try activate the given user (might fail due to restrictions in entitlement service)
+     * @param userId
+     */
+    async activateUser(userId: string) {
+        return await this.invokeApiWithErrorHandling<User>(
+            `/users/${userId}`,
+            'PATCH',
+            [
+                {
+                    op: 'activate',
+                },
+            ],
+            {
+                headers: {
+                    'Content-Type': 'application/json-patch+json',
+                },
+            }
+        );
+    }
+
+    /**
+     * deactivate the given user
+     * @param userId
+     */
+    async deactivateUser(userId: string) {
+        return await this.invokeApiWithErrorHandling<User>(`/users/${userId}`, 'PATCH', [{ op: 'deactivate' }], {
+            headers: {
+                'Content-Type': 'application/json-patch+json',
+            },
+        });
+    }
+
+    /**
+     * returns the currently logged in user
+     */
+    async fetchCurrentUser() {
+        return await this.invokeApiWithErrorHandling<User>('/users/currentUser', 'GET');
     }
 }
