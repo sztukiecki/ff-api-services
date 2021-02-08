@@ -20,6 +20,10 @@ export enum IdentifiedUserStatusCodes {
     NO_UNIQUE_USER_FOUND = 409,
 }
 
+export enum SsoType {
+    SCOUT = 'SCOUT',
+}
+
 export interface IdentifiedUserResponse {
     identifier: string;
     identifiersOfMatchingAliases: string[];
@@ -59,5 +63,5 @@ export interface UserTokenEntity {
 }
 
 export interface SSO {
-    ssoType: string;
+    ssoType: SsoType;
 }
