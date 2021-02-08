@@ -16,9 +16,12 @@ export interface APIClientAdditionalParams extends AxiosRequestConfig {
 
 export type MethodTypes = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'OPTIONS' | 'PATCH' | 'HEAD';
 
+export type APIVersion = undefined | string;
+
 export abstract class APIClient {
     private userId: string;
     private readonly _service: APIService;
+    private readonly _version: APIVersion;
 
     private static languages: string = 'de';
 
@@ -26,8 +29,9 @@ export abstract class APIClient {
         this.languages = newLanguages;
     }
 
-    protected constructor(service: APIService) {
+    protected constructor(service: APIService, version?: APIVersion) {
         this._service = service;
+        this._version = version;
     }
 
     public withUserId(userId: string): this {
@@ -93,13 +97,14 @@ export abstract class APIClient {
             }
         }
 
+        const versionHeaders = this._version ? { 'x-ff-version': this._version } : {};
         const userIdentification = path.startsWith('/public') ? {} : await this.getUserIdentification();
         const languages: any = { 'Accept-Language': APIClient.languages };
 
         let request: AxiosRequestConfig = {
             method: method,
             url: apiUrl,
-            headers: Object.assign({}, userIdentification, languages, headers || {}),
+            headers: Object.assign({}, userIdentification, languages, versionHeaders, headers || {}),
             data: body,
             cancelToken: cancelToken,
             ...others,
