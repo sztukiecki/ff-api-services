@@ -1,5 +1,5 @@
 import { S3File } from '@flowfact/types';
-import { UserType, User, UserRole } from './UserService.Types';
+import { UserType, User } from './UserService.Types';
 
 import { APIClient, APIMapping } from '../../http';
 

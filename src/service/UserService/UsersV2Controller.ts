@@ -1,6 +1,5 @@
-import { User } from './UserService.Types';
+import { User, UserRole } from './UserService.Types';
 import { APIClient, APIMapping } from '../../http';
-import { UserRole } from '@flowfact/types';
 
 export class UsersV2Controller extends APIClient {
     constructor() {
