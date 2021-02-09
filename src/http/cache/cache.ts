@@ -1,5 +1,4 @@
-
-const cacheName = "ff-api-cache"
+const cacheName = 'ff-api-cache';
 
 export const ApiCache = {
     async get(url: string): Promise<CacheValue | undefined> {
@@ -14,37 +13,37 @@ export const ApiCache = {
     },
 
     async set(url: string, body: any, headers: HeaderObject) {
-        body = isStreamContent(headers) ? body : JSON.stringify(body)
+        body = isStreamContent(headers) ? body : JSON.stringify(body);
         try {
-            return (await apiCache()).put(url, new Response(body, { headers }))
-        } catch(e) {
-            console.error("error writing to api-cache for: " + url + ". Maybe cache is full, resetting cache and trying again.", e)
-            await this.reset()
-            return (await apiCache()).put(url, new Response(body, { headers }))
-        }  
+            return (await apiCache()).put(url, new Response(body, { headers }));
+        } catch (error) {
+            console.error(`error writing to api-cache for: ${url}. Maybe cache is full, resetting cache and trying again.`, error);
+            await this.reset();
+            return (await apiCache()).put(url, new Response(body, { headers }));
+        }
     },
 
     async reset() {
-        return caches.delete(cacheName)
-    }
-}
+        return caches.delete(cacheName);
+    },
+};
 
 async function apiCache() {
-    return await caches.open(cacheName)
+    return await caches.open(cacheName);
 }
 
 function getHeadersObject(headers: Headers) {
     let result = {} as HeaderObject;
-    headers.forEach((value, key) => result[key] = value)
+    headers.forEach((value, key) => (result[key] = value));
     return result;
 }
 
 function isStreamContent(headers: HeaderObject) {
-    return headers["content-type"]?.includes("-stream") // e.g. application/octet-stream
+    return headers['content-type']?.includes('-stream'); // e.g. application/octet-stream
 }
 
-export type HeaderObject = {[key: string]: string}
+export type HeaderObject = { [key: string]: string };
 export type CacheValue = {
     body: any;
     headers: HeaderObject;
-}
+};
