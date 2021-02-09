@@ -56,4 +56,22 @@ export default class IS24ImportController extends APIClient {
     async importDeveloperProjects(portalId: string) {
         return await this.invokeApiWithErrorHandling(`/portals/${portalId}/import-projects`, 'POST');
     }
+
+    /**
+     * Fetches OTOA widget URL for given estate
+     * @param portalId
+     * @param estateId
+     * @param returnUrl
+     */
+    async fetchOtoaWidgetUrl(portalId: string, entityId: string, returnUrl: string) {
+        return await this.invokeApiWithErrorHandling<string>(
+            `/portal/${portalId}/estate/${entityId}/otoa`,
+            'GET',
+            undefined,
+            {
+                queryParams: {
+                    returnUrl,
+                },
+            });
+    }
 }
