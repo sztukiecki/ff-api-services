@@ -1,4 +1,4 @@
-import { ApiCache  } from './cache';
+import { ApiCache } from './cache';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 async function requestInterceptor(config: AxiosRequestConfig) {
@@ -38,7 +38,10 @@ function getCachedItem(config: AxiosRequestConfig) {
 
 export default function axiosETAGCache(config?: AxiosRequestConfig) {
     const instance = axios.create(config);
-    instance.interceptors.request.use(requestInterceptor);
-    instance.interceptors.response.use(responseInterceptor, responseErrorInterceptor);
+    const cacheStorageAvailable = typeof caches !== 'undefined';
+    if (cacheStorageAvailable) {
+        instance.interceptors.request.use(requestInterceptor);
+        instance.interceptors.response.use(responseInterceptor, responseErrorInterceptor);
+    }
     return instance;
 }
