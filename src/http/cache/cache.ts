@@ -4,7 +4,9 @@ const cacheName = "ff-api-cache"
 export const ApiCache = {
     async get(url: string): Promise<CacheValue | undefined> {
         const item = await (await apiCache()).match(url);
-        if (!item) return;
+        if (!item) {
+            return;
+        }
 
         const headers = getHeadersObject(item.headers);
         const body = isStreamContent(headers) ? await item.arrayBuffer() : await item.json();
@@ -33,12 +35,7 @@ async function apiCache() {
 
 function getHeadersObject(headers: Headers) {
     let result = {} as HeaderObject;
-    const keys = (headers as any).keys();
-    let header = keys.next();
-    while (header.value) {
-        result[header.value] = headers.get(header.value) || "";
-        header = keys.next();
-    }
+    headers.forEach((value, key) => result[key] = value)
     return result;
 }
 

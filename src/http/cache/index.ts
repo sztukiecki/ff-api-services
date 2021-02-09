@@ -11,7 +11,7 @@ async function requestInterceptor(config: AxiosRequestConfig) {
     return config;
 }
 
-async function responseInterceptor(response: AxiosResponse) {
+function responseInterceptor(response: AxiosResponse) {
     if (isCacheableMethod(response.config) && response.headers?.etag) {
         ApiCache.set(response.config.url!, response.data, response.headers);
     }
