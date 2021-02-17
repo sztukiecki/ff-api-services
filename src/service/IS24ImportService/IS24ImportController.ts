@@ -1,5 +1,5 @@
-import { APIClient, APIMapping } from '../../http';
-import { IS24ImportServiceTypes } from './IS24ImportService.Types';
+import {APIClient, APIMapping} from '../../http';
+import {IS24ImportServiceTypes} from './IS24ImportService.Types';
 import IS24Property = IS24ImportServiceTypes.IS24Property;
 import PossibleUser = IS24ImportServiceTypes.PossibleUser;
 
@@ -64,7 +64,7 @@ export default class IS24ImportController extends APIClient {
      * @param returnUrl
      */
     async fetchOtoaWidgetUrl(portalId: string, entityId: string, returnUrl: string) {
-        return await this.invokeApiWithErrorHandling<string>(
+        return await this.invokeApiWithErrorHandling<{ url: string; expiration: number; }>(
             `/portal/${portalId}/estate/${entityId}/otoa`,
             'GET',
             undefined,
