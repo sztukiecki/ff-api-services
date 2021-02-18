@@ -5,7 +5,7 @@ export namespace SupportServiceTypes {
     export type SupportItem = RestSupportItem | DisplayResponseItem;
 
     export interface BaseSupportItem {
-        type: 'REST';
+        type: 'REST' | 'DISPLAY_RESPONSE';
         captions: Captions;
         descriptions: Captions;
         confirmable?: boolean;
