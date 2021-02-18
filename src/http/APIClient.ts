@@ -16,12 +16,12 @@ export interface APIClientAdditionalParams extends AxiosRequestConfig {
 
 export type MethodTypes = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'OPTIONS' | 'PATCH' | 'HEAD';
 
-export type APIVersion = undefined | string;
+export type APIVersion = string;
 
-export abstract class APIClient {
+export class APIClient {
     private userId: string;
-    private readonly _service: APIService;
-    private readonly _version: APIVersion;
+    private readonly _service: APIService | undefined;
+    private readonly _version: APIVersion | undefined;
 
     private static languages: string = 'de';
 
@@ -29,7 +29,7 @@ export abstract class APIClient {
         this.languages = newLanguages;
     }
 
-    protected constructor(service: APIService, version?: APIVersion) {
+    public constructor(service?: APIService, version?: APIVersion) {
         this._service = service;
         this._version = version;
     }
@@ -69,14 +69,10 @@ export abstract class APIClient {
         return userIdentification.cognitoToken || userIdentification['x-ff-support-token'];
     }
 
-    public async invokeApi<T = any>(
-        path: string,
-        method: MethodTypes = 'GET',
-        body: string | {} = '',
-        additionalParams: APIClientAdditionalParams = {}
-    ): Promise<AxiosResponse<T>> {
-        if (!path.startsWith('/')) {
-            throw new Error('Your path has to start with a slash. Path: ' + path);
+    public async invokeApi<T = any>(path: string, method: MethodTypes = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<T>> {
+        // If no service is defined and the url does not start with http, then we throw an error
+        if(!this._service && !path.startsWith('http')) {
+            throw Error('[APIClient] If you do not pass a service into APIClient, then your url has to start with http!');
         }
 
         const { queryParams, headers, cancelToken, ...others } = additionalParams;
@@ -84,10 +80,14 @@ export abstract class APIClient {
         // add parameters to the url
         let apiUrl;
 
-        if (this._service instanceof LambdaAPIService) {
-            apiUrl = `${EnvironmentManagementInstance.getLambdaUrl(this._service)}${path}`;
+        if(this._service) {
+            if (this._service instanceof LambdaAPIService) {
+                apiUrl = `${EnvironmentManagementInstance.getLambdaUrl(this._service)}${path}`;
+            } else {
+                apiUrl = `${EnvironmentManagementInstance.getBaseUrl(isNode)}/${this._service.name}${path}`;
+            }
         } else {
-            apiUrl = `${EnvironmentManagementInstance.getBaseUrl(isNode)}/${this._service.name}${path}`;
+            apiUrl = path;
         }
 
         if (queryParams) {
