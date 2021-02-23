@@ -1,7 +1,7 @@
-import { AuthRequest, NylasConfig, NylasConfigPatch, RegistrationUrl, SendEmailRequest } from '@flowfact/types';
-import { AxiosResponse } from 'axios';
-import { APIClient, APIMapping } from '../../http';
-import { NylasServiceTypes } from './NylasService.Types';
+import {AuthRequest, NylasConfig, NylasConfigPatch, RegistrationUrl, SendEmailRequest} from '@flowfact/types';
+import {AxiosResponse, CancelToken} from 'axios';
+import {APIClient, APIMapping} from '../../http';
+import {NylasServiceTypes} from './NylasService.Types';
 import SchedulerPage = NylasServiceTypes.SchedulerPage;
 
 /**
@@ -62,6 +62,49 @@ export class NylasService extends APIClient {
             queryParams: {
                 email: emailAccount,
             },
+        });
+    }
+
+    /**
+     * Returns an attachment metadata using the nylas api
+     * @param emailAccount the email to be sending from
+     * @param attachmentId
+     */
+    async getAttachmentMetadata(emailAccount: string, attachmentId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/nylas/files/${attachmentId}`, 'GET', '', {
+            queryParams: {
+                email: emailAccount,
+            }
+        });
+    }
+
+    /**
+     * Uploads an attachment using the nylas api
+     * @param emailAccount the email to be sending from
+     * @param file attachment
+     * @param cancelToken
+     */
+    async uploadAttachment(emailAccount: string, file: Blob, cancelToken?: CancelToken): Promise<AxiosResponse> {
+        const formData = new FormData();
+        formData.append('file', file);
+        return await this.invokeApi('/nylas/files', 'POST', formData, {
+            queryParams: {
+                email: emailAccount,
+            },
+            cancelToken: cancelToken
+        });
+    }
+
+    /**
+     * Removes an attachment using the nylas api
+     * @param emailAccount the email to be sending from
+     * @param attachmentId
+     */
+    async removeAttachment(emailAccount: string, attachmentId: string): Promise<AxiosResponse> {
+        return await this.invokeApi(`/nylas/files/${attachmentId}`, 'DELETE', '', {
+            queryParams: {
+                email: emailAccount,
+            }
         });
     }
 
