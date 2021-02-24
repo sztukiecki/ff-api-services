@@ -113,6 +113,15 @@ export class CaasManagementService extends APIClient {
     }
 
     /**
+     * Gets the current default domain of the container
+     * @param id
+     * @return { url: string }
+     */
+    async fetchContainerDefaultDomain(id: string): Promise<AxiosResponse<{ defaultDomain: string, containerId: string }>> {
+        return this.invokeApi(`/containers/${id}`, 'GET');
+    }
+
+    /**
      * GETs the given url and returns the respose
      * @param {string} url
      */
