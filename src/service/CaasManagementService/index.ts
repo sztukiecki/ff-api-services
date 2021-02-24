@@ -12,4 +12,4 @@ export class CaasManagementService {
     }
 }
 
-export const CompanyServiceInstance = new CaasManagementService();
+export const CaasManagementServiceInstance = new CaasManagementService();
