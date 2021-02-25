@@ -10,6 +10,11 @@ export interface PagedResponse<T> {
     size: number;
 }
 
+export interface OtoaResponse {
+    url: string;
+    expiration: number;
+}
+
 export default class IS24ImportController extends APIClient {
     constructor() {
         super(APIMapping.is24ImportService);
@@ -64,7 +69,7 @@ export default class IS24ImportController extends APIClient {
      * @param returnUrl
      */
     async fetchOtoaWidgetUrl(portalId: string, entityId: string, returnUrl: string) {
-        return await this.invokeApiWithErrorHandling<{ url: string; expiration: number; }>(
+        return await this.invokeApiWithErrorHandling<OtoaResponse>(
             `/portal/${portalId}/estate/${entityId}/otoa`,
             'GET',
             undefined,
