@@ -4,6 +4,7 @@ import { stringify } from 'qs';
 import Authentication from '../authentication/Authentication';
 import { EnvironmentManagementInstance } from '../util/EnvironmentManagement';
 import { APIService, LambdaAPIService } from './APIMapping';
+import axios from 'axios';
 import axiosETAGCache from './cache';
 
 export type ParamMap = { [key: string]: string | boolean | number | undefined };
@@ -69,6 +70,9 @@ export class APIClient {
         return userIdentification.cognitoToken || userIdentification['x-ff-support-token'];
     }
 
+    /**
+     * @deprecated Use invokeApiWithErrorHandling instead.
+     */
     public async invokeApi<T = any>(path: string, method: MethodTypes = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<T>> {
         // If no service is defined and the url does not start with http, then we throw an error
         if(!this._service && !path.startsWith('http')) {
@@ -143,6 +147,7 @@ export class APIClient {
                 ...error,
                 status: error?.response?.status,
                 isSuccessful2xx: false,
+                isCancelled: axios.isCancel(error),
                 data: error?.response?.data ?? defaultValue,
             };
         }
@@ -156,6 +161,7 @@ export interface ApiResponseSuccess<T> extends Partial<AxiosResponse<T>> {
 export interface ApiResponseError<T> extends Partial<AxiosError<T>> {
     isSuccessful2xx: false | undefined;
     status: number;
+    isCancelled?: boolean;
     data?: T;
 }
 

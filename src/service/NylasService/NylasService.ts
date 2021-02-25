@@ -1,6 +1,6 @@
 import {AuthRequest, NylasConfig, NylasConfigPatch, RegistrationUrl, SendEmailRequest} from '@flowfact/types';
 import {AxiosResponse, CancelToken} from 'axios';
-import {APIClient, APIMapping} from '../../http';
+import {APIClient, APIMapping, ApiResponse} from '../../http';
 import {NylasServiceTypes} from './NylasService.Types';
 import SchedulerPage = NylasServiceTypes.SchedulerPage;
 
@@ -57,8 +57,8 @@ export class NylasService extends APIClient {
      * @param emailAccount the email to be sending from
      * @param email
      */
-    async sendMail(emailAccount: string, email: SendEmailRequest): Promise<AxiosResponse> {
-        return await this.invokeApi('/nylas/send', 'POST', email, {
+    async sendMail(emailAccount: string, email: SendEmailRequest): Promise<ApiResponse<any>> {
+        return await this.invokeApiWithErrorHandling('/nylas/send', 'POST', email, {
             queryParams: {
                 email: emailAccount,
             },
@@ -70,8 +70,8 @@ export class NylasService extends APIClient {
      * @param emailAccount the email to be sending from
      * @param attachmentId
      */
-    async getAttachmentMetadata(emailAccount: string, attachmentId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/nylas/files/${attachmentId}`, 'GET', '', {
+    async fetchAttachmentMetadata(emailAccount: string, attachmentId: string): Promise<ApiResponse<any>> {
+        return await this.invokeApiWithErrorHandling(`/nylas/files/${attachmentId}`, 'GET', undefined, {
             queryParams: {
                 email: emailAccount,
             }
@@ -84,10 +84,10 @@ export class NylasService extends APIClient {
      * @param file attachment
      * @param cancelToken
      */
-    async uploadAttachment(emailAccount: string, file: Blob, cancelToken?: CancelToken): Promise<AxiosResponse> {
+    async uploadAttachment(emailAccount: string, file: Blob, cancelToken?: CancelToken): Promise<ApiResponse<any>> {
         const formData = new FormData();
         formData.append('file', file);
-        return await this.invokeApi('/nylas/files', 'POST', formData, {
+        return await this.invokeApiWithErrorHandling('/nylas/files', 'POST', formData, {
             queryParams: {
                 email: emailAccount,
             },
@@ -100,8 +100,8 @@ export class NylasService extends APIClient {
      * @param emailAccount the email to be sending from
      * @param attachmentId
      */
-    async removeAttachment(emailAccount: string, attachmentId: string): Promise<AxiosResponse> {
-        return await this.invokeApi(`/nylas/files/${attachmentId}`, 'DELETE', '', {
+    async removeAttachment(emailAccount: string, attachmentId: string): Promise<ApiResponse<any>> {
+        return await this.invokeApiWithErrorHandling(`/nylas/files/${attachmentId}`, 'DELETE', undefined, {
             queryParams: {
                 email: emailAccount,
             }
