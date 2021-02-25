@@ -16,6 +16,7 @@ export namespace CaasManagementServiceTypes {
         environment: ContainerEnvironment | WordpressContainerEnvironment;
         projectId: string;
         tags?: ContainerTags;
+        roles?: string[];
     }
 
     export interface ContainerResponse {
@@ -46,6 +47,7 @@ export namespace CaasManagementServiceTypes {
         endpoint: string;
         projectId: string;
         tags?: ContainerTags;
+        roles?: string[];
     }
 
     export interface ContainerTags {
