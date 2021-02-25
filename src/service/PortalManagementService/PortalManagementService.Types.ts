@@ -57,6 +57,8 @@ export namespace PortalManagementTypes {
         channels: PublishChannel[];
     }
 
+    export type PortalPublishInformation = Partial<PortalEstate> & { portalId: string };
+
     export interface PortalEstateSettings {
         id: string;
         portalId: string;
@@ -107,14 +109,5 @@ export namespace PortalManagementTypes {
         captions: { [key: string]: string };
         logo: string;
         portalType: PortalType;
-    }
-
-    export interface PortalPublishInformation {
-        portalId: string;
-        entityId?: string;
-        lastUpdate?: number;
-        onlineSince?: number;
-        showAddress?: boolean;
-        channels?: PublishChannel[];
     }
 }
