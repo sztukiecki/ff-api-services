@@ -4,6 +4,7 @@ export interface MandatoryElkData {
     SenderName: string;
     SenderVersion: string;
     product: string;
+    referer: string
 }
 
 export interface FFAdditionalElkData {
