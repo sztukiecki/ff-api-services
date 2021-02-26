@@ -160,6 +160,7 @@ export namespace CaasManagementServiceTypes {
     export interface ProjectCreate {
         name: string;
         tags?: ProjectTags;
+        roles?: string[];
     }
 
     export interface Project {
@@ -184,5 +185,6 @@ export namespace CaasManagementServiceTypes {
         containers: string[];
         databases: string[];
         tags: ProjectTags;
+        roles: string[];
     }
 }
