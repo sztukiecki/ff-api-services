@@ -19,14 +19,14 @@ export namespace CaasManagementServiceTypes {
         roles?: string[];
     }
 
-    export interface ContainerResponse {
+    export interface Container {
         id: string;
         details: ContainerDetails;
         status: ContainerStatus;
     }
 
     export interface GetAllContainersResponse {
-        items: ContainerResponse[];
+        items: Container[];
         total: number;
         pageSize: number;
     }

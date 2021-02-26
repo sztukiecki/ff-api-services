@@ -54,7 +54,7 @@ export class CaasManagementController extends APIClient {
      * @param id
      */
     async fetchContainer(id: string) {
-        return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.ContainerResponse>(`/containers/${id}`, 'GET');
+        return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container>(`/containers/${id}`, 'GET');
     }
 
     /**
@@ -70,7 +70,7 @@ export class CaasManagementController extends APIClient {
      * @param containerConfiguration
      */
     async createContainer(containerConfiguration: CaasManagementServiceTypes.ContainerCreate) {
-        return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.ContainerResponse>('/containers', 'POST', containerConfiguration);
+        return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container>('/containers', 'POST', containerConfiguration);
     }
 
     /**
@@ -79,7 +79,7 @@ export class CaasManagementController extends APIClient {
      * @param containerConfiguration
      */
     async updateContainer(id: string, containerConfiguration: CaasManagementServiceTypes.ContainerDetails) {
-        return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.ContainerResponse>(`/containers/${id}`, 'PUT', containerConfiguration);
+        return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container>(`/containers/${id}`, 'PUT', containerConfiguration);
     }
 
     /**
