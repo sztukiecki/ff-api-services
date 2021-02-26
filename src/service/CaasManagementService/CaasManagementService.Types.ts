@@ -10,7 +10,7 @@ export namespace CaasManagementServiceTypes {
         name: string;
         memory: number;
         niceNames: string[];
-        imageRepoName: ImageRepoNames;
+        imageRepoName: string;
         imageTagName: ImageTagName;
         containerPort: number;
         environment: ContainerEnvironment | WordpressContainerEnvironment;
@@ -40,7 +40,7 @@ export namespace CaasManagementServiceTypes {
         name: string;
         memory: number;
         niceNames: string[];
-        imageRepoName: ImageRepoNames;
+        imageRepoName: string;
         imageTagName: ImageTagName;
         containerPort: number;
         environment: ContainerEnvironment | WordpressContainerEnvironment;
@@ -76,7 +76,6 @@ export namespace CaasManagementServiceTypes {
         | 'FAILED'
         | 'UNKNOWN';
     export type EcsServiceStatus = 'RUNNING' | 'STOPPING' | 'STOPPED' | 'UNKNOWN';
-    export type ImageRepoNames = 'nginx' | 'wordpress';
     export type ImageTagName = 'latest';
 
     export interface NiceNameAvailableResponse {
