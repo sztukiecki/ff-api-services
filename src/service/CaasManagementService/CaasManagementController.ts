@@ -103,7 +103,7 @@ export class CaasManagementController extends APIClient {
      * @param id
      */
     async updateContainerDefaultDomain(id: string, domain: string) {
-        return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.GetContainerDefaultDomainResponse>(`/containers/${id}`, 'PUT', {
+        return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.GetContainerDefaultDomainResponse>(`/containers/${id}/default-domain`, 'PUT', {
             containerId: id,
             defaultDomain: domain
         });
