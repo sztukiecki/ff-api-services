@@ -78,7 +78,7 @@ export class FlywheelController extends APIClient {
      * @param entityId
      */
     async fetchTransactions(entityId: string) {
-        return this.invokeApiWithErrorHandling<Transaction>(
+        return this.invokeApiWithErrorHandling<Transaction[]>(
             `/transactions/entities/${entityId}`,
             'GET'
         )
@@ -90,7 +90,7 @@ export class FlywheelController extends APIClient {
      * @param flywheelName
      */
     async fetchTransactionsInFlywheel(entityId: string, flywheelName: string) {
-        return this.invokeApiWithErrorHandling<Transaction>(
+        return this.invokeApiWithErrorHandling<Transaction[]>(
             `/transactions/entities/${entityId}/flywheel/${flywheelName}`,
             'GET'
         )
