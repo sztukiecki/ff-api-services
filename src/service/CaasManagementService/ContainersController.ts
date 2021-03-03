@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { APIClient, APIMapping } from '../../http';
 import { CaasManagementServiceTypes } from './CaasManagementService.Types';
 
-export class ContainerController extends APIClient {
+export class ContainersController extends APIClient {
     constructor() {
         super(APIMapping.caasManamgentService);
     }

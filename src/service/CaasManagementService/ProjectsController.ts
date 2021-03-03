@@ -1,7 +1,7 @@
 import { APIClient, APIMapping } from '../../http';
 import { CaasManagementServiceTypes } from './CaasManagementService.Types';
 
-export class ProjectController extends APIClient {
+export class ProjectsController extends APIClient {
     constructor() {
         super(APIMapping.caasManamgentService);
     }

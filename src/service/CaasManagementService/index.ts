@@ -1,20 +1,20 @@
-import { ContainerController } from './ContainerController';
-import { DatabaseController } from './DatabaseController';
-import { ProjectController } from './ProjectController';
+import { ContainersController } from './ContainersController';
+import { DatabasesController } from './DatabasesController';
+import { ProjectsController } from './ProjectsController';
 
 export * from './CaasManagementService.Types';
 
 export class CaasManagementService {
     public static instance = new CaasManagementService();
 
-    public readonly container: ContainerController;
-    public readonly database: DatabaseController;
-    public readonly project: ProjectController;
+    public readonly containers: ContainersController;
+    public readonly databases: DatabasesController;
+    public readonly projects: ProjectsController;
 
     constructor() {
-        this.container = new ContainerController();
-        this.database = new DatabaseController();
-        this.project = new ProjectController();
+        this.containers = new ContainersController();
+        this.databases = new DatabasesController();
+        this.projects = new ProjectsController();
     }
 }
 
