@@ -1,189 +1,162 @@
 export namespace CaasManagementServiceTypes {
 
-    /*
-    *
-    * CONTAINERS
-    *
-    */
+    export namespace Container {
 
-    export interface ContainerCreate {
-        name: string;
-        memory: number;
-        niceNames: string[];
-        imageRepoName: string;
-        imageTagName: ImageTagName;
-        containerPort: number;
-        environment: ContainerEnvironment | WordpressContainerEnvironment;
-        projectId: string;
-        tags?: ContainerTags;
-        roles?: string[];
+        export interface Create {
+            name: string;
+            memory: number;
+            niceNames: string[];
+            imageRepoName: string;
+            imageTagName: ImageTagName;
+            containerPort: number;
+            environment: Environment | WordpressEnvironment;
+            projectId: string;
+            tags?: Tags;
+            roles?: string[];
+        }
+
+        export interface Container {
+            id: string;
+            details: Details;
+            status: Status;
+        }
+
+        export interface GetAllResponse {
+            items: Container[];
+            total: number;
+            pageSize: number;
+        }
+
+        export interface GetDefaultDomainResponse {
+            defaultDomain: string;
+            containerId: string;
+        }
+
+        export interface Details {
+            name: string;
+            memory: number;
+            niceNames: string[];
+            imageRepoName: string;
+            imageTagName: ImageTagName;
+            containerPort: number;
+            environment: Environment | WordpressEnvironment;
+            endpoint: string;
+            projectId: string;
+            tags?: Tags;
+            roles?: string[];
+        }
+
+        export interface Environment {
+            SERVICE_NAME: string;
+        }
+
+        export interface WordpressEnvironment {
+            WORDPRESS_DB_HOST: string;
+            WORDPRESS_DB_USER: string;
+            WORDPRESS_DB_PASSWORD: string;
+            WORDPRESS_DB_NAME: string;
+        }
+
+        export type EcsServiceStatus = 'RUNNING' | 'STOPPING' | 'STOPPED' | 'UNKNOWN';
+        export type ImageTagName = 'latest';
+
+        export interface NiceNameAvailableResponse {
+            unique: boolean;
+        }
+
+        export interface LogsResponse {
+            logs: LogMap;
+        }
+
+        export interface LogMap {
+            [key: string]: Log[];
+        }
+
+        export interface Log {
+            timestamp: number;
+            message: string;
+            utcIsoFormattedTimestamp: string;
+        }
     }
 
-    export interface Container {
-        id: string;
-        details: ContainerDetails;
-        status: ContainerStatus;
+    export namespace Database {
+
+        export interface Create {
+            label: string;
+            tenancy: Tenancy;
+            projectId: string;
+            tags?: Tags;
+        }
+
+        export interface Database {
+            id: string;
+            companyId: string;
+            details: Details;
+            status: Status;
+        }
+
+        export interface GetAllResponse {
+            items: Database[];
+            total: number;
+            pageSize: number;
+        }
+
+        export interface Details {
+            label: string;
+            name: string;
+            userName: string;
+            userPassword: string;
+            databaseName: string;
+            endpoint: string;
+            port: number;
+            tags?: Tags;
+        }
+
+        export type Tenancy = 'shared' | 'dedicated';
     }
 
-    export interface GetAllContainersResponse {
-        items: Container[];
-        total: number;
-        pageSize: number;
+    export namespace Project {
+
+        export interface Create {
+            name: string;
+            tags?: Tags;
+            roles?: string[];
+        }
+    
+        export interface Project {
+            id: string;
+            companyId: string;
+            details: Details;
+        }
+    
+        export interface GetAllResponse {
+            items: Project[];
+            total: number;
+            pageSize: number;
+        }
+    
+        export interface Details {
+            id: string;
+            name: string;
+            containers: string[];
+            databases: string[];
+            tags: Tags;
+            roles: string[];
+        }
     }
 
-    export interface GetContainerDefaultDomainResponse {
-        defaultDomain: string;
-        containerId: string;
-    }
-
-    export interface ContainerDetails {
-        name: string;
-        memory: number;
-        niceNames: string[];
-        imageRepoName: string;
-        imageTagName: ImageTagName;
-        containerPort: number;
-        environment: ContainerEnvironment | WordpressContainerEnvironment;
-        endpoint: string;
-        projectId: string;
-        tags?: ContainerTags;
-        roles?: string[];
-    }
-
-    export interface ContainerTags {
+    export interface Tags {
         [key: string]: string;
     }
 
-    export interface ContainerEnvironment {
-        SERVICE_NAME: string;
-    }
-
-    export interface WordpressContainerEnvironment {
-        WORDPRESS_DB_HOST: string;
-        WORDPRESS_DB_USER: string;
-        WORDPRESS_DB_PASSWORD: string;
-        WORDPRESS_DB_NAME: string;
-    }
-
-    export type ContainerStatus =
-        'RUNNING'
-        | 'MAINTENANCE'
-        | 'CREATING'
-        | 'STARTING'
-        | 'STOPPING'
-        | 'STOPPED'
-        | 'DELETING'
-        | 'FAILED'
-        | 'UNKNOWN';
-    export type EcsServiceStatus = 'RUNNING' | 'STOPPING' | 'STOPPED' | 'UNKNOWN';
-    export type ImageTagName = 'latest';
-
-    export interface NiceNameAvailableResponse {
-        unique: boolean;
-    }
-
-    export interface ContainerLogsResponse {
-        logs: ContainerLogMap;
-    }
-
-    export interface ContainerLogMap {
-        [key: string]: ContainerLog[];
-    }
-
-    export interface ContainerLog {
-        timestamp: number;
-        message: string;
-        utcIsoFormattedTimestamp: string;
-    }
-
-    /*
-    *
-    * DATABASES
-    *
-    */
-
-    export interface DatabaseCreate {
-        label: string;
-        tenancy: DatabaseTenancy;
-        projectId: string;
-        tags?: DatabaseTags;
-    }
-
-    export interface Database {
-        id: string;
-        companyId: string;
-        details: DatabaseDetails;
-        status: DatabaseStatus;
-    }
-
-    export interface GetAllDatabasesResponse {
-        items: Database[];
-        total: number;
-        pageSize: number;
-    }
-
-    export interface DatabaseDetails {
-        label: string;
-        name: string;
-        userName: string;
-        userPassword: string;
-        databaseName: string;
-        endpoint: string;
-        port: number;
-        tags?: DatabaseTags;
-    }
-
-    export interface DatabaseTags {
-        [key: string]: string;
-    }
-
-    export type DatabaseStatus =
-        'RUNNING'
-        | 'MAINTENANCE'
-        | 'CREATING'
-        | 'STARTING'
-        | 'STOPPING'
-        | 'STOPPED'
-        | 'DELETING'
-        | 'FAILED'
-        | 'UNKNOWN';
-
-    export type DatabaseTenancy = 'shared' | 'dedicated';
-
-    /*
-    *
-    * PROJECTS
-    *
-    */
-
-    export interface ProjectCreate {
-        name: string;
-        tags?: ProjectTags;
-        roles?: string[];
-    }
-
-    export interface Project {
-        id: string;
-        companyId: string;
-        details: ProjectDetails;
-    }
-
-    export interface ProjectTags {
-        [key: string]: string;
-    }
-
-    export interface GetAllProjectsResponse {
-        items: Project[];
-        total: number;
-        pageSize: number;
-    }
-
-    export interface ProjectDetails {
-        id: string;
-        name: string;
-        containers: string[];
-        databases: string[];
-        tags: ProjectTags;
-        roles: string[];
-    }
+    export type Status =
+            'RUNNING'
+            | 'MAINTENANCE'
+            | 'CREATING'
+            | 'STARTING'
+            | 'STOPPING'
+            | 'STOPPED'
+            | 'DELETING'
+            | 'FAILED'
+            | 'UNKNOWN';
 }
