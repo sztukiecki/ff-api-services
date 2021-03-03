@@ -11,7 +11,7 @@ export class ProjectController extends APIClient {
     /**
      * Fetches all projects
      */
-    async fetchAllProjects() {
+    async fetchAll() {
         return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Project.GetAllResponse>('/projects', 'GET');
     }
 
@@ -19,7 +19,7 @@ export class ProjectController extends APIClient {
      * Fetches the project with the given id
      * @param id
      */
-    async fetchProject(id: string) {
+    async fetch(id: string) {
         return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Project.Project>(`/projects/${id}`, 'GET');
     }
 
@@ -27,7 +27,7 @@ export class ProjectController extends APIClient {
      * Creates a project with the given configuration
      * @param projectConfiguration
      */
-    async createProject(projectConfiguration: CaasManagementServiceTypes.Project.Create) {
+    async create(projectConfiguration: CaasManagementServiceTypes.Project.Create) {
         return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Project.Project>('/projects', 'POST', projectConfiguration);
     }
 
@@ -35,7 +35,7 @@ export class ProjectController extends APIClient {
      * Deletes the project with the given id
      * @param id
      */
-    async deleteProject(id: string) {
+    async delete(id: string) {
         return this.invokeApiWithErrorHandling(`/projects/${id}`, 'DELETE');
     }
 }

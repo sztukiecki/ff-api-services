@@ -9,7 +9,7 @@ export class DatabaseController extends APIClient {
     /**
      * Fetches all databases
      */
-    async fetchAllDatabases() {
+    async fetchAll() {
         return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Database.GetAllResponse>('/databases', 'GET');
     }
 
@@ -17,7 +17,7 @@ export class DatabaseController extends APIClient {
      * Fetches the database with the given id
      * @param id
      */
-    async fetchDatabase(id: string) {
+    async fetch(id: string) {
         return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Database.Database>(`/databases/${id}`, 'GET');
     }
 
@@ -25,7 +25,7 @@ export class DatabaseController extends APIClient {
      * Creates a database with the given configuration
      * @param databaseConfiguration
      */
-    async createDatabase(databaseConfiguration: CaasManagementServiceTypes.Database.Create) {
+    async create(databaseConfiguration: CaasManagementServiceTypes.Database.Create) {
         return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Database.Database>('/databases', 'POST', databaseConfiguration);
     }
 
@@ -33,7 +33,7 @@ export class DatabaseController extends APIClient {
      * Deletes the database with the given id
      * @param id
      */
-    async deleteDatabase(id: string) {
+    async delete(id: string) {
         return this.invokeApiWithErrorHandling(`/databases/${id}`, 'DELETE');
     }
 }

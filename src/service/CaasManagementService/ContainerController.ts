@@ -10,7 +10,7 @@ export class ContainerController extends APIClient {
     /**
     * Fetches all containers in their short representation
     */
-    async fetchAllContainers() {
+    async fetchAll() {
         return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container.GetAllResponse>('/containers', 'GET');
     }
 
@@ -18,7 +18,7 @@ export class ContainerController extends APIClient {
      * Fetches the container with the given id
      * @param id
      */
-    async fetchContainer(id: string) {
+    async fetch(id: string) {
         return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container.Container>(`/containers/${id}`, 'GET');
     }
 
@@ -26,7 +26,7 @@ export class ContainerController extends APIClient {
      * Fetches the logs for the container with the given id
      * @param id
      */
-    async fetchContainerLogs(id: string) {
+    async fetchLogs(id: string) {
         return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container.LogsResponse>(`/containers/${id}/logs`, 'GET');
     }
 
@@ -34,7 +34,7 @@ export class ContainerController extends APIClient {
      * Creates a container with the given configuration
      * @param containerConfiguration
      */
-    async createContainer(containerConfiguration: CaasManagementServiceTypes.Container.Create) {
+    async create(containerConfiguration: CaasManagementServiceTypes.Container.Create) {
         return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container.Container>('/containers', 'POST', containerConfiguration);
     }
 
@@ -43,7 +43,7 @@ export class ContainerController extends APIClient {
      * @param id
      * @param containerConfiguration
      */
-    async updateContainer(id: string, containerConfiguration: CaasManagementServiceTypes.Container.Details) {
+    async update(id: string, containerConfiguration: CaasManagementServiceTypes.Container.Details) {
         return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container.Container>(`/containers/${id}`, 'PUT', containerConfiguration);
     }
 
@@ -51,7 +51,7 @@ export class ContainerController extends APIClient {
      * Deletes the container with the given id
      * @param id
      */
-    async deleteContainer(id: string) {
+    async delete(id: string) {
         return this.invokeApiWithErrorHandling(`/containers/${id}`, 'DELETE');
     }
 
@@ -59,7 +59,7 @@ export class ContainerController extends APIClient {
      * Gets the current default domain of the container
      * @param id
      */
-    async fetchContainerDefaultDomain(id: string) {
+    async fetchDefaultDomain(id: string) {
         return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container.GetDefaultDomainResponse>(`/containers/${id}/default-domain`, 'GET');
     }
 
@@ -67,7 +67,7 @@ export class ContainerController extends APIClient {
      * Gets the current default domain of the container
      * @param id
      */
-    async updateContainerDefaultDomain(id: string, domain: string) {
+    async updateDefaultDomain(id: string, domain: string) {
         return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container.GetDefaultDomainResponse>(`/containers/${id}/default-domain`, 'PUT', {
             containerId: id,
             defaultDomain: domain
