@@ -2,6 +2,7 @@ import { APIClient, APIMapping } from '../../http';
 import { FlywheelServiceTypes } from './FlywheelService.Types';
 import Flywheel = FlywheelServiceTypes.Flywheel;
 import FlywheelStatisticTypes = FlywheelServiceTypes.FlywheelStatisticTypes;
+import Transaction = FlywheelServiceTypes.Transaction;
 
 export class FlywheelController extends APIClient {
     constructor() {
@@ -68,6 +69,29 @@ export class FlywheelController extends APIClient {
     async fetchStatistics(entityId: string) {
         return this.invokeApiWithErrorHandling<FlywheelStatisticTypes.FlywheelStatistics>(
             `/flywheel-statistics/entity/${entityId}`,
+            'GET'
+        )
+    }
+
+    /**
+     * Fetch transactions for a given entityId
+     * @param entityId
+     */
+    async fetchTransactions(entityId: string) {
+        return this.invokeApiWithErrorHandling<Transaction[]>(
+            `/transactions/entities/${entityId}`,
+            'GET'
+        )
+    }
+
+    /**
+     * Fetch transactions for a given entityId in a flywheel with flywheelName
+     * @param entityId
+     * @param flywheelName
+     */
+    async fetchTransactionsInFlywheel(entityId: string, flywheelName: string) {
+        return this.invokeApiWithErrorHandling<Transaction[]>(
+            `/transactions/entities/${entityId}/flywheel/${flywheelName}`,
             'GET'
         )
     }
