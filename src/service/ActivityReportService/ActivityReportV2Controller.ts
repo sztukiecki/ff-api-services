@@ -1,6 +1,6 @@
 import {APIClient, APIMapping, ApiResponse} from '../../http';
 import {ActivityReportRequestBody, ActivityReportRequestMethod, LambdaServiceResponse} from './ActivityReportV2.Types';
-import {EnvironmentManagementInstance} from '../..';
+import {EnvironmentManagementInstance, StageTypes} from '../..';
 
 
 export class ActivityReportV2Controller extends APIClient {
@@ -29,9 +29,24 @@ export class ActivityReportV2Controller extends APIClient {
      * @param activityReportId entity id of the activity report instance
      */
     async generateActivityReportPreviewUrl(activityReportId: string): Promise<string> {
-        const baseUrl = EnvironmentManagementInstance.getActivityReportUrl();
+        const baseUrl = this.getActivityReportUrl();
         const authenticationToken = await this.getAuthenticationToken();
         return `${baseUrl}/preview?hash=${authenticationToken}&id=${activityReportId}`;
+    }
+
+
+    /**
+     * URL for activity report based on stage
+     * We only have DEV and PROD environment for activity report.
+     */
+    getActivityReportUrl(): string {
+        const stage = EnvironmentManagementInstance.getStage();
+        if (stage === StageTypes.DEVELOPMENT) {
+            return 'https://latest-development-activity-report-v2-cloud.fe.flowfact-dev.cloud';
+        } else {
+            // TODO change it after the URL for PROD environment is configured
+            return 'https://latest-development-activity-report-v2-cloud.fe.flowfact-dev.cloud';
+        }
     }
 
     private async prepareActivityReportV2Body(method: ActivityReportRequestMethod, entityId: string): Promise<ActivityReportRequestBody> {

@@ -1,7 +1,7 @@
 import {APIClient, APIMapping} from '../../http';
 
 
-export class LogDirectoryController extends APIClient {
+export class ImporterRecordLogController extends APIClient {
     constructor() {
         super(APIMapping.lambdaProxyService);
     }

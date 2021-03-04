@@ -75,7 +75,8 @@ export * from './service/SmsService';
 export * from './service/FilterDefinitionService';
 export * from './service/UserService';
 export * from './service/SupportService';
-export * from './service/LambdaProxyService';
+export * from './service/ActivityReportService';
+export * from './service/ImporterRecordLogService';
 
 export * from './http';
 export * from './util/EnvironmentManagement';
