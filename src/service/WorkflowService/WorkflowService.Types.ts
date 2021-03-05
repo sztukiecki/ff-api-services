@@ -1,3 +1,5 @@
+import { Captions } from '@flowfact/types';
+
 export namespace WorkflowServiceTypes {
     export interface Workflows {
         workflows: Workflow[];
@@ -84,8 +86,8 @@ export namespace WorkflowServiceTypes {
 
     export interface Template {
         templateName: string;
-        title?: string;
-        description?: string;
+        titles: Captions;
+        descriptions: Captions;
         actionType: string;
         created?: number;
         parameters: { [key: string]: any };
