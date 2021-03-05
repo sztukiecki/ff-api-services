@@ -10,9 +10,15 @@ export interface PagedResponse<T> {
     size: number;
 }
 
-export interface OtoaResponse {
+export interface ImmoResponse {
     url: string;
     expiration: number;
+}
+
+export interface ImmoAvailabilityInfo {
+    available: boolean;
+    portalId: string;
+    is24EstateId: string;
 }
 
 export default class IS24ImportController extends APIClient {
@@ -63,14 +69,14 @@ export default class IS24ImportController extends APIClient {
     }
 
     /**
-     * Fetches OTOA widget URL for given estate
+     * Fetches IMMO widget URL for given estate
      * @param portalId
-     * @param estateId
+     * @param entityId
      * @param returnUrl
      */
-    async fetchOtoaWidgetUrl(portalId: string, entityId: string, returnUrl: string) {
-        return await this.invokeApiWithErrorHandling<OtoaResponse>(
-            `/portal/${portalId}/estate/${entityId}/otoa`,
+    async fetchImmoWidgetUrl(portalId: string, entityId: string, returnUrl: string) {
+        return await this.invokeApiWithErrorHandling<ImmoResponse>(
+            `/portal/${portalId}/estate/${entityId}/immo`,
             'GET',
             undefined,
             {
@@ -78,5 +84,15 @@ export default class IS24ImportController extends APIClient {
                     returnUrl,
                 },
             });
+    }
+
+    /**
+     * Fetches IMMO widget availability info for given estate
+     * @param entityId
+     */
+    async fetchImmoWidgetAvailabilityInfo( entityId: string) {
+        return await this.invokeApiWithErrorHandling<ImmoAvailabilityInfo>(
+            `/estate/${entityId}/immoAvailability`,
+            'GET');
     }
 }
