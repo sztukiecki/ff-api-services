@@ -1,7 +1,6 @@
 export { default as AdminTokenService } from './service/AdminTokenService';
 export { default as AgentRecommendationService } from './service/AgentRecommendationService';
 export { default as AppointmentBookingService } from './service/AppointmentBookingService';
-export { default as CaasManagementService } from './service/CaasManagementService';
 export { default as CommissionCalculationService } from './service/CommissionCalculationService';
 export { default as ContactService } from './service/ContactService';
 export { default as CsvToEntityImporterService } from './service/CsvToEntityImporterService';
@@ -36,7 +35,6 @@ export { default as OmniChannelService } from './service/OmniChannelService';
 export { default as IS24EntitlementService } from './service/IS24EntitlementService';
 export { default as BehaviourService } from './service/BehaviourService';
 export { default as ContractService } from './service/ContractService';
-export { default as FilterDefinitionService } from './service/FilterDefinitionService';
 export { default as SoftLinksEntityService } from './service/SoftLinksEntityService';
 export { default as OpenimmoImporterService } from './service/OpenimmoImporterService';
 export { default as ImporterFlowFactTransferService } from './service/ImporterFlowFactTransferService';
@@ -73,7 +71,10 @@ export * from './service/SearchServiceTypes';
 export * from './service/SmsIngestionService';
 export * from './service/CompanyService';
 export * from './service/SmsService';
+export * from './service/FilterDefinitionService';
 export * from './service/UserService';
+export * from './service/SupportService';
+export * from './service/CaasManagementService';
 
 export * from './http';
 export * from './util/EnvironmentManagement';
