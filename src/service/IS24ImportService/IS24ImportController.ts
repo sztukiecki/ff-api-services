@@ -2,23 +2,14 @@ import {APIClient, APIMapping} from '../../http';
 import {IS24ImportServiceTypes} from './IS24ImportService.Types';
 import IS24Property = IS24ImportServiceTypes.IS24Property;
 import PossibleUser = IS24ImportServiceTypes.PossibleUser;
+import ImmoResponse = IS24ImportServiceTypes.ImmoResponse;
+import ImmoAvailabilityInfo = IS24ImportServiceTypes.ImmoAvailabilityInfo;
 
 export interface PagedResponse<T> {
     entities: T[];
     totalCount: number;
     page: number;
     size: number;
-}
-
-export interface ImmoResponse {
-    url: string;
-    expiration: number;
-}
-
-export interface ImmoAvailabilityInfo {
-    available: boolean;
-    portalId: string;
-    is24EstateId: string;
 }
 
 export default class IS24ImportController extends APIClient {
@@ -90,7 +81,7 @@ export default class IS24ImportController extends APIClient {
      * Fetches IMMO widget availability info for given estate
      * @param entityId
      */
-    async fetchImmoWidgetAvailabilityInfo( entityId: string) {
+    async fetchImmoWidgetAvailabilityInfo(entityId: string) {
         return await this.invokeApiWithErrorHandling<ImmoAvailabilityInfo>(
             `/estate/${entityId}/immoAvailability`,
             'GET');
