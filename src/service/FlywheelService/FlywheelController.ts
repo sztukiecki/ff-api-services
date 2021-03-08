@@ -101,12 +101,12 @@ export class FlywheelController extends APIClient {
     }
 
     /**
-     * Create a transaction for a given entityId in a given phase. Returns an ID of created transaction
+     * Create a transaction for a given entityId in a given phase. Returns the created transaction
      * @param entityId
      * @param phaseName
      */
     async createTransaction(entityId: string, phaseName: string) {
-        return this.invokeApiWithErrorHandling<number>(`/transactions/entities/${entityId}`, 'POST', {
+        return this.invokeApiWithErrorHandling<Transaction>(`/transactions/entities/${entityId}`, 'POST', {
             phaseName
         })
     }
