@@ -8,9 +8,9 @@ export class SearchController extends APIClient {
 
     /**
      * free text search for polygons based on captions
-     * @param query
+     * @param q
      */
-    async findPolygon(query: string) {
-        return this.invokeApiWithErrorHandling('/polygons/search', 'GET', query)
+    async findPolygon(q: string) {
+        return this.invokeApiWithErrorHandling(`/polygons/search?q=${q}`, 'GET')
     }
 }
