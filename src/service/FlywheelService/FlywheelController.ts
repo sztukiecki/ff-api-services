@@ -66,6 +66,10 @@ export class FlywheelController extends APIClient {
         );
     }
 
+    /**
+     * Fetch statistics for a given entityId
+     * @param entityId
+     */
     async fetchStatistics(entityId: string) {
         return this.invokeApiWithErrorHandling<FlywheelStatisticTypes.FlywheelStatistics>(
             `/flywheel-statistics/entity/${entityId}`,
@@ -94,5 +98,16 @@ export class FlywheelController extends APIClient {
             `/transactions/entities/${entityId}/flywheel/${flywheelName}`,
             'GET'
         )
+    }
+
+    /**
+     * Create a transaction for a given entityId in a given phase. Returns the created transaction
+     * @param entityId
+     * @param phaseName
+     */
+    async createTransaction(entityId: string, phaseName: string) {
+        return this.invokeApiWithErrorHandling<Transaction>(`/transactions/entities/${entityId}`, 'POST', {
+            phaseName
+        })
     }
 }

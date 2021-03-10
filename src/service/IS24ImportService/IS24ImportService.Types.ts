@@ -23,4 +23,15 @@ export namespace IS24ImportServiceTypes {
         portalId: string;
         scoutId: string;
     }
+
+    export interface ImmoResponse {
+        url: string;
+        expiration: number;
+    }
+
+    export interface ImmoAvailabilityInfo {
+        available: boolean;
+        portalId: string;
+        is24EstateId: string;
+    }
 }

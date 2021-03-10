@@ -58,19 +58,24 @@ export class SearchService extends APIClient {
      * @param withCount
      */
     async search(query: Flowdsl, index: string, page: number = 1, size?: number, withCount?: boolean) {
-        let queryParams: any = {};
-        if (page) {
-            queryParams.page = page;
-        }
-        if (size) {
-            queryParams.size = size;
-        }
-        if (typeof withCount === 'boolean') {
-            queryParams.withCount = withCount;
-        }
-
         return await this.invokeApi<PagedResponse<Entity>>('/schemas/' + index, 'POST', query, {
-            queryParams: queryParams,
+            queryParams: this.buildQueryParams(page, size, withCount),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    }
+
+    /**
+     * This method searches for saved searches.
+     * @param query
+     * @param page
+     * @param size
+     * @param withCount
+     */
+    async searchSavedSearches(query: Flowdsl, page: number = 1, size?: number, withCount?: boolean) {
+        return await this.invokeApi<PagedResponse<Entity>>('/saved-searches', 'POST', query, {
+            queryParams: this.buildQueryParams(page, size, withCount),
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -175,6 +180,21 @@ export class SearchService extends APIClient {
                 'Content-Type': 'application/json',
             },
         });
+    }
+
+    private buildQueryParams(page: number = 1, size?: number, withCount?: boolean) {
+        const queryParams: any = {};
+        if (page) {
+            queryParams.page = page;
+        }
+        if (size) {
+            queryParams.size = size;
+        }
+        if (typeof withCount === 'boolean') {
+            queryParams.withCount = withCount;
+        }
+
+        return queryParams;
     }
 
     buildQuery(filterConfiguration: FilterConfiguration, sorting: any): Flowdsl {
