@@ -7,10 +7,9 @@ export class SmsController extends APIClient {
     }
 
     /**
-     * Fetches sms api credentials for given companyId
-     * @param companyId
+     * Fetches sms api credentials for current user company
      */
-    async fetchCredentials(companyId: string) {
-        return this.invokeApiWithErrorHandling<SmsServiceTypes.Credentials>(`/credentials/${companyId}`, 'GET');
+    async fetchCredentials() {
+        return this.invokeApiWithErrorHandling<SmsServiceTypes.Credentials>(`/credentials`, 'GET');
     }
 }

@@ -49,7 +49,6 @@ export interface ViewDefinitionV2Category {
     id: string;
     captions: Captions;
     content: ViewDefinitionV2CategoryContentItem[];
-    hideFieldsIfEmpty: string[];
 }
 
 export interface ViewDefinitionV2 {
