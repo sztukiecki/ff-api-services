@@ -1,5 +1,4 @@
-import {APIClient, APIMapping} from '../../http';
-
+import { APIClient, APIMapping } from '../../http';
 
 export class ImporterRecordLogController extends APIClient {
     constructor() {
@@ -11,7 +10,6 @@ export class ImporterRecordLogController extends APIClient {
     }
 
     async fetchDirectoryContents(table: string) {
-        return this.invokeApiWithErrorHandling('/ff-importer-v2-record-log-s3-directory-content', 'POST', {table});
+        return this.invokeApiWithErrorHandling('/ff-importer-v2-record-log-s3-directory-content', 'POST', { table });
     }
-
 }
