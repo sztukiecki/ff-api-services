@@ -1,7 +1,6 @@
-import {APIClient, APIMapping, ApiResponse} from '../../http';
-import {ActivityReportRequestBody, ActivityReportRequestMethod, LambdaServiceResponse} from './ActivityReportV2.Types';
-import {EnvironmentManagementInstance, StageTypes} from '../..';
-
+import { APIClient, APIMapping, ApiResponse } from '../../http';
+import { ActivityReportRequestBody, ActivityReportRequestMethod, LambdaServiceResponse } from './ActivityReportV2.Types';
+import { EnvironmentManagementInstance, StageTypes } from '../..';
 
 export class ActivityReportV2Controller extends APIClient {
     constructor() {
@@ -34,7 +33,6 @@ export class ActivityReportV2Controller extends APIClient {
         return `${baseUrl}/preview?hash=${authenticationToken}&id=${activityReportId}`;
     }
 
-
     /**
      * URL for activity report based on stage
      * We only have DEV and PROD environment for activity report.
@@ -60,6 +58,8 @@ export class ActivityReportV2Controller extends APIClient {
 
     private async invokeActivityReportV2(method: ActivityReportRequestMethod, entityId: string): Promise<ApiResponse<LambdaServiceResponse>> {
         const body = await this.prepareActivityReportV2Body(method, entityId);
-        return await this.invokeApiWithErrorHandling<LambdaServiceResponse>('/activity-report2-lambda', 'POST', body, {headers: {'Content-Type': 'application/json'}});
+        return await this.invokeApiWithErrorHandling<LambdaServiceResponse>('/activity-report2-lambda', 'POST', body, {
+            headers: { 'Content-Type': 'application/json' },
+        });
     }
 }

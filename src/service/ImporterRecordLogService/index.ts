@@ -1,5 +1,4 @@
-import {ImporterRecordLogController} from './ImporterRecordLogController';
-
+import { ImporterRecordLogController } from './ImporterRecordLogController';
 
 class ImporterRecordLogService {
     public readonly importerRecordLog: ImporterRecordLogController;
@@ -7,7 +6,6 @@ class ImporterRecordLogService {
     constructor() {
         this.importerRecordLog = new ImporterRecordLogController();
     }
-
 }
 
 export const ImporterRecordLogServiceInstance = new ImporterRecordLogService();
