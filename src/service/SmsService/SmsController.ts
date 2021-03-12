@@ -12,4 +12,19 @@ export class SmsController extends APIClient {
     async fetchCredentials() {
         return this.invokeApiWithErrorHandling<SmsServiceTypes.Credentials>(`/credentials`, 'GET');
     }
+
+    /**
+     * Saves SMS API credentials of the company
+     * @param token
+     */
+    async saveCredentials(token: string) {
+        return this.invokeApiWithErrorHandling<SmsServiceTypes.Credentials>(`/credentials`, 'POST', { token });
+    }
+
+    /**
+     * Removes SMS API credentials of the company
+     */
+    async deleteCredentials() {
+        return this.invokeApiWithErrorHandling(`/credentials`, 'DELETE');
+    }
 }
