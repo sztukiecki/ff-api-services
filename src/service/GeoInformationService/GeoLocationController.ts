@@ -1,4 +1,6 @@
 import { APIClient, APIMapping } from '../../http';
+import {GeoInformationsServiceTypes} from './GeoInformationService.Types';
+import ListOfPolygons = GeoInformationsServiceTypes.ListOfPolygons;
 
 
 export class GeoLocationController extends APIClient {
@@ -11,7 +13,7 @@ export class GeoLocationController extends APIClient {
      * @param geolocationId
      */
     async fetchByGeolocationId(geolocationId: string) {
-        return this.invokeApiWithErrorHandling(`/geolocations/${geolocationId}`, 'GET')
+        return this.invokeApiWithErrorHandling<ListOfPolygons>(`/geolocations/${geolocationId}`, 'GET')
     }
 
 }
