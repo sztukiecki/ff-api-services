@@ -1,4 +1,5 @@
 import { APIClient, APIMapping } from '../../http';
+import { GeoInformationsServiceTypes } from './GeoInformationService.Types';
 
 
 export class SearchController extends APIClient {
@@ -8,9 +9,9 @@ export class SearchController extends APIClient {
 
     /**
      * free text search for polygons based on captions
-     * @param q
+     * @param query
      */
-    async findPolygon(q: string) {
-        return this.invokeApiWithErrorHandling(`/polygons/search?q=${q}`, 'GET')
+    async findPolygon(query: string) {
+        return this.invokeApiWithErrorHandling<GeoInformationsServiceTypes.FindPolygonResponse>(`/polygons/search?q=${query}`, 'GET');
     }
 }

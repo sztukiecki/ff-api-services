@@ -3,6 +3,8 @@ import {GeoPolygonController} from "./GeoPolygonController";
 import {PolygonEntityLinkController} from "./PolygonEntityLinkController";
 import {SearchController} from "./SearchController";
 
+export * from './GeoInformationService.Types';
+
 export class GeoInformationService {
     public static instance = new GeoInformationService();
 
