@@ -22,6 +22,7 @@ export enum IdentifiedUserStatusCodes {
 
 export enum SsoType {
     SCOUT = 'SCOUT',
+    COGNITO_SAML = 'COGNITO_SAML'
 }
 
 export interface IdentifiedUserResponse {
@@ -64,4 +65,9 @@ export interface UserTokenEntity {
 
 export interface SSO {
     ssoType: SsoType;
+}
+
+export interface SSOResponse {
+    ssoType: SsoType;
+    clientId: string;
 }
