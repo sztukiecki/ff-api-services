@@ -37,7 +37,7 @@ Rewrite your master branch so that any commits of yours that aren't already in u
 ```git rebase upstream/master```
 
 ## Issue tracking
-Please open a issue if you find a bug or you want to make a feature request.
+Please open a issue if you find a bug, or you want to make a feature request.
 
 ## Be a contributor
 Please make pull-requests, if you want to make some changes :)
