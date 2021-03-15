@@ -42,8 +42,7 @@ export class ActivityReportV2Controller extends APIClient {
         if (stage === StageTypes.DEVELOPMENT) {
             return 'https://latest-development-activity-report-v2-cloud.fe.flowfact-dev.cloud';
         } else {
-            // TODO change it after the URL for PROD environment is configured
-            return 'https://latest-development-activity-report-v2-cloud.fe.flowfact-dev.cloud';
+            return 'https://activityreport.flowfact.com';
         }
     }
 
