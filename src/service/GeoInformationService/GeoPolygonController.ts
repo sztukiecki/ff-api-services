@@ -1,4 +1,6 @@
 import { APIClient, APIMapping } from '../../http';
+import {GeoInformationsServiceTypes} from './GeoInformationService.Types';
+import ListOfPolygons = GeoInformationsServiceTypes.ListOfPolygons;
 
 
 export class GeoPolygonController extends APIClient {
@@ -10,14 +12,14 @@ export class GeoPolygonController extends APIClient {
      * fetch list of all the polygons
      */
     async fetchAll() {
-        return this.invokeApiWithErrorHandling('/polygons', 'GET')
+        return this.invokeApiWithErrorHandling<ListOfPolygons>('/polygons', 'GET')
     }
 
     /**
      * create polygon of type LINE, LINESTRING, POLYGON and MULTIPOLYGON
      */
     async create() {
-        return this.invokeApiWithErrorHandling('/polygons', 'POST')
+        return this.invokeApiWithErrorHandling<ListOfPolygons>('/polygons', 'POST')
     }
 
     /**
@@ -25,7 +27,7 @@ export class GeoPolygonController extends APIClient {
      * @param name
      */
     async fetchByName(name: string) {
-        return this.invokeApiWithErrorHandling(`/polygons/${name}`, 'GET')
+        return this.invokeApiWithErrorHandling<ListOfPolygons>(`/polygons/${name}`, 'GET')
     }
 
     /**
@@ -33,7 +35,7 @@ export class GeoPolygonController extends APIClient {
      * @param name
      */
     async updateByName(name: string) {
-        return this.invokeApiWithErrorHandling(`/polygons/${name}`, 'PUT')
+        return this.invokeApiWithErrorHandling<ListOfPolygons>(`/polygons/${name}`, 'PUT')
     }
 
     /**
@@ -41,6 +43,6 @@ export class GeoPolygonController extends APIClient {
      * @param name
      */
     async deleteByName(name: string) {
-        return this.invokeApiWithErrorHandling(`/polygons/${name}`, 'DELETE')
+        return this.invokeApiWithErrorHandling<ListOfPolygons>(`/polygons/${name}`, 'DELETE')
     }
 }
