@@ -2,17 +2,14 @@ import {APIClient, APIMapping} from '../../http';
 import {IS24ImportServiceTypes} from './IS24ImportService.Types';
 import IS24Property = IS24ImportServiceTypes.IS24Property;
 import PossibleUser = IS24ImportServiceTypes.PossibleUser;
+import ImmoResponse = IS24ImportServiceTypes.ImmoResponse;
+import ImmoAvailabilityInfo = IS24ImportServiceTypes.ImmoAvailabilityInfo;
 
 export interface PagedResponse<T> {
     entities: T[];
     totalCount: number;
     page: number;
     size: number;
-}
-
-export interface OtoaResponse {
-    url: string;
-    expiration: number;
 }
 
 export default class IS24ImportController extends APIClient {
@@ -63,14 +60,14 @@ export default class IS24ImportController extends APIClient {
     }
 
     /**
-     * Fetches OTOA widget URL for given estate
+     * Fetches IMMO widget URL for given estate
      * @param portalId
-     * @param estateId
+     * @param entityId
      * @param returnUrl
      */
-    async fetchOtoaWidgetUrl(portalId: string, entityId: string, returnUrl: string) {
-        return await this.invokeApiWithErrorHandling<OtoaResponse>(
-            `/portal/${portalId}/estate/${entityId}/otoa`,
+    async fetchImmoWidgetUrl(portalId: string, entityId: string, returnUrl: string) {
+        return await this.invokeApiWithErrorHandling<ImmoResponse>(
+            `/portal/${portalId}/estate/${entityId}/immo`,
             'GET',
             undefined,
             {
@@ -78,5 +75,15 @@ export default class IS24ImportController extends APIClient {
                     returnUrl,
                 },
             });
+    }
+
+    /**
+     * Fetches IMMO widget availability info for given estate
+     * @param entityId
+     */
+    async fetchImmoWidgetAvailabilityInfo(entityId: string) {
+        return await this.invokeApiWithErrorHandling<ImmoAvailabilityInfo>(
+            `/estate/${entityId}/immoAvailability`,
+            'GET');
     }
 }
