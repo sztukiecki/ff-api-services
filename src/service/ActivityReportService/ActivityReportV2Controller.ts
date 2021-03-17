@@ -43,10 +43,16 @@ export class ActivityReportV2Controller extends APIClient {
      * @param activityReportId entity id of the activity report instance
      */
     async generateActivityReportPreviewUrl(activityReportId: string): Promise<string> {
+        const stage = EnvironmentManagementInstance.getStage();
         const baseUrl = this.getActivityReportUrl();
         const authenticationToken = await this.getAuthenticationToken();
-        return `${baseUrl}/preview?hash=${authenticationToken}&id=${activityReportId}`;
+        const previewUrl = `${baseUrl}/preview?hash=${authenticationToken}&id=${activityReportId}`;
+        if (stage === StageTypes.DEVELOPMENT) {
+            return `${previewUrl}&dev=1`
+        }
+        return previewUrl;
     }
+
 
     /**
      * URL for activity report based on stage
