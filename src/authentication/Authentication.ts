@@ -9,17 +9,20 @@ const stageSettings = {
     development: {
         identityPoolId: 'eu-central-1:079515e9-300a-42c6-b608-930f84fed704',
         userPoolId: 'eu-central-1_8kCTHzIgR',
-        clientId: '3qefeom3dsgsjd65555rdfu4pq',// '4gql86evdegfa9otnpa30rf47i',
+        clientId: '4gql86evdegfa9otnpa30rf47i',
+        ssoClientId: '3qefeom3dsgsjd65555rdfu4pq'
     },
     staging: {
         identityPoolId: 'eu-central-1:a344597d-b532-4b94-81ef-5d31bf56e504',
         userPoolId: 'eu-central-1_8R899yNNH',
         clientId: '7qpfm5e3625hrf5mpieph9cu2a',
+        ssoClientId: 'todo'
     },
     production: {
         identityPoolId: 'eu-central-1:2b79058f-3250-492a-a7a8-91bb06911ae9',
         userPoolId: 'eu-central-1_RdHzlSKS0',
         clientId: '57brn8csff678o6aee3k1ia00n',
+        ssoClientId: 'todo'
     },
 };
 
@@ -47,6 +50,17 @@ class Authentication {
 
     public reconfigure(config: object) {
         return Amplify.configure(config);
+    }
+
+    public configureSSO() {
+        return Amplify.configure({
+            storage: CustomStorage,
+            Auth: {
+                region: region,
+                userPoolId: stageSettings[this.stage].userPoolId,
+                userPoolWebClientId: stageSettings[this.stage].ssoClientId,
+            },
+        });
     }
 
     /**
@@ -81,20 +95,12 @@ class Authentication {
         }
 
         const clientId: string = (Auth.configure(null) as any).userPoolWebClientId || stageSettings[stage].clientId;
-        console.log({ authenticationData });
         // set the new tokens in the store
         const key = `CognitoIdentityServiceProvider.${clientId}`;
         localStorage.setItem(`${key}.LastAuthUser`, authenticationData.username);
         localStorage.setItem(`${key}.${authenticationData.username}.idToken`, authenticationData.idToken);
         localStorage.setItem(`${key}.${authenticationData.username}.refreshToken`, authenticationData.refreshToken);
         localStorage.setItem(`${key}.${authenticationData.username}.accessToken`, authenticationData.accessToken);
-
-        console.log('stored', [
-            [`${key}.LastAuthUser`, authenticationData.username],
-            [`${key}.${authenticationData.username}.idToken`, authenticationData.idToken],
-            [`${key}.${authenticationData.username}.refreshToken`, authenticationData.refreshToken],
-            [`${key}.${authenticationData.username}.accessToken`, authenticationData.accessToken]
-        ]);
 
         return this.getCurrentSession();
     }
