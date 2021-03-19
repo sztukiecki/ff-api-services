@@ -68,6 +68,13 @@ export interface SSO {
 }
 
 export interface SSOResponse {
-    ssoType: SsoType;
+    type: SsoType;
     clientId: string;
+}
+
+export interface SSOTokenResponse {
+    idToken: string;
+    accessToken: string;
+    refreshToken: string;
+    username: string;
 }

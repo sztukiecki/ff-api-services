@@ -9,7 +9,7 @@ const stageSettings = {
     development: {
         identityPoolId: 'eu-central-1:079515e9-300a-42c6-b608-930f84fed704',
         userPoolId: 'eu-central-1_8kCTHzIgR',
-        clientId: '4gql86evdegfa9otnpa30rf47i',
+        clientId: '3qefeom3dsgsjd65555rdfu4pq',// '4gql86evdegfa9otnpa30rf47i',
     },
     staging: {
         identityPoolId: 'eu-central-1:a344597d-b532-4b94-81ef-5d31bf56e504',
@@ -81,12 +81,20 @@ class Authentication {
         }
 
         const clientId: string = (Auth.configure(null) as any).userPoolWebClientId || stageSettings[stage].clientId;
+        console.log({ authenticationData });
         // set the new tokens in the store
         const key = `CognitoIdentityServiceProvider.${clientId}`;
         localStorage.setItem(`${key}.LastAuthUser`, authenticationData.username);
         localStorage.setItem(`${key}.${authenticationData.username}.idToken`, authenticationData.idToken);
         localStorage.setItem(`${key}.${authenticationData.username}.refreshToken`, authenticationData.refreshToken);
         localStorage.setItem(`${key}.${authenticationData.username}.accessToken`, authenticationData.accessToken);
+
+        console.log('stored', [
+            [`${key}.LastAuthUser`, authenticationData.username],
+            [`${key}.${authenticationData.username}.idToken`, authenticationData.idToken],
+            [`${key}.${authenticationData.username}.refreshToken`, authenticationData.refreshToken],
+            [`${key}.${authenticationData.username}.accessToken`, authenticationData.accessToken]
+        ]);
 
         return this.getCurrentSession();
     }
