@@ -1,5 +1,5 @@
 import { APIClient, APIMapping, ApiResponse } from '../../http';
-import { ActivityReportRequestBody, ActivityReportRequestMethod, LambdaServiceResponse } from './ActivityReportV2.Types';
+import { ActivityReportLinkType, ActivityReportRequestBody, ActivityReportRequestMethod, LambdaServiceResponse } from './ActivityReportV2.Types';
 import { EnvironmentManagementInstance, StageTypes } from '../..';
 
 export class ActivityReportV2Controller extends APIClient {
@@ -12,7 +12,8 @@ export class ActivityReportV2Controller extends APIClient {
      * @param entityId entity id of the estate object
      */
     async generateActivityReportV2(entityId: string): Promise<ApiResponse<LambdaServiceResponse>> {
-        return this.invokeActivityReportV2('generate', entityId);
+        const body = await this.prepareActivityReportV2Body('generate', entityId);
+        return this.invokeActivityReportV2(body);
     }
 
     /**
@@ -20,7 +21,21 @@ export class ActivityReportV2Controller extends APIClient {
      * @param entityId entity id of the activity report object
      */
     async publicActivityReportV2(entityId: string): Promise<ApiResponse<LambdaServiceResponse>> {
-        return this.invokeActivityReportV2('publish', entityId);
+        const body = await this.prepareActivityReportV2Body('publish', entityId);
+        return this.invokeActivityReportV2(body);
+    }
+
+    async prepareEmailBody(links: ActivityReportLinkType[], message: string): Promise<ApiResponse<LambdaServiceResponse>> {
+        const authenticationToken = await this.getAuthenticationToken();
+        const requestBody: ActivityReportRequestBody = {
+            cognitoToken: authenticationToken,
+            method: 'prepareEmailBody',
+            links,
+            message,
+        };
+        return await this.invokeApiWithErrorHandling<LambdaServiceResponse>('/activity-report2-lambda', 'POST', requestBody, {
+            headers: { 'Content-Type': 'application/json' },
+        });
     }
 
     /**
@@ -28,10 +43,16 @@ export class ActivityReportV2Controller extends APIClient {
      * @param activityReportId entity id of the activity report instance
      */
     async generateActivityReportPreviewUrl(activityReportId: string): Promise<string> {
+        const stage = EnvironmentManagementInstance.getStage();
         const baseUrl = this.getActivityReportUrl();
         const authenticationToken = await this.getAuthenticationToken();
-        return `${baseUrl}/preview?hash=${authenticationToken}&id=${activityReportId}`;
+        const previewUrl = `${baseUrl}/preview?hash=${authenticationToken}&id=${activityReportId}`;
+        if (stage === StageTypes.DEVELOPMENT) {
+            return `${previewUrl}&dev=1`
+        }
+        return previewUrl;
     }
+
 
     /**
      * URL for activity report based on stage
@@ -42,22 +63,36 @@ export class ActivityReportV2Controller extends APIClient {
         if (stage === StageTypes.DEVELOPMENT) {
             return 'https://latest-development-activity-report-v2-cloud.fe.flowfact-dev.cloud';
         } else {
-            // TODO change it after the URL for PROD environment is configured
-            return 'https://latest-development-activity-report-v2-cloud.fe.flowfact-dev.cloud';
+            return 'https://activityreport.flowfact.com';
         }
     }
 
-    private async prepareActivityReportV2Body(method: ActivityReportRequestMethod, entityId: string): Promise<ActivityReportRequestBody> {
+    private async prepareActivityReportV2Body(
+        method: ActivityReportRequestMethod,
+        entityId?: string,
+        links?: ActivityReportLinkType[],
+        message?: string
+    ): Promise<ActivityReportRequestBody> {
         const authenticationToken = await this.getAuthenticationToken();
-        return {
+        if (method === 'prepareEmailBody') {
+            return {
+                cognitoToken: authenticationToken,
+                method: 'prepareEmailBody',
+                links: links || [],
+                message: message || '',
+            };
+        }
+        const requestBody: ActivityReportRequestBody = {
             cognitoToken: authenticationToken,
-            entityId: entityId,
             method: method,
         };
+        if (entityId) {
+            requestBody.entityId = entityId;
+        }
+        return requestBody;
     }
 
-    private async invokeActivityReportV2(method: ActivityReportRequestMethod, entityId: string): Promise<ApiResponse<LambdaServiceResponse>> {
-        const body = await this.prepareActivityReportV2Body(method, entityId);
+    private async invokeActivityReportV2(body: ActivityReportRequestBody): Promise<ApiResponse<LambdaServiceResponse>> {
         return await this.invokeApiWithErrorHandling<LambdaServiceResponse>('/activity-report2-lambda', 'POST', body, {
             headers: { 'Content-Type': 'application/json' },
         });
