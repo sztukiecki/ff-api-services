@@ -86,4 +86,15 @@ export default class IS24ImportController extends APIClient {
             `/estate/${entityId}/immoAvailability`,
             'GET');
     }
+
+    /**
+     * Fetches IMMO widget availability info for given portal and estate
+     * @param portalId
+     * @param entityId
+     */
+    async fetchImmoWidgetAvailabilityInfoForPortal(portalId: string, entityId: string) {
+        return await this.invokeApiWithErrorHandling<ImmoAvailabilityInfo>(
+            `/portal/${portalId}/estate/${entityId}/immoAvailability`,
+            'GET');
+    }
 }

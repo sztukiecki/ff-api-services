@@ -1,6 +1,6 @@
 {
     "name": "@flowfact/api-services",
-    "version": "36.0.0-SNAPSHOT",
+    "version": "37.0.0-SNAPSHOT",
     "description": "middleware of FLOWFACT to interact between frontend and backend",
     "main": "build/index.js",
     "module": "build/es/index.js",
@@ -22,7 +22,7 @@
         "prettier:changed": "yarn node scripts/prettier.js just-changed-files"
     },
     "dependencies": {
-        "@flowfact/node-flowdsl": "^2.20201020.38",
+        "@flowfact/node-flowdsl": "^2.20210316.39",
         "@flowfact/types": "^7.20210208.187",
         "aws-amplify": "^3.3.8",
         "axios": "^0.21.0",
