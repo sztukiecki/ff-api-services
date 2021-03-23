@@ -22,7 +22,7 @@
         "prettier:changed": "yarn node scripts/prettier.js just-changed-files"
     },
     "dependencies": {
-        "@flowfact/node-flowdsl": "^2.20201020.38",
+        "@flowfact/node-flowdsl": "^2.20210316.39",
         "@flowfact/types": "^7.20210208.187",
         "aws-amplify": "^3.3.8",
         "axios": "^0.21.0",
