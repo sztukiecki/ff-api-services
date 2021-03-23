@@ -52,7 +52,7 @@ export default class IS24ImmoController extends APIClient {
      * Checks if IMMO widget is available for given portal without estate context
      * @param portalId
      */
-    async isImmoWidgetAvailableForPortal(portalId: string) {
+    async checkImmoWidgetAvailableForPortal(portalId: string) {
         return await this.invokeApiWithErrorHandling<Boolean>(
             `/portal/${portalId}/immoAvailability`,
             'GET');
