@@ -36,6 +36,12 @@ class Authentication {
         }
 
         // Configure amplify auth
+        this.resetConfiguration();
+
+        Authentication.instance = this;
+    }
+
+    public resetConfiguration(){
         Amplify.configure({
             storage: CustomStorage,
             Auth: {
@@ -44,12 +50,6 @@ class Authentication {
                 userPoolWebClientId: stageSettings[this.stage].clientId,
             },
         });
-
-        Authentication.instance = this;
-    }
-
-    public reconfigure(config: object) {
-        return Amplify.configure(config);
     }
 
     public configureSSO() {
@@ -61,6 +61,10 @@ class Authentication {
                 userPoolWebClientId: stageSettings[this.stage].ssoClientId,
             },
         });
+    }
+
+    public reconfigure(config: object) {
+        return Amplify.configure(config);
     }
 
     /**
