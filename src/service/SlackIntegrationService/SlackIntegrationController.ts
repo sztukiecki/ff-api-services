@@ -10,7 +10,7 @@ export class SlackIntegrationController extends APIClient {
     /**
      * Fetches Slack credentials for current user's company
      */
-    async getCredentials() {
+    async fetchCredentials() {
         return this.invokeApiWithErrorHandling<SlackIntegrationServiceTypes.Credentials>('/credentials', 'GET');
     }
 
@@ -53,7 +53,7 @@ export class SlackIntegrationController extends APIClient {
         return this.invokeApiWithErrorHandling('/slack/oauthAccess', 'POST', oAuthAccessRequest);
     }
 
-    async getSettings() {
+    async fetchSettings() {
         return this.invokeApiWithErrorHandling('/companyIntegrationSettings', 'GET');
     }
 
