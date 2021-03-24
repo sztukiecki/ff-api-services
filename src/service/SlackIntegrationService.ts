@@ -1,5 +1,6 @@
-import { APIClient, APIMapping } from '../http';
+import { APIClient, APIMapping, ApiResponse } from '../http';
 import { AxiosResponse } from 'axios';
+import { EnvironmentManagementInstance } from '../util/EnvironmentManagement';
 
 export interface CompanyIntegrationSetting {
     id: number;
@@ -52,9 +53,17 @@ export interface SettingsApi {
     deleteSettings(): Promise<AxiosResponse>;
 }
 
+export interface CredentialsApi {
+    getCredentials(): Promise<ApiResponse<any>>;
+    addCredentials(token: string): Promise<ApiResponse<any>>;
+    deleteCredentials(): Promise<ApiResponse<any>>;
+    slackAuthCodeRedirectUri(): string;
+}
+
 export class SlackIntegrationService extends APIClient {
     private readonly _slackApi: SlackApi;
     private readonly _settingsApi: SettingsApi;
+    private readonly _credentialsApi: CredentialsApi;
 
     constructor() {
         super(APIMapping.slackIntegrationService);
@@ -69,6 +78,12 @@ export class SlackIntegrationService extends APIClient {
             postSettings: (slackConfiguration) => this.invokeApi('/companyIntegrationSettings', 'POST', slackConfiguration),
             deleteSettings: () => this.invokeApi('/companyIntegrationSettings', 'DELETE'),
         };
+        this._credentialsApi = {
+            getCredentials: () => this.invokeApiWithErrorHandling('/credentials', 'GET'),
+            addCredentials: (token: string) => this.invokeApiWithErrorHandling('/credentials', 'POST', { token }),
+            deleteCredentials: () => this.invokeApiWithErrorHandling('/credentials', 'DELETE'),
+            slackAuthCodeRedirectUri: () => `${EnvironmentManagementInstance.getBaseUrl()}/${APIMapping.slackIntegrationService.name}/public/oauth/callback`,
+        };
     }
 
     public get slack(): SlackApi {
@@ -77,6 +92,9 @@ export class SlackIntegrationService extends APIClient {
 
     public get settings(): SettingsApi {
         return this._settingsApi;
+    }
+    public get credentials(): CredentialsApi {
+        return this._credentialsApi;
     }
 }
 
