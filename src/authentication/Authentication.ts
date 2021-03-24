@@ -41,7 +41,7 @@ class Authentication {
         Authentication.instance = this;
     }
 
-    public resetConfiguration(){
+    public resetConfiguration = () => {
         Amplify.configure({
             storage: CustomStorage,
             Auth: {
@@ -52,7 +52,7 @@ class Authentication {
         });
     }
 
-    public configureSSO() {
+    public configureSSO = () => {
         return Amplify.configure({
             storage: CustomStorage,
             Auth: {
