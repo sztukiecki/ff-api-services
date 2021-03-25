@@ -10,16 +10,19 @@ const stageSettings = {
         identityPoolId: 'eu-central-1:079515e9-300a-42c6-b608-930f84fed704',
         userPoolId: 'eu-central-1_8kCTHzIgR',
         clientId: '4gql86evdegfa9otnpa30rf47i',
+        ssoClientId: '4o13eokvepr4gq45d6379agkgd'
     },
     staging: {
         identityPoolId: 'eu-central-1:a344597d-b532-4b94-81ef-5d31bf56e504',
         userPoolId: 'eu-central-1_8R899yNNH',
         clientId: '7qpfm5e3625hrf5mpieph9cu2a',
+        ssoClientId: '4n89omj7okn77k7s0e1vhorifu'
     },
     production: {
         identityPoolId: 'eu-central-1:2b79058f-3250-492a-a7a8-91bb06911ae9',
         userPoolId: 'eu-central-1_RdHzlSKS0',
         clientId: '57brn8csff678o6aee3k1ia00n',
+        ssoClientId: '2bcsa6s3oejftomdst1sujeg4c'
     },
 };
 
@@ -33,6 +36,12 @@ class Authentication {
         }
 
         // Configure amplify auth
+        this.resetConfiguration();
+
+        Authentication.instance = this;
+    }
+
+    public resetConfiguration = () => {
         Amplify.configure({
             storage: CustomStorage,
             Auth: {
@@ -41,8 +50,17 @@ class Authentication {
                 userPoolWebClientId: stageSettings[this.stage].clientId,
             },
         });
+    }
 
-        Authentication.instance = this;
+    public configureSSO = () => {
+        return Amplify.configure({
+            storage: CustomStorage,
+            Auth: {
+                region: region,
+                userPoolId: stageSettings[this.stage].userPoolId,
+                userPoolWebClientId: stageSettings[this.stage].ssoClientId,
+            },
+        });
     }
 
     public reconfigure(config: object) {

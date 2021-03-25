@@ -24,7 +24,6 @@ export { default as PresetService } from './service/PresetService';
 export { default as SchemaService } from './service/SchemaService';
 export { default as SchemaServiceV2 } from './service/SchemaServiceV2';
 export { default as SearchService } from './service/SearchService';
-export { default as SlackIntegrationService } from './service/SlackIntegrationService';
 export { default as SprengnetterService } from './service/SprengnetterService';
 export { default as TaggingService } from './service/TaggingService';
 export { default as TagsService } from './service/TagService';
@@ -68,6 +67,7 @@ export * from './service/InteractiveExposeStatisticsService';
 export * from './service/EmailService';
 export * from './service/EntitlementService';
 export * from './service/SearchServiceTypes';
+export * from './service/SlackService';
 export * from './service/SmsIngestionService';
 export * from './service/CompanyService';
 export * from './service/SmsService';
@@ -77,6 +77,7 @@ export * from './service/SupportService';
 export * from './service/ActivityReportService';
 export * from './service/ImporterRecordLogService';
 export * from './service/CaasManagementService';
+export * from './service/GeoInformationService'
 
 export * from './http';
 export * from './util/EnvironmentManagement';
