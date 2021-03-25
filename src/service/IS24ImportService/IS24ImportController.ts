@@ -2,8 +2,7 @@ import {APIClient, APIMapping} from '../../http';
 import {IS24ImportServiceTypes} from './IS24ImportService.Types';
 import IS24Property = IS24ImportServiceTypes.IS24Property;
 import PossibleUser = IS24ImportServiceTypes.PossibleUser;
-import ImmoResponse = IS24ImportServiceTypes.ImmoResponse;
-import ImmoAvailabilityInfo = IS24ImportServiceTypes.ImmoAvailabilityInfo;
+
 
 export interface PagedResponse<T> {
     entities: T[];
@@ -59,31 +58,4 @@ export default class IS24ImportController extends APIClient {
         return await this.invokeApiWithErrorHandling(`/portals/${portalId}/import-projects`, 'POST');
     }
 
-    /**
-     * Fetches IMMO widget URL for given estate
-     * @param portalId
-     * @param entityId
-     * @param returnUrl
-     */
-    async fetchImmoWidgetUrl(portalId: string, entityId: string, returnUrl: string) {
-        return await this.invokeApiWithErrorHandling<ImmoResponse>(
-            `/portal/${portalId}/estate/${entityId}/immo`,
-            'GET',
-            undefined,
-            {
-                queryParams: {
-                    returnUrl,
-                },
-            });
-    }
-
-    /**
-     * Fetches IMMO widget availability info for given estate
-     * @param entityId
-     */
-    async fetchImmoWidgetAvailabilityInfo(entityId: string) {
-        return await this.invokeApiWithErrorHandling<ImmoAvailabilityInfo>(
-            `/estate/${entityId}/immoAvailability`,
-            'GET');
-    }
 }

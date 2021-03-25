@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from '../../http';
-import { IdentifiedUserResponse } from './UserService.Types';
+import { IdentifiedUserResponse, SSOResponse, SSOTokenResponse } from './UserService.Types';
 
 export class PublicController extends APIClient {
     constructor() {
@@ -32,6 +32,32 @@ export class PublicController extends APIClient {
                 aliasMailAddress: businessMailAddress,
                 ssoType: ssoType,
             },
+        });
+    }
+
+    /**
+     * This resource checks if a user is part of a company that is restricted to SSO
+     * @param email
+     */
+    async hasSsoOfTypeV2(email: string) {
+        return await this.invokeApiWithErrorHandling<SSOResponse>('/public/sso', 'GET', undefined, {
+            queryParams: {
+                username: email
+            },
+        });
+    }
+
+    /**
+     * This resource fetches the authentication tokens when a valid authorization code is provided
+     * @param code
+     * @param clientId
+     * @param redirectUri
+     */
+    async authenticateWithSsoToken(code: string, clientId: string, redirectUri: string) {
+        return await this.invokeApiWithErrorHandling<SSOTokenResponse>('/public/sso/token', 'POST', {
+            code,
+            clientId,
+            redirectURI: redirectUri
         });
     }
 
