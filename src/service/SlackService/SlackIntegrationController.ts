@@ -1,7 +1,7 @@
 import { APIClient, APIMapping } from '../../http';
 import { SlackServiceTypes } from './SlackService.Types';
 import Channel = SlackServiceTypes.Channel;
-import User = SlackServiceTypes.User;
+import SlackUser = SlackServiceTypes.SlackUser;
 
 export class SlackIntegrationController extends APIClient {
 
@@ -20,6 +20,6 @@ export class SlackIntegrationController extends APIClient {
      * Fetch all Slack users
      */
     async fetchUsers() {
-        return this.invokeApiWithErrorHandling<User[]>('/users');
+        return this.invokeApiWithErrorHandling<SlackUser[]>('/users');
     }
 }

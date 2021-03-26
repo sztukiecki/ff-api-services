@@ -10,7 +10,7 @@ export namespace SlackServiceTypes {
         member?: boolean;
     }
 
-    export interface User {
+    export interface SlackUser {
         id: string;
         name: string;
     }
