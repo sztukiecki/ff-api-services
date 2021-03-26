@@ -10,8 +10,16 @@ export namespace SlackServiceTypes {
         member?: boolean;
     }
 
+    export interface ChannelsResponse {
+        channels: Channel[];
+    }
+
     export interface SlackUser {
         id: string;
         name: string;
+    }
+
+    export interface SlackUsersResponse {
+        users: SlackUser[];
     }
 }
