@@ -25,6 +25,11 @@ export class ActivityReportV2Controller extends APIClient {
         return this.invokeActivityReportV2(body);
     }
 
+    /**
+     * prepare the body for the email to send activity report
+     * @param links array of links to activity reports
+     * @param message email message
+     */
     async prepareEmailBody(links: ActivityReportLinkType[], message: string): Promise<ApiResponse<LambdaServiceResponse>> {
         const authenticationToken = await this.getAuthenticationToken();
         const requestBody: ActivityReportRequestBody = {
