@@ -1,5 +1,7 @@
 import { APIClient, APIMapping } from '../../http';
 import { SlackServiceTypes } from './SlackService.Types';
+import ChannelsResponse = SlackServiceTypes.ChannelsResponse;
+import SlackUsersResponse = SlackServiceTypes.SlackUsersResponse;
 
 export class SlackIntegrationController extends APIClient {
 
@@ -7,19 +9,17 @@ export class SlackIntegrationController extends APIClient {
         super(APIMapping.slackIntegrationService);
     }
 
-    async postMessage(postMessageRequest: SlackServiceTypes.PostMessageRequest) {
-        return this.invokeApiWithErrorHandling('/slack/postMessage', 'POST', postMessageRequest);
+    /**
+     * Fetch all Slack channels
+     */
+    async fetchChannels() {
+        return this.invokeApiWithErrorHandling<ChannelsResponse>('/channels');
     }
 
-    async createChannel(createChannelRequest: SlackServiceTypes.CreateChannelRequest) {
-        return this.invokeApiWithErrorHandling('/slack/createChannel', 'POST', createChannelRequest);
-    }
-
-    async deleteChannel(deleteChannelRequest: SlackServiceTypes.DeleteChannelRequest) {
-        return this.invokeApiWithErrorHandling('/slack/deleteChannel', 'POST', deleteChannelRequest);
-    }
-
-    async oAuthAccess(oAuthAccessRequest: SlackServiceTypes.OAuthAccessRequest) {
-        return this.invokeApiWithErrorHandling('/slack/oauthAccess', 'POST', oAuthAccessRequest);
+    /**
+     * Fetch all Slack users
+     */
+    async fetchUsers() {
+        return this.invokeApiWithErrorHandling<SlackUsersResponse>('/users');
     }
 }
