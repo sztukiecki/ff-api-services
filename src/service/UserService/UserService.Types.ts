@@ -1,4 +1,4 @@
-import { S3File } from '@flowfact/types';
+import { Captions, S3File, SchemaV2FieldType } from '@flowfact/types';
 
 export enum UserRole {
     USER = 'USER',
@@ -77,4 +77,17 @@ export interface SSOTokenResponse {
     accessToken: string;
     refreshToken: string;
     username: string;
+}
+
+export interface AdditionalField {
+    id: string;
+    name: string;
+    captions: Captions;
+    type: SchemaV2FieldType;
+    mandatory: boolean;
+}
+
+export interface UserAdditionalData {
+    key: string;
+    value: string;
 }
