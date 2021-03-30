@@ -1,7 +1,5 @@
 export namespace CaasManagementServiceTypes {
-
     export namespace Container {
-
         export interface Create {
             name: string;
             memory: number;
@@ -80,7 +78,6 @@ export namespace CaasManagementServiceTypes {
     }
 
     export namespace Database {
-
         export interface Create {
             label: string;
             tenancy: Tenancy;
@@ -116,25 +113,24 @@ export namespace CaasManagementServiceTypes {
     }
 
     export namespace Project {
-
         export interface Create {
             name: string;
             tags?: Tags;
             roles?: string[];
         }
-    
+
         export interface Project {
             id: string;
             companyId: string;
             details: Details;
         }
-    
+
         export interface GetAllResponse {
             items: Project[];
             total: number;
             pageSize: number;
         }
-    
+
         export interface Details {
             id: string;
             name: string;
@@ -149,14 +145,5 @@ export namespace CaasManagementServiceTypes {
         [key: string]: string;
     }
 
-    export type Status =
-            'RUNNING'
-            | 'MAINTENANCE'
-            | 'CREATING'
-            | 'STARTING'
-            | 'STOPPING'
-            | 'STOPPED'
-            | 'DELETING'
-            | 'FAILED'
-            | 'UNKNOWN';
+    export type Status = 'RUNNING' | 'MAINTENANCE' | 'CREATING' | 'STARTING' | 'STOPPING' | 'STOPPED' | 'DELETING' | 'FAILED' | 'UNKNOWN';
 }

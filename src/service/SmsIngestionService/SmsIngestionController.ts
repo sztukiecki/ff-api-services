@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from '../../http';
-import {SmsIngestionServiceTypes} from "./SmsIngestionService.Types";
+import { SmsIngestionServiceTypes } from './SmsIngestionService.Types';
 
 export class SmsIngestionController extends APIClient {
     constructor() {
@@ -13,5 +13,4 @@ export class SmsIngestionController extends APIClient {
     async send(messageRequest: SmsIngestionServiceTypes.TextMessageRequest) {
         return this.invokeApiWithErrorHandling<void>('/send', 'POST', messageRequest);
     }
-
 }

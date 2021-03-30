@@ -22,7 +22,7 @@ export enum IdentifiedUserStatusCodes {
 
 export enum SsoType {
     SCOUT = 'SCOUT',
-    COGNITO_SAML = 'COGNITO_SAML'
+    COGNITO_SAML = 'COGNITO_SAML',
 }
 
 export interface IdentifiedUserResponse {

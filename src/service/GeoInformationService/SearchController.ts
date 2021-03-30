@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from '../../http';
-import {GeoInformationsServiceTypes} from './GeoInformationService.Types';
+import { GeoInformationsServiceTypes } from './GeoInformationService.Types';
 import FindPolygonResponse = GeoInformationsServiceTypes.FindPolygonResponse;
 import GeoInformationValue = GeoInformationsServiceTypes.GeoInformationValue;
 
@@ -20,16 +20,15 @@ export class SearchController extends APIClient {
      * fetch one polygon by caption
      * @param caption
      */
-     async fetchPolygonDetail(caption: string) {
+    async fetchPolygonDetail(caption: string) {
         return this.invokeApiWithErrorHandling<GeoInformationValue>(`/polygons/${caption}`, 'GET');
     }
-    
+
     /**
      * fetch polygons list by captions
      * @param captions
      */
-     async fetchPolygonDetails(captions: string) {
+    async fetchPolygonDetails(captions: string) {
         return this.invokeApiWithErrorHandling<GeoInformationValue[]>(`/polygons/list?names=${captions}`, 'GET');
     }
-
 }

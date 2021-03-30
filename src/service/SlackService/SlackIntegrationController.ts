@@ -4,7 +4,6 @@ import ChannelsResponse = SlackServiceTypes.ChannelsResponse;
 import SlackUsersResponse = SlackServiceTypes.SlackUsersResponse;
 
 export class SlackIntegrationController extends APIClient {
-
     constructor() {
         super(APIMapping.slackIntegrationService);
     }

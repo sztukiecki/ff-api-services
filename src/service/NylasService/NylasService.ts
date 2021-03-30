@@ -1,7 +1,7 @@
-import {AuthRequest, NylasConfig, NylasConfigPatch, RegistrationUrl, SendEmailRequest} from '@flowfact/types';
-import {AxiosResponse, CancelToken} from 'axios';
-import {APIClient, APIMapping, ApiResponse} from '../../http';
-import {NylasServiceTypes} from './NylasService.Types';
+import { AuthRequest, NylasConfig, NylasConfigPatch, RegistrationUrl, SendEmailRequest } from '@flowfact/types';
+import { AxiosResponse, CancelToken } from 'axios';
+import { APIClient, APIMapping, ApiResponse } from '../../http';
+import { NylasServiceTypes } from './NylasService.Types';
 import SchedulerPage = NylasServiceTypes.SchedulerPage;
 
 /**
@@ -74,7 +74,7 @@ export class NylasService extends APIClient {
         return await this.invokeApiWithErrorHandling(`/nylas/files/${attachmentId}`, 'GET', undefined, {
             queryParams: {
                 email: emailAccount,
-            }
+            },
         });
     }
 
@@ -91,7 +91,7 @@ export class NylasService extends APIClient {
             queryParams: {
                 email: emailAccount,
             },
-            cancelToken: cancelToken
+            cancelToken: cancelToken,
         });
     }
 
@@ -104,7 +104,7 @@ export class NylasService extends APIClient {
         return await this.invokeApiWithErrorHandling(`/nylas/files/${attachmentId}`, 'DELETE', undefined, {
             queryParams: {
                 email: emailAccount,
-            }
+            },
         });
     }
 

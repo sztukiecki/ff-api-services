@@ -39,7 +39,6 @@ export { default as OpenimmoImporterService } from './service/OpenimmoImporterSe
 export { default as ImporterFlowFactTransferService } from './service/ImporterFlowFactTransferService';
 export { default as AclGroupServiceRest } from './service/AclGroupServiceRest';
 
-
 export * from './service/GDPRService';
 export * from './service/IS24LeadService';
 export * from './service/IS24ImportService';
@@ -77,7 +76,8 @@ export * from './service/SupportService';
 export * from './service/ActivityReportService';
 export * from './service/ImporterRecordLogService';
 export * from './service/CaasManagementService';
-export * from './service/GeoInformationService'
+export * from './service/GeoInformationService';
+export * from './service/EverSignService';
 
 export * from './http';
 export * from './util/EnvironmentManagement';

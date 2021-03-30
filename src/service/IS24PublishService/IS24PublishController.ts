@@ -55,10 +55,7 @@ export class IS24PublishController extends APIClient {
      * @param projectId
      */
     async fetchProjectProposal(projectId: string) {
-        return await this.invokeApiWithErrorHandling<IS24PublishTypes.IS24ProjectProposal>(
-          `/project-proposals/${projectId}`,
-          'GET',
-        );
+        return await this.invokeApiWithErrorHandling<IS24PublishTypes.IS24ProjectProposal>(`/project-proposals/${projectId}`, 'GET');
     }
 
     /**
@@ -67,10 +64,7 @@ export class IS24PublishController extends APIClient {
      * @param entityId
      */
     async fetchEstateDescription(portalId: string, entityId: string) {
-        return await this.invokeApiWithErrorHandling<string>(
-          `/portal/${portalId}/estate/${entityId}/description`,
-          'GET'
-        )
+        return await this.invokeApiWithErrorHandling<string>(`/portal/${portalId}/estate/${entityId}/description`, 'GET');
     }
 
     /**
@@ -79,10 +73,7 @@ export class IS24PublishController extends APIClient {
      * @param entityId
      */
     async fetchEstateLocationText(portalId: string, entityId: string) {
-        return await this.invokeApiWithErrorHandling<string>(
-          `/portal/${portalId}/estate/${entityId}/locationText`,
-          'GET'
-        )
+        return await this.invokeApiWithErrorHandling<string>(`/portal/${portalId}/estate/${entityId}/locationText`, 'GET');
     }
 }
 

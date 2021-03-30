@@ -53,11 +53,10 @@ export class ActivityReportV2Controller extends APIClient {
         const authenticationToken = await this.getAuthenticationToken();
         const previewUrl = `${baseUrl}/preview?hash=${authenticationToken}&id=${activityReportId}`;
         if (stage === StageTypes.DEVELOPMENT) {
-            return `${previewUrl}&dev=1`
+            return `${previewUrl}&dev=1`;
         }
         return previewUrl;
     }
-
 
     /**
      * URL for activity report based on stage

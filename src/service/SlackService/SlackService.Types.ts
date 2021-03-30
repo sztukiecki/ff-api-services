@@ -1,5 +1,4 @@
 export namespace SlackServiceTypes {
-
     export interface Credentials {
         token: string;
     }

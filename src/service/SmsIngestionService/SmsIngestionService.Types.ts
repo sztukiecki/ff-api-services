@@ -10,6 +10,6 @@ export namespace SmsIngestionServiceTypes {
 
     export enum Channel {
         SMS = 'SMS',
-        WhatsApp = 'WhatsApp'
+        WhatsApp = 'WhatsApp',
     }
 }

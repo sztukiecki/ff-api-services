@@ -96,7 +96,8 @@ const APIMapping = {
     placeholderService: new APIService('placeholder-service'),
     smsIngestionService: new APIService('sms-ingestion-service'),
     smsService: new APIService('sms-service'),
-    supportService: new APIService('support-service')
+    supportService: new APIService('support-service'),
+    everSignService: new APIService('ever-sign-service'),
 };
 
 export default APIMapping;

@@ -1,4 +1,4 @@
-import {SmsIngestionController} from "./SmsIngestionController";
+import { SmsIngestionController } from './SmsIngestionController';
 
 export * from './SmsIngestionService.Types';
 
