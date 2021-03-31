@@ -8,8 +8,8 @@ export namespace EverSignServiceTypes {
     export interface DigitalSignatureTask {
         eversignBusinessId: string;
         eversignAccessKey: string;
-        title?: string;
-        message?: string;
+        title: string;
+        message: string;
         fileName?: string;
         fileUrl: string;
         signers: DigitalSigner[];
