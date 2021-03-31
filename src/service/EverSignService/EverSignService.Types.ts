@@ -6,8 +6,10 @@ export namespace EverSignServiceTypes {
     }
 
     export interface DigitalSignatureTask {
-        title: string;
-        message: string;
+        eversignBusinessId: string;
+        eversignAccessKey: string;
+        title?: string;
+        message?: string;
         fileName?: string;
         fileUrl: string;
         signers: DigitalSigner[];
