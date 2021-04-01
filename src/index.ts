@@ -67,6 +67,7 @@ export * from './service/EmailService';
 export * from './service/EntitlementService';
 export * from './service/SearchServiceTypes';
 export * from './service/SlackService';
+export * from './service/TeamsIntegrationService';
 export * from './service/SmsIngestionService';
 export * from './service/CompanyService';
 export * from './service/SmsService';
