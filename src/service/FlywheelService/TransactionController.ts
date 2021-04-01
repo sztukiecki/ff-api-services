@@ -130,4 +130,27 @@ export class TransactionController extends APIClient {
             }
         );
     }
+
+    /**
+     * TODO: Please comment this method
+     * @param transactionId
+     * @param targetPhase
+     */
+    async moveToPhase(transactionId: number, targetPhase: number) {
+        return this.invokeApiWithErrorHandling(
+            `/transactions/${transactionId}`,
+            'PATCH',
+            [
+                {
+                    op: 'moveToPhase',
+                    targetPhase,
+                },
+            ],
+            {
+                headers: {
+                    'Content-Type': 'application/json-patch+json',
+                },
+            }
+        );
+    }
 }
