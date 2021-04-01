@@ -132,7 +132,7 @@ export class TransactionController extends APIClient {
     }
 
     /**
-     * TODO: Please comment this method
+     * Move transaction to phase inside flywheel
      * @param transactionId
      * @param targetPhase
      */
