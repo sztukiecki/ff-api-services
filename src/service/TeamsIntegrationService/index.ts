@@ -1,8 +1,8 @@
 import { TeamsIntegrationController } from './TeamsIntegrationController';
 
-export * from './TeamsService.Types';
+export * from './TeamsIntegrationServiceTypes';
 
-export class TeamsService {
+export class TeamsIntegrationService {
     public readonly integration: TeamsIntegrationController;
 
     constructor() {
@@ -10,4 +10,4 @@ export class TeamsService {
     }
 }
 
-export const TeamsServiceInstance = new TeamsService();
+export const TeamsIntegrationServiceInstance = new TeamsIntegrationService();
