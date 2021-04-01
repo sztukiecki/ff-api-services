@@ -1,7 +1,7 @@
-import {APIClient, APIMapping} from '../../http';
-import {TeamsIntegrationServiceTypes} from './TeamsIntegrationServiceTypes';
+import { APIClient, APIMapping } from '../../http';
+import { TeamsIntegrationServiceTypes } from './TeamsIntegrationServiceTypes';
 
-export class TeamsIntegrationController extends APIClient {
+export class ConversationsController extends APIClient {
     constructor() {
         super(APIMapping.teamsIntegrationService);
     }

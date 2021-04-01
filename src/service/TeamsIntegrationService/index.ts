@@ -1,12 +1,12 @@
-import { TeamsIntegrationController } from './TeamsIntegrationController';
+import { ConversationsController } from './ConversationsController';
 
 export * from './TeamsIntegrationServiceTypes';
 
 export class TeamsIntegrationService {
-    public readonly integration: TeamsIntegrationController;
+    public readonly conversations: ConversationsController;
 
     constructor() {
-        this.integration = new TeamsIntegrationController();
+        this.conversations = new ConversationsController();
     }
 }
 
