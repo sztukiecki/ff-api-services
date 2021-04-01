@@ -46,6 +46,7 @@ export namespace PortalManagementTypes {
         ftpFolder?: string;
         fullUpdate: boolean;
         vendor?: string;
+        index?: number;
     }
 
     export interface PortalEstate {
