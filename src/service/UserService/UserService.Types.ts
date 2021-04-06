@@ -1,4 +1,4 @@
-import { Captions, S3File, SchemaV2FieldType } from '@flowfact/types';
+import { Captions, S3File } from '@flowfact/types';
 
 export enum UserRole {
     USER = 'USER',
@@ -23,6 +23,10 @@ export enum IdentifiedUserStatusCodes {
 export enum SsoType {
     SCOUT = 'SCOUT',
     COGNITO_SAML = 'COGNITO_SAML',
+}
+
+export enum AdditionalFieldType {
+    TEXT = 'TEXT',
 }
 
 export interface IdentifiedUserResponse {
@@ -83,7 +87,7 @@ export interface AdditionalField {
     id: string;
     name: string;
     captions: Captions;
-    type: SchemaV2FieldType;
+    type: AdditionalFieldType;
     mandatory: boolean;
 }
 
