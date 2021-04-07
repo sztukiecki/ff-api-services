@@ -76,6 +76,7 @@ export interface SSOResponse {
     clientId: string;
     companyId: string;
     name: string;
+    // name of the indentity provider
     idpName: string;
 }
 
