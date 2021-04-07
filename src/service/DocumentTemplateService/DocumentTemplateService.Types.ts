@@ -13,7 +13,7 @@ export interface BaseTemplate {
     captions: Captions;
     fileType: string;
     neededPlaceholders: NeededPlaceholder[];
-    type?: 'WORD' | 'HTML';
+    templateType?: 'WORD' | 'HTML';
 }
 
 export interface ReadTemplate extends BaseTemplate {
@@ -26,7 +26,7 @@ export interface BaseCategory {
     parentName: string | null;
     name: string;
     captions: Captions;
-    type?: 'WORD' | 'HTML';
+    templateType?: 'WORD' | 'HTML';
 }
 
 export interface ReadCategory extends BaseCategory {
