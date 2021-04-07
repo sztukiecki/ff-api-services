@@ -74,6 +74,9 @@ export interface SSO {
 export interface SSOResponse {
     type: SsoType;
     clientId: string;
+    companyId: string;
+    name: string;
+    idpName: string;
 }
 
 export interface SSOTokenResponse {
