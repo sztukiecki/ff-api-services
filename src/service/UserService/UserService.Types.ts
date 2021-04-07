@@ -74,6 +74,10 @@ export interface SSO {
 export interface SSOResponse {
     type: SsoType;
     clientId: string;
+    companyId: string;
+    name: string;
+    // name of the indentity provider
+    idpName: string;
 }
 
 export interface SSOTokenResponse {
