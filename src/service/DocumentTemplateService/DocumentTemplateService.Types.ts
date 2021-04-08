@@ -29,7 +29,6 @@ export interface BaseCategory {
     parentName: string | null;
     name: string;
     captions: Captions;
-    // Expected types with a fallback to safe data, even if type is unknown
     templateType?: TemplateTypes;
 }
 
