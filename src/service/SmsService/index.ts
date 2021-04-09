@@ -1,5 +1,4 @@
-import {SmsController} from "./SmsController";
-
+import { SmsController } from './SmsController';
 
 export * from './SmsService.Types';
 

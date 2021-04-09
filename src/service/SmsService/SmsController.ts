@@ -1,5 +1,5 @@
 import { APIClient, APIMapping } from '../../http';
-import {SmsServiceTypes} from "./SmsService.Types";
+import { SmsServiceTypes } from './SmsService.Types';
 
 export class SmsController extends APIClient {
     constructor() {

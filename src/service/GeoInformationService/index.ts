@@ -1,7 +1,7 @@
-import {GeoLocationController} from "./GeoLocationController";
-import {GeoPolygonController} from "./GeoPolygonController";
-import {PolygonEntityLinkController} from "./PolygonEntityLinkController";
-import {SearchController} from "./SearchController";
+import { GeoLocationController } from './GeoLocationController';
+import { GeoPolygonController } from './GeoPolygonController';
+import { PolygonEntityLinkController } from './PolygonEntityLinkController';
+import { SearchController } from './SearchController';
 
 export * from './GeoInformationService.Types';
 

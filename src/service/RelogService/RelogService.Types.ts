@@ -21,5 +21,5 @@ export interface FFAdditionalElkData {
     docker_host?: string;
     sourceName?: string;
     browserAgent?: string;
-    referer?: string
+    referer?: string;
 }

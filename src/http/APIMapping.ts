@@ -67,6 +67,7 @@ const APIMapping = {
     schemaService: new APIService('schema-service'),
     searchService: new APIService('search-service'),
     slackIntegrationService: new APIService('slack-integration-service'),
+    teamsIntegrationService: new APIService('teams-integration-service'),
     spregnetterService: new APIService('sprengnetter-service'),
     taggingService: new APIService('tagging-service'),
     tagService: new APIService('tag-service'),
@@ -96,7 +97,8 @@ const APIMapping = {
     placeholderService: new APIService('placeholder-service'),
     smsIngestionService: new APIService('sms-ingestion-service'),
     smsService: new APIService('sms-service'),
-    supportService: new APIService('support-service')
+    supportService: new APIService('support-service'),
+    everSignService: new APIService('eversign-service'),
 };
 
 export default APIMapping;

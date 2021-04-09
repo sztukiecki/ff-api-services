@@ -42,7 +42,7 @@ export class PublicController extends APIClient {
     async hasSsoOfTypeV2(email: string) {
         return await this.invokeApiWithErrorHandling<SSOResponse>('/public/sso', 'GET', undefined, {
             queryParams: {
-                username: email
+                username: email,
             },
         });
     }
@@ -57,7 +57,7 @@ export class PublicController extends APIClient {
         return await this.invokeApiWithErrorHandling<SSOTokenResponse>('/public/sso/token', 'POST', {
             code,
             clientId,
-            redirectURI: redirectUri
+            redirectURI: redirectUri,
         });
     }
 

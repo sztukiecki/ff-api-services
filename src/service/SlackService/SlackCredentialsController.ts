@@ -3,7 +3,6 @@ import { SlackServiceTypes } from './SlackService.Types';
 import { EnvironmentManagementInstance } from '../../util/EnvironmentManagement';
 
 export class SlackCredentialsController extends APIClient {
-
     constructor() {
         super(APIMapping.slackIntegrationService);
     }

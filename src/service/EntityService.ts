@@ -241,8 +241,11 @@ export class EntityService extends APIClient {
      * @param entityId
      * @returns a new UUID of created entity.
      */
-    async duplicateEntity(schemaId: string, entityId: string): Promise<AxiosResponse<string>> {
-        return this.invokeApi(`/schemas/${schemaId}/entities/${entityId}/duplicate`, 'POST');
+    async duplicateEntity(schemaId: string, entityId: string, targetSchema?: string) {
+        const queryParams: ParamList = {
+            targetSchema,
+        };
+        return this.invokeApiWithErrorHandling<string>(`/schemas/${schemaId}/entities/${entityId}/duplicate`, 'POST', undefined, { queryParams });
     }
 
     /**

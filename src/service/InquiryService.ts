@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import {APIClient, APIMapping, ApiResponse} from '../http';
+import { APIClient, APIMapping, ApiResponse } from '../http';
 import { Flowdsl } from '@flowfact/node-flowdsl';
 
 export type InquiryStatus = 'active' | 'pinned' | 'done';
@@ -27,11 +27,13 @@ export interface InquiryAutomation {
 
 export interface EmailVerificationResult {
     reason: string;
-    status: EmailValidationStatus
+    status: EmailValidationStatus;
 }
 
 export enum EmailValidationStatus {
-    PROCESSED = 'PROCESSED', NOT_INQUIRY = 'NOT_INQUIRY', TO_BE_PROCESSED = 'TO_BE_PROCESSED'
+    PROCESSED = 'PROCESSED',
+    NOT_INQUIRY = 'NOT_INQUIRY',
+    TO_BE_PROCESSED = 'TO_BE_PROCESSED',
 }
 
 export class InquiryServiceClass extends APIClient {
@@ -81,7 +83,7 @@ export class InquiryServiceClass extends APIClient {
      * @param entityId as emailId
      */
     replayEmail(entityId: string): Promise<ApiResponse<any>> {
-        return this.invokeApiWithErrorHandling(`/email/${entityId}/replay`, 'POST')
+        return this.invokeApiWithErrorHandling(`/email/${entityId}/replay`, 'POST');
     }
 
     /**
@@ -89,7 +91,7 @@ export class InquiryServiceClass extends APIClient {
      * @param entityId as emailId
      */
     validateEmail(entityId: string): Promise<ApiResponse<any>> {
-        return this.invokeApiWithErrorHandling(`/email/${entityId}/verify`, 'GET')
+        return this.invokeApiWithErrorHandling(`/email/${entityId}/verify`, 'GET');
     }
 }
 

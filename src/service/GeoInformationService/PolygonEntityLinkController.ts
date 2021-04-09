@@ -1,8 +1,7 @@
 import { APIClient, APIMapping } from '../../http';
-import {GeoInformationsServiceTypes} from './GeoInformationService.Types';
+import { GeoInformationsServiceTypes } from './GeoInformationService.Types';
 import LinkedPolygon = GeoInformationsServiceTypes.LinkedPolygon;
 import ListOfPolygons = GeoInformationsServiceTypes.ListOfPolygons;
-
 
 export class PolygonEntityLinkController extends APIClient {
     constructor() {
@@ -13,7 +12,7 @@ export class PolygonEntityLinkController extends APIClient {
      * link a polygon to an entity
      */
     async linkPolygon() {
-        return this.invokeApiWithErrorHandling<LinkedPolygon>('/polygons/entity', 'POST')
+        return this.invokeApiWithErrorHandling<LinkedPolygon>('/polygons/entity', 'POST');
     }
 
     /**
@@ -21,7 +20,7 @@ export class PolygonEntityLinkController extends APIClient {
      * @param entityId
      */
     async fetchAll(entityId: string) {
-        return this.invokeApiWithErrorHandling<ListOfPolygons>(`/polygons/entity/${entityId}`, 'GET')
+        return this.invokeApiWithErrorHandling<ListOfPolygons>(`/polygons/entity/${entityId}`, 'GET');
     }
 
     /**
@@ -29,7 +28,6 @@ export class PolygonEntityLinkController extends APIClient {
      * @param entityId
      */
     async deleteAll(entityId: string) {
-        return this.invokeApiWithErrorHandling(`/polygons/entity/${entityId}`, 'DELETE')
+        return this.invokeApiWithErrorHandling(`/polygons/entity/${entityId}`, 'DELETE');
     }
 }
-

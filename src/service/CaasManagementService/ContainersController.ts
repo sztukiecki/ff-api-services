@@ -8,8 +8,8 @@ export class ContainersController extends APIClient {
     }
 
     /**
-    * Fetches all containers in their short representation
-    */
+     * Fetches all containers in their short representation
+     */
     async fetchAll() {
         return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container.GetAllResponse>('/containers', 'GET');
     }
@@ -60,7 +60,10 @@ export class ContainersController extends APIClient {
      * @param id
      */
     async fetchDefaultDomain(id: string) {
-        return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container.GetDefaultDomainResponse>(`/containers/${id}/default-domain`, 'GET');
+        return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container.GetDefaultDomainResponse>(
+            `/containers/${id}/default-domain`,
+            'GET'
+        );
     }
 
     /**
@@ -68,10 +71,14 @@ export class ContainersController extends APIClient {
      * @param id
      */
     async updateDefaultDomain(id: string, domain: string) {
-        return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container.GetDefaultDomainResponse>(`/containers/${id}/default-domain`, 'PUT', {
-            containerId: id,
-            defaultDomain: domain
-        });
+        return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container.GetDefaultDomainResponse>(
+            `/containers/${id}/default-domain`,
+            'PUT',
+            {
+                containerId: id,
+                defaultDomain: domain,
+            }
+        );
     }
 
     /**
@@ -87,6 +94,9 @@ export class ContainersController extends APIClient {
      * @param niceName
      */
     async isNiceNameAvailable(niceName: string) {
-        return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container.NiceNameAvailableResponse>(`/containers/nice-name-available?value=${niceName}`, 'GET');
+        return this.invokeApiWithErrorHandling<CaasManagementServiceTypes.Container.NiceNameAvailableResponse>(
+            `/containers/nice-name-available?value=${niceName}`,
+            'GET'
+        );
     }
 }

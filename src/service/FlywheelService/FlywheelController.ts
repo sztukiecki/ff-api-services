@@ -71,10 +71,7 @@ export class FlywheelController extends APIClient {
      * @param entityId
      */
     async fetchStatistics(entityId: string) {
-        return this.invokeApiWithErrorHandling<FlywheelStatisticTypes.FlywheelStatistics>(
-            `/flywheel-statistics/entity/${entityId}`,
-            'GET'
-        )
+        return this.invokeApiWithErrorHandling<FlywheelStatisticTypes.FlywheelStatistics>(`/flywheel-statistics/entity/${entityId}`, 'GET');
     }
 
     /**
@@ -82,10 +79,7 @@ export class FlywheelController extends APIClient {
      * @param entityId
      */
     async fetchTransactions(entityId: string) {
-        return this.invokeApiWithErrorHandling<Transaction[]>(
-            `/transactions/entities/${entityId}`,
-            'GET'
-        )
+        return this.invokeApiWithErrorHandling<Transaction[]>(`/transactions/entities/${entityId}`, 'GET');
     }
 
     /**
@@ -94,10 +88,7 @@ export class FlywheelController extends APIClient {
      * @param flywheelName
      */
     async fetchTransactionsInFlywheel(entityId: string, flywheelName: string) {
-        return this.invokeApiWithErrorHandling<Transaction[]>(
-            `/transactions/entities/${entityId}/flywheel/${flywheelName}`,
-            'GET'
-        )
+        return this.invokeApiWithErrorHandling<Transaction[]>(`/transactions/entities/${entityId}/flywheel/${flywheelName}`, 'GET');
     }
 
     /**
@@ -107,7 +98,7 @@ export class FlywheelController extends APIClient {
      */
     async createTransaction(entityId: string, phaseName: string) {
         return this.invokeApiWithErrorHandling<Transaction>(`/transactions/entities/${entityId}`, 'POST', {
-            phaseName
-        })
+            phaseName,
+        });
     }
 }

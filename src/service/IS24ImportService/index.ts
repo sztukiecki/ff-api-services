@@ -1,6 +1,6 @@
 import IS24ImportController from './IS24ImportController';
 import IS24ProjectController from './IS24ProjectController';
-import IS24ImmoController from "./IS24ImmoController";
+import IS24ImmoController from './IS24ImmoController';
 
 export * from './IS24ImportService.Types';
 

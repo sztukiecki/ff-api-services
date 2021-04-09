@@ -7,12 +7,16 @@ export interface NeededPlaceholder {
     captions: Captions;
 }
 
+// Expected types with a fallback to safe data, even if type is unknown
+export type TemplateTypes = 'WORD' | 'HTML' | 'SLACK' | string;
+
 export interface BaseTemplate {
     name: string;
     categoryName?: string;
     captions: Captions;
     fileType: string;
     neededPlaceholders: NeededPlaceholder[];
+    templateType?: TemplateTypes;
 }
 
 export interface ReadTemplate extends BaseTemplate {
@@ -25,6 +29,7 @@ export interface BaseCategory {
     parentName: string | null;
     name: string;
     captions: Captions;
+    templateType?: TemplateTypes;
 }
 
 export interface ReadCategory extends BaseCategory {

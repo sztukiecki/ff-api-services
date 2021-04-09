@@ -73,9 +73,14 @@ export class APIClient {
     /**
      * @deprecated Use invokeApiWithErrorHandling instead.
      */
-    public async invokeApi<T = any>(path: string, method: MethodTypes = 'GET', body: string | {} = '', additionalParams: APIClientAdditionalParams = {}): Promise<AxiosResponse<T>> {
+    public async invokeApi<T = any>(
+        path: string,
+        method: MethodTypes = 'GET',
+        body: string | {} = '',
+        additionalParams: APIClientAdditionalParams = {}
+    ): Promise<AxiosResponse<T>> {
         // If no service is defined and the url does not start with http, then we throw an error
-        if(!this._service && !path.startsWith('http')) {
+        if (!this._service && !path.startsWith('http')) {
             throw Error('[APIClient] If you do not pass a service into APIClient, then your url has to start with http!');
         }
 
@@ -84,7 +89,7 @@ export class APIClient {
         // add parameters to the url
         let apiUrl;
 
-        if(this._service) {
+        if (this._service) {
             if (this._service instanceof LambdaAPIService) {
                 apiUrl = `${EnvironmentManagementInstance.getLambdaUrl(this._service)}${path}`;
             } else {

@@ -1,4 +1,4 @@
-import { S3File } from '@flowfact/types';
+import { Captions, S3File } from '@flowfact/types';
 
 export enum UserRole {
     USER = 'USER',
@@ -22,7 +22,11 @@ export enum IdentifiedUserStatusCodes {
 
 export enum SsoType {
     SCOUT = 'SCOUT',
-    COGNITO_SAML = 'COGNITO_SAML'
+    COGNITO_SAML = 'COGNITO_SAML',
+}
+
+export enum AdditionalFieldType {
+    TEXT = 'TEXT',
 }
 
 export interface IdentifiedUserResponse {
@@ -70,6 +74,10 @@ export interface SSO {
 export interface SSOResponse {
     type: SsoType;
     clientId: string;
+    companyId: string;
+    name: string;
+    // name of the indentity provider
+    idpName: string;
 }
 
 export interface SSOTokenResponse {
@@ -77,4 +85,17 @@ export interface SSOTokenResponse {
     accessToken: string;
     refreshToken: string;
     username: string;
+}
+
+export interface AdditionalField {
+    id: string;
+    name: string;
+    captions: Captions;
+    type: AdditionalFieldType;
+    mandatory: boolean;
+}
+
+export interface UserAdditionalData {
+    key: string;
+    value: string;
 }
