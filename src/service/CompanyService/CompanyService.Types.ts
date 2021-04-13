@@ -72,6 +72,7 @@ export namespace CompanyServiceTypes {
         timestamp: number;
         trial: boolean;
         verified: boolean;
+        language?: string;
     }
 
     export interface ShortCompany {

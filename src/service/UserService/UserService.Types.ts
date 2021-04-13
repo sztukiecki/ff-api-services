@@ -56,6 +56,7 @@ export interface User {
     sso?: SSO[];
     timestamp?: number;
     type?: UserType;
+    language?: string;
 }
 
 export interface UserTokenEntity {
