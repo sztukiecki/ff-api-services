@@ -69,7 +69,7 @@ export namespace PortalManagementTypes {
         showAddress: boolean;
     }
 
-    export type PortalType = 'IS24' | 'OPENIMMO' | 'WORDPRESS' | 'IDX' | 'IDX_SUB';
+    export type PortalType = 'IS24' | 'OPENIMMO' | 'WORDPRESS' | 'IDX' | 'IDX_SUB' | 'SWISSRETS';
 
     export type PredefinedPortal = {
         category: string;
