@@ -19,7 +19,7 @@ export class PortalController extends APIClient {
         return await this.invokeApiWithErrorHandling<Portal[]>('/portals', 'GET', undefined, {
             queryParams: {
                 ignoreInactivePortals,
-                portalType,
+                type: portalType,
             },
         });
     }
