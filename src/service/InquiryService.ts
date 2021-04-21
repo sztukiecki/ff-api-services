@@ -87,6 +87,14 @@ export class InquiryServiceClass extends APIClient {
     }
 
     /**
+     * Process the email now.
+     * @param entityId as emailId
+     */
+    processEmail(entityId: string): Promise<ApiResponse<any>> {
+        return this.invokeApiWithErrorHandling(`/email/${entityId}/process`, 'POST');
+    }
+
+    /**
      * Checks if this email is an inquiry and can be processed or is already processed.
      * @param entityId as emailId
      */
