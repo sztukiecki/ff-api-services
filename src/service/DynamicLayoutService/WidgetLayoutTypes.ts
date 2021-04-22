@@ -44,7 +44,7 @@ export namespace WidgetLayoutTypes {
     export interface LayoutWidget {
         tempKey: string;
         kind: 'widget';
-        configuration?: object;
+        configuration?: Record<string, unknown>;
         globalWidgetId?: string;
         widgetStoreId: string;
         type: string;
