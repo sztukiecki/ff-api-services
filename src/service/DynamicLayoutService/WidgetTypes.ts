@@ -7,7 +7,7 @@ export namespace WidgetTypes {
         captions: Captions;
         descriptions: Captions;
         schemas: string[];
-        configuration: Record<string, unknown>;
+        configuration: object;
         images: {
             thumbnail: string;
             preview: string;
