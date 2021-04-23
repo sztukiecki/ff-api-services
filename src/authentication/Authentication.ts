@@ -10,7 +10,7 @@ const stageSettings = {
         identityPoolId: 'eu-central-1:079515e9-300a-42c6-b608-930f84fed704',
         userPoolId: 'eu-central-1_8kCTHzIgR',
         clientId: '4gql86evdegfa9otnpa30rf47i',
-        ssoClientId: '4o13eokvepr4gq45d6379agkgd',
+        ssoClientId: '6bok2d0e9u5o5abn2u59rc76ic',
     },
     staging: {
         identityPoolId: 'eu-central-1:a344597d-b532-4b94-81ef-5d31bf56e504',
